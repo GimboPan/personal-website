@@ -124,3 +124,18 @@ node scripts/mobile-screenshot.mjs http://localhost:4322
 # Find any element causing horizontal overflow at a viewport:
 node scripts/inspect-overflow.mjs http://localhost:4322
 ```
+
+---
+
+## 🚀 Live Deploy Status (auto-updated 2026-05-07)
+
+- **Production URL**: https://personal-website-zeta-nine-61.vercel.app
+- **Vercel Project**: `panjunbao-8783s-projects/personal-website`
+- **GitHub repo**: https://github.com/GimboPan/personal-website
+- **Git auto-deploy**: ✅ enabled (every push to `main` triggers a production rebuild)
+- **Custom domain**: pending — TBD
+- **Latest deploy**: `dpl_HfFUdEv11xGBdbKbfCJRRS6qrnz8` (Astro static, 12s build, READY)
+
+To deploy a change: `git push origin main` → wait ~30s → live.
+
+To deploy without pushing: `npx vercel@latest deploy --prod`.

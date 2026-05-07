@@ -69,7 +69,8 @@ const comets = [
       <img
         src="/landing/gimbos-universe.png"
         alt="Gimbo's Universe — three floating islands depicting work, fitness, and life in deep space"
-        class="hero-img w-full h-full object-cover object-center select-none"
+        class="hero-img w-full h-full object-cover select-none"
+        style="object-position: center top;"
         draggable="false"
         fetchpriority="high"
         decoding="async"
@@ -256,7 +257,9 @@ const comets = [
   }
 
   /* Background image: subtle parallax in the OPPOSITE direction
-     (gives a feeling of "I'm moving forward, the universe stays put") */
+     (gives a feeling of "I'm moving forward, the universe stays put").
+     Scale is small (1.02) + transform-origin top so the painted nav at
+     the very top of the source image stays visible after cropping. */
   .hero-img {
     transform:
       translate3d(
@@ -264,7 +267,8 @@ const comets = [
         calc(var(--my) * -6px),
         0
       )
-      scale(1.04);
+      scale(1.02);
+    transform-origin: center top;
     transition: transform 350ms ease-out;
     will-change: transform;
   }

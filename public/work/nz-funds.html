@@ -1,0 +1,2664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新西兰华人基金投资指南 · NZ Managed Funds for 华人投资者</title>
+<meta name="description" content="面向新西兰华人投资者的 Managed Fund 选择指南：含 PIE/FIF 税务、风险指标、组合配置、货币对冲与基准对比。">
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="新西兰华人基金投资指南">
+<meta property="og:description" content="面向新西兰华人投资者的 Managed Fund 选择指南——含 PIE/FIF 税务、风险、组合配置与基准对比。">
+<meta property="og:site_name" content="NZ 华人基金指南">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#9fe870">
+<meta name="author" content="Auckland 匿名投资者社群">
+<meta name="article:published_time" content="2026-05-05">
+<meta name="article:section" content="Personal Finance">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<style>
+  /* ================ Design tokens ================ */
+  :root {
+    --ink: #0e0f0c;
+    --ink-2: #2a2c29;
+    --muted: #5c5e5b;        /* WCAG AA-compliant on white */
+    --muted-2: #8a8c89;
+    --line: rgba(14,15,12,0.10);
+    --line-soft: rgba(14,15,12,0.06);
+    --bg: #ffffff;
+    --bg-mint: #f3f8ec;       /* very light green tint for section bands */
+    --bg-soft: #f7f7f4;
+    --green: #9fe870;
+    --green-deep: #163300;
+    --green-tint: #e2f6d5;
+    --red: #d03238;
+    --amber: #ffd11a;
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-5: 48px;
+    --space-6: 64px;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 30px;
+    --prose: 720px;
+  }
+
+  /* ================ Reset & base ================ */
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+    font-feature-settings: "calt", "halt";
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.75;             /* CJK-friendly */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { color: var(--green-deep); }
+  :focus-visible { outline: 3px solid var(--green); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: var(--green); color: var(--green-deep); }
+
+  /* ================ Layout helpers ================ */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  @media (max-width: 640px) { .container { padding: 0 18px; } }
+  .prose { max-width: var(--prose); }
+  .mt-2 { margin-top: var(--space-2); }
+  .mt-3 { margin-top: var(--space-3); }
+  .mt-4 { margin-top: var(--space-4); }
+  .mt-5 { margin-top: var(--space-5); }
+  .mb-2 { margin-bottom: var(--space-2); }
+  .mb-3 { margin-bottom: var(--space-3); }
+
+  /* Text utility classes — replaces inline font-size/color noise */
+  .t-body { font-size: 14.5px; color: var(--ink-2); line-height: 1.75; }
+  .t-caption { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .t-fine { font-size: 12.5px; color: var(--muted-2); line-height: 1.6; }
+  .h3-card {
+    font-size: 22px; font-weight: 800; margin: 4px 0 12px;
+    letter-spacing: -0.3px; line-height: 1.25;
+  }
+  .h3-card-sm {
+    font-size: 18px; font-weight: 800; margin: 6px 0 10px;
+    letter-spacing: -0.2px; line-height: 1.3;
+  }
+  .h3-card-md {
+    font-size: 20px; font-weight: 800; margin: 0 0 10px;
+    letter-spacing: -0.25px; line-height: 1.3;
+  }
+  .list-prose { font-size: 14px; color: var(--ink-2); padding-left: 18px; line-height: 1.75; margin: 10px 0 0; }
+  .list-prose li { margin: 4px 0; }
+  /* Chart container heights */
+  .chart-box.tall { height: 460px; }
+  .chart-box.md { height: 420px; }
+  .chart-box.sm { height: 320px; }
+
+  /* ================ Scroll progress ================ */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    z-index: 100; pointer-events: none;
+    background: rgba(159,232,112,0.15);
+  }
+  .scroll-progress > span {
+    display: block; height: 100%; background: var(--green);
+    width: 0%; transition: width 0.08s linear;
+  }
+
+  /* ================ Top nav ================ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(160%) blur(10px);
+    -webkit-backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
+  .brand-dot { width: 14px; height: 14px; border-radius: 9999px; background: var(--green); box-shadow: 0 0 0 4px var(--green-tint); }
+  .nav-links { display: flex; gap: 4px; flex-wrap: nowrap; }
+  .nav-links a {
+    padding: 7px 12px; border-radius: 9999px; text-decoration: none; font-size: 13.5px; font-weight: 600;
+    color: var(--muted); transition: background 0.15s ease, color 0.15s ease; white-space: nowrap;
+  }
+  .nav-links a:hover { background: rgba(211,242,192,0.5); color: var(--ink); }
+  .nav-cta {
+    padding: 8px 16px; border-radius: 9999px; background: var(--green); color: var(--green-deep);
+    font-weight: 700; font-size: 14px; text-decoration: none; transition: transform 0.12s ease; white-space: nowrap;
+  }
+  .nav-cta:hover { transform: scale(1.05); color: var(--green-deep); }
+  /* Mobile hamburger */
+  .nav-toggle {
+    display: none; width: 40px; height: 40px; border-radius: 9999px;
+    border: 1px solid var(--line); background: #fff; cursor: pointer;
+    align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 0;
+  }
+  .nav-toggle span { display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .nav-mobile {
+    position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+    background: #fff; padding: 24px; z-index: 49;
+    transform: translateX(100%); transition: transform 0.25s ease;
+    display: flex; flex-direction: column; gap: 4px; overflow-y: auto;
+    border-top: 1px solid var(--line-soft);
+  }
+  .nav-mobile.open { transform: translateX(0); }
+  .nav-mobile a {
+    padding: 14px 16px; border-radius: 14px; text-decoration: none;
+    font-size: 16px; font-weight: 600; color: var(--ink);
+    border: 1px solid var(--line-soft); display: flex; align-items: center; gap: 12px;
+  }
+  .nav-mobile a:hover { background: var(--bg-mint); border-color: var(--green); }
+  .nav-mobile a .num { font-variant-numeric: tabular-nums; color: var(--green-deep); font-weight: 800; min-width: 24px; }
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: inline-flex; }
+  }
+  /* On phones the hamburger contains all destinations — hide the redundant CTA */
+  @media (max-width: 640px) { .nav-cta { display: none; } }
+
+  /* ================ Mini TOC (desktop) ================ */
+  .toc-side {
+    position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+    width: 180px; z-index: 40; pointer-events: none;
+  }
+  .toc-side-inner { pointer-events: auto; }
+  .toc-side-label {
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.4px; color: var(--muted-2); margin-bottom: 10px;
+  }
+  .toc-side ol { list-style: none; padding: 0; margin: 0; counter-reset: tn; }
+  .toc-side li { counter-increment: tn; position: relative; }
+  .toc-side a {
+    display: block; padding: 5px 0 5px 26px; font-size: 12.5px; line-height: 1.35;
+    color: var(--muted-2); text-decoration: none; border-left: 2px solid transparent;
+    margin-left: -2px; transition: color 0.15s, border-color 0.15s;
+  }
+  .toc-side li::before {
+    content: counter(tn, decimal-leading-zero);
+    position: absolute; left: 4px; top: 5px; font-size: 10px; font-weight: 700;
+    font-variant-numeric: tabular-nums; color: var(--muted-2);
+    transition: color 0.15s;
+  }
+  .toc-side a:hover { color: var(--ink); }
+  .toc-side li.active a { color: var(--ink); font-weight: 600; border-left-color: var(--green); }
+  .toc-side li.active::before { color: var(--green-deep); }
+  @media (max-width: 1380px) { .toc-side { display: none; } }
+
+  /* ================ Back to top ================ */
+  .back-to-top {
+    position: fixed; right: 24px; bottom: 24px; z-index: 40;
+    width: 48px; height: 48px; border-radius: 9999px;
+    background: var(--ink); color: var(--green); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(20px); pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s; font-size: 20px; font-weight: 700;
+    box-shadow: 0 4px 24px rgba(14,15,12,0.18);
+  }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover { transform: translateY(-2px) scale(1.05); }
+  @media (max-width: 640px) { .back-to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; } }
+
+  /* ================ Hero ================ */
+  .hero { padding: 72px 0 56px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 9999px;
+    background: var(--green-tint); color: var(--green-deep);
+    font-weight: 600; font-size: 13px;
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-deep); }
+  h1.display {
+    font-weight: 900;
+    line-height: 1.18;          /* leave leading room so highlight sits below CJK body */
+    letter-spacing: 0;
+    font-size: clamp(38px, 6vw, 84px);
+    margin: 18px 0 24px;
+    color: var(--ink);
+  }
+  /* Highlighter pen effect — uses background-image with explicit em sizing
+     so the green strip lands BELOW the CJK character body, not through it. */
+  h1.display .accent {
+    background-image: linear-gradient(var(--green), var(--green));
+    background-repeat: no-repeat;
+    background-size: 100% 0.32em;
+    background-position: 0 92%;
+    padding: 0 0.08em;
+    /* graceful fallback if background-image fails */
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .hero-sub {
+    max-width: var(--prose); font-size: 18px; color: var(--ink-2);
+    font-weight: 500; line-height: 1.7;
+  }
+  .meta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .meta-chip {
+    background: var(--bg-soft); border: 1px solid var(--line-soft);
+    padding: 9px 14px; border-radius: 12px;
+    font-size: 13px; color: var(--ink-2); line-height: 1.5;
+  }
+  .meta-chip strong { color: var(--ink); font-weight: 700; }
+  .meta-chip .meta-sep { color: var(--muted-2); margin: 0 6px; }
+  /* Freshness indicator dot — color set via JS */
+  .freshness-dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green); margin-right: 6px; vertical-align: 1px;
+    box-shadow: 0 0 0 3px rgba(159,232,112,0.25);
+  }
+  .freshness-dot.warn { background: var(--amber); box-shadow: 0 0 0 3px rgba(255,209,26,0.25); }
+  .freshness-dot.stale { background: var(--red); box-shadow: 0 0 0 3px rgba(208,50,56,0.25); }
+
+  /* ================ Sections & rhythm ================ */
+  section { padding: 80px 0; border-top: 1px solid var(--line-soft); }
+  section.hero { border-top: none; }
+  @media (max-width: 640px) { section { padding: 56px 0; } }
+
+  /* Mint band — applied to ~25% of sections to break monotony */
+  section.section-mint { background: var(--bg-mint); border-top: none; }
+  section.section-mint + section { border-top: none; }   /* color edge already separates */
+  /* Section counter — auto-numbers each <section[id]> body section.
+     Renders as "01 · " prefix inside the .eyebrow kicker. */
+  main { counter-reset: section-counter; }
+  section[id]:not(.hero) { counter-increment: section-counter; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 1.6px; font-size: 11.5px; font-weight: 700;
+    color: var(--green-deep); margin-bottom: 10px;
+  }
+  section[id]:not(.hero) .eyebrow::before {
+    content: counter(section-counter, decimal-leading-zero);
+    color: var(--green-deep);
+    background: var(--green-tint);
+    padding: 3px 8px; border-radius: 6px;
+    margin-right: 10px; font-weight: 800; letter-spacing: 0.6px;
+  }
+  /* In dark sections (none currently, but defensively styled) */
+  section.section-dark .eyebrow::before { background: rgba(159,232,112,0.18); color: var(--green); }
+  h2 {
+    font-weight: 900;
+    line-height: 1.05;          /* CJK-friendly (was 0.95) */
+    letter-spacing: -0.4px;     /* gentler (was -1.4px) */
+    font-size: clamp(28px, 3.4vw, 44px);
+    margin: 0 0 16px;
+    max-width: var(--prose);
+  }
+  h2 br { display: none; }       /* let CJK wrap naturally */
+  @media (min-width: 900px) { h2 br { display: inline; } }
+  .lede {
+    font-size: 17px; color: var(--ink-2); max-width: var(--prose);
+    line-height: 1.7; font-weight: 500;
+  }
+
+  /* Cards / grids */
+  .grid { display: grid; gap: 20px; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; } }
+
+  /* ================ Cards ================
+     Color discipline: white default. Accent variants ONLY for narrative
+     focal points (max 1 per section). Green is for CTAs and highlight bars,
+     not for filling whole cards. */
+  .card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+    /* flex column lets sub-text align flush to bottom regardless of content length */
+    display: flex; flex-direction: column;
+  }
+  .card .sub-text { margin-top: auto; }
+  .card.feat {
+    /* Sole "feature" treatment — used at most once per section */
+    background: var(--ink); border-color: var(--ink); color: #e8ebe6;
+  }
+  .card.feat .num { color: #ffffff; }
+  .card.feat .lbl { color: var(--green); }
+  .card.feat .sub-text { color: #c8d3c1; }
+  .card.accent-green {
+    /* Subtle green tint — for emphasis without flooding the brand color */
+    background: var(--bg-mint); border-color: var(--green-tint);
+  }
+  .card.accent-green .num { color: var(--green-deep); }
+  .card.outline-green {
+    /* Strong border, white background — bold without overusing green */
+    border: 1.5px solid var(--green); background: #ffffff;
+  }
+  .card.outline-green .num { color: var(--green-deep); }
+
+  .num {
+    font-size: clamp(34px, 4.2vw, 56px);
+    font-weight: 900; line-height: 1.0; letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .lbl {
+    font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--muted); margin-bottom: 10px;
+  }
+  .sub-text { font-size: 14px; color: var(--ink-2); margin-top: 10px; line-height: 1.65; }
+
+  /* Inline mini visualization in cards */
+  .micro {
+    width: 130px; height: 36px; display: block;
+    margin: 0 0 14px;
+    overflow: visible; /* let in-SVG labels render past viewBox if needed */
+  }
+
+  /* ================ Hero 2-column layout ================ */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 56px; align-items: start;
+  }
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .hero-text { min-width: 0; }
+  .hero-viz {
+    background: var(--ink); color: #e8ebe6;
+    border-radius: 28px; padding: 28px 28px 26px;
+    position: sticky; top: 84px;
+  }
+  @media (max-width: 980px) { .hero-viz { position: static; } }
+  .hero-viz-tag {
+    font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.4px; color: var(--green); margin-bottom: 6px;
+  }
+  .hero-viz-title {
+    font-size: 22px; font-weight: 800; color: #ffffff;
+    letter-spacing: -0.2px; line-height: 1.25; margin: 0 0 22px;
+  }
+  .viz-row {
+    display: grid; grid-template-columns: 56px 1fr auto;
+    gap: 14px; align-items: center;
+    padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.10);
+    font-variant-numeric: tabular-nums;
+  }
+  .viz-row.feat {
+    background: var(--green); color: var(--green-deep);
+    border-top: none;
+    margin: 4px -10px 4px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+  .viz-rate {
+    font-size: 14px; font-weight: 700; color: #c8d3c1;
+    letter-spacing: -0.2px;
+  }
+  .viz-row.feat .viz-rate { color: var(--green-deep); font-weight: 800; }
+  .viz-bar {
+    height: 5px; border-radius: 9999px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green) var(--bar-w), rgba(255,255,255,0.10) var(--bar-w));
+  }
+  .viz-row.feat .viz-bar {
+    background: linear-gradient(90deg, var(--green-deep) 0%, var(--green-deep) var(--bar-w), rgba(22,51,0,0.18) var(--bar-w));
+  }
+  .viz-num {
+    font-size: 22px; font-weight: 900; color: #ffffff;
+    letter-spacing: -0.3px;
+  }
+  .viz-row.feat .viz-num { color: var(--green-deep); font-size: 24px; }
+  .hero-viz-foot {
+    font-size: 12.5px; color: #a8b3a3; line-height: 1.55;
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  /* ================ Tables ================ */
+  .tablewrap {
+    overflow-x: auto; border-radius: var(--radius-lg);
+    border: 1px solid var(--line); background: #ffffff;
+  }
+  /* Tall scroll container — used by the 90-fund table */
+  .tablewrap.scroll-y { max-height: 70vh; overflow: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.55; }
+  thead th {
+    text-align: left; font-weight: 700; padding: 14px 16px;
+    background: var(--bg-soft); color: var(--ink);
+    border-bottom: 1px solid var(--line); white-space: nowrap;
+    cursor: default; user-select: none; font-size: 13px;
+  }
+  /* Sticky header inside scroll containers */
+  .tablewrap.scroll-y thead th { position: sticky; top: 0; z-index: 2; }
+  thead th.sortable { cursor: pointer; }
+  thead th.sortable:hover { background: #eef0e9; }
+  thead th.sortable::after { content: ' ⇅'; color: var(--muted-2); font-weight: 400; font-size: 11px; }
+  thead th.sort-asc::after { content: ' ↑'; color: var(--green-deep); }
+  thead th.sort-desc::after { content: ' ↓'; color: var(--green-deep); }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.num-cell { font-variant-numeric: tabular-nums; font-weight: 600; }
+  td.green-text { color: #054d28; }
+  td.red-text { color: var(--red); }
+
+  /* ===== Funds table: zebra + sticky first col + clear hover ===== */
+  #funds-table tbody tr:nth-child(odd) td { background: #ffffff; }
+  #funds-table tbody tr:nth-child(even) td { background: #fafaf6; }
+  #funds-table tbody tr:hover td { background: var(--bg-mint); }
+  /* Sticky first column (basin name) — works during horizontal scroll */
+  #funds-table thead th:first-child,
+  #funds-table tbody td:first-child {
+    position: sticky; left: 0;
+  }
+  #funds-table thead th:first-child {
+    z-index: 3; background: var(--bg-soft);
+    box-shadow: 1px 0 0 var(--line);
+  }
+  #funds-table tbody tr:nth-child(odd) td:first-child { background: #ffffff; box-shadow: 1px 0 0 var(--line-soft); }
+  #funds-table tbody tr:nth-child(even) td:first-child { background: #fafaf6; box-shadow: 1px 0 0 var(--line-soft); }
+  #funds-table tbody tr:hover td:first-child { background: var(--bg-mint); }
+
+  /* Estimation warning marker on column header */
+  .th-warn { color: var(--amber); font-weight: 700; margin-left: 2px; }
+  /* Tilde prefix on estimated drawdown cells signals approximation */
+  td.dd-cell { font-style: italic; opacity: 0.92; }
+
+  /* Funds counter shown above the table */
+  .funds-count {
+    font-size: 13px; color: var(--muted);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 0 4px; margin: 12px 0 8px;
+  }
+  .funds-count strong { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* Funds table — compact mobile cells (long names ate vertical space) */
+  @media (max-width: 640px) {
+    #funds-table { font-size: 12.5px; }
+    #funds-table thead th,
+    #funds-table tbody td { padding: 9px 10px; }
+    #funds-table tbody td:first-child {
+      max-width: 140px;
+      font-size: 12.5px; line-height: 1.4;
+      word-break: break-word;
+    }
+    #funds-table thead th { font-size: 11px; }
+  }
+
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.2px; white-space: nowrap;
+  }
+  .badge.nz { background: #e2f6d5; color: #054d28; }
+  .badge.global { background: rgba(56,200,255,0.15); color: #075985; }
+  .badge.au { background: #ffe9d4; color: #9a3412; }
+  .badge.mix { background: #f3e8ff; color: #6b21a8; }
+
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600;
+    background: rgba(14,15,12,0.06); color: #454745; margin-right: 4px;
+  }
+
+  /* Filters */
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-label { font-size: 12px; color: #868685; font-weight: 600; margin-right: 4px; align-self: center; }
+  .filter-btn {
+    padding: 7px 14px; border-radius: 9999px; border: 1px solid rgba(14,15,12,0.12);
+    background: #ffffff; color: #454745; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all 0.12s ease; font-family: inherit;
+  }
+  .filter-btn:hover { transform: scale(1.04); border-color: #9fe870; color: #0e0f0c; }
+  .filter-btn.active { background: #0e0f0c; color: #9fe870; border-color: #0e0f0c; }
+  .search-input {
+    padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(14,15,12,0.12);
+    font-size: 14px; min-width: 220px; font-family: inherit;
+  }
+  .search-input:focus { outline: 2px solid #9fe870; border-color: #9fe870; }
+
+  /* ================ Tax decision tree (with connectors) ================ */
+  .decision-tree { display: flex; flex-direction: column; gap: 0; padding-left: 4px; }
+  .dt-step {
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+    padding: 18px 20px 18px 16px; border-radius: 16px;
+    background: #ffffff; border: 1px solid var(--line);
+    position: relative; z-index: 1;
+    margin-bottom: 22px;            /* room for connector below */
+  }
+  /* Vertical connector line between steps */
+  .dt-step:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 35px;                    /* center of dt-num (16 + 40/2 - 1) */
+    bottom: -22px; height: 22px; width: 2px;
+    background: linear-gradient(to bottom, var(--ink) 0%, var(--green) 100%);
+    z-index: 0;
+  }
+  /* Down-arrow chevron at the connector tail */
+  .dt-step:not(:last-child)::before {
+    content: ''; position: absolute;
+    left: 30px; bottom: -10px;
+    width: 12px; height: 12px;
+    border-right: 2px solid var(--green); border-bottom: 2px solid var(--green);
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+  /* Last step gets a green circle terminator instead of arrow */
+  .dt-step:last-child .dt-num { background: var(--green); color: var(--green-deep); }
+  .dt-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ink); color: var(--green);
+    font-weight: 900; display: flex; align-items: center;
+    justify-content: center; font-size: 17px; flex-shrink: 0;
+    box-shadow: 0 0 0 4px #ffffff;  /* clean separation from connector line */
+  }
+  .dt-content { font-size: 14.5px; color: var(--ink-2); line-height: 1.7; }
+  .dt-content strong {
+    display: block; margin-bottom: 4px; font-size: 15.5px;
+    color: var(--ink); font-weight: 700;
+  }
+  .dt-content code { background: rgba(14,15,12,0.06); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+
+  /* Portfolio cards */
+  .portfolio { padding: 28px; border-radius: 28px; border: 1px solid rgba(14,15,12,0.1); background: #ffffff; }
+  .portfolio.feat { background: #0e0f0c; color: #e8ebe6; border-color: #0e0f0c; }
+  .portfolio.feat h3, .portfolio.feat .alloc-name, .portfolio.feat .alloc-pct { color: #ffffff; }
+  .portfolio.feat .meta-row .meta-chip { background: #1a1b17; border-color: rgba(255,255,255,0.12); color: #9fe870; }
+  .portfolio.feat .meta-row .meta-chip strong { color: #ffffff; }
+  .portfolio.feat .alloc-bar { background: rgba(255,255,255,0.08); }
+  .portfolio.feat .alloc-row { border-bottom-color: rgba(255,255,255,0.08); }
+  .portfolio h3 { font-size: 24px; font-weight: 900; margin: 0 0 6px; letter-spacing: -0.3px; line-height: 1.2; }
+  .portfolio .ptag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 4px; }
+  .portfolio.feat .ptag { color: var(--green); }
+  .portfolio .blurb { font-size: 14px; color: var(--ink-2); line-height: 1.7; margin: 0; }
+  .portfolio.feat .blurb { color: #c8d3c1; }
+  .alloc-list { margin-top: 18px; }
+  .alloc-row { padding: 10px 0; border-bottom: 1px dashed rgba(14,15,12,0.1); }
+  .alloc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .alloc-name { font-size: 14px; font-weight: 600; }
+  .alloc-pct { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .alloc-bar { height: 6px; border-radius: 9999px; background: rgba(14,15,12,0.06); overflow: hidden; }
+  .alloc-bar-fill { height: 100%; background: #9fe870; border-radius: 9999px; }
+  .alloc-note { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .portfolio.feat .alloc-note { color: #c8d3c1; }
+  /* Asset-class examples — secondary line under the note */
+  .alloc-examples {
+    font-size: 11.5px; color: var(--muted-2);
+    margin-top: 6px; line-height: 1.5;
+  }
+  .alloc-examples-label {
+    font-weight: 700; color: var(--muted); margin-right: 2px;
+  }
+  .portfolio.feat .alloc-examples { color: #8a9285; }
+  .portfolio.feat .alloc-examples-label { color: #c8d3c1; }
+
+  /* Misc */
+  .callout {
+    display: grid; grid-template-columns: 28px 1fr; gap: 12px;
+    padding: 18px 22px; border-radius: 18px; background: #fff8e7; border: 1px solid #ffd11a;
+    margin: 16px 0;
+  }
+  .callout.info { background: rgba(56,200,255,0.10); border-color: rgba(56,200,255,0.3); }
+  .callout.danger { background: #ffeaeb; border-color: #f8b4b4; }
+  .callout.green { background: #e2f6d5; border-color: #9fe870; }
+  .callout-icon { font-size: 20px; line-height: 1; }
+  .callout p { margin: 0; font-size: 14.5px; color: #0e0f0c; }
+  .callout strong { color: #0e0f0c; font-weight: 700; }
+
+  /* Chart container */
+  .chart-card {
+    background: #ffffff; border: 1px solid rgba(14,15,12,0.10);
+    border-radius: 24px; padding: 24px;
+  }
+  .chart-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+  .chart-card .chart-sub { font-size: 13px; color: #868685; margin-bottom: 18px; }
+  .chart-box { position: relative; height: 380px; }
+
+  /* ================ Footer ================ */
+  footer {
+    background: var(--ink); color: #c8d3c1;
+    padding: 80px 0 36px; margin-top: 0;
+  }
+  /* Closing tagline — sets emotional note before utility links */
+  .footer-tagline {
+    font-size: clamp(28px, 3.8vw, 48px);
+    font-weight: 900; line-height: 1.1; letter-spacing: -0.4px;
+    color: #ffffff; max-width: 720px; margin: 0 0 8px;
+  }
+  .footer-tagline .accent {
+    background-image: linear-gradient(var(--green), var(--green));
+    background-repeat: no-repeat;
+    background-size: 100% 0.32em;
+    background-position: 0 92%;
+    padding: 0 0.08em;
+    color: #ffffff;
+  }
+  .footer-tagline-sub {
+    font-size: 16px; color: #a8b3a3; max-width: 720px;
+    margin: 0 0 56px;
+  }
+  footer h4 { color: #ffffff; font-size: 14px; font-weight: 700; margin: 0 0 14px; letter-spacing: 0.2px; text-transform: uppercase; letter-spacing: 1.2px; font-size: 11px; }
+  footer p, footer li { font-size: 13.5px; line-height: 1.7; color: #c8d3c1; }
+  footer a { color: var(--green); text-decoration-color: rgba(159,232,112,0.4); transition: text-decoration-color 0.15s; }
+  footer a:hover { text-decoration-color: var(--green); }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { padding: 2px 0; }
+  .footer-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px;
+    padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+  .footer-mark {
+    font-size: 20px; font-weight: 900; line-height: 1.1; letter-spacing: -0.3px;
+    color: #ffffff; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .footer-mark::before {
+    content: ''; width: 14px; height: 14px; border-radius: 9999px;
+    background: var(--green); box-shadow: 0 0 0 4px rgba(159,232,112,0.2);
+  }
+  .footer-bottom {
+    margin-top: 28px; padding-top: 0;
+    font-size: 12.5px; color: #868685;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-bottom code { color: var(--green); background: rgba(159,232,112,0.08); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+
+  /* ================ Action cards (CTA closure) ================ */
+  .action-card {
+    background: #ffffff; border: 1px solid var(--line);
+    border-radius: 20px; padding: 24px 22px;
+    display: flex; flex-direction: column; gap: 4px;
+    text-decoration: none; cursor: pointer; font-family: inherit;
+    text-align: left; color: var(--ink);
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .action-card:hover { border-color: var(--green); transform: translateY(-3px); color: var(--ink); }
+  .action-card:active { transform: translateY(-1px); }
+  .action-card .ico {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--bg-mint); color: var(--green-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; line-height: 1; margin-bottom: 8px;
+  }
+  .action-card strong { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .action-card .action-sub { font-size: 13px; color: var(--muted); line-height: 1.55; margin-top: 2px; }
+
+  /* ================ Toast feedback ================ */
+  .toast {
+    position: fixed; bottom: 88px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: #fff;
+    padding: 12px 22px; border-radius: 12px;
+    font-size: 14px; font-weight: 600; z-index: 200;
+    opacity: 0; transition: opacity 0.25s, transform 0.25s;
+    pointer-events: none;
+    box-shadow: 0 4px 24px rgba(14,15,12,0.25);
+    border: 1px solid rgba(159,232,112,0.3);
+  }
+  .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast .check { color: var(--green); margin-right: 6px; font-weight: 800; }
+
+  /* ================ Reveal-on-scroll ================ */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  /* Reduce-motion users get content immediately */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ================ A11y utilities ================ */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 1000;
+    padding: 12px 20px; background: var(--ink); color: var(--green);
+    text-decoration: none; font-weight: 700; border-radius: 0 0 12px 0;
+    font-size: 14px;
+  }
+  .skip-link:focus { left: 0; outline: 3px solid var(--green); outline-offset: -3px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); border: 0; white-space: nowrap;
+  }
+  /* Respect user motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+  /* Caption shown only to screen readers */
+  table caption {
+    text-align: left; padding: 0; margin: 0;
+  }
+
+  /* ================ Print ================ */
+  @media print {
+    .nav, .filters, footer, .toc-side, .scroll-progress, .back-to-top, .nav-mobile, #next-steps { display: none; }
+    section { break-inside: avoid; padding: 24px 0; border-top: 1px solid #ddd; }
+    .tablewrap.scroll-y { max-height: none; overflow: visible; }
+    body { line-height: 1.5; }
+  }
+
+  /* TOC anchor offsets for sticky nav */
+  section[id] { scroll-margin-top: 70px; }
+
+  /* Detail sliders & TOC */
+  details { background: #f5f5f3; border-radius: 16px; padding: 14px 18px; margin: 8px 0; }
+  details summary { font-weight: 700; cursor: pointer; font-size: 15px; }
+  details[open] summary { margin-bottom: 10px; }
+  details p, details li { font-size: 14.5px; color: #454745; line-height: 1.6; }
+  details ul { margin: 6px 0 0 18px; padding: 0; }
+
+  /* Inline progress bar */
+  .progress { height: 8px; border-radius: 9999px; background: rgba(14,15,12,0.08); overflow: hidden; }
+  .progress > span { display: block; height: 100%; background: #9fe870; border-radius: 9999px; }
+
+  hr.section-sep { border: none; border-top: 1px dashed rgba(14,15,12,0.15); margin: 36px 0; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<!-- ====================================================================
+     Wayfinding chrome — progress bar, TOC, back-to-top, mobile drawer
+     ==================================================================== -->
+<div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+<aside class="toc-side" aria-label="章节目录">
+  <div class="toc-side-inner">
+    <div class="toc-side-label">章节</div>
+    <ol id="toc-list">
+      <li><a href="#insights" data-section="insights">关键发现</a></li>
+      <li><a href="#tax" data-section="tax">税务（PIE/FIF）</a></li>
+      <li><a href="#goal" data-section="goal">10% 合理吗</a></li>
+      <li><a href="#top" data-section="top">10 年榜单</a></li>
+      <li><a href="#funds" data-section="funds">基金大全</a></li>
+      <li><a href="#risk" data-section="risk">风险指标</a></li>
+      <li><a href="#window" data-section="window">5Y vs 10Y</a></li>
+      <li><a href="#fees" data-section="fees">费用影响</a></li>
+      <li><a href="#currency" data-section="currency">货币对冲</a></li>
+      <li><a href="#benchmark" data-section="benchmark">基准对比</a></li>
+      <li><a href="#portfolios" data-section="portfolios">三套组合</a></li>
+      <li><a href="#origin" data-section="origin">提供商</a></li>
+      <li><a href="#platforms" data-section="platforms">平台对比</a></li>
+      <li><a href="#methodology" data-section="methodology">方法论</a></li>
+      <li><a href="#next-steps" data-section="next-steps">下一步</a></li>
+      <li><a href="#disclaimer" data-section="disclaimer">免责</a></li>
+    </ol>
+  </div>
+</aside>
+
+<button class="back-to-top" id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+
+<!-- ====================================================================
+     SECTION 1 — Top navigation
+     ==================================================================== -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>NZ 华人基金指南</span>
+    </div>
+    <div class="nav-links">
+      <a href="#tax">税务</a>
+      <a href="#funds">基金大全</a>
+      <a href="#risk">风险</a>
+      <a href="#fees">费用</a>
+      <a href="#currency">汇率</a>
+      <a href="#portfolios">组合</a>
+      <a href="#platforms">平台</a>
+    </div>
+    <a class="nav-cta" href="#funds">查基金 →</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+  <a href="#insights"><span class="num">01</span> 关键发现</a>
+  <a href="#tax"><span class="num">02</span> 税务（PIE/FIF）</a>
+  <a href="#goal"><span class="num">03</span> 10% 合理吗</a>
+  <a href="#top"><span class="num">04</span> 10 年榜单</a>
+  <a href="#funds"><span class="num">05</span> 基金大全</a>
+  <a href="#risk"><span class="num">06</span> 风险指标</a>
+  <a href="#window"><span class="num">07</span> 5Y vs 10Y</a>
+  <a href="#fees"><span class="num">08</span> 费用影响</a>
+  <a href="#currency"><span class="num">09</span> 货币对冲</a>
+  <a href="#benchmark"><span class="num">10</span> 基准对比</a>
+  <a href="#portfolios"><span class="num">11</span> 三套组合</a>
+  <a href="#origin"><span class="num">12</span> 提供商</a>
+  <a href="#platforms"><span class="num">13</span> 平台对比</a>
+  <a href="#methodology"><span class="num">14</span> 方法论</a>
+  <a href="#next-steps"><span class="num">15</span> 下一步</a>
+  <a href="#disclaimer"><span class="num">16</span> 免责</a>
+</div>
+
+<!-- ====================================================================
+     SECTION 2 — Hero
+     ==================================================================== -->
+<main id="main">
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="pill"><span class="dot"></span> <span id="hero-data-date">数据更新中</span></span>
+        <h1 class="display" id="hero-h1">
+          在新西兰投资 <br><span class="accent">10万纽币</span>，<br>该买哪只基金？
+        </h1>
+        <p class="hero-sub">
+          面向新西兰华人投资者的 Managed Fund 选择指南。覆盖 90+ 只主流基金的 5 年与 10 年实际回报，含税务（PIE / FIF）、风险、组合配置、汇率影响、基准对比——全部数据来源公开可查。
+        </p>
+        <div class="meta-row">
+          <div class="meta-chip" id="freshness-chip">
+            <span class="freshness-dot" aria-hidden="true"></span>
+            数据 <strong id="meta-data-age">--</strong>
+            <span class="meta-sep">·</span>
+            <span id="meta-freshness-label">--</span>
+          </div>
+          <div class="meta-chip">页面更新：<strong id="meta-page-date">--</strong></div>
+          <div class="meta-chip">阅读时长：<strong>~ 14 分钟</strong></div>
+          <div class="meta-chip">基金数量：<strong id="meta-fund-count">--</strong></div>
+          <div class="meta-chip">主数据源：<strong>InvestNow / Morningstar</strong></div>
+        </div>
+      </div>
+
+      <!-- Hero visual anchor — outcome scenarios for $100k over 10 years -->
+      <aside class="hero-viz" aria-label="$10 万纽币 10 年后的复利情景">
+        <div class="hero-viz-tag">10 万 NZD · 10 年后</div>
+        <div class="hero-viz-title">同样起点，<br>不同年化的差距</div>
+        <div class="viz-row">
+          <span class="viz-rate">~6%</span>
+          <span class="viz-bar" style="--bar-w: 60%;"></span>
+          <span class="viz-num">$179k</span>
+        </div>
+        <div class="viz-row">
+          <span class="viz-rate">~8%</span>
+          <span class="viz-bar" style="--bar-w: 76%;"></span>
+          <span class="viz-num">$216k</span>
+        </div>
+        <div class="viz-row feat">
+          <span class="viz-rate">~10%</span>
+          <span class="viz-bar" style="--bar-w: 92%;"></span>
+          <span class="viz-num">$259k</span>
+        </div>
+        <p class="hero-viz-foot">复利 = 时间 × 收益率。每多 2% 年化，10 年差额可达 $40k+。但 10% 不是免费的——见下文风险章节。</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 3 — Key insights (4 cards)
+     ==================================================================== -->
+<section id="insights">
+  <div class="container">
+    <div class="eyebrow">先看这个</div>
+    <h2>4 个关键发现</h2>
+    <p class="lede">如果只看一眼，请记住这 4 点：它们决定你 80% 的结果。</p>
+
+    <div class="grid grid-4 mt-4">
+      <div class="card reveal">
+        <div class="lbl">税务先于一切</div>
+        <!-- Mini-viz: PIE 28% bar vs Personal 39% bar — show the gap -->
+        <svg class="micro" viewBox="0 0 130 36" aria-label="PIE 28% 条形短于个税 39% 条形">
+          <rect x="0" y="6"  width="60"  height="10" fill="#9fe870" rx="2"/>
+          <text x="64" y="14" font-size="9" font-weight="700" fill="#163300">PIE 28%</text>
+          <rect x="0" y="22" width="84"  height="10" fill="#0e0f0c" rx="2"/>
+          <text x="88" y="30" font-size="9" font-weight="700" fill="#0e0f0c">个税 39%</text>
+        </svg>
+        <div class="num">11%</div>
+        <div class="sub-text">高收入者用 PIE 结构基金 vs 个人持股，每年最多省下 11% 的税（39% − 28%）。$100k 投资差额可达数千纽币/年。</div>
+      </div>
+      <div class="card reveal">
+        <div class="lbl">被动 ETF 的胜利</div>
+        <!-- Mini-viz: 10 dots, 7 filled green, 3 outlined -->
+        <svg class="micro" viewBox="0 0 110 18" aria-label="10 个圆点中 7 个填满代表被动 ETF 占比">
+          <circle cx="6"   cy="9" r="5" fill="#9fe870"/>
+          <circle cx="18"  cy="9" r="5" fill="#9fe870"/>
+          <circle cx="30"  cy="9" r="5" fill="#9fe870"/>
+          <circle cx="42"  cy="9" r="5" fill="#9fe870"/>
+          <circle cx="54"  cy="9" r="5" fill="#9fe870"/>
+          <circle cx="66"  cy="9" r="5" fill="#9fe870"/>
+          <circle cx="78"  cy="9" r="5" fill="#9fe870"/>
+          <circle cx="90"  cy="9" r="5" fill="none" stroke="#5c5e5b" stroke-width="1.5"/>
+          <circle cx="102" cy="9" r="5" fill="none" stroke="#5c5e5b" stroke-width="1.5"/>
+        </svg>
+        <div class="num">7 / 10</div>
+        <div class="sub-text">10 年回报 Top 10 中有 7 只是 SmartShares 被动 ETF。低费率指数化跑赢绝大多数主动基金。</div>
+      </div>
+      <div class="card reveal">
+        <div class="lbl">汇率隐藏推手</div>
+        <!-- Mini-viz: NZD/USD downward trend (NZD weakening = unhedged gain) -->
+        <svg class="micro" viewBox="0 0 110 36" aria-label="NZD 兑 USD 下行趋势线">
+          <polyline points="2,8 22,12 42,16 62,22 82,28 104,32"
+            stroke="#9fe870" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <polygon points="104,32 98,28 102,36" fill="#9fe870"/>
+          <text x="2" y="6" font-size="8" font-weight="700" fill="#5c5e5b">NZD/USD</text>
+        </svg>
+        <div class="num">~4%</div>
+        <div class="sub-text">过去 5 年 NZD 对 USD 贬值约 18%，相当于每年给 unhedged 美股基金"白送" ~4% 回报——未来未必延续。</div>
+      </div>
+      <div class="card feat reveal">
+        <div class="lbl">10% 不是免费的</div>
+        <!-- Mini-viz: drawdown drop — peak then steep fall, with measurement bracket -->
+        <svg class="micro" viewBox="0 0 110 36" aria-label="2022 年熊市深度回撤示意">
+          <polyline points="2,10 18,7 30,9 44,18 58,26 72,31 86,33 102,31"
+            stroke="#9fe870" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="30" y1="5"  x2="30" y2="33" stroke="#9fe870" stroke-width="1" stroke-dasharray="2,3" opacity="0.55"/>
+          <line x1="86" y1="5"  x2="86" y2="33" stroke="#9fe870" stroke-width="1" stroke-dasharray="2,3" opacity="0.55"/>
+          <path d="M 30 5 L 86 5" stroke="#9fe870" stroke-width="1.5"/>
+          <path d="M 28 5 L 32 5 M 84 5 L 88 5" stroke="#9fe870" stroke-width="2"/>
+          <text x="58" y="3.5" font-size="7" font-weight="800" fill="#9fe870" text-anchor="middle" letter-spacing="0.3">2022 熊市</text>
+        </svg>
+        <div class="num">−25%</div>
+        <div class="sub-text">能持续做到 10%+ 的几乎都是美股集中型基金；2022 年回撤 −20% 到 −33%。要回本需要涨 33%。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 4 — TAX (PIE / FIF) — most important
+     ==================================================================== -->
+<section id="tax" class="section-mint">
+  <div class="container">
+    <div class="eyebrow">第一站 · 最重要</div>
+    <h2>PIE 与 FIF——<br>选基金前先选"税"</h2>
+    <p class="lede">在新西兰，"税前回报"和"税后到手"经常差出 1–3% / 年。这一节决定你 $100k 真正能拿多少。</p>
+
+    <div class="grid grid-2 mt-4">
+      <!-- PIR card -->
+      <div class="card">
+        <div class="lbl">什么是 PIE / PIR</div>
+        <h3 class="h3-card">PIE = Portfolio Investment Entity</h3>
+        <p class="t-body">几乎所有 NZ 注册的 Managed Fund 都是 PIE 结构。基金按你的 <strong>PIR 储蓄税率</strong>替你扣税，最高封顶 <strong>28%</strong>，无论你的个人边际税率多高。</p>
+        <div class="tablewrap mt-2">
+          <table>
+            <thead><tr><th>2024–25 应税收入</th><th>PIR</th><th>个人最高税率</th></tr></thead>
+            <tbody>
+              <tr><td>≤ $14,000</td><td class="num-cell">10.5%</td><td class="num-cell">10.5%</td></tr>
+              <tr><td>$14,001–$48,000</td><td class="num-cell">17.5%</td><td class="num-cell">17.5%</td></tr>
+              <tr><td>$48,001–$70,000</td><td class="num-cell">28%</td><td class="num-cell">30%</td></tr>
+              <tr><td>$70,001–$180,000</td><td class="num-cell">28%</td><td class="num-cell">33%</td></tr>
+              <tr><td>&gt; $180,000</td><td class="num-cell green-text">28% ★</td><td class="num-cell">39%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="t-fine mt-2">★ 高收入者用 PIE 比直接持有省 5–11% 税。注意：PIR 是 <em>Prescribed Investor Rate</em>，按过去两年的收入决定。报错会被 IRD 追补。</p>
+      </div>
+
+      <!-- FIF card -->
+      <div class="card">
+        <div class="lbl">超过 50k 触发</div>
+        <h3 class="h3-card">FIF = Foreign Investment Fund</h3>
+        <p class="t-body">如果你<strong>直接持有</strong>境外注册的股票或基金（如直接买美股、Hatch、IBKR 持有海外 ETF），且全年成本基础 &gt; <strong>NZD 50,000</strong>，会触发 FIF 税：</p>
+        <ul class="list-prose">
+          <li><strong>FDR (Fair Dividend Rate)</strong>：按年初市值 × 5% 计税，无论实际涨跌（除非全年总回报为负，可改用 CV）。</li>
+          <li><strong>CV (Comparative Value)</strong>：按年内实际增值 + 分红计税。一般亏损年才划算。</li>
+          <li>豁免：澳洲注册公司、某些 ASX 上市股票、PIE 结构基金不走 FIF。</li>
+        </ul>
+        <div class="callout danger mt-2">
+          <span class="callout-icon">⚠</span>
+          <p>$100k 直接买美股 / 海外 ETF 必踩 FIF 红线。但买 <strong>NZ 注册的 PIE 基金</strong>（即使它投资海外）<u>不走 FIF</u>，按 PIE 28% 封顶。这是绝大多数华人投资者的最优选择。</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-sep">
+
+    <h3 class="h3-card mt-3">$100k 投资税务决策树</h3>
+    <div class="decision-tree">
+      <div class="dt-step">
+        <div class="dt-num">1</div>
+        <div class="dt-content">
+          <strong>查清你的 PIR</strong>
+          年收入 &gt; $48k 或全家年收入 &gt; $70k，PIR = 28%。报错会被追税，建议每年 4 月 1 日前确认。
+        </div>
+      </div>
+      <div class="dt-step">
+        <div class="dt-num">2</div>
+        <div class="dt-content">
+          <strong>优先选 PIE 结构基金</strong>
+          $100k 体量下，PIE 几乎一定优于直接持股。InvestNow / Sharesies / Hatch 上的 NZ 注册 Managed Fund 与 SmartShares ETF 都是 PIE。
+        </div>
+      </div>
+      <div class="dt-step">
+        <div class="dt-num">3</div>
+        <div class="dt-content">
+          <strong>避免直接买美股 / 境外 ETF</strong>
+          除非你愿意每年自己算 FDR / CV。$100k 美股每年至少要交 ~$1,400 FIF 税（即使账面没赚钱）。<code>VOO</code> / <code>QQQ</code> 直接买 ≠ 买 SmartShares 的 <code>USF</code> / <code>USG</code>。
+        </div>
+      </div>
+      <div class="dt-step">
+        <div class="dt-num">4</div>
+        <div class="dt-content">
+          <strong>KiwiSaver 与 Managed Fund 不互斥</strong>
+          KiwiSaver 锁定到 65 岁但有政府配资 + 雇主匹配。Managed Fund 灵活提取——3 年期目标只能用后者。两者税率结构完全相同（都是 PIE）。
+        </div>
+      </div>
+      <div class="dt-step">
+        <div class="dt-num">5</div>
+        <div class="dt-content">
+          <strong>夫妻 / 家庭分散持有</strong>
+          如果伴侣 PIR 较低（比如全职带娃），可以以低 PIR 一方名义持有部分基金，整体税负更低。注意控制每人 FIF 阈值。
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">ⓘ</span>
+      <p><strong>本节是一般信息，不是税务建议。</strong>具体情况请咨询持牌会计师或参考 <a href="https://www.ird.govt.nz" target="_blank" rel="noopener">IRD 官网</a>。FIF / PIE 规则可能因年度更新而变。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 5 — Investment Goal Reality Check
+     ==================================================================== -->
+<section id="goal">
+  <div class="container">
+    <div class="eyebrow">期望管理</div>
+    <h2>10% 年化合理吗？</h2>
+    <p class="lede">原始目标"10万 NZD / 年化 10%+ / 3 年"——我们用 90 只基金的真实数据检验一下。</p>
+
+    <div class="grid grid-3 mt-4">
+      <div class="card reveal">
+        <div class="lbl">10Y ≥ 10% 的基金</div>
+        <div class="num" id="kpi-10y10pct">--</div>
+        <div class="sub-text">90 只有 10 年记录的基金中，能做到 10 年年化 ≥ 10% 的数量。绝大多数集中在<strong>美股 + 全球股</strong>。</div>
+      </div>
+      <div class="card reveal">
+        <div class="lbl">5Y 与 10Y 都 ≥ 10%</div>
+        <div class="num" id="kpi-dual10pct">--</div>
+        <div class="sub-text">"双 10%"——两个时间窗口都达标的优等生。这才是更严格的稳健标准。</div>
+      </div>
+      <div class="card reveal">
+        <div class="lbl">90 只基金 10Y 平均</div>
+        <div class="num" id="kpi-avg10y">--%</div>
+        <div class="sub-text">大盘平均水平。注意：这是经过<u>幸存者偏差</u>筛选的——已倒闭 / 合并的基金不在内，真实平均可能更低。</div>
+      </div>
+    </div>
+
+    <div class="callout green mt-3">
+      <span class="callout-icon">✓</span>
+      <p><strong>结论</strong>：10% 是<u>可达成的</u>但<u>非保证的</u>。要稳定实现这个目标，必须接受 −20% 到 −30% 的回撤可能。如果你的资金 3 年内一定会用，目标应下调到 6–8%。</p>
+    </div>
+
+    <div class="grid grid-2 mt-3">
+      <div class="chart-card">
+        <h3>$100k 在不同情景下的复利曲线</h3>
+        <div class="chart-sub">同样 10 年时间，年化收益差别带来的实际差距</div>
+        <div class="chart-box"><canvas id="chart-compound" role="img" aria-label="$10万投资在5种不同年化收益情景下10年的复利对比曲线"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>10Y 年化收益分布</h3>
+        <div class="chart-sub">90 只基金按收益区间统计</div>
+        <div class="chart-box"><canvas id="chart-distribution" role="img" aria-label="90 只基金按 10 年年化收益区间的数量分布柱状图"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 6 — Top performers
+     ==================================================================== -->
+<section id="top">
+  <div class="container">
+    <div class="eyebrow">10 年实战榜单</div>
+    <h2>10 年回报 Top 15</h2>
+    <p class="lede">截至数据日期，按 10 年年化收益排序。所有数据来自 InvestNow / Morningstar，税前 / 净费率（after fees, before tax）。</p>
+
+    <div class="chart-card mt-3">
+      <h3>Top 15 / 10 年年化收益</h3>
+      <div class="chart-sub">柱形颜色=资产类别。注意：榜单偏向"长寿"的被动 ETF；Generate / Simplicity 因成立晚（2012/2016）不出现于此。</div>
+      <div class="chart-box tall"><canvas id="chart-top15" role="img" aria-label="按 10 年年化收益排序的 Top 15 基金水平柱状图"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 7 — All funds table (with filter)
+     ==================================================================== -->
+<section id="funds">
+  <div class="container">
+    <div class="eyebrow">全部基金</div>
+    <h2>基金大全（可筛选 / 排序）</h2>
+    <p class="lede">点击表头排序。下方筛选条件可叠加。颜色标识：<span class="badge nz">NZ本地</span> <span class="badge mix">NZ+美资</span> <span class="badge au">澳洲</span> <span class="badge global">海外跨国</span></p>
+
+    <div class="callout info mt-3">
+      <span class="callout-icon">ⓘ</span>
+      <p><strong>数据口径声明</strong>：所有回报数字来自 InvestNow 显示的 <strong>Retail PIE 单元</strong>，报告为 <strong>net of fees, before PIR tax</strong>。同一只基金可能有 wholesale / class B / hedged 等不同份额类，本指南只对应 InvestNow 上显示的版本。跨平台对比时（如 Sorted Smart Investor 与 Morningstar）可能因 share class / 报告日期略异，差额通常在 0.3–0.5% 之间。</p>
+    </div>
+
+    <div class="filters mt-3">
+      <div class="filter-group">
+        <span class="filter-label">类别：</span>
+        <button class="filter-btn active" data-filter="sector" data-value="all">全部</button>
+        <button class="filter-btn" data-filter="sector" data-value="intl">国际股票</button>
+        <button class="filter-btn" data-filter="sector" data-value="aus">澳新股票</button>
+        <button class="filter-btn" data-filter="sector" data-value="div">多元化</button>
+        <button class="filter-btn" data-filter="sector" data-value="prop">房产</button>
+        <button class="filter-btn" data-filter="sector" data-value="fi">固定收益 / 现金</button>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">归属：</span>
+        <button class="filter-btn active" data-filter="origin" data-value="all">全部</button>
+        <button class="filter-btn" data-filter="origin" data-value="nz">NZ本地</button>
+        <button class="filter-btn" data-filter="origin" data-value="nz-us">NZ+美资</button>
+        <button class="filter-btn" data-filter="origin" data-value="au">澳洲</button>
+        <button class="filter-btn" data-filter="origin" data-value="global">海外跨国</button>
+      </div>
+      <div class="filter-group" style="margin-left: auto;">
+        <input class="search-input" type="search" id="fund-search" placeholder="搜索基金 / 公司...">
+      </div>
+    </div>
+
+    <div class="funds-count">
+      <span>显示 <strong id="funds-shown">--</strong> / <strong id="funds-total">--</strong> 只基金</span>
+      <span class="t-fine">点击表头排序 · 滚动查看更多</span>
+    </div>
+    <div class="tablewrap scroll-y">
+      <table id="funds-table" aria-describedby="funds-table-caption">
+        <caption class="sr-only" id="funds-table-caption">90 只新西兰 PIE 基金的 3 年 / 5 年 / 10 年年化收益与 2022 估算回撤数据。可按公司、归属、类别筛选；点击表头排序；首列固定，方便横向对比。</caption>
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="name">基金名称</th>
+            <th class="sortable" data-sort="provider">公司</th>
+            <th class="sortable" data-sort="origin">归属</th>
+            <th class="sortable" data-sort="sector">类别</th>
+            <th class="sortable" data-sort="yr3">3Y</th>
+            <th class="sortable sort-desc" data-sort="yr10">10Y</th>
+            <th class="sortable" data-sort="yr5">5Y</th>
+            <th class="sortable" data-sort="dd" title="基于资产类别近似估算，非各基金真实回撤">2022 回撤估算 <span class="th-warn" aria-hidden="true">⚠</span></th>
+          </tr>
+        </thead>
+        <tbody id="funds-tbody"></tbody>
+      </table>
+    </div>
+    <div class="callout mt-3">
+      <span class="callout-icon">⚠</span>
+      <p><strong>关于"2022 回撤估算"列</strong>：数字基于资产类别在 2022 全球熊市的<u>近似回撤</u>，<strong>不是单只基金的真实数字</strong>，且<strong>系统性偏乐观约 5pp</strong>（实际 max drawdown 通常比表中数字深 4–7 个百分点）。仅作<strong>风险相对量级</strong>参考。<br>真实月度 NAV 数据 + 真实 peak-to-trough 计算已列入 <code>backlog</code>，将在后续版本替换。当前阶段，建议把表中数字 ×1.3 作为"现实风险下限"心理预算。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 8 — Risk metrics
+     ==================================================================== -->
+<section id="risk">
+  <div class="container">
+    <div class="eyebrow">收益不是全部</div>
+    <h2>风险——你能承受多深的坑？</h2>
+    <p class="lede">原始研究只看收益是不够的。亏 25% 后需要涨 33% 才能回本。这一节按资产类别看 2022 真实回撤量级。</p>
+
+    <div class="tablewrap mt-4">
+      <table>
+        <thead>
+          <tr>
+            <th>资产类别</th>
+            <th>代表基金</th>
+            <th>2022 估算回撤 <span class="th-warn" aria-hidden="true">⚠</span></th>
+            <th>回本所需涨幅</th>
+            <th>波动量级</th>
+          </tr>
+        </thead>
+        <tbody id="risk-tbody"></tbody>
+      </table>
+    </div>
+    <p class="t-fine mt-2">★ 回撤数字为<u>该资产类别同期的近似估算</u>，并系统性偏乐观约 5pp。例如美股 S&amp;P 500 2022 真实回撤约 −25%（表中 −19% 偏低）。请把数字当作"<strong>相对风险量级</strong>"读，而不是精确历史。</p>
+
+    <div class="callout">
+      <span class="callout-icon">★</span>
+      <p><strong>实战意义</strong>：如果你 3 年后必须用这笔钱，"激进=美股集中"组合可能在第 1 年亏 25%，剩余 2 年要年化 18% 才能回到 10% 整体目标。这不现实。资金期限越短，风险预算越紧。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 9 — 5Y vs 10Y
+     ==================================================================== -->
+<section id="window" class="section-mint">
+  <div class="container">
+    <div class="eyebrow">时间窗口</div>
+    <h2>5 年 vs 10 年——<br>同一基金两张脸</h2>
+    <p class="lede">5 年窗口（2021 起）包含 2022 熊市与新西兰利率紧缩；10 年窗口（2016 起）多了一段 2016–2021 大牛。Smart NZ Top 50 一个 8.61%（10Y）vs 2.47%（5Y）就是典型例子。</p>
+
+    <div class="chart-card mt-3">
+      <h3>5Y vs 10Y 散点图</h3>
+      <div class="chart-sub">右上角=两个窗口都强；右下=5Y 弱于 10Y（"减速"）；左上=5Y 强于 10Y（"加速"）。45° 线为参考。</div>
+      <div class="chart-box md"><canvas id="chart-scatter" role="img" aria-label="5 年与 10 年年化收益的散点图，对角虚线为 5Y 等于 10Y 参考线"></canvas></div>
+    </div>
+
+    <div class="grid grid-3 mt-3">
+      <div class="card">
+        <div class="lbl">加速基金（5Y &gt; 10Y）</div>
+        <div class="num" id="kpi-accelerating">--</div>
+        <div class="sub-text">最近 5 年表现优于 10 年——多为 US Large Growth、Australian Resources 等近年题材。</div>
+      </div>
+      <div class="card">
+        <div class="lbl">减速基金（5Y &lt; 10Y）</div>
+        <div class="num" id="kpi-decelerating">--</div>
+        <div class="sub-text">10 年好但 5 年走弱——多为 NZ 股、NZ 房产、固定收益。利率周期影响显著。</div>
+      </div>
+      <div class="card">
+        <div class="lbl">10Y − 5Y 平均差</div>
+        <div class="num" id="kpi-delta">--</div>
+        <div class="sub-text">整体 5 年回报比 10 年低约 1–2 个百分点。说明近期市场比中长期更难。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 10 — Fees
+     ==================================================================== -->
+<section id="fees">
+  <div class="container">
+    <div class="eyebrow">复利的反面</div>
+    <h2>费用，<br>每年 1% 的隐形税</h2>
+    <p class="lede">$100k 投资里，1% 的管理费差异在 10 年后差出 ~$15k。被动 ETF 0.34%，主动基金 1.50%——长期下来是天文数字。</p>
+
+    <div class="chart-card mt-4">
+      <h3>$100k 投资 / 净到手金额（按管理费分层）</h3>
+      <div class="chart-sub">假设统一年化 8%（gross），扣除不同费率后的实际值</div>
+      <div class="chart-box"><canvas id="chart-fees" role="img" aria-label="$10 万投资在不同管理费率下 10 年净到手金额的差异曲线"></canvas></div>
+    </div>
+
+    <div class="grid grid-4 mt-4">
+      <div class="card reveal">
+        <div class="lbl">超低费 0.10–0.35%</div>
+        <div class="num">$3k</div>
+        <div class="sub-text">10年总费用（$100k）。代表：Simplicity Growth、Smart US 500 ETF。</div>
+      </div>
+      <div class="card reveal">
+        <div class="lbl">低费 0.35–0.60%</div>
+        <div class="num">$6k</div>
+        <div class="sub-text">代表：SmartShares 行业 ETF、SuperLife 基金。</div>
+      </div>
+      <div class="card reveal">
+        <div class="lbl">中费 0.75–1.10%</div>
+        <div class="num">$11k</div>
+        <div class="sub-text">代表：Milford Active Growth、Generate、Booster。</div>
+      </div>
+      <div class="card feat reveal">
+        <div class="lbl">高费 1.25–1.80%</div>
+        <div class="num">$18k</div>
+        <div class="sub-text">代表：Fisher Funds Global、Milford Dynamic、Elevation。要求 alpha 显著才划算。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 11 — Currency
+     ==================================================================== -->
+<section id="currency" class="section-mint">
+  <div class="container">
+    <div class="eyebrow">汇率风险</div>
+    <h2>你赚的是美元，<br>还是 NZD？</h2>
+    <p class="lede">买全球股 / 美股基金时，<strong>hedged（对冲）</strong>和 <strong>unhedged（不对冲）</strong>版本回报可能差几个百分点——过去 5 年 NZD 对 USD 持续贬值，给 unhedged 基金白送了大约 4%/年。但这反过来同样可能。</p>
+
+    <div class="grid grid-2 mt-4">
+      <div class="chart-card">
+        <h3>Mercer 全球股 hedged vs unhedged（10Y）</h3>
+        <div class="chart-sub">同样投资标的，不同币种风险敞口</div>
+        <div class="chart-box sm"><canvas id="chart-currency" role="img" aria-label="Mercer 全球股 hedged 与 unhedged 版本在 3 年 / 5 年 / 10 年的回报对比柱状图"></canvas></div>
+      </div>
+      <div>
+        <div class="card">
+          <h3 class="h3-card-md">怎么选？</h3>
+          <ul class="list-prose">
+            <li><strong>看好 USD 长期 vs NZD</strong>（如美国生产率领先）→ unhedged 美股 ETF</li>
+            <li><strong>认为 NZD 已超跌</strong>（2026 年 NZD/USD 在 ~0.59，历史中下区间）→ hedged 全球股</li>
+            <li><strong>不确定 / 想分散</strong> → 一半 hedged 一半 unhedged</li>
+            <li><strong>只买 NZ 资产</strong> → 无汇率风险但牺牲多元化（NZ 股市仅占全球 ~0.05%）</li>
+          </ul>
+        </div>
+        <div class="callout mt-2">
+          <span class="callout-icon">!</span>
+          <p>SmartShares 的 <code>USF</code>（US 500）默认 unhedged。Mercer / Russell 都同时提供 hedged / unhedged 版本——选错了过去 5 年差 ~6%/年。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 12 — Benchmarks
+     ==================================================================== -->
+<section id="benchmark">
+  <div class="container">
+    <div class="eyebrow">参照系</div>
+    <h2>基准对比：<br>你跑赢"市场"了吗？</h2>
+    <p class="lede">不和指数比的回报数字没有意义。一支 9% 的基金到底是 alpha（超额收益）还是只跟着大盘走？</p>
+
+    <div class="tablewrap mt-3">
+      <table>
+        <thead>
+          <tr>
+            <th>基准 / 代表基金</th>
+            <th>5Y 年化</th>
+            <th>10Y 年化</th>
+            <th>含义</th>
+          </tr>
+        </thead>
+        <tbody id="benchmark-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">ⓘ</span>
+      <p><strong>关键观察</strong>：Milford Active Growth 的 9.31% (5Y) 略低于 SmartShares Total World 的 15.17%——但前者是 30/70 股债配置（多元化），后者是 100% 股票。"超过基准"要在<u>同等风险水平</u>上比较。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 13 — Portfolios
+     ==================================================================== -->
+<section id="portfolios">
+  <div class="container">
+    <div class="eyebrow">怎么配 $100k</div>
+    <h2>三套<br>资产类别配置示例</h2>
+    <p class="lede">下面的三套示例按<strong>资产类别（asset class）+ 比例</strong>表达，每条后列举该类别下的<strong>同类可选基金</strong>——可任意替换。</p>
+
+    <div class="callout danger mt-3">
+      <span class="callout-icon">⚠</span>
+      <p><strong>这不是个性化投资建议（personalised advice）。</strong>NZ 受 FMA 监管的 Financial Advice Provider 制度下，针对具体个人的"具体基金 + 具体金额"配置只能由<a href="https://fsp-register.companiesoffice.govt.nz/" target="_blank" rel="noopener">持牌 FA</a> 提供。本节仅为教育用途的资产类别框架，请把它当作"和持牌 FA 讨论的起点"，不是终点。</p>
+    </div>
+
+    <div class="grid grid-3 mt-4">
+      <!-- Conservative -->
+      <div class="portfolio">
+        <div class="ptag">保守稳健</div>
+        <h3>护城河</h3>
+        <p class="blurb">3 年内可能动用 / 心理承受 −10% 以内回撤 / 优先保本。</p>
+        <div class="meta-row mt-2">
+          <div class="meta-chip">目标年化 <strong>5–7%</strong></div>
+          <div class="meta-chip">最大回撤 <strong>~10%</strong></div>
+        </div>
+        <div class="alloc-list" id="alloc-conservative"></div>
+      </div>
+      <!-- Balanced - featured -->
+      <div class="portfolio feat">
+        <div class="ptag">示例 · 平衡</div>
+        <h3>稳进取</h3>
+        <p class="blurb">5 年以上 / 接受 −15% 回撤 / 兼顾增长与稳健。多数家庭场景的常见参考。</p>
+        <div class="meta-row mt-2">
+          <div class="meta-chip">目标年化 <strong>7–9%</strong></div>
+          <div class="meta-chip">最大回撤 <strong>~15%</strong></div>
+        </div>
+        <div class="alloc-list" id="alloc-balanced"></div>
+      </div>
+      <!-- Aggressive -->
+      <div class="portfolio">
+        <div class="ptag">进取增长</div>
+        <h3>火力全开</h3>
+        <p class="blurb">10 年以上 / 接受 −25% 回撤 / 追求 10%+ 长期复利。本金要"放得久"。</p>
+        <div class="meta-row mt-2">
+          <div class="meta-chip">目标年化 <strong>9–12%</strong></div>
+          <div class="meta-chip">最大回撤 <strong>~25%</strong></div>
+        </div>
+        <div class="alloc-list" id="alloc-aggressive"></div>
+      </div>
+    </div>
+
+    <div class="callout green mt-3">
+      <span class="callout-icon">✓</span>
+      <p><strong>3 个组合都做到的事</strong>：① 100% PIE 结构（避免 FIF）；② 至少 60% 海外分散（NZ 股市太小）；③ 含一只低费率被动 ETF 做"地基"；④ 只用 $100k 即可在 InvestNow 一站式实现，无平台费。</p>
+    </div>
+
+    <details>
+      <summary>定投 vs 一次性投入：哪个好？</summary>
+      <p>历史数据上 <strong>一次性投入（lump sum）</strong>大约 2/3 时间跑赢分批定投——因为市场长期向上。但定投的心理价值在于：如果第 1 个月就跌 15%，分批可以让你不至于崩溃割肉。</p>
+      <ul>
+        <li>$100k 一次性 → 长期期望收益更高，但需要心理承受力</li>
+        <li>$100k / 6–12 个月分批 → 平均成本，但牺牲约 0.5–1% 长期回报</li>
+        <li>折中：30% 立即入场 + 70% 分 6 个月平均建仓</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 14 — Provider origin
+     ==================================================================== -->
+<section id="origin">
+  <div class="container">
+    <div class="eyebrow">背景调查</div>
+    <h2>这些钱被谁管？</h2>
+    <p class="lede">在 NZ 注册（PIE）≠ NZ 公司经营。Milford 100% 本地，Mercer 总部在美国，ANZ Investments 母公司在澳洲——出问题时找谁、监管在哪都不一样。</p>
+
+    <div class="grid grid-3 mt-4">
+      <div class="card">
+        <div class="lbl"><span class="badge nz">NZ 本地</span></div>
+        <h3 class="h3-card-sm">SmartShares · Milford · Simplicity · Generate · Harbour · Salt · Devon · Booster · Pathfinder · QuayStreet · Mint · Octagon · Amova · Aspiring · Whai Rawa · Elevation · Clarity</h3>
+        <p class="t-caption">本地决策、本地监管（FMA），管理团队稳定性强。Simplicity 为非营利基金会架构，费率最低。</p>
+      </div>
+      <div class="card">
+        <div class="lbl"><span class="badge mix">混合</span></div>
+        <h3 class="h3-card-sm">Fisher Funds（Toi 基金会 + 美资 TA Associates 34%）<br>ANZ Investments（澳洲 ANZ 银行子公司）</h3>
+        <p class="t-caption">日常运营仍在 NZ，但战略 / 资本面有海外控制人。Fisher 仍是 NZ 长期老牌主动基金管理人。</p>
+      </div>
+      <div class="card">
+        <div class="lbl"><span class="badge global">海外跨国</span></div>
+        <h3 class="h3-card-sm">Mercer（美国 Marsh McLennan）<br>Russell Investments（美国西雅图）</h3>
+        <p class="t-caption">在 NZ 都有 PIE 注册基金，可放心持有；管理团队和投资策略来自全球网络。Mercer Core Global Shares 长期表现强劲。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 15 — Platforms
+     ==================================================================== -->
+<section id="platforms">
+  <div class="container">
+    <div class="eyebrow">怎么买</div>
+    <h2>购买平台对比</h2>
+    <p class="lede">$100k 体量下，平台费比基金费率影响小，但<strong>覆盖面</strong>差异巨大。InvestNow 一家几乎能买齐本指南所有 PIE 基金。</p>
+
+    <div class="tablewrap mt-3">
+      <table>
+        <thead>
+          <tr>
+            <th>平台</th>
+            <th>覆盖</th>
+            <th>平台费</th>
+            <th>最低投资</th>
+            <th>FIF 风险</th>
+            <th>适合</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>InvestNow</strong></td>
+            <td>200+ NZ Managed Fund + SmartShares ETF（含 Milford / Generate / Simplicity / Mercer / Russell 等）</td>
+            <td class="num-cell green-text">$0</td>
+            <td>$50</td>
+            <td class="green-text">无（全为 PIE）</td>
+            <td>本指南推荐主力平台</td>
+          </tr>
+          <tr>
+            <td><strong>Sharesies</strong></td>
+            <td>NZX / ASX / 美股 + 部分 Managed Fund</td>
+            <td class="num-cell">$1.5–25 / 月（按规模）</td>
+            <td>$1</td>
+            <td class="red-text">直接买美股会触发</td>
+            <td>新手 / 小额 / 想买单股</td>
+          </tr>
+          <tr>
+            <td><strong>Hatch</strong></td>
+            <td>美股 / 美股 ETF（直接持有美国注册）</td>
+            <td class="num-cell">$3–15 / 月 + 0.5% 汇兑</td>
+            <td>$0</td>
+            <td class="red-text">$50k+ 几乎必触发</td>
+            <td>愿意自己处理 FIF / 想直接买美国 ETF</td>
+          </tr>
+          <tr>
+            <td><strong>直接通过基金公司</strong></td>
+            <td>仅该公司基金</td>
+            <td class="num-cell green-text">$0</td>
+            <td>$1k–10k</td>
+            <td class="green-text">无（PIE）</td>
+            <td>专一持有 Milford / Generate 等</td>
+          </tr>
+          <tr>
+            <td><strong>NZX 直接（通过券商）</strong></td>
+            <td>SmartShares ETF / 上市公司</td>
+            <td class="num-cell">交易费 $5–30 / 笔</td>
+            <td>1 股</td>
+            <td class="green-text">PIE 结构无 FIF</td>
+            <td>想自己挑 ETF / 不在乎交易费</td>
+          </tr>
+          <tr>
+            <td><strong>IBKR (Interactive Brokers)</strong></td>
+            <td>全球市场</td>
+            <td class="num-cell">交易费极低</td>
+            <td>$0</td>
+            <td class="red-text">境外资产几乎必触发 FIF</td>
+            <td>不适合本指南目标场景</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 16 — Methodology + FAQ
+     ==================================================================== -->
+<section id="methodology" class="section-mint">
+  <div class="container">
+    <div class="eyebrow">数据来源 / 方法论</div>
+    <h2>这些数字怎么来的？</h2>
+
+    <div class="grid grid-2 mt-3">
+      <div class="card">
+        <h3 class="h3-card-sm">主数据源</h3>
+        <ul class="list-prose">
+          <li><strong>InvestNow（Morningstar 数据）</strong>——本指南所有 1M / 3M / 6M / 1Y / 3Y / 5Y / 10Y 回报的统一来源。<u>Retail PIE 单元，net of fees, before PIR tax</u>。</li>
+          <li><strong>各基金公司官方月报 (Fact Sheet)</strong>——交叉验证（Milford / Mercer / Generate 数据）。</li>
+          <li><strong>Sorted Smart Investor</strong>——政府背景比对，仅 5Y 数据。</li>
+          <li><strong>IRD（PIE / FIF 规则）</strong>、<strong>RBNZ（NZD/USD 历史）</strong>。</li>
+          <li><strong>Disclose Register</strong> + 各基金 <strong>PDS (Product Disclosure Statement)</strong>——投资前应阅读的法定披露文件。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="h3-card-sm">已知限制</h3>
+        <ul class="list-prose">
+          <li><strong>幸存者偏差</strong>：已合并 / 关闭的基金不在内，整体表现被高估。</li>
+          <li><strong>10Y 榜单偏差</strong>：Generate（2012）、Simplicity（2016）等较新基金没有 10 年数据，被系统性排除。</li>
+          <li><strong>2022 回撤为类别估算</strong>：用资产类别同期表现近似，<u>不是每只基金的实际数字</u>。仅作风险量级参考。</li>
+          <li><strong>份额类未统一</strong>：同一基金可能有 retail / wholesale / hedged / unhedged 等多个 share class。本指南对应 InvestNow 显示的 <strong>Retail PIE</strong>，但跨源对比可能因 class 差异出现 0.3–0.5% 误差。</li>
+          <li><strong>美股回报含 NZD 贬值红利</strong>：Smart US 500 ETF 5Y 17.88% ≈ S&P 500 USD 12.8% + NZD 贬值 4%/年。未来 NZD 反弹时，unhedged 基金的 NZD 回报会显著低于历史。</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="section-sep">
+
+    <h3 class="h3-card mt-3">份额类与税务约定（重要）</h3>
+    <div class="callout">
+      <span class="callout-icon">★</span>
+      <p>本指南的所有数字基于以下默认假设：<br>
+        <strong>① 份额类</strong>：InvestNow 显示的 <strong>Retail PIE 单元</strong>，对应一般个人投资者通过 InvestNow 平台持有的基金 class。<br>
+        <strong>② 报告口径</strong>：<u>after fees, before tax</u>——已扣除 management fee 但未扣除 PIR 税。你的实际净回报 ≈ 表中数字 × (1 − 你的 PIR)。<br>
+        <strong>③ 计算货币</strong>：NZD。海外资产基金（如 Smart US 500 ETF）的 NZD 回报 = 标的资产 USD 回报 + NZD 兑 USD 汇率变动。<br>
+        <strong>④ 报告日</strong>：2026-02-28。每个月底滚动更新，下次刷新窗口约 2026-08-31 前。</p>
+    </div>
+
+    <hr class="section-sep">
+
+    <h3 class="h3-card mt-3">常见问题</h3>
+    <details>
+      <summary>$100k 全部押 Smart US 500 ETF 行不行？</summary>
+      <p>历史表现确实很强（10Y 15.22%），但风险极高：① 单一国家、单一指数；② 2022 跌过 −19%，1995–2025 内最差 12 个月跌 −37%（2008）；③ 全部押 USD，未来 NZD 反弹会显著吃掉收益。建议作为组合的<strong>主轴而非全部</strong>——比如平衡组合的 35–45%。</p>
+    </details>
+    <details>
+      <summary>KiwiSaver 已经买了 Aggressive，还需要 Managed Fund 吗？</summary>
+      <p>KiwiSaver 锁定到 65 岁，对短中期理财（房子、教育、应急）不适用。Managed Fund 提供灵活性。两者可以同时持有——KiwiSaver 拿政府配资 + 雇主匹配（不能放弃），Managed Fund 处理灵活资金。注意整体资产配置不要重复（比如 KS Aggressive + Managed Fund Growth Stock 都是 80%+ 股票暴露）。</p>
+    </details>
+    <details>
+      <summary>定投比一次性投入安全吗？</summary>
+      <p>"安全"看怎么定义。从期望回报看，约 2/3 时间一次性投入跑赢定投——因为市场长期向上。定投的真实价值是<strong>降低你做错决定的概率</strong>：如果你刚投完就跌 20% 受不了割肉，定投会让你还有钱在手。$100k 推荐做法：30% 立即 + 70% / 6 个月分批。</p>
+    </details>
+    <details>
+      <summary>主动基金（Milford 等）还值得买吗？</summary>
+      <p>大部分主动基金长期跑不赢被动指数（这是全球数据，不只是 NZ）。但<strong>少数主动基金</strong>因策略独特、规模适中、团队稳定能持续创造 alpha——Milford Active Growth 就是其中之一。$100k 可考虑 20–40% 主动 + 其余被动 ETF 的组合，让两种风格都贡献。</p>
+    </details>
+    <details>
+      <summary>这页面怎么更新数据？</summary>
+      <p>所有基金数据集中在 HTML 顶部 <code>FUNDS_DATA</code> 数组中（一行一只基金）。每季度去 InvestNow 导出新的 3Y / 5Y / 10Y 数字替换即可。<code>META</code> 对象同步更新数据日期。结构可以无缝喂给 Claude 让它帮你刷新。</p>
+    </details>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 17 — Next steps (CTA closure)
+     ==================================================================== -->
+<section id="next-steps">
+  <div class="container">
+    <div class="eyebrow">读完之后</div>
+    <h2>把信息<br>变成行动</h2>
+    <p class="lede">研究只是起点。下面 4 个 1 分钟操作，能让这页内容真正落地。</p>
+
+    <div class="grid grid-4 mt-4">
+      <button class="action-card" id="action-print" type="button">
+        <span class="ico" aria-hidden="true">⎙</span>
+        <strong>打印 / 存 PDF</strong>
+        <span class="action-sub">浏览器 Cmd+P / Ctrl+P，自动优化排版</span>
+      </button>
+      <button class="action-card" id="action-copy" type="button">
+        <span class="ico" aria-hidden="true">⌘</span>
+        <strong>复制本页链接</strong>
+        <span class="action-sub">分享给微信好友 / 收藏夹</span>
+      </button>
+      <button class="action-card" id="action-share" type="button">
+        <span class="ico" aria-hidden="true">↗</span>
+        <strong>系统分享</strong>
+        <span class="action-sub">手机一键分享到 微信 / 邮件 / Notes</span>
+      </button>
+      <a class="action-card" href="https://fsp-register.companiesoffice.govt.nz/" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true">✓</span>
+        <strong>查持牌 FA</strong>
+        <span class="action-sub">FSP Register 官方注册查询</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     SECTION 18 — Disclaimer
+     ==================================================================== -->
+<section id="disclaimer">
+  <div class="container">
+    <div class="eyebrow">最重要的免责</div>
+    <h2>这不是投资建议。</h2>
+    <p class="lede">本页面是公开信息整理与数据可视化，不是个性化投资建议、不是税务建议、不是法律建议。作者不持有 NZ Financial Adviser 资格。任何投资决策前请咨询持牌专业人士。</p>
+
+    <ul class="list-prose prose">
+      <li><strong>历史回报不代表未来</strong>——尤其是过去 10 年美股的强势行情，未必在下一个 10 年延续。</li>
+      <li><strong>所有金融产品都有亏损可能</strong>——包括"保守"基金（2022 NZ 债券基金跌了约 10%）。</li>
+      <li><strong>税法每年都可能变</strong>——PIE / FIF 规则细节请以 IRD 当年最新口径为准。</li>
+      <li><strong>不要把鸡蛋放在一个篮子</strong>——即使数据好的基金。本指南所有"组合"都至少包含 3 只不同资产基金。</li>
+      <li><strong>能承受多深的亏损，先想清楚</strong>——回撤承受力（risk tolerance）比预期收益（return target）更重要。</li>
+    </ul>
+
+    <div class="callout danger mt-3">
+      <span class="callout-icon">!</span>
+      <p>如果有人推销保证 10%+ 收益、保本、或来自非 FMA 注册公司的"基金"——99% 是诈骗。NZ 的所有合法 Managed Fund 都在 <a href="https://disclose-register.companiesoffice.govt.nz" target="_blank" rel="noopener">Disclose Register</a> 可查。</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ====================================================================
+     SECTION 18 — Footer
+     ==================================================================== -->
+<footer>
+  <div class="container">
+    <h2 class="footer-tagline">钱不必有边界——<br>但<span class="accent">选择</span>应该有依据。</h2>
+    <p class="footer-tagline-sub">独立维护，开源数据，不收集任何用户信息。如果这页内容帮到你，请把它分享给在新西兰理财的朋友。</p>
+
+    <div class="footer-grid">
+      <div>
+        <div class="footer-mark">NZ 华人基金<br>投资指南</div>
+        <p>面向新西兰华人投资者的开源数据指南。覆盖 90+ 主流 PIE Managed Fund，含税务、风险、组合配置与平台对比。</p>
+      </div>
+      <div>
+        <h4>导航</h4>
+        <ul>
+          <li><a href="#tax">税务（PIE/FIF）</a></li>
+          <li><a href="#funds">基金大全</a></li>
+          <li><a href="#portfolios">三套组合</a></li>
+          <li><a href="#platforms">平台对比</a></li>
+          <li><a href="#methodology">方法论</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>权威来源</h4>
+        <ul>
+          <li><a href="https://www.investnow.co.nz" target="_blank" rel="noopener">InvestNow</a></li>
+          <li><a href="https://smartinvestor.sorted.org.nz" target="_blank" rel="noopener">Sorted Smart Investor</a></li>
+          <li><a href="https://www.ird.govt.nz" target="_blank" rel="noopener">IRD · 税务</a></li>
+          <li><a href="https://www.fma.govt.nz" target="_blank" rel="noopener">FMA · 监管</a></li>
+          <li><a href="https://disclose-register.companiesoffice.govt.nz" target="_blank" rel="noopener">Disclose Register</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>更新数据</h4>
+        <ul>
+          <li>1. 打开源文件</li>
+          <li>2. 找到顶部 <code>META</code> 与 <code>FUNDS_DATA</code></li>
+          <li>3. 季度从 InvestNow 导出最新数字</li>
+          <li>4. 替换 + 提交</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code></span>
+      <span>无追踪 · 无 cookie · 完全静态 HTML · 内容采用 CC BY 4.0 开放</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================================================
+     DATA & SCRIPT
+     ==================================================================== -->
+<script>
+/* ============================================================================
+   ★★★ 更新数据时只需修改下方 META 与 FUNDS_DATA 两处 ★★★
+   建议每季度从 InvestNow 导出最新 3Y / 5Y / 10Y 数据替换。
+   ============================================================================ */
+
+const META = {
+  dataDate: '2026-02-28',
+  publishedDate: '2026-05-05',
+  fundCount: 90,
+  source: 'InvestNow / Morningstar',
+  nzdUsd5YStart: 0.72,
+  nzdUsd5YEnd: 0.59,
+};
+
+/* Provider 归属（origin）映射 */
+const PROVIDER_ORIGIN = {
+  'SmartShares':   { origin: 'nz',     label: 'NZ本地',  info: 'NZX 子公司' },
+  'SuperLife':     { origin: 'nz',     label: 'NZ本地',  info: 'NZX/SmartShares 旗下' },
+  'Milford':       { origin: 'nz',     label: 'NZ本地',  info: 'NZ 私营 / 员工持股' },
+  'Simplicity':    { origin: 'nz',     label: 'NZ本地',  info: 'NZ 非营利基金会' },
+  'Generate':      { origin: 'nz',     label: 'NZ本地',  info: 'NZ 私营' },
+  'Booster':       { origin: 'nz',     label: 'NZ本地',  info: 'NZ 私营' },
+  'Fisher Funds':  { origin: 'nz-us',  label: 'NZ+美资', info: 'NZ Toi 基金会 + 34% TA Associates(US)' },
+  'Mercer':        { origin: 'global', label: '海外跨国', info: '美国 Marsh McLennan 子公司' },
+  'Harbour':       { origin: 'nz',     label: 'NZ本地',  info: 'NZ 本地基金管理' },
+  'QuayStreet':    { origin: 'nz',     label: 'NZ本地',  info: '现归 NZX 所有' },
+  'Russell':       { origin: 'global', label: '海外跨国', info: '美国 Russell Investments(西雅图)' },
+  'Salt':          { origin: 'nz',     label: 'NZ本地',  info: 'NZ 精品基金管理' },
+  'Devon':         { origin: 'nz',     label: 'NZ本地',  info: 'NZ 本地' },
+  'Pathfinder':    { origin: 'nz',     label: 'NZ本地',  info: 'NZ ESG / ethical' },
+  'ANZ':           { origin: 'au',     label: '澳洲',    info: '澳洲 ANZ 银行子公司' },
+  'Mint':          { origin: 'nz',     label: 'NZ本地',  info: 'NZ 本地' },
+  'Octagon':       { origin: 'nz',     label: 'NZ本地',  info: 'NZ 本地' },
+  'Amova':         { origin: 'nz',     label: 'NZ本地',  info: 'NZ 本地' },
+  'Elevation':     { origin: 'nz',     label: 'NZ本地',  info: 'NZ 精品' },
+  'Other':         { origin: 'nz',     label: 'NZ本地',  info: '' },
+};
+
+/* 2022 估算回撤（peak-to-trough）—— 全部为 max drawdown 口径，非日历年回报。
+   数字基于该资产类别同期主要指数的近似回撤。已知系统性偏乐观约 5pp。
+   见 README backlog，待未来用真实月度 NAV 数据替换。 */
+const SECTOR_DRAWDOWN_EST = {
+  'intl-growth': -28,    // NASDAQ-100 实际 −33%
+  'intl-broad':  -18,    // S&P 500 实际 −25%
+  'intl-value':  -10,    // Russell 1000 Value 实际 −16%
+  'aus-resource': -10,   // ASX Resources 期间最大回撤（日历年正收益但有 −15% 期间回调）
+  'aus-broad':   -12,    // ASX 200 期间最大回撤（日历年小负，期间 −16%）
+  'nz-broad':    -13,    // NZX 50 实际 −14%
+  'nz-property': -22,    // NZX Real Estate 实际 −27%
+  'div-balanced': -10,   // 60/40 实际 −16%
+  'div-growth':  -14,    // 80/20 实际 −20%
+  'div-conserv': -7,     // 30/70 实际 −10%
+  'fi':          -8,     // Bloomberg AGG 实际 −13%
+  'cash':         0,     // 现金接近零波动
+  'prop-other':  -15,    // 全球房产 −20%
+  'other':       -10,
+};
+
+function classifyDrawdown(name, sector) {
+  const n = name.toLowerCase();
+  if (n.includes('us large growth') || n.includes('global growth')) return SECTOR_DRAWDOWN_EST['intl-growth'];
+  if (n.includes('us 500') || n.includes('total world') || n.includes('us mid') || n.includes('us small')) return SECTOR_DRAWDOWN_EST['intl-broad'];
+  if (n.includes('us large value') || n.includes('value')) return SECTOR_DRAWDOWN_EST['intl-value'];
+  if (n.includes('australian resources') || n.includes('australian financials')) return SECTOR_DRAWDOWN_EST['aus-resource'];
+  if (sector.includes('Australasian')) return SECTOR_DRAWDOWN_EST['aus-broad'];
+  if (n.includes('nz property')) return SECTOR_DRAWDOWN_EST['nz-property'];
+  if (n.includes('cash')) return SECTOR_DRAWDOWN_EST['cash'];
+  if (sector.includes('Fixed') || sector.includes('Bond')) return SECTOR_DRAWDOWN_EST['fi'];
+  if (sector.includes('Property')) return SECTOR_DRAWDOWN_EST['prop-other'];
+  if (n.includes('conservative')) return SECTOR_DRAWDOWN_EST['div-conserv'];
+  if (n.includes('balanced')) return SECTOR_DRAWDOWN_EST['div-balanced'];
+  if (n.includes('growth') && sector.includes('Diversified')) return SECTOR_DRAWDOWN_EST['div-growth'];
+  if (sector.includes('Diversified')) return SECTOR_DRAWDOWN_EST['div-balanced'];
+  if (sector.includes('International')) return SECTOR_DRAWDOWN_EST['intl-broad'];
+  return SECTOR_DRAWDOWN_EST['other'];
+}
+
+function getProvider(fundName) {
+  if (fundName.startsWith('Smart ')) return 'SmartShares';
+  if (fundName.startsWith('SuperLife')) return 'SuperLife';
+  if (fundName.startsWith('Milford')) return 'Milford';
+  if (fundName.startsWith('Simplicity')) return 'Simplicity';
+  if (fundName.startsWith('Generate')) return 'Generate';
+  if (fundName.startsWith('Booster')) return 'Booster';
+  if (fundName.startsWith('Fisher')) return 'Fisher Funds';
+  if (fundName.startsWith('Mercer')) return 'Mercer';
+  if (fundName.startsWith('Harbour')) return 'Harbour';
+  if (fundName.startsWith('QuayStreet')) return 'QuayStreet';
+  if (fundName.startsWith('Russell')) return 'Russell';
+  if (fundName.startsWith('Salt')) return 'Salt';
+  if (fundName.startsWith('Devon')) return 'Devon';
+  if (fundName.startsWith('Pathfinder')) return 'Pathfinder';
+  if (fundName.startsWith('ANZ')) return 'ANZ';
+  if (fundName.startsWith('Mint')) return 'Mint';
+  if (fundName.startsWith('Octagon')) return 'Octagon';
+  if (fundName.startsWith('Amova')) return 'Amova';
+  if (fundName.startsWith('Elevation')) return 'Elevation';
+  return 'Other';
+}
+
+function getSectorKey(sector) {
+  if (sector.includes('International') && sector.includes('Equit')) return 'intl';
+  if (sector.includes('Australasian')) return 'aus';
+  if (sector.includes('Diversified')) return 'div';
+  if (sector.includes('Property')) return 'prop';
+  if (sector.includes('Fixed') || sector.includes('Bond') || sector.includes('Cash')) return 'fi';
+  return 'other';
+}
+
+function getSectorLabel(key) {
+  return ({ intl: '国际股票', aus: '澳新股票', div: '多元化', prop: '房产', fi: '固定收益', other: '其他' })[key] || key;
+}
+
+function parsePct(s) {
+  if (!s || s === '–' || s === '−' || s === 'N/A') return null;
+  return parseFloat(String(s).replace('%', '').replace('−', '-'));
+}
+
+/* ===== 90 只 NZ Managed Fund 数据（InvestNow / Morningstar） =====
+   格式: [Name, Sector, 3Y, 5Y, 10Y]  — N/A 用 '–' 表示 */
+const FUNDS_DATA = [
+  ['Amova Concentrated Equity Fund','Australasian Equities','3.78%','2.06%','7.14%'],
+  ['Amova Core Equity Fund','Australasian Equities','4.39%','3.01%','8.60%'],
+  ['Amova NZ Corporate Bond Fund','New Zealand Fixed Interest','6.72%','2.67%','3.54%'],
+  ['ANZ OneAnswer Australian Share Fund','Australasian Equities','9.26%','9.99%','6.74%'],
+  ['ANZ OneAnswer Balanced Growth Fund','Diversified','9.24%','5.75%','7.13%'],
+  ['ANZ OneAnswer International Share Fund','International Equities','15.35%','11.68%','12.10%'],
+  ['ANZ OneAnswer NZ Share Fund','Australasian Equities','5.15%','2.26%','8.20%'],
+  ['ANZ OneAnswer Property Securities Fund','Listed Property','1.31%','−2.05%','4.24%'],
+  ['Devon Alpha Fund','Australasian Equities','6.47%','8.04%','8.13%'],
+  ['Devon Australian Fund','Australasian Equities','11.73%','10.99%','9.25%'],
+  ['Devon Dividend Yield Fund','Australasian Equities','8.86%','8.52%','7.99%'],
+  ['Devon Trans-Tasman Fund','Australasian Equities','9.96%','9.49%','9.80%'],
+  ['Elevation Capital Global Shares Fund','International Equities','8.29%','6.41%','7.56%'],
+  ['Fisher Funds Australian Growth Fund','Australasian Equities','3.33%','3.95%','8.12%'],
+  ['Fisher Funds BondPlus Fund','International Fixed Interest','4.05%','−0.27%','1.54%'],
+  ['Fisher Funds CashPlus Fund','Cash and Cash Equivalents','4.53%','2.96%','2.35%'],
+  ['Fisher Funds Global Fund','International Equities','13.92%','8.41%','10.52%'],
+  ['Fisher Funds Income Fund','International Fixed Interest','6.84%','3.23%','3.48%'],
+  ['Fisher Funds International Growth Fund','International Equities','8.97%','1.92%','9.64%'],
+  ['Fisher Funds NZ Fixed Income Trust','New Zealand Fixed Interest','6.10%','1.42%','2.44%'],
+  ['Fisher Funds NZ Growth Fund','Australasian Equities','5.44%','1.01%','9.15%'],
+  ['Fisher Funds Property & Infrastructure','Listed Property','8.82%','7.15%','9.90%'],
+  ['Fisher Funds Trans Tasman Equity Trust','Australasian Equities','3.87%','1.95%','8.72%'],
+  ['Harbour Australasian Equity Focus Fund','Australasian Equities','2.28%','0.75%','8.07%'],
+  ['Harbour Australasian Equity Fund','Australasian Equities','3.66%','1.56%','8.26%'],
+  ['Harbour Australasian Equity Income Fund','Australasian Equities','5.48%','5.41%','7.86%'],
+  ['Harbour Income Fund','Diversified','6.32%','3.39%','4.68%'],
+  ['Harbour NZ Core Fixed Interest Fund','New Zealand Fixed Interest','6.14%','2.01%','2.70%'],
+  ['Harbour NZ Corporate Bond Fund','New Zealand Fixed Interest','6.71%','2.49%','3.13%'],
+  ['Harbour NZ Index Shares Fund','Australasian Equities','5.13%','2.57%','8.32%'],
+  ['Harbour T. Rowe Price Global Equity','International Equities','17.09%','8.09%','13.31%'],
+  ['Mercer Core Global Shares Fund','International Equities','22.71%','17.73%','13.95%'],
+  ['Mercer Core Hedged Global Shares Fund','International Equities','19.47%','10.74%','11.52%'],
+  ['Mercer Global Listed Infrastructure','Other','10.98%','11.22%','9.34%'],
+  ['Mercer Global Listed Real Estate','Listed Property','8.33%','4.19%','4.81%'],
+  ['Mercer Global Shares Fund','International Equities','20.62%','13.07%','12.58%'],
+  ['Mercer Income Generator Fund','Diversified','5.50%','4.10%','5.71%'],
+  ['Mercer Macquarie NZ Cash Fund','Cash and Cash Equivalents','4.67%','3.45%','3.00%'],
+  ['Mercer Macquarie NZ Fixed Interest','New Zealand Fixed Interest','5.77%','1.49%','2.39%'],
+  ['Mercer Macquarie NZ Short Duration','New Zealand Fixed Interest','5.74%','2.82%','2.91%'],
+  ['Mercer Responsible Balanced Fund','Diversified','13.64%','8.20%','8.94%'],
+  ['Mercer Responsible Conservative Fund','Diversified','6.70%','3.35%','4.47%'],
+  ['Mercer Responsible Growth Fund','Diversified','16.66%','10.36%','10.52%'],
+  ['Mercer Responsible Trans-Tasman Shares','Australasian Equities','5.65%','2.55%','9.04%'],
+  ['Milford Active Growth Fund','Diversified','11.98%','9.31%','10.52%'],
+  ['Milford Balanced Fund','Diversified','8.75%','7.04%','8.42%'],
+  ['Milford Conservative Fund','Diversified','6.74%','3.89%','5.15%'],
+  ['Milford Diversified Income Fund','Diversified','7.17%','5.60%','6.99%'],
+  ['Milford Global Equity Fund','International Equities','13.40%','9.32%','10.42%'],
+  ['Milford Trans-Tasman Bond Fund','New Zealand Fixed Interest','6.44%','2.66%','3.69%'],
+  ['Milford Trans-Tasman Equity Fund','Australasian Equities','7.88%','5.88%','11.04%'],
+  ['Mint Australasian Equity Fund','Australasian Equities','3.90%','1.94%','7.99%'],
+  ['Mint Australasian Property Fund','Listed Property','2.64%','−0.72%','4.39%'],
+  ['Mint Diversified Income Fund','Diversified','5.51%','2.74%','3.72%'],
+  ['Octagon Australian Equities','Australasian Equities','11.44%','10.70%','9.88%'],
+  ['Octagon New Zealand Equities','Australasian Equities','5.14%','4.01%','9.37%'],
+  ['Pathfinder Global Property Fund','Listed Property','8.17%','4.22%','3.49%'],
+  ['Pathfinder Global Water Fund','International Equities','10.98%','8.78%','9.58%'],
+  ['QuayStreet Income Fund','Diversified','6.38%','4.33%','4.83%'],
+  ['QuayStreet NZ Equity Fund','Australasian Equities','4.50%','3.30%','9.01%'],
+  ['Russell Global Fixed Interest Fund','International Fixed Interest','4.00%','−0.04%','2.09%'],
+  ['Russell Global Shares Fund','International Equities','20.35%','14.99%','12.92%'],
+  ['Russell Hedged Global Shares Fund','International Equities','18.46%','11.03%','11.70%'],
+  ['Russell NZ Fixed Interest Fund','New Zealand Fixed Interest','5.83%','1.64%','2.48%'],
+  ['Russell NZ Shares Fund','Australasian Equities','4.56%','2.33%','8.21%'],
+  ['Salt Enhanced Property Fund','Listed Property','3.19%','0.08%','6.06%'],
+  ['Salt Long Short Fund','Australasian Equities','17.48%','15.58%','10.86%'],
+  ['Salt NZ Dividend Appreciation Fund','Australasian Equities','10.07%','6.45%','10.06%'],
+  ['Smart Asia Pacific ETF','International Equities','21.74%','12.83%','10.60%'],
+  ['Smart Australian Dividend ETF','Australasian Equities','14.94%','12.68%','9.05%'],
+  ['Smart Australian Financials ETF','Australasian Equities','23.19%','17.88%','11.75%'],
+  ['Smart Australian Mid Cap ETF','Australasian Equities','14.19%','12.50%','12.40%'],
+  ['Smart Australian Property ETF','Listed Property','8.26%','7.00%','6.69%'],
+  ['Smart Australian Resources ETF','Australasian Equities','18.56%','15.51%','19.61%'],
+  ['Smart Australian Top 20 ETF','Australasian Equities','15.91%','13.50%','11.55%'],
+  ['Smart Emerging Markets ETF','International Equities','17.38%','8.42%','9.55%'],
+  ['Smart Europe ETF','International Equities','17.83%','14.96%','10.46%'],
+  ['Smart Global Bond ETF','International Fixed Interest','3.88%','0.92%','2.56%'],
+  ['Smart NZ Bond ETF','New Zealand Fixed Interest','5.31%','2.45%','3.33%'],
+  ['Smart NZ Cash ETF','Cash and Cash Equivalents','5.02%','3.62%','2.95%'],
+  ['Smart NZ Dividend ETF','Australasian Equities','7.98%','5.53%','8.11%'],
+  ['Smart NZ Mid Cap ETF','Australasian Equities','6.82%','3.43%','8.95%'],
+  ['Smart NZ Property ETF','Listed Property','2.63%','−1.26%','4.92%'],
+  ['Smart NZ Top 10 ETF','Australasian Equities','4.35%','2.49%','8.12%'],
+  ['Smart NZ Top 50 ETF','Australasian Equities','4.78%','2.47%','8.61%'],
+  ['Smart Total World ETF','International Equities','21.01%','15.17%','12.93%'],
+  ['Smart US 500 ETF','International Equities','21.76%','17.88%','15.22%'],
+  ['Smart US Large Growth ETF','International Equities','26.61%','17.31%','17.49%'],
+  ['Smart US Large Value ETF','International Equities','16.05%','16.74%','12.72%'],
+  ['Smart US Mid Cap ETF','International Equities','14.21%','12.45%','11.89%'],
+  ['Smart US Small Cap ETF','International Equities','13.90%','10.85%','12.28%'],
+];
+
+/* ===== 三套样板组合（资产类别 + 同类基金示例）
+   注意：以教育用途按资产类别表达，每条后列举的是"同类可选"基金。
+   不构成具体投资建议——读者应根据自身情况与持牌 FA 讨论。 ===== */
+const PORTFOLIOS = {
+  conservative: [
+    { class: 'NZ 固定收益（债券）',  pct: 30, note: '本地债券压舱石',
+      examples: 'Smart NZ Bond ETF · Harbour NZ Core FI · Milford Trans-Tasman Bond' },
+    { class: '多元化保守基金（30/70 股债）',  pct: 25, note: '专业经理操作',
+      examples: 'Milford Conservative · Mercer Responsible Conservative · ANZ OneAnswer Conservative' },
+    { class: '全球股票指数',              pct: 20, note: '广泛分散',
+      examples: 'Smart Total World ETF · Russell Global Shares · ANZ OneAnswer International Share' },
+    { class: '现金 / 货币基金',            pct: 15, note: '流动性缓冲',
+      examples: 'Smart NZ Cash ETF · Mercer Macquarie NZ Cash · Fisher Funds CashPlus' },
+    { class: 'ESG 多元化',                 pct: 10, note: '可持续投资偏好',
+      examples: 'Mercer Responsible Balanced · Pathfinder Global Water · Pathfinder Global Property' },
+  ],
+  balanced: [
+    { class: '全球股票指数',              pct: 30, note: '组合核心',
+      examples: 'Smart Total World ETF · Russell Global Shares · Mercer Global Shares' },
+    { class: '多元化激进 / 主动 (60/40)',  pct: 25, note: '主动经理 alpha',
+      examples: 'Milford Active Growth · Mercer Responsible Growth · Generate Focused Growth' },
+    { class: '美股大盘指数',              pct: 15, note: '增长引擎',
+      examples: 'Smart US 500 ETF · ANZ OneAnswer International Share · Russell Global Shares' },
+    { class: 'NZ 固定收益（债券）',        pct: 15, note: '波动缓冲',
+      examples: 'Smart NZ Bond ETF · Harbour NZ Core FI · Milford Trans-Tasman Bond' },
+    { class: '全球股票 hedged',           pct: 10, note: '降低货币波动',
+      examples: 'Russell Hedged Global Shares · Mercer Core Hedged Global Shares' },
+    { class: '澳股大盘',                   pct:  5, note: '近邻分散',
+      examples: 'Smart Australian Top 20 ETF · Smart Australian Mid Cap ETF · Devon Australian' },
+  ],
+  aggressive: [
+    { class: '全球股票指数',              pct: 30, note: '组合核心',
+      examples: 'Smart Total World ETF · Russell Global Shares · Mercer Global Shares' },
+    { class: '美股大盘指数',              pct: 25, note: '主增长引擎',
+      examples: 'Smart US 500 ETF · Russell Global Shares · Mercer Core Global Shares' },
+    { class: '美股成长 / 高 beta',         pct: 15, note: '更高潜在回报与回撤',
+      examples: 'Smart US Large Growth ETF · Smart US Mid Cap ETF · Fisher Funds International Growth' },
+    { class: '主动全球股票',              pct: 15, note: '寻找 alpha',
+      examples: 'Mercer Core Global Shares · Harbour T. Rowe Price Global Equity · Milford Global Equity' },
+    { class: '商品 / 资源',                pct: 10, note: '分散非美股风险',
+      examples: 'Smart Australian Resources ETF · Smart Australian Top 20 ETF · Salt Long Short' },
+    { class: 'NZ 债券缓冲',                pct:  5, note: '少量保护',
+      examples: 'Smart NZ Bond ETF · Harbour NZ Corporate Bond' },
+  ],
+};
+
+/* ===== 风险指标表 ===== */
+const RISK_TABLE = [
+  { sector: '美股大盘成长 (US Growth)',  example: 'Smart US Large Growth ETF', dd: -28, recover: 39, vol: '高' },
+  { sector: '美股大盘混合 (US 500)',     example: 'Smart US 500 ETF',          dd: -19, recover: 23, vol: '中高' },
+  { sector: '美股价值 / 中盘',            example: 'Smart US Large Value',      dd: -10, recover: 11, vol: '中' },
+  { sector: '全球股 hedged',             example: 'Russell Hedged Global',     dd: -22, recover: 28, vol: '中高' },
+  { sector: '全球股 unhedged',           example: 'Mercer Global Shares',      dd: -15, recover: 18, vol: '中' },
+  { sector: '澳股大盘',                  example: 'Smart Australian Top 20',   dd:  -5, recover:  5, vol: '中' },
+  { sector: '澳股资源',                  example: 'Smart Australian Resources', dd:  +8, recover:  0, vol: '高' },
+  { sector: 'NZ 大盘',                   example: 'Smart NZ Top 50 ETF',       dd: -13, recover: 15, vol: '中' },
+  { sector: 'NZ 房产',                   example: 'Smart NZ Property ETF',     dd: -22, recover: 28, vol: '中高' },
+  { sector: '多元化激进 (80%股)',         example: 'Generate Focused Growth',   dd: -16, recover: 19, vol: '中' },
+  { sector: '多元化平衡 (60%股)',         example: 'Milford Active Growth',     dd: -12, recover: 14, vol: '中低' },
+  { sector: '多元化保守 (30%股)',         example: 'Milford Conservative',      dd:  -7, recover:  8, vol: '低' },
+  { sector: 'NZ 债券',                   example: 'Smart NZ Bond ETF',         dd: -10, recover: 11, vol: '低' },
+  { sector: '现金 / 货币',                example: 'Smart NZ Cash ETF',         dd:  +2, recover:  0, vol: '极低' },
+];
+
+/* ===== 基准对比表 ===== */
+const BENCHMARKS = [
+  { name: 'Smart NZ Top 50 ETF (NZX 50 代理)',   yr5: 2.47,  yr10: 8.61,  meaning: 'NZ 本土股市基准。5Y 弱因 2022-23 利率冲击。' },
+  { name: 'Smart US 500 ETF (S&P 500 代理)',     yr5: 17.88, yr10: 15.22, meaning: '美股大盘。许多本地基金的"隐形对手"。' },
+  { name: 'Smart Total World ETF (MSCI World)',  yr5: 15.17, yr10: 12.93, meaning: '全球股票综合。最公平的国际基准。' },
+  { name: 'Smart Global Bond ETF (全球债)',       yr5: 0.92,  yr10: 2.56,  meaning: '债券基准。2022 全球债熊市拖累 5Y。' },
+  { name: 'Smart NZ Cash ETF (现金代理)',         yr5: 3.62,  yr10: 2.95,  meaning: '无风险利率。所有"主动"基金都应跑赢这个。' },
+  { name: 'NZ 银行定期存款 (~年化)',              yr5: 4.0,   yr10: 3.5,   meaning: '最容易拿到的"对手盘"。许多平衡基金长期未跑赢。' },
+];
+
+/* ============================================================================
+   渲染逻辑
+   ============================================================================ */
+
+const FUNDS = FUNDS_DATA.map(r => {
+  const provider = getProvider(r[0]);
+  const po = PROVIDER_ORIGIN[provider] || PROVIDER_ORIGIN['Other'];
+  const sectorKey = getSectorKey(r[1]);
+  return {
+    name: r[0],
+    sector: r[1],
+    sectorKey,
+    sectorLabel: getSectorLabel(sectorKey),
+    provider,
+    origin: po.origin,
+    originLabel: po.label,
+    yr3: parsePct(r[2]),
+    yr5: parsePct(r[3]),
+    yr10: parsePct(r[4]),
+    dd: classifyDrawdown(r[0], r[1]),
+  };
+});
+
+/* Meta 注入 */
+document.getElementById('hero-data-date').textContent = `数据截至 ${META.dataDate}`;
+document.getElementById('meta-page-date').textContent = META.publishedDate;
+document.getElementById('meta-fund-count').textContent = `${FUNDS.length} 只`;
+document.getElementById('footer-data-date').textContent = META.dataDate;
+document.getElementById('footer-page-date').textContent = META.publishedDate;
+
+/* Data freshness — derive a human "67 天前 · 仍新鲜" label */
+(function () {
+  const dataDate = new Date(META.dataDate);
+  const now = new Date();
+  const ageDays = Math.floor((now - dataDate) / 86400000);
+  const ageEl = document.getElementById('meta-data-age');
+  const labelEl = document.getElementById('meta-freshness-label');
+  const dotEl = document.querySelector('.freshness-dot');
+  if (ageEl) ageEl.textContent = `${ageDays} 天前`;
+  let label, dotClass;
+  if (ageDays < 90)       { label = '仍新鲜';   dotClass = ''; }
+  else if (ageDays < 180) { label = '建议刷新'; dotClass = 'warn'; }
+  else                    { label = '已陈旧';   dotClass = 'stale'; }
+  if (labelEl) labelEl.textContent = label;
+  if (dotEl && dotClass) dotEl.classList.add(dotClass);
+})();
+
+/* KPIs */
+const kpi10 = FUNDS.filter(f => f.yr10 !== null && f.yr10 >= 10).length;
+const kpiDual = FUNDS.filter(f => f.yr5 !== null && f.yr10 !== null && f.yr5 >= 10 && f.yr10 >= 10).length;
+const kpiAvg = FUNDS.filter(f => f.yr10 !== null).reduce((a, f) => a + f.yr10, 0) / FUNDS.filter(f => f.yr10 !== null).length;
+document.getElementById('kpi-10y10pct').textContent = kpi10;
+document.getElementById('kpi-dual10pct').textContent = kpiDual;
+document.getElementById('kpi-avg10y').textContent = kpiAvg.toFixed(2) + '%';
+
+const accel = FUNDS.filter(f => f.yr5 !== null && f.yr10 !== null && f.yr5 > f.yr10).length;
+const decel = FUNDS.filter(f => f.yr5 !== null && f.yr10 !== null && f.yr5 < f.yr10).length;
+const deltaAvg = (FUNDS.filter(f => f.yr5 !== null && f.yr10 !== null).reduce((a, f) => a + (f.yr10 - f.yr5), 0) / FUNDS.filter(f => f.yr5 !== null && f.yr10 !== null).length).toFixed(2);
+document.getElementById('kpi-accelerating').textContent = accel;
+document.getElementById('kpi-decelerating').textContent = decel;
+document.getElementById('kpi-delta').textContent = '+' + deltaAvg + '%';
+
+/* ===== Funds table ===== */
+let activeFilters = { sector: 'all', origin: 'all', search: '' };
+let sortState = { col: 'yr10', dir: 'desc' };
+
+function renderFundsTable() {
+  let data = FUNDS.slice();
+  if (activeFilters.sector !== 'all') data = data.filter(f => f.sectorKey === activeFilters.sector);
+  if (activeFilters.origin !== 'all') data = data.filter(f => f.origin === activeFilters.origin);
+  if (activeFilters.search) {
+    const q = activeFilters.search.toLowerCase();
+    data = data.filter(f => f.name.toLowerCase().includes(q) || f.provider.toLowerCase().includes(q));
+  }
+  data.sort((a, b) => {
+    const av = a[sortState.col];
+    const bv = b[sortState.col];
+    if (av === null && bv === null) return 0;
+    if (av === null) return 1;
+    if (bv === null) return -1;
+    if (typeof av === 'string') return sortState.dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortState.dir === 'asc' ? av - bv : bv - av;
+  });
+
+  const tbody = document.getElementById('funds-tbody');
+  tbody.innerHTML = data.map(f => {
+    const fmt = v => v === null ? '<span style="color:#868685;">—</span>' : (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+    const colorClass = v => v === null ? '' : v >= 10 ? 'green-text' : (v < 0 ? 'red-text' : '');
+    const ddCell = f.dd === 0
+      ? `<span style="color: var(--muted-2);">~ 0%</span>`
+      : f.dd > 0
+        ? `<span class="green-text">~ +${f.dd}%</span>`
+        : `<span class="red-text">~ ${f.dd}%</span>`;
+    return `<tr>
+      <td><strong>${f.name}</strong></td>
+      <td>${f.provider}</td>
+      <td><span class="badge ${f.origin}">${f.originLabel}</span></td>
+      <td>${f.sectorLabel}</td>
+      <td class="num-cell ${colorClass(f.yr3)}">${fmt(f.yr3)}</td>
+      <td class="num-cell ${colorClass(f.yr10)}"><strong>${fmt(f.yr10)}</strong></td>
+      <td class="num-cell ${colorClass(f.yr5)}">${fmt(f.yr5)}</td>
+      <td class="num-cell dd-cell">${ddCell}</td>
+    </tr>`;
+  }).join('');
+
+  document.querySelectorAll('thead th[data-sort]').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.sort === sortState.col) th.classList.add(sortState.dir === 'asc' ? 'sort-asc' : 'sort-desc');
+  });
+
+  /* Update count display */
+  const shownEl = document.getElementById('funds-shown');
+  const totalEl = document.getElementById('funds-total');
+  if (shownEl) shownEl.textContent = data.length;
+  if (totalEl) totalEl.textContent = FUNDS.length;
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    const value = btn.dataset.value;
+    activeFilters[filter] = value;
+    document.querySelectorAll(`.filter-btn[data-filter="${filter}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderFundsTable();
+  });
+});
+
+document.getElementById('fund-search').addEventListener('input', e => {
+  activeFilters.search = e.target.value.trim();
+  renderFundsTable();
+});
+
+document.querySelectorAll('thead th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.sort;
+    if (sortState.col === col) {
+      sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortState.col = col;
+      sortState.dir = (col === 'name' || col === 'provider' || col === 'sector' || col === 'origin') ? 'asc' : 'desc';
+    }
+    renderFundsTable();
+  });
+});
+
+renderFundsTable();
+
+/* ===== Risk table ===== */
+const riskTbody = document.getElementById('risk-tbody');
+riskTbody.innerHTML = RISK_TABLE.map(r => `
+  <tr>
+    <td><strong>${r.sector}</strong></td>
+    <td>${r.example}</td>
+    <td class="num-cell ${r.dd < 0 ? 'red-text' : 'green-text'}">${r.dd > 0 ? '+' : ''}${r.dd}%</td>
+    <td class="num-cell">${r.recover === 0 ? '—' : '+' + r.recover + '%'}</td>
+    <td>${r.vol}</td>
+  </tr>
+`).join('');
+
+/* ===== Benchmark table ===== */
+const bmTbody = document.getElementById('benchmark-tbody');
+bmTbody.innerHTML = BENCHMARKS.map(b => `
+  <tr>
+    <td><strong>${b.name}</strong></td>
+    <td class="num-cell">${b.yr5.toFixed(2)}%</td>
+    <td class="num-cell">${b.yr10.toFixed(2)}%</td>
+    <td>${b.meaning}</td>
+  </tr>
+`).join('');
+
+/* ===== Portfolios — render asset-class allocations (FMA-aware) ===== */
+function renderPortfolio(id, items) {
+  const el = document.getElementById(id);
+  el.innerHTML = items.map(it => `
+    <div class="alloc-row">
+      <div class="alloc-head">
+        <span class="alloc-name">${it.class}</span>
+        <span class="alloc-pct">${it.pct}%</span>
+      </div>
+      <div class="alloc-bar"><div class="alloc-bar-fill" style="width: ${it.pct * 2.5}%; max-width: 100%;"></div></div>
+      <div class="alloc-note">${it.note}</div>
+      <div class="alloc-examples"><span class="alloc-examples-label">同类可选：</span>${it.examples}</div>
+    </div>
+  `).join('');
+}
+renderPortfolio('alloc-conservative', PORTFOLIOS.conservative);
+renderPortfolio('alloc-balanced', PORTFOLIOS.balanced);
+renderPortfolio('alloc-aggressive', PORTFOLIOS.aggressive);
+
+/* ============================================================================
+   Charts
+   ============================================================================ */
+Chart.defaults.font.family = "'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif";
+Chart.defaults.color = '#454745';
+Chart.defaults.borderColor = 'rgba(14,15,12,0.08)';
+
+/* Brand-styled tooltip — dark with green title accent */
+Object.assign(Chart.defaults.plugins.tooltip, {
+  backgroundColor: 'rgba(14,15,12,0.95)',
+  titleColor: '#9fe870',
+  titleFont: { weight: 700, size: 12, family: "'Inter','PingFang SC',sans-serif" },
+  bodyColor: '#ffffff',
+  bodyFont: { weight: 500, size: 13, family: "'Inter','PingFang SC',sans-serif" },
+  padding: 12,
+  cornerRadius: 12,
+  displayColors: true,
+  boxPadding: 6,
+  boxWidth: 8,
+  boxHeight: 8,
+  borderColor: 'rgba(159,232,112,0.3)',
+  borderWidth: 1,
+  caretSize: 6,
+});
+
+/* ==== Plugin: 45° reference line on scatter (5Y = 10Y) ==== */
+const diagonalReference = {
+  id: 'diagonalReference',
+  afterDatasetsDraw(chart) {
+    if (chart.canvas.id !== 'chart-scatter') return;
+    const { ctx, scales: { x, y } } = chart;
+    const lo = Math.max(x.min, y.min);
+    const hi = Math.min(x.max, y.max);
+    if (hi <= lo) return;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(14,15,12,0.22)';
+    ctx.setLineDash([5, 5]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x.getPixelForValue(lo), y.getPixelForValue(lo));
+    ctx.lineTo(x.getPixelForValue(hi), y.getPixelForValue(hi));
+    ctx.stroke();
+    /* label near the top-right end of the line */
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(14,15,12,0.55)';
+    ctx.font = "600 11px 'Inter','PingFang SC',sans-serif";
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('5Y = 10Y 参考线', x.getPixelForValue(hi) - 6, y.getPixelForValue(hi) - 6);
+    ctx.restore();
+  },
+};
+
+/* ==== Plugin: value labels on horizontal Top15 bars ==== */
+const horizontalBarLabels = {
+  id: 'horizontalBarLabels',
+  afterDatasetsDraw(chart) {
+    if (chart.canvas.id !== 'chart-top15') return;
+    const ctx = chart.ctx;
+    chart.data.datasets.forEach((ds, i) => {
+      const meta = chart.getDatasetMeta(i);
+      meta.data.forEach((bar, j) => {
+        const v = ds.data[j];
+        if (v == null) return;
+        ctx.save();
+        ctx.font = "700 11px 'Inter',sans-serif";
+        ctx.fillStyle = '#0e0f0c';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(v.toFixed(2) + '%', bar.x + 6, bar.y);
+        ctx.restore();
+      });
+    });
+  },
+};
+Chart.register(diagonalReference, horizontalBarLabels);
+
+const COLORS = {
+  green: '#9fe870',
+  darkGreen: '#163300',
+  black: '#0e0f0c',
+  mint: '#e2f6d5',
+  amber: '#ffd11a',
+  orange: '#ffc091',
+  red: '#d03238',
+  blue: 'rgba(56,200,255,0.85)',
+  purple: '#a78bfa',
+  gray: '#868685',
+};
+const SECTOR_COLOR = {
+  intl: COLORS.green,
+  aus: COLORS.amber,
+  div: COLORS.purple,
+  prop: COLORS.orange,
+  fi: COLORS.blue,
+  other: COLORS.gray,
+};
+
+/* --- Top 15 chart --- */
+const top15 = FUNDS.filter(f => f.yr10 !== null).sort((a, b) => b.yr10 - a.yr10).slice(0, 15);
+new Chart(document.getElementById('chart-top15'), {
+  type: 'bar',
+  data: {
+    labels: top15.map(f => f.name.replace('Fund', '').replace('ETF', 'ETF').trim()),
+    datasets: [{
+      data: top15.map(f => f.yr10),
+      backgroundColor: top15.map(f => SECTOR_COLOR[f.sectorKey] + 'cc'),
+      borderColor: top15.map(f => SECTOR_COLOR[f.sectorKey]),
+      borderWidth: 1.5,
+      borderRadius: 6,
+    }],
+  },
+  options: {
+    indexAxis: 'y',
+    maintainAspectRatio: false,
+    layout: { padding: { right: 56 } },   /* room for value labels */
+    scales: {
+      x: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(14,15,12,0.04)' }, suggestedMax: Math.ceil(top15[0].yr10 + 2) },
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } },
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => c.parsed.x.toFixed(2) + '% / 10年年化' } },
+    },
+  },
+});
+
+/* --- Compound chart --- */
+const years = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const fv = (p, r, y) => p * Math.pow(1 + r / 100, y);
+const compoundData = {
+  labels: years.map(y => y + ' 年'),
+  datasets: [
+    { label: '银行定存 ~3.5%', data: years.map(y => fv(100000, 3.5, y)), borderColor: COLORS.gray, backgroundColor: 'transparent', borderDash: [4, 4], pointRadius: 2 },
+    { label: '保守组合 ~6%', data: years.map(y => fv(100000, 6, y)), borderColor: COLORS.blue, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 2 },
+    { label: '平衡组合 ~8%', data: years.map(y => fv(100000, 8, y)), borderColor: COLORS.purple, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 3 },
+    { label: '激进组合 ~10%', data: years.map(y => fv(100000, 10, y)), borderColor: COLORS.darkGreen, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 3 },
+    { label: 'Top US 基金 ~15%', data: years.map(y => fv(100000, 15, y)), borderColor: COLORS.green, backgroundColor: 'transparent', borderWidth: 3, pointRadius: 3 },
+  ],
+};
+new Chart(document.getElementById('chart-compound'), {
+  type: 'line',
+  data: compoundData,
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      y: { ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'k' }, grid: { color: 'rgba(14,15,12,0.04)' } },
+      x: { grid: { display: false } },
+    },
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, font: { size: 11 } } },
+      tooltip: { callbacks: { label: c => c.dataset.label + ': $' + c.parsed.y.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') } },
+    },
+  },
+});
+
+/* --- Distribution chart --- */
+const buckets = [-Infinity, 0, 4, 8, 12, 16, 20, Infinity];
+const bLabels = ['<0%', '0–4%', '4–8%', '8–12%', '12–16%', '16–20%', '>20%'];
+const counts = bLabels.map(_ => 0);
+FUNDS.filter(f => f.yr10 !== null).forEach(f => {
+  for (let i = 0; i < buckets.length - 1; i++) {
+    if (f.yr10 > buckets[i] && f.yr10 <= buckets[i + 1]) { counts[i]++; break; }
+  }
+});
+new Chart(document.getElementById('chart-distribution'), {
+  type: 'bar',
+  data: {
+    labels: bLabels,
+    datasets: [{
+      data: counts,
+      backgroundColor: bLabels.map((l, i) => i < 2 ? COLORS.red : i < 4 ? COLORS.amber : COLORS.green),
+      borderRadius: 6,
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      y: { ticks: { stepSize: 5 }, grid: { color: 'rgba(14,15,12,0.04)' }, title: { display: true, text: '基金数量' } },
+      x: { grid: { display: false }, title: { display: true, text: '10 年年化收益' } },
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => c.parsed.y + ' 只基金' } },
+    },
+  },
+});
+
+/* --- Scatter 5Y vs 10Y --- */
+const scatterDatasets = ['intl', 'aus', 'div', 'prop', 'fi'].map(sk => ({
+  label: getSectorLabel(sk),
+  data: FUNDS.filter(f => f.sectorKey === sk && f.yr5 !== null && f.yr10 !== null).map(f => ({ x: f.yr5, y: f.yr10, name: f.name })),
+  backgroundColor: SECTOR_COLOR[sk] + 'cc',
+  borderColor: SECTOR_COLOR[sk],
+  borderWidth: 1,
+  pointRadius: 5,
+  pointHoverRadius: 7,
+}));
+new Chart(document.getElementById('chart-scatter'), {
+  type: 'scatter',
+  data: { datasets: scatterDatasets },
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      x: { title: { display: true, text: '5 年年化收益' }, ticks: { callback: v => v + '%' }, grid: { color: 'rgba(14,15,12,0.04)' } },
+      y: { title: { display: true, text: '10 年年化收益' }, ticks: { callback: v => v + '%' }, grid: { color: 'rgba(14,15,12,0.04)' } },
+    },
+    plugins: {
+      legend: { position: 'top', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } },
+      tooltip: { callbacks: { label: c => c.raw.name + ': 5Y ' + c.raw.x.toFixed(1) + '% / 10Y ' + c.raw.y.toFixed(1) + '%' } },
+    },
+  },
+});
+
+/* --- Fees impact chart --- */
+const feeYears = Array.from({ length: 11 }, (_, i) => i);
+function netValue(p, gross, fee, y) { return p * Math.pow(1 + (gross - fee) / 100, y); }
+new Chart(document.getElementById('chart-fees'), {
+  type: 'line',
+  data: {
+    labels: feeYears.map(y => y + '年'),
+    datasets: [
+      { label: '0.30% (Simplicity / 美股 ETF)', data: feeYears.map(y => netValue(100000, 8, 0.30, y)), borderColor: COLORS.darkGreen, borderWidth: 3, pointRadius: 2 },
+      { label: '0.55% (SmartShares 行业 ETF)', data: feeYears.map(y => netValue(100000, 8, 0.55, y)), borderColor: COLORS.green, borderWidth: 2.5, pointRadius: 2 },
+      { label: '1.05% (Milford / Generate)', data: feeYears.map(y => netValue(100000, 8, 1.05, y)), borderColor: COLORS.purple, borderWidth: 2.5, pointRadius: 2 },
+      { label: '1.65% (Fisher Funds)', data: feeYears.map(y => netValue(100000, 8, 1.65, y)), borderColor: COLORS.red, borderWidth: 2.5, pointRadius: 2 },
+    ],
+  },
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      y: { ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'k' }, grid: { color: 'rgba(14,15,12,0.04)' } },
+      x: { grid: { display: false } },
+    },
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, font: { size: 11 } } },
+      tooltip: { callbacks: { label: c => c.dataset.label + ': $' + c.parsed.y.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') } },
+    },
+  },
+});
+
+/* --- Currency chart (Mercer hedged vs unhedged) --- */
+const mercerUnhedged = FUNDS.find(f => f.name === 'Mercer Core Global Shares Fund');
+const mercerHedged = FUNDS.find(f => f.name === 'Mercer Core Hedged Global Shares Fund');
+new Chart(document.getElementById('chart-currency'), {
+  type: 'bar',
+  data: {
+    labels: ['3 年年化', '5 年年化', '10 年年化'],
+    datasets: [
+      {
+        label: 'Unhedged (NZD 暴露)',
+        data: [mercerUnhedged.yr3, mercerUnhedged.yr5, mercerUnhedged.yr10],
+        backgroundColor: COLORS.green + 'cc',
+        borderColor: COLORS.green,
+        borderWidth: 1.5,
+        borderRadius: 6,
+      },
+      {
+        label: 'Hedged (无 NZD 暴露)',
+        data: [mercerHedged.yr3, mercerHedged.yr5, mercerHedged.yr10],
+        backgroundColor: COLORS.gray + 'cc',
+        borderColor: COLORS.gray,
+        borderWidth: 1.5,
+        borderRadius: 6,
+      },
+    ],
+  },
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      y: { ticks: { callback: v => v + '%' }, grid: { color: 'rgba(14,15,12,0.04)' }, title: { display: true, text: '年化收益' } },
+      x: { grid: { display: false } },
+    },
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, font: { size: 11 } } },
+      tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y.toFixed(2) + '%' } },
+    },
+  },
+});
+
+/* ============================================================================
+   Wayfinding interactions: scroll progress, mobile nav, back-to-top, scroll-spy
+   ============================================================================ */
+(function () {
+  const progressBar = document.getElementById('scroll-progress-bar');
+  const backToTop = document.getElementById('back-to-top');
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+  const tocItems = document.querySelectorAll('#toc-list li');
+  const tocLinkByHash = {};
+  tocItems.forEach(li => {
+    const a = li.querySelector('a');
+    if (a) tocLinkByHash[a.getAttribute('href')] = li;
+  });
+
+  /* Scroll progress + back-to-top visibility */
+  function onScroll() {
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (backToTop) {
+      if (scrolled > 600) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Back to top */
+  if (backToTop) {
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* Mobile hamburger */
+  if (navToggle && navMobile) {
+    navToggle.addEventListener('click', () => {
+      const open = navMobile.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navMobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    navMobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navMobile.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navMobile.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  /* Scroll-spy + hash routing — keeps URL in sync with the section in view.
+     Uses replaceState so manual scrolling never pollutes browser history;
+     TOC link clicks still go through the native <a href="#..."> path which
+     pushes to history (so back/forward jumps section-by-section). */
+  const sections = document.querySelectorAll('section[id]');
+  if (sections.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocItems.forEach(li => li.classList.remove('active'));
+          const li = tocLinkByHash['#' + entry.target.id];
+          if (li) li.classList.add('active');
+          /* Silently mirror current section into the URL */
+          const newHash = '#' + entry.target.id;
+          if (location.hash !== newHash && history.replaceState) {
+            history.replaceState(null, '', newHash);
+          }
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(s => observer.observe(s));
+  }
+
+  /* Strip the hash when the user scrolls back to the very top — keeps the
+     "fresh visit" URL clean and avoids stale hash on share. */
+  let hashClearTimer;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 80 && location.hash && history.replaceState) {
+      clearTimeout(hashClearTimer);
+      hashClearTimer = setTimeout(() => {
+        history.replaceState(null, '', location.pathname + location.search);
+      }, 150);
+    }
+  }, { passive: true });
+
+  /* Reveal-on-scroll for tagged elements */
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('visible'));
+  } else {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    /* Stagger items inside the same parent */
+    const grouped = new Map();
+    reveals.forEach(el => {
+      const parent = el.parentElement;
+      if (!grouped.has(parent)) grouped.set(parent, 0);
+      const i = grouped.get(parent);
+      el.style.setProperty('--reveal-delay', (i * 80) + 'ms');
+      grouped.set(parent, i + 1);
+      revealObs.observe(el);
+    });
+  }
+
+  /* ============== Toast feedback helper ============== */
+  function showToast(msg, ok = true) {
+    document.querySelectorAll('.toast').forEach(t => t.remove());
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = (ok ? '<span class="check">✓</span>' : '') + msg;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  }
+
+  /* ============== CTA actions ============== */
+  const printBtn = document.getElementById('action-print');
+  const copyBtn  = document.getElementById('action-copy');
+  const shareBtn = document.getElementById('action-share');
+
+  if (printBtn) printBtn.addEventListener('click', () => window.print());
+
+  if (copyBtn) copyBtn.addEventListener('click', async () => {
+    const url = window.location.href;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+        showToast('链接已复制到剪贴板');
+      } else {
+        /* Fallback for non-HTTPS or older browsers */
+        const ta = document.createElement('textarea');
+        ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        showToast('链接已复制');
+      }
+    } catch (err) {
+      showToast('复制失败 — 请手动复制地址栏 URL', false);
+    }
+  });
+
+  if (shareBtn) shareBtn.addEventListener('click', async () => {
+    const data = {
+      title: 'NZ 华人基金投资指南',
+      text: '面向新西兰华人投资者的 Managed Fund 选择指南（含 PIE/FIF 税务、风险、组合）',
+      url: window.location.href,
+    };
+    if (navigator.share) {
+      try { await navigator.share(data); }
+      catch (e) { /* user dismissed — silent */ }
+    } else {
+      try {
+        await navigator.clipboard.writeText(data.url);
+        showToast('当前设备不支持系统分享 — 已复制链接');
+      } catch (e) {
+        showToast('当前设备不支持系统分享', false);
+      }
+    }
+  });
+})();
+
+</script>
+</body>
+</html>

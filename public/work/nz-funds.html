@@ -126,6 +126,25 @@
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
   .brand-dot { width: 14px; height: 14px; border-radius: 9999px; background: var(--green); box-shadow: 0 0 0 4px var(--green-tint); }
+  .back-home {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    background: var(--ink);
+    color: #ffffff;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: transform 150ms ease, background 200ms ease;
+  }
+  .back-home:hover { transform: scale(1.05); background: var(--green-deep); }
+  .back-home .arrow { font-size: 14px; line-height: 1; }
+  .brand-sep { color: var(--muted-2); font-weight: 400; padding: 0 2px; }
+  @media (max-width: 640px) {
+    .back-home-label { display: none; }
+    .back-home { padding: 6px 10px; }
+    .brand-sep { display: none; }
+  }
   .nav-links { display: flex; gap: 4px; flex-wrap: nowrap; }
   .nav-links a {
     padding: 7px 12px; border-radius: 9999px; text-decoration: none; font-size: 13.5px; font-weight: 600;
@@ -807,6 +826,11 @@
 <nav class="nav">
   <div class="container nav-inner">
     <div class="brand">
+      <a href="/" class="back-home" aria-label="返回 Gimbo's Universe 主页">
+        <span class="arrow" aria-hidden="true">←</span>
+        <span class="back-home-label">Gimbo's Universe</span>
+      </a>
+      <span class="brand-sep" aria-hidden="true">/</span>
       <span class="brand-dot"></span>
       <span>NZ 华人基金指南</span>
     </div>

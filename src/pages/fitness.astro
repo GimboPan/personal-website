@@ -6,14 +6,13 @@ import ModuleCard from '~/components/ModuleCard.astro';
 
 <BaseLayout
   title="Fitness — Gimbo's Universe"
-  description="Tennis on clay, running on weekends, the body as the one project that resists agentizing."
+  description="Tennis, nutrition, and strength — the body project that won't be agentized."
 >
-  <!-- Custom band: clay-orange tint behind the sports hero -->
   <SectionHero
     index="02"
     kicker="Scene II — Clay court, back view, racquet down"
     title="On the court I am present."
-    subtitle="Tennis weekly. Run sometimes. The body is the one project that won't be agentized — and that's exactly the point."
+    subtitle="Three working surfaces — tennis, nutrition, and strength. The body is the one project I cannot delegate to an agent, and that's exactly the point."
     bandClass="border-b border-hairline"
   />
 
@@ -30,29 +29,31 @@ import ModuleCard from '~/components/ModuleCard.astro';
         <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
           Modules
         </h2>
-        <div class="terminal text-ink-gray hidden md:block">// future feeds</div>
+        <div class="terminal text-ink-gray hidden md:block">
+          // body × 3
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <ModuleCard
           index="01"
           title="Tennis Buddy"
-          subtitle="Roland Garros-themed app for finding hitting partners, drills, NTRP-tagged sessions."
-          status="planned"
-          tools={["MUI", "RG-design", "Auth"]}
+          subtitle="Match logs, hitting partners, drill notes, NTRP-tagged sessions. A small Roland-Garros-themed app for finding and tracking court time."
+          status="wip"
+          tools={["MUI", "RG-design", "Match Log"]}
           featured={true}
         />
         <ModuleCard
           index="02"
-          title="Match Log"
-          subtitle="Every session, score, opponent, weather, surface. Auto-summarized weekly."
+          title="Nutrition · 营养"
+          subtitle="What I eat, when, and why. Tracking intake against training load, NZ-grocery realities, and the long game (not the next 6-pack)."
           status="planned"
-          tools={["Markdown", "Claude"]}
+          tools={["MyFitnessPal", "Markdown"]}
         />
         <ModuleCard
           index="03"
-          title="Body Stats"
-          subtitle="HR zones, sleep, weight curve. Weekly digest into the review system."
+          title="Strength · 力量训练"
+          subtitle="Compound lifts, mobility work, recovery protocols. Volume tracking and progression as a hedge against everything tennis breaks down."
           status="planned"
           tools={["Apple Health", "Whoop"]}
         />

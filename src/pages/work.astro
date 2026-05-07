@@ -6,13 +6,13 @@ import ModuleCard from '~/components/ModuleCard.astro';
 
 <BaseLayout
   title="Work — Gimbo's Universe"
-  description="Where Claude agents run the supply chain, and ARK theses meet on-chain experiments."
+  description="Supply chain agents, investing, AI applications, AI × data analysis."
 >
   <SectionHero
     index="01"
     kicker="Scene I — Empty workstation, two screens still glowing"
     title="Work runs itself. I supervise."
-    subtitle="40 vendors, 5,000+ SKUs across NZ and AU, executed by a three-agent supply chain stack. On the side: ARK theses, on-chain notes, and weekly reflections — all in one feed."
+    subtitle="Four working surfaces — supply chain agents, investing, AI applications, and AI × data analysis. The agents do the running; I do the thinking."
     bandClass="border-b border-hairline"
   />
 
@@ -23,61 +23,40 @@ import ModuleCard from '~/components/ModuleCard.astro';
           Modules
         </h2>
         <div class="terminal text-ink-gray hidden md:block">
-          // sourced from /Users/gimbo/Desktop/claude cowork/
+          // 4 surfaces · more arriving
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <ModuleCard
           index="01"
-          title="Supply Planning Agents"
-          subtitle="NZ (D365) + AU (JDE) MRP, PO routing, settlement. Three-agent stack with a supervisor."
-          status="live"
-          tools={["D365", "JDE", "Claude", "Python"]}
+          title="Supply Chain Agent"
+          subtitle="A three-agent stack running NZ + AU MRP, PO routing, vendor confirmations and settlement. The supervisor agent triages exceptions; I review and approve. Notes, retros, and architecture sketches live here."
+          status="wip"
+          tools={["Claude", "Python", "MRP"]}
           featured={true}
         />
         <ModuleCard
           index="02"
-          title="NZ Managed Funds for 华人投资者"
-          subtitle="新西兰华人基金选择指南：PIE/FIF 税务、风险指标、组合配置、货币对冲、平台对比。Top 15 十年回报榜 + 完整可筛选基金大全。"
+          title="Investing"
+          subtitle="What I'm putting money behind and why — NZ managed funds, ARK theses, on-chain experiments. Starts with the NZ 华人基金 selection guide."
           status="live"
           href="/work/nz-funds.html"
-          tools={["NZ Funds", "PIE", "FIF", "Chart.js"]}
+          tools={["NZ Funds", "PIE/FIF", "ARK"]}
         />
         <ModuleCard
           index="03"
-          title="ARK + AI Crypto Research"
-          subtitle="ARK Big Ideas 2017–2026, Indigo livestream notes, conviction theses."
-          status="wip"
-          tools={["ARK PDFs", "Notion", "Indigo"]}
+          title="AI Applications"
+          subtitle="Practical agentic workflows I've shipped or am shipping — Outlook rule rewrites, weekly review automation, document parsers. What works in real day-job conditions, not just demos."
+          status="planned"
+          tools={["Claude SDK", "Skills", "Cron"]}
         />
         <ModuleCard
           index="04"
-          title="Personal Finance Dashboard"
-          subtitle="Bank statement parser → monthly spend visualization."
+          title="AI × Data Analysis"
+          subtitle="Where AI meets the spreadsheet — vendor performance dashboards, on-chain flow analysis, market structure visualizations. Numbers given a brain."
           status="planned"
-          tools={["NZ banks", "Wise", "CSV"]}
-        />
-        <ModuleCard
-          index="05"
-          title="Outlook Optimization"
-          subtitle="30+ vendor mail rules refactored from name-based to domain-based."
-          status="wip"
-          tools={["Outlook", "PowerShell"]}
-        />
-        <ModuleCard
-          index="06"
-          title="Weekly / Monthly Review System"
-          subtitle="Daily email digests + weekly review skill across six life dimensions."
-          status="live"
-          tools={["Claude Skill", "Markdown"]}
-        />
-        <ModuleCard
-          index="07"
-          title="GeekLab — Agent Experiments"
-          subtitle="GenericAgent trials, AI roundtable research, home DNS monitoring."
-          status="planned"
-          tools={["TS", "Claude SDK"]}
+          tools={["Python", "Polars", "Chart.js"]}
         />
       </div>
     </div>

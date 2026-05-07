@@ -6,13 +6,13 @@ import ModuleCard from '~/components/ModuleCard.astro';
 
 <BaseLayout
   title="Life — Gimbo's Universe"
-  description="Books on the table, slow chapters, ten years in NZ."
+  description="Writing, reading, and the people in the room — the slow lane."
 >
   <SectionHero
     index="03"
     kicker="Scene III — Side profile, books, tea, no laptop"
     title="The slow lane is the long lane."
-    subtitle="Ten years in New Zealand, one book in progress, a stack of essays no algorithm will rank. This is the part of the site that resists optimization."
+    subtitle="Three working surfaces — writing a book, reading what doesn't trend, and showing up for the people who matter. The part of the site that resists optimization."
     bandClass="border-b border-hairline"
   />
 
@@ -22,30 +22,33 @@ import ModuleCard from '~/components/ModuleCard.astro';
         <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
           Modules
         </h2>
+        <div class="terminal text-ink-gray hidden md:block">
+          // slow × 3
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <ModuleCard
           index="01"
-          title="Life Essential in NZ"
-          subtitle="The book in progress. 9 chapters; ch.3 (finance) currently writing. Newsletter + ebook."
+          title="Writing the Book"
+          subtitle="《Life Essential in NZ》 — ten years in New Zealand, distilled into nine chapters. Currently writing chapter 3 (finance). Newsletter + ebook when ready."
           status="wip"
           tools={["Markdown", "WeChat MP"]}
           featured={true}
         />
         <ModuleCard
           index="02"
-          title="Reading List"
-          subtitle="What's currently on the table. Notes when something deserves them."
+          title="Reading"
+          subtitle="What's on the table right now, what changed something, and the long shelf I keep returning to. Sparse on purpose."
           status="planned"
-          tools={["Markdown"]}
+          tools={["Notes", "Markdown"]}
         />
         <ModuleCard
           index="03"
-          title="Field Notes"
-          subtitle="Short essays, kitchen observations, ten years of small NZ moments."
+          title="Social"
+          subtitle="The dinners, the long walks, the people I owe a call. The most important infrastructure that no app can replace."
           status="planned"
-          tools={["MDX"]}
+          tools={["IRL"]}
         />
       </div>
     </div>

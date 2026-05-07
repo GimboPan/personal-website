@@ -1,51 +1,108 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import SectionHero from '~/components/SectionHero.astro';
+
+const roles = [
+  { en: 'Supply Chain Professional', zh: '供应链人' },
+  { en: 'AI Super User', zh: 'AI 重度用户' },
+  { en: 'Investor', zh: '投资者' },
+  { en: 'Tennis Player', zh: '网球玩家' },
+  { en: 'Writer', zh: '写字的人' },
+];
 ---
 
 <BaseLayout
   title="About — Gimbo's Universe"
-  description="Who is Gimbo, and why does this site exist."
+  description="Who is Gimbo. Five roles, ten years in NZ, one creed."
 >
   <SectionHero
-    index="04"
+    index="05"
     kicker="ABOUT — the operator behind the universe"
     title="I am Gimbo."
-    subtitle="Supply Planner by day, ARK reader by night, tennis player on weekends, slow writer of essays no algorithm ranks. Ten years in New Zealand. The site is the public version of the inner loop."
+    subtitle="Five roles, one person, ten years in New Zealand. The site is the public version of the inner loop."
     bandClass="border-b border-hairline"
   />
 
   <section class="relative">
     <div class="mx-auto max-w-3xl px-6 lg:px-12 py-16 space-y-10">
-      <div class="card">
-        <div class="tool-label mb-2">The Three Pillars</div>
-        <h3 class="font-display text-2xl font-black text-ink-white mb-3">
-          Work × Sport × Life
-        </h3>
-        <p class="text-ink-mint leading-relaxed">
-          Work compounds with the help of agents. Sport keeps the body honest.
-          Life — books, family, slowness — is the part the algorithms cannot
-          rank. This site is where I publish what runs in each.
-        </p>
-      </div>
 
+      <!-- Roles -->
       <div class="card">
-        <div class="tool-label mb-2">Stack</div>
-        <ul class="font-mono text-sm text-ink-mint space-y-1.5">
-          <li>· Astro + Tailwind</li>
-          <li>· wise-dark design tokens (this section)</li>
-          <li>· roland-garros visual identity (sport section)</li>
-          <li>· ChatGPT image as the front door</li>
-          <li>· built collaboratively with Claude Code</li>
+        <div class="tool-label mb-4">The Five Roles</div>
+        <ul class="space-y-3">
+          {roles.map((r, i) => (
+            <li class="flex items-baseline gap-4 border-b border-hairline last:border-b-0 pb-3 last:pb-0">
+              <span class="font-mono text-xs text-lime tabular-nums w-8">0{i + 1}</span>
+              <div class="flex-1">
+                <div class="font-display font-black text-ink-white text-lg leading-tight">
+                  {r.en}
+                </div>
+                <div class="text-sm text-ink-mint mt-0.5">{r.zh}</div>
+              </div>
+            </li>
+          ))}
+          <li class="flex items-baseline gap-4 pt-3 border-t border-hairline">
+            <span class="font-mono text-xs text-lime tabular-nums w-8">06</span>
+            <div class="flex-1">
+              <div class="font-display font-black text-ink-white text-lg leading-tight">
+                Ten years in New Zealand
+              </div>
+              <div class="text-sm text-ink-mint mt-0.5">在新西兰十年</div>
+            </div>
+          </li>
         </ul>
       </div>
 
-      <div class="card">
-        <div class="tool-label mb-2">Contact</div>
-        <p class="text-ink-mint">
-          For now: <span class="text-lime font-mono">panjunbao@gmail.com</span>
-        </p>
+      <!-- Creed (hero card — lime) -->
+      <div class="card-feature">
+        <div
+          class="text-xs font-black tracking-tool uppercase mb-3"
+          style="color: rgba(22, 51, 0, 0.7);"
+        >
+          人生信条 · Life Creed
+        </div>
+        <div
+          class="font-display font-black leading-[1.05] text-2xl md:text-3xl"
+          style="color: #163300;"
+        >
+          心怀敬畏，<br />
+          凡事感恩，<br />
+          自律精进。
+        </div>
+        <div
+          class="mt-5 font-mono text-xs leading-relaxed"
+          style="color: rgba(22, 51, 0, 0.75);"
+        >
+          Hold reverence ·<br />
+          Be grateful for everything ·<br />
+          Discipline through self-improvement.
+        </div>
       </div>
+
+      <!-- Contact -->
+      <div class="card">
+        <div class="tool-label mb-4">Contact</div>
+        <ul class="space-y-3 font-mono text-sm">
+          <li class="flex items-center gap-3">
+            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-lime-tint text-lime text-[11px] font-black">微</span>
+            <span class="text-ink-mint">WeChat:</span>
+            <span class="text-ink-white">@TBD</span>
+            <span class="text-ink-gray text-xs">— update via CLAUDE.md after share</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-lime-tint text-lime text-[11px] font-black">红</span>
+            <span class="text-ink-mint">小红书:</span>
+            <span class="text-ink-white">@TBD</span>
+            <span class="text-ink-gray text-xs">— Xiaohongshu handle</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-lime-tint text-lime text-[11px] font-black">@</span>
+            <span class="text-ink-mint">Email:</span>
+            <a class="text-lime hover:underline" href="mailto:panjunbao@gmail.com">panjunbao@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </section>
 </BaseLayout>

@@ -218,16 +218,17 @@
     text-transform: uppercase;
   }
 
-  /* Display-mega billboard heading */
+  /* Display-mega billboard heading — UPPERCASE + 句号 = Rewired-style
+     manifesto rhythm. Period-as-statement-mark is a Wise/Linear pattern. */
   .display-mega {
     font-family: 'Wise Sans', 'Inter', system-ui, sans-serif;
     font-weight: 900;
     line-height: 0.85;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
     /* Allow wrapping on tight viewports — Wise Sans 900 is dense */
     word-break: break-word;
     overflow-wrap: anywhere;
-    hyphens: auto;
   }
 }
 

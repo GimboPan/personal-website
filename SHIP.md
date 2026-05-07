@@ -1,5 +1,10 @@
 # Ship Checklist
 
+> **Current version**: 🟢 **v0.5 — shipped 2026-05-07** ([CHANGELOG.md](./CHANGELOG.md))
+> **Live URL**: https://personal-website-zeta-nine-61.vercel.app
+> **Repo**: https://github.com/GimboPan/personal-website
+> **Auto-deploy**: ✅ `git push origin main` → ~30s → live
+
 Status as of 2026-05-07. Everything listed under **DONE** is wired up and committed; everything under **TODO (you)** needs your account/auth/decision.
 
 ---

@@ -1,8 +1,10 @@
 # Gimbo's Universe
 
-A personal website that aggregates Gimbo's projects into a single public surface — three "floating islands" in deep space (Work, Fitness, Life) plus Ideas, About, and a journal-style explore section.
+A personal website that aggregates Gimbo's projects into a single public surface — three "floating islands" in deep space (Work, Fitness, Life) plus Ideas and About.
 
-Live: _domain pending_ · Built with [Astro](https://astro.build) + [Tailwind](https://tailwindcss.com).
+**Status**: 🟢 v0.5 — shipped 2026-05-07. See [CHANGELOG.md](./CHANGELOG.md) for the full release notes.
+**Live**: https://personal-website-zeta-nine-61.vercel.app · _custom domain pending_
+**Stack**: [Astro](https://astro.build) + [Tailwind](https://tailwindcss.com), hosted on Vercel.
 
 ---
 

@@ -1,0 +1,77 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ModuleCard from '~/components/ModuleCard.astro';
+---
+
+<BaseLayout
+  title="Work — Gimbo's Universe"
+  description="Where Claude agents run the supply chain, and ARK theses meet on-chain experiments."
+>
+  <SectionHero
+    index="01"
+    kicker="Scene I — Empty workstation, two screens still glowing"
+    title="Work runs itself. I supervise."
+    subtitle="40 vendors, 5,000+ SKUs across NZ and AU, executed by a three-agent supply chain stack. On the side: ARK theses, on-chain notes, and weekly reflections — all in one feed."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
+          Modules
+        </h2>
+        <div class="terminal text-ink-gray hidden md:block">
+          // sourced from /Users/gimbo/Desktop/claude cowork/
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ModuleCard
+          index="01"
+          title="Supply Planning Agents"
+          subtitle="NZ (D365) + AU (JDE) MRP, PO routing, settlement. Three-agent stack with a supervisor."
+          status="live"
+          tools={["D365", "JDE", "Claude", "Python"]}
+          featured={true}
+        />
+        <ModuleCard
+          index="02"
+          title="ARK + AI Crypto Research"
+          subtitle="ARK Big Ideas 2017–2026, Indigo livestream notes, conviction theses."
+          status="wip"
+          tools={["ARK PDFs", "Notion", "Indigo"]}
+        />
+        <ModuleCard
+          index="03"
+          title="Personal Finance Dashboard"
+          subtitle="Bank statement parser → monthly spend visualization."
+          status="planned"
+          tools={["NZ banks", "Wise", "CSV"]}
+        />
+        <ModuleCard
+          index="04"
+          title="Outlook Optimization"
+          subtitle="30+ vendor mail rules refactored from name-based to domain-based."
+          status="wip"
+          tools={["Outlook", "PowerShell"]}
+        />
+        <ModuleCard
+          index="05"
+          title="Weekly / Monthly Review System"
+          subtitle="Daily email digests + weekly review skill across six life dimensions."
+          status="live"
+          tools={["Claude Skill", "Markdown"]}
+        />
+        <ModuleCard
+          index="06"
+          title="GeekLab — Agent Experiments"
+          subtitle="GenericAgent trials, AI roundtable research, home DNS monitoring."
+          status="planned"
+          tools={["TS", "Claude SDK"]}
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

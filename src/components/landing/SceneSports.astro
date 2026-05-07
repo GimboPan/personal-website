@@ -1,0 +1,231 @@
+---
+/**
+ * Scene 02 — Roland Garros clay court, player back view, mid-rally.
+ * Pixel-art with clay-orange court, white lines, white sportswear figure
+ * holding a racquet, ball arcing toward the net.
+ */
+---
+
+<div class="scene-sports group relative w-full">
+  <svg
+    viewBox="0 0 240 200"
+    class="w-full h-auto pixelated"
+    role="img"
+    aria-label="Roland Garros clay court with player back view"
+  >
+    <defs>
+      <filter id="ballGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="0.8" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- ─── Court (perspective trapezoid) ─── -->
+    <!-- shadow under court -->
+    <polygon points="40,178 200,178 220,184 20,184" fill="#000000" opacity="0.4" />
+
+    <!-- main clay court -->
+    <polygon
+      points="40,178 200,178 220,80 20,80"
+      fill="#cc4e0e"
+    />
+    <!-- darker clay band (depth) -->
+    <polygon
+      points="40,178 200,178 215,90 25,90"
+      fill="#b8430a"
+      opacity="0.4"
+    />
+
+    <!-- court lines (white) -->
+    <!-- back baseline -->
+    <polygon points="20,80 220,80 218,82 22,82" fill="#fdf3ee" />
+    <!-- front baseline (closer = brighter) -->
+    <polygon points="40,178 200,178 200,180 40,180" fill="#fdf3ee" />
+    <!-- center service line -->
+    <polygon
+      points="120,80 120,178 121,178 121,80"
+      fill="#fdf3ee"
+      opacity="0.85"
+    />
+    <!-- left side line -->
+    <polygon points="20,80 22,82 40,178 40,180" fill="#fdf3ee" />
+    <!-- right side line -->
+    <polygon points="220,80 218,82 200,178 200,180" fill="#fdf3ee" />
+    <!-- service box mid line -->
+    <polygon points="46,128 194,128 192,130 48,130" fill="#fdf3ee" opacity="0.85" />
+
+    <!-- ─── Net ─── -->
+    <!-- net post left -->
+    <rect x="32" y="100" width="2" height="32" fill="#1a1b17" />
+    <!-- net post right -->
+    <rect x="206" y="100" width="2" height="32" fill="#1a1b17" />
+    <!-- net cord top -->
+    <rect x="32" y="100" width="176" height="1" fill="#fdf3ee" />
+    <!-- net mesh (dashes) -->
+    <g fill="#fdf3ee" opacity="0.55">
+      <rect x="36" y="103" width="2" height="1" />
+      <rect x="42" y="103" width="2" height="1" />
+      <rect x="48" y="103" width="2" height="1" />
+      <rect x="54" y="103" width="2" height="1" />
+      <rect x="60" y="103" width="2" height="1" />
+      <rect x="66" y="103" width="2" height="1" />
+      <rect x="72" y="103" width="2" height="1" />
+      <rect x="78" y="103" width="2" height="1" />
+      <rect x="84" y="103" width="2" height="1" />
+      <rect x="90" y="103" width="2" height="1" />
+      <rect x="96" y="103" width="2" height="1" />
+      <rect x="102" y="103" width="2" height="1" />
+      <rect x="108" y="103" width="2" height="1" />
+      <rect x="114" y="103" width="2" height="1" />
+      <rect x="120" y="103" width="2" height="1" />
+      <rect x="126" y="103" width="2" height="1" />
+      <rect x="132" y="103" width="2" height="1" />
+      <rect x="138" y="103" width="2" height="1" />
+      <rect x="144" y="103" width="2" height="1" />
+      <rect x="150" y="103" width="2" height="1" />
+      <rect x="156" y="103" width="2" height="1" />
+      <rect x="162" y="103" width="2" height="1" />
+      <rect x="168" y="103" width="2" height="1" />
+      <rect x="174" y="103" width="2" height="1" />
+      <rect x="180" y="103" width="2" height="1" />
+      <rect x="186" y="103" width="2" height="1" />
+      <rect x="192" y="103" width="2" height="1" />
+      <rect x="198" y="103" width="2" height="1" />
+    </g>
+    <g fill="#fdf3ee" opacity="0.4">
+      <rect x="36" y="106" width="2" height="1" />
+      <rect x="48" y="106" width="2" height="1" />
+      <rect x="60" y="106" width="2" height="1" />
+      <rect x="72" y="106" width="2" height="1" />
+      <rect x="84" y="106" width="2" height="1" />
+      <rect x="96" y="106" width="2" height="1" />
+      <rect x="108" y="106" width="2" height="1" />
+      <rect x="120" y="106" width="2" height="1" />
+      <rect x="132" y="106" width="2" height="1" />
+      <rect x="144" y="106" width="2" height="1" />
+      <rect x="156" y="106" width="2" height="1" />
+      <rect x="168" y="106" width="2" height="1" />
+      <rect x="180" y="106" width="2" height="1" />
+      <rect x="192" y="106" width="2" height="1" />
+    </g>
+
+    <!-- ─── Player (back view) ─── -->
+    <!-- shadow -->
+    <ellipse cx="120" cy="174" rx="14" ry="2" fill="#000000" opacity="0.3" />
+
+    <!-- legs (white shorts → bare legs → shoes) -->
+    <!-- right leg -->
+    <rect x="116" y="160" width="4" height="14" fill="#fdf3ee" />
+    <!-- left leg (slightly back) -->
+    <rect x="122" y="160" width="4" height="14" fill="#fdf3ee" />
+    <!-- shoes -->
+    <rect x="114" y="172" width="6" height="2" fill="#9fe870" />
+    <rect x="122" y="172" width="6" height="2" fill="#9fe870" />
+
+    <!-- shorts -->
+    <rect x="114" y="148" width="14" height="14" fill="#fdf3ee" />
+    <rect x="114" y="160" width="14" height="2" fill="#e8ebe6" />
+
+    <!-- torso (white shirt) -->
+    <rect x="112" y="128" width="18" height="22" fill="#fdf3ee" />
+    <!-- shirt detail (RG green band hint) -->
+    <rect x="112" y="128" width="18" height="2" fill="#00503c" />
+    <!-- back number / logo hint -->
+    <rect x="119" y="136" width="4" height="6" fill="#cc4e0e" opacity="0.6" />
+
+    <!-- arms -->
+    <!-- left arm (down by side) -->
+    <rect x="108" y="130" width="4" height="14" fill="#fdf3ee" />
+    <rect x="108" y="142" width="4" height="2" fill="#e2c5a8" />
+    <!-- right arm (raised, holding racquet) -->
+    <rect x="130" y="124" width="4" height="12" fill="#fdf3ee" />
+    <rect x="130" y="120" width="4" height="4" fill="#e2c5a8" />
+
+    <!-- racquet -->
+    <!-- handle -->
+    <rect x="132" y="108" width="2" height="14" fill="#1a1b17" />
+    <!-- frame -->
+    <rect x="128" y="98" width="10" height="12" fill="none" stroke="#1a1b17" stroke-width="1" />
+    <!-- strings (cross-hatch) -->
+    <line x1="129" y1="100" x2="137" y2="100" stroke="#fdf3ee" stroke-width="0.3" opacity="0.7" />
+    <line x1="129" y1="103" x2="137" y2="103" stroke="#fdf3ee" stroke-width="0.3" opacity="0.7" />
+    <line x1="129" y1="106" x2="137" y2="106" stroke="#fdf3ee" stroke-width="0.3" opacity="0.7" />
+    <line x1="131" y1="99" x2="131" y2="109" stroke="#fdf3ee" stroke-width="0.3" opacity="0.7" />
+    <line x1="135" y1="99" x2="135" y2="109" stroke="#fdf3ee" stroke-width="0.3" opacity="0.7" />
+
+    <!-- head (back of head with hair) -->
+    <rect x="114" y="114" width="14" height="14" fill="#1a1b17" />
+    <!-- hair highlight -->
+    <rect x="114" y="114" width="14" height="2" fill="#000000" />
+    <rect x="116" y="116" width="2" height="2" fill="#3a3a3a" />
+    <!-- neck -->
+    <rect x="118" y="126" width="6" height="2" fill="#e2c5a8" />
+
+    <!-- ─── Tennis ball arcing toward net ─── -->
+    <g filter="url(#ballGlow)">
+      <rect x="86" y="74" width="3" height="3" fill="#cdffad">
+        <animate
+          attributeName="x"
+          values="86;100;120;100;86"
+          dur="3.5s"
+          repeatCount="indefinite"
+        />
+        <animate
+          attributeName="y"
+          values="74;60;72;60;74"
+          dur="3.5s"
+          repeatCount="indefinite"
+        />
+      </rect>
+    </g>
+
+    <!-- ball trail (motion blur) -->
+    <rect x="80" y="76" width="2" height="2" fill="#cdffad" opacity="0.3" />
+    <rect x="74" y="78" width="1" height="1" fill="#cdffad" opacity="0.2" />
+
+    <!-- ─── Stadium hint (back rows) ─── -->
+    <rect x="20" y="76" width="200" height="2" fill="#1a1b17" />
+    <!-- crowd dots -->
+    <g fill="#3a3a3a">
+      <rect x="30" y="72" width="1" height="2" />
+      <rect x="38" y="72" width="1" height="2" />
+      <rect x="50" y="72" width="1" height="2" />
+      <rect x="64" y="72" width="1" height="2" />
+      <rect x="78" y="72" width="1" height="2" />
+      <rect x="92" y="72" width="1" height="2" />
+      <rect x="106" y="72" width="1" height="2" />
+      <rect x="134" y="72" width="1" height="2" />
+      <rect x="148" y="72" width="1" height="2" />
+      <rect x="162" y="72" width="1" height="2" />
+      <rect x="176" y="72" width="1" height="2" />
+      <rect x="190" y="72" width="1" height="2" />
+      <rect x="204" y="72" width="1" height="2" />
+    </g>
+
+    <!-- ─── Title strip (terminal) ─── -->
+    <rect x="20" y="10" width="200" height="14" fill="#0e0f0c" stroke="#9fe870" stroke-width="0.5" opacity="0.9" />
+    <text
+      x="26"
+      y="20"
+      font-family="JetBrains Mono, monospace"
+      font-size="7"
+      fill="#9fe870"
+      font-weight="bold"
+    >
+      $ ./serve --court=clay --opponent=human
+    </text>
+  </svg>
+</div>
+
+<style>
+  .scene-sports {
+    transition: transform 300ms ease, filter 300ms ease;
+  }
+  .scene-sports:hover {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 0 24px rgba(204, 78, 14, 0.3));
+  }
+</style>

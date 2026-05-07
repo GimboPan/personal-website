@@ -1,0 +1,170 @@
+---
+/**
+ * Scene 03 — Dining table with stack of books, side-profile figure eating.
+ * Warm side-light from a small lamp, a steaming cup, books anchoring the frame.
+ */
+---
+
+<div class="scene-life group relative w-full">
+  <svg
+    viewBox="0 0 240 200"
+    class="w-full h-auto pixelated"
+    role="img"
+    aria-label="Dining table with books and a side profile figure"
+  >
+    <defs>
+      <filter id="warmGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="2" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffd47a" stop-opacity="0.55" />
+        <stop offset="60%" stop-color="#cc4e0e" stop-opacity="0.15" />
+        <stop offset="100%" stop-color="#cc4e0e" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+
+    <!-- ─── Warm ambient glow from lamp ─── -->
+    <circle cx="180" cy="100" r="80" fill="url(#lampGlow)" />
+
+    <!-- ─── Floor / floating platform ─── -->
+    <polygon points="20,184 220,184 230,194 10,194" fill="#1a1b17" stroke="#9fe870" stroke-width="0.3" opacity="0.9" />
+    <line x1="60" y1="184" x2="56" y2="194" stroke="#9fe870" stroke-width="0.3" opacity="0.4" />
+    <line x1="120" y1="184" x2="120" y2="194" stroke="#9fe870" stroke-width="0.3" opacity="0.4" />
+    <line x1="180" y1="184" x2="184" y2="194" stroke="#9fe870" stroke-width="0.3" opacity="0.4" />
+
+    <!-- ─── Table ─── -->
+    <!-- table top -->
+    <rect x="20" y="130" width="200" height="6" fill="#5a3a1f" />
+    <!-- top highlight -->
+    <rect x="20" y="130" width="200" height="1" fill="#7a5232" />
+    <!-- under-shadow -->
+    <rect x="20" y="136" width="200" height="2" fill="#2a1a0d" />
+    <!-- legs -->
+    <rect x="34" y="138" width="4" height="44" fill="#4a2f18" />
+    <rect x="202" y="138" width="4" height="44" fill="#4a2f18" />
+
+    <!-- ─── Stack of books (left side of table) ─── -->
+    <!-- book 1 (bottom) — green spine, a la Penguin -->
+    <rect x="40" y="120" width="50" height="6" fill="#00503c" />
+    <rect x="40" y="120" width="50" height="1" fill="#00754f" />
+    <rect x="44" y="123" width="6" height="2" fill="#fdf3ee" />
+    <!-- book 2 — orange clay -->
+    <rect x="44" y="112" width="44" height="8" fill="#cc4e0e" />
+    <rect x="44" y="112" width="44" height="1" fill="#e36418" />
+    <rect x="48" y="115" width="8" height="3" fill="#fdf3ee" opacity="0.85" />
+    <!-- book 3 — cream / hardcover -->
+    <rect x="42" y="106" width="46" height="6" fill="#e2c5a8" />
+    <rect x="42" y="106" width="46" height="1" fill="#f0d6bb" />
+    <rect x="48" y="108" width="8" height="2" fill="#5a3a1f" />
+    <!-- book 4 (top, slightly askew with a bookmark) — wise green -->
+    <rect x="48" y="98" width="40" height="8" fill="#9fe870" />
+    <rect x="48" y="98" width="40" height="1" fill="#cdffad" />
+    <rect x="52" y="100" width="6" height="3" fill="#163300" />
+    <!-- bookmark sticking out -->
+    <rect x="80" y="98" width="2" height="12" fill="#cc4e0e" />
+
+    <!-- ─── Plate with food ─── -->
+    <ellipse cx="125" cy="132" rx="16" ry="3" fill="#fdf3ee" />
+    <ellipse cx="125" cy="131" rx="14" ry="2" fill="#e8ebe6" />
+    <!-- food blobs -->
+    <rect x="118" y="129" width="6" height="2" fill="#cc4e0e" opacity="0.8" />
+    <rect x="124" y="129" width="4" height="2" fill="#9fe870" opacity="0.7" />
+    <rect x="128" y="130" width="4" height="2" fill="#e36418" opacity="0.7" />
+
+    <!-- ─── Cup of tea ─── -->
+    <rect x="148" y="120" width="10" height="12" fill="#fdf3ee" stroke="#5a3a1f" stroke-width="0.5" />
+    <rect x="158" y="123" width="2" height="6" fill="none" stroke="#5a3a1f" stroke-width="0.5" />
+    <!-- saucer -->
+    <ellipse cx="153" cy="132" rx="8" ry="1.5" fill="#fdf3ee" />
+    <!-- steam -->
+    <rect x="150" y="116" width="1" height="3" fill="#e2f6d5" opacity="0.4">
+      <animate attributeName="y" values="120;108" dur="2.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0" dur="2.5s" repeatCount="indefinite" />
+    </rect>
+    <rect x="153" y="114" width="1" height="3" fill="#e2f6d5" opacity="0.3">
+      <animate attributeName="y" values="120;104" dur="3s" begin="0.6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.4;0" dur="3s" begin="0.6s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- ─── Lamp on the right ─── -->
+    <!-- lamp post -->
+    <rect x="190" y="92" width="2" height="38" fill="#3a2616" />
+    <!-- lamp base -->
+    <rect x="184" y="128" width="14" height="3" fill="#3a2616" />
+    <!-- lamp shade -->
+    <polygon points="180,82 202,82 198,96 184,96" fill="#5a3a1f" />
+    <polygon points="180,82 202,82 200,86 182,86" fill="#7a5232" />
+    <!-- bulb glow -->
+    <rect x="188" y="94" width="6" height="3" fill="#ffd47a" filter="url(#warmGlow)" />
+
+    <!-- ─── Side-profile figure (sitting on right side, facing left toward food) ─── -->
+    <!-- chair back hint -->
+    <rect x="158" y="140" width="3" height="40" fill="#3a2616" opacity="0.7" />
+
+    <!-- torso (sitting, facing left) -->
+    <rect x="152" y="100" width="14" height="32" fill="#1a1b17" />
+    <!-- shirt fold/light -->
+    <rect x="152" y="100" width="2" height="32" fill="#2a2c25" />
+    <!-- collar -->
+    <rect x="156" y="98" width="6" height="2" fill="#3a3a3a" />
+
+    <!-- arm reaching toward plate -->
+    <rect x="142" y="118" width="10" height="4" fill="#1a1b17" />
+    <rect x="138" y="120" width="6" height="3" fill="#e2c5a8" />
+
+    <!-- head (side profile, facing left — nose pointing left) -->
+    <!-- back of skull -->
+    <rect x="154" y="80" width="12" height="14" fill="#e2c5a8" />
+    <!-- hair on top + back -->
+    <rect x="154" y="78" width="12" height="6" fill="#1a1b17" />
+    <rect x="160" y="76" width="6" height="2" fill="#1a1b17" />
+    <!-- nose tip (sticking out left) -->
+    <rect x="151" y="86" width="3" height="2" fill="#e2c5a8" />
+    <!-- mouth -->
+    <rect x="153" y="90" width="2" height="1" fill="#5a3a1f" />
+    <!-- chin -->
+    <rect x="154" y="92" width="3" height="2" fill="#e2c5a8" />
+    <!-- eye hint -->
+    <rect x="158" y="84" width="2" height="1" fill="#1a1b17" />
+    <!-- ear -->
+    <rect x="164" y="86" width="2" height="3" fill="#d8b89c" />
+
+    <!-- ─── Window pane in the back (with stars peeking through) ─── -->
+    <rect x="100" y="34" width="40" height="40" fill="#0d0a2c" stroke="#5a3a1f" stroke-width="1" opacity="0.85" />
+    <!-- window cross frame -->
+    <rect x="119" y="34" width="2" height="40" fill="#5a3a1f" />
+    <rect x="100" y="53" width="40" height="2" fill="#5a3a1f" />
+    <!-- stars in window -->
+    <rect x="108" y="42" width="1" height="1" fill="#ffffff" />
+    <rect x="128" y="46" width="1" height="1" fill="#9fe870" />
+    <rect x="115" y="62" width="1" height="1" fill="#ffffff" />
+    <rect x="132" y="66" width="1" height="1" fill="#cdffad" />
+
+    <!-- ─── Title strip (terminal) ─── -->
+    <rect x="20" y="10" width="200" height="14" fill="#0e0f0c" stroke="#9fe870" stroke-width="0.5" opacity="0.9" />
+    <text
+      x="26"
+      y="20"
+      font-family="JetBrains Mono, monospace"
+      font-size="7"
+      fill="#9fe870"
+      font-weight="bold"
+    >
+      $ uptime: 10 years in NZ · still reading
+    </text>
+  </svg>
+</div>
+
+<style>
+  .scene-life {
+    transition: transform 300ms ease, filter 300ms ease;
+  }
+  .scene-life:hover {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 0 24px rgba(255, 212, 122, 0.25));
+  }
+</style>

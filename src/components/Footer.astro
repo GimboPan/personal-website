@@ -1,0 +1,54 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-hairline mt-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-12 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div class="space-y-3">
+        <div class="terminal text-lime">$ whoami</div>
+        <div class="font-display text-2xl font-black text-ink-white leading-none">
+          Gimbo
+        </div>
+        <p class="text-sm text-ink-mint max-w-xs">
+          Supply Planner @ ParagonCare · Auckland · Tennis weekly · Ten years in NZ.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="tool-label">Pillars</div>
+        <ul class="space-y-1.5 text-sm">
+          <li><a class="hover:text-lime" href="/work">Work</a></li>
+          <li><a class="hover:text-lime" href="/fitness">Fitness</a></li>
+          <li><a class="hover:text-lime" href="/life">Life</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <div class="tool-label">Meta</div>
+        <ul class="space-y-1.5 text-sm">
+          <li><a class="hover:text-lime" href="/ideas">Ideas</a></li>
+          <li><a class="hover:text-lime" href="/about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <div class="tool-label">Stack</div>
+        <ul class="space-y-1.5 text-sm font-mono text-ink-mint">
+          <li>Astro · Tailwind</li>
+          <li>Wise-Dark tokens</li>
+          <li>Built with Claude</li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-10 pt-6 border-t border-hairline flex flex-col md:flex-row items-start md:items-center justify-between gap-3"
+    >
+      <div class="terminal text-ink-gray">
+        © {year} gimbo's universe &nbsp;·&nbsp; built with claude code
+      </div>
+      <div class="terminal text-lime cursor-blink">$ </div>
+    </div>
+  </div>
+</footer>

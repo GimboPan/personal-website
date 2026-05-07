@@ -1,0 +1,77 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ModuleCard from '~/components/ModuleCard.astro';
+---
+
+<BaseLayout
+  title="Ideas — Gimbo's Universe"
+  description="Half-formed thoughts, essays, research notes, theses I am circling."
+>
+  <SectionHero
+    index="04"
+    kicker="IDEAS — half-formed, in motion, occasionally wrong"
+    title="What I am thinking about."
+    subtitle="Essays, notes, conviction theses, things I am circling. Some get written up. Most stay sketches. This is the surface where ideas leave the head and become public."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
+          Streams
+        </h2>
+        <div class="terminal text-ink-gray hidden md:block">
+          // future: MDX entries auto-imported
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ModuleCard
+          index="01"
+          title="Essays"
+          subtitle="Long-form pieces — the slow lane. One published when it actually has something to say."
+          status="planned"
+          tools={["MDX"]}
+          featured={true}
+        />
+        <ModuleCard
+          index="02"
+          title="Conviction Theses"
+          subtitle="What I think will be true in 5 years and why. Updated when wrong."
+          status="planned"
+          tools={["ARK", "On-chain"]}
+        />
+        <ModuleCard
+          index="03"
+          title="Reading Notes"
+          subtitle="Notes on books that changed something. Sparse on purpose."
+          status="planned"
+          tools={["Markdown"]}
+        />
+        <ModuleCard
+          index="04"
+          title="Build Logs"
+          subtitle="What the supply chain agents did, decided, escalated. Retrospectives."
+          status="wip"
+          tools={["Claude SDK"]}
+        />
+        <ModuleCard
+          index="05"
+          title="Weekly Reviews"
+          subtitle="Six dimensions every Sunday — health, learning, people, projects, money, work."
+          status="live"
+          tools={["Claude Skill"]}
+        />
+        <ModuleCard
+          index="06"
+          title="Sketches"
+          subtitle="Half-formed ideas. Posted before they are ready, in case they help someone else."
+          status="planned"
+          tools={["Markdown"]}
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

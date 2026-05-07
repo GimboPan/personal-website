@@ -1,0 +1,51 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Universe not found"
+  description="The page you tried to visit drifted into a black hole."
+>
+  <section class="relative min-h-[calc(100vh-3.5rem)] flex items-center justify-center overflow-hidden">
+    <!-- pixel star backdrop -->
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at 50% 30%, #1a1240 0%, #0d0a2c 30%, #0e0f0c 100%);"
+    ></div>
+    <div class="pixel-stars"></div>
+    <div class="pixel-stars-twinkle"></div>
+
+    <div class="relative max-w-2xl px-6 py-20 text-center">
+      <div class="terminal text-lime mb-6 flex items-center justify-center gap-2">
+        <span>$</span>
+        <span>cd /universe/<span class="text-rg-orangeBright">{Astro.url.pathname}</span></span>
+      </div>
+
+      <div class="terminal text-rg-orangeBright mb-8 text-sm">
+        bash: no such satellite. errno=404
+      </div>
+
+      <h1
+        class="display-mega text-ink-white text-7xl md:text-9xl"
+      >
+        4<span class="text-lime">0</span>4
+      </h1>
+
+      <p class="mt-6 text-base md:text-lg text-ink-mint max-w-md mx-auto leading-relaxed">
+        That page drifted past the event horizon. Pick a working surface
+        instead.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a href="/" class="btn-pill">← back to the universe</a>
+        <a href="/work" class="btn-pill-ghost">work</a>
+        <a href="/fitness" class="btn-pill-ghost">fitness</a>
+        <a href="/life" class="btn-pill-ghost">life</a>
+      </div>
+
+      <div class="mt-12 terminal text-ink-gray cursor-blink">
+        $&nbsp;
+      </div>
+    </div>
+  </section>
+</BaseLayout>

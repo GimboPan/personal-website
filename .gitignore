@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.production
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Source images dropped at the project root (originals for the hero).
+# The optimized variants live under public/landing/.
+/gimbo*.png
+/个人网站图.png
+/*.psd
+/*.ai
+

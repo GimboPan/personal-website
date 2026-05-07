@@ -1,0 +1,195 @@
+---
+/**
+ * Scene 01 — Empty workstation, two monitors lit, no human.
+ * Left monitor: Claude asterisk emblem
+ * Right monitor: OpenAI hexagonal swirl
+ * Pixel-art aesthetic; sits on a floating platform in deep space.
+ */
+---
+
+<div class="scene-work group relative w-full">
+  <svg
+    viewBox="0 0 240 200"
+    class="w-full h-auto pixelated"
+    role="img"
+    aria-label="Empty workstation with two monitors showing Claude and OpenAI logos"
+  >
+    <defs>
+      <!-- monitor screen glow -->
+      <filter id="screenGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="1.5" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- ─── Floating platform ─── -->
+    <!-- Platform base shadow -->
+    <rect x="20" y="178" width="200" height="2" fill="#9fe870" opacity="0.18" />
+    <rect x="24" y="176" width="192" height="2" fill="#9fe870" opacity="0.10" />
+
+    <!-- Platform top (perspective-ish) -->
+    <polygon
+      points="30,170 210,170 220,180 20,180"
+      fill="#1a1b17"
+      stroke="#9fe870"
+      stroke-width="0.5"
+      opacity="0.9"
+    />
+    <!-- Grid lines on platform -->
+    <line x1="60" y1="170" x2="56" y2="180" stroke="#9fe870" stroke-width="0.3" opacity="0.5" />
+    <line x1="100" y1="170" x2="98" y2="180" stroke="#9fe870" stroke-width="0.3" opacity="0.5" />
+    <line x1="140" y1="170" x2="142" y2="180" stroke="#9fe870" stroke-width="0.3" opacity="0.5" />
+    <line x1="180" y1="170" x2="184" y2="180" stroke="#9fe870" stroke-width="0.3" opacity="0.5" />
+    <line x1="25" y1="175" x2="215" y2="175" stroke="#9fe870" stroke-width="0.3" opacity="0.5" />
+
+    <!-- ─── Desk ─── -->
+    <rect x="32" y="146" width="176" height="6" fill="#2a2c25" />
+    <rect x="32" y="152" width="176" height="2" fill="#0e0f0c" />
+    <!-- desk legs hint -->
+    <rect x="36" y="154" width="2" height="16" fill="#1a1b17" />
+    <rect x="202" y="154" width="2" height="16" fill="#1a1b17" />
+
+    <!-- ─── LEFT MONITOR (Claude) ─── -->
+    <!-- monitor stand -->
+    <rect x="68" y="138" width="6" height="8" fill="#1a1b17" stroke="#9fe870" stroke-width="0.5" />
+    <rect x="60" y="144" width="22" height="2" fill="#1a1b17" stroke="#9fe870" stroke-width="0.3" />
+
+    <!-- monitor frame -->
+    <rect x="40" y="78" width="62" height="60" fill="#0e0f0c" stroke="#9fe870" stroke-width="1.5" />
+    <!-- screen inset -->
+    <rect x="44" y="82" width="54" height="48" fill="#08090a" />
+
+    <!-- screen glow halo -->
+    <rect x="40" y="78" width="62" height="60" fill="none" stroke="#9fe870" stroke-width="3" opacity="0.18" />
+
+    <!-- Claude asterisk emblem (8-ray compass star) -->
+    <g transform="translate(71, 106)" filter="url(#screenGlow)">
+      <!-- vertical ray -->
+      <rect x="-1" y="-16" width="2" height="32" fill="#9fe870" />
+      <!-- horizontal ray -->
+      <rect x="-16" y="-1" width="32" height="2" fill="#9fe870" />
+      <!-- diagonal NE-SW -->
+      <rect x="-1" y="-1" width="2" height="2" fill="#9fe870" transform="rotate(45)" />
+      <g transform="rotate(45)">
+        <rect x="-1" y="-12" width="2" height="24" fill="#9fe870" />
+      </g>
+      <!-- diagonal NW-SE -->
+      <g transform="rotate(-45)">
+        <rect x="-1" y="-12" width="2" height="24" fill="#9fe870" />
+      </g>
+      <!-- center bright dot -->
+      <rect x="-3" y="-3" width="6" height="6" fill="#cdffad" />
+      <rect x="-2" y="-2" width="4" height="4" fill="#ffffff" />
+    </g>
+
+    <!-- screen scanline hint -->
+    <rect x="44" y="92" width="54" height="0.5" fill="#9fe870" opacity="0.3" />
+    <rect x="44" y="110" width="54" height="0.5" fill="#9fe870" opacity="0.3" />
+    <rect x="44" y="128" width="54" height="0.5" fill="#9fe870" opacity="0.3" />
+
+    <!-- LED dot on monitor -->
+    <rect x="98" y="135" width="2" height="2" fill="#9fe870">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- ─── RIGHT MONITOR (OpenAI) ─── -->
+    <rect x="166" y="138" width="6" height="8" fill="#1a1b17" stroke="#9fe870" stroke-width="0.5" />
+    <rect x="158" y="144" width="22" height="2" fill="#1a1b17" stroke="#9fe870" stroke-width="0.3" />
+
+    <rect x="138" y="78" width="62" height="60" fill="#0e0f0c" stroke="#9fe870" stroke-width="1.5" />
+    <rect x="142" y="82" width="54" height="48" fill="#08090a" />
+    <rect x="138" y="78" width="62" height="60" fill="none" stroke="#9fe870" stroke-width="3" opacity="0.18" />
+
+    <!-- OpenAI hexagonal swirl emblem -->
+    <g transform="translate(169, 106)" filter="url(#screenGlow)">
+      <!-- outer hexagon (pixelated) -->
+      <polygon
+        points="-12,-7 -12,7 0,14 12,7 12,-7 0,-14"
+        fill="none"
+        stroke="#9fe870"
+        stroke-width="2"
+      />
+      <!-- inner triangular swirl segments -->
+      <polygon
+        points="-8,-4 -8,4 0,8"
+        fill="#9fe870"
+        opacity="0.7"
+      />
+      <polygon
+        points="8,-4 8,4 0,-8"
+        fill="#9fe870"
+        opacity="0.4"
+      />
+      <!-- center node -->
+      <rect x="-2" y="-2" width="4" height="4" fill="#cdffad" />
+      <rect x="-1" y="-1" width="2" height="2" fill="#ffffff" />
+    </g>
+
+    <rect x="142" y="92" width="54" height="0.5" fill="#9fe870" opacity="0.3" />
+    <rect x="142" y="110" width="54" height="0.5" fill="#9fe870" opacity="0.3" />
+    <rect x="142" y="128" width="54" height="0.5" fill="#9fe870" opacity="0.3" />
+
+    <rect x="196" y="135" width="2" height="2" fill="#9fe870">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" begin="0.3s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- ─── Desk objects ─── -->
+    <!-- Keyboard left -->
+    <rect x="46" y="148" width="36" height="3" fill="#1a1b17" stroke="#9fe870" stroke-width="0.3" />
+    <!-- Keyboard right -->
+    <rect x="144" y="148" width="36" height="3" fill="#1a1b17" stroke="#9fe870" stroke-width="0.3" />
+
+    <!-- Coffee mug -->
+    <rect x="112" y="138" width="10" height="12" fill="#1a1b17" stroke="#9fe870" stroke-width="0.5" />
+    <rect x="122" y="140" width="2" height="6" fill="none" stroke="#9fe870" stroke-width="0.5" />
+    <!-- steam -->
+    <g class="steam">
+      <rect x="115" y="132" width="1" height="3" fill="#e2f6d5" opacity="0.4">
+        <animate attributeName="y" values="135;125" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.5;0" dur="2s" repeatCount="indefinite" />
+      </rect>
+      <rect x="118" y="130" width="1" height="3" fill="#e2f6d5" opacity="0.3">
+        <animate attributeName="y" values="135;120" dur="2.5s" begin="0.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.4;0" dur="2.5s" begin="0.5s" repeatCount="indefinite" />
+      </rect>
+    </g>
+
+    <!-- Empty chair behind desk (just the back piece visible) -->
+    <rect x="108" y="160" width="20" height="2" fill="#1a1b17" stroke="#9fe870" stroke-width="0.3" opacity="0.5" />
+
+    <!-- ─── Floating data motes ─── -->
+    <rect x="20" y="50" width="2" height="2" fill="#9fe870">
+      <animate attributeName="cy" values="50;30" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.8;0" dur="3s" repeatCount="indefinite" />
+    </rect>
+    <rect x="218" y="60" width="2" height="2" fill="#9fe870">
+      <animate attributeName="opacity" values="0;0.8;0" dur="2s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- ─── Title strip (terminal) ─── -->
+    <rect x="20" y="10" width="200" height="14" fill="#0e0f0c" stroke="#9fe870" stroke-width="0.5" opacity="0.9" />
+    <text
+      x="26"
+      y="20"
+      font-family="JetBrains Mono, monospace"
+      font-size="7"
+      fill="#9fe870"
+      font-weight="bold"
+    >
+      $ ps -ax | grep "agent" → 2 running
+    </text>
+  </svg>
+</div>
+
+<style>
+  .scene-work {
+    transition: transform 300ms ease, filter 300ms ease;
+  }
+  .scene-work:hover {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 0 24px rgba(159, 232, 112, 0.25));
+  }
+</style>

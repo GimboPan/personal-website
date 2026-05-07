@@ -1,0 +1,51 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+---
+
+<BaseLayout
+  title="About — Gimbo's Universe"
+  description="Who is Gimbo, and why does this site exist."
+>
+  <SectionHero
+    index="04"
+    kicker="ABOUT — the operator behind the universe"
+    title="I am Gimbo."
+    subtitle="Supply Planner by day, ARK reader by night, tennis player on weekends, slow writer of essays no algorithm ranks. Ten years in New Zealand. The site is the public version of the inner loop."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-3xl px-6 lg:px-12 py-16 space-y-10">
+      <div class="card">
+        <div class="tool-label mb-2">The Three Pillars</div>
+        <h3 class="font-display text-2xl font-black text-ink-white mb-3">
+          Work × Sport × Life
+        </h3>
+        <p class="text-ink-mint leading-relaxed">
+          Work compounds with the help of agents. Sport keeps the body honest.
+          Life — books, family, slowness — is the part the algorithms cannot
+          rank. This site is where I publish what runs in each.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="tool-label mb-2">Stack</div>
+        <ul class="font-mono text-sm text-ink-mint space-y-1.5">
+          <li>· Astro + Tailwind</li>
+          <li>· wise-dark design tokens (this section)</li>
+          <li>· roland-garros visual identity (sport section)</li>
+          <li>· ChatGPT image as the front door</li>
+          <li>· built collaboratively with Claude Code</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="tool-label mb-2">Contact</div>
+        <p class="text-ink-mint">
+          For now: <span class="text-lime font-mono">panjunbao@gmail.com</span>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

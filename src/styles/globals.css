@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----- Pixel-tech base ----- */
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #0e0f0c;
+    color: #e2f6d5;
+    /* CRT-like font smoothing off for pixel feel where used */
+  }
+
+  body {
+    background: #0e0f0c;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
+  /* Prevent any rogue element from breaking mobile layout */
+  *, *::before, *::after {
+    min-width: 0;
+  }
+
+  /* Selection */
+  ::selection {
+    background: #9fe870;
+    color: #163300;
+  }
+
+  /* Scrollbar (webkit) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0e0f0c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1a1b17;
+    border: 1px solid #ffffff1f;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9fe87022;
+  }
+}
+
+@layer components {
+  /* CRT scanline overlay — fixed, screen-wide, very subtle */
+  .crt-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.06) 3px,
+        transparent 4px
+      );
+    mix-blend-mode: multiply;
+  }
+
+  /* Moving scanline beam */
+  .crt-beam {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 61;
+    overflow: hidden;
+  }
+  .crt-beam::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(159, 232, 112, 0.08),
+      transparent
+    );
+    animation: scanline 8s linear infinite;
+  }
+
+  /* Pixel star background */
+  .pixel-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, #ffffff 50%, transparent 50%),
+      radial-gradient(1px 1px at 60% 70%, #9fe870 50%, transparent 50%),
+      radial-gradient(1px 1px at 80% 20%, #e2f6d5 50%, transparent 50%),
+      radial-gradient(1px 1px at 30% 80%, #ffffff 50%, transparent 50%),
+      radial-gradient(1px 1px at 50% 50%, #9fe870 50%, transparent 50%),
+      radial-gradient(1px 1px at 90% 60%, #ffffff 50%, transparent 50%),
+      radial-gradient(1px 1px at 10% 60%, #e2f6d5 50%, transparent 50%),
+      radial-gradient(1px 1px at 70% 10%, #ffffff 50%, transparent 50%),
+      radial-gradient(2px 2px at 40% 40%, #9fe870 50%, transparent 50%),
+      radial-gradient(2px 2px at 85% 85%, #ffffff 50%, transparent 50%);
+    background-size: 400px 400px;
+    background-repeat: repeat;
+    image-rendering: pixelated;
+    opacity: 0.7;
+  }
+
+  /* Twinkling overlay */
+  .pixel-stars-twinkle {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 25% 25%, #ffffff 50%, transparent 50%),
+      radial-gradient(1px 1px at 75% 75%, #9fe870 50%, transparent 50%),
+      radial-gradient(1px 1px at 15% 85%, #ffffff 50%, transparent 50%);
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    image-rendering: pixelated;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  /* Card primitive (wise-dark default card) */
+  .card {
+    background: #1a1b17;
+    border: 1px solid #ffffff1f;
+    border-radius: 30px;
+    padding: 24px;
+  }
+
+  .card-feature {
+    background: #9fe870;
+    color: #163300;
+    border-radius: 30px;
+    padding: 24px;
+  }
+
+  /* Pill button */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    background: #9fe870;
+    color: #163300;
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform 150ms ease;
+  }
+  .btn-pill:hover {
+    transform: scale(1.05);
+  }
+  .btn-pill:active {
+    transform: scale(0.95);
+  }
+
+  .btn-pill-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 150ms ease;
+  }
+  .btn-pill-ghost:hover {
+    transform: scale(1.05);
+  }
+
+  /* Terminal text style */
+  .terminal {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: #9fe870;
+    letter-spacing: 0.05em;
+  }
+
+  /* Pixelated rendering helper */
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  /* Tag / chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    background: #9fe87022;
+    color: #9fe870;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* UPPERCASE small label */
+  .tool-label {
+    font-size: 10px;
+    font-weight: 900;
+    color: #868685;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Display-mega billboard heading */
+  .display-mega {
+    font-family: 'Wise Sans', 'Inter', system-ui, sans-serif;
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    /* Allow wrapping on tight viewports — Wise Sans 900 is dense */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+}
+
+/* Cursor blink for terminal-style prompts */
+.cursor-blink::after {
+  content: '_';
+  animation: cursor 1s step-end infinite;
+  color: #9fe870;
+}

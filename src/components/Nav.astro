@@ -1,0 +1,111 @@
+---
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+const items = [
+  { href: '/', label: 'HOME' },
+  { href: '/work', label: 'WORK' },
+  { href: '/fitness', label: 'FITNESS' },
+  { href: '/life', label: 'LIFE' },
+  { href: '/ideas', label: 'IDEAS' },
+  { href: '/about', label: 'ABOUT' },
+];
+
+export interface Props {
+  /** When true, render with transparent bg + over-image positioning */
+  overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
+---
+
+<header
+  class={[
+    'top-0 z-40 w-full transition-colors',
+    overlay
+      ? 'absolute bg-transparent border-b-0'
+      : 'sticky border-b border-hairline bg-canvas/85 backdrop-blur-sm',
+  ].join(' ')}
+>
+  <div
+    class="mx-auto flex h-14 md:h-16 max-w-[1480px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-12"
+  >
+    <!-- Brand: G logo + (full text on sm+) -->
+    <a href="/" class="flex items-center gap-2.5 group flex-shrink-0">
+      <span
+        class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-lime/60 text-lime font-mono text-xs font-black flex-shrink-0"
+      >
+        G
+      </span>
+      <span
+        class="hidden sm:inline font-display text-ink-white text-sm md:text-base font-black tracking-[0.2em] whitespace-nowrap"
+      >
+        GIMBO'S UNIVERSE
+      </span>
+    </a>
+
+    <!-- Center nav links (lg+ only) -->
+    <nav class="hidden lg:flex items-center gap-1 min-w-0 flex-1 justify-center">
+      {
+        items.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class={[
+                'px-3 py-1.5 rounded-full text-[11px] font-mono font-semibold tracking-[0.18em] transition-colors whitespace-nowrap',
+                active
+                  ? 'text-lime'
+                  : 'text-ink-mint hover:text-lime',
+              ].join(' ')}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <!-- Mobile menu button (sm-md): expandable drawer would be next; for now scroll links -->
+    <nav class="flex lg:hidden items-center gap-2 min-w-0 overflow-x-auto no-scrollbar">
+      {
+        items.slice(1).map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class={[
+                'px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold tracking-[0.15em] whitespace-nowrap',
+                active
+                  ? 'text-lime'
+                  : 'text-ink-mint hover:text-lime',
+              ].join(' ')}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <!-- CTA — compact on small screens -->
+    <a
+      href="#explore"
+      class="hidden md:inline-flex items-center gap-2 px-4 md:px-5 py-2 rounded-full border border-ink-mint/40 text-ink-white text-[11px] font-mono font-semibold tracking-[0.18em] hover:border-lime hover:text-lime transition-all hover:scale-105 flex-shrink-0 whitespace-nowrap"
+    >
+      ENTER
+      <span class="hidden lg:inline">MY UNIVERSE</span>
+      <span class="inline-block w-3.5 h-3.5 rounded-full border border-current"></span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>

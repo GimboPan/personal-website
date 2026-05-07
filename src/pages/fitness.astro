@@ -1,0 +1,62 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ModuleCard from '~/components/ModuleCard.astro';
+---
+
+<BaseLayout
+  title="Fitness — Gimbo's Universe"
+  description="Tennis on clay, running on weekends, the body as the one project that resists agentizing."
+>
+  <!-- Custom band: clay-orange tint behind the sports hero -->
+  <SectionHero
+    index="02"
+    kicker="Scene II — Clay court, back view, racquet down"
+    title="On the court I am present."
+    subtitle="Tennis weekly. Run sometimes. The body is the one project that won't be agentized — and that's exactly the point."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <!-- subtle clay band -->
+    <div
+      class="absolute inset-0 -z-10"
+      style="background: linear-gradient(180deg, #0e0f0c 0%, #15110d 60%, #0e0f0c 100%);"
+    >
+    </div>
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
+          Modules
+        </h2>
+        <div class="terminal text-ink-gray hidden md:block">// future feeds</div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ModuleCard
+          index="01"
+          title="Tennis Buddy"
+          subtitle="Roland Garros-themed app for finding hitting partners, drills, NTRP-tagged sessions."
+          status="planned"
+          tools={["MUI", "RG-design", "Auth"]}
+          featured={true}
+        />
+        <ModuleCard
+          index="02"
+          title="Match Log"
+          subtitle="Every session, score, opponent, weather, surface. Auto-summarized weekly."
+          status="planned"
+          tools={["Markdown", "Claude"]}
+        />
+        <ModuleCard
+          index="03"
+          title="Body Stats"
+          subtitle="HR zones, sleep, weight curve. Weekly digest into the review system."
+          status="planned"
+          tools={["Apple Health", "Whoop"]}
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -5,13 +5,13 @@ import ModuleCard from '~/components/ModuleCard.astro';
 ---
 
 <BaseLayout
-  title="Work — Gimbo's Universe"
+  title="AI Builder — Gimbo's Universe"
   description="Supply chain agents, investing, AI applications, AI × data analysis."
 >
   <SectionHero
     index="01"
     kicker="Scene I — Empty workstation, two screens still glowing"
-    title="Work runs itself. I supervise."
+    title="The end of work. The start of building."
     subtitle="Four working surfaces — supply chain agents, investing, AI applications, and AI × data analysis. The agents do the running; I do the thinking."
     bandClass="border-b border-hairline"
   />
@@ -29,6 +29,7 @@ import ModuleCard from '~/components/ModuleCard.astro';
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <ModuleCard
+          id="supply-chain"
           index="01"
           title="Supply Chain Agent"
           subtitle="A three-agent stack running NZ + AU MRP, PO routing, vendor confirmations and settlement. The supervisor agent triages exceptions; I review and approve. Notes, retros, and architecture sketches live here."
@@ -37,6 +38,7 @@ import ModuleCard from '~/components/ModuleCard.astro';
           featured={true}
         />
         <ModuleCard
+          id="investing"
           index="02"
           title="Investing"
           subtitle="What I'm putting money behind and why — NZ managed funds, ARK theses, on-chain experiments. Starts with the NZ 华人基金 selection guide."
@@ -45,6 +47,7 @@ import ModuleCard from '~/components/ModuleCard.astro';
           tools={["NZ Funds", "PIE/FIF", "ARK"]}
         />
         <ModuleCard
+          id="ai-apps"
           index="03"
           title="AI Applications"
           subtitle="Practical agentic workflows I've shipped or am shipping — Outlook rule rewrites, weekly review automation, document parsers. What works in real day-job conditions, not just demos."
@@ -52,6 +55,7 @@ import ModuleCard from '~/components/ModuleCard.astro';
           tools={["Claude SDK", "Skills", "Cron"]}
         />
         <ModuleCard
+          id="ai-data"
           index="04"
           title="AI × Data Analysis"
           subtitle="Where AI meets the spreadsheet — vendor performance dashboards, on-chain flow analysis, market structure visualizations. Numbers given a brain."

@@ -8,6 +8,17 @@ export interface Props {
   tools?: string[];
   /** Render as the section's hero card (Wise Green fill) */
   featured?: boolean;
+  /** Extra wrapper classes (used for bento col-span / row-span overrides) */
+  class?: string;
+  /** Scale up the index circle + title (for primary bento cards) */
+  large?: boolean;
+  /** Horizontal layout: big index left, content right (for wide bento cells) */
+  wide?: boolean;
+  /** Don't wrap the entire card in <a> — let the slot content provide its
+      own per-item links. Title still becomes a link to `href`. */
+  disableWrapperLink?: boolean;
+  /** Anchor id (so the card can be deep-linked via /section#id) */
+  id?: string;
 }
 
 const {
@@ -18,7 +29,15 @@ const {
   href,
   tools = [],
   featured = false,
+  class: className = '',
+  large = false,
+  wide = false,
+  disableWrapperLink = false,
+  id,
 } = Astro.props;
+
+const wrapAsLink = !!href && !disableWrapperLink;
+const titleAsLink = !!href && disableWrapperLink;
 
 const statusMap = {
   live: { label: 'LIVE', dot: 'bg-lime' },
@@ -28,79 +47,149 @@ const statusMap = {
 };
 const s = statusMap[status];
 
-const Tag = href ? 'a' : 'div';
+const Tag = wrapAsLink ? 'a' : 'div';
 ---
 
 <Tag
-  href={href}
+  href={wrapAsLink ? href : undefined}
+  id={id}
   class={[
-    'block group relative transition-transform duration-200',
-    href ? 'hover:scale-[1.015]' : '',
+    'block group relative h-full flex flex-col transition-transform duration-200',
+    wrapAsLink ? 'hover:scale-[1.015]' : '',
     featured ? 'card-feature' : 'card',
+    className,
   ].join(' ')}
 >
-  <div class="flex items-start justify-between gap-4 mb-4">
-    <div
-      class={[
-        'inline-flex h-10 w-10 items-center justify-center rounded-full font-mono font-black text-sm',
-        featured ? 'bg-lime-dark text-lime' : 'bg-lime text-lime-dark',
-      ].join(' ')}
-    >
-      {index}
-    </div>
-    <div
-      class={[
-        'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-tool',
-        featured ? 'bg-lime-dark/10 text-lime-dark' : 'bg-lime-tint text-lime',
-      ].join(' ')}
-    >
-      <span class={`h-1.5 w-1.5 rounded-full ${s.dot}`}></span>
-      {s.label}
-    </div>
-  </div>
-
-  <h3
-    class={[
-      'font-sans text-xl md:text-2xl font-black leading-tight',
-      featured ? 'text-lime-dark' : 'text-ink-white',
-    ].join(' ')}
-  >
-    {title}
-  </h3>
-
-  <p
-    class={[
-      'mt-2 text-sm leading-relaxed',
-      featured ? 'text-lime-dark/80' : 'text-ink-mint',
-    ].join(' ')}
-  >
-    {subtitle}
-  </p>
-
-  {tools.length > 0 && (
-    <div class="mt-5 pt-4 border-t" style={featured ? 'border-color: rgba(22,51,0,0.15)' : 'border-color: #ffffff1f'}>
+  {wide ? (
+    <div class="flex flex-col sm:flex-row sm:items-stretch gap-5 sm:gap-7 h-full">
       <div
         class={[
-          'tool-label mb-2',
-          featured ? '!text-lime-dark' : '',
+          'shrink-0 inline-flex items-center justify-center rounded-full font-mono font-black',
+          'h-14 w-14 sm:h-20 sm:w-20 text-xl sm:text-3xl',
+          featured ? 'bg-lime-dark text-lime' : 'bg-lime text-lime-dark',
         ].join(' ')}
       >
-        Tools
+        {index}
       </div>
-      <div class="flex flex-wrap gap-1.5">
-        {tools.map((t) => (
-          <span
+      <div class="flex-1 min-w-0 flex flex-col">
+        <div class="flex items-start justify-between gap-3">
+          <h3
             class={[
-              'font-mono text-xs px-2 py-0.5 rounded-full',
-              featured
-                ? 'bg-lime-dark/10 text-lime-dark'
-                : 'bg-lime-tint text-lime',
+              'font-sans font-black leading-tight text-2xl md:text-3xl',
+              featured ? 'text-lime-dark' : 'text-ink-white',
             ].join(' ')}
           >
-            {t}
-          </span>
-        ))}
+            {titleAsLink ? <a href={href} class="hover:text-lime transition-colors">{title}</a> : title}
+          </h3>
+          <div
+            class={[
+              'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-tool shrink-0',
+              featured ? 'bg-lime-dark/10 text-lime-dark' : 'bg-lime-tint text-lime',
+            ].join(' ')}
+          >
+            <span class={`h-1.5 w-1.5 rounded-full ${s.dot}`}></span>
+            {s.label}
+          </div>
+        </div>
+        <p
+          class={[
+            'mt-2 text-sm md:text-base leading-relaxed',
+            featured ? 'text-lime-dark/80' : 'text-ink-mint',
+          ].join(' ')}
+        >
+          {subtitle}
+        </p>
+        <slot />
+        {tools.length > 0 && (
+          <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+            {tools.map((t) => (
+              <span
+                class={[
+                  'font-mono text-xs px-2 py-0.5 rounded-full',
+                  featured ? 'bg-lime-dark/10 text-lime-dark' : 'bg-lime-tint text-lime',
+                ].join(' ')}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
+  ) : (
+    <>
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <div
+          class={[
+            'inline-flex items-center justify-center rounded-full font-mono font-black',
+            large ? 'h-16 w-16 text-2xl' : 'h-10 w-10 text-sm',
+            featured ? 'bg-lime-dark text-lime' : 'bg-lime text-lime-dark',
+          ].join(' ')}
+        >
+          {index}
+        </div>
+        <div
+          class={[
+            'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-tool',
+            featured ? 'bg-lime-dark/10 text-lime-dark' : 'bg-lime-tint text-lime',
+          ].join(' ')}
+        >
+          <span class={`h-1.5 w-1.5 rounded-full ${s.dot}`}></span>
+          {s.label}
+        </div>
+      </div>
+
+      <h3
+        class={[
+          'font-sans font-black leading-tight',
+          large ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl',
+          featured ? 'text-lime-dark' : 'text-ink-white',
+        ].join(' ')}
+      >
+        {titleAsLink ? <a href={href} class="hover:text-lime transition-colors">{title}</a> : title}
+      </h3>
+
+      <p
+        class={[
+          'mt-2 leading-relaxed',
+          large ? 'text-base md:text-lg' : 'text-sm',
+          featured ? 'text-lime-dark/80' : 'text-ink-mint',
+        ].join(' ')}
+      >
+        {subtitle}
+      </p>
+
+      <slot />
+
+      {tools.length > 0 && (
+        <div
+          class="mt-auto pt-4 border-t"
+          style={featured ? 'border-color: rgba(22,51,0,0.15)' : 'border-color: #ffffff1f'}
+        >
+          <div
+            class={[
+              'tool-label mb-2',
+              featured ? '!text-lime-dark' : '',
+            ].join(' ')}
+          >
+            Tools
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            {tools.map((t) => (
+              <span
+                class={[
+                  'font-mono text-xs px-2 py-0.5 rounded-full',
+                  featured
+                    ? 'bg-lime-dark/10 text-lime-dark'
+                    : 'bg-lime-tint text-lime',
+                ].join(' ')}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   )}
 </Tag>

@@ -6,6 +6,100 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [0.6.0] — 2026-05-08
+
+> **Explore-section overhaul + the Work → AI Builder rebrand.** A pure iteration release on the homepage's lower half — no new routes, no new assets — but the explore section now has a personality of its own.
+
+**Live**: https://personal-website-zeta-nine-61.vercel.app
+
+### Story of the day
+
+The session opened on a single complaint: the lime-green featured Work card on the homepage felt loud against the deep-space hero. From there we kept pulling at the thread.
+
+First, we dropped `featured={true}` on the Work card — five uniform dark cards, no neon slab. Then we removed the About card entirely (the user judged that it didn't earn an explore slot — About lives one click away in the nav and footer), so the section went from 5 cards to 4.
+
+With 4 cards we restructured into a **bento mosaic** instead of a uniform grid:
+
+- **Work (now AI Builder)** — primary card, `lg:col-span-2 lg:row-span-2`
+- **Fitness / Life** — secondary cards, single cells in row 1
+- **Ideas** — wide footer card, `lg:col-span-2` in row 2
+
+To make the bento earn its varying sizes, we added a default `<slot />` to `ModuleCard` and per-card sub-content:
+
+- **AI Builder card** — 4 clickable sub-bullets (Supply Chain Agent · Investing/NZ Funds · AI Applications · AI × Data Analysis), each with status dot and hover-revealed `→` arrow, deep-linking to `/work#<anchor>` on the inner page (added `id` props on the four `/work` modules).
+- **Fitness / Life cards** — 3 static sub-bullets each, mirroring the inner page's modules with status dots and tags.
+- **Ideas card** — horizontal layout (huge "04" left, content right) with an editorial **"Up next"** TOC listing the three nearest essay streams (Essays · Conviction Theses · Reading Notes), each tagged `SOON`.
+
+Even after that, the AI Builder card had a ~280px gap above the Tools section because row-span-2 forced it to match the right column's combined height. The user reframed the gap as opportunity — "I'll have lots of AI build projects coming, use it as a coming-soon placeholder" — so we added a **pipeline ghost** below the four real bullets:
+
+- `IN THE PIPELINE` tool-label kicker + `// more loading` terminal note on the right
+- 4 placeholder rows with em-dash labels and decreasing opacity (50% → 40% → 30% → 20%) — visually a "future fading into the haze"
+- Tags: SOON × 2 / TBD × 2
+
+### The Work → AI Builder rebrand
+
+Mid-session the user articulated a thesis: **"In the post-AI era, there's no Work — everyone's a builder."** That triggered a rebrand of the first pillar.
+
+Code-side rename (everywhere we could):
+
+| Surface | Before | After |
+|---|---|---|
+| Homepage card title | Work | **AI Builder** |
+| Footer Pillars link | Work | **AI Builder** |
+| Inner-page top nav | WORK | **AI BUILDER** |
+| `/work` page hero manifesto | "Work runs itself. I supervise." | **"The end of work. The start of building."** |
+| `/work` browser tab | "Work — Gimbo's Universe" | **"AI Builder — Gimbo's Universe"** |
+| Homepage browser tab | "...Work. Invest. Move. Live." | **"...Build. Invest. Move. Live."** |
+| Meta description | "Work · Invest · Move · Live..." | **"Build · Invest · Move · Live..."** |
+| Footer self-description | "AI super user" | **"AI builder"** |
+
+Intentionally **not** renamed:
+
+- **Painted hero image** — "WORK" is baked into the AI-generated nav and the work-island label. Re-rendering the image isn't worth it for v0.6, and the contrast (painted "WORK" vs. coded "AI Builder") becomes a quiet thesis statement: *the old word is still on the surface; the new word is what's underneath.*
+- **URL `/work`** — the painted hero links here, so the route name is locked.
+- **`/work` page kicker** ("Scene I — Empty workstation, two screens still glowing") and module subtitle wording — kept their poetic / scenic register.
+
+### Copy polish
+
+- Removed three Unix-prompt `$` symbols (homepage `$ ls -la /universe`, footer `$ whoami`, footer trailing cursor-blink). The user reported them as reading like dollar signs to non-CLI eyes — kept the terminal kickers as bare `ls -la /universe` and `whoami`.
+- Trimmed the redundant explore intro paragraph: *"Each section below is a working surface — projects in flight, notes in progress..."* → *"Projects in flight, notes in progress, things I'm thinking about right now."*
+- Reworked the AI Builder card subtitle to vary phrasing from the heading: *"Four working surfaces — agents, investing..."* → *"Four streams I run from one notebook — agents, investing, applications, analysis."*
+
+### Considered, then dropped
+
+A late-session detour considered adding two animated pixel-art lobsters (the Claude Code CLI mascot) wandering on the planet horizon at the bottom of the hero — built and verified working (CSS-driven walk + idle animations, with a "meeting" greeting animation), then removed at the user's call as off-tone for the editorial / manifesto register the rest of the page cultivates. The work is gone but the impulse — *"give the universe a small living thing"* — gets logged here for v1.x consideration.
+
+### Added
+
+- `class`, `large`, `wide`, `disableWrapperLink`, `id` props on `ModuleCard.astro`, plus a default `<slot />` for inserting per-card sub-content (sub-bullet lists, pipeline ghost, "Up next" TOC).
+- `.bullet-row` / `.bullet-label` / `.bullet-arrow` / `.bullet-tag` / `.dot` component classes in `globals.css` for typed status-list rows (both link and static variants).
+- `id="supply-chain"` / `"investing"` / `"ai-apps"` / `"ai-data"` anchor ids on the four `/work` modules so the homepage AI Builder bullets can deep-link.
+
+### Changed
+
+- `src/pages/index.astro` — bento mosaic grid (`lg:grid-cols-4`), 4 cards (Work/Fitness/Life/Ideas, no About), per-card slot content.
+- `src/components/ModuleCard.astro` — split layout into `wide` and `stacked` paths; `h-full flex flex-col` so cards fill bento cells; tools section pinned to bottom via `mt-auto`.
+- `src/components/Nav.astro` — second nav item label `WORK` → `AI BUILDER`.
+- `src/components/Footer.astro` — Pillars link / self-description / removed `$` decorations.
+- `src/pages/work.astro` — manifesto + browser tab title rebranded, anchor ids added.
+- `src/layouts/BaseLayout.astro` — meta description rebranded.
+
+### Decisions logged
+
+- **Drop About from explore section** — About is one click away (nav + footer); five overview cards is one too many for visual rhythm.
+- **Bento over uniform grid** — variable card sizes give the section a "front page of a magazine" feel rather than an iOS app drawer.
+- **Keep the painted-hero "WORK" / coded "AI Builder" mismatch as a feature** — the contrast is the thesis. A future v1.x re-roll of the hero image with painted "BUILDER" is on the table but not urgent.
+- **No mascot on this site** — the bottom-of-hero pixel-lobster experiment shipped as a working prototype and was rolled back; the editorial/manifesto register won.
+
+### Deferred (intentionally) — picked up in v0.7+
+
+- Re-render the hero image with "BUILDER" replacing "WORK" in the painted nav and island label.
+- Real content on `/ideas`. Right now the homepage Ideas card teases three streams (Essays / Conviction Theses / Reading Notes) but they all link to `/ideas` which is still a stub.
+- WeChat / 小红书 real handles in About + Footer.
+- Custom domain.
+
+---
+
 ## [0.5.0] — 2026-05-07
 
 > **First public deployment.** From "I have an idea about a personal website" to "live on the internet" in one day.

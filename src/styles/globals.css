@@ -218,6 +218,57 @@
     text-transform: uppercase;
   }
 
+  /* Bento bullet row — used for sub-module lists inside ModuleCards.
+     Both static (just info) and link (clickable, with hover arrow) variants. */
+  .bullet-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px;
+    margin: 0 -8px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #e2f6d5;
+    border-radius: 6px;
+    transition: background 150ms ease, color 150ms ease;
+  }
+  a.bullet-row:hover {
+    background: rgba(159, 232, 112, 0.07);
+    color: #ffffff;
+  }
+  a.bullet-row:hover .bullet-arrow {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  .bullet-row .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+  }
+  .bullet-label {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .bullet-arrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    color: #9fe870;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .bullet-row--static .bullet-arrow {
+    display: none;
+  }
+  .bullet-tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
   /* Display-mega billboard heading — UPPERCASE + 句号 = Rewired-style
      manifesto rhythm. Period-as-statement-mark is a Wise/Linear pattern. */
   .display-mega {

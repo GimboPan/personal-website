@@ -16,5 +16,6 @@ dist/
 /*.ai
 
 .vercel
+.claude/
 
 /首页图片*.png

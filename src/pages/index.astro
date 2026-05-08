@@ -41,7 +41,7 @@ const comets = [
 ---
 
 <BaseLayout
-  title="Gimbo's Universe — Work. Invest. Move. Live."
+  title="Gimbo's Universe — Build. Invest. Move. Live."
   description="A meaningful life in the future, built one scene at a time. Three floating islands in deep space — work, fitness, life — feeding back into a single virtual identity."
   hideCrt={true}
   hideNav={true}
@@ -186,28 +186,104 @@ const comets = [
   <!-- ============ EXPLORE: deeper content below the hero ============ -->
   <section id="explore" class="relative">
     <div class="mx-auto max-w-7xl px-6 lg:px-12 py-20 md:py-28">
-      <div class="terminal text-lime mb-3 flex items-center gap-2">
-        <span>$</span>
-        <span>ls -la /universe</span>
-      </div>
+      <div class="terminal text-lime mb-3">ls -la /universe</div>
       <h2 class="display-mega text-ink-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl break-words">
         The working surfaces.
       </h2>
       <p class="mt-5 text-base md:text-lg text-ink-mint max-w-2xl leading-relaxed">
-        Each section below is a working surface — projects in flight, notes in
-        progress, things I am thinking about right now.
+        Projects in flight, notes in progress, things I'm thinking about right now.
       </p>
 
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <ModuleCard
           index="01"
-          title="Work"
-          subtitle="Supply chain agents · investing · AI applications · AI × data analysis. Four working surfaces."
+          title="AI Builder"
+          subtitle="Four streams I run from one notebook — agents, investing, applications, analysis."
           status="wip"
           href="/work"
           tools={["Claude", "Agents", "Data"]}
-          featured={true}
-        />
+          large={true}
+          disableWrapperLink={true}
+          class="lg:col-span-2 lg:row-span-2"
+        >
+          <ul class="mt-6 space-y-1">
+            <li>
+              <a
+                href="/work#supply-chain"
+                class="bullet-row group/row"
+              >
+                <span class="dot bg-rg-orangeBright animate-pulse"></span>
+                <span class="bullet-label">Supply Chain Agent</span>
+                <span class="bullet-arrow">→</span>
+                <span class="bullet-tag text-ink-gray">WIP</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/work/nz-funds.html"
+                class="bullet-row group/row"
+              >
+                <span class="dot bg-lime"></span>
+                <span class="bullet-label">Investing &mdash; NZ Funds</span>
+                <span class="bullet-arrow">→</span>
+                <span class="bullet-tag text-lime">LIVE</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/work#ai-apps"
+                class="bullet-row group/row"
+              >
+                <span class="dot bg-rg-orangeBright animate-pulse"></span>
+                <span class="bullet-label">AI Applications</span>
+                <span class="bullet-arrow">→</span>
+                <span class="bullet-tag text-ink-gray">WIP</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/work#ai-data"
+                class="bullet-row group/row"
+              >
+                <span class="dot bg-rg-orangeBright animate-pulse"></span>
+                <span class="bullet-label">AI &times; Data Analysis</span>
+                <span class="bullet-arrow">→</span>
+                <span class="bullet-tag text-ink-gray">WIP</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Pipeline ghost: placeholder rows for future AI builds.
+               Decreasing opacity = "future fades into the haze". -->
+          <div class="mt-8 pt-5 border-t border-hairline/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="tool-label">In the pipeline</span>
+              <span class="terminal text-ink-gray text-[10px]">// more loading</span>
+            </div>
+            <ul class="space-y-1">
+              <li class="bullet-row bullet-row--static opacity-50">
+                <span class="dot bg-ink-gray/70"></span>
+                <span class="bullet-label font-mono text-ink-gray">&mdash;&mdash;&mdash;&mdash; &mdash;&mdash;&mdash;&mdash;&mdash; &mdash;&mdash;</span>
+                <span class="bullet-tag text-ink-gray">SOON</span>
+              </li>
+              <li class="bullet-row bullet-row--static opacity-40">
+                <span class="dot bg-ink-gray/70"></span>
+                <span class="bullet-label font-mono text-ink-gray">&mdash;&mdash;&mdash; &mdash;&mdash;&mdash; &mdash;&mdash;&mdash;&mdash;</span>
+                <span class="bullet-tag text-ink-gray">SOON</span>
+              </li>
+              <li class="bullet-row bullet-row--static opacity-30">
+                <span class="dot bg-ink-gray/70"></span>
+                <span class="bullet-label font-mono text-ink-gray">&mdash;&mdash;&mdash;&mdash; &mdash;&mdash;&mdash;</span>
+                <span class="bullet-tag text-ink-gray">TBD</span>
+              </li>
+              <li class="bullet-row bullet-row--static opacity-20">
+                <span class="dot bg-ink-gray/70"></span>
+                <span class="bullet-label font-mono text-ink-gray">&mdash;&mdash;&mdash; &mdash;</span>
+                <span class="bullet-tag text-ink-gray">TBD</span>
+              </li>
+            </ul>
+          </div>
+        </ModuleCard>
         <ModuleCard
           index="02"
           title="Fitness"
@@ -215,7 +291,25 @@ const comets = [
           status="wip"
           href="/fitness"
           tools={["Tennis", "Nutrition", "Strength"]}
-        />
+        >
+          <ul class="mt-4 space-y-1">
+            <li class="bullet-row bullet-row--static">
+              <span class="dot bg-rg-orangeBright animate-pulse"></span>
+              <span class="bullet-label">Tennis Buddy</span>
+              <span class="bullet-tag text-ink-gray">WIP</span>
+            </li>
+            <li class="bullet-row bullet-row--static">
+              <span class="dot bg-ink-gray"></span>
+              <span class="bullet-label">Nutrition</span>
+              <span class="bullet-tag text-ink-gray">PLAN</span>
+            </li>
+            <li class="bullet-row bullet-row--static">
+              <span class="dot bg-ink-gray"></span>
+              <span class="bullet-label">Strength</span>
+              <span class="bullet-tag text-ink-gray">PLAN</span>
+            </li>
+          </ul>
+        </ModuleCard>
         <ModuleCard
           index="03"
           title="Life"
@@ -223,23 +317,56 @@ const comets = [
           status="wip"
           href="/life"
           tools={["Book", "Reading", "IRL"]}
-        />
+        >
+          <ul class="mt-4 space-y-1">
+            <li class="bullet-row bullet-row--static">
+              <span class="dot bg-rg-orangeBright animate-pulse"></span>
+              <span class="bullet-label">Writing the Book</span>
+              <span class="bullet-tag text-ink-gray">WIP</span>
+            </li>
+            <li class="bullet-row bullet-row--static">
+              <span class="dot bg-ink-gray"></span>
+              <span class="bullet-label">Reading</span>
+              <span class="bullet-tag text-ink-gray">PLAN</span>
+            </li>
+            <li class="bullet-row bullet-row--static">
+              <span class="dot bg-ink-gray"></span>
+              <span class="bullet-label">Social</span>
+              <span class="bullet-tag text-ink-gray">PLAN</span>
+            </li>
+          </ul>
+        </ModuleCard>
         <ModuleCard
           index="04"
           title="Ideas"
           subtitle="Half-formed thoughts, essays, conviction theses. Coming soon."
           status="planned"
           href="/ideas"
-          tools={["soon"]}
-        />
-        <ModuleCard
-          index="05"
-          title="About"
-          subtitle="Five roles, one person, ten years in New Zealand. The operator behind the universe."
-          status="live"
-          href="/about"
-          tools={["bio", "creed", "contact"]}
-        />
+          tools={[]}
+          wide={true}
+          class="lg:col-span-2"
+        >
+          <div class="mt-4 border-t border-hairline pt-4">
+            <div class="tool-label mb-2">Up next</div>
+            <ul class="space-y-1">
+              <li class="bullet-row bullet-row--static">
+                <span class="font-mono text-[10px] text-ink-gray w-5">01</span>
+                <span class="bullet-label">Essays</span>
+                <span class="bullet-tag text-ink-gray">SOON</span>
+              </li>
+              <li class="bullet-row bullet-row--static">
+                <span class="font-mono text-[10px] text-ink-gray w-5">02</span>
+                <span class="bullet-label">Conviction Theses</span>
+                <span class="bullet-tag text-ink-gray">SOON</span>
+              </li>
+              <li class="bullet-row bullet-row--static">
+                <span class="font-mono text-[10px] text-ink-gray w-5">03</span>
+                <span class="bullet-label">Reading Notes</span>
+                <span class="bullet-tag text-ink-gray">SOON</span>
+              </li>
+            </ul>
+          </div>
+        </ModuleCard>
       </div>
     </div>
   </section>

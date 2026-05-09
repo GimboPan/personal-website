@@ -9,7 +9,10 @@ interface Book {
   tags: string[];
   brief: string;
   thoughts: string;
-  hue: string;             // tints the placeholder cover area
+  /** Path to cover image. When present, renders real <img>. */
+  coverUrl?: string;
+  /** Tints the placeholder cover when no coverUrl. */
+  hue?: string;
 }
 
 interface Group {
@@ -22,43 +25,43 @@ interface Group {
   status: 'active' | 'dormant';
 }
 
-/* Reading list — placeholder seed; swap to real entries when ready. */
+/* Reading list — currently on (or near) the table. */
 const books: Book[] = [
   {
-    slug: 'tools-and-weapons',
-    title: 'Tools and Weapons',
-    author: 'Brad Smith',
-    tags: ['tech', 'society', 'AI policy'],
-    brief: "Microsoft's president on the geopolitics of cloud, AI, and the tech industry that finally has to answer for itself.",
-    thoughts: "The supply-chain-and-trust chapters were the surprise. Most tech books skip the part I work in.",
-    hue: '#5e6ad2',
+    slug: 'outlive',
+    title: 'Outlive',
+    author: 'Peter Attia, MD (with Bill Gifford)',
+    tags: ['health', 'longevity', 'medicine'],
+    brief: "The science and art of longevity — Attia's case for re-thinking medicine across the four horsemen of disease.",
+    thoughts: "Stop optimizing for the absence of disease; start optimizing for the last decade. That mindset reframe alone pays for the book.",
+    coverUrl: '/outlive.webp',
   },
   {
-    slug: 'almanack-naval',
-    title: 'The Almanack of Naval Ravikant',
-    author: 'Eric Jorgenson',
-    tags: ['philosophy', 'wealth', 'focus'],
-    brief: "Compiled wisdom from Naval's threads and podcasts — leverage, judgment, and the long game.",
-    thoughts: "Re-read every six months. The 'specific knowledge' chapter is the one that doesn't age.",
-    hue: '#9fe870',
+    slug: 'heal-faster',
+    title: 'Heal Faster',
+    author: 'Dr Victoria Maizes',
+    tags: ['health', 'recovery', 'self-care'],
+    brief: "On the body's recovery reflex — practical protocols for bouncing back from illness and injury.",
+    thoughts: "Reads more like a manual than a memoir. The kind of book you wish you'd read before you needed it.",
+    coverUrl: '/heal-faster.webp',
   },
   {
-    slug: 'thinking-fast-slow',
-    title: 'Thinking, Fast and Slow',
-    author: 'Daniel Kahneman',
-    tags: ['psychology', 'decisions', 'biases'],
-    brief: "The two-system model of the mind, and how to catch yourself making the wrong call.",
-    thoughts: "Investing reading-list essential. The anchoring chapter alone repaid the price.",
-    hue: '#cc4e0e',
+    slug: 'let-them',
+    title: 'The Let Them Theory',
+    author: 'Mel Robbins',
+    tags: ['psychology', 'agency', 'relationships'],
+    brief: "A two-word reframe for letting go — what other people do is none of your business; what you do is.",
+    thoughts: "Half a sentence I now use weekly. The other half is 'let me'.",
+    coverUrl: '/let-them.webp',
   },
   {
-    slug: 'sapiens',
-    title: 'Sapiens',
-    author: 'Yuval Harari',
-    tags: ['history', 'big-picture', 'future'],
-    brief: "Where humans came from, how we got here, and the stories we tell ourselves to coordinate at scale.",
-    thoughts: "Pop history with teeth. The 'imagined orders' framing comes back when I think about money.",
-    hue: '#e38045',
+    slug: 'next-conversation',
+    title: 'The Next Conversation',
+    author: 'Jefferson Fisher',
+    tags: ['communication', 'relationships', 'argument'],
+    brief: "Argue less, talk more. Fisher (a litigator-turned-communicator) on getting to the conversation that actually matters.",
+    thoughts: "The bit on pausing before responding earns its keep on its own. The rest is bonus.",
+    coverUrl: '/next-conversation.webp',
   },
 ];
 
@@ -128,22 +131,17 @@ const groups: Group[] = [
         class="block group mt-6 card !p-0 overflow-hidden hover:scale-[1.005] transition-transform duration-200"
       >
         <div class="flex flex-col lg:flex-row">
-          <!-- Book cover placeholder -->
+          <!-- Real book cover -->
           <div
-            class="lg:w-[36%] aspect-[4/3] lg:aspect-auto lg:min-h-[280px] flex items-center justify-center p-8 relative overflow-hidden"
-            style="background: linear-gradient(135deg, rgba(159,232,112,0.18) 0%, #1a1b17 70%);"
+            class="lg:w-[40%] flex items-center justify-center px-8 py-10 md:py-12 lg:px-10"
           >
-            <div class="text-center">
-              <div class="terminal text-lime mb-3 text-[10px]">// 写作中 · WIP</div>
-              <div
-                class="font-display text-3xl md:text-4xl font-black text-ink-white leading-[0.95] uppercase tracking-tight"
-              >
-                Life<br />Essential<br />in NZ
-              </div>
-              <div class="mt-3 text-xs text-ink-mint italic">
-                《新西兰生活之要》
-              </div>
-            </div>
+            <img
+              src="/bookcover2.png"
+              alt="Life Essentials — A Decade of Life in New Zealand · book cover"
+              class="w-full max-w-[260px] h-auto rounded-sm shadow-2xl shadow-black/50"
+              loading="eager"
+              decoding="async"
+            />
           </div>
           <!-- Synopsis + CTA -->
           <div class="flex-1 p-7 md:p-9 flex flex-col justify-between">
@@ -199,23 +197,43 @@ const groups: Group[] = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {books.map((b) => (
           <article id={b.slug} class="card !p-0 overflow-hidden flex flex-col">
-            {/* "Cover" placeholder — title-as-art on tinted gradient */}
-            <div
-              class="aspect-[3/4] flex flex-col items-center justify-center p-5 text-center relative"
-              style={`background: linear-gradient(160deg, ${b.hue}33 0%, #1a1b17 70%); border-bottom: 1px solid ${b.hue}33;`}
-            >
+            {/* Cover */}
+            {b.coverUrl ? (
+              <div class="aspect-[2/3] overflow-hidden bg-canvas">
+                <img
+                  src={b.coverUrl}
+                  alt={`${b.title} — ${b.author} · book cover`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ) : (
               <div
-                class="font-display text-base md:text-lg font-black uppercase leading-tight tracking-tight"
-                style={`color: ${b.hue};`}
+                class="aspect-[2/3] flex flex-col items-center justify-center p-5 text-center relative"
+                style={`background: linear-gradient(160deg, ${b.hue ?? '#9fe870'}33 0%, #1a1b17 70%); border-bottom: 1px solid ${b.hue ?? '#9fe870'}33;`}
               >
-                {b.title}
+                <div
+                  class="font-display text-base md:text-lg font-black uppercase leading-tight tracking-tight"
+                  style={`color: ${b.hue ?? '#9fe870'};`}
+                >
+                  {b.title}
+                </div>
+                <div class="mt-3 font-mono text-[10px] tracking-tool text-ink-mint">
+                  {b.author}
+                </div>
               </div>
-              <div class="mt-3 font-mono text-[10px] tracking-tool text-ink-mint">
-                {b.author}
-              </div>
-            </div>
+            )}
             {/* Body */}
             <div class="p-4 flex-1 flex flex-col gap-3">
+              <div>
+                <h3 class="font-sans text-sm font-black text-ink-white leading-tight">
+                  {b.title}
+                </h3>
+                <div class="mt-0.5 font-mono text-[10px] tracking-tool text-ink-gray">
+                  {b.author}
+                </div>
+              </div>
               <div class="flex flex-wrap gap-1.5">
                 {b.tags.map((t) => (
                   <span class="font-mono text-[10px] px-2 py-0.5 rounded-full bg-lime-tint text-lime tracking-tool">

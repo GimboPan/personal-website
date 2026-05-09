@@ -19,3 +19,6 @@ dist/
 .claude/
 
 /首页图片*.png
+# Book cover alternates dropped at root (e.g. 三体版.png, 阿凡达版.png).
+# Official cover variants live under public/.
+/*版.png

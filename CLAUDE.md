@@ -2,15 +2,29 @@
 
 These are project-level rules for any future Claude Code session in this repo. Read this before making changes.
 
-## 🚫 Never mention the user's employer / company name
+## 🚫 Three red lines for anything published to the public site
 
-**Hard rule, no exceptions** — anywhere on the public-facing site, in metadata (JSON-LD, OG, sitemap), in code comments, or in commit messages, **do not name the user's day-job employer**.
+**Hard rules, no exceptions** — anywhere on the public-facing site, in metadata (JSON-LD, OG, sitemap), in code comments, in book chapter content (`src/pages/life/book/`), or in commit messages, **do not** publish the following:
 
-If a structured field requires an organization (e.g. `schema.org/Person.worksFor`), **omit the field entirely** rather than substituting a placeholder. If a sentence used to read "Supply Planner @ <Employer>", rewrite it to just "Supply Planner" or "Supply chain professional" — drop the @ <Employer> portion.
+### 1. Company names
 
-This rule was set by the user on 2026-05-07 and applies in perpetuity. If asked to add resume-style content with a current job, default to role + industry only ("Supply chain professional based in Auckland"), never the company.
+Any company the user has worked for, currently works for, has clients/suppliers/employer relationships with — including past employers, current employer, the parent group, partner companies, recruiters, and customers. Replace with a role + industry ("Supply chain professional in NZ healthcare distribution") or a structural noun ("the new role", "my previous employer", "the recruiter").
 
-If unsure, ask before publishing.
+If a structured field requires an organization (e.g. `schema.org/Person.worksFor`), **omit the field entirely** rather than substituting a placeholder.
+
+### 2. Specific friend, colleague, or family member names
+
+No first names, last names, or @-handles of people in the user's life — coworkers, hiring managers, mentors, friends, family. Replace with the role / relationship ("a coach who'd been a hiring manager at two of the companies I applied to", "a food R&D friend", "my manager"). Public figures (authors, chefs, podcast hosts) referenced by the user are fine.
+
+### 3. Specific personal financial information
+
+Concrete investment positions, holdings, account balances, bank/broker account numbers, transaction details, salary figures, net-worth statements. General investment philosophy or category-level notes are fine ("I hold NZ-based PIE funds across 5 families" — fine; "I bought 1,200 shares of XYZ at $14.30 last Tuesday" — not fine).
+
+---
+
+These rules were set by the user on 2026-05-07 (rule 1) and 2026-05-09 (rules 2 + 3) and apply in perpetuity. If unsure about borderline content, ask before publishing.
+
+When auditing or revising existing content, run a sweep against all three rules — not just the company-name one.
 
 ## Stack & conventions
 

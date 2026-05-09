@@ -1,20 +1,42 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import SectionHero from '~/components/SectionHero.astro';
 import ModuleCard from '~/components/ModuleCard.astro';
 ---
 
 <BaseLayout
   title="Ideas — Gimbo's Universe"
-  description="Half-formed thoughts, essays, and theses — coming soon."
+  description="Exploring concepts that shape a better future — humanity, society, technology, and what comes next."
+  hideNav={true}
 >
-  <SectionHero
-    index="04"
-    kicker="IDEAS — half-formed, in motion, coming soon"
-    title="What I am thinking about."
-    subtitle="The surface where ideas leave the head and become public — essays, conviction theses, reading notes, build retrospectives, sketches. Posting starts soon. Empty for now is honest."
-    bandClass="border-b border-hairline"
-  />
+  <!-- ============ HERO: full-bleed AI image ============ -->
+  <section
+    class="relative w-full overflow-hidden border-b border-hairline"
+    style="height: min(100vh, calc(100vw * 2 / 3));"
+  >
+    <img
+      src="/landing/ideas-hero.png"
+      alt="Ideas — a lone figure stands beneath a giant sculpted head dissolving into floating monoliths above a desert plain"
+      class="absolute inset-0 w-full h-full object-cover select-none"
+      style="object-position: center top;"
+      draggable="false"
+      fetchpriority="high"
+      decoding="async"
+    />
+
+    <!-- Top-nav baked-in text hot spots (mirrors the painted nav inside the image) -->
+    <a href="/" aria-label="Gimbo's Universe (home)"
+       class="absolute" style="top: 1.5%; left: 1.5%; width: 16%; height: 5%;"></a>
+    <a href="/work" aria-label="AI X / Work"
+       class="absolute" style="top: 2.5%; left: 60%; width: 6%; height: 3.5%;"></a>
+    <a href="/fitness" aria-label="Fitness"
+       class="absolute" style="top: 2.5%; left: 67%; width: 7%; height: 3.5%;"></a>
+    <a href="/life" aria-label="Life"
+       class="absolute" style="top: 2.5%; left: 75%; width: 4%; height: 3.5%;"></a>
+    <a href="/ideas" aria-label="Ideas"
+       class="absolute" style="top: 2.5%; left: 80%; width: 5%; height: 3.5%;"></a>
+    <a href="/about" aria-label="About"
+       class="absolute" style="top: 2.5%; left: 86%; width: 6%; height: 3.5%;"></a>
+  </section>
 
   <section class="relative">
     <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">

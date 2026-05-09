@@ -22,3 +22,7 @@ dist/
 # Book cover alternates dropped at root (e.g. 三体版.png, 阿凡达版.png).
 # Official cover variants live under public/.
 /*版.png
+
+# AI image-tool staging drop folder. Sources for the section heroes are
+# duplicated into public/landing/*-hero.png (which IS tracked).
+/public/photos produced by ai/

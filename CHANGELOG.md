@@ -6,6 +6,88 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [0.7.0] — 2026-05-09
+
+> **Inner-page rebuilds.** /work and /life both got real structures. The book's first chapter went live.
+
+**Live**: https://personal-website-zeta-nine-61.vercel.app
+**New routes**: `/life/book`, `/life/book/ch02-food-health`
+
+### Story of the day
+
+Two inner pages got the same treatment /work got mid-week: typed data model + a layout that reflects what the section is actually about, not just a generic 3-card grid.
+
+**`/work` was rebuilt** around a featured "Latest builds" gallery (top-3 by date across all streams) plus three category sections — **Supply Chain · Investing · AI Experiments** — each showing the three most-recent items as `.project-row` rows (index · title · summary · date · status) with a `view all (+N) →` overflow link anchored to the section id (placeholder destination until per-category pages exist). Nine seed projects were added, one of which (NZ Funds) is a real LIVE link to the existing `/work/nz-funds.html` enclave. Featured cards use category-tinted gradient + giant monogram letter (S/I/A) as image placeholder — the data model includes an `imageUrl?` field so real images drop in later without a layout change. Third category color is **Linear Purple** `#5e6ad2` (added inline, no Tailwind config change needed). Every project row carries a slug-based id so the homepage AI Builder bullet hrefs deep-link correctly (`/work#supply-chain` → `/work#supply-chain-agent`, etc.). Added `scroll-margin-top: 80px` to project rows so deep-link landings clear the sticky nav.
+
+**`/work` hero manifesto split into 2 lines** — "THE END OF WORK." / "THE START OF BUILDING." — via a small `SectionHero` upgrade: the `title` prop now accepts `string | string[]`, with array elements joined by `<br>`. Adjusted the size ladder (md: 7xl→6xl, lg: 8xl→7xl, xl new: 8xl) so the longer second line ("THE START OF BUILDING." = 22 chars) fits on one line at lg viewports without needing `max-w-4xl`. Other inner pages re-verified visually — all titles still read big.
+
+**`/life` was rebuilt** around three thematic modules with their own visual rhythm (no uniform card grid this time):
+
+- **Module 1 · Writing the Book** — wide featured card with stacked book-cover placeholder ("LIFE / ESSENTIAL / IN NZ" typography on tinted gradient) on the left, synopsis + status + "Open table of contents →" CTA on the right. Whole card links to `/life/book`.
+- **Module 2 · Reading** — 4-up grid of book cards. Each card has a 3:4-aspect cover placeholder (title-as-art tinted by per-book hue) + tags + brief intro + "thoughts" pull-quote with lime border. Seeded with 4 placeholder books across tech/philosophy/psychology/history.
+- **Module 3 · Social** — 2-up grid of group cards with emoji icon, name, interest · frequency line, active/dormant pill, and a 2-line brief. Seeded with 4 placeholder interest groups (tennis / NZ 投资圈 / AI builders / reading circle).
+
+**`/life/book` (new TOC sub-page)** — 2-column layout per the user's spec: left column is sticky synopsis (why I'm writing it + FORMAT/STATUS/LANGUAGE meta + ← back to Life link), right column is the chapter table of contents using `.project-row`. Mobile stacks both columns. Chapter outline matches the **real book project** (9 chapters, not 10):
+
+1. Sports & Outdoors · 运动与户外生活
+2. Food & Health · 饮食与健康 — **LIVE**
+3. Finance & Investing · 金融投资 — WIP
+4. Language & Communication · 语言与沟通
+5. Work & Career · 工作与职场 — WIP (drafted but not published — see decision below)
+6. Belonging, Social & Community · 归属感、社交与社区
+7. Cultural Differences & Adaptation · 文化差异与适应
+8. Mental Health & Inner Growth · 精神健康与内在成长
+9. TBD · 待定
+
+**`/life/book/ch02-food-health` (first published chapter)** — a 16 KB Chinese-language essay drafted by the user (April 2026). Renders via a new `ChapterLayout.astro` + a fresh `.prose` component class in `globals.css` (tuned for bilingual EN+中文 reading at 17px / 1.85 line-height; styled headings, blockquotes, tables, lists, code, em/strong, internal anchors). Markdown-based architecture — chapters drop in as `.md` files with a layout pointer in frontmatter, no per-chapter Astro file needed. Header shows chapter number + draft version + draft date; footer has previous/next navigation back to TOC and `/life`.
+
+**`/about` got a leftover v0.6 fix** — "AI Super User · AI 重度用户" became "AI Builder · AI 构建者" (matching the rest of the rebrand). Was missed on the original v0.6 sweep.
+
+### Considered, then deferred
+
+- **ch05 (Work & Career)** is fully drafted (340 lines, ~19 KB) but **not published**. It contains specific employer names, recruiter names, and individual colleague names throughout — publishing as-is would violate the project's "never name the day-job employer" rule (see [CLAUDE.md](./CLAUDE.md)). Future revisions need either a redaction pass (ParagonCare → "the new role", JDE → "FMCG", named individuals → roles) or a different framing. Marked WIP on the TOC.
+- **Per-category pages** for `/work` (`/work/supply-chain`, `/work/investing`, `/work/ai-experiments`) — `view all →` currently anchors to the section header as a no-op placeholder, per the user's choice for v0.7.
+- **Individual chapter pages** for the other 8 chapters — `ChapterLayout` is in place; new chapters drop in as `.md` files when the user is ready.
+
+### Added
+
+- `src/pages/work.astro` — full rewrite around typed `Project[]` data model, featured-3 gallery, 3 category sections with overflow indicator.
+- `src/pages/life.astro` — full rewrite around 3 thematic modules (Writing Book / Reading / Social) with per-module layout.
+- `src/pages/life/book.astro` — new TOC sub-page, 2-column synopsis + 9-chapter list.
+- `src/pages/life/book/ch02-food-health.md` — first published chapter content.
+- `src/layouts/ChapterLayout.astro` — wrapper layout for chapter `.md` files (header + prose + nav footer).
+- `.project-row` (and modifiers) in `globals.css` — typed status-list rows for `/work` categories and `/life/book` chapters; responsive (drops date column at lg, stacks layout on mobile).
+- `.prose` styles in `globals.css` — long-form bilingual prose for chapter pages.
+- `id` props on `/work` modules for deep-link anchoring.
+
+### Changed
+
+- `src/components/SectionHero.astro` — `title` prop now accepts `string | string[]`; size ladder tightened so longer multi-line manifestos fit on one line at lg.
+- `src/components/Nav.astro` — second nav item label `WORK` → `AI BUILDER`. _(landed in v0.6, recorded here for completeness as the ladder of inner-page changes lands.)_
+- `src/components/Footer.astro` — Pillars link / self-description / removed `$` decorations. _(v0.6.)_
+- `src/components/ModuleCard.astro` — gained `class`, `large`, `wide`, `disableWrapperLink`, `id` props + default slot. _(v0.6.)_
+- `src/pages/index.astro` — homepage AI Builder bullet hrefs updated to slug-based anchors (`/work#supply-chain-agent`, `/work#ai-applications`, `/work#ai-data-analysis`).
+- `src/pages/about.astro` — "AI Super User · AI 重度用户" → "AI Builder · AI 构建者".
+
+### Decisions logged
+
+- **Markdown chapters via ChapterLayout** — chosen over hand-rolled per-chapter Astro pages so the user can drop in `.md` files with frontmatter and have them render correctly without writing layout code each time. Future chapters just need a `.md` file.
+- **9 chapters, not 10** — the placeholder TOC built earlier in the day was wrong; the actual book outline (in the user's writing folder) has 9, with chapter 9 deliberately TBD until late in the writing process.
+- **Bento mosaic > uniform grid (`/work`)** — variable card sizes give the section a magazine-front-page feel rather than an iOS app drawer. Confirmed live for two days; staying.
+- **Per-module layout (`/life`)** — Reading and Social have very different content types (book covers vs. group cards), so they get different layouts on the same page. Refused the temptation to standardize for the sake of standardization.
+- **Tinted-monogram cover placeholders** — until real images arrive, the typographic placeholders are honest about being placeholders while still feeling editorial. Added `imageUrl?` field so swap-in is one prop change.
+- **Project rule held**: ch05 not published despite being draft-ready, because of the employer-name privacy rule. This is exactly the kind of judgment-call the rule was written to short-circuit.
+
+### Known gaps (acceptable for v0.7)
+
+- 8 of 9 book chapters are still outline-only; ch05 is drafted but not yet redacted/published.
+- `view all →` on category sections is currently a no-op anchor (no per-category pages yet).
+- Reading list and Social groups on `/life` are placeholder content.
+- The `Reading` module on `/life` doesn't yet show real book covers — using monogram-on-gradient.
+- No real images on `/work` featured cards either — same monogram pattern.
+
+---
+
 ## [0.6.0] — 2026-05-08
 
 > **Explore-section overhaul + the Work → AI Builder rebrand.** A pure iteration release on the homepage's lower half — no new routes, no new assets — but the explore section now has a personality of its own.

@@ -1,11 +1,11 @@
 # Ship Checklist
 
-> **Current version**: 🟢 **v0.6 — shipped 2026-05-08** ([CHANGELOG.md](./CHANGELOG.md))
+> **Current version**: 🟢 **v0.7 — shipped 2026-05-09** ([CHANGELOG.md](./CHANGELOG.md))
 > **Live URL**: https://personal-website-zeta-nine-61.vercel.app
 > **Repo**: https://github.com/GimboPan/personal-website
 > **Auto-deploy**: ✅ `git push origin main` → ~30s → live
 
-Status as of 2026-05-08. Everything listed under **DONE** is wired up and committed; everything under **TODO (you)** needs your account/auth/decision.
+Status as of 2026-05-09. Everything listed under **DONE** is wired up and committed; everything under **TODO (you)** needs your account/auth/decision.
 
 ---
 
@@ -132,14 +132,14 @@ node scripts/inspect-overflow.mjs http://localhost:4322
 
 ---
 
-## 🚀 Live Deploy Status (auto-updated 2026-05-08)
+## 🚀 Live Deploy Status (auto-updated 2026-05-09)
 
 - **Production URL**: https://personal-website-zeta-nine-61.vercel.app
 - **Vercel Project**: `panjunbao-8783s-projects/personal-website`
 - **GitHub repo**: https://github.com/GimboPan/personal-website
 - **Git auto-deploy**: ✅ enabled (every push to `main` triggers a production rebuild)
 - **Custom domain**: pending — TBD
-- **Latest version**: v0.6 (homepage explore-section bento + Work → AI Builder rebrand)
+- **Latest version**: v0.7 (/work + /life rebuilt; first book chapter live at /life/book/ch02-food-health)
 
 To deploy a change: `git push origin main` → wait ~30s → live.
 

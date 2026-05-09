@@ -4,26 +4,27 @@ import SectionHero from '~/components/SectionHero.astro';
 
 interface Chapter {
   num: string;
-  title: string;
+  en: string;
   zh: string;
   kicker: string;
   status: 'live' | 'wip' | 'planned';
   slug: string;
+  href?: string;          // present only when a chapter page is published
 }
 
-/* Placeholder chapter list — common topics for a 10-year NZ memoir.
-   Swap titles/kickers when the real outline lands. */
+/* Real outline — see /Users/gimbo/Desktop/claude cowork/Rewind- 写书/.../OUTLINE.md
+   Statuses reflect what's actually drafted (ch02 published, ch03 in flight,
+   ch05 has draft v0.1 but no page yet, others outlined only). */
 const chapters: Chapter[] = [
-  { num: '01', title: 'Migration',         zh: '着陆',         kicker: 'The first 90 days, the airport, the rented room.',                                  status: 'planned', slug: 'migration' },
-  { num: '02', title: 'First Job',         zh: '第一份工作',    kicker: 'Walking in green, leaving green-er. The slow on-ramp.',                              status: 'planned', slug: 'career-1' },
-  { num: '03', title: 'Finance',           zh: '钱与税',       kicker: 'PIE funds, FIF rules, mortgages, and the spreadsheet that finally made sense.',     status: 'wip',     slug: 'finance' },
-  { num: '04', title: 'Daily Life',        zh: '衣食住行',      kicker: 'Insulation, mowing, supermarket geometry, and how groceries shape a year.',          status: 'planned', slug: 'daily-life' },
-  { num: '05', title: 'Healthcare',        zh: '医疗系统',      kicker: 'GPs, the public/private dance, and what surprised me most.',                         status: 'planned', slug: 'healthcare' },
-  { num: '06', title: 'Education',         zh: '教育',         kicker: 'Decile, NCEA, the long view on raising kids in a small country.',                    status: 'planned', slug: 'education' },
-  { num: '07', title: 'Climate & Outdoors',zh: '气候与户外',    kicker: 'Two seasons, a thousand walks, and learning to look up.',                            status: 'planned', slug: 'climate' },
-  { num: '08', title: 'Food',              zh: '餐桌上的两国史', kicker: 'What we cook, what we miss, what we learned to stop missing.',                       status: 'planned', slug: 'food' },
-  { num: '09', title: 'Identity',          zh: '中间地带',      kicker: 'On being neither, both, or in flux — and stopping the audit.',                        status: 'planned', slug: 'identity' },
-  { num: '10', title: 'Looking Back',      zh: '十年之后',      kicker: 'What I would tell the version of me who landed in 2016.',                            status: 'planned', slug: 'looking-back' },
+  { num: '01', en: 'Sports & Outdoors',                   zh: '运动与户外生活',   kicker: '新西兰教会我的——运动不是自律，是生活本身。',                              status: 'planned', slug: 'sports-outdoors' },
+  { num: '02', en: 'Food & Health',                       zh: '饮食与健康',      kicker: '在食物里找到平衡——从中式胃到全球胃。',                                  status: 'live',    slug: 'ch02-food-health', href: '/life/book/ch02-food-health' },
+  { num: '03', en: 'Finance & Investing',                 zh: '金融投资',        kicker: '在新西兰学会和钱好好相处。',                                              status: 'wip',     slug: 'finance' },
+  { num: '04', en: 'Language & Communication',            zh: '语言与沟通',      kicker: '语言不只是工具，是打开另一个世界的钥匙。',                                 status: 'planned', slug: 'language' },
+  { num: '05', en: 'Work & Career',                       zh: '工作与职场',      kicker: '重新理解"工作"这两个字。',                                              status: 'wip',     slug: 'work-career' },
+  { num: '06', en: 'Belonging, Social & Community',       zh: '归属感、社交与社区', kicker: '在异国他乡，重新定义"我是谁"和"我属于哪里"。',                       status: 'planned', slug: 'belonging' },
+  { num: '07', en: 'Cultural Differences & Adaptation',   zh: '文化差异与适应',   kicker: '差异不是障碍，是看世界的新角度。',                                       status: 'planned', slug: 'culture' },
+  { num: '08', en: 'Mental Health & Inner Growth',        zh: '精神健康与内在成长', kicker: '与焦虑共处，找到内在的锚。',                                            status: 'planned', slug: 'mental-health' },
+  { num: '09', en: 'TBD',                                 zh: '待定',           kicker: '主题待确定 —— 随着写作推进，灵感会来的。',                              status: 'planned', slug: 'tbd' },
 ];
 
 const statusMeta = {
@@ -32,19 +33,20 @@ const statusMeta = {
   planned: { label: 'PLAN', dot: 'bg-ink-gray',                  text: 'text-ink-gray' },
 } as const;
 
-const wipCount = chapters.filter((c) => c.status === 'wip').length;
 const liveCount = chapters.filter((c) => c.status === 'live').length;
+const wipCount = chapters.filter((c) => c.status === 'wip').length;
+const planCount = chapters.length - liveCount - wipCount;
 ---
 
 <BaseLayout
   title="Life Essential in NZ — TOC — Gimbo's Universe"
-  description="Table of contents for 《Life Essential in NZ》 — 10 chapters across ten years of life in New Zealand."
+  description="Table of contents for 《Life Essential in NZ》 — nine chapters across ten years of life in New Zealand."
 >
   <SectionHero
     index="03.1"
     kicker="《Life Essential in NZ》 — book in motion"
-    title={['Ten years.', 'Ten chapters.']}
-    subtitle="A slow personal record of moving to and settling in New Zealand. One chapter posted at a time, then collected as an ebook when all ten land."
+    title={['Ten years.', 'Nine chapters.']}
+    subtitle="A slow personal record of moving to and settling in New Zealand. One chapter posted at a time, then collected as an ebook when all nine are in."
     bandClass="border-b border-hairline"
   />
 
@@ -60,36 +62,36 @@ const liveCount = chapters.filter((c) => c.status === 'live').length;
             </h2>
           </div>
           <p class="text-base text-ink-mint leading-relaxed">
-            I moved to New Zealand thinking it was a two-year stop. Ten
-            years later I am still here, and most of what I learned
-            about this country came from paying tax, getting sick,
-            raising kids, and slowly re-tuning what "home" feels like.
+            April Fools' Day, 2015 — I landed in Auckland thinking it
+            was a two-year stop. Ten years later I am still here, and
+            most of what I learned about this country came from paying
+            tax, getting sick, raising kids, and slowly re-tuning what
+            "home" feels like.
           </p>
           <p class="text-base text-ink-mint leading-relaxed">
             This book is the version of that decade I would have wanted
-            to read before I landed. Practical where it can be, personal
-            where it should be, and short on advice the internet already
-            gives away for free.
+            to read before I landed. Not a guide; not a sermon. A
+            ten-year personal record, written for myself.
           </p>
 
           <div class="pt-5 border-t border-hairline space-y-1.5">
             <div class="font-mono text-[10px] tracking-tool text-ink-gray">FORMAT</div>
             <p class="text-sm text-ink-mint leading-relaxed">
-              Each chapter posted as a newsletter. Ebook collects all
-              ten when they're in.
+              Each chapter posted as it lands. Ebook collects all nine
+              when the last one is in.
             </p>
           </div>
           <div class="pt-5 border-t border-hairline space-y-1.5">
             <div class="font-mono text-[10px] tracking-tool text-ink-gray">STATUS</div>
             <p class="text-sm text-ink-mint leading-relaxed">
-              {liveCount} live · {wipCount} in motion · {chapters.length - liveCount - wipCount} planned.
+              {liveCount} live · {wipCount} in flight · {planCount} outlined.
             </p>
           </div>
           <div class="pt-5 border-t border-hairline space-y-1.5">
             <div class="font-mono text-[10px] tracking-tool text-ink-gray">LANGUAGE</div>
             <p class="text-sm text-ink-mint leading-relaxed">
-              Bilingual — English + 中文 in turns, depending on which
-              language the chapter wants to be in.
+              Bilingual — written primarily in 中文, with English where
+              the chapter wants to be read in English.
             </p>
           </div>
           <a
@@ -110,19 +112,26 @@ const liveCount = chapters.filter((c) => c.status === 'live').length;
               </h2>
             </div>
             <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
-              10 in total
+              {chapters.length} in total
             </span>
           </div>
           <ul class="space-y-1">
             {chapters.map((c) => {
               const s = statusMeta[c.status];
+              const Tag = c.href ? 'a' : 'div';
               return (
                 <li id={c.slug} class="scroll-mt-20">
-                  <div class="project-row project-row--static">
+                  <Tag
+                    href={c.href}
+                    class:list={[
+                      'project-row',
+                      c.href ? 'project-row--link group/row' : 'project-row--static',
+                    ]}
+                  >
                     <span class="project-num">{c.num}</span>
                     <span class="project-body">
                       <span class="project-title">
-                        {c.title}
+                        {c.en}
                         <span class="ml-2 text-ink-gray font-normal">· {c.zh}</span>
                       </span>
                       <span class="project-summary">{c.kicker}</span>
@@ -132,14 +141,14 @@ const liveCount = chapters.filter((c) => c.status === 'live').length;
                       {s.label}
                     </span>
                     <span class="project-arrow">→</span>
-                  </div>
+                  </Tag>
                 </li>
               );
             })}
           </ul>
           <p class="mt-6 text-sm text-ink-gray leading-relaxed">
-            Individual chapter pages will come online as each chapter is
-            published. Until then, the rows above are a deliberate
+            Individual chapter pages come online as each chapter is
+            published. Until then, the rows above are the deliberate
             promise list.
           </p>
         </div>

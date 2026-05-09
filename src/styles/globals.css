@@ -382,6 +382,133 @@
     }
   }
 
+  /* Long-form prose — used by ChapterLayout for book chapters.
+     Tuned for bilingual EN + 中文 reading at ~17px / 1.75 line-height. */
+  .prose {
+    color: #e2f6d5;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+  .prose > *:first-child { margin-top: 0; }
+  .prose > *:last-child { margin-bottom: 0; }
+  .prose p {
+    margin: 0 0 1.4em 0;
+  }
+  .prose h2 {
+    font-family: 'Wise Sans', 'Inter', system-ui, sans-serif;
+    font-weight: 900;
+    font-size: 1.55em;
+    line-height: 1.2;
+    margin: 2.6em 0 0.8em 0;
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff1f;
+    padding-bottom: 0.5em;
+    letter-spacing: -0.01em;
+  }
+  .prose h3 {
+    font-family: 'Wise Sans', 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.18em;
+    line-height: 1.3;
+    margin: 2em 0 0.6em 0;
+    color: #9fe870;
+  }
+  .prose h4 {
+    font-weight: 700;
+    font-size: 1em;
+    margin: 1.5em 0 0.5em 0;
+    color: #ffffff;
+  }
+  .prose blockquote {
+    margin: 1.5em 0;
+    padding: 0.4em 1.2em;
+    border-left: 3px solid rgba(159, 232, 112, 0.5);
+    color: #ffffff;
+    font-style: italic;
+    background: rgba(159, 232, 112, 0.04);
+  }
+  .prose blockquote p {
+    margin: 0.4em 0;
+  }
+  .prose strong {
+    color: #ffffff;
+    font-weight: 700;
+  }
+  .prose em {
+    font-style: italic;
+    color: #cdffad;
+  }
+  .prose a {
+    color: #9fe870;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+  .prose a:hover {
+    color: #cdffad;
+    text-decoration-thickness: 2px;
+  }
+  .prose ul, .prose ol {
+    margin: 1em 0 1.5em 0;
+    padding-left: 1.4em;
+  }
+  .prose ul li {
+    list-style-type: disc;
+    margin-bottom: 0.4em;
+  }
+  .prose ol li {
+    list-style-type: decimal;
+    margin-bottom: 0.4em;
+  }
+  .prose li::marker {
+    color: rgba(159, 232, 112, 0.7);
+  }
+  .prose hr {
+    margin: 3em 0;
+    border: 0;
+    border-top: 1px solid #ffffff1f;
+  }
+  .prose code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.88em;
+    color: #9fe870;
+    background: rgba(159, 232, 112, 0.08);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+  .prose img {
+    margin: 2em auto;
+    border-radius: 8px;
+    max-width: 100%;
+  }
+  .prose figure {
+    margin: 2em 0;
+  }
+  .prose figcaption {
+    font-size: 0.85em;
+    color: #868685;
+    text-align: center;
+    margin-top: 0.5em;
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.92em;
+  }
+  .prose th, .prose td {
+    border: 1px solid #ffffff1f;
+    padding: 0.6em 0.9em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose th {
+    background: rgba(159, 232, 112, 0.06);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
   /* Display-mega billboard heading — UPPERCASE + 句号 = Rewired-style
      manifesto rhythm. Period-as-statement-mark is a Wise/Linear pattern. */
   .display-mega {

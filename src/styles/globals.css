@@ -269,6 +269,119 @@
     flex-shrink: 0;
   }
 
+  /* Project row — used on /work category sections. Bigger than .bullet-row
+     because each row carries title + summary + date + status + arrow. */
+  .project-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    align-items: center;
+    column-gap: 16px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: background 180ms ease, border-color 180ms ease;
+    text-decoration: none;
+    color: inherit;
+    /* Offset for sticky nav so deep-link anchors land below the header */
+    scroll-margin-top: 80px;
+  }
+  .project-row--link:hover {
+    background: rgba(159, 232, 112, 0.04);
+    border-color: rgba(159, 232, 112, 0.18);
+  }
+  .project-row--link:hover .project-arrow {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  .project-num {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 800;
+    color: #9fe870;
+    letter-spacing: 0.1em;
+    width: 24px;
+  }
+  .project-body {
+    min-width: 0;
+  }
+  .project-title {
+    display: block;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+  .project-summary {
+    display: block;
+    font-size: 12px;
+    color: #868685;
+    line-height: 1.4;
+    margin-top: 3px;
+    /* Single line truncation in tight desktop columns; full on hover via title attr if needed. */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .project-date {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #868685;
+    white-space: nowrap;
+  }
+  .project-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    border: 1px solid #ffffff1f;
+    white-space: nowrap;
+  }
+  .project-arrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    color: #9fe870;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+    width: 14px;
+    text-align: right;
+  }
+  .project-row--static .project-arrow {
+    visibility: hidden;
+  }
+  /* Tablet: drop date column to give room to summary */
+  @media (max-width: 1024px) {
+    .project-row {
+      grid-template-columns: auto 1fr auto auto;
+    }
+    .project-date {
+      display: none;
+    }
+  }
+  /* Mobile: stack layout — number + title/summary, status pinned right */
+  @media (max-width: 640px) {
+    .project-row {
+      grid-template-columns: auto 1fr auto;
+      column-gap: 12px;
+      padding: 12px 12px;
+    }
+    .project-summary {
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .project-arrow {
+      display: none;
+    }
+  }
+
   /* Display-mega billboard heading — UPPERCASE + 句号 = Rewired-style
      manifesto rhythm. Period-as-statement-mark is a Wise/Linear pattern. */
   .display-mega {

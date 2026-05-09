@@ -1,68 +1,323 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import SectionHero from '~/components/SectionHero.astro';
-import ModuleCard from '~/components/ModuleCard.astro';
+
+type Status = 'live' | 'wip' | 'planned' | 'archive';
+type Category = 'supply-chain' | 'investing' | 'ai-experiments';
+
+interface Project {
+  slug: string;
+  title: string;
+  summary: string;
+  category: Category;
+  status: Status;
+  date: string;          // YYYY-MM-DD; used for sorting
+  href?: string;
+  imageUrl?: string;     // optional — replaces gradient/monogram placeholder when present
+}
+
+/* ─── Project catalog ─────────────────────────────────────────────────────
+   The single source of truth for /work. Featured = top 3 by date across
+   all categories. Each category section shows up to 3 most-recent items;
+   anything beyond that is hidden behind a `view all (+N) →` link that
+   currently anchors back to the category section (placeholder destination
+   until per-category pages exist). */
+const projects: Project[] = [
+  // INVESTING
+  {
+    slug: 'nz-funds',
+    title: 'NZ Managed Funds Guide',
+    summary: '华人投资者 deep-dive on PIE funds, FIF rules, and the 5 fund families worth knowing in 2026.',
+    category: 'investing',
+    status: 'live',
+    date: '2026-05-07',
+    href: '/work/nz-funds.html',
+  },
+  {
+    slug: 'ark-theses',
+    title: 'ARK Theses Tracker',
+    summary: 'Live notes on the disruption theses I am following — innovation, robotics, multi-omic, fintech.',
+    category: 'investing',
+    status: 'planned',
+    date: '2026-04-15',
+  },
+  {
+    slug: 'on-chain',
+    title: 'On-Chain Research',
+    summary: 'Market-structure visualizations, flow analysis, and crypto thesis notes.',
+    category: 'investing',
+    status: 'planned',
+    date: '2026-04-01',
+  },
+  // SUPPLY CHAIN
+  {
+    slug: 'supply-chain-agent',
+    title: 'Supply Chain Agent',
+    summary: 'Three-agent stack running NZ + AU MRP, PO routing, vendor confirmations and settlement.',
+    category: 'supply-chain',
+    status: 'wip',
+    date: '2026-05-01',
+  },
+  {
+    slug: 'mrp-watchdog',
+    title: 'MRP Anomaly Watchdog',
+    summary: 'Daily exception scanner that catches stockouts and PO mismatches before they hit production.',
+    category: 'supply-chain',
+    status: 'planned',
+    date: '2026-04-20',
+  },
+  {
+    slug: 'vendor-settlement',
+    title: 'Vendor Settlement Automation',
+    summary: 'Tri-party matching and dispute routing — a 3-hour weekly task collapsed into a 5-minute review.',
+    category: 'supply-chain',
+    status: 'planned',
+    date: '2026-04-10',
+  },
+  // AI EXPERIMENTS
+  {
+    slug: 'ai-data-analysis',
+    title: 'AI × Data Analysis',
+    summary: 'Where AI meets the spreadsheet — vendor performance dashboards, on-chain flows, market structure.',
+    category: 'ai-experiments',
+    status: 'planned',
+    date: '2026-05-05',
+  },
+  {
+    slug: 'ai-applications',
+    title: 'AI Applications',
+    summary: 'Practical agentic workflows — Outlook rule rewrites, weekly review automation, document parsers.',
+    category: 'ai-experiments',
+    status: 'planned',
+    date: '2026-04-25',
+  },
+  {
+    slug: 'weekly-review-automator',
+    title: 'Weekly Review Automator',
+    summary: 'Six-dimension review (health, learning, people, projects, money, work) auto-drafted from week\'s logs.',
+    category: 'ai-experiments',
+    status: 'planned',
+    date: '2026-04-18',
+  },
+];
+
+const sortByDate = (a: Project, b: Project) => b.date.localeCompare(a.date);
+const featured = [...projects].sort(sortByDate).slice(0, 3);
+
+interface CatDef {
+  key: Category;
+  name: string;
+  kicker: string;
+  hue: string;
+  monogram: string;
+  gradient: string;
+}
+const categories: CatDef[] = [
+  {
+    key: 'supply-chain',
+    name: 'Supply Chain',
+    kicker: '供应链 · the day job, automated',
+    hue: '#cc4e0e',
+    monogram: 'S',
+    gradient: 'linear-gradient(135deg, rgba(204,78,14,0.42) 0%, #1a1b17 65%)',
+  },
+  {
+    key: 'investing',
+    name: 'Investing',
+    kicker: '投资 · what I put money behind',
+    hue: '#9fe870',
+    monogram: 'I',
+    gradient: 'linear-gradient(135deg, rgba(159,232,112,0.32) 0%, #1a1b17 65%)',
+  },
+  {
+    key: 'ai-experiments',
+    name: 'AI Experiments',
+    kicker: 'AI 实践 · agents, workflows, builds',
+    hue: '#5e6ad2',
+    monogram: 'A',
+    gradient: 'linear-gradient(135deg, rgba(94,106,210,0.45) 0%, #1a1b17 65%)',
+  },
+];
+const catByKey: Record<Category, CatDef> = Object.fromEntries(
+  categories.map((c) => [c.key, c]),
+) as Record<Category, CatDef>;
+
+const statusMeta = {
+  live: { label: 'LIVE', dot: 'bg-lime', text: 'text-lime' },
+  wip: { label: 'WIP', dot: 'bg-rg-orangeBright animate-pulse', text: 'text-ink-mint' },
+  planned: { label: 'PLAN', dot: 'bg-ink-gray', text: 'text-ink-gray' },
+  archive: { label: 'ARCHIVE', dot: 'bg-hairline', text: 'text-ink-gray' },
+} as const;
+
+const itemsByCategory = (cat: Category) =>
+  projects.filter((p) => p.category === cat).sort(sortByDate);
 ---
 
 <BaseLayout
   title="AI Builder — Gimbo's Universe"
-  description="Supply chain agents, investing, AI applications, AI × data analysis."
+  description="Supply chain agents, investing research, AI experiments — what I'm building this year."
 >
   <SectionHero
     index="01"
     kicker="Scene I — Empty workstation, two screens still glowing"
     title="The end of work. The start of building."
-    subtitle="Four working surfaces — supply chain agents, investing, AI applications, and AI × data analysis. The agents do the running; I do the thinking."
+    subtitle="Three streams I run from one notebook — supply chain, investing, and AI experiments. The agents do the running; I do the thinking."
     bandClass="border-b border-hairline"
   />
 
+  <!-- ============ FEATURED · LATEST 3 ============ -->
   <section class="relative">
-    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">
-      <div class="flex items-end justify-between mb-8">
-        <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
-          Modules
-        </h2>
-        <div class="terminal text-ink-gray hidden md:block">
-          // 4 surfaces · more arriving
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-16">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-8">
+        <div>
+          <div class="terminal text-lime mb-1.5">// most recent · across all streams</div>
+          <h2 class="font-display text-3xl md:text-4xl font-black text-ink-white leading-tight">
+            Latest builds.
+          </h2>
+        </div>
+        <div class="terminal text-ink-gray text-[11px]">
+          {featured.length} of {projects.length} · sorted by date
         </div>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-        <ModuleCard
-          id="supply-chain"
-          index="01"
-          title="Supply Chain Agent"
-          subtitle="A three-agent stack running NZ + AU MRP, PO routing, vendor confirmations and settlement. The supervisor agent triages exceptions; I review and approve. Notes, retros, and architecture sketches live here."
-          status="wip"
-          tools={["Claude", "Python", "MRP"]}
-          featured={true}
-        />
-        <ModuleCard
-          id="investing"
-          index="02"
-          title="Investing"
-          subtitle="What I'm putting money behind and why — NZ managed funds, ARK theses, on-chain experiments. Starts with the NZ 华人基金 selection guide."
-          status="live"
-          href="/work/nz-funds.html"
-          tools={["NZ Funds", "PIE/FIF", "ARK"]}
-        />
-        <ModuleCard
-          id="ai-apps"
-          index="03"
-          title="AI Applications"
-          subtitle="Practical agentic workflows I've shipped or am shipping — Outlook rule rewrites, weekly review automation, document parsers. What works in real day-job conditions, not just demos."
-          status="planned"
-          tools={["Claude SDK", "Skills", "Cron"]}
-        />
-        <ModuleCard
-          id="ai-data"
-          index="04"
-          title="AI × Data Analysis"
-          subtitle="Where AI meets the spreadsheet — vendor performance dashboards, on-chain flow analysis, market structure visualizations. Numbers given a brain."
-          status="planned"
-          tools={["Python", "Polars", "Chart.js"]}
-        />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {featured.map((p) => {
+          const c = catByKey[p.category];
+          const s = statusMeta[p.status];
+          const Tag = p.href ? 'a' : 'div';
+          return (
+            <Tag
+              href={p.href}
+              class:list={[
+                'group block card overflow-hidden flex flex-col !p-0',
+                p.href ? 'hover:scale-[1.015] transition-transform duration-200' : '',
+              ]}
+            >
+              {/* Image area: gradient + giant monogram + tags */}
+              <div
+                class="relative aspect-[16/10] flex items-center justify-center overflow-hidden"
+                style={`background: ${c.gradient};`}
+              >
+                {p.imageUrl ? (
+                  <img src={p.imageUrl} alt={p.title} class="w-full h-full object-cover" />
+                ) : (
+                  <span
+                    class="font-display font-black select-none pointer-events-none"
+                    style={`color: ${c.hue}; opacity: 0.20; font-size: clamp(120px, 30vw, 200px); line-height: 1;`}
+                  >
+                    {c.monogram}
+                  </span>
+                )}
+                <span
+                  class="absolute top-3 left-3 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-black tracking-tool bg-canvas/75 backdrop-blur-sm"
+                  style={`color: ${c.hue}; border: 1px solid ${c.hue}66;`}
+                >
+                  {c.name}
+                </span>
+                <span
+                  class:list={[
+                    'absolute top-3 right-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-tool bg-canvas/75 backdrop-blur-sm border border-hairline',
+                    s.text,
+                  ]}
+                >
+                  <span class:list={['h-1.5 w-1.5 rounded-full', s.dot]} />
+                  {s.label}
+                </span>
+              </div>
+              {/* Card body */}
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="font-sans text-lg md:text-xl font-black text-ink-white leading-tight">
+                  {p.title}
+                </h3>
+                <p class="mt-2 text-sm text-ink-mint leading-relaxed flex-1">
+                  {p.summary}
+                </p>
+                <div class="mt-4 pt-3 border-t border-hairline flex items-center justify-between">
+                  <span class="font-mono text-[10px] tracking-tool text-ink-gray">
+                    {p.date}
+                  </span>
+                  {p.href && (
+                    <span class="font-mono text-xs text-lime opacity-60 group-hover:opacity-100 transition-opacity">
+                      → read
+                    </span>
+                  )}
+                </div>
+              </div>
+            </Tag>
+          );
+        })}
       </div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 pb-24 space-y-12">
+      {categories.map((cat) => {
+        const items = itemsByCategory(cat.key);
+        const visible = items.slice(0, 3);
+        const hiddenCount = items.length - visible.length;
+        return (
+          <div id={cat.key} class="scroll-mt-20">
+            {/* category header */}
+            <div
+              class="flex items-end justify-between gap-3 mb-5 pb-3 border-b"
+              style={`border-color: ${cat.hue}33;`}
+            >
+              <div class="min-w-0">
+                <div
+                  class="terminal text-[11px] mb-1.5 truncate"
+                  style={`color: ${cat.hue};`}
+                >
+                  {cat.kicker}
+                </div>
+                <h3
+                  class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight leading-none"
+                  style={`color: ${cat.hue};`}
+                >
+                  {cat.name}
+                </h3>
+              </div>
+              <a
+                href={`#${cat.key}`}
+                class="font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors whitespace-nowrap shrink-0"
+              >
+                view all{hiddenCount > 0 ? ` (+${hiddenCount})` : ''} →
+              </a>
+            </div>
+            {/* project rows */}
+            <ul class="space-y-1">
+              {visible.map((p, i) => {
+                const s = statusMeta[p.status];
+                const Tag = p.href ? 'a' : 'div';
+                return (
+                  <li>
+                    <Tag
+                      id={p.slug}
+                      href={p.href}
+                      class:list={[
+                        'project-row group/row',
+                        p.href ? 'project-row--link' : 'project-row--static',
+                      ]}
+                    >
+                      <span class="project-num">{String(i + 1).padStart(2, '0')}</span>
+                      <span class="project-body">
+                        <span class="project-title">{p.title}</span>
+                        <span class="project-summary">{p.summary}</span>
+                      </span>
+                      <span class="project-date">{p.date}</span>
+                      <span class:list={['project-status', s.text]}>
+                        <span class:list={['h-1.5 w-1.5 rounded-full', s.dot]} />
+                        {s.label}
+                      </span>
+                      <span class="project-arrow">→</span>
+                    </Tag>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>

@@ -1,12 +1,111 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import SectionHero from '~/components/SectionHero.astro';
-import ModuleCard from '~/components/ModuleCard.astro';
+
+interface Book {
+  slug: string;
+  title: string;
+  author: string;
+  tags: string[];
+  brief: string;
+  thoughts: string;
+  hue: string;             // tints the placeholder cover area
+}
+
+interface Group {
+  slug: string;
+  emoji: string;
+  name: string;
+  interest: string;
+  frequency: string;
+  brief: string;
+  status: 'active' | 'dormant';
+}
+
+/* Reading list — placeholder seed; swap to real entries when ready. */
+const books: Book[] = [
+  {
+    slug: 'tools-and-weapons',
+    title: 'Tools and Weapons',
+    author: 'Brad Smith',
+    tags: ['tech', 'society', 'AI policy'],
+    brief: "Microsoft's president on the geopolitics of cloud, AI, and the tech industry that finally has to answer for itself.",
+    thoughts: "The supply-chain-and-trust chapters were the surprise. Most tech books skip the part I work in.",
+    hue: '#5e6ad2',
+  },
+  {
+    slug: 'almanack-naval',
+    title: 'The Almanack of Naval Ravikant',
+    author: 'Eric Jorgenson',
+    tags: ['philosophy', 'wealth', 'focus'],
+    brief: "Compiled wisdom from Naval's threads and podcasts — leverage, judgment, and the long game.",
+    thoughts: "Re-read every six months. The 'specific knowledge' chapter is the one that doesn't age.",
+    hue: '#9fe870',
+  },
+  {
+    slug: 'thinking-fast-slow',
+    title: 'Thinking, Fast and Slow',
+    author: 'Daniel Kahneman',
+    tags: ['psychology', 'decisions', 'biases'],
+    brief: "The two-system model of the mind, and how to catch yourself making the wrong call.",
+    thoughts: "Investing reading-list essential. The anchoring chapter alone repaid the price.",
+    hue: '#cc4e0e',
+  },
+  {
+    slug: 'sapiens',
+    title: 'Sapiens',
+    author: 'Yuval Harari',
+    tags: ['history', 'big-picture', 'future'],
+    brief: "Where humans came from, how we got here, and the stories we tell ourselves to coordinate at scale.",
+    thoughts: "Pop history with teeth. The 'imagined orders' framing comes back when I think about money.",
+    hue: '#e38045',
+  },
+];
+
+/* Interest-based groups — placeholder. */
+const groups: Group[] = [
+  {
+    slug: 'tennis-club',
+    emoji: '🎾',
+    name: 'Auckland Tennis Club',
+    interest: 'tennis',
+    frequency: 'weekly',
+    brief: 'Where the body project gets a sparring partner. Friday hits and Saturday matches.',
+    status: 'active',
+  },
+  {
+    slug: 'nz-investing',
+    emoji: '📈',
+    name: 'NZ 投资圈',
+    interest: 'investing',
+    frequency: 'monthly',
+    brief: 'A small group of NZ-based 华人 trading notes on funds, tax brackets, and where to park money.',
+    status: 'active',
+  },
+  {
+    slug: 'ai-builders',
+    emoji: '🤖',
+    name: 'AI Builders Auckland',
+    interest: 'AI · coding',
+    frequency: 'fortnightly',
+    brief: 'Coffee + code. Casual show-and-tell — bring whatever you are building, in whatever shape it is in.',
+    status: 'active',
+  },
+  {
+    slug: 'reading-circle',
+    emoji: '📚',
+    name: 'Auckland Reading Circle',
+    interest: 'books',
+    frequency: 'monthly',
+    brief: 'One book a month, two hours on a Sunday, no agenda except actually reading.',
+    status: 'active',
+  },
+];
 ---
 
 <BaseLayout
   title="Life — Gimbo's Universe"
-  description="Writing, reading, and the people in the room — the slow lane."
+  description="Writing the book, reading what doesn't trend, and the people in the room — the slow lane."
 >
   <SectionHero
     index="03"
@@ -16,41 +115,170 @@ import ModuleCard from '~/components/ModuleCard.astro';
     bandClass="border-b border-hairline"
   />
 
+  <!-- ============ MODULE 1 · WRITING THE BOOK ============ -->
   <section class="relative">
-    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">
-      <div class="flex items-end justify-between mb-8">
-        <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
-          Modules
-        </h2>
-        <div class="terminal text-ink-gray hidden md:block">
-          // slow × 3
-        </div>
-      </div>
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-16">
+      <div class="terminal text-lime mb-1.5 text-[11px]">// chapter 3 of 10 in flight</div>
+      <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white leading-tight">
+        Writing the Book
+      </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <ModuleCard
-          index="01"
-          title="Writing the Book"
-          subtitle="《Life Essential in NZ》 — ten years in New Zealand, distilled into nine chapters. Currently writing chapter 3 (finance). Newsletter + ebook when ready."
-          status="wip"
-          tools={["Markdown", "WeChat MP"]}
-          featured={true}
-        />
-        <ModuleCard
-          index="02"
-          title="Reading"
-          subtitle="What's on the table right now, what changed something, and the long shelf I keep returning to. Sparse on purpose."
-          status="planned"
-          tools={["Notes", "Markdown"]}
-        />
-        <ModuleCard
-          index="03"
-          title="Social"
-          subtitle="The dinners, the long walks, the people I owe a call. The most important infrastructure that no app can replace."
-          status="planned"
-          tools={["IRL"]}
-        />
+      <a
+        href="/life/book"
+        class="block group mt-6 card !p-0 overflow-hidden hover:scale-[1.005] transition-transform duration-200"
+      >
+        <div class="flex flex-col lg:flex-row">
+          <!-- Book cover placeholder -->
+          <div
+            class="lg:w-[36%] aspect-[4/3] lg:aspect-auto lg:min-h-[280px] flex items-center justify-center p-8 relative overflow-hidden"
+            style="background: linear-gradient(135deg, rgba(159,232,112,0.18) 0%, #1a1b17 70%);"
+          >
+            <div class="text-center">
+              <div class="terminal text-lime mb-3 text-[10px]">// 写作中 · WIP</div>
+              <div
+                class="font-display text-3xl md:text-4xl font-black text-ink-white leading-[0.95] uppercase tracking-tight"
+              >
+                Life<br />Essential<br />in NZ
+              </div>
+              <div class="mt-3 text-xs text-ink-mint italic">
+                《新西兰生活之要》
+              </div>
+            </div>
+          </div>
+          <!-- Synopsis + CTA -->
+          <div class="flex-1 p-7 md:p-9 flex flex-col justify-between">
+            <div>
+              <div class="font-mono text-[10px] tracking-tool text-ink-gray mb-3">
+                10 CHAPTERS · TEN YEARS · ONE QUIET OBSERVATION
+              </div>
+              <p class="text-base md:text-lg text-ink-mint leading-relaxed">
+                Ten years of observation, distilled into ten chapters
+                — landing in Auckland, building a career, parsing the
+                tax code, eating across two cuisines, and slowly
+                re-tuning what "home" means. Not a guide; a slow
+                personal record.
+              </p>
+              <p class="mt-3 text-sm text-ink-gray leading-relaxed">
+                Currently writing chapter 3 (Finance · 钱与税). Each
+                chapter goes out as a newsletter when it lands; the
+                full ebook drops once all ten are in.
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-hairline flex items-center justify-between">
+              <span class="font-mono text-[10px] tracking-tool text-ink-gray">
+                Status: 1 of 10 in motion · 9 to go
+              </span>
+              <span class="font-mono text-xs text-lime opacity-70 group-hover:opacity-100 transition-opacity">
+                Open table of contents →
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ MODULE 2 · READING ============ -->
+  <section class="relative border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-16">
+      <div class="flex items-end justify-between mb-8 gap-3">
+        <div>
+          <div class="terminal text-lime mb-1.5 text-[11px]">// what's on the shelf</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            Reading
+          </h2>
+        </div>
+        <a
+          href="#reading"
+          class="font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors whitespace-nowrap shrink-0"
+        >
+          view all books →
+        </a>
       </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {books.map((b) => (
+          <article id={b.slug} class="card !p-0 overflow-hidden flex flex-col">
+            {/* "Cover" placeholder — title-as-art on tinted gradient */}
+            <div
+              class="aspect-[3/4] flex flex-col items-center justify-center p-5 text-center relative"
+              style={`background: linear-gradient(160deg, ${b.hue}33 0%, #1a1b17 70%); border-bottom: 1px solid ${b.hue}33;`}
+            >
+              <div
+                class="font-display text-base md:text-lg font-black uppercase leading-tight tracking-tight"
+                style={`color: ${b.hue};`}
+              >
+                {b.title}
+              </div>
+              <div class="mt-3 font-mono text-[10px] tracking-tool text-ink-mint">
+                {b.author}
+              </div>
+            </div>
+            {/* Body */}
+            <div class="p-4 flex-1 flex flex-col gap-3">
+              <div class="flex flex-wrap gap-1.5">
+                {b.tags.map((t) => (
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded-full bg-lime-tint text-lime tracking-tool">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <p class="text-xs text-ink-mint leading-relaxed">
+                {b.brief}
+              </p>
+              <p class="text-xs text-ink-gray italic leading-relaxed border-l border-lime/40 pl-3 mt-auto">
+                "{b.thoughts}"
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODULE 3 · SOCIAL ============ -->
+  <section class="relative border-t border-hairline">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-16">
+      <div class="flex items-end justify-between mb-8 gap-3">
+        <div>
+          <div class="terminal text-lime mb-1.5 text-[11px]">// the people in the room</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            Social
+          </h2>
+        </div>
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
+          {groups.length} interest groups
+        </span>
+      </div>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {groups.map((g) => (
+          <li id={g.slug} class="card flex items-start gap-4">
+            <span class="text-3xl shrink-0 leading-none mt-0.5">{g.emoji}</span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="font-sans text-base md:text-lg font-black text-ink-white leading-tight">
+                  {g.name}
+                </h3>
+                <span
+                  class:list={[
+                    'font-mono text-[10px] tracking-tool px-2 py-0.5 rounded-full whitespace-nowrap shrink-0',
+                    g.status === 'active'
+                      ? 'bg-lime-tint text-lime border border-lime/30'
+                      : 'bg-canvas text-ink-gray border border-hairline',
+                  ]}
+                >
+                  {g.status === 'active' ? '● active' : '○ dormant'}
+                </span>
+              </div>
+              <div class="font-mono text-[10px] tracking-tool text-ink-gray mt-1">
+                {g.interest} · {g.frequency}
+              </div>
+              <p class="text-sm text-ink-mint leading-relaxed mt-2">
+                {g.brief}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>

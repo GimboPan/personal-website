@@ -1,0 +1,149 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+
+interface Chapter {
+  num: string;
+  title: string;
+  zh: string;
+  kicker: string;
+  status: 'live' | 'wip' | 'planned';
+  slug: string;
+}
+
+/* Placeholder chapter list — common topics for a 10-year NZ memoir.
+   Swap titles/kickers when the real outline lands. */
+const chapters: Chapter[] = [
+  { num: '01', title: 'Migration',         zh: '着陆',         kicker: 'The first 90 days, the airport, the rented room.',                                  status: 'planned', slug: 'migration' },
+  { num: '02', title: 'First Job',         zh: '第一份工作',    kicker: 'Walking in green, leaving green-er. The slow on-ramp.',                              status: 'planned', slug: 'career-1' },
+  { num: '03', title: 'Finance',           zh: '钱与税',       kicker: 'PIE funds, FIF rules, mortgages, and the spreadsheet that finally made sense.',     status: 'wip',     slug: 'finance' },
+  { num: '04', title: 'Daily Life',        zh: '衣食住行',      kicker: 'Insulation, mowing, supermarket geometry, and how groceries shape a year.',          status: 'planned', slug: 'daily-life' },
+  { num: '05', title: 'Healthcare',        zh: '医疗系统',      kicker: 'GPs, the public/private dance, and what surprised me most.',                         status: 'planned', slug: 'healthcare' },
+  { num: '06', title: 'Education',         zh: '教育',         kicker: 'Decile, NCEA, the long view on raising kids in a small country.',                    status: 'planned', slug: 'education' },
+  { num: '07', title: 'Climate & Outdoors',zh: '气候与户外',    kicker: 'Two seasons, a thousand walks, and learning to look up.',                            status: 'planned', slug: 'climate' },
+  { num: '08', title: 'Food',              zh: '餐桌上的两国史', kicker: 'What we cook, what we miss, what we learned to stop missing.',                       status: 'planned', slug: 'food' },
+  { num: '09', title: 'Identity',          zh: '中间地带',      kicker: 'On being neither, both, or in flux — and stopping the audit.',                        status: 'planned', slug: 'identity' },
+  { num: '10', title: 'Looking Back',      zh: '十年之后',      kicker: 'What I would tell the version of me who landed in 2016.',                            status: 'planned', slug: 'looking-back' },
+];
+
+const statusMeta = {
+  live:    { label: 'LIVE', dot: 'bg-lime',                     text: 'text-lime' },
+  wip:     { label: 'WIP',  dot: 'bg-rg-orangeBright animate-pulse', text: 'text-ink-mint' },
+  planned: { label: 'PLAN', dot: 'bg-ink-gray',                  text: 'text-ink-gray' },
+} as const;
+
+const wipCount = chapters.filter((c) => c.status === 'wip').length;
+const liveCount = chapters.filter((c) => c.status === 'live').length;
+---
+
+<BaseLayout
+  title="Life Essential in NZ — TOC — Gimbo's Universe"
+  description="Table of contents for 《Life Essential in NZ》 — 10 chapters across ten years of life in New Zealand."
+>
+  <SectionHero
+    index="03.1"
+    kicker="《Life Essential in NZ》 — book in motion"
+    title={['Ten years.', 'Ten chapters.']}
+    subtitle="A slow personal record of moving to and settling in New Zealand. One chapter posted at a time, then collected as an ebook when all ten land."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+        <!-- Left: synopsis -->
+        <aside class="lg:col-span-4 lg:sticky lg:top-24 lg:self-start space-y-6">
+          <div>
+            <div class="terminal text-lime mb-2 text-[10px]">// SYNOPSIS</div>
+            <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white leading-tight">
+              Why I am writing this.
+            </h2>
+          </div>
+          <p class="text-base text-ink-mint leading-relaxed">
+            I moved to New Zealand thinking it was a two-year stop. Ten
+            years later I am still here, and most of what I learned
+            about this country came from paying tax, getting sick,
+            raising kids, and slowly re-tuning what "home" feels like.
+          </p>
+          <p class="text-base text-ink-mint leading-relaxed">
+            This book is the version of that decade I would have wanted
+            to read before I landed. Practical where it can be, personal
+            where it should be, and short on advice the internet already
+            gives away for free.
+          </p>
+
+          <div class="pt-5 border-t border-hairline space-y-1.5">
+            <div class="font-mono text-[10px] tracking-tool text-ink-gray">FORMAT</div>
+            <p class="text-sm text-ink-mint leading-relaxed">
+              Each chapter posted as a newsletter. Ebook collects all
+              ten when they're in.
+            </p>
+          </div>
+          <div class="pt-5 border-t border-hairline space-y-1.5">
+            <div class="font-mono text-[10px] tracking-tool text-ink-gray">STATUS</div>
+            <p class="text-sm text-ink-mint leading-relaxed">
+              {liveCount} live · {wipCount} in motion · {chapters.length - liveCount - wipCount} planned.
+            </p>
+          </div>
+          <div class="pt-5 border-t border-hairline space-y-1.5">
+            <div class="font-mono text-[10px] tracking-tool text-ink-gray">LANGUAGE</div>
+            <p class="text-sm text-ink-mint leading-relaxed">
+              Bilingual — English + 中文 in turns, depending on which
+              language the chapter wants to be in.
+            </p>
+          </div>
+          <a
+            href="/life"
+            class="inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors"
+          >
+            ← back to Life
+          </a>
+        </aside>
+
+        <!-- Right: chapter list -->
+        <div class="lg:col-span-8">
+          <div class="flex items-end justify-between mb-5 pb-3 border-b border-hairline gap-3">
+            <div>
+              <div class="terminal text-lime mb-1 text-[10px]">// CHAPTERS</div>
+              <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+                Table of Contents
+              </h2>
+            </div>
+            <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
+              10 in total
+            </span>
+          </div>
+          <ul class="space-y-1">
+            {chapters.map((c) => {
+              const s = statusMeta[c.status];
+              return (
+                <li id={c.slug} class="scroll-mt-20">
+                  <div class="project-row project-row--static">
+                    <span class="project-num">{c.num}</span>
+                    <span class="project-body">
+                      <span class="project-title">
+                        {c.title}
+                        <span class="ml-2 text-ink-gray font-normal">· {c.zh}</span>
+                      </span>
+                      <span class="project-summary">{c.kicker}</span>
+                    </span>
+                    <span class:list={['project-status', s.text]}>
+                      <span class:list={['h-1.5 w-1.5 rounded-full', s.dot]} />
+                      {s.label}
+                    </span>
+                    <span class="project-arrow">→</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          <p class="mt-6 text-sm text-ink-gray leading-relaxed">
+            Individual chapter pages will come online as each chapter is
+            published. Until then, the rows above are a deliberate
+            promise list.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

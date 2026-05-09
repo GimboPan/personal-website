@@ -2,13 +2,15 @@
 export interface Props {
   index: string;
   kicker: string;
-  title: string;
+  /** Pass a string for single-line, or string[] for explicit per-line breaks. */
+  title: string | string[];
   subtitle: string;
   /** Tailwind classes for the gradient/tint band behind the hero */
   bandClass?: string;
 }
 
 const { index, kicker, title, subtitle, bandClass = '' } = Astro.props;
+const titleLines = Array.isArray(title) ? title : [title];
 ---
 
 <section class={`relative overflow-hidden ${bandClass}`}>
@@ -22,9 +24,14 @@ const { index, kicker, title, subtitle, bandClass = '' } = Astro.props;
     </div>
 
     <h1
-      class="display-mega text-ink-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-4xl break-words"
+      class="display-mega text-ink-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl max-w-4xl lg:max-w-none break-words"
     >
-      {title}
+      {titleLines.map((line, i) => (
+        <>
+          {line}
+          {i < titleLines.length - 1 && <br />}
+        </>
+      ))}
     </h1>
 
     <p class="mt-5 md:mt-6 text-base md:text-lg text-ink-mint max-w-2xl leading-relaxed">

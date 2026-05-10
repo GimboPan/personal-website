@@ -509,6 +509,20 @@
     font-weight: 700;
   }
 
+  /* Full-bleed hero section sizing — aspect-ratio driven so the image
+     always fills exactly with no cover-crop at any viewport.
+     Mobile (<768px): 1:1 square — matches the centered square mobile crop.
+     Desktop (≥768px): 1536:944 — matches the wide post-top-crop master. */
+  .hero-fullbleed {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  @media (min-width: 768px) {
+    .hero-fullbleed {
+      aspect-ratio: 1536 / 944;
+    }
+  }
+
   /* Display-mega billboard heading — UPPERCASE + 句号 = Rewired-style
      manifesto rhythm. Period-as-statement-mark is a Wise/Linear pattern. */
   .display-mega {

@@ -1,0 +1,31 @@
+---
+/**
+ * Full-bleed AI-painted hero `<section>` used at the top of every primary
+ * page. Wraps `<HeroPicture>` with the responsive `.hero-fullbleed` height
+ * rules (square-ish on mobile, 3:2 cap on desktop).
+ *
+ * The painted in-image navigation visible in the artwork is decorative —
+ * the real persistent `<Nav />` from `BaseLayout` sits sticky above the
+ * hero and handles routing.
+ */
+import HeroPicture from '~/components/HeroPicture.astro';
+
+export interface Props {
+  /** Base filename in /public/landing/ (without extension). */
+  name: string;
+  /** Descriptive alt text for the painted scene. */
+  alt: string;
+  /** Render a hairline bottom border under the hero. Default: true. */
+  border?: boolean;
+}
+
+const { name, alt, border = true } = Astro.props;
+const sectionClass = [
+  'relative w-full overflow-hidden hero-fullbleed',
+  border ? 'border-b border-hairline' : '',
+].join(' ').trim();
+---
+
+<section class={sectionClass}>
+  <HeroPicture name={name} alt={alt} />
+</section>

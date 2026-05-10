@@ -88,7 +88,7 @@ npm run preview      # http://localhost:4321 (static preview)
 Re-run if you replace the hero image:
 
 ```bash
-# Drop a 1536×1024 PNG at public/landing/gimbos-universe.png, then:
+# Drop a 1536×1024 PNG at landing-source/<name>.png, then:
 node scripts/optimize-images.mjs
 ```
 

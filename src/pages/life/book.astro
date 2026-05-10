@@ -30,7 +30,7 @@ const chapters: Chapter[] = [
 const statusMeta = {
   live:    { label: 'LIVE', dot: 'bg-lime',                     text: 'text-lime' },
   wip:     { label: 'WIP',  dot: 'bg-rg-orangeBright animate-pulse', text: 'text-ink-mint' },
-  planned: { label: 'PLAN', dot: 'bg-ink-gray',                  text: 'text-ink-gray' },
+  planned: { label: 'SOON', dot: 'bg-ink-gray',                  text: 'text-ink-gray' },
 } as const;
 
 const liveCount = chapters.filter((c) => c.status === 'live').length;
@@ -41,6 +41,7 @@ const planCount = chapters.length - liveCount - wipCount;
 <BaseLayout
   title="Life Essentials — TOC — Gimbo's Universe"
   description="Table of contents for 《Life Essentials》 — A Decade of Life in New Zealand. Nine chapters from a decade between 2015 and 2025."
+  ogImage="/og-life.jpg"
 >
   <SectionHero
     index="03.1"

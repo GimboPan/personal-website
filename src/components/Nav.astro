@@ -88,9 +88,11 @@ const { overlay = false } = Astro.props;
       }
     </nav>
 
-    <!-- CTA — compact on small screens -->
+    <!-- CTA — compact on small screens. Always navigates to home + #explore
+         so it works from inner pages too (just `#explore` was a dead anchor
+         off-home). -->
     <a
-      href="#explore"
+      href="/#explore"
       class="hidden md:inline-flex items-center gap-2 px-4 md:px-5 py-2 rounded-full border border-ink-mint/40 text-ink-white text-[11px] font-mono font-semibold tracking-[0.18em] hover:border-lime hover:text-lime transition-all hover:scale-105 flex-shrink-0 whitespace-nowrap"
     >
       ENTER

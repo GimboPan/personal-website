@@ -1,52 +1,19 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ModuleCard from '~/components/ModuleCard.astro';
+import HeroSection from '~/components/HeroSection.astro';
 ---
 
 <BaseLayout
   title="Gimbo's Universe — Building the next decade together."
   description="Agents, robots and us. A personal hub aggregating projects across the agentic era — supply chain, investing, AI experiments, tennis, books, and the slow lane."
   hideCrt={true}
-  hideNav={true}
 >
-  <!-- ============ HERO: full-bleed AI image ============ -->
-  <section
-    id="hero"
-    class="relative w-full overflow-hidden"
-    style="height: min(100vh, calc(100vw * 2 / 3));"
-  >
-    <img
-      src="/landing/homepage-hero.png"
-      alt="Gimbo's Universe — a sculpted figure dissolving into voxel architecture above an Auckland tennis court at dusk"
-      class="absolute inset-0 w-full h-full object-cover select-none"
-      style="object-position: center top;"
-      draggable="false"
-      fetchpriority="high"
-      decoding="async"
-    />
-
-    <!-- Top-nav baked-in text hot spots (mirrors the painted nav inside the image) -->
-    <a href="/" aria-label="Gimbo's Universe (home)"
-       class="absolute" style="top: 1.5%; left: 1.5%; width: 16%; height: 5%;"></a>
-    <a href="/work" aria-label="AI X / Work"
-       class="absolute" style="top: 2.5%; left: 60%; width: 6%; height: 3.5%;"></a>
-    <a href="/fitness" aria-label="Fitness"
-       class="absolute" style="top: 2.5%; left: 67%; width: 7%; height: 3.5%;"></a>
-    <a href="/life" aria-label="Life"
-       class="absolute" style="top: 2.5%; left: 75%; width: 4%; height: 3.5%;"></a>
-    <a href="/ideas" aria-label="Ideas"
-       class="absolute" style="top: 2.5%; left: 80%; width: 5%; height: 3.5%;"></a>
-    <a href="/about" aria-label="About"
-       class="absolute" style="top: 2.5%; left: 86%; width: 6%; height: 3.5%;"></a>
-
-    <!-- Invisible bottom hot spot — natural scroll still works; this gives keyboard/screen-reader access to #explore -->
-    <a
-      href="#explore"
-      aria-label="Scroll to explore"
-      class="absolute"
-      style="bottom: 1.5%; left: 50%; transform: translateX(-50%); width: 18%; height: 5%;"
-    ></a>
-  </section>
+  <HeroSection
+    name="homepage-hero"
+    alt="Gimbo's Universe — a sculpted figure dissolving into voxel architecture above an Auckland tennis court at dusk"
+    border={false}
+  />
 
   <!-- ============ EXPLORE: deeper content below the hero ============ -->
   <section id="explore" class="relative">
@@ -166,12 +133,12 @@ import ModuleCard from '~/components/ModuleCard.astro';
             <li class="bullet-row bullet-row--static">
               <span class="dot bg-ink-gray"></span>
               <span class="bullet-label">Nutrition</span>
-              <span class="bullet-tag text-ink-gray">PLAN</span>
+              <span class="bullet-tag text-ink-gray">SOON</span>
             </li>
             <li class="bullet-row bullet-row--static">
               <span class="dot bg-ink-gray"></span>
               <span class="bullet-label">Strength</span>
-              <span class="bullet-tag text-ink-gray">PLAN</span>
+              <span class="bullet-tag text-ink-gray">SOON</span>
             </li>
           </ul>
         </ModuleCard>
@@ -192,12 +159,12 @@ import ModuleCard from '~/components/ModuleCard.astro';
             <li class="bullet-row bullet-row--static">
               <span class="dot bg-ink-gray"></span>
               <span class="bullet-label">Reading</span>
-              <span class="bullet-tag text-ink-gray">PLAN</span>
+              <span class="bullet-tag text-ink-gray">SOON</span>
             </li>
             <li class="bullet-row bullet-row--static">
               <span class="dot bg-ink-gray"></span>
               <span class="bullet-label">Social</span>
-              <span class="bullet-tag text-ink-gray">PLAN</span>
+              <span class="bullet-tag text-ink-gray">SOON</span>
             </li>
           </ul>
         </ModuleCard>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import HeroSection from '~/components/HeroSection.astro';
 
 type Status = 'live' | 'wip' | 'planned' | 'archive';
 type Category = 'supply-chain' | 'investing' | 'ai-experiments';
@@ -144,7 +145,7 @@ const catByKey: Record<Category, CatDef> = Object.fromEntries(
 const statusMeta = {
   live: { label: 'LIVE', dot: 'bg-lime', text: 'text-lime' },
   wip: { label: 'WIP', dot: 'bg-rg-orangeBright animate-pulse', text: 'text-ink-mint' },
-  planned: { label: 'PLAN', dot: 'bg-ink-gray', text: 'text-ink-gray' },
+  planned: { label: 'SOON', dot: 'bg-ink-gray', text: 'text-ink-gray' },
   archive: { label: 'ARCHIVE', dot: 'bg-hairline', text: 'text-ink-gray' },
 } as const;
 
@@ -155,37 +156,12 @@ const itemsByCategory = (cat: Category) =>
 <BaseLayout
   title="AI X — Gimbo's Universe"
   description="Building systems that scale human potential. Supply chain agents, investing research, AI experiments — what I'm building this year."
-  hideNav={true}
+  ogImage="/og-work.jpg"
 >
-  <!-- ============ HERO: full-bleed AI image ============ -->
-  <section
-    class="relative w-full overflow-hidden border-b border-hairline"
-    style="height: min(100vh, calc(100vw * 2 / 3));"
-  >
-    <img
-      src="/landing/work-hero.png"
-      alt="AI X — a sculpted human form fragmenting into voxel architecture, surrounded by orbital schematics on a dark grid"
-      class="absolute inset-0 w-full h-full object-cover select-none"
-      style="object-position: center top;"
-      draggable="false"
-      fetchpriority="high"
-      decoding="async"
-    />
-
-    <!-- Top-nav baked-in text hot spots (mirrors the painted nav inside the image) -->
-    <a href="/" aria-label="Gimbo's Universe (home)"
-       class="absolute" style="top: 1.5%; left: 1.5%; width: 16%; height: 5%;"></a>
-    <a href="/work" aria-label="AI X / Work"
-       class="absolute" style="top: 2.5%; left: 60%; width: 6%; height: 3.5%;"></a>
-    <a href="/fitness" aria-label="Fitness"
-       class="absolute" style="top: 2.5%; left: 67%; width: 7%; height: 3.5%;"></a>
-    <a href="/life" aria-label="Life"
-       class="absolute" style="top: 2.5%; left: 75%; width: 4%; height: 3.5%;"></a>
-    <a href="/ideas" aria-label="Ideas"
-       class="absolute" style="top: 2.5%; left: 80%; width: 5%; height: 3.5%;"></a>
-    <a href="/about" aria-label="About"
-       class="absolute" style="top: 2.5%; left: 86%; width: 6%; height: 3.5%;"></a>
-  </section>
+  <HeroSection
+    name="work-hero"
+    alt="AI X — a sculpted human form fragmenting into voxel architecture, surrounded by orbital schematics on a dark grid"
+  />
 
   <!-- ============ FEATURED · LATEST 3 ============ -->
   <section class="relative">

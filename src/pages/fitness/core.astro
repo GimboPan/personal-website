@@ -1,0 +1,97 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ArticleRow from '~/components/ArticleRow.astro';
+
+interface Article {
+  index: string;
+  title: string;
+  lede: string;
+  status: 'live' | 'wip' | 'planned';
+  href?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const articles: Article[] = [
+  {
+    index: '01',
+    title: 'Core is not abs — and why that distinction matters',
+    lede: 'For ten years I trained "core" as a synonym for "abs" — crunches, sit-ups, leg raises. Then a physio watched me serve and said the reason my lower back hurt at the end of every match was that nothing between my ribs and my hips was actually holding me together. Core is anti-rotation, anti-extension, anti-lateral-flexion. The visible muscle is the smallest part of the job.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['intro', 'mindset'],
+  },
+  {
+    index: '02',
+    title: 'The five movements I run twice a week',
+    lede: 'After three rounds of trying complicated programs I cut the core block down to five moves that I can run in fifteen minutes with no equipment besides a mat and a band: dead bug, bird dog, Pallof press, side plank with reach, and Copenhagen plank. Each one trains a specific anti- pattern. I do all five, twice a week, every week. No periodisation. No deload. Just five moves.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['program', 'minimalism'],
+  },
+  {
+    index: '03',
+    title: 'Single-leg balance — the test I failed for two years',
+    lede: 'Stand on one leg, close your eyes, set a timer. Most adults under 50 should be able to do thirty seconds. I could do six. For two years I thought my forehand was timing-related; turns out my forehand was balance-related, and my balance was non-existent because I sat at a desk all day and trained both legs symmetrically every gym session. The fix took six months and one minute a day.',
+    status: 'planned',
+    date: '2026-Q3',
+    tags: ['balance', 'tennis'],
+  },
+];
+
+const liveCount = articles.filter((a) => a.status === 'live').length;
+const wipCount = articles.filter((a) => a.status === 'wip').length;
+const planCount = articles.length - liveCount - wipCount;
+---
+
+<BaseLayout
+  title="Core & Stability — Fitness — Gimbo's Universe"
+  description="Anti-rotation, anti-extension, single-leg balance. The quiet engine behind every groundstroke and every lift."
+  ogImage="/og-fitness.jpg"
+>
+  <SectionHero
+    index="02.4"
+    kicker="Fitness · Module 04 · Core & Stability · 核心与稳定性"
+    title={['The quiet engine', 'under every shot.']}
+    subtitle="Anti-rotation, anti-extension, single-leg balance. The part nobody trains until something tears."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-5xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 pb-3 border-b border-hairline gap-3">
+        <div>
+          <div class="terminal text-lime mb-1 text-[10px]">// ARTICLES</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            Logs & writing
+          </h2>
+        </div>
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
+          {liveCount} live · {wipCount} wip · {planCount} planned
+        </span>
+      </div>
+
+      <div class="space-y-3">
+        {articles.map((a) => (
+          <ArticleRow
+            index={a.index}
+            title={a.title}
+            lede={a.lede}
+            status={a.status}
+            href={a.href}
+            date={a.date}
+            tags={a.tags}
+          />
+        ))}
+      </div>
+
+      <a
+        href="/fitness"
+        class="mt-10 inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors"
+      >
+        ← back to Fitness
+      </a>
+    </div>
+  </section>
+</BaseLayout>

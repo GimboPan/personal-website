@@ -1,0 +1,97 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ArticleRow from '~/components/ArticleRow.astro';
+
+interface Article {
+  index: string;
+  title: string;
+  lede: string;
+  status: 'live' | 'wip' | 'planned';
+  href?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const articles: Article[] = [
+  {
+    index: '01',
+    title: 'Why I am building Tennis Buddy',
+    lede: 'Three years of bouncing between WhatsApp groups, court-booking apps, and a notes file called partners.txt. The problem isn\'t finding tennis — it is keeping the same hitting partner long enough for either of you to actually improve. So I am building the smallest possible app that solves that.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['intro'],
+  },
+  {
+    index: '02',
+    title: 'Match Log v0 — fields, not features',
+    lede: 'The first version of the match log has five fields and no charts. Date, opponent, NTRP, surface, score. Notes are free text. I am resisting the temptation to add a serve-percentage tracker before I have logged ten matches by hand and know what I actually want to see at the end of the year.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['build log'],
+  },
+  {
+    index: '03',
+    title: 'NTRP self-rating — honest at 3.5',
+    lede: 'Most adult-rec players over-rate themselves by half a notch. I have hit with 4.0s and gotten dismantled, and I have hit with 3.0s and walked off bored. After 50 matches the honest answer is 3.5 — steady forehand, weak backhand under pressure, serve that lives and dies by my second-toss height.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['self-eval'],
+  },
+];
+
+const liveCount = articles.filter((a) => a.status === 'live').length;
+const wipCount = articles.filter((a) => a.status === 'wip').length;
+const planCount = articles.length - liveCount - wipCount;
+---
+
+<BaseLayout
+  title="Tennis Buddy — Fitness — Gimbo's Universe"
+  description="Match logs, hitting partners, drill notes — building a small app for finding and tracking court time."
+  ogImage="/og-fitness.jpg"
+>
+  <SectionHero
+    index="02.1"
+    kicker="Fitness · Module 01 · Tennis Buddy"
+    title={['On the court,', 'I am present.']}
+    subtitle="Match logs, hitting partners, drill notes, NTRP-tagged sessions. The articles below track the build and the practice — both."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-5xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 pb-3 border-b border-hairline gap-3">
+        <div>
+          <div class="terminal text-lime mb-1 text-[10px]">// ARTICLES</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            Logs & writing
+          </h2>
+        </div>
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
+          {liveCount} live · {wipCount} wip · {planCount} planned
+        </span>
+      </div>
+
+      <div class="space-y-3">
+        {articles.map((a) => (
+          <ArticleRow
+            index={a.index}
+            title={a.title}
+            lede={a.lede}
+            status={a.status}
+            href={a.href}
+            date={a.date}
+            tags={a.tags}
+          />
+        ))}
+      </div>
+
+      <a
+        href="/fitness"
+        class="mt-10 inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors"
+      >
+        ← back to Fitness
+      </a>
+    </div>
+  </section>
+</BaseLayout>

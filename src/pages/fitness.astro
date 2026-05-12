@@ -6,7 +6,7 @@ import HeroSection from '~/components/HeroSection.astro';
 
 <BaseLayout
   title="Fitness — Gimbo's Universe"
-  description="On the court I am present. The body is the one project I can't delegate — tennis, nutrition, strength."
+  description="On the court I am present. The body is the one project I can't delegate — tennis, nutrition, strength, core."
   ogImage="/og-fitness.jpg"
 >
   <HeroSection
@@ -28,17 +28,18 @@ import HeroSection from '~/components/HeroSection.astro';
           Modules
         </h2>
         <div class="terminal text-ink-gray hidden md:block">
-          // body × 3
+          // body × 4
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <ModuleCard
           index="01"
           title="Tennis Buddy"
           subtitle="Match logs, hitting partners, drill notes, NTRP-tagged sessions. A small Roland-Garros-themed app for finding and tracking court time."
           status="wip"
           tools={["MUI", "RG-design", "Match Log"]}
+          href="/fitness/tennis"
           featured={true}
         />
         <ModuleCard
@@ -47,6 +48,7 @@ import HeroSection from '~/components/HeroSection.astro';
           subtitle="What I eat, when, and why. Tracking intake against training load, NZ-grocery realities, and the long game (not the next 6-pack)."
           status="planned"
           tools={["MyFitnessPal", "Markdown"]}
+          href="/fitness/nutrition"
         />
         <ModuleCard
           index="03"
@@ -54,6 +56,15 @@ import HeroSection from '~/components/HeroSection.astro';
           subtitle="Compound lifts, mobility work, recovery protocols. Volume tracking and progression as a hedge against everything tennis breaks down."
           status="planned"
           tools={["Apple Health", "Whoop"]}
+          href="/fitness/strength"
+        />
+        <ModuleCard
+          index="04"
+          title="Core & Stability · 核心与稳定性"
+          subtitle="Anti-rotation, anti-extension, single-leg balance. The quiet engine behind every groundstroke and every lift — the part nobody trains until something tears."
+          status="planned"
+          tools={["Pallof Press", "Dead Bug", "Copenhagen"]}
+          href="/fitness/core"
         />
       </div>
     </div>

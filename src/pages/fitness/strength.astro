@@ -1,0 +1,97 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ArticleRow from '~/components/ArticleRow.astro';
+
+interface Article {
+  index: string;
+  title: string;
+  lede: string;
+  status: 'live' | 'wip' | 'planned';
+  href?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const articles: Article[] = [
+  {
+    index: '01',
+    title: 'The four lifts I keep coming back to',
+    lede: 'After cycling through eight different programs in three years I have settled on four movements that earn their slot regardless of phase — trap-bar deadlift, goblet squat, single-arm dumbbell row, and overhead press. Everything else is seasoning. Here is the case for each and why I picked these variations over the textbook versions.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['programming'],
+  },
+  {
+    index: '02',
+    title: 'Strength for tennis — the four mistakes I made first',
+    lede: 'I tried to train like a powerlifter for two years before realising tennis is not a max-effort sport. It is repeated near-max effort, recoverable inside a 20-second window, for three hours. The mistakes I made — heavy bench press, low-rep barbell squats, no rotational work, no single-leg work — all came from copying programs written for a different sport.',
+    status: 'planned',
+    date: '2026-Q3',
+    tags: ['mistakes', 'tennis'],
+  },
+  {
+    index: '03',
+    title: 'A 40-minute home gym that actually gets used',
+    lede: 'The cheapest gym in the world is the one in the garage that you actually walk into. Mine is one adjustable bench, a pair of adjustable dumbbells, a trap bar, a pull-up bar, and a yoga mat. Total cost about NZD 1,200 over four years. Total sessions: way more than the commercial-gym membership it replaced.',
+    status: 'planned',
+    date: '2026-Q3',
+    tags: ['gear', 'home gym'],
+  },
+];
+
+const liveCount = articles.filter((a) => a.status === 'live').length;
+const wipCount = articles.filter((a) => a.status === 'wip').length;
+const planCount = articles.length - liveCount - wipCount;
+---
+
+<BaseLayout
+  title="Strength — Fitness — Gimbo's Universe"
+  description="Compound lifts, mobility work, recovery protocols. A hedge against everything tennis breaks down."
+  ogImage="/og-fitness.jpg"
+>
+  <SectionHero
+    index="02.3"
+    kicker="Fitness · Module 03 · Strength · 力量训练"
+    title={['Lift the body', 'tennis wears out.']}
+    subtitle="Compound lifts, mobility work, recovery protocols. Volume tracking and progression as a hedge against everything tennis breaks down."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-5xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 pb-3 border-b border-hairline gap-3">
+        <div>
+          <div class="terminal text-lime mb-1 text-[10px]">// ARTICLES</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            Logs & writing
+          </h2>
+        </div>
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
+          {liveCount} live · {wipCount} wip · {planCount} planned
+        </span>
+      </div>
+
+      <div class="space-y-3">
+        {articles.map((a) => (
+          <ArticleRow
+            index={a.index}
+            title={a.title}
+            lede={a.lede}
+            status={a.status}
+            href={a.href}
+            date={a.date}
+            tags={a.tags}
+          />
+        ))}
+      </div>
+
+      <a
+        href="/fitness"
+        class="mt-10 inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors"
+      >
+        ← back to Fitness
+      </a>
+    </div>
+  </section>
+</BaseLayout>

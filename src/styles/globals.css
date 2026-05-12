@@ -382,6 +382,115 @@
     }
   }
 
+  /* Article row — used on /fitness/<module> pages and any "list of articles"
+     surface. Big media block on the left, title + lede on the right. */
+  .article-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid #ffffff1a;
+    background: rgba(255, 255, 255, 0.015);
+    text-decoration: none;
+    color: inherit;
+    transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+    scroll-margin-top: 80px;
+  }
+  .article-row--link:hover {
+    background: rgba(159, 232, 112, 0.04);
+    border-color: rgba(159, 232, 112, 0.22);
+  }
+  .article-row--link:hover .article-row__arrow {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  .article-row__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #232323 100%);
+    border: 1px dashed #ffffff14;
+    overflow: hidden;
+  }
+  .article-row__media-mark {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #5a5a5a;
+  }
+  .article-row__media-index {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #5a5a5a;
+    font-weight: 800;
+  }
+  .article-row__body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .article-row__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    border: 1px solid #ffffff1f;
+    white-space: nowrap;
+  }
+  .article-row__title {
+    font-family: 'Wise Sans', 'Inter', system-ui, sans-serif;
+    font-weight: 900;
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .article-row__arrow {
+    display: inline-block;
+    margin-left: 8px;
+    color: #9fe870;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .article-row__lede {
+    color: #b6c7ad;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  @media (max-width: 640px) {
+    .article-row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 14px;
+    }
+    .article-row__media {
+      aspect-ratio: 16 / 9;
+    }
+    .article-row__title {
+      font-size: 19px;
+    }
+  }
+
   /* Long-form prose — used by ChapterLayout for book chapters.
      Tuned for bilingual EN + 中文 reading at ~17px / 1.75 line-height. */
   .prose {

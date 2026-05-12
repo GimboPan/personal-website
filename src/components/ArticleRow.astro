@@ -1,0 +1,65 @@
+---
+export interface Props {
+  index: string;
+  title: string;
+  lede: string;
+  status?: 'live' | 'wip' | 'planned';
+  href?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const {
+  index,
+  title,
+  lede,
+  status = 'planned',
+  href,
+  date,
+  tags = [],
+} = Astro.props;
+
+const statusMeta = {
+  live:    { label: 'LIVE', dot: 'bg-lime',                          text: 'text-lime' },
+  wip:     { label: 'WIP',  dot: 'bg-rg-orangeBright animate-pulse', text: 'text-ink-mint' },
+  planned: { label: 'SOON', dot: 'bg-ink-gray',                      text: 'text-ink-gray' },
+} as const;
+const s = statusMeta[status];
+
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag
+  href={href}
+  class:list={[
+    'article-row group/article',
+    href ? 'article-row--link' : 'article-row--static',
+  ]}
+>
+  <!-- Left: image placeholder -->
+  <div class="article-row__media">
+    <span class="article-row__media-mark font-mono">// image</span>
+    <span class="article-row__media-index font-mono">{index}</span>
+  </div>
+
+  <!-- Right: title + lede + meta -->
+  <div class="article-row__body">
+    <div class="flex items-center gap-3 flex-wrap">
+      <span class:list={['article-row__status', s.text]}>
+        <span class:list={['h-1.5 w-1.5 rounded-full', s.dot]}></span>
+        {s.label}
+      </span>
+      {date && <span class="font-mono text-[10px] tracking-tool text-ink-gray">{date}</span>}
+      {tags.map((t) => (
+        <span class="font-mono text-[10px] tracking-tool text-ink-gray">· {t}</span>
+      ))}
+    </div>
+
+    <h3 class="article-row__title">
+      {title}
+      {href && <span class="article-row__arrow">→</span>}
+    </h3>
+
+    <p class="article-row__lede">{lede}</p>
+  </div>
+</Tag>

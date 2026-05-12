@@ -1,0 +1,97 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+import ArticleRow from '~/components/ArticleRow.astro';
+
+interface Article {
+  index: string;
+  title: string;
+  lede: string;
+  status: 'live' | 'wip' | 'planned';
+  href?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const articles: Article[] = [
+  {
+    index: '01',
+    title: 'The NZ-grocery reality check',
+    lede: 'Most online nutrition advice assumes a US Trader Joe\'s pantry. In Auckland, half those ingredients are either three times the price, seasonal-only, or labelled differently. This is the working list of substitutions I made over twelve months to stop fighting the supermarket and start eating well within it.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['groceries'],
+  },
+  {
+    index: '02',
+    title: 'Protein on a training day — what 1.8g/kg actually looks like',
+    lede: 'The number is easy to quote and hard to hit without thinking. For an 80kg body that is 144g of protein per day, every day, including the days when I just want toast. Here is what a Tuesday on-court looks like when I actually count it — and the three meal patterns I rotate to make it boring enough to be sustainable.',
+    status: 'planned',
+    date: '2026-Q2',
+    tags: ['protein', 'tracking'],
+  },
+  {
+    index: '03',
+    title: 'Why I stopped tracking calories (and what I track instead)',
+    lede: 'I tracked every calorie for eighteen months and learned exactly one useful thing: that I under-ate protein on rest days and over-ate carbs the night before a hitting session. Once I knew that, the spreadsheet was friction. Now I track three things and ignore the rest.',
+    status: 'planned',
+    date: '2026-Q3',
+    tags: ['habits'],
+  },
+];
+
+const liveCount = articles.filter((a) => a.status === 'live').length;
+const wipCount = articles.filter((a) => a.status === 'wip').length;
+const planCount = articles.length - liveCount - wipCount;
+---
+
+<BaseLayout
+  title="Nutrition — Fitness — Gimbo's Universe"
+  description="What I eat, when, and why. Tracking intake against training load and NZ-grocery realities."
+  ogImage="/og-fitness.jpg"
+>
+  <SectionHero
+    index="02.2"
+    kicker="Fitness · Module 02 · Nutrition · 营养"
+    title={['Food is fuel.', 'Also memory.']}
+    subtitle="What I eat, when, and why — tracked against training load and the long game, not the next 6-pack."
+    bandClass="border-b border-hairline"
+  />
+
+  <section class="relative">
+    <div class="mx-auto max-w-5xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 pb-3 border-b border-hairline gap-3">
+        <div>
+          <div class="terminal text-lime mb-1 text-[10px]">// ARTICLES</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            Logs & writing
+          </h2>
+        </div>
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
+          {liveCount} live · {wipCount} wip · {planCount} planned
+        </span>
+      </div>
+
+      <div class="space-y-3">
+        {articles.map((a) => (
+          <ArticleRow
+            index={a.index}
+            title={a.title}
+            lede={a.lede}
+            status={a.status}
+            href={a.href}
+            date={a.date}
+            tags={a.tags}
+          />
+        ))}
+      </div>
+
+      <a
+        href="/fitness"
+        class="mt-10 inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors"
+      >
+        ← back to Fitness
+      </a>
+    </div>
+  </section>
+</BaseLayout>

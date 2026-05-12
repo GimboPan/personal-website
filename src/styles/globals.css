@@ -491,6 +491,129 @@
     }
   }
 
+  /* Claude Code pixel mascot card — decorative slot on /fitness row 1. */
+  .mascot-card {
+    background: linear-gradient(180deg, #1a1b17 0%, #15110d 100%);
+  }
+  .mascot-stage {
+    position: relative;
+    margin-top: auto;
+  }
+  .mascot-prompt {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    opacity: 0.85;
+  }
+  .mascot-cursor {
+    color: #9fe870;
+    margin-left: 2px;
+    animation: mascot-cursor-blink 1s steps(1, end) infinite;
+  }
+  @keyframes mascot-cursor-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  .mascot-floor {
+    position: relative;
+    height: 100px;
+    border: 1px solid rgba(159, 232, 112, 0.14);
+    border-radius: 10px;
+    background:
+      linear-gradient(180deg, rgba(159, 232, 112, 0.02) 0%, rgba(0,0,0,0.25) 100%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(159, 232, 112, 0.05) 0,
+        rgba(159, 232, 112, 0.05) 1px,
+        transparent 1px,
+        transparent 12px
+      );
+    overflow: hidden;
+  }
+  .mascot-floor::before {
+    /* baseline tick under character */
+    content: "";
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    height: 1px;
+    background: rgba(159, 232, 112, 0.18);
+  }
+  .mascot-walker {
+    position: absolute;
+    bottom: 10px;
+    width: 56px;
+    height: 70px;
+    animation: mascot-walk 9s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes mascot-walk {
+    0%   { left: 10px; transform: scaleX(1); }
+    45%  { left: calc(100% - 66px); transform: scaleX(1); }
+    50%  { left: calc(100% - 66px); transform: scaleX(-1); }
+    95%  { left: 10px; transform: scaleX(-1); }
+    100% { left: 10px; transform: scaleX(1); }
+  }
+  .mascot-bobber {
+    position: relative;
+    width: 56px;
+    height: 70px;
+    animation: mascot-bob 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes mascot-bob {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-2px); }
+  }
+  .mascot-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  .mascot-frame--1 { animation: mascot-frame-a 0.6s steps(1, end) infinite; }
+  .mascot-frame--2 { animation: mascot-frame-b 0.6s steps(1, end) infinite; opacity: 0; }
+  @keyframes mascot-frame-a {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  @keyframes mascot-frame-b {
+    0%, 49% { opacity: 0; }
+    50%, 100% { opacity: 1; }
+  }
+  .mascot-shadow {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 40px;
+    height: 5px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 70%);
+    transform: translateX(-50%);
+    animation: mascot-shadow 0.6s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes mascot-shadow {
+    from { transform: translateX(-50%) scale(1, 1);    opacity: 0.7; }
+    to   { transform: translateX(-50%) scale(0.82, 1); opacity: 0.45; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mascot-walker,
+    .mascot-bobber,
+    .mascot-shadow,
+    .mascot-frame--1,
+    .mascot-frame--2,
+    .mascot-cursor {
+      animation: none;
+    }
+    .mascot-frame--2 { opacity: 0; }
+    .mascot-walker { left: 50%; transform: translateX(-50%); }
+  }
+
   /* Long-form prose — used by ChapterLayout for book chapters.
      Tuned for bilingual EN + 中文 reading at ~17px / 1.75 line-height. */
   .prose {

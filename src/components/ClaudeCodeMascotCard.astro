@@ -1,0 +1,143 @@
+---
+/**
+ * Decorative pixel-art card — a Claude Code companion idling and
+ * walking back and forth on a small terminal floor. Slots into the
+ * /fitness module grid; non-interactive, no link.
+ *
+ * Two SVG frames (legs-together / legs-apart) alternate every 0.3s
+ * via CSS opacity keyframes, driven from .article-row__media-style
+ * animation primitives in globals.css.
+ */
+---
+
+<div class="card mascot-card relative h-full flex flex-col overflow-hidden">
+  <div class="flex items-start justify-between gap-4 mb-4">
+    <div
+      class="inline-flex items-center justify-center rounded-full font-mono font-black bg-lime text-lime-dark h-10 w-10 text-sm"
+    >
+      00
+    </div>
+    <div
+      class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-tool bg-lime-tint text-lime"
+    >
+      <span class="h-1.5 w-1.5 rounded-full bg-lime"></span>
+      LIVE
+    </div>
+  </div>
+
+  <h3
+    class="font-sans font-black leading-tight text-xl md:text-2xl text-ink-white"
+  >
+    Built with Claude Code.
+  </h3>
+  <p class="mt-2 leading-relaxed text-sm text-ink-mint">
+    Every page on this site — every keyframe of this animation — vibe-coded
+    with the CLI companion in the corner.
+  </p>
+
+  <!-- pixel stage -->
+  <div class="mascot-stage mt-4">
+    <div class="mascot-prompt font-mono">
+      <span class="text-lime">$</span>
+      <span class="text-ink-white">claude</span>
+      <span class="mascot-cursor">▍</span>
+    </div>
+
+    <div class="mascot-floor">
+      <div class="mascot-walker">
+        <div class="mascot-shadow"></div>
+        <div class="mascot-bobber">
+          <!-- Frame 1 — legs together -->
+          <svg
+            class="mascot-frame mascot-frame--1"
+            viewBox="0 0 16 20"
+            shape-rendering="crispEdges"
+            aria-hidden="true"
+          >
+            <!-- hair -->
+            <rect x="5" y="1" width="6" height="2" fill="#1a1410"/>
+            <rect x="4" y="2" width="2" height="1" fill="#1a1410"/>
+            <rect x="10" y="2" width="2" height="1" fill="#1a1410"/>
+            <rect x="4" y="3" width="1" height="3" fill="#1a1410"/>
+            <rect x="11" y="3" width="1" height="3" fill="#1a1410"/>
+            <!-- head/skin -->
+            <rect x="6" y="2" width="4" height="1" fill="#d97757"/>
+            <rect x="5" y="3" width="6" height="4" fill="#d97757"/>
+            <!-- eyes -->
+            <rect x="6" y="4" width="1" height="1" fill="#0e0f0c"/>
+            <rect x="9" y="4" width="1" height="1" fill="#0e0f0c"/>
+            <!-- mouth -->
+            <rect x="7" y="6" width="2" height="1" fill="#a0463a"/>
+            <!-- neck -->
+            <rect x="7" y="7" width="2" height="1" fill="#d97757"/>
+            <!-- shirt -->
+            <rect x="5" y="8" width="6" height="1" fill="#ffffff"/>
+            <rect x="4" y="9" width="8" height="1" fill="#ffffff"/>
+            <rect x="3" y="10" width="10" height="3" fill="#ffffff"/>
+            <rect x="4" y="13" width="8" height="1" fill="#ffffff"/>
+            <!-- arms -->
+            <rect x="2" y="10" width="1" height="2" fill="#d97757"/>
+            <rect x="13" y="10" width="1" height="2" fill="#d97757"/>
+            <!-- lime accent (shirt logo) -->
+            <rect x="7" y="11" width="2" height="1" fill="#9fe870"/>
+            <rect x="6" y="12" width="1" height="1" fill="#9fe870"/>
+            <rect x="9" y="12" width="1" height="1" fill="#9fe870"/>
+            <!-- pants -->
+            <rect x="5" y="14" width="6" height="2" fill="#0e0f0c"/>
+            <!-- legs (together) -->
+            <rect x="6" y="16" width="2" height="2" fill="#0e0f0c"/>
+            <rect x="8" y="16" width="2" height="2" fill="#0e0f0c"/>
+            <!-- shoes -->
+            <rect x="5" y="18" width="3" height="1" fill="#ffffff"/>
+            <rect x="8" y="18" width="3" height="1" fill="#ffffff"/>
+          </svg>
+
+          <!-- Frame 2 — legs apart (mid-stride) -->
+          <svg
+            class="mascot-frame mascot-frame--2"
+            viewBox="0 0 16 20"
+            shape-rendering="crispEdges"
+            aria-hidden="true"
+          >
+            <!-- hair -->
+            <rect x="5" y="1" width="6" height="2" fill="#1a1410"/>
+            <rect x="4" y="2" width="2" height="1" fill="#1a1410"/>
+            <rect x="10" y="2" width="2" height="1" fill="#1a1410"/>
+            <rect x="4" y="3" width="1" height="3" fill="#1a1410"/>
+            <rect x="11" y="3" width="1" height="3" fill="#1a1410"/>
+            <!-- head/skin -->
+            <rect x="6" y="2" width="4" height="1" fill="#d97757"/>
+            <rect x="5" y="3" width="6" height="4" fill="#d97757"/>
+            <!-- eyes -->
+            <rect x="6" y="4" width="1" height="1" fill="#0e0f0c"/>
+            <rect x="9" y="4" width="1" height="1" fill="#0e0f0c"/>
+            <!-- mouth -->
+            <rect x="7" y="6" width="2" height="1" fill="#a0463a"/>
+            <!-- neck -->
+            <rect x="7" y="7" width="2" height="1" fill="#d97757"/>
+            <!-- shirt -->
+            <rect x="5" y="8" width="6" height="1" fill="#ffffff"/>
+            <rect x="4" y="9" width="8" height="1" fill="#ffffff"/>
+            <rect x="3" y="10" width="10" height="3" fill="#ffffff"/>
+            <rect x="4" y="13" width="8" height="1" fill="#ffffff"/>
+            <!-- arms (one swung forward — slightly angled by 1px) -->
+            <rect x="2" y="11" width="1" height="2" fill="#d97757"/>
+            <rect x="13" y="9" width="1" height="2" fill="#d97757"/>
+            <!-- lime accent -->
+            <rect x="7" y="11" width="2" height="1" fill="#9fe870"/>
+            <rect x="6" y="12" width="1" height="1" fill="#9fe870"/>
+            <rect x="9" y="12" width="1" height="1" fill="#9fe870"/>
+            <!-- pants -->
+            <rect x="5" y="14" width="6" height="2" fill="#0e0f0c"/>
+            <!-- legs (apart, mid-stride) -->
+            <rect x="5" y="16" width="2" height="2" fill="#0e0f0c"/>
+            <rect x="9" y="16" width="2" height="2" fill="#0e0f0c"/>
+            <!-- shoes (staggered) -->
+            <rect x="4" y="18" width="3" height="1" fill="#ffffff"/>
+            <rect x="9" y="18" width="3" height="1" fill="#ffffff"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -491,7 +491,90 @@
     }
   }
 
-  /* Claude Code pixel mascot card — decorative slot on /fitness row 1. */
+  /* Reusable pixel-mascot — used by ClaudeCodeMascotCard and any
+     scene that wants a Claude Code companion idling at the bottom.
+     Sized + colored via CSS custom properties from the parent. */
+  .pixel-mascot {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .pixel-mascot__walker {
+    position: absolute;
+    bottom: var(--mascot-bottom, 0);
+    width: var(--mascot-size, 56px);
+    height: calc(var(--mascot-size, 56px) * 1.25);
+    animation: pixel-mascot-walk var(--mascot-walk-dur, 9s) ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes pixel-mascot-walk {
+    0%   { left: var(--mascot-pad, 10px); transform: scaleX(1); }
+    45%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px)); transform: scaleX(1); }
+    50%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px)); transform: scaleX(-1); }
+    95%  { left: var(--mascot-pad, 10px); transform: scaleX(-1); }
+    100% { left: var(--mascot-pad, 10px); transform: scaleX(1); }
+  }
+  .pixel-mascot__bobber {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: pixel-mascot-bob 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes pixel-mascot-bob {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-2px); }
+  }
+  .pixel-mascot__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  .pixel-mascot__frame--1 { animation: pixel-mascot-frame-a 0.6s steps(1, end) infinite; }
+  .pixel-mascot__frame--2 { animation: pixel-mascot-frame-b 0.6s steps(1, end) infinite; opacity: 0; }
+  @keyframes pixel-mascot-frame-a {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  @keyframes pixel-mascot-frame-b {
+    0%, 49% { opacity: 0; }
+    50%, 100% { opacity: 1; }
+  }
+  .pixel-mascot__accent {
+    fill: var(--mascot-accent, #9fe870);
+  }
+  .pixel-mascot__shadow {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: calc(var(--mascot-size, 56px) * 0.7);
+    height: 5px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 70%);
+    transform: translateX(-50%);
+    animation: pixel-mascot-shadow 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes pixel-mascot-shadow {
+    from { transform: translateX(-50%) scale(1, 1);    opacity: 0.7; }
+    to   { transform: translateX(-50%) scale(0.82, 1); opacity: 0.45; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pixel-mascot__walker,
+    .pixel-mascot__bobber,
+    .pixel-mascot__shadow,
+    .pixel-mascot__frame--1,
+    .pixel-mascot__frame--2 {
+      animation: none;
+    }
+    .pixel-mascot__frame--2 { opacity: 0; }
+    .pixel-mascot__walker { left: 50%; transform: translateX(-50%); }
+  }
+
+  /* Claude Code pixel mascot card — decorative slot on /fitness row 1.
+     The bordered "terminal floor" framing lives here; the walking
+     character itself comes from <PixelMascot />. */
   .mascot-card {
     background: linear-gradient(180deg, #1a1b17 0%, #15110d 100%);
   }
@@ -542,76 +625,6 @@
     bottom: 8px;
     height: 1px;
     background: rgba(159, 232, 112, 0.18);
-  }
-  .mascot-walker {
-    position: absolute;
-    bottom: 10px;
-    width: 56px;
-    height: 70px;
-    animation: mascot-walk 9s ease-in-out infinite;
-    transform-origin: center bottom;
-  }
-  @keyframes mascot-walk {
-    0%   { left: 10px; transform: scaleX(1); }
-    45%  { left: calc(100% - 66px); transform: scaleX(1); }
-    50%  { left: calc(100% - 66px); transform: scaleX(-1); }
-    95%  { left: 10px; transform: scaleX(-1); }
-    100% { left: 10px; transform: scaleX(1); }
-  }
-  .mascot-bobber {
-    position: relative;
-    width: 56px;
-    height: 70px;
-    animation: mascot-bob 0.6s ease-in-out infinite alternate;
-  }
-  @keyframes mascot-bob {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-2px); }
-  }
-  .mascot-frame {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-  }
-  .mascot-frame--1 { animation: mascot-frame-a 0.6s steps(1, end) infinite; }
-  .mascot-frame--2 { animation: mascot-frame-b 0.6s steps(1, end) infinite; opacity: 0; }
-  @keyframes mascot-frame-a {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-  @keyframes mascot-frame-b {
-    0%, 49% { opacity: 0; }
-    50%, 100% { opacity: 1; }
-  }
-  .mascot-shadow {
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 40px;
-    height: 5px;
-    background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 70%);
-    transform: translateX(-50%);
-    animation: mascot-shadow 0.6s ease-in-out infinite alternate;
-    pointer-events: none;
-  }
-  @keyframes mascot-shadow {
-    from { transform: translateX(-50%) scale(1, 1);    opacity: 0.7; }
-    to   { transform: translateX(-50%) scale(0.82, 1); opacity: 0.45; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .mascot-walker,
-    .mascot-bobber,
-    .mascot-shadow,
-    .mascot-frame--1,
-    .mascot-frame--2,
-    .mascot-cursor {
-      animation: none;
-    }
-    .mascot-frame--2 { opacity: 0; }
-    .mascot-walker { left: 50%; transform: translateX(-50%); }
   }
 
   /* Long-form prose — used by ChapterLayout for book chapters.

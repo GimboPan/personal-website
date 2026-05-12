@@ -1,0 +1,134 @@
+---
+/**
+ * Reusable pixel-art Claude Code companion that walks back and forth
+ * across the bottom of its positioned parent. Renders as an absolutely
+ * positioned overlay (inset: 0; pointer-events: none) so it can be
+ * dropped into any card/scene without disturbing layout.
+ *
+ * The parent must be `position: relative` (or otherwise establish a
+ * containing block) and should usually have `overflow: hidden`.
+ */
+export interface Props {
+  /** Sprite pixel size (square). Default 56. */
+  size?: number;
+  /** Accent color used for the lime "C" on the character's shirt. */
+  accent?: string;
+  /** Edge padding the character reverses at. Default 10. */
+  padding?: number;
+  /** Walk-loop duration (CSS time string). Default 9s. */
+  walkDuration?: string;
+  /** Offset from the parent's bottom edge. Default 0. */
+  bottomOffset?: number;
+}
+
+const {
+  size = 56,
+  accent = '#9fe870',
+  padding = 10,
+  walkDuration = '9s',
+  bottomOffset = 0,
+} = Astro.props;
+
+const styleVars = [
+  `--mascot-size: ${size}px`,
+  `--mascot-accent: ${accent}`,
+  `--mascot-pad: ${padding}px`,
+  `--mascot-walk-dur: ${walkDuration}`,
+  `--mascot-bottom: ${bottomOffset}px`,
+].join('; ');
+---
+
+<div class="pixel-mascot" style={styleVars} aria-hidden="true">
+  <div class="pixel-mascot__walker">
+    <div class="pixel-mascot__shadow"></div>
+    <div class="pixel-mascot__bobber">
+      <!-- Frame 1 — legs together -->
+      <svg
+        class="pixel-mascot__frame pixel-mascot__frame--1"
+        viewBox="0 0 16 20"
+        shape-rendering="crispEdges"
+      >
+        <!-- hair -->
+        <rect x="5" y="1" width="6" height="2" fill="#1a1410"/>
+        <rect x="4" y="2" width="2" height="1" fill="#1a1410"/>
+        <rect x="10" y="2" width="2" height="1" fill="#1a1410"/>
+        <rect x="4" y="3" width="1" height="3" fill="#1a1410"/>
+        <rect x="11" y="3" width="1" height="3" fill="#1a1410"/>
+        <!-- head/skin -->
+        <rect x="6" y="2" width="4" height="1" fill="#d97757"/>
+        <rect x="5" y="3" width="6" height="4" fill="#d97757"/>
+        <!-- eyes -->
+        <rect x="6" y="4" width="1" height="1" fill="#0e0f0c"/>
+        <rect x="9" y="4" width="1" height="1" fill="#0e0f0c"/>
+        <!-- mouth -->
+        <rect x="7" y="6" width="2" height="1" fill="#a0463a"/>
+        <!-- neck -->
+        <rect x="7" y="7" width="2" height="1" fill="#d97757"/>
+        <!-- shirt -->
+        <rect x="5" y="8" width="6" height="1" fill="#ffffff"/>
+        <rect x="4" y="9" width="8" height="1" fill="#ffffff"/>
+        <rect x="3" y="10" width="10" height="3" fill="#ffffff"/>
+        <rect x="4" y="13" width="8" height="1" fill="#ffffff"/>
+        <!-- arms -->
+        <rect x="2" y="10" width="1" height="2" fill="#d97757"/>
+        <rect x="13" y="10" width="1" height="2" fill="#d97757"/>
+        <!-- accent logo -->
+        <rect x="7" y="11" width="2" height="1" class="pixel-mascot__accent"/>
+        <rect x="6" y="12" width="1" height="1" class="pixel-mascot__accent"/>
+        <rect x="9" y="12" width="1" height="1" class="pixel-mascot__accent"/>
+        <!-- pants -->
+        <rect x="5" y="14" width="6" height="2" fill="#0e0f0c"/>
+        <!-- legs together -->
+        <rect x="6" y="16" width="2" height="2" fill="#0e0f0c"/>
+        <rect x="8" y="16" width="2" height="2" fill="#0e0f0c"/>
+        <!-- shoes -->
+        <rect x="5" y="18" width="3" height="1" fill="#ffffff"/>
+        <rect x="8" y="18" width="3" height="1" fill="#ffffff"/>
+      </svg>
+
+      <!-- Frame 2 — legs apart (mid-stride) -->
+      <svg
+        class="pixel-mascot__frame pixel-mascot__frame--2"
+        viewBox="0 0 16 20"
+        shape-rendering="crispEdges"
+      >
+        <!-- hair -->
+        <rect x="5" y="1" width="6" height="2" fill="#1a1410"/>
+        <rect x="4" y="2" width="2" height="1" fill="#1a1410"/>
+        <rect x="10" y="2" width="2" height="1" fill="#1a1410"/>
+        <rect x="4" y="3" width="1" height="3" fill="#1a1410"/>
+        <rect x="11" y="3" width="1" height="3" fill="#1a1410"/>
+        <!-- head/skin -->
+        <rect x="6" y="2" width="4" height="1" fill="#d97757"/>
+        <rect x="5" y="3" width="6" height="4" fill="#d97757"/>
+        <!-- eyes -->
+        <rect x="6" y="4" width="1" height="1" fill="#0e0f0c"/>
+        <rect x="9" y="4" width="1" height="1" fill="#0e0f0c"/>
+        <!-- mouth -->
+        <rect x="7" y="6" width="2" height="1" fill="#a0463a"/>
+        <!-- neck -->
+        <rect x="7" y="7" width="2" height="1" fill="#d97757"/>
+        <!-- shirt -->
+        <rect x="5" y="8" width="6" height="1" fill="#ffffff"/>
+        <rect x="4" y="9" width="8" height="1" fill="#ffffff"/>
+        <rect x="3" y="10" width="10" height="3" fill="#ffffff"/>
+        <rect x="4" y="13" width="8" height="1" fill="#ffffff"/>
+        <!-- arms (swung) -->
+        <rect x="2" y="11" width="1" height="2" fill="#d97757"/>
+        <rect x="13" y="9" width="1" height="2" fill="#d97757"/>
+        <!-- accent logo -->
+        <rect x="7" y="11" width="2" height="1" class="pixel-mascot__accent"/>
+        <rect x="6" y="12" width="1" height="1" class="pixel-mascot__accent"/>
+        <rect x="9" y="12" width="1" height="1" class="pixel-mascot__accent"/>
+        <!-- pants -->
+        <rect x="5" y="14" width="6" height="2" fill="#0e0f0c"/>
+        <!-- legs apart -->
+        <rect x="5" y="16" width="2" height="2" fill="#0e0f0c"/>
+        <rect x="9" y="16" width="2" height="2" fill="#0e0f0c"/>
+        <!-- shoes staggered -->
+        <rect x="4" y="18" width="3" height="1" fill="#ffffff"/>
+        <rect x="9" y="18" width="3" height="1" fill="#ffffff"/>
+      </svg>
+    </div>
+  </div>
+</div>

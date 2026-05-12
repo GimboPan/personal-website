@@ -505,8 +505,18 @@
     bottom: var(--mascot-bottom, 0);
     width: var(--mascot-size, 56px);
     height: calc(var(--mascot-size, 56px) * 1.25);
-    animation: pixel-mascot-walk var(--mascot-walk-dur, 9s) ease-in-out infinite;
     transform-origin: center bottom;
+    animation-duration: var(--mascot-walk-dur, 9s);
+    animation-delay: var(--mascot-delay, 0s);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .pixel-mascot--walk .pixel-mascot__walker {
+    animation-name: pixel-mascot-walk;
+  }
+  .pixel-mascot--walk-look .pixel-mascot__walker {
+    animation-name: pixel-mascot-walk-look;
+    animation-timing-function: linear;
   }
   @keyframes pixel-mascot-walk {
     0%   { left: var(--mascot-pad, 10px); transform: scaleX(1); }
@@ -514,6 +524,31 @@
     50%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px)); transform: scaleX(-1); }
     95%  { left: var(--mascot-pad, 10px); transform: scaleX(-1); }
     100% { left: var(--mascot-pad, 10px); transform: scaleX(1); }
+  }
+  /* walk-look: walk to one side, pause and glance both ways,
+     walk back, pause and glance both ways again. ~16s feels right.
+     During the "look" phases the legs keep their swap animation,
+     reading as a small weight-shift / foot-shuffle. */
+  @keyframes pixel-mascot-walk-look {
+    /* walking right (face right, scaleX 1) */
+    0%   { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+    40%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(1); }
+    /* arrived at right edge: pause, glance left, glance right */
+    42%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(1); }
+    45%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(-1); }
+    48%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(-1); }
+    50%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(1); }
+    52%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(1); }
+    /* commit to walking back — face left and head home */
+    54%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(-1); }
+    90%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(-1); }
+    /* arrived at left edge: pause, glance right, glance left */
+    92%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(-1); }
+    94%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+    96%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+    98%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(-1); }
+    /* re-orient to walk right for the next loop */
+    100% { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
   }
   .pixel-mascot__bobber {
     position: relative;

@@ -19,6 +19,19 @@ export interface Props {
   walkDuration?: string;
   /** Offset from the parent's bottom edge. Default 0. */
   bottomOffset?: number;
+  /**
+   * Movement behavior:
+   *  - 'walk': straight back-and-forth (default)
+   *  - 'walk-look': walk to one end, pause and look both ways, walk
+   *    back, repeat. Useful for slower, more lifelike ambient mascots.
+   */
+  behavior?: 'walk' | 'walk-look';
+  /**
+   * Optional CSS animation-delay (e.g. '-4s'). Negative delays start
+   * the character mid-cycle — useful to desynchronize multiple
+   * mascots that share a parent.
+   */
+  delay?: string;
 }
 
 const {
@@ -27,6 +40,8 @@ const {
   padding = 10,
   walkDuration = '9s',
   bottomOffset = 0,
+  behavior = 'walk',
+  delay = '0s',
 } = Astro.props;
 
 const styleVars = [
@@ -35,10 +50,15 @@ const styleVars = [
   `--mascot-pad: ${padding}px`,
   `--mascot-walk-dur: ${walkDuration}`,
   `--mascot-bottom: ${bottomOffset}px`,
+  `--mascot-delay: ${delay}`,
 ].join('; ');
 ---
 
-<div class="pixel-mascot" style={styleVars} aria-hidden="true">
+<div
+  class:list={['pixel-mascot', `pixel-mascot--${behavior}`]}
+  style={styleVars}
+  aria-hidden="true"
+>
   <div class="pixel-mascot__walker">
     <div class="pixel-mascot__shadow"></div>
     <div class="pixel-mascot__bobber">

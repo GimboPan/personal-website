@@ -2,6 +2,7 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ModuleCard from '~/components/ModuleCard.astro';
 import HeroSection from '~/components/HeroSection.astro';
+import PixelMascot from '~/components/PixelMascot.astro';
 ---
 
 <BaseLayout
@@ -199,6 +200,28 @@ import HeroSection from '~/components/HeroSection.astro';
             </ul>
           </div>
         </ModuleCard>
+      </div>
+
+      <!-- Bottom dividing line — two pixel companions pacing,
+           pausing to look around. Decorative; non-interactive. -->
+      <div class="mt-24 md:mt-28">
+        <div class="relative h-24 md:h-28 border-b border-hairline">
+          <PixelMascot
+            size={40}
+            accent="#9fe870"
+            walkDuration="18s"
+            behavior="walk-look"
+            padding={16}
+          />
+          <PixelMascot
+            size={36}
+            accent="#cc4e0e"
+            walkDuration="15s"
+            behavior="walk-look"
+            delay="-7s"
+            padding={24}
+          />
+        </div>
       </div>
     </div>
   </section>

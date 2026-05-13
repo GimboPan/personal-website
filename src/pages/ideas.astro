@@ -1,73 +1,146 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import ModuleCard from '~/components/ModuleCard.astro';
-import HeroSection from '~/components/HeroSection.astro';
+import ArticleRow from '~/components/ArticleRow.astro';
+
+// Article catalog. New pieces go here; the topic counts + archive
+// timeline below are derived from this single source of truth.
+const articles = [
+  {
+    index: '02',
+    title: '《文明》系列与 AI 时代的人生意义',
+    lede: '为什么马斯克、贝佐斯、扎克伯格几乎都在不同场合推荐 Iain M. Banks 的《文明》（The Culture）系列？如果 AI 真的把我们从"工作"中解放出来，人活着的意义到底是什么？这是我和 Gemini 的一次深度对话的整理。',
+    date: '2026.05',
+    tags: ['Culture'],
+    topicSlug: 'culture',
+    href: '/ideas/culture-series',
+    status: 'live' as const,
+  },
+  {
+    index: '01',
+    title: 'Yang 的竞选史 + UBI 起源',
+    lede: 'Yang 上一次参选总统是 2020 年大选，那本《The War on Normal People》系统阐述了 UBI 论证——但当时谈的是蓝领+物理自动化的故事。2026 年再看，论证的射程已经从蓝领扩到了白领，这是质变；但政治可行性其实比 2020 年还要更复杂。',
+    date: '2026.05',
+    tags: ['Economy'],
+    topicSlug: 'economy',
+    href: '/ideas/yang-ubi',
+    status: 'live' as const,
+  },
+];
+
+// Derive topic counts + archive timeline from the article list — keeps
+// the sidebar numbers honest without a manual update step.
+const topicDefs = [
+  { slug: 'all',     label: '全部',  sub: 'All'     },
+  { slug: 'society', label: '社会',  sub: 'Society' },
+  { slug: 'economy', label: '经济',  sub: 'Economy' },
+  { slug: 'culture', label: '文化',  sub: 'Culture' },
+  { slug: 'tech',    label: '科技',  sub: 'Tech'    },
+];
+const topics = topicDefs.map((t) => ({
+  ...t,
+  count: t.slug === 'all'
+    ? articles.length
+    : articles.filter((a) => a.topicSlug === t.slug).length,
+  active: t.slug === 'all',
+}));
+
+const archiveCounts = articles.reduce<Record<string, number>>((acc, a) => {
+  acc[a.date] = (acc[a.date] ?? 0) + 1;
+  return acc;
+}, {});
+const archiveMonths = ['2026.05', '2026.04', '2026.03', '2026.02', '2026.01'];
+const archive = archiveMonths.map((ym) => ({ ym, count: archiveCounts[ym] ?? 0 }));
 ---
 
 <BaseLayout
   title="Ideas — Gimbo's Universe"
-  description="Exploring concepts that shape a better future — humanity, society, technology, and what comes next."
+  description="Concepts that shape a better future — society, economy, culture, technology."
   ogImage="/og-ideas.jpg"
 >
-  <HeroSection
-    name="ideas-hero"
-    alt="Ideas — a lone figure stands beneath a giant sculpted head dissolving into floating monoliths above a desert plain"
-  />
-
   <section class="relative">
-    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16">
-      <div class="flex items-end justify-between mb-8">
-        <h2 class="font-display text-3xl md:text-5xl font-black text-ink-white leading-none">
-          Streams
-        </h2>
-        <div class="terminal text-ink-gray hidden md:block">
-          // all coming soon · check back later
-        </div>
-      </div>
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-16 md:py-20">
+      <!-- Page header. A smaller hero image will land in this slot later. -->
+      <header class="mb-12 md:mb-16 max-w-2xl">
+        <h1 class="font-display text-4xl md:text-6xl font-black text-ink-white leading-none uppercase">
+          Ideas.
+        </h1>
+        <p class="mt-4 md:mt-6 text-base md:text-lg text-ink-mint leading-relaxed">
+          Concepts that shape a better future — society, economy, culture, technology. Slow writing, posted when there is something to say.
+        </p>
+      </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <ModuleCard
-          index="01"
-          title="Essays"
-          subtitle="Long-form pieces — the slow lane. One published when it actually has something to say."
-          status="planned"
-          tools={[]}
-        />
-        <ModuleCard
-          index="02"
-          title="Conviction Theses"
-          subtitle="What I think will be true in 5 years and why. Updated when wrong."
-          status="planned"
-          tools={[]}
-        />
-        <ModuleCard
-          index="03"
-          title="Reading Notes"
-          subtitle="Notes on books that changed something. Sparse on purpose."
-          status="planned"
-          tools={[]}
-        />
-        <ModuleCard
-          index="04"
-          title="Build Logs"
-          subtitle="What the agents did, decided, escalated. Retrospectives from the trenches."
-          status="planned"
-          tools={[]}
-        />
-        <ModuleCard
-          index="05"
-          title="Weekly Reviews"
-          subtitle="Six dimensions every Sunday — health, learning, people, projects, money, work."
-          status="planned"
-          tools={[]}
-        />
-        <ModuleCard
-          index="06"
-          title="Sketches"
-          subtitle="Half-formed ideas. Posted before they are ready, in case they help someone else."
-          status="planned"
-          tools={[]}
-        />
+      <!-- 3-column layout: topics · articles · archive timeline.
+           Stacks on mobile; on desktop the sidebars stay sticky as you scroll. -->
+      <div class="grid grid-cols-1 lg:grid-cols-[180px_minmax(0,1fr)_180px] gap-10 lg:gap-12">
+
+        <!-- LEFT — topic filters -->
+        <aside class="lg:sticky lg:top-24 lg:self-start">
+          <h2 class="font-mono text-[10px] tracking-tool uppercase text-ink-gray mb-4">
+            Topics
+          </h2>
+          <ul class="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+            {topics.map((t) => (
+              <li>
+                <a
+                  href={`#topic-${t.slug}`}
+                  class:list={[
+                    'flex items-baseline justify-between gap-3 px-3 py-2 rounded-md text-sm transition-colors',
+                    t.active
+                      ? 'bg-white/[0.04] text-ink-white border border-lime/30'
+                      : 'text-ink-mint hover:text-ink-white hover:bg-white/[0.02] border border-transparent',
+                  ]}
+                >
+                  <span class="flex items-baseline gap-2">
+                    <span>{t.label}</span>
+                    <span class="font-mono text-[10px] tracking-tool text-ink-gray">{t.sub}</span>
+                  </span>
+                  <span class="font-mono text-[10px] tracking-tool text-ink-gray">{t.count}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        <!-- MIDDLE — article list -->
+        <main class="space-y-4">
+          {articles.map((a) => (
+            <ArticleRow
+              index={a.index}
+              title={a.title}
+              lede={a.lede}
+              date={a.date}
+              tags={a.tags}
+              status={a.status}
+              href={a.href}
+            />
+          ))}
+
+          <p class="font-mono text-[11px] tracking-tool text-ink-gray pt-6">
+            // {articles.length} piece{articles.length === 1 ? '' : 's'} · more land here as they finish
+          </p>
+        </main>
+
+        <!-- RIGHT — archive timeline. Hidden on mobile to keep the article
+             column the focus; the same data can re-surface as a footer when
+             the archive matters. -->
+        <aside class="hidden lg:block lg:sticky lg:top-24 lg:self-start">
+          <h2 class="font-mono text-[10px] tracking-tool uppercase text-ink-gray mb-4">
+            Archive
+          </h2>
+          <ul class="space-y-1">
+            {archive.map((a) => (
+              <li>
+                <a
+                  href={`#archive-${a.ym.replace('.', '-')}`}
+                  class="flex items-baseline justify-between gap-3 px-3 py-1.5 rounded-md text-sm text-ink-mint hover:text-ink-white hover:bg-white/[0.02] transition-colors"
+                >
+                  <span class="font-mono tabular-nums">{a.ym}</span>
+                  <span class="font-mono text-[10px] tracking-tool text-ink-gray">{a.count}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
     </div>
   </section>

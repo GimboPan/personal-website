@@ -1,0 +1,172 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+const meta = {
+  title: 'Yang 的竞选史 + UBI 起源',
+  subtitle: '2018 蓝领自动化论 vs 2026 白领 AI 冲击 — 时机是不是真的到了',
+  date: '2026.05',
+  topic: 'Economy · 经济',
+  reading: '~8 min',
+};
+---
+
+<BaseLayout
+  title={`${meta.title} — Ideas · Gimbo's Universe`}
+  description={meta.subtitle}
+  ogImage="/og-ideas.jpg"
+>
+  <header class="border-b border-hairline">
+    <div class="mx-auto max-w-3xl px-6 lg:px-12 py-12 md:py-16">
+      <a
+        href="/ideas"
+        class="inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors mb-6"
+      >
+        ← back to ideas
+      </a>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 terminal text-lime text-[11px] mb-4">
+        <span>{meta.date}</span>
+        <span class="text-ink-gray">·</span>
+        <span>{meta.topic}</span>
+        <span class="text-ink-gray">·</span>
+        <span class="text-ink-gray">{meta.reading}</span>
+      </div>
+      <h1
+        class="font-display text-3xl md:text-5xl font-black text-ink-white leading-tight tracking-tight"
+      >
+        {meta.title}
+      </h1>
+      <p class="mt-4 text-base md:text-lg text-ink-mint italic leading-relaxed">
+        {meta.subtitle}
+      </p>
+    </div>
+  </header>
+
+  <article class="prose mx-auto max-w-3xl px-6 lg:px-12 py-12 md:py-16">
+    <p>
+      Yang 上一次参选总统是 2020 年大选（2019–2020 民主党初选），这是他第一次也是唯一一次正式参与总统竞选。
+    </p>
+
+    <h2>简要时间线</h2>
+
+    <ul>
+      <li><strong>2017 年底</strong>：辞掉自己的非营利组织 Venture for America，宣布参选</li>
+      <li><strong>2018 年</strong>：出版《The War on Normal People》，系统阐述 UBI 论证</li>
+      <li><strong>2019–2020</strong>：民主党初选，峰值民调 5% 左右，最终在新罕布什尔之后 2020 年 2 月退选</li>
+      <li><strong>2021 年</strong>：回纽约参选市长，民主党初选第四出局</li>
+      <li><strong>2022 年</strong>：正式与民主党决裂，创办中间派前进党（Forward Party）</li>
+      <li><strong>2024 年</strong>：没有再参选总统，把前进党作为一个长期改革平台经营</li>
+    </ul>
+
+    <p>
+      他当年那个 UBI 提案有个名字：<strong>Freedom Dividend</strong>（自由分红）——给每位 18 岁以上的美国公民每月 1,000 美元，无条件、不审查收入。
+    </p>
+
+    <h2>2018–2020 当时他论证 UBI 的背景</h2>
+
+    <p>
+      那时还没有 ChatGPT（ChatGPT 是 2022 年 11 月才发布的）。Yang 用的论据完全是蓝领+物理自动化的故事：
+    </p>
+
+    <ol>
+      <li><strong>制造业被自动化吃掉</strong>：1999 年至他写书时，美国制造业岗位减少约 400 万，主因是自动化（不是中国——他特意区分这一点）</li>
+      <li><strong>卡车司机即将被自动驾驶替代</strong>：全美约 350 万职业卡车司机，他认为这是"美国男性最常见的职业"——这群人没了工作，锈带就会爆炸</li>
+      <li><strong>零售末日（Retail Apocalypse）</strong>：Sears、JCPenney、玩具反斗城连环倒闭，亚马逊一家吃光商场</li>
+      <li><strong>客服外包+自动化</strong>：菲律宾呼叫中心 + 简单 IVR 已经在替代美国客服</li>
+      <li><strong>结构性指标恶化</strong>：GDP 在涨，但男性劳动参与率降到大萧条以来最低，"死亡绝望潮"（deaths of despair——阿片、酒精、自杀）正在重创中部小镇</li>
+      <li><strong>2016 年的政治信号</strong>：川普赢下密歇根、宾夕法尼亚、威斯康星——自动化打击最重的州。Yang 的核心政治论点是"川普 2016 是一次自动化警报，不是一次种族主义警报"</li>
+    </ol>
+
+    <p>
+      他的论证逻辑很清晰：<strong>资本主义+技术的回报正在脱离劳动</strong>。GDP 这个指标已经不能反映人的处境，所以需要把"作为公民"这件事直接货币化——你是美国人，所以你拿这份红利。资金来源：增值税（VAT）+ 收回的福利重叠 + 自动化红利再分配。
+    </p>
+
+    <p>
+      那次他做了一件很重要的事：把 UBI 从"硅谷怪人想法"和"老式社会主义"两个标签里同时拉出来，塞进美国主流政治讨论。他没赢，但他做到了"让讨论存在"。
+    </p>
+
+    <h2>现在（2026）看起来确实"时机到了"——但分三层看</h2>
+
+    <h3>第一层：论证的射程已经从蓝领扩到了白领，这是质变</h3>
+
+    <p>
+      Yang 2018 年那本书最大的政治弱点是——它谈的群体在政治上不够"有声音"。卡车司机、零售员工、制造业工人，这些群体投票率低、政治组织能力弱、媒体覆盖少。所以他喊了三年，主流媒体当成"那个有趣的亚洲数学男"看待。
+    </p>
+
+    <p>
+      但现在他这篇《The End of the Office》里，被点名的是：
+    </p>
+
+    <ul>
+      <li>律师、会计、程序员</li>
+      <li>中层管理者</li>
+      <li>大学应届生</li>
+      <li>市场、咨询、分析、研究</li>
+    </ul>
+
+    <p>
+      这群人的特征是：<strong>高投票率、高媒体存在、有按揭、有学贷、有政治组织能力</strong>。他们如果被大规模裁掉，后果跟卡车司机被裁是不同量级的政治事件。Yang 这次的"悲伤"语气背后，藏着的是"这次政客没法假装看不见"。
+    </p>
+
+    <blockquote>
+      <p>
+        那个上市公司 CEO 引言——"现在裁 15%、两年后再 20%、再两年后再 20%"——如果在 5–10 家上市科技公司同时发生，会变成 <strong>2008 雷曼级别的政治时刻</strong>。区别是 2008 救的是银行，这次需要救的是几百万年薪 8–15 万美元的中产白领。
+      </p>
+    </blockquote>
+
+    <h3>第二层：政治可行性其实比 2020 年还要更复杂</h3>
+
+    <p>
+      但"时机到了"不等于"会发生"——有三个反向力量比 2020 年时更重：
+    </p>
+
+    <h4>1. 当前美国政治环境不是 UBI 的环境</h4>
+
+    <p>
+      2025 年特朗普第二任期开始，行政重心是关税、移民、AI 去监管化。UBI 是典型的"再分配"政策，跟当前共和党主流路线相反。民主党 2024 年大选输了，内部正在重整，UBI 也不在他们当前主流议程上（他们的主推是更窄向的扩张，如儿童税收抵免）。
+    </p>
+
+    <h4>2. 财政状况比 2020 年差很多</h4>
+
+    <p>
+      2020 年美国联邦债务/GDP 约 100%，现在已经接近 130%。Yang 当年的 Freedom Dividend 估算成本约每年 2.8 万亿美元——在债务利息已经超过国防预算的环境下，这件事在国会过的概率非常低。哪怕用 VAT 也很难，因为 VAT 也是新税。
+    </p>
+
+    <h4>3. 替代方案先到</h4>
+
+    <p>
+      更可能先发生的不是 UBI，而是几个<strong>"近似品"</strong>：
+    </p>
+
+    <ul>
+      <li>AI 转岗补贴（类似 Trade Adjustment Assistance，但针对 AI 失业）</li>
+      <li>扩大失业保险时长</li>
+      <li>儿童税收抵免永久化</li>
+      <li>某些州先试点州级 UBI（加州、纽约最有可能）</li>
+    </ul>
+
+    <p>
+      Yang 自己也意识到这一点——他这篇文章里说的是"我们应该围绕人重组经济，<strong>这要从 UBI 开始</strong>"，注意"开始"两个字——他是在做长期的政治种子，不是预测明年就能落地。
+    </p>
+
+    <h3>第三层：历史类比</h3>
+
+    <p>把这件事放进历史看会更清楚：</p>
+
+    <ul>
+      <li><strong>大萧条 → 罗斯福新政（1933）</strong>：危机持续了 4 年才有政治回应</li>
+      <li><strong>滞胀 → 里根革命（1981）</strong>：危机持续了 8 年才有政治回应</li>
+      <li><strong>2008 金融危机 → Dodd-Frank + QE（2010）</strong>：危机持续了 2 年才有政治回应</li>
+      <li><strong>AI 白领冲击（2024 起算）→ ???</strong></li>
+    </ul>
+
+    <p>
+      美国政治回应一场结构性危机的典型滞后是 2–8 年。所以哪怕 Yang 是对的，<strong>UBI 真正进入立法窗口的时间可能也是 2028–2032 之间——下一届或下下届总统任期</strong>。
+    </p>
+
+    <hr />
+
+    <p class="terminal text-ink-gray text-sm">
+      // 这是我自己整理的一些思考，把 Yang 2020 那次和现在 2026 的语境放在一起看。等真正进入立法窗口前后，会回来续写。
+    </p>
+  </article>
+</BaseLayout>

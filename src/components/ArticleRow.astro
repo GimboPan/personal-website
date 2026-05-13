@@ -7,6 +7,7 @@ export interface Props {
   href?: string;
   date?: string;
   tags?: string[];
+  isNew?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   href,
   date,
   tags = [],
+  isNew = false,
 } = Astro.props;
 
 const statusMeta = {
@@ -45,6 +47,12 @@ const Tag = href ? 'a' : 'article';
   <!-- Right: title + lede + meta -->
   <div class="article-row__body">
     <div class="flex items-center gap-3 flex-wrap">
+      {isNew && (
+        <span class="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-tool px-2 py-0.5 rounded-full bg-lime text-canvas font-bold">
+          <span class="h-1.5 w-1.5 rounded-full bg-canvas animate-pulse"></span>
+          NEW
+        </span>
+      )}
       <span class:list={['article-row__status', s.text]}>
         <span class:list={['h-1.5 w-1.5 rounded-full', s.dot]}></span>
         {s.label}

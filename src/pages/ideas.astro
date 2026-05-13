@@ -6,6 +6,17 @@ import ArticleRow from '~/components/ArticleRow.astro';
 // timeline below are derived from this single source of truth.
 const articles = [
   {
+    index: '03',
+    title: '文明系列 · 十书可视化解读',
+    lede: 'Iain M. Banks 用十本书、二十五年时间，雕刻出一座"工作可选"的乌托邦。这是一份可视化解读：每本书一种颜色、一个母题、一个对今天硅谷大佬的回声——从《Phlebas》的入场到《Hydrogen Sonata》的退场。',
+    date: '2026.05',
+    tags: ['Culture'],
+    topicSlug: 'culture',
+    href: '/ideas/culture-series-visual-guide.html',
+    status: 'live' as const,
+    isNew: true,
+  },
+  {
     index: '02',
     title: '《文明》系列与 AI 时代的人生意义',
     lede: '为什么马斯克、贝佐斯、扎克伯格几乎都在不同场合推荐 Iain M. Banks 的《文明》（The Culture）系列？如果 AI 真的把我们从"工作"中解放出来，人活着的意义到底是什么？这是我和 Gemini 的一次深度对话的整理。',
@@ -112,6 +123,7 @@ const archive = archiveMonths.map((ym) => ({ ym, count: archiveCounts[ym] ?? 0 }
               tags={a.tags}
               status={a.status}
               href={a.href}
+              isNew={a.isNew}
             />
           ))}
 

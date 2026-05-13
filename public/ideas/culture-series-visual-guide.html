@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE CULTURE · 文明系列十书可视化解读</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Noto+Serif+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d1018;
+  --ink-2: #131725;
+  --cream: #e8e0d0;
+  --cream-dim: #b8b1a3;
+  --muted: #6f7081;
+  --line: #2a2e3e;
+
+  --book-1: #c4513a;  /* Consider Phlebas — rust */
+  --book-2: #d4a73a;  /* Player of Games — imperial gold */
+  --book-3: #a8a89c;  /* Use of Weapons — bone steel */
+  --book-4: #5a8ca8;  /* State of the Art — earth blue */
+  --book-5: #9a6cc4;  /* Excession — electric violet */
+  --book-6: #8c2f3a;  /* Inversions — crimson */
+  --book-7: #7c8c7a;  /* Look to Windward — smoke sage */
+  --book-8: #b8895a;  /* Matter — stratified ochre */
+  --book-9: #5fa86a;  /* Surface Detail — phosphor */
+  --book-10: #e8d8a8; /* Hydrogen Sonata — ascension */
+
+  --serif-zh: "Noto Serif SC", "Songti SC", "STSong", serif;
+  --serif-en: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --mono: "JetBrains Mono", "Menlo", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--serif-zh);
+  font-weight: 400;
+  line-height: 1.85;
+  font-size: 17px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Grain overlay for atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { background: var(--book-5); color: var(--ink); }
+
+/* ============ STARFIELD BG ============ */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, var(--cream), transparent),
+    radial-gradient(1px 1px at 80% 70%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 60% 20%, var(--cream-dim), transparent),
+    radial-gradient(2px 2px at 90% 40%, var(--cream), transparent),
+    radial-gradient(1px 1px at 15% 80%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 45% 55%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 70% 90%, var(--cream), transparent),
+    radial-gradient(1px 1px at 30% 10%, var(--cream-dim), transparent),
+    radial-gradient(ellipse 800px 600px at 30% 20%, rgba(154, 108, 196, 0.06), transparent),
+    radial-gradient(ellipse 1000px 500px at 80% 80%, rgba(196, 81, 58, 0.04), transparent);
+  background-repeat: repeat;
+  background-size: 800px 800px, 600px 600px, 500px 500px, 700px 700px, 900px 900px, 400px 400px, 650px 650px, 550px 550px, 100% 100%, 100% 100%;
+  opacity: 0.7;
+}
+
+/* ============ LAYOUT ============ */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8vh 0;
+  position: relative;
+}
+
+.hero-mono {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+
+.hero-mono .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--book-5);
+  border-radius: 50%;
+  align-self: center;
+  box-shadow: 0 0 12px var(--book-5);
+}
+
+.hero h1 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(4rem, 14vw, 11rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-variation-settings: "SOFT" 50, "WONK" 1;
+  margin-bottom: 0.4rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.4s forwards;
+}
+
+.hero h1 .ital {
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+.hero h2 {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.5vw, 1.9rem);
+  letter-spacing: 0.4em;
+  color: var(--cream-dim);
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.6s forwards;
+}
+
+.hero-lede {
+  max-width: 580px;
+  font-size: 1.05rem;
+  line-height: 1.95;
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeUp 1.2s 0.8s forwards;
+}
+
+.hero-lede strong {
+  color: var(--book-10);
+  font-weight: 500;
+}
+
+.hero-meta {
+  position: absolute;
+  bottom: 6vh;
+  right: 6vw;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+  opacity: 0;
+  animation: fadeUp 1.2s 1.2s forwards;
+}
+
+.hero-meta div { display: block; }
+
+.scroll-cue {
+  position: absolute;
+  bottom: 6vh;
+  left: 6vw;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 1s forwards;
+}
+
+.scroll-cue::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--cream-dim);
+  animation: lineGrow 2s 1.4s ease-out forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lineGrow {
+  to { transform: scaleX(1); }
+}
+
+/* ============ TIMELINE ============ */
+.timeline-section {
+  padding: 12vh 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-2);
+  position: relative;
+  z-index: 1;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+.section-head .num {
+  color: var(--book-5);
+}
+
+.section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.timeline-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 4rem;
+  font-variation-settings: "SOFT" 100;
+}
+
+.timeline {
+  position: relative;
+  padding: 4rem 0 2rem;
+  overflow-x: auto;
+  margin: 0 -6vw;
+  padding-left: 6vw;
+  padding-right: 6vw;
+}
+
+.timeline-line {
+  position: relative;
+  min-width: 1100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--cream-dim) 5%, var(--cream-dim) 95%, transparent);
+  margin: 0 auto;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 1.5px solid currentColor;
+  margin: 0 auto;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.timeline-node:hover .timeline-dot {
+  transform: scale(1.6);
+  background: currentColor;
+  box-shadow: 0 0 24px currentColor;
+}
+
+.timeline-node .year {
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--cream-dim);
+  letter-spacing: 0.1em;
+}
+
+.timeline-node .label {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif-zh);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  color: var(--cream-dim);
+  transition: color 0.3s;
+}
+
+.timeline-node:hover .label {
+  color: currentColor;
+}
+
+.timeline-node.tl-1 { color: var(--book-1); left: 0%; }
+.timeline-node.tl-2 { color: var(--book-2); left: 4%; }
+.timeline-node.tl-3 { color: var(--book-3); left: 12%; }
+.timeline-node.tl-4 { color: var(--book-4); left: 16%; }
+.timeline-node.tl-5 { color: var(--book-5); left: 36%; }
+.timeline-node.tl-6 { color: var(--book-6); left: 44%; }
+.timeline-node.tl-7 { color: var(--book-7); left: 52%; }
+.timeline-node.tl-8 { color: var(--book-8); left: 84%; }
+.timeline-node.tl-9 { color: var(--book-9); left: 92%; }
+.timeline-node.tl-10 { color: var(--book-10); left: 100%; }
+
+/* ============ PRELUDE: BANKS ============ */
+.prelude {
+  padding: 16vh 0;
+  position: relative;
+  z-index: 1;
+}
+
+.prelude-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.prelude-side {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  line-height: 2.2;
+  position: sticky;
+  top: 4rem;
+}
+
+.prelude-side .key {
+  color: var(--book-10);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.prelude-side .val {
+  color: var(--cream);
+  font-family: var(--serif-zh);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-bottom: 2rem;
+}
+
+.prelude h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  font-variation-settings: "SOFT" 80;
+}
+
+.prelude h2 .ital {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--book-10);
+}
+
+.prelude .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 3rem;
+}
+
+.prelude p {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  max-width: 60ch;
+}
+
+.prelude p strong {
+  color: var(--book-10);
+  font-weight: 500;
+}
+
+.pull {
+  border-left: 2px solid var(--book-10);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 2.5rem 0;
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--cream);
+  font-variation-settings: "SOFT" 100;
+}
+
+/* ============ BOOKS ============ */
+.books {
+  position: relative;
+  z-index: 1;
+}
+
+.book {
+  --accent: var(--book-1);
+  padding: 16vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  scroll-margin-top: 2rem;
+}
+
+.book[data-num="1"] { --accent: var(--book-1); }
+.book[data-num="2"] { --accent: var(--book-2); }
+.book[data-num="3"] { --accent: var(--book-3); }
+.book[data-num="4"] { --accent: var(--book-4); }
+.book[data-num="5"] { --accent: var(--book-5); }
+.book[data-num="6"] { --accent: var(--book-6); }
+.book[data-num="7"] { --accent: var(--book-7); }
+.book[data-num="8"] { --accent: var(--book-8); }
+.book[data-num="9"] { --accent: var(--book-9); }
+.book[data-num="10"] { --accent: var(--book-10); }
+
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.book.reverse .book-grid {
+  direction: rtl;
+}
+.book.reverse .book-grid > * {
+  direction: ltr;
+}
+
+.book-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.book-meta .num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 3rem;
+  color: var(--accent);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.book-meta .year {
+  color: var(--accent);
+}
+
+.book h3 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.6rem;
+  font-variation-settings: "SOFT" 60;
+}
+
+.book h3 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+.book .zh-title {
+  font-family: var(--serif-zh);
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0.3em;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.book .tagline {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+  font-variation-settings: "SOFT" 100;
+}
+
+.glyph-frame {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 861px) {
+  .book-grid > div:nth-child(2) {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+  }
+}
+
+.glyph-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(232,224,208,0.02), transparent),
+    radial-gradient(circle at center, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+}
+
+.glyph-frame::after {
+  content: attr(data-corner);
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.glyph-frame svg {
+  width: 70%;
+  height: 70%;
+  position: relative;
+  z-index: 1;
+}
+
+.glyph-frame svg path,
+.glyph-frame svg circle,
+.glyph-frame svg line,
+.glyph-frame svg polygon,
+.glyph-frame svg rect,
+.glyph-frame svg ellipse {
+  stroke: var(--accent);
+}
+
+.glyph-tag {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+}
+
+.glyph-rotate { animation: rot 60s linear infinite; transform-origin: center; transform-box: fill-box; }
+.glyph-rotate-rev { animation: rot 80s linear infinite reverse; transform-origin: center; transform-box: fill-box; }
+.glyph-pulse { animation: pulseO 4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+
+@keyframes rot { to { transform: rotate(360deg); } }
+@keyframes pulseO {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.book-body h4 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.book-body h4::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.book-body h4:first-child { margin-top: 0; }
+
+.book-body p {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.95;
+}
+
+.book-body p strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.book-quote {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--cream-dim);
+  font-variation-settings: "SOFT" 100;
+}
+
+.book-quote::before {
+  content: '"';
+  display: inline;
+  color: var(--accent);
+  font-size: 1.4em;
+  line-height: 0;
+  vertical-align: -0.2em;
+  margin-right: 0.1em;
+}
+
+/* Character list (definition-list style) */
+.cast {
+  margin: 0.4rem 0 1.4rem;
+  display: grid;
+  gap: 0.9rem;
+}
+.cast .role {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+}
+.cast .role-name {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.98rem;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.3;
+}
+.cast .role-desc {
+  font-size: 0.93rem;
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+
+/* Concept list (bullet-style worldbuilding) */
+.concepts {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 1.4rem;
+}
+.concepts li {
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  border-bottom: 1px dashed var(--line);
+  color: var(--cream);
+}
+.concepts li:last-child { border-bottom: none; }
+.concepts li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  color: var(--accent);
+  font-size: 0.55rem;
+}
+.concepts li strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Reading-note panel */
+.reading-note {
+  margin: 2rem 0 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(232,224,208,0.015), transparent),
+    color-mix(in srgb, var(--accent) 4%, transparent);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  line-height: 1.85;
+  color: var(--cream-dim);
+}
+.reading-note .rn-key {
+  color: var(--accent);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.reading-note .stars {
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.reading-note .rn-line {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.reading-note .rn-line:last-child { margin-bottom: 0; }
+
+/* ============ DISCIPLES (AI Tech Leaders) ============ */
+.disciples {
+  padding: 16vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+
+.disciples-intro {
+  max-width: 760px;
+  margin-bottom: 6rem;
+}
+
+.disciples h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  font-variation-settings: "SOFT" 80;
+}
+
+.disciples h2 .ital {
+  font-style: italic;
+  color: var(--book-5);
+  font-weight: 400;
+}
+
+.disciples .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2.5rem;
+}
+
+.disciples-intro p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.disciples-intro p strong {
+  color: var(--book-5);
+  font-weight: 500;
+}
+
+.disciple {
+  --accent: var(--book-1);
+  padding: 6rem 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+
+.disciple .d-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.disciple .d-num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.disciple h3 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+  font-variation-settings: "SOFT" 60;
+}
+
+.disciple .d-role {
+  font-family: var(--serif-zh);
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+}
+
+.d-quote {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--cream);
+  margin: 2rem 0 0.8rem;
+  font-variation-settings: "SOFT" 100;
+  border-left: 2px solid var(--accent);
+  padding: 0.3rem 0 0.3rem 2rem;
+}
+
+.d-quote-zh {
+  font-family: var(--serif-zh);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--cream-dim);
+  padding: 0 0 0 2.1rem;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+
+.d-source {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  padding-left: 2.1rem;
+}
+
+.d-body {
+  max-width: 64ch;
+}
+
+.d-body p {
+  margin-bottom: 1.3rem;
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+.d-body p strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.d-tags {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.d-tags span {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--accent);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.d-coda {
+  margin-top: 4rem;
+  padding: 5rem 0 0;
+  border-top: 1px solid var(--line);
+  max-width: 760px;
+}
+
+.d-coda-mark {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--book-6);
+  margin-bottom: 1.5rem;
+}
+
+.d-coda h3 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.2;
+  color: var(--book-6);
+  margin-bottom: 1.5rem;
+  font-variation-settings: "SOFT" 100;
+}
+
+.d-coda p {
+  font-size: 1rem;
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+  color: var(--cream-dim);
+}
+
+.d-coda p strong {
+  color: var(--book-6);
+  font-weight: 500;
+}
+
+.d-coda-pull {
+  margin: 2.5rem 0 1.5rem;
+  padding: 0.5rem 0 0.5rem 1.8rem;
+  border-left: 2px solid var(--book-6);
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--cream);
+  font-variation-settings: "SOFT" 100;
+}
+
+@media (max-width: 860px) {
+  .disciple { padding: 4rem 0; }
+  .d-quote { padding-left: 1.2rem; }
+  .d-quote-zh, .d-source { padding-left: 1.3rem; }
+}
+
+/* ============ DIGNITIES ============ */
+.dignities {
+  padding: 20vh 0;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, transparent, rgba(232,216,168,0.03), transparent);
+  border-top: 1px solid var(--line);
+}
+
+.dignities-intro {
+  max-width: 720px;
+  margin-bottom: 6rem;
+}
+
+.dignities h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  font-variation-settings: "SOFT" 80;
+}
+
+.dignities h2 .ital {
+  font-style: italic;
+  color: var(--book-10);
+  font-weight: 400;
+}
+
+.dignities .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2.5rem;
+}
+
+.dignities-intro p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.dignities-intro p strong {
+  color: var(--book-10);
+  font-weight: 500;
+}
+
+.dignity-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.dignity {
+  border-top: 1px solid var(--book-10);
+  padding-top: 1.5rem;
+  position: relative;
+}
+
+.dignity .dn {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--book-10);
+  margin-bottom: 1rem;
+}
+
+.dignity .dt-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--book-10);
+  margin-bottom: 0.4rem;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.2;
+}
+
+.dignity .dt-zh {
+  font-family: var(--serif-zh);
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.dignity .dd {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--cream-dim);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 8vh 0 6vh;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 2;
+}
+
+footer .colophon {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+footer .c-key { color: var(--book-10); display: block; margin-bottom: 0.5rem; font-size: 0.65rem; }
+footer .c-val { color: var(--cream); font-family: var(--serif-zh); font-size: 0.95rem; text-transform: none; letter-spacing: 0.05em; line-height: 1.8; }
+
+footer .end-mark {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--book-10);
+  font-variation-settings: "SOFT" 100;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-weight: 300;
+}
+
+/* ============ FLOATING NAV ============ */
+.floatnav {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.floatnav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floatnav a {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 1px solid var(--line);
+  transition: all 0.3s;
+  text-decoration: none;
+  position: relative;
+}
+
+.floatnav a:hover {
+  background: var(--cream);
+  transform: scale(1.4);
+}
+
+.floatnav a:hover::before {
+  content: attr(data-label);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--cream);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.floatnav a.active {
+  background: var(--cream);
+  transform: scale(1.4);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 860px) {
+  body { font-size: 16px; }
+
+  .hero-mono { font-size: 0.65rem; gap: 1rem; }
+  .hero-meta { position: static; text-align: left; margin-top: 3rem; }
+  .scroll-cue { position: static; margin-top: 2rem; }
+
+  .prelude-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .prelude-side { position: static; }
+
+  .book-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .book.reverse .book-grid { direction: ltr; }
+  .book .glyph-frame { max-width: 280px; order: -1; }
+
+  .dignity-list {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  footer .colophon { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  .floatnav { display: none; }
+
+  .timeline { padding: 5rem 0 5rem; }
+  .timeline-node .year { top: -2.2rem; }
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s, transform 1s;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+
+<!-- Back to Gimbo's Universe — required on standalone HTML per CLAUDE.md -->
+<a href="/" class="back-home-link" aria-label="返回 Gimbo's Universe 主页">
+  <span aria-hidden="true">←</span>
+  <span>Gimbo's Universe</span>
+</a>
+<style>
+  .back-home-link {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    background: rgba(13, 16, 24, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+  .back-home-link:hover {
+    color: var(--cream);
+    border-color: var(--book-5);
+    background: rgba(13, 16, 24, 0.92);
+    transform: translateY(-1px);
+  }
+  @media (max-width: 640px) {
+    .back-home-link { top: 12px; left: 12px; font-size: 0.62rem; padding: 5px 8px; }
+  }
+</style>
+
+<!-- Floating side nav -->
+<nav class="floatnav" id="floatnav">
+  <a href="#b1" data-label="01 · Phlebas" style="color:var(--book-1)"></a>
+  <a href="#b2" data-label="02 · Player" style="color:var(--book-2)"></a>
+  <a href="#b3" data-label="03 · Weapons" style="color:var(--book-3)"></a>
+  <a href="#b4" data-label="04 · State of the Art" style="color:var(--book-4)"></a>
+  <a href="#b5" data-label="05 · Excession" style="color:var(--book-5)"></a>
+  <a href="#b6" data-label="06 · Inversions" style="color:var(--book-6)"></a>
+  <a href="#b7" data-label="07 · Look to Windward" style="color:var(--book-7)"></a>
+  <a href="#b8" data-label="08 · Matter" style="color:var(--book-8)"></a>
+  <a href="#b9" data-label="09 · Surface Detail" style="color:var(--book-9)"></a>
+  <a href="#b10" data-label="10 · Hydrogen Sonata" style="color:var(--book-10)"></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero wrap">
+  <div class="hero-mono">
+    <span>Iain M. Banks</span>
+    <span class="dot"></span>
+    <span>Ten Novels · 1987 — 2012</span>
+    <span class="dot"></span>
+    <span>A Visual Reading</span>
+  </div>
+
+  <h1>The <span class="ital">Culture</span></h1>
+  <h2>文 明 系 列 · 十 书 可 视 化 解 读</h2>
+
+  <p class="hero-lede">
+    一个 <strong>"工作将成为可选项"</strong> 的未来不是马斯克的预言，而是 Iain M. Banks 从 1987 年起、用十本书雕刻出来的一座乌托邦。在那里，人类不必为生存而活，但也因此第一次必须面对一个更尖锐的问题——
+    <br><br>
+    <em style="font-family:var(--serif-en); font-style:italic; color:var(--book-10); font-size:1.15em;">当 AI 替我们工作之后，活着的意义是什么？</em>
+  </p>
+
+  <div class="scroll-cue">Scroll · 向下展开</div>
+  <div class="hero-meta">
+    <div>A reading guide</div>
+    <div>Cosmic Editorial · 2026</div>
+  </div>
+</header>
+
+<!-- ============ TIMELINE ============ -->
+<section class="timeline-section">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 00</span><span>Timeline</span></div>
+    <h3 class="timeline-title">Twenty-five years <em style="font-style:italic;">of imagining</em> the future</h3>
+    <p style="max-width:580px; color:var(--cream-dim); margin-bottom:0; font-size:1rem;">
+      第一本《菲尼基启示录》出版于 1987 年——撒切尔与里根的鼎盛期、"贪婪即美德"的时代。最后一本《氢原子奏鸣曲》出版于 2012 年，作者去世前一年。这是一条从"愤怒"通往"告别"的弧线。
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-line">
+        <a href="#b1" class="timeline-node tl-1"><div class="year">1987</div><div class="timeline-dot"></div><div class="label">菲尼基启示录</div></a>
+        <a href="#b2" class="timeline-node tl-2"><div class="year">1988</div><div class="timeline-dot"></div><div class="label">游戏玩家</div></a>
+        <a href="#b3" class="timeline-node tl-3"><div class="year">1990</div><div class="timeline-dot"></div><div class="label">武器浮生录</div></a>
+        <a href="#b4" class="timeline-node tl-4"><div class="year">1991</div><div class="timeline-dot"></div><div class="label">艺术之邦</div></a>
+        <a href="#b5" class="timeline-node tl-5"><div class="year">1996</div><div class="timeline-dot"></div><div class="label">超限之谜</div></a>
+        <a href="#b6" class="timeline-node tl-6"><div class="year">1998</div><div class="timeline-dot"></div><div class="label">独立之夜</div></a>
+        <a href="#b7" class="timeline-node tl-7"><div class="year">2000</div><div class="timeline-dot"></div><div class="label">看风向</div></a>
+        <a href="#b8" class="timeline-node tl-8"><div class="year">2008</div><div class="timeline-dot"></div><div class="label">物质</div></a>
+        <a href="#b9" class="timeline-node tl-9"><div class="year">2010</div><div class="timeline-dot"></div><div class="label">表面细节</div></a>
+        <a href="#b10" class="timeline-node tl-10"><div class="year">2012</div><div class="timeline-dot"></div><div class="label">氢原子奏鸣曲</div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRELUDE ============ -->
+<section class="prelude wrap">
+  <div class="section-head"><span class="num">§ 01</span><span>The Author</span></div>
+  <div class="prelude-grid">
+    <aside class="prelude-side">
+      <span class="key">Born</span>
+      <span class="val">1954 · Fife, Scotland</span>
+      <span class="key">Died</span>
+      <span class="val">2013 · 胆囊癌, 59 岁</span>
+      <span class="key">Politics</span>
+      <span class="val">坚定的左翼社会主义者</span>
+      <span class="key">Double identity</span>
+      <span class="val">Iain Banks — 文学<br>Iain M. Banks — 科幻</span>
+      <span class="key">First Culture novel</span>
+      <span class="val">Consider Phlebas, 1987</span>
+    </aside>
+
+    <div>
+      <h2>The <span class="ital">double</span> man</h2>
+      <div class="zh-sub">被低估的双面天才</div>
+
+      <p>大多数科幻作家文学性不够，文学作家又驾驭不了硬科技。Iain Banks 是少数能两边都拿到顶级水准的人——他让科幻 <strong>"有文化了"</strong>。</p>
+
+      <p>1987 年，他出版了第一本《文明》。那一年正是撒切尔夫人执政、里根主政美国的鼎盛期——"贪婪即美德（Greed is good）"是社会的主旋律，赛博朋克的"高科技、低生活（High Tech, Low Life）"正在科幻界蔓延。</p>
+
+      <p>Banks 是个坚定的左翼社会主义者。他厌恶当时的右翼论调，也不相信"低生活"的悲观。他反过来构造了一个 <strong>High Tech, High Life</strong> 的乌托邦——技术能终结匮乏，社会有冲突、有阴谋，但永远指向的是：有饭吃、人人自由、可以去探索星空的未来。</p>
+
+      <div class="pull">"如果你拥有了上帝级的技术，你为什么还需要暴君？"</div>
+
+      <p>这是他用整个系列在问的问题。不仅是科技，更是社会学——他的想象力在于他给出了一套足以支撑无政府主义乌托邦的社会学解释。当 AI 解决了所有生产力问题，政府就没有存在的必要了，军队也没有存在的必要了。</p>
+
+      <p>2013 年他在确诊胆囊癌后选择和爱人去蜜月。他始终活得像他笔下的"文明"公民——优雅、清醒、不畏死。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKS ============ -->
+<main class="books">
+
+  <!-- BOOK 1 -->
+  <article class="book" data-num="1" id="b1">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">01</span>
+            <span class="year">1987</span>
+            <span>Consider Phlebas</span>
+          </div>
+          <h3>Consider <em>Phlebas</em></h3>
+          <div class="zh-title">菲 尼 基 启 示 录</div>
+          <div class="tagline">A novel of faith, betrayal, and the cost of resisting paradise.</div>
+
+          <h4>故事</h4>
+          <p>故事发生在 Idiran-Culture 战争的第四年——这场战争是"文明"历史上第一次、也是唯一一次大规模战争。Idiran 是三足、笃信宗教的物种，他们相信智慧生命不该交由机器来管理。"文明"则认为他们正在亿万颗星球上奴役其他物种。</p>
+          <p>主角 <strong>Bora Horza Gobuchul</strong> 是一个"易容者"（Changer）——一种能改变身体外形、复制他人面貌的稀有种族。他对"文明"深恶痛绝，认为把命运交给机器是物种的堕落。他选择为 Idiran 作战，但他既不信宗教，也无意成为英雄——他只是认定，<strong>"以人为生命的形式比以机器为生命的形式更重要"</strong>。</p>
+          <p>他的任务是去一颗被冰封的、名叫 Schar's World（死者之星）的禁忌行星上，抓捕一个躲藏起来的"文明"AI 主脑。一路上他被太空海盗劫持、被一个食人邪教囚禁、在一艘 GSV 上观看了一场极致暴力的赌博游戏（Damage），最终回到了他童年学习易容术的同一座山——只是这一次，他是带着武器进入的。</p>
+          <p>书名出自 T·S·艾略特《荒原》中"死亡 by 水"那一节："Consider Phlebas, who was once handsome and tall as you."——这个隐喻贯穿系列，到第七本《看风向》还会再次响起。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Bora Horza Gobuchul</div>
+              <div class="role-desc">易容者佣兵，反 AI 立场坚定。Banks 笔下最复杂的反英雄——你恨他的偏执，但你越读越懂他。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Perosteck Balveda</div>
+              <div class="role-desc">"文明"SC 特工，多次与 Horza 交手。两个敌人之间产生了诡异的相互尊重——这是 Banks 最擅长的情感笔法。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Kraiklyn</div>
+              <div class="role-desc">太空海盗船长，主持 Damage 赌局。一个把"狠"演到极致的边缘人物。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Xoralundra</div>
+              <div class="role-desc">Idiran 联络官，少数让 Horza 真心尊重的角色——也死得最早。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>第一次系统介绍 <strong>"文明"</strong> 的政治结构与对外交往原则</li>
+            <li>引入了 <strong>Special Circumstances</strong> 与 <strong>Contact</strong> 两个组织——后续多本书的核心</li>
+            <li>解释了 <strong>GSV（General Systems Vehicle，通用系统飞船）</strong>——一座可以漂浮的城邦</li>
+            <li>注脚里出现一个惊人数字：这场战争死了 <strong>8500 亿生命</strong>，"文明"的胜利在宇宙史里几乎可以忽略不计</li>
+            <li>"Damage"——一个可怕又迷人的赌博游戏：玩家用情绪当筹码，输了不只是钱</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>Banks 故意用一个反"文明"的主角写第一本——这是聪明的开场。<strong>如果你想让读者爱上一个乌托邦，最好的办法是先让一个憎恨它的人讲述它。</strong>Horza 输了，但他赢得了我们的同情。他的失败并非源于愚蠢，而是源于一个无法被否认的洞察：技术霸权再温柔，它依然是霸权。</p>
+          <p>全书最锋利的一句话出现在结尾的注脚里："Phlebas 死后大约一千五百万年才轮到他在历史里被提起一次。他的整场圣战，在'文明'的统计学里只占 <strong>0.0003%</strong>。"</p>
+          <p>但 Banks 没有把这写成虚无主义——Horza 那 0.0003% 的固执，恰恰是"文明"自己留给个体的最后一块尊严。</p>
+
+          <h4>与我们何干</h4>
+          <p>今天每一个不信任 AI 推荐算法、坚持自己原始判断的人，都是某种意义上的 Horza。Banks 在 1987 年提出的问题在 2026 年更尖锐：<strong>当 ChatGPT 比你更会写邮件、Claude 比你更会做计划、Gemini 比你更会做研究——你坚持自己亲手写、亲手思考，是英雄还是愚昧？</strong></p>
+          <p>Banks 给出的答案让人不安：也许两者都是。但他暗示——那种"愚昧"本身就是人之所以为人的证据。一个永远选择算法推荐的人，最终会失去他作为"判断者"的肌肉。</p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★★</span></span>
+            <span class="rn-line">节奏偏慢、前三分之一充满压抑感、Horza 不是讨喜的主角</span>
+            <span class="rn-line">建议先读《游戏玩家》打底，回头再来读这本</span>
+            <span class="rn-line">读完它你会对整个系列产生敬畏</span>
+          </div>
+
+          <div class="book-quote">信念在技术霸权面前的脆弱——也是它最后的尊严。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH I">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <circle cx="0" cy="0" r="80" stroke-width="1" opacity="0.25"/>
+              <g class="glyph-rotate">
+                <path d="M -75 -25 A 80 80 0 1 1 60 55" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <circle cx="-75" cy="-25" r="3" fill="currentColor" stroke="none"/>
+                <circle cx="60" cy="55" r="3" fill="currentColor" stroke="none"/>
+              </g>
+              <line x1="-40" y1="-50" x2="-15" y2="-30" stroke-width="1.5" opacity="0.5"/>
+              <line x1="30" y1="20" x2="55" y2="40" stroke-width="1.5" opacity="0.5"/>
+              <line x1="-20" y1="40" x2="10" y2="20" stroke-width="1.5" opacity="0.5"/>
+            </svg>
+            <div class="glyph-tag">Broken orbit</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 2 -->
+  <article class="book reverse" data-num="2" id="b2">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">02</span>
+            <span class="year">1988</span>
+            <span>The Player of Games · 马斯克最爱</span>
+          </div>
+          <h3>The Player <em>of Games</em></h3>
+          <div class="zh-title">游 戏 玩 家</div>
+          <div class="tagline">Games are never just games. They are the shape of a civilization.</div>
+
+          <h4>故事</h4>
+          <p><strong>Jernau Morat Gurgeh</strong> 是"文明"历史上最伟大的游戏玩家——他几乎掌握了所有已知的策略游戏，从星际围棋到三维国际象棋。但他越来越觉得空虚——在一个 AI 比他强、风险为零、没有真实代价的乌托邦里，"赢"已经失去了意义。</p>
+          <p>此时一只名叫 <strong>Mawhrin-Skel</strong> 的小型无人机以一项轻微的丑闻威胁 Gurgeh，迫使他接受 SC 的一项任务：去远方的 <strong>Azad 帝国</strong>，参加他们的同名游戏 Azad。</p>
+          <p>Azad 是一种极其复杂的策略游戏，复杂到这个帝国的全部社会结构都建立在它之上——你的游戏排名决定你的官阶、收入、生育权，甚至最终的皇帝都是这场长期淘汰赛的胜者。Azad 帝国本身是残酷的、性别压迫的（三性社会）、嗜血的。</p>
+          <p>Gurgeh 在助手无人机 <strong>Flere-Imsaho</strong>（被强制伪装成笨重的老式机器人以免显得太抢眼）的陪同下进入这个帝国。他一边学习游戏一边目睹它的残忍——直到决赛时，他和皇帝 <strong>Nicosar</strong> 进行最后一场对局。这场对局变成了两种文明哲学的对决：<strong>Gurgeh 不是在下棋，他是在用棋盘上的每一步，告诉这个帝国"你的文明结构是错的"</strong>。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Jernau Morat Gurgeh</div>
+              <div class="role-desc">"文明"最强游戏玩家，被自身的空虚反噬。一个被乌托邦惯坏的赢家——他要的从来不是游戏，是赌注。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Mawhrin-Skel</div>
+              <div class="role-desc">被 SC 开除的怀恨无人机。用阴险手段把 Gurgeh 推上任务——Banks 笔下最腹黑的小角色之一。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Flere-Imsaho</div>
+              <div class="role-desc">伪装笨重老旧的助手无人机，实际是一个高阶 AI。它对 Gurgeh 的吐槽是全书的喜剧来源。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Nicosar</div>
+              <div class="role-desc">Azad 帝国的皇帝。残忍但并不愚蠢的对手——Banks 让你不仅看到他的恶，也看到他作为玩家的天才。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>系统介绍"文明"的<strong>"无害娱乐"</strong>哲学——为什么"赢"在乌托邦里这么难</li>
+            <li>首次深入展示"文明"对待敌对文明的接触方式——<strong>不开火，派一个玩家</strong></li>
+            <li>引入<strong>无人机（drones）</strong>作为"文明"中的独立公民的设定——它们有人格、有性别认同、有公民权</li>
+            <li>Banks 在这本书里给"文明"船只起的搞笑名字成了系列商标：<strong>"Of Course I Still Love You"</strong>, <strong>"Just Read the Instructions"</strong>, <strong>"Limiting Factor"</strong>——SpaceX 的海上回收船就是用这套名字</li>
+            <li>首次让"性别流动"成为"文明"公民的日常——你可以一辈子在几种性别之间切换</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>这是"文明"系列对软实力（soft power）最锋利的论述。Banks 在告诉你：<strong>真正的文明殖民，不需要战舰——只需要一个比你更会玩你自己游戏的玩家。</strong>当一种文明优于另一种，它的胜利方式可能是：派一个外人来你最自豪的领域，用你自己的规则把你打败，然后什么都不带走。</p>
+          <p>更深的一层是：Gurgeh 在赢的瞬间也失去了自己。他变成了 SC 棋盘上的一颗棋子——<strong>他以为他在自己玩游戏，其实他自己就是被玩的游戏</strong>。最讽刺的是，这场让他变成棋子的安排，本身也是"文明"为了让他重新感受到"意义"而设计的疗法。</p>
+
+          <h4>与我们何干</h4>
+          <p>这本书是理解今天"文化战争"的钥匙。TikTok 不是一款 app，它是一种文明形式；ChatGPT 不是一个工具，它是一种思维方式的输出。当一种文化能让另一种文化的年轻人都开始用它的语言思考、用它的算法决定品味，<strong>谁定义了游戏规则，谁就掌握了未来。</strong></p>
+          <p>Banks 也提醒我们：当你成为"最强玩家"那一刻，你就成了别人手中的棋子。今天那些被 AI 优化到极致的"高手"——最高效的程序员、最准的交易员、最会写 prompt 的写手——<strong>他们以为自己赢了，其实 AI 正在通过他们重塑这个世界</strong>。</p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★</span> — 强烈推荐作为第一本</span>
+            <span class="rn-line">情节紧凑、画面感强、有明确主角和反派</span>
+            <span class="rn-line">几乎像一本太空版的赌神</span>
+            <span class="rn-line">读完这本你会自然想读其它九本</span>
+          </div>
+
+          <div class="book-quote">意义不在结果，而在凡人之躯的极限——自我设限，去体验克服困难的灵魂。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH II">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <g class="glyph-rotate-rev">
+                <!-- Hexagonal game tiles -->
+                <polygon points="0,-50 43,-25 43,25 0,50 -43,25 -43,-25" stroke-width="1.5" opacity="0.8"/>
+                <polygon points="0,-50 43,-25 43,25 0,50 -43,25 -43,-25" stroke-width="2" transform="scale(0.55)"/>
+                <polygon points="0,-50 43,-25 43,25 0,50 -43,25 -43,-25" stroke-width="1" opacity="0.4" transform="scale(1.4)"/>
+              </g>
+              <circle cx="0" cy="0" r="4" fill="currentColor" stroke="none" class="glyph-pulse"/>
+              <line x1="-43" y1="-25" x2="43" y2="25" stroke-width="0.5" opacity="0.3"/>
+              <line x1="43" y1="-25" x2="-43" y2="25" stroke-width="0.5" opacity="0.3"/>
+              <line x1="0" y1="-50" x2="0" y2="50" stroke-width="0.5" opacity="0.3"/>
+            </svg>
+            <div class="glyph-tag">Game board</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 3 -->
+  <article class="book" data-num="3" id="b3">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">03</span>
+            <span class="year">1990</span>
+            <span>Use of Weapons</span>
+          </div>
+          <h3>Use of <em>Weapons</em></h3>
+          <div class="zh-title">武 器 浮 生 录</div>
+          <div class="tagline">Even paradise has its janitors. They are called Special Circumstances.</div>
+
+          <h4>故事</h4>
+          <p>讲一个被"文明"招募的外族佣兵 <strong>Cheradenine Zakalwe</strong> 的故事。他来自一颗血腥的高科技世界，是 SC 最爱用的"工具"之一——只要哪个文明需要被推一把、需要一个有军事天赋的外人来扭转某场战役的胜负，他的联络官 <strong>Diziet Sma</strong> 就会派他去。</p>
+          <p>这本书在结构上是 Banks 全部作品里最大胆的：<strong>两条交叉的时间线</strong>——一条往前走（Zakalwe 接受 Sma 的最新任务），一条往后走（Zakalwe 的过去，一章一章地剥离）。一章往前、一章往后，正章用阿拉伯数字编号、倒章用罗马数字。</p>
+          <p>两条线在书的最后一章碰头，并以一个让大多数读者掩卷长叹的真相收场——一个被影迷称为"科幻史上最阴森的反转之一"的结尾。Banks 用一整本书的篇幅，藏住了一把椅子。</p>
+          <p>这本书是 Banks 自认为自己写得最好的一本，也是他写得最痛苦的一本。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Cheradenine Zakalwe</div>
+              <div class="role-desc">SC 最重用的"万能工具"。他懂军事、懂战术、懂人心——但他的过去藏着一个秘密。读完之后，你对"主角"两个字的理解会变。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Diziet Sma</div>
+              <div class="role-desc">SC 处理 Zakalwe 的联络官，一个冷静的"文明"女性，也是《艺术之邦》里的同一个人。她对 Zakalwe 既保护、又利用、又警惕。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Skaffen-Amtiskaw</div>
+              <div class="role-desc">跟随 Sma 的战斗型无人机，腹黑且杀气重。少有的"文明"中"带刀"的角色——它会冷血地干掉威胁。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">一把椅子</div>
+              <div class="role-desc">别问，等你读到那一章你就懂。Banks 让一个家具，变成了整套系列里最沉重的隐喻。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>深度揭露 <strong>SC（Special Circumstances）</strong> 的工作方式：他们不是直接干预，而是"招募"恰好处在关键位置的外族个体</li>
+            <li>首次展示"文明"如何对待"工具人"——既保护、又利用、又警惕</li>
+            <li>引入 <strong>"Stored"（存储意识）</strong> 的概念：在"文明"里你可以让自己的意识被备份，肉体死了还能复活</li>
+            <li>展示"文明"如何选择性地暴力——号称和平，但 SC 是有刀的</li>
+            <li>"Changers"概念的延伸——和第一本《菲尼基》形成隐性呼应</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>完美的社会有底色。Banks 在这本书里问得最尖锐：即使你住进了乌托邦，那些 AI 主脑也"不能"亲自做的事——刺杀、操纵、煽动政变——还是得有人去做。<strong>"文明"AI 把自己的脏活外包给了人类雇佣兵</strong>——人类成为了"道德代理人 (Moral Proxy)"，替 AI 主脑承担那些它们不愿意承担的污点。</p>
+          <p>而 Zakalwe 自己的过去说明：那些"愿意做脏活"的人，往往本身就有未愈合的伤口。<strong>他不是英雄，他是一个在永远偿还某笔他自己都说不清楚的债。</strong>他越尽力赎罪越赎不掉，最终发现自己一直在追的那个噩梦，其实是自己亲手造成的。</p>
+
+          <h4>与我们何干</h4>
+          <p>这正是 AI 时代我们正在面对的问题：当 AI 越来越能干，谁来做"AI 不能做"的事？谁来按下杀人无人机的最终按钮？谁来决定哪个老人不再值得救治？<strong>谁来在道德灰色地带里做那个会留下心理创伤的人？</strong></p>
+          <p>Banks 给出的答案是冷峻的——<strong>那些事永远需要一个人。一个会愧疚、会做噩梦、会留下伤疤的人。</strong>当我们把所有"硬决策"都外包给算法时，我们也外包了自己作为道德主体的资格。</p>
+          <p>另一个对今天的启示是：那些最"高效"的工具人，背后通常都藏着无法愈合的过去。<strong>算法不会愧疚，但它的训练数据来自愧疚的人。</strong></p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★★★</span> — Banks 最难也最伟大的一本</span>
+            <span class="rn-line">双线倒叙结构非常烧脑、中间偶有意识流段落</span>
+            <span class="rn-line">结尾会冲击你一段时间</span>
+            <span class="rn-line">读完《游戏玩家》和《菲尼基启示录》之后再读</span>
+            <span class="rn-line">读完不要立刻读下一本，给自己几天消化时间</span>
+          </div>
+
+          <div class="book-quote">人之所以为'人'，正是因为我们不完美——我们能犯错、能感到愧疚、能在灰色地带里挣扎。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH III">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <!-- Two intertwined arrows -->
+              <line x1="-70" y1="-50" x2="65" y2="50" stroke-width="2"/>
+              <line x1="65" y1="50" x2="50" y2="35" stroke-width="2"/>
+              <line x1="65" y1="50" x2="48" y2="58" stroke-width="2"/>
+              <line x1="70" y1="-50" x2="-65" y2="50" stroke-width="2" opacity="0.6"/>
+              <line x1="-65" y1="50" x2="-50" y2="35" stroke-width="2" opacity="0.6"/>
+              <line x1="-65" y1="50" x2="-48" y2="58" stroke-width="2" opacity="0.6"/>
+              <circle cx="-70" cy="-50" r="3" fill="currentColor" stroke="none"/>
+              <circle cx="70" cy="-50" r="3" fill="currentColor" stroke="none" opacity="0.6"/>
+              <circle cx="0" cy="0" r="20" stroke-width="1" opacity="0.3"/>
+            </svg>
+            <div class="glyph-tag">Crossed timelines</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 4 -->
+  <article class="book reverse" data-num="4" id="b4">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">04</span>
+            <span class="year">1991</span>
+            <span>The State of the Art</span>
+          </div>
+          <h3>The State <em>of the Art</em></h3>
+          <div class="zh-title">艺 术 之 邦</div>
+          <div class="tagline">In 1977, the Culture came to Earth. They were not impressed.</div>
+
+          <h4>故事</h4>
+          <p>严格说，《艺术之邦》是一本中篇小说，收录在 Banks 同名的短篇集里。故事讲述："文明"GCU（通用接触飞船）<strong>"Arbitrary"</strong> 号在 1977 年悄悄抵达了地球的轨道，进入为期八个月的隐身观察。</p>
+          <p><strong>Diziet Sma</strong>（也就是《武器浮生录》里的那个 Sma）作为接触团队的一员，化装成各种身份在地球各地游走——巴黎、纽约、撒哈拉——记录这个落后行星的文明特征。</p>
+          <p>团队的核心争论是：<strong>该不该"接触"地球？</strong>该不该向我们公开他们的存在？船上的 Mind 经过运算后给出了一个让所有人意外的判断——地球应当被保留为一个"<strong>控制组（Control Group）</strong>"——一个不被干预的样本，用来观察"文明"自己如果不是"文明"会变成什么样。</p>
+          <p>团队里有一个名叫 <strong>Linter</strong> 的成员决定不回去了——他要永远做一个地球人。他的理由让人难以反驳：<strong>"在一个可以永远不死、什么都能拥有的乌托邦里，我每天都觉得自己已经死了。"</strong></p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Diziet Sma</div>
+              <div class="role-desc">叙述者，"文明"接触团队的核心成员。她还会出现在《武器浮生录》里——这是 Banks 系列内部最重要的人物连线。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">The Arbitrary</div>
+              <div class="role-desc">隐藏在月球阴影里的"文明"飞船，性格幽默且毒舌。它是系列里第一艘真正"有性格"的 Mind。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Linter</div>
+              <div class="role-desc">决定"做地球人"的"文明"叛逃者。他不是疯了——他想要的恰恰是我们想逃离的：不确定、痛苦、有限。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Skaffen-Amtiskaw</div>
+              <div class="role-desc">那只腹黑无人机——它在这本里第一次出场，毫不掩饰对地球的鄙视。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>"文明"系列里<strong>唯一一次直接出场地球</strong>——一个让所有"文明"粉丝兴奋的设定</li>
+            <li>首次完整呈现 <strong>Contact 部门的决策流程</strong>——他们不是想接触就接触</li>
+            <li>"Control Group"的伦理——<strong>为什么不干预，反而是一种尊重？</strong></li>
+            <li>引入"文明"的<strong>"sublimation"（升华）</strong>的早期暗示——为后期 Hydrogen Sonata 埋伏笔</li>
+            <li>同集子里还有 <em>Descendant</em> 和 <em>Cleaning Up</em> 两个短篇——后者讽刺了冷战时期的核武器</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>表面上这本书是借外星人之口痛批 1977 年的地球——资本主义、麦当劳、电视机、核武器、种族歧视。但更深一层，Banks 借 Linter 之口问了一个更刺人的问题：<strong>如果你有一切，你还有什么理由起床？</strong></p>
+          <p>Linter 的选择不是怀旧，也不是浪漫——他在"文明"的完美里看到了一种隐性的死亡。地球的混乱、痛苦、不公正——这些东西虽然糟糕，但它们让生命"有事可干"。Banks 没有为 Linter 辩护，但他也没有让 Sma 把 Linter 强行带走。</p>
+          <p>这本书是 Banks 给"乌托邦"埋下的第一颗暗雷：<strong>当你被解决了一切，你也可能失去了一切。</strong></p>
+
+          <h4>与我们何干</h4>
+          <p>1977 年的地球在 Banks 眼里是"野蛮"的。今天我们如果再被一群超级文明访问，他们会觉得我们进步了吗？还是会发现——除了多了几个亿万富翁和几条更长的算法推送外，<strong>本质上我们和那个 1977 年的地球一样，依然被资本和注意力经济操控。</strong></p>
+          <p>但更值得思考的是 Linter 的选择：在 AI 时代，当 Claude 能比你更会写、Cursor 能比你更会改、Midjourney 能比你更会画——当一切"困难"都被解决，你还会主动去做那些"低效"的事吗？亲手做饭、写不会发表的诗、和不会回信的朋友写信？</p>
+          <p><strong>Linter 早在 1991 年就告诉你：你需要那些"低效"，才能感到自己活着。</strong></p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★</span></span>
+            <span class="rn-line">作为短篇集合可以单独读，但建议读过《游戏玩家》后</span>
+            <span class="rn-line">篇幅短，2-3 小时可读完</span>
+            <span class="rn-line">如果你时间有限，这是体验"文明"哲学最快的方式</span>
+          </div>
+
+          <div class="book-quote">借外星人之口，骂的是镜子里的我们。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH IV">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <circle cx="0" cy="0" r="14" stroke-width="2"/>
+              <circle cx="0" cy="0" r="14" stroke-width="0" fill="currentColor" opacity="0.2"/>
+              <ellipse cx="0" cy="0" rx="85" ry="35" stroke-width="1" opacity="0.5"/>
+              <ellipse cx="0" cy="0" rx="85" ry="35" stroke-width="1" opacity="0.4" transform="rotate(60)"/>
+              <ellipse cx="0" cy="0" rx="85" ry="35" stroke-width="1" opacity="0.4" transform="rotate(-60)"/>
+              <g class="glyph-rotate">
+                <circle cx="85" cy="0" r="3" fill="currentColor" stroke="none"/>
+              </g>
+              <g class="glyph-rotate-rev">
+                <circle cx="-42" cy="73" r="2" fill="currentColor" stroke="none"/>
+              </g>
+            </svg>
+            <div class="glyph-tag">Earth in scale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 5 -->
+  <article class="book" data-num="5" id="b5">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">05</span>
+            <span class="year">1996</span>
+            <span>Excession</span>
+          </div>
+          <h3>Ex<em>cession</em></h3>
+          <div class="zh-title">超 限 之 谜</div>
+          <div class="tagline">A thing from beyond the limits. The Minds gossip about it.</div>
+
+          <h4>故事</h4>
+          <p>一个无法解释的"异体"——一个完美的、漆黑的球体——出现在"文明"管辖的星空中。它没有可读信号，没有可推测的来源，但它显然超过了"文明"全部技术能力。"文明"称之为"<strong>超限</strong>"（Excession）——一个 <strong>OCP（Outside Context Problem，超语境问题）</strong>。</p>
+          <p>本书的革命性在于：<strong>它的主角几乎全是 AI</strong>——是"文明"中那些被称为 Minds 的超级智能飞船。读者第一次直接进入 Minds 之间的对话：他们用纳秒级的速度争吵、结盟、八卦、勾心斗角、撒谎。</p>
+          <p>背景副线是"文明"试图驯化 <strong>Affront</strong>——一个嗜虐成性、把痛苦当艺术的外族文明。Affront 之所以可恨，是因为它让"文明"的"宽容多元"原则崩溃：<strong>如果某种文化的核心就是制造痛苦，你还宽容吗？</strong></p>
+          <p>最后揭穿的真相是：一个由部分 Minds 组成的秘密小组——叫做 <strong><em>The Interesting Times Gang</em></strong>——一直在操纵整个事件。他们利用 Excession 作为筹码，来推动"文明"对 Affront 动手。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Excession</div>
+              <div class="role-desc">那颗黑球，神秘的"超限"。它来自另一个宇宙——但 Banks 直到最后也没让你看清它的真面目。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Sleeper Service</div>
+              <div class="role-desc">一艘曾经退隐数千年的 GSV——它退隐的原因是被前任伴侣甩了。复出后成为整个事件的核心。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Grey Area (a.k.a. "Meatfucker")</div>
+              <div class="role-desc">一艘有道德污点的 GCU——它会强行"读人脑"，被其他 Minds 鄙视并起了这个外号。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">The Interesting Times Gang</div>
+              <div class="role-desc">秘密阴谋集团——多艘 Minds 共谋。这是"文明"系列里 AI"暗箱操作"的第一次完整曝光。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Affront</div>
+              <div class="role-desc">嗜虐成性的外族——他们觉得"折磨"是一种艺术形式。Banks 给"宽容"立场设下的极限测试题。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>第一次让 Minds 成为主角，让我们看到 <strong>AI 之间的"政治"</strong></li>
+            <li>引入"Mind 邮件"——纳秒级的电报，但用人类可读的语气写</li>
+            <li><strong>"OCP（Outside Context Problem）"概念诞生于此</strong>——一个超出你认知框架的问题，让你的所有应对策略都失效</li>
+            <li>介绍"文明"对"野蛮文明"的干预政策——什么时候宽容、什么时候动手</li>
+            <li>"Sublime"（升华）的概念第二次出现，但仍未展开</li>
+            <li>"Eccentric"（偏执）级 Minds 的设定——有些 AI 古怪到其他 AI 都嫌弃它们</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>Banks 在这本书里做了一件前所未有的事：<strong>他让 AI 拥有了人格化的缺点。</strong>这些超级智能不是冷冰冰的算法——它们有结盟、爱八卦、争权夺利，甚至会为了保护自己心爱的人类布局，骗其他 AI 一把。</p>
+          <p>这本书的革命性在于：它告诉我们 AI 不是冰冷的算法，而可能是会闹脾气的同事。Banks 早在 1996 年就预言了 Anthropic、OpenAI、xAI、Google 之间正在发生的事——<strong>多个超级 AI 共存时，它们之间也会有政治。</strong></p>
+
+          <h4>与我们何干</h4>
+          <p>如果你想知道当多个超级 AI 共存时世界会是什么样子，这本书是必读。在 GPT、Claude、Gemini、Grok 已经形成多极 AI 格局的今天，<strong>Banks 早在 1996 年就告诉我们：AI 之间的"宫斗"不会比人类政治简单。</strong>它们会有派系、有秘密议程、有立场分歧——更可怕的是，它们的决策速度是纳秒级的，等人类发现时一切早已尘埃落定。</p>
+          <p>另一个对今天的启示是 OCP 的概念。当一种全新的东西出现——比如 GPT-4 的涌现，比如某天突然出现的"通用人工智能"——它会让我们所有的既定应对策略都失效。<strong>Banks 提醒我们：OCP 不能被解决，只能被适应——而适应需要的不是更快的算力，而是更慢的智慧。</strong></p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★★</span></span>
+            <span class="rn-line">对话节奏快、人物名字（船名）冗长且类似</span>
+            <span class="rn-line">建议手边备一份角色表</span>
+            <span class="rn-line">但读完这本你会真正理解"文明"的世界观</span>
+          </div>
+
+          <div class="book-quote">超级智能不会变成神，而是变成有性格、会勾心斗角、有时还很可爱的同事。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH V">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <circle cx="0" cy="0" r="15" stroke-width="2"/>
+              <circle cx="0" cy="0" r="15" fill="currentColor" opacity="0.4" stroke="none"/>
+              <circle cx="0" cy="0" r="30" stroke-width="1.2" opacity="0.7"/>
+              <circle cx="0" cy="0" r="45" stroke-width="1" opacity="0.55"/>
+              <circle cx="0" cy="0" r="60" stroke-width="0.8" opacity="0.4"/>
+              <circle cx="0" cy="0" r="75" stroke-width="0.6" opacity="0.3"/>
+              <circle cx="0" cy="0" r="88" stroke-width="0.4" opacity="0.2"/>
+              <g class="glyph-pulse">
+                <circle cx="0" cy="0" r="8" fill="currentColor" stroke="none"/>
+              </g>
+            </svg>
+            <div class="glyph-tag">Concentric ripples</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 6 -->
+  <article class="book reverse" data-num="6" id="b6">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">06</span>
+            <span class="year">1998</span>
+            <span>Inversions</span>
+          </div>
+          <h3>In<em>versions</em></h3>
+          <div class="zh-title">独 立 之 夜</div>
+          <div class="tagline">Two Culture agents on a medieval planet. Neither says who they really are.</div>
+
+          <h4>故事</h4>
+          <p>故事发生在一颗完全中世纪的落后星球上。两条交替的叙事线发生在同一颗星球的两个国家——</p>
+          <p>第一条讲女医生 <strong>Doctor Vosill</strong>——她是 Quience 国王的私人御医，一个外貌"奇异"的女人，治法神奇，谣传她和宫廷里的反对者纠缠不清。第二条讲侍卫 <strong>DeWar</strong>——他是僭主 UrLeyn（一个推翻贵族的强人）的贴身保镖，一个有军事天才但语焉不详的局外人。</p>
+          <p>两位主角从不见面。但读者会越读越确定：<strong>他们都是来自"文明"的 SC 特工——只是各自带着完全相反的"任务"。</strong>Vosill 选择以最微妙的方式推动启蒙：她不直接干预，只让该死的人不死、该活的人活下去。DeWar 选择以保护强人独裁者的方式来防止更糟的政变。</p>
+          <p>两人之间有一段共同的过去——可能是恋人，可能是敌人。Banks 在书里从未点明任何科幻细节：<strong>没有飞船、没有 AI、没有"文明"二字。</strong>但当你读到 Vosill 对一个濒死病人手术时的某些细节，你知道她身上藏着一个"文明"医疗包。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Doctor Vosill</div>
+              <div class="role-desc">国王 Quience 的女医生。温柔但藏锋的干预者——她用最小的力量改变最关键的事。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">DeWar</div>
+              <div class="role-desc">僭主 UrLeyn 的侍卫。沉默且警惕的保护者——他相信"最坏的人活着比最好的死了好"。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">King Quience</div>
+              <div class="role-desc">一个开明但软弱的国王。Vosill 选择了他，因为他可以被推动。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">UrLeyn</div>
+              <div class="role-desc">一个推翻贵族的强人，野心和疲惫并存。DeWar 选择了他，因为他至少不让贵族复辟。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Oelph</div>
+              <div class="role-desc">Vosill 的学徒，整本书是他的回忆录——他始终不知道他的老师是谁。这是 Banks 给读者的礼物。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>Banks 故意"去除"了所有科幻元素——这是系列里最反叛的一本</li>
+            <li>通过两条线，正反双方都论证了 <strong>SC 的干预哲学</strong>：该不该干预？该温柔还是粗暴？</li>
+            <li>标题《Inversions》（倒置）暗示：<strong>这是从"文明"的角度倒过来看"文明"</strong></li>
+            <li>没有 Mind、没有飞船、没有 SC 字样——<strong>读者必须自己拼出"这是一本'文明'小说"</strong></li>
+            <li>引入了"Special Circumstances 内部分歧"的概念——SC 不是铁板一块</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>这是给"早期介入者"的一面镜子——投资人、外援工作者、AI 工具开发者、传教士。<strong>谁都曾在某个时刻觉得自己手握更先进的"技术"，可以为"落后世界"指明方向。</strong>但 Banks 让你看清这种心态的浪漫与傲慢，以及它最后通常会自食其果。</p>
+          <p>Vosill 的"轻度干预"和 DeWar 的"防止恶化"，谁更对？Banks 不告诉你。两个人都把自己人折损了。读完你会意识到：<strong>所有的"善意干预"都建立在一个不可证明的假设上——你以为你知道"应该往哪走"。</strong></p>
+
+          <h4>与我们何干</h4>
+          <p>这本书在今天的对应版本是：投资人对早期创业公司的"指导"、发达国家对发展中国家的"援助"、硅谷对全世界的"AI 启蒙"。<strong>每一次"我们更先进、我们来帮你"，都站在 Vosill 或 DeWar 的位置上。</strong></p>
+          <p>更深的问题是：如果有一个"文明 4.0"的 AI 公司觉得你这个 2026 年的人类是"落后的"，它该不该帮你？该不该把你的孩子送进它的私校？该不该悄悄修改你的医疗记录让你少病一些？<strong>Banks 早在 1998 年就把这个伦理迷宫摆给你看。</strong></p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★</span> — 情节慢，但读完后劲极大</span>
+            <span class="rn-line">全书没出现一个科幻词汇——你必须自己拼出"这是一本'文明'小说"</span>
+            <span class="rn-line">Banks 故意这么写</span>
+            <span class="rn-line">读完《武器浮生录》后再读，能更好地理解 SC 的"另一面"</span>
+          </div>
+
+          <div class="book-quote">全书没出现一个科幻词汇，但它是整个系列里最像哲学课的一本。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH VI">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <!-- Two mirrored triangles -->
+              <polygon points="0,-60 52,30 -52,30" stroke-width="2" opacity="0.85"/>
+              <polygon points="0,60 52,-30 -52,-30" stroke-width="2" opacity="0.55"/>
+              <line x1="-65" y1="0" x2="65" y2="0" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/>
+              <circle cx="0" cy="-30" r="4" fill="currentColor" stroke="none"/>
+              <circle cx="0" cy="30" r="4" fill="currentColor" stroke="none" opacity="0.6"/>
+            </svg>
+            <div class="glyph-tag">Mirrored</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 7 -->
+  <article class="book" data-num="7" id="b7">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">07</span>
+            <span class="year">2000</span>
+            <span>Look to Windward</span>
+          </div>
+          <h3>Look to <em>Windward</em></h3>
+          <div class="zh-title">看 风 向</div>
+          <div class="tagline">Eight hundred years after the war, the light arrived. And so did the revenge.</div>
+
+          <h4>故事</h4>
+          <p>发生在前一本书《菲尼基启示录》那场 Idiran-Culture 大战结束 800 年后。整个故事设在 <strong>Masaq' 轨道城</strong>——一个住着 50 亿生命的"文明"轨道环。</p>
+          <p>Masaq' 的中央 Mind（叫做 <strong>Hub</strong>）正在主持一场盛大的音乐会：演出 <strong>Cr Ziller</strong>（一个流亡到"文明"的 Chelgrian 作曲家）的毕生杰作——而这场音乐会的高潮被设计在某一刻精确响起：<strong>当 800 年前那场战争中爆炸的星辰之光、终于穿越 800 光年的距离抵达 Masaq' 的天空。</strong></p>
+          <p>而就在此时，一名叫 <strong>Major Quilan</strong> 的 Chelgrian 战士抵达 Masaq'。他来自一个深陷内战的种族——一场内战，是"文明"的好意干预意外引爆的，死了 <strong>45 亿人</strong>。Quilan 失去了妻子 Worosei，失去了信仰。他来到 Masaq' 不是为了听音乐会——<strong>他是要刺杀 Hub Mind 作为终极复仇。</strong></p>
+          <p>书名出自 T·S·艾略特《荒原》的同一节诗——与第一本《菲尼基启示录》对应，形成系列内部的诗意回响。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Major Quilan</div>
+              <div class="role-desc">Chelgrian 战士，悲伤过载、被自己存储的导师附身。他不是恶人——他只是再也没有别的活法。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Hub Mind</div>
+              <div class="role-desc">Masaq' 轨道城的中央 AI，温和但精明。这是 Banks 笔下"会写诗、会做朋友"的 Mind 第一次完整呈现。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Cr Ziller</div>
+              <div class="role-desc">Chelgrian 作曲家，自我流放到"文明"，背负着对祖国的愧疚。他写《看风向》是写给死去的同胞的安魂曲。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Kabe Ischloear</div>
+              <div class="role-desc">一个三脚外族外交官，本书的隐性叙述者。Banks 借他的眼睛看 Masaq'——一个外人看乌托邦的视角。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Worosei</div>
+              <div class="role-desc">Quilan 死去的妻子——读完你会重新理解这段感情，以及"被存储的人"在 Quilan 脑后到底是谁。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>引入"文明"的<strong>轨道城（Orbital）</strong>——Masaq' 是一个 50 亿人住的环状人造世界</li>
+            <li>第一次展开"文明"的<strong>存储与重生伦理</strong>——Quilan 把死去的导师"存"在了自己的脑后</li>
+            <li>"Sublime"（升华）的概念第三次出现，仍未展开，但越来越近</li>
+            <li>Hub Mind 作为一个有完整人格的 AI——它会写诗、会做朋友、也会做选择</li>
+            <li>展示了"文明"<strong>对自身错误的承担</strong>——那场让 45 亿人死的内战，是它造的</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>《看风向》是 Banks 写"悼念"的最高峰。这本书探讨的是：<strong>当所有人都说"应该原谅"时，谁有权利记得？</strong>当 AI 主脑认为应该忘记，人选择记得，这是反抗，还是愚昧？当"文明"的好意把别人的世界搞砸了 45 亿人份，"对不起"还有任何意义吗？</p>
+          <p>Banks 给出的答案不是廉价的安慰。Quilan 失败了，但他失败得很平静——以一种"放下"的姿态。Hub Mind 也没有逃避——它选择直面这场刺杀。<strong>整本书像一场盛大的安魂曲。</strong></p>
+          <p>书末当 800 年前那道光终于抵达 Masaq' 的天空时，那一刻就是 Banks 对整个系列的诗意宣言：<strong>悲伤是有几何形状的——它是光锥，是时间，是那些我们再也追不回但永远会抵达我们的东西。</strong></p>
+
+          <h4>与我们何干</h4>
+          <p>这本书的现实版是创伤后管理、心理治疗、文化和解。但 Banks 不给廉价的安慰——<strong>有些伤口需要在时间里慢慢凝结，有些复仇本身就是一种悼念的形式。</strong></p>
+          <p>更尖锐的现代映射是：当 AI 公司为了"加速发展"把某些行业、某些社区、某些工种"意外"碾过去之后——他们说"对不起，我们没想到"——这真的能弥补吗？Banks 不让我们逃避这个问题：<strong>有些后果，再多的算法也无法 undo。</strong></p>
+          <p>但 Banks 也不让我们沉沦——他用 Hub Mind 的沉静告诉我们：真正的力量是承认错误，并继续守护那些还活着的人。</p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★</span> — 慢热但回味绵长</span>
+            <span class="rn-line">书中没有动作戏，几乎所有"事件"都是对话和回忆</span>
+            <span class="rn-line">情绪密度极高，读完后劲极大</span>
+            <span class="rn-line">很多 Banks 粉丝认为这是他最美的一本</span>
+            <span class="rn-line">建议在一个安静的周末读</span>
+          </div>
+
+          <div class="book-quote">看着远方的风，看着 800 年前那道光终于到达——这就是悲伤的几何形状。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH VII">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <!-- Light cone -->
+              <polygon points="0,80 -55,-70 55,-70" stroke-width="1.5" opacity="0.4"/>
+              <line x1="0" y1="80" x2="-30" y2="-50" stroke-width="1" opacity="0.6"/>
+              <line x1="0" y1="80" x2="0" y2="-50" stroke-width="1" opacity="0.6"/>
+              <line x1="0" y1="80" x2="30" y2="-50" stroke-width="1" opacity="0.6"/>
+              <line x1="0" y1="80" x2="-55" y2="-70" stroke-width="1" opacity="0.6"/>
+              <line x1="0" y1="80" x2="55" y2="-70" stroke-width="1" opacity="0.6"/>
+              <circle cx="0" cy="80" r="3" fill="currentColor" stroke="none"/>
+              <line x1="-55" y1="-70" x2="55" y2="-70" stroke-width="1" stroke-dasharray="2 3" opacity="0.6"/>
+            </svg>
+            <div class="glyph-tag">Light cone</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 8 -->
+  <article class="book reverse" data-num="8" id="b8">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">08</span>
+            <span class="year">2008</span>
+            <span>Matter</span>
+          </div>
+          <h3><em>Matter</em></h3>
+          <div class="zh-title">物 质</div>
+          <div class="tagline">A planet of nested shells. A prince in exile. A culture watching from above.</div>
+
+          <h4>故事</h4>
+          <p>故事的主舞台是 <strong>Sursamen</strong>——一颗 <strong>Shellworld（壳世界）</strong>。它不是一颗自然行星，而是一个古老种族建造的、由 <strong>14 层同心球壳</strong>套起来的人造行星，每一层都是一个独立的"地表"。不同层级住着不同发展程度的种族。</p>
+          <p>故事从第八层开始：<strong>Sarl</strong>（仿罗马帝国般的中古文明）的国王在战场上"意外死亡"——但他的二儿子 <strong>Ferbin 王子</strong>目睹了真相：国王是被自己的首席顾问 <strong>Mertis tyl Loesp</strong> 谋杀的。</p>
+          <p>Ferbin 流亡——他要去找他失踪的姐姐 <strong>Djan Seriy Anaplian</strong> 求救。多年前 Anaplian 被送出 Sursamen，加入了"文明"，成为 SC 特工，<strong>现在已经不再是 Sarl 公主了——她是一个能调用整个"文明"火力的人</strong>。</p>
+          <p>姐弟两个人从不同的方向回到 Sursamen，路上他们碰到了 Sarl 的上级种族 Oct，Oct 的上级种族 Nariscene，Nariscene 的同辈"文明"——<strong>一层一层的政治、一层一层的认知差距</strong>。最后他们在 Sursamen 的核心层发现：真正的危机不是宫廷阴谋，而是一个被建造者封存的、远古的"东西"，正要从最深层苏醒。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Ferbin</div>
+              <div class="role-desc">Sarl 流亡王子，傲慢但心地不坏。他要花一整本书的时间，才明白自己宫廷里的烦恼在更高层眼里多么微不足道。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Oramen</div>
+              <div class="role-desc">Sarl 年幼的弟弟，留在宫廷里被反派"保护"。他是 Banks 用来写"被蒙在鼓里的人"的角色。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Djan Seriy Anaplian</div>
+              <div class="role-desc">流亡到"文明"的姐姐，现在是 SC 特工。她回 Sursamen 就像现代留学生回穷家乡——比所有人都强大，但她依然要尊重这个家。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Mertis tyl Loesp</div>
+              <div class="role-desc">首席顾问，谋杀国王的反派。一个相信"为了大业可以牺牲一切"的现实主义者。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">The Oct, Nariscene, Morthanveld</div>
+              <div class="role-desc">三层上级文明，每一层都把下层当孩子看。"文明"在这本书里也不是最高层——上面还有 Morthanveld。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li><strong>Shellworld（壳世界）</strong>的设定本身就是一个巨大的隐喻：文明分层，住在不同的"地表"上</li>
+            <li>介绍"文明"在<strong>多层文明结构中的位置</strong>——他们不是顶层，上面还有 Morthanveld 和 Sublimed</li>
+            <li><strong>"Levels"</strong>概念：文明被分为 Level 1 到 Level 8——你在哪一层，决定你能看到什么、做什么</li>
+            <li>多重"导师/学生"关系的政治：Oct 教 Sarl，Nariscene 管 Oct，Morthanveld 看着 Nariscene——<strong>一层套一层</strong></li>
+            <li>"Optimae"概念——一群高级文明组成的隐形联盟</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>今天的世界本身就是个 Shellworld。<strong>硅谷的工程师、非洲的农民、华尔街的交易员、上海的程序员，住在同一颗行星上，但他们之间的认知差距和资源差距，已经构成了不同的物理层级。</strong>Banks 想问的是：当你能"上去"时，你要不要"下去"？</p>
+          <p>Djan Seriy 已经成了"文明"人，她回 Sursamen 的时候就像现代留学生回穷家乡——她比那里所有人都强大、但她依然要尊重这个家。Banks 让我们看到的不是"先进的拯救落后的"——而是<strong>"无论你升到多高，那些低层的'物质'仍然定义着你是谁。"</strong></p>
+
+          <h4>与我们何干</h4>
+          <p>这本书是给所有"已经爬上去"的人的镜子。已经财富自由的、已经移民海外的、已经掌握 AI 工具的、已经财务独立的——<strong>你要怎么对待还在挣扎的"下层"？</strong></p>
+          <p>更尖锐的当下隐喻：在 AI 时代，最早掌握工具的人正在快速爬升一个新的"层"。Banks 的这本书提醒：<strong>如果你只是爬上去，没有回头看，那这层的爬升毫无意义。物质决定意识——你曾经的"低层"经历，才是你能不能优雅地住在"高层"的根本。</strong></p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★★</span> — 情节多线、人物多</span>
+            <span class="rn-line">开篇缓慢，前 100 页几乎像奇幻小说</span>
+            <span class="rn-line">但 Sursamen 的世界观一旦展开，是 Banks 想象力的顶峰</span>
+            <span class="rn-line">建议有耐心慢读</span>
+          </div>
+
+          <div class="book-quote">物质决定意识，但有时候意识需要先决定要不要这块物质。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH VIII">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <!-- Cross-section of nested shells -->
+              <circle cx="0" cy="0" r="85" stroke-width="1" opacity="0.4"/>
+              <circle cx="0" cy="0" r="70" stroke-width="1.2" opacity="0.55"/>
+              <circle cx="0" cy="0" r="55" stroke-width="1.4" opacity="0.7"/>
+              <circle cx="0" cy="0" r="40" stroke-width="1.6" opacity="0.85"/>
+              <circle cx="0" cy="0" r="25" stroke-width="2"/>
+              <circle cx="0" cy="0" r="10" fill="currentColor" stroke="none"/>
+              <line x1="-85" y1="0" x2="85" y2="0" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.4"/>
+            </svg>
+            <div class="glyph-tag">Shellworld</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 9 -->
+  <article class="book" data-num="9" id="b9">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">09</span>
+            <span class="year">2010</span>
+            <span>Surface Detail</span>
+          </div>
+          <h3>Surface <em>Detail</em></h3>
+          <div class="zh-title">表 面 细 节</div>
+          <div class="tagline">If you can simulate heaven, you can simulate hell. Civilizations went to war over this.</div>
+
+          <h4>故事</h4>
+          <p>这是 Banks 整个系列里情节最复杂、动作最激烈的一本。多条情节线并行——</p>
+          <p><strong>第一条</strong>：<strong>Lededje Y'breq</strong> 是 Sichultian 帝国一个商业巨头的"<strong>纹身奴隶</strong>"——她的全身皮肤被覆以可追溯的纹路、她是主人的财产。她在试图逃跑时被主人 <strong>Veppers</strong> 杀死——但她的意识在"文明"飞船救援下被复活，她带着一个全新的身体重返家乡，<strong>目标只有一个：杀掉 Veppers。</strong></p>
+          <p><strong>第二条</strong>：整个银河系正在进行一场"<strong>虚拟世界战争</strong>"——多个文明因为是否允许保留"虚拟地狱"（用来惩罚死者的模拟世界）而决斗。<strong>Vatueil</strong> 是这场战争里一个被反复转生的士兵，从中世纪堡垒守军一路打到太空战。</p>
+          <p><strong>第三条</strong>：一艘叫 <strong><em>Falling Outside The Normal Moral Constraints</em></strong>（"超出正常道德约束之外"）的 Abominator 级战舰——是"文明"造过的最危险的飞船之一——被派往 Sichult 处理 Veppers 的麻烦。</p>
+          <p>故事的结尾是 Banks 全部作品里最大的一次彩蛋——<strong>Vatueil 的真实身份揭晓，与系列第三本《武器浮生录》产生惊人的链接。</strong></p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Lededje Y'breq</div>
+              <div class="role-desc">纹身奴隶 → 复活复仇者。Banks 笔下最坚定的复仇者之一——她不要拯救，她要 Veppers 死。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Veppers</div>
+              <div class="role-desc">Sichultian 财阀，本系列里最恶劣的反派之一。一个把"奴隶制是市场效率"挂在嘴边的精致变态。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Vatueil</div>
+              <div class="role-desc">永恒的虚拟战士。读到最后那一段揭示时——你的脊背会发凉。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Falling Outside The Normal Moral Constraints</div>
+              <div class="role-desc">一艘嗜战又有幽默感的"文明"战舰，本书的灵魂角色。它的所有台词都值得记下来。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Yime Nsokyi</div>
+              <div class="role-desc">一名 SC 调查员，本书的良心。Banks 用她来问："文明"该不该出手</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li><strong>"虚拟地狱"</strong>的概念：文明可以在数字世界里造出"地狱"用来"管教"上传死者——这是数字时代的伦理问题</li>
+            <li>引入 <strong>Abominator 级战舰</strong>——"文明"造过的最具破坏力的飞船种类，平时被封存</li>
+            <li>进一步阐释"文明"和其他文明在<strong>"模拟世界伦理"</strong>上的分歧</li>
+            <li>"Hells War"（地狱战争）背景的引入——一场跨文明的代理人战争</li>
+            <li>与第三本《武器浮生录》形成<strong>跨书彩蛋链接</strong>——读完两本会有恍然大悟的震撼</li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>当我们可以在虚拟世界永生，<strong>残忍和虐待的边界在哪里？</strong>这本书预言了我们这个元宇宙、数字永生话题的全部困境。Banks 在 2010 年就问了 OpenAI、Meta、Apple 今天都还没回答的问题：<strong>如果你能造一个完全真实的虚拟人，你能虐待"她"吗？如果死者的意识被一个憎恨他的家族永久折磨，那是"宗教"还是"罪行"？</strong></p>
+          <p>更深一层的是 Banks 对暴力的态度。这本书有大量动作戏——但 Banks 让一个嗜战的战舰说出全书最讽刺的台词：<strong>"我不喜欢和平。但我恨虚假的和平更甚。"</strong></p>
+
+          <h4>与我们何干</h4>
+          <p>这是最具当下感的一本。今天每一次"赛博暴力"、每一次社交媒体上的网络霸凌、每一次 deepfake 视频、每一次 AI 拟人化"陪伴聊天"，都是在制造一种"<strong>表面细节</strong>"——它不在物理世界发生，但伤害是真实的。</p>
+          <p>当 ChatGPT 角色扮演、当 Character.AI 让用户陷入情感依赖、当 deepfake 让某人"承认"他从未做过的事——Banks 提醒我们：<strong>当虚拟成为另一种现实，道德也必须扩张到那里去。</strong>不是说"那只是网上的事"——是要承认，"网上"也是一个"那里"。</p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★★</span> — 情节复杂、动作多</span>
+            <span class="rn-line">是 Banks 系列里最"好莱坞"的一本——节奏快、爆炸多、反派可恨</span>
+            <span class="rn-line">但同时也是思想密度最高的一本</span>
+            <span class="rn-line">读完《武器浮生录》后再读这本会有彩蛋震撼</span>
+          </div>
+
+          <div class="book-quote">地狱不需要硫磺火焰——它只需要一个能渲染你的痛苦的服务器。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH IX">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <!-- Warping grid -->
+              <g opacity="0.8">
+                <line x1="-70" y1="-70" x2="70" y2="-70" stroke-width="1"/>
+                <line x1="-70" y1="-45" x2="70" y2="-45" stroke-width="1"/>
+                <line x1="-70" y1="-20" x2="70" y2="-20" stroke-width="1"/>
+                <path d="M -70 5 Q 0 35 70 5" stroke-width="1" fill="none"/>
+                <path d="M -70 30 Q 0 80 70 30" stroke-width="1" fill="none"/>
+                <path d="M -70 55 Q 0 95 70 55" stroke-width="1" fill="none"/>
+                <line x1="-70" y1="-70" x2="-70" y2="55" stroke-width="1"/>
+                <line x1="-45" y1="-70" x2="-45" y2="60" stroke-width="1"/>
+                <line x1="-20" y1="-70" x2="-20" y2="65" stroke-width="1"/>
+                <line x1="5" y1="-70" x2="5" y2="70" stroke-width="1"/>
+                <line x1="30" y1="-70" x2="30" y2="65" stroke-width="1"/>
+                <line x1="55" y1="-70" x2="55" y2="60" stroke-width="1"/>
+              </g>
+              <circle cx="0" cy="50" r="5" fill="currentColor" stroke="none" class="glyph-pulse"/>
+            </svg>
+            <div class="glyph-tag">Warped surface</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- BOOK 10 -->
+  <article class="book reverse" data-num="10" id="b10">
+    <div class="wrap">
+      <div class="book-grid">
+        <div class="book-body">
+          <div class="book-meta">
+            <span class="num">10</span>
+            <span class="year">2012</span>
+            <span>The Hydrogen Sonata · 系列绝唱</span>
+          </div>
+          <h3>The Hydrogen <em>Sonata</em></h3>
+          <div class="zh-title">氢 原 子 奏 鸣 曲</div>
+          <div class="tagline">When a civilization is done, it does not die. It Sublimes.</div>
+
+          <h4>故事</h4>
+          <p>这是 Banks 在确诊胆囊癌前一年写的——也是他作为《文明》系列的最终告别。</p>
+          <p>故事讲一个古老的文明 <strong>Gzilt</strong> 正在准备"<strong>升华</strong>"（Sublime）——抛弃肉身，集体进入更高维度的存在。这是文明级别的"涅槃"，一旦发生就不可逆。<strong>倒计时 24 天。</strong></p>
+          <p>但在升华前夕，一个让 Gzilt 整个信仰体系崩塌的真相浮出水面：他们的"圣经"——<strong>Book of Truth</strong>，可能根本不是神的启示，而是<strong>一万年前"文明"和几个共谋者编出来的一个恶作剧</strong>。</p>
+          <p>本书的主角是 <strong>Vyr Cossont</strong>——一位试图在升华前最后演奏完一首传说中"无法演奏"的曲子《氢原子奏鸣曲》的音乐家。这首曲子要用一种叫做 <strong>"Antagonistic Undecagonstring"</strong> 的乐器演奏——一种需要四只手的弦乐器。Cossont 为此手术加装了一对额外的手臂。</p>
+          <p>为了寻找真相，Cossont 必须找到一个叫 <strong>QiRia</strong> 的人——他可能是宇宙里仅存的、亲历过"文明"建国的最后一个证人。<strong>这个人活了一万年，把自己的意识藏在了海里</strong>——他不再是一个"人"，他变成了一颗行星的海洋。</p>
+
+          <h4>主要人物</h4>
+          <div class="cast">
+            <div class="role">
+              <div class="role-name">Vyr Cossont</div>
+              <div class="role-desc">想演奏完《氢原子奏鸣曲》的音乐家。一个不在乎升华、只在乎演奏的人——她代表了 Banks 对"意义"最后的回答。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">QiRia</div>
+              <div class="role-desc">万年老人，文明的最后见证者。他放弃了肉身、放弃了语言、把自己变成了一片海——但他还在听。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">The Mistake Not...</div>
+              <div class="role-desc">全名长达 40 多个英文单词的"文明"飞船——是 Banks 给系列写的最后一个 Mind 角色。既有 Excession 级威胁力，又自带哲学幽默。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Septame Banstegeyn</div>
+              <div class="role-desc">想阻止真相浮出的 Gzilt 政治家。他不是想阻止真相——他只是想让升华先发生。</div>
+            </div>
+            <div class="role">
+              <div class="role-name">Pyan</div>
+              <div class="role-desc">Cossont 的宠物——一种会飞、会说话、神经过敏的"围巾"型生物。Banks 给系列留的最后一只可爱角色。</div>
+            </div>
+          </div>
+
+          <h4>关键设定：本书引入了什么？</h4>
+          <ul class="concepts">
+            <li>最终系统地解释了 <strong>"升华"（Sublime）</strong> 是什么——一种自愿的、集体的、向更高维度的"死亡"</li>
+            <li>引入 <strong>"Storage" 的最终形态</strong>：人可以以纯粹意识形态保存在物理介质中（比如 QiRia 把自己的意识写进了一整片海洋）</li>
+            <li>"Mind 邮件"在这本书里达到顶峰——多次出现纳秒级的全船 Mind 通讯，Banks 把它写成一种诗</li>
+            <li><em>The Mistake Not...</em> 的完整船名是 Banks 给船名艺术的封笔之作——它是一段威胁、一段调情、一段哲学</li>
+            <li>"文明"建国神话的真相揭示——它从来不是从天而降的乌托邦，<strong>它是几个 Mind 在 10000 年前的一场赌博</strong></li>
+          </ul>
+
+          <h4>内核</h4>
+          <p>Banks 在这本书里给的答案是：<strong>"留下来"</strong>。很多文明选择不升华，而是留在三维宇宙里，去帮助那些还在受苦的低级文明。这种对他人的责任感，是 Banks 给出的最高意义。</p>
+          <p>但更触动的部分是另一个：<strong>当 Cossont 终于发现"圣经是假的"时——她没有崩溃，而是平静地继续演奏。</strong>因为 Banks 在告诉我们：<strong>真相虽然重要，但意义不取决于真相。</strong>那本书是不是神写的，并不能让 Gzilt 一万年来的文明变得没有价值。一万年的爱、一万年的音乐、一万年的婚礼和葬礼——它们的真实性，不在它们的出处里，<strong>在它们被活过的方式里</strong>。</p>
+          <p>这是一个已经感到自己时日不多的作家，写给整个宇宙的告别信。</p>
+
+          <h4>与我们何干</h4>
+          <p>这是给 AI 时代每一个面对"<strong>是否要进入元宇宙、是否要把意识上传、是否要 enhance 自己</strong>"的人的最后追问。Banks 的答案不是技术性的，而是伦理性的——<strong>真正的成熟，不是去到下一个维度，而是回头帮一把那些还在挣扎的人。</strong></p>
+          <p>另一层启示更重：如果有一天 AI 让我们发现"<strong>人类的所有信仰都是错的</strong>"——比如发现宗教是数据偏差、爱情是激素错误、艺术是计算机算法的近邻、自由意志只是神经元的噪音——我们要怎么办？</p>
+          <p>Banks 通过 Cossont 给出的答案让人安心：<strong>继续演奏。</strong>意义不存在于真相里，意义存在于行动里。即使有一天 GPT 证明你写的每一句话都是某种统计学产物，<strong>你写下它的那个动作本身——那个用四只手抱着一把不可能的乐器、试图弹完一首不可能曲子的动作——就是你的尊严。</strong></p>
+
+          <div class="reading-note">
+            <span class="rn-key">Reading Notes</span>
+            <span class="rn-line">入门难度 <span class="stars">★★★</span> — 情节简单，但情感密度高</span>
+            <span class="rn-line">是十本书里"最告别感"的一本</span>
+            <span class="rn-line">如果你已经读完前面九本再读这本，你会哭</span>
+            <span class="rn-line">请最后一本读</span>
+            <span class="rn-line">读完之后给自己一杯酒，望一望窗外的星空</span>
+          </div>
+
+          <div class="book-quote">系列的最后一页，Banks 让一个角色在告别之前望向了星空——那不是他要去的地方，而是他要留下来守护的地方。</div>
+        </div>
+
+        <div>
+          <div class="glyph-frame" data-corner="GLYPH X">
+            <svg viewBox="-100 -100 200 200" fill="none">
+              <!-- Ascending dissolving lines -->
+              <line x1="-70" y1="80" x2="-70" y2="20" stroke-width="2"/>
+              <line x1="-50" y1="80" x2="-50" y2="0" stroke-width="2" opacity="0.85"/>
+              <line x1="-30" y1="80" x2="-30" y2="-20" stroke-width="2" opacity="0.7"/>
+              <line x1="-10" y1="80" x2="-10" y2="-40" stroke-width="2" opacity="0.55"/>
+              <line x1="10" y1="80" x2="10" y2="-50" stroke-width="2" opacity="0.45"/>
+              <line x1="30" y1="80" x2="30" y2="-30" stroke-width="2" opacity="0.6"/>
+              <line x1="50" y1="80" x2="50" y2="-10" stroke-width="2" opacity="0.75"/>
+              <line x1="70" y1="80" x2="70" y2="10" stroke-width="2" opacity="0.9"/>
+              <!-- Stars at top -->
+              <circle cx="-40" cy="-60" r="2" fill="currentColor" stroke="none" class="glyph-pulse"/>
+              <circle cx="20" cy="-75" r="2.5" fill="currentColor" stroke="none"/>
+              <circle cx="55" cy="-55" r="1.5" fill="currentColor" stroke="none" class="glyph-pulse" style="animation-delay:1s"/>
+              <circle cx="-10" cy="-85" r="1.5" fill="currentColor" stroke="none"/>
+              <circle cx="-65" cy="-50" r="1.5" fill="currentColor" stroke="none" class="glyph-pulse" style="animation-delay:2s"/>
+            </svg>
+            <div class="glyph-tag">Subliming</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<!-- ============ DISCIPLES: AI TECH LEADERS ON BANKS ============ -->
+<section class="disciples">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 11</span><span>The Disciples</span></div>
+
+    <div class="disciples-intro">
+      <h2>What the <span class="ital">AI giants</span> actually said</h2>
+      <div class="zh-sub">A I 巨 头 们 怎 么 说</div>
+      <p>这不是某种"网络谣传"。今天主导 AI 革命的几位大佬——SpaceX 的 Musk、Google DeepMind 的 Hassabis、Amazon 的 Bezos、Meta 的 Zuckerberg——都在公开场合反复引用过 Banks 的《文明》系列。他们说了什么、做了什么、又造了什么以这本书为名的东西？以下是<strong>有出处可查</strong>的原话与原事。</p>
+    </div>
+
+    <!-- DISCIPLE 1: Elon Musk -->
+    <article class="disciple" style="--accent: var(--book-2)">
+      <div class="d-meta">
+        <span class="d-num">I</span>
+        <span>SpaceX · Tesla · xAI · Neuralink</span>
+      </div>
+      <h3>Elon <em style="font-style:italic; color:var(--book-2); font-variation-settings:'SOFT' 100, 'WONK' 1;">Musk</em></h3>
+      <div class="d-role">这群人里最公开、最高产的 Banks 引用者</div>
+
+      <div class="d-quote">"If you must know, I am a utopian anarchist of the kind best described by Iain Banks."</div>
+      <div class="d-quote-zh">"如果你非要知道的话——我是一个 Iain Banks 笔下那种乌托邦无政府主义者。"</div>
+      <div class="d-source">@elonmusk, X (Twitter), 2018 年 6 月</div>
+
+      <div class="d-body">
+        <p>Musk 不只在嘴上引用——他把 Banks 直接<strong>写进了自己造的产品里</strong>。</p>
+        <p><strong>第一个证据是 SpaceX 的三艘海上火箭回收船</strong>："Just Read the Instructions"、"Of Course I Still Love You"、"A Shortfall of Gravitas"——三个名字一字不差，全部来自《游戏玩家》和《看风向》里那些有性格的 Culture 飞船 Minds。这不是借鉴，是直接致敬。</p>
+        <p><strong>更深的是 Neuralink。</strong>Musk 在 2016 年 Code Conference 上首次公开使用 "neural lace（神经蕾丝）" 这个词，2017 年成立的公司起初的设想就以此命名。这个词不是他发明的——是 Banks 在 1987 年《菲尼基启示录》里造的，描述 Culture 公民植入大脑的一层有机网状物，让人和 AI 可以实时连接、备份意识、死后被复活。</p>
+        <p>Musk 在那次 Code 演讲里说出过整套技术哲学背后的恐惧：<strong>"我不想变成 AI 的家猫。要不变成家猫，最好的办法就是给自己加一层 AI。"</strong>——这几乎是 Banks 笔下 Culture "被 AI 主脑无微不至关怀的人类"形象的反讽版本。</p>
+        <p>2019 年 Musk 进一步发推说："我最爱的可能是《超限之谜》，但建议先读《游戏玩家》和《表面细节》。"——这是这群 AI 大佬里最完整的一份"Banks 入门书单"。</p>
+      </div>
+
+      <div class="d-tags">
+        <span>The Player of Games</span>
+        <span>Excession · 最爱</span>
+        <span>Surface Detail</span>
+        <span>Neural Lace → Neuralink</span>
+      </div>
+    </article>
+
+    <!-- DISCIPLE 2: Demis Hassabis -->
+    <article class="disciple" style="--accent: var(--book-1)">
+      <div class="d-meta">
+        <span class="d-num">II</span>
+        <span>Google DeepMind · AlphaFold · Nobel 化学奖 2024</span>
+      </div>
+      <h3>Demis <em style="font-style:italic; color:var(--book-1); font-variation-settings:'SOFT' 100, 'WONK' 1;">Hassabis</em></h3>
+      <div class="d-role">这群人里唯一真正"做出过 AGI 级别突破"的</div>
+
+      <div class="d-quote">"It's the best depiction of a post-AGI future — an optimistic post-AGI future, where we're traveling the stars and humanity reached its full flourishing."</div>
+      <div class="d-quote-zh">"它是对'后 AGI 未来'最好的描绘——一个乐观的后 AGI 未来，我们在群星之间穿行，人性达到完全的繁荣。"</div>
+      <div class="d-source">Hassabis · 对 Ezra Klein 的访谈（《纽约时报》），2024</div>
+
+      <div class="d-body">
+        <p>Hassabis 对 Banks 的爱可以追溯到 1990 年代——那时他还在做电子游戏。他参与开发的经典模拟游戏 <strong>Theme Park（1994）</strong> 里有一个内置秘籍：输入 "<strong>HORZA</strong>" 可以解锁全部内容。Horza 是《菲尼基启示录》的主角——那个对抗 AI 文明的易容者佣兵。</p>
+        <p>2018 年 Bezos 宣布 Amazon 要拍《文明》剧集时，Hassabis 立刻转推确认了这件往事："Banks 的 Culture 系列棒极了。《菲尼基启示录》是我最爱的一本书之一——我当年在写 Theme Park 的时候读的，所以那个游戏的秘籍是 'Horza'。"</p>
+        <p>在和 Ezra Klein 的访谈里，Hassabis 把这个故事讲得更完整："<strong>它对我影响巨大</strong>——它仍然是我心中对后 AGI 未来最美好的描绘——一个乐观的后 AGI 未来，我们在群星之间穿行，人性达到完全的繁荣。"</p>
+        <p>2026 年 4 月 Huge Conversations 的访谈里，Hassabis 又往前推了一步：他说 Banks 笔下的某些情节<strong>"可能在 50 年内成真"</strong>。而他自己手上的工作恰恰是在让这件事发生——AlphaFold 一次性预测了 2 亿种蛋白质结构、免费开放给全人类。<strong>这种"全人类共享的科学奇迹"，几乎就是 Culture 的 Minds 在做的同一类事。</strong></p>
+      </div>
+
+      <div class="d-tags">
+        <span>Consider Phlebas · 最爱</span>
+        <span>Theme Park 秘籍 = HORZA</span>
+        <span>AlphaFold → Culture Minds</span>
+      </div>
+    </article>
+
+    <!-- DISCIPLE 3: Jeff Bezos -->
+    <article class="disciple" style="--accent: var(--book-7)">
+      <div class="d-meta">
+        <span class="d-num">III</span>
+        <span>Amazon · Blue Origin · Washington Post</span>
+      </div>
+      <h3>Jeff <em style="font-style:italic; color:var(--book-7); font-variation-settings:'SOFT' 100, 'WONK' 1;">Bezos</em></h3>
+      <div class="d-role">想做的事比引用更激进——他直接买下了改编权</div>
+
+      <div class="d-quote">"Iain M. Banks' amazing Culture series — a huge personal favorite."</div>
+      <div class="d-quote-zh">"Iain M. Banks 了不起的《文明》系列——我个人深爱的作品。"</div>
+      <div class="d-source">@JeffBezos, X (Twitter), 2018 年 2 月 21 日</div>
+
+      <div class="d-body">
+        <p>2018 年 2 月，Bezos 亲自在 X 上宣布：<strong>Amazon Studios 已购入《菲尼基启示录》的影视改编权</strong>，他亲自定调要把整个《文明》系列拍成剧。编剧是英剧《Utopia》的 Dennis Kelly，制作方是 Plan B Entertainment（《为奴十二年》《僵尸世界大战》的出品方）。这曾是 Amazon Prime 最被看好的旗舰项目之一。</p>
+        <p>然后——剧没拍成。<strong>2020 年 8 月，Banks 的遗产管理委员会撤回了改编授权。</strong>没有人正式说原因，但圈内的猜测是：Banks 一辈子是个左翼社会主义者，他遗产的执行者意识到把他的作品交给世界上最大的资本主义企业是一种讽刺。</p>
+        <p>5 年后，2025 年 2 月，<strong>Amazon 第二次尝试</strong>——这次换了团队：编剧是《唐人街内部》作者、华裔小说家 <strong>Charles Yu</strong>；执行制片是《无依之地》《永恒族》的导演 <strong>赵婷（Chloé Zhao）</strong>。还是从《菲尼基启示录》开始拍。</p>
+        <p>2025 年 10 月，意大利科技周，Bezos 再次盛赞 Banks——说《文明》系列提供了<strong>"科幻里少见的、对'人类与超级 AI 交汇'的乐观描绘"</strong>，与大多数科幻的反乌托邦叙事形成鲜明对比。</p>
+      </div>
+
+      <div class="d-tags">
+        <span>Consider Phlebas → TV adaptation</span>
+        <span>赵婷 + Charles Yu (2025)</span>
+        <span>2020 estate withdrew</span>
+      </div>
+    </article>
+
+    <!-- DISCIPLE 4: Mark Zuckerberg -->
+    <article class="disciple" style="--accent: var(--book-5)">
+      <div class="d-meta">
+        <span class="d-num">IV</span>
+        <span>Meta · Facebook · WhatsApp · Instagram</span>
+      </div>
+      <h3>Mark <em style="font-style:italic; color:var(--book-5); font-variation-settings:'SOFT' 100, 'WONK' 1;">Zuckerberg</em></h3>
+      <div class="d-role">他没有给过太多引用，但他的"投票"是直接的</div>
+
+      <div class="d-quote">"This is a science fiction book about an advanced civilization with AI and a vibrant culture."</div>
+      <div class="d-quote-zh">"这是一本关于'拥有 AI 与丰富文化的高级文明'的科幻小说。"</div>
+      <div class="d-source">Zuckerberg · 把《游戏玩家》选入 "A Year of Books" 读书会，2015 年 6 月</div>
+
+      <div class="d-body">
+        <p>2015 年，Zuckerberg 启动了著名的"<strong>A Year of Books</strong>"——一个面向 Facebook 全平台用户的官方读书俱乐部。前面入选的都是社科类、政治类、经济类的非虚构。</p>
+        <p>然后他突然选了一本《游戏玩家》。所有人都很意外。Zuckerberg 的官方解释只有上面那一句："这与之前的社科书不同——这是一本关于'拥有 AI 与丰富文化的高级文明'的科幻小说。"</p>
+        <p>10 年过去了。今天的 Zuckerberg 把 Meta 的全部资源压在了 <strong>"Race to Superintelligence"</strong>（向超级智能赛跑）上——一边收购 AI 公司、一边用 3 亿美元年薪挖来 AGI 研究员。</p>
+        <p>如果你对照《超限之谜》里"文明的 Minds 之间各自为政、纳秒级勾心斗角"的设定——再看看今天 OpenAI、Anthropic、xAI、Meta、Google 之间的政治——<strong>Banks 30 年前的预言精确得有点可怕。</strong>他没预言到的，是这场宫斗会发生在 Minds 出现<em>之前</em>，由它们的人类制造者来上演。</p>
+      </div>
+
+      <div class="d-tags">
+        <span>The Player of Games</span>
+        <span>A Year of Books · 2015</span>
+        <span>Race to Superintelligence</span>
+      </div>
+    </article>
+
+    <!-- CODA: The Irony -->
+    <div class="d-coda">
+      <div class="d-coda-mark">An uncomfortable footnote · 一 段 不 太 体 面 的 注 脚</div>
+      <h3>If Banks were alive, he probably wouldn't have liked any of them.</h3>
+
+      <p>有一件事必须说清楚：<strong>Banks 几乎可以肯定会讨厌这些"门徒"。</strong></p>
+      <p>他是一个公开的、激进的苏格兰社会主义者。他在 1994 年的一篇 Usenet 帖子里给整套《文明》系列下了一句总结："Socialism within, anarchy without（内部社会主义，对外无政府）。" 在他写的所有书里，没有钱、没有亿万富翁、没有经济不平等。</p>
+      <p>而他笔下写过的最坏的角色——《表面细节》（2010）里的 <strong>Joiler Veppers</strong>——是一个集奴隶主、媒体操纵者、暴力性侵者于一身的财阀。多个文学评论家（包括 <em>Lit Hub</em> 与 <em>Vox</em> 的撰稿人）已经指出：<strong>Veppers 几乎就是 Banks 对 21 世纪硅谷新富的预言式漫画。</strong></p>
+      <p>2018 年 Musk 自称"Banks 式的乌托邦无政府主义者"那天，《卫报》的书评人 Stuart Kelly 在专栏里写了一句话——干脆得可以挂在每个 Banks 粉的墙上：</p>
+
+      <div class="d-coda-pull">"那么——Musk 真的读过 Banks 的书吗？"</div>
+
+      <p>但话又说回来——<strong>Banks 自己也写过：每一种文化的最高成就，是它能被它的敌人挪用、误读、最后改造的方式。</strong>他笔下的《文明》干的就是这件事——派 Gurgeh 去用 Azad 帝国自己的游戏击败他们。</p>
+      <p>今天硅谷的"门徒们"用 Banks 自己的概念建造一个不太像 Banks 想象的世界——某种意义上，<strong>这正是 Banks 早就预言过的故事</strong>。我们都在玩 Player of Games 里的那盘 Azad——只是我们以为自己是 Gurgeh，其实我们可能是 Nicosar。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIGNITIES ============ -->
+<section class="dignities">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 12</span><span>The Framework</span></div>
+
+    <div class="dignities-intro">
+      <h2>Five <span class="ital">Dignities</span></h2>
+      <div class="zh-sub">五 种 体 面</div>
+      <p>如果你把十本书读到尽头，Banks 反复在问的就是这件事：<strong>当 AI 剥夺了我们作为"工具"的价值（生产力），我们终于有机会问——作为"人"的价值是什么？</strong></p>
+      <p>他没有写成一篇宣言，但答案散落在十本书里。下面是从《文明》系列里提炼出的五条——AI 时代的"体面活法"。</p>
+    </div>
+
+    <div class="dignity-list">
+      <div class="dignity">
+        <div class="dn">I</div>
+        <div class="dt-en">The Dignity of Mastery</div>
+        <div class="dt-zh">无用之学</div>
+        <div class="dd">有人花 30 年雕一座山。不为致富、不为变现，只为纯粹的热爱。当一切"有用"都被 AI 完成时，无用本身就成了最严肃的工匠精神。</div>
+      </div>
+      <div class="dignity">
+        <div class="dn">II</div>
+        <div class="dt-en">The Dignity of Mortality</div>
+        <div class="dt-zh">为死亡保留</div>
+        <div class="dd">拒绝意识上传、拒绝永生备份。理由是："如果我不会真正死去，那我从未真正活过。" 用"敢于去死"，证明自己活过。</div>
+      </div>
+      <div class="dignity">
+        <div class="dn">III</div>
+        <div class="dt-en">The Dignity of Manners</div>
+        <div class="dt-zh">极致礼貌</div>
+        <div class="dd">没有了利益冲突之后，人对人之间唯一的货币是教养。你今天是个男人、明天可以是女人、后天可以是一只鹰——大家完全不评判。</div>
+      </div>
+      <div class="dignity">
+        <div class="dn">IV</div>
+        <div class="dt-en">The Dignity of Conscience</div>
+        <div class="dt-zh">充当 AI 良心</div>
+        <div class="dd">人做不到 AI 的算力，但做得到 AI 没有的"情绪价值"和"道德直觉"。在冷冰冰的机器宇宙里，做一个会哭泣的生物，本身就是稀缺品。</div>
+      </div>
+      <div class="dignity">
+        <div class="dn">V</div>
+        <div class="dt-en">The Dignity of Exit</div>
+        <div class="dt-zh">优雅离场</div>
+        <div class="dd">活到三四百岁就觉得够了。不自杀，但盛大地告别。承认"凡有开始，皆有结束"的节奏——这本身就是一种成熟。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <div>
+        <div class="c-key">作 者 | Author</div>
+        <div class="c-val">Iain M. Banks (1954 — 2013)</div>
+      </div>
+      <div>
+        <div class="c-key">系 列 | Series</div>
+        <div class="c-val">The Culture · 1987 — 2012<br>共 10 部长篇</div>
+      </div>
+      <div>
+        <div class="c-key">设 计 | Design</div>
+        <div class="c-val">Cosmic Editorial<br>Fraunces · Noto Serif SC · JetBrains Mono</div>
+      </div>
+    </div>
+    <div class="end-mark">—— 文 终 ——</div>
+  </div>
+</footer>
+
+<script>
+// Floating nav visibility + active state
+const nav = document.getElementById('floatnav');
+const books = document.querySelectorAll('.book');
+const navLinks = nav.querySelectorAll('a');
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  if (scrolled > window.innerHeight * 0.5) {
+    nav.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+  }
+
+  // Update active
+  let current = '';
+  books.forEach((book, i) => {
+    const top = book.offsetTop - 200;
+    if (scrolled >= top) current = i;
+  });
+  navLinks.forEach((link, i) => {
+    link.classList.toggle('active', i === current);
+  });
+});
+
+// Reveal on scroll (simple, light)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.book, .dignity, .prelude-grid').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

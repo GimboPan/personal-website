@@ -10,6 +10,45 @@ import PixelMascot from '~/components/PixelMascot.astro';
   description="Agents, robots and us. A personal hub aggregating projects across the agentic era — supply chain, investing, AI experiments, tennis, books, and the slow lane."
   hideCrt={true}
 >
+  <!-- ============ DISPATCH STRAP: editorial top-line announcing the newest piece.
+       Sits between sticky nav and hero — scrolls away with the page. Pure
+       typography, no card chrome, intentionally quiet. Remove this <div>
+       when the article is no longer the latest. ============ -->
+  <div class="relative border-b border-hairline">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+      <a
+        href="/ideas/culture-series-visual-guide.html"
+        class="group flex items-center gap-3 sm:gap-4 py-2.5 text-[11px] sm:text-xs font-mono tracking-tool"
+      >
+        <!-- NEW pulse pill -->
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-lime text-canvas font-bold text-[10px] shrink-0">
+          <span class="h-1 w-1 rounded-full bg-canvas animate-pulse"></span>
+          NEW
+        </span>
+
+        <!-- Meta — hidden on tiny screens to keep the line breathable -->
+        <span class="hidden sm:inline text-ink-gray shrink-0">
+          // LATEST DISPATCH · 2026.05 · IDEAS
+        </span>
+
+        <!-- Title — the heart of the message -->
+        <span class="text-ink-white font-semibold group-hover:text-lime transition-colors truncate">
+          文明系列 · 十书可视化解读
+        </span>
+
+        <!-- Subtitle — desktop only, fades into gray -->
+        <span class="hidden lg:inline text-ink-gray truncate">
+          — Iain M. Banks 的十本书，一座 AI 之后的乌托邦
+        </span>
+
+        <!-- Arrow pinned right -->
+        <span class="ml-auto text-lime opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0">
+          Read →
+        </span>
+      </a>
+    </div>
+  </div>
+
   <HeroSection
     name="homepage-hero"
     alt="Gimbo's Universe — a sculpted figure dissolving into voxel architecture above an Auckland tennis court at dusk"

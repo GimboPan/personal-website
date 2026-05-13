@@ -1,6 +1,6 @@
 ---
 /**
- * Reusable pixel-art Claude Code companion that walks back and forth
+ * Reusable pixel-art Claude Code penguin that waddles back and forth
  * across the bottom of its positioned parent. Renders as an absolutely
  * positioned overlay (inset: 0; pointer-events: none) so it can be
  * dropped into any card/scene without disturbing layout.
@@ -11,7 +11,7 @@
 export interface Props {
   /** Sprite pixel size (square). Default 56. */
   size?: number;
-  /** Accent color used for the lime "C" on the character's shirt. */
+  /** Accent color used for the lime "C" on the penguin's belly. */
   accent?: string;
   /** Edge padding the character reverses at. Default 10. */
   padding?: number;
@@ -24,8 +24,10 @@ export interface Props {
    *  - 'walk': straight back-and-forth (default)
    *  - 'walk-look': walk to one end, pause and look both ways, walk
    *    back, repeat. Useful for slower, more lifelike ambient mascots.
+   *  - 'snail': very slow waddle with two mid-walk pauses per loop;
+   *    during each pause the eyes drift upward as if looking at the sky.
    */
-  behavior?: 'walk' | 'walk-look';
+  behavior?: 'walk' | 'walk-look' | 'snail';
   /**
    * Optional CSS animation-delay (e.g. '-4s'). Negative delays start
    * the character mid-cycle — useful to desynchronize multiple
@@ -62,92 +64,47 @@ const styleVars = [
   <div class="pixel-mascot__walker">
     <div class="pixel-mascot__shadow"></div>
     <div class="pixel-mascot__bobber">
-      <!-- Frame 1 — legs together -->
+      <!-- Frame 1 — left leg grounded, right leg lifted -->
       <svg
         class="pixel-mascot__frame pixel-mascot__frame--1"
         viewBox="0 0 16 20"
         shape-rendering="crispEdges"
       >
-        <!-- hair -->
-        <rect x="5" y="1" width="6" height="2" fill="#1a1410"/>
-        <rect x="4" y="2" width="2" height="1" fill="#1a1410"/>
-        <rect x="10" y="2" width="2" height="1" fill="#1a1410"/>
-        <rect x="4" y="3" width="1" height="3" fill="#1a1410"/>
-        <rect x="11" y="3" width="1" height="3" fill="#1a1410"/>
-        <!-- head/skin -->
-        <rect x="6" y="2" width="4" height="1" fill="#d97757"/>
-        <rect x="5" y="3" width="6" height="4" fill="#d97757"/>
-        <!-- eyes -->
-        <rect x="6" y="4" width="1" height="1" fill="#0e0f0c"/>
-        <rect x="9" y="4" width="1" height="1" fill="#0e0f0c"/>
-        <!-- mouth -->
-        <rect x="7" y="6" width="2" height="1" fill="#a0463a"/>
-        <!-- neck -->
-        <rect x="7" y="7" width="2" height="1" fill="#d97757"/>
-        <!-- shirt -->
-        <rect x="5" y="8" width="6" height="1" fill="#ffffff"/>
-        <rect x="4" y="9" width="8" height="1" fill="#ffffff"/>
-        <rect x="3" y="10" width="10" height="3" fill="#ffffff"/>
-        <rect x="4" y="13" width="8" height="1" fill="#ffffff"/>
-        <!-- arms -->
-        <rect x="2" y="10" width="1" height="2" fill="#d97757"/>
-        <rect x="13" y="10" width="1" height="2" fill="#d97757"/>
-        <!-- accent logo -->
-        <rect x="7" y="11" width="2" height="1" class="pixel-mascot__accent"/>
-        <rect x="6" y="12" width="1" height="1" class="pixel-mascot__accent"/>
-        <rect x="9" y="12" width="1" height="1" class="pixel-mascot__accent"/>
-        <!-- pants -->
-        <rect x="5" y="14" width="6" height="2" fill="#0e0f0c"/>
-        <!-- legs together -->
-        <rect x="6" y="16" width="2" height="2" fill="#0e0f0c"/>
-        <rect x="8" y="16" width="2" height="2" fill="#0e0f0c"/>
-        <!-- shoes -->
-        <rect x="5" y="18" width="3" height="1" fill="#ffffff"/>
-        <rect x="8" y="18" width="3" height="1" fill="#ffffff"/>
+        <!-- body main block (cols 4-11, rows 3-14) -->
+        <rect x="4" y="3" width="8" height="12" fill="#d97757"/>
+        <!-- arm stubs sticking out (1 col each side) -->
+        <rect x="3" y="9" width="1" height="2" fill="#d97757"/>
+        <rect x="12" y="9" width="1" height="2" fill="#d97757"/>
+        <!-- eyes: 1x2 vertical black rectangles, grouped so a CSS
+             animation can translate them up during a "look up" pause -->
+        <g class="pixel-mascot__eyes">
+          <rect x="5" y="5" width="1" height="2" fill="#0e0f0c"/>
+          <rect x="10" y="5" width="1" height="2" fill="#0e0f0c"/>
+        </g>
+        <!-- legs: left grounded (3 rows), right lifted (2 rows) -->
+        <rect x="4" y="15" width="2" height="3" fill="#d97757"/>
+        <rect x="10" y="15" width="2" height="2" fill="#d97757"/>
       </svg>
 
-      <!-- Frame 2 — legs apart (mid-stride) -->
+      <!-- Frame 2 — right leg grounded, left leg lifted -->
       <svg
         class="pixel-mascot__frame pixel-mascot__frame--2"
         viewBox="0 0 16 20"
         shape-rendering="crispEdges"
       >
-        <!-- hair -->
-        <rect x="5" y="1" width="6" height="2" fill="#1a1410"/>
-        <rect x="4" y="2" width="2" height="1" fill="#1a1410"/>
-        <rect x="10" y="2" width="2" height="1" fill="#1a1410"/>
-        <rect x="4" y="3" width="1" height="3" fill="#1a1410"/>
-        <rect x="11" y="3" width="1" height="3" fill="#1a1410"/>
-        <!-- head/skin -->
-        <rect x="6" y="2" width="4" height="1" fill="#d97757"/>
-        <rect x="5" y="3" width="6" height="4" fill="#d97757"/>
-        <!-- eyes -->
-        <rect x="6" y="4" width="1" height="1" fill="#0e0f0c"/>
-        <rect x="9" y="4" width="1" height="1" fill="#0e0f0c"/>
-        <!-- mouth -->
-        <rect x="7" y="6" width="2" height="1" fill="#a0463a"/>
-        <!-- neck -->
-        <rect x="7" y="7" width="2" height="1" fill="#d97757"/>
-        <!-- shirt -->
-        <rect x="5" y="8" width="6" height="1" fill="#ffffff"/>
-        <rect x="4" y="9" width="8" height="1" fill="#ffffff"/>
-        <rect x="3" y="10" width="10" height="3" fill="#ffffff"/>
-        <rect x="4" y="13" width="8" height="1" fill="#ffffff"/>
-        <!-- arms (swung) -->
-        <rect x="2" y="11" width="1" height="2" fill="#d97757"/>
-        <rect x="13" y="9" width="1" height="2" fill="#d97757"/>
-        <!-- accent logo -->
-        <rect x="7" y="11" width="2" height="1" class="pixel-mascot__accent"/>
-        <rect x="6" y="12" width="1" height="1" class="pixel-mascot__accent"/>
-        <rect x="9" y="12" width="1" height="1" class="pixel-mascot__accent"/>
-        <!-- pants -->
-        <rect x="5" y="14" width="6" height="2" fill="#0e0f0c"/>
-        <!-- legs apart -->
-        <rect x="5" y="16" width="2" height="2" fill="#0e0f0c"/>
-        <rect x="9" y="16" width="2" height="2" fill="#0e0f0c"/>
-        <!-- shoes staggered -->
-        <rect x="4" y="18" width="3" height="1" fill="#ffffff"/>
-        <rect x="9" y="18" width="3" height="1" fill="#ffffff"/>
+        <!-- body main block (cols 4-11, rows 3-14) -->
+        <rect x="4" y="3" width="8" height="12" fill="#d97757"/>
+        <!-- arm stubs sticking out -->
+        <rect x="3" y="9" width="1" height="2" fill="#d97757"/>
+        <rect x="12" y="9" width="1" height="2" fill="#d97757"/>
+        <!-- eyes (grouped for look-up animation) -->
+        <g class="pixel-mascot__eyes">
+          <rect x="5" y="5" width="1" height="2" fill="#0e0f0c"/>
+          <rect x="10" y="5" width="1" height="2" fill="#0e0f0c"/>
+        </g>
+        <!-- legs: left lifted (2 rows), right grounded (3 rows) -->
+        <rect x="4" y="15" width="2" height="2" fill="#d97757"/>
+        <rect x="10" y="15" width="2" height="3" fill="#d97757"/>
       </svg>
     </div>
   </div>

@@ -518,6 +518,17 @@
     animation-name: pixel-mascot-walk-look;
     animation-timing-function: linear;
   }
+  .pixel-mascot--snail .pixel-mascot__walker {
+    animation-name: pixel-mascot-snail;
+    animation-timing-function: linear;
+  }
+  /* Eyes drift up during snail pauses to read as "look at the sky".
+     1 viewBox unit = mascot-size / 16, so translateY(-mascot-size/16)
+     shifts the eyes exactly 1 pixel-art unit (crisp on the grid). */
+  .pixel-mascot--snail .pixel-mascot__eyes {
+    animation: pixel-mascot-look var(--mascot-walk-dur, 40s) linear infinite;
+    animation-delay: var(--mascot-delay, 0s);
+  }
   @keyframes pixel-mascot-walk {
     0%   { left: var(--mascot-pad, 10px); transform: scaleX(1); }
     45%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px)); transform: scaleX(1); }
@@ -549,6 +560,40 @@
     98%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(-1); }
     /* re-orient to walk right for the next loop */
     100% { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+  }
+  /* snail: very slow walk with two mid-walk pauses where the eyes
+     drift up. Total cycle should feel unhurried — default 40s. */
+  @keyframes pixel-mascot-snail {
+    /* walk right slowly from left padding to ~40% across */
+    0%   { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+    15%  { left: 40%;                                                                        transform: scaleX(1); }
+    /* pause at 40% — look up phase (eyes anim handles the shift) */
+    22%  { left: 40%;                                                                        transform: scaleX(1); }
+    /* continue walking right to the right edge */
+    40%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(1); }
+    /* short pause at the edge, then turn around */
+    43%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(1); }
+    45%  { left: calc(100% - var(--mascot-size, 56px) - var(--mascot-pad, 10px));            transform: scaleX(-1); }
+    /* walk left from right edge to ~50% across */
+    60%  { left: 50%;                                                                        transform: scaleX(-1); }
+    /* second pause — look up again */
+    67%  { left: 50%;                                                                        transform: scaleX(-1); }
+    /* continue walking left to the left edge */
+    90%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(-1); }
+    /* short pause at the edge, then re-orient for the next loop */
+    93%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(-1); }
+    95%  { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+    100% { left: var(--mascot-pad, 10px);                                                    transform: scaleX(1); }
+  }
+  /* Eyes "look up" exactly during the two pause windows above
+     (22%-ish and 67%-ish). Animation duration is locked to the
+     walker's so they stay in sync. */
+  @keyframes pixel-mascot-look {
+    0%, 16%   { transform: translateY(0); }
+    18%, 21%  { transform: translateY(calc(var(--mascot-size, 56px) / -16)); }
+    23%, 62%  { transform: translateY(0); }
+    64%, 66%  { transform: translateY(calc(var(--mascot-size, 56px) / -16)); }
+    68%, 100% { transform: translateY(0); }
   }
   .pixel-mascot__bobber {
     position: relative;
@@ -600,7 +645,8 @@
     .pixel-mascot__bobber,
     .pixel-mascot__shadow,
     .pixel-mascot__frame--1,
-    .pixel-mascot__frame--2 {
+    .pixel-mascot__frame--2,
+    .pixel-mascot__eyes {
       animation: none;
     }
     .pixel-mascot__frame--2 { opacity: 0; }

@@ -3,11 +3,19 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import ModuleCard from '~/components/ModuleCard.astro';
 import HeroSection from '~/components/HeroSection.astro';
 import PixelMascot from '~/components/PixelMascot.astro';
+import { feed, feedUpdated } from '~/data/feed';
+
+// Action word colour by kind — done = shipped/live, wip = in flight, ongoing = steady state.
+const actionColor: Record<string, string> = {
+  done: 'text-lime',
+  wip: 'text-rg-orangeBright',
+  ongoing: 'text-ink-gray',
+};
 ---
 
 <BaseLayout
-  title="Gimbo's Universe — Building the next decade together."
-  description="Agents, robots and us. A personal hub aggregating projects across the agentic era — supply chain, investing, AI experiments, tennis, books, and the slow lane."
+  title="Gimbo's Universe — A life, organised into links."
+  description="My digital life OS — work, investing, the body, reading, writing, and life observations in New Zealand, all settling into one shareable place."
   hideCrt={true}
 >
   <!-- ============ DISPATCH STRAP: editorial top-line announcing the newest piece.
@@ -55,6 +63,69 @@ import PixelMascot from '~/components/PixelMascot.astro';
     border={false}
   />
 
+  <!-- ============ NOW: the framing line + a reverse-chronological feed of
+       what's recently happened across the site. Hand-edited via
+       src/data/feed.ts — newest row first. ============ -->
+  <section id="now" class="relative border-b border-hairline">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-20 md:py-28">
+      <div class="terminal text-lime mb-3">tail -f /universe/log</div>
+      <h2 class="display-mega text-ink-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl break-words">
+        A life, organised into links.
+      </h2>
+      <p class="mt-5 text-base md:text-lg text-ink-mint max-w-2xl leading-relaxed">
+        Gimbo's Universe is my digital life OS — work, investing, the body,
+        reading, writing, and the long observation of a life in New Zealand,
+        all settling into one shareable place.
+      </p>
+
+      <!-- Recent activity — ordered by time, not by module, so it reads as
+           a living log rather than a second copy of the grid below. -->
+      <div class="mt-12 max-w-3xl">
+        <span class="tool-label">Recent across the universe</span>
+        <ul class="mt-4 border-y border-hairline divide-y divide-hairline">
+          {feed.map((e) => {
+            const Tag = e.href ? 'a' : 'div';
+            return (
+              <li>
+                <Tag
+                  href={e.href}
+                  class:list={[
+                    'group flex items-baseline gap-3 sm:gap-4 py-3',
+                    e.href ? '-mx-3 px-3 hover:bg-white/[0.02] transition-colors' : '',
+                  ]}
+                >
+                  <span class="font-mono text-[11px] tabular-nums text-ink-gray shrink-0">
+                    {e.date}
+                  </span>
+                  <span class="flex-1 min-w-0 text-sm leading-relaxed">
+                    <span class:list={['font-mono text-[11px] uppercase tracking-tool', actionColor[e.kind]]}>
+                      {e.action}
+                    </span>
+                    <span class="text-ink-gray"> · </span>
+                    <span class="text-ink-mint group-hover:text-ink-white transition-colors">
+                      {e.title}
+                    </span>
+                  </span>
+                  <span class="font-mono text-[10px] tracking-tool text-ink-gray shrink-0">
+                    {e.module}
+                  </span>
+                  {e.href && (
+                    <span class="text-lime opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                      →
+                    </span>
+                  )}
+                </Tag>
+              </li>
+            );
+          })}
+        </ul>
+        <div class="mt-4 terminal text-ink-gray text-[10px]">
+          // {feed.length} updates · {feedUpdated} · edited by hand
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ EXPLORE: deeper content below the hero ============ -->
   <section id="explore" class="relative">
     <div class="mx-auto max-w-7xl px-6 lg:px-12 py-20 md:py-28">
@@ -63,7 +134,7 @@ import PixelMascot from '~/components/PixelMascot.astro';
         The working surfaces.
       </h2>
       <p class="mt-5 text-base md:text-lg text-ink-mint max-w-2xl leading-relaxed">
-        Projects in flight, notes in progress, things I'm thinking about right now.
+        Four modules, each collecting its own long-running threads — work, the body, life, and ideas. Pick a surface and go deeper.
       </p>
 
       <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

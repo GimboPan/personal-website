@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Health · Friendship is health — Fitness — Gimbo's Universe</title>
+  <meta name="description" content="Mel Robbins × Kasley Killam on adult friendship, the loneliness epidemic, and the 5-3-1 formula for social health. A field guide to the missing pillar of well-being." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Layout ─── */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    /* ─── Display type — Wise Sans 900 / 0.85 line-height ─── */
+    .display {
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── Back-link bar ─── */
+    .backbar {
+      background: var(--surface-1);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0;
+    }
+    .backbar .wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      font-weight: 600;
+    }
+    .backbar a {
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .15s;
+    }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .sep { color: var(--ink-faint); }
+    .backbar .here { color: var(--ink); }
+
+    /* ─── Hero ─── */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: rgba(159,232,112,0.10);
+      border: 1px solid rgba(159,232,112,0.30);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      margin-bottom: 28px;
+      font-weight: 700;
+    }
+    .hero h1 {
+      font-size: clamp(56px, 9vw, 112px);
+      margin-bottom: 28px;
+      max-width: 18ch;
+    }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead {
+      font-size: clamp(17px, 1.6vw, 21px);
+      color: var(--ink-soft);
+      max-width: 62ch;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+    .hero .credits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 28px;
+      font-size: 13px;
+      color: var(--ink-faint);
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .hero .credits .item .label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* ─── Section base ─── */
+    section { padding: 72px 0; }
+    .section-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--green);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: clamp(36px, 5.5vw, 64px);
+      margin-bottom: 18px;
+      max-width: 20ch;
+    }
+    .section-lead {
+      font-size: 17px;
+      color: var(--ink-soft);
+      max-width: 64ch;
+      line-height: 1.55;
+      margin-bottom: 48px;
+    }
+
+    /* ─── Stat banner (the wake-up number) ─── */
+    .stat-banner {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 40px;
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 40px;
+      align-items: center;
+    }
+    .stat-banner .num {
+      font-weight: 900;
+      line-height: 0.82;
+      letter-spacing: -0.04em;
+      font-size: clamp(80px, 14vw, 200px);
+      color: var(--green);
+    }
+    .stat-banner .num .small {
+      display: block;
+      font-size: 0.32em;
+      color: var(--ink);
+      margin-top: 12px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-banner .copy h3 {
+      font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .stat-banner .copy p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    @media (max-width: 760px) {
+      .stat-banner { grid-template-columns: 1fr; padding: 40px 28px; border-radius: 30px; }
+    }
+
+    /* ─── YouTube embed ─── */
+    .video-wrap {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 20px;
+      margin-top: 32px;
+    }
+    .video-frame {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #000;
+    }
+    .video-frame iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .video-cap {
+      font-size: 13px;
+      color: var(--ink-faint);
+      margin-top: 14px;
+      padding: 0 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      justify-content: space-between;
+    }
+    .video-cap a { color: var(--green); font-weight: 600; }
+    .video-cap a:hover { color: var(--green-tint); }
+
+    /* ─── 5-3-1 KPI tiles ─── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .kpi {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 32px 28px;
+      transition: transform .2s, border-color .2s;
+    }
+    .kpi:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+    }
+    .kpi.accent {
+      background: var(--green);
+      color: var(--green-deep);
+      border-color: var(--green);
+    }
+    .kpi.accent .num,
+    .kpi.accent .label,
+    .kpi.accent p { color: var(--green-deep); }
+    .kpi .num {
+      font-weight: 900;
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+    .kpi .label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .kpi h4 {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .kpi p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    @media (max-width: 760px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Friendship styles cards ─── */
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .style-card {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .style-card .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .style-card .badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .style-card h4 {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+    }
+    .style-card .axes {
+      display: flex;
+      gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      font-weight: 600;
+    }
+    .style-card .axes span { display: inline-flex; gap: 6px; align-items: center; }
+    .style-card .axes b { color: var(--ink); font-weight: 700; }
+    .style-card p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    @media (max-width: 760px) {
+      .style-grid { grid-template-columns: 1fr; }
+      .style-card h4 { font-size: 24px; }
+    }
+
+    /* ─── Excuse vs Need ─── */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .compare .col {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 32px 28px;
+    }
+    .compare .col.excuse { border-color: rgba(255,122,130,0.35); }
+    .compare .col.need { border-color: rgba(159,232,112,0.35); }
+    .compare .col h4 {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare .col.excuse h4 { color: var(--coral); }
+    .compare .col.need h4 { color: var(--green); }
+    .compare .col .sub {
+      font-size: 13px;
+      color: var(--ink-faint);
+      margin-bottom: 22px;
+    }
+    .compare ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .compare li {
+      font-size: 15px;
+      color: var(--ink);
+      padding: 12px 16px;
+      background: var(--surface-3);
+      border-radius: 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+    .compare li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ink-faint);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .compare .col.excuse li::before { background: var(--coral); }
+    .compare .col.need li::before { background: var(--green); }
+    @media (max-width: 760px) {
+      .compare { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Strategy strip ─── */
+    .strat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .strat {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 32px 28px;
+    }
+    .strat .num {
+      font-weight: 900;
+      font-size: 40px;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+    .strat h4 {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .strat p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    @media (max-width: 760px) {
+      .strat-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Takeaways ─── */
+    .takeaway-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .takeaway {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .takeaway .idx {
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 0.9;
+      color: var(--green);
+      letter-spacing: -0.02em;
+    }
+    .takeaway h4 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .takeaway p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    @media (max-width: 600px) {
+      .takeaway { grid-template-columns: 1fr; gap: 8px; padding: 22px 24px; }
+      .takeaway .idx { font-size: 32px; }
+    }
+
+    /* ─── Stat strip ─── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .stat {
+      background: var(--surface-1);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px 20px;
+    }
+    .stat .v {
+      font-weight: 900;
+      font-size: 36px;
+      color: var(--ink);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .stat .v.warn { color: var(--amber); }
+    .stat .v.danger { color: var(--coral); }
+    .stat .v.pos { color: var(--green); }
+    .stat .l {
+      font-size: 12px;
+      color: var(--ink-faint);
+      line-height: 1.4;
+    }
+    @media (max-width: 760px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── CTA ─── */
+    .cta {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 40px;
+      padding: 64px 48px;
+      text-align: center;
+      margin: 40px 0 80px;
+    }
+    .cta h2 {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      max-width: 20ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta h2 .accent { color: var(--green); }
+    .cta p {
+      font-size: 16px;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin: 0 auto 32px;
+    }
+    .cta .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      transition: transform .15s, background .15s, color .15s;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--green-deep);
+    }
+    .btn-primary:hover { transform: scale(1.04); }
+    .btn-ghost {
+      color: var(--ink);
+      border-color: var(--line-strong);
+    }
+    .btn-ghost:hover { background: var(--surface-3); }
+
+    /* ─── Footer ─── */
+    footer {
+      padding: 40px 0 60px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+    footer a { color: var(--green); }
+
+    /* ─── Mobile tweaks ─── */
+    @media (max-width: 640px) {
+      section { padding: 56px 0; }
+      .hero { padding: 56px 0 40px; }
+      .wrap { padding: 0 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════ BACK LINK ═══════════════ -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/fitness" aria-label="Back to Gimbo's Universe — Fitness">
+      <span aria-hidden="true">←</span> Gimbo's Universe
+    </a>
+    <span class="sep">/</span>
+    <span class="here">Fitness · Social Health</span>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">§ Field guide · Mel Robbins × Kasley Killam</span>
+    <h1 class="display">
+      Friendship is <span class="accent">health.</span><br/>
+      And it shows up in your body.
+    </h1>
+    <p class="lead">
+      Mel Robbins 这一期请来了哈佛公共卫生硕士、Social Health 研究者 Kasley Killam,把"成年人的友谊"做成了一门科学:
+      为什么我们越长越孤独、孤独如何改写大脑和身体、以及她基于研究提出的 <b style="color:var(--ink);">5-3-1 公式</b>
+      —— 一套可执行的"社交健康"最低剂量。
+    </p>
+    <div class="credits">
+      <div class="item"><div class="label">Episode</div><div class="value">393 · The Mel Robbins Podcast</div></div>
+      <div class="item"><div class="label">Guest</div><div class="value">Kasley Killam, MPH</div></div>
+      <div class="item"><div class="label">Topic</div><div class="value">Social Health · Adult Friendship</div></div>
+      <div class="item"><div class="label">Released</div><div class="value">2026 · Mid-May</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ STAT BANNER ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="stat-banner">
+      <div class="num">
+        1<span style="color: var(--ink); font-size: 0.55em;"> / </span>6
+        <span class="small">Americans report feeling isolated most or all of the time.</span>
+      </div>
+      <div class="copy">
+        <h3>Loneliness is not a mood. It's a signal.</h3>
+        <p>
+          Killam 的研究把孤独看作和"饥饿"同等性质的生理信号 —— 大脑在告诉你:你少了某种营养。
+          长期孤独对死亡率的影响,大约相当于<b style="color:var(--coral);">每天抽 15 支烟</b>,
+          或者<b style="color:var(--coral);">长期肥胖</b>。它不仅仅是心理问题,它是公共卫生问题。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ VIDEO ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ Watch · 1h 4min</span>
+    <h2 class="section-title display">先看完原片<br/>再读下面的笔记。</h2>
+    <p class="section-lead">
+      下面的所有框架、数字、案例都来自这期播客。我把它们整理成笔记是为了之后能反复回查 ——
+      但原片里 Mel 的追问和 Kasley 临场的例子,是文字留不住的东西。
+    </p>
+    <div class="video-wrap">
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/CZYOy58RTl8"
+          title="The Reality of Adult Friendship — Mel Robbins × Kasley Killam"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <div class="video-cap">
+        <span>The Mel Robbins Podcast · Episode 393 · with Kasley Killam, MPH</span>
+        <a href="https://www.youtube.com/watch?v=CZYOy58RTl8" target="_blank" rel="noopener">Open on YouTube →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 5-3-1 ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ The 5-3-1 Formula</span>
+    <h2 class="section-title display">Social health 的<br/>最低有效剂量。</h2>
+    <p class="section-lead">
+      Killam 基于研究提出的极简公式 —— 一个数字一个动作,三个加起来就是"维持基本社交健康"的最低门槛。
+      不是 KPI,是体检指标:跌破任意一项你大概率已经在孤独区。
+    </p>
+    <div class="kpi-grid">
+      <div class="kpi accent">
+        <div class="label">Each week</div>
+        <div class="num">5</div>
+        <h4>Different people</h4>
+        <p>一周和至少 5 个不同的人有真实互动 —— 不是 like,不是评论,是双向的对话。包括同事、邻居、便利店熟人,门槛比想象中低。</p>
+      </div>
+      <div class="kpi">
+        <div class="label">Maintain</div>
+        <div class="num">3</div>
+        <h4>Close relationships</h4>
+        <p>3 段你可以"凌晨两点打电话"的关系。质量比数量重要 —— 不需要 best friend × 10,需要的是 deep × 3。</p>
+      </div>
+      <div class="kpi">
+        <div class="label">Every day</div>
+        <div class="num">1<span style="font-size:0.5em;">h</span></div>
+        <h4>Quality connection</h4>
+        <p>每天累计 1 小时的高质量连接 —— 可以拆成早晨和爸妈的语音、午餐和同事的对话、晚上和伴侣的散步。不是 screen time。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 4 STYLES ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ The 4 Friendship Styles</span>
+    <h2 class="section-title display">你是哪一种<br/>社交体质?</h2>
+    <p class="section-lead">
+      Killam 把人按"连接频率 × 连接深度"两个轴分成四种 —— 没有谁优于谁,关键是<b style="color:var(--ink);">认识自己</b>,
+      然后按自己的"代谢率"去设计社交。Evergreen 的剂量给 Wallflower 会过敏,反过来也一样。
+    </p>
+    <div class="style-grid">
+      <div class="style-card">
+        <div class="badge"><span class="dot"></span>Type 01 · Frequent + Casual</div>
+        <h4>Butterfly 🦋</h4>
+        <div class="axes">
+          <span>Frequency: <b>High</b></span><span>Depth: <b>Light</b></span>
+        </div>
+        <p>派对的灵魂,认识每一个人。在很多场合都游刃有余,但不一定有"深夜电话"型的关系。挑战在于把广度转化成深度。</p>
+      </div>
+      <div class="style-card">
+        <div class="badge"><span class="dot"></span>Type 02 · Infrequent + Light</div>
+        <h4>Wallflower 🌿</h4>
+        <div class="axes">
+          <span>Frequency: <b>Low</b></span><span>Depth: <b>Light</b></span>
+        </div>
+        <p>不抗拒社交,但更享受独处。是好倾听者,小圈子里很自在。挑战在于不要把"低频"误认为"不需要"——剂量太低身体也会发出信号。</p>
+      </div>
+      <div class="style-card">
+        <div class="badge"><span class="dot"></span>Type 03 · Infrequent + Deep</div>
+        <h4>Firefly ✨</h4>
+        <div class="axes">
+          <span>Frequency: <b>Low</b></span><span>Depth: <b>Deep</b></span>
+        </div>
+        <p>不常聚,但一聊就到凌晨两点。喜欢有营养的对话,讨厌寒暄。挑战在于"低频"很容易滑成"长时间不联系",连接需要主动续费。</p>
+      </div>
+      <div class="style-card">
+        <div class="badge"><span class="dot"></span>Type 04 · Frequent + Deep</div>
+        <h4>Evergreen 🌲</h4>
+        <div class="axes">
+          <span>Frequency: <b>High</b></span><span>Depth: <b>Deep</b></span>
+        </div>
+        <p>每天都和核心几个人保持深度联系。社交是日常代谢的一部分。挑战在于这种密度对方未必能匹配,需要尊重对方的体质差异。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXCUSE VS NEED ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ Excuse vs Need</span>
+    <h2 class="section-title display">"今晚不想出门"<br/>到底是哪一种?</h2>
+    <p class="section-lead">
+      Killam 推荐的做法:准备两个玻璃罐,左边贴 <b style="color:var(--coral);">Excuses</b>,右边贴 <b style="color:var(--green);">Needs</b>。
+      每次想取消一个 plan,先写张小纸条扔进对应的罐子里。一个月之后翻一翻,你会非常清楚地看到 ——
+      你在为身体说话,还是在替惰性辩护。
+    </p>
+    <div class="compare">
+      <div class="col excuse">
+        <h4>🥀 Excuses</h4>
+        <p class="sub">这些都是孤独养出来的甜蜜借口,不是真正的边界。</p>
+        <ul>
+          <li>"我没什么衣服好穿"</li>
+          <li>"我需要 me time"(连续第 4 个周末)</li>
+          <li>"下班太累了"</li>
+          <li>"我最近压力很大"</li>
+          <li>"还是在家追剧好了"</li>
+          <li>"这周预算紧张"</li>
+        </ul>
+      </div>
+      <div class="col need">
+        <h4>🌱 Real needs</h4>
+        <p class="sub">这些是身体在保护你,值得听 —— 而且通常是阶段性的。</p>
+        <ul>
+          <li>医生确诊的倦怠期,需要安静恢复</li>
+          <li>对方是消耗型/伤害性关系</li>
+          <li>留给伴侣或家人的固定时间</li>
+          <li>"我没有真正双向滋养的友谊"——这是结构问题,要去解决而非回避</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STRATEGIES ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ Long-distance toolkit</span>
+    <h2 class="section-title display">远距离友谊的<br/>三种维护工具。</h2>
+    <p class="section-lead">
+      搬家、出国、换工作之后还能保住的友谊,几乎都用了下面这三种方法的某种组合 —— 不是热情,而是<b style="color:var(--ink);">系统</b>。
+    </p>
+    <div class="strat-grid">
+      <div class="strat">
+        <div class="num">01</div>
+        <h4>Swap Strategy 🔁</h4>
+        <p>想到对方的那一刻就发出去 —— 一张照片、一条 60 秒语音、一句"刚听到这首歌想起你"。重点是<b style="color:var(--ink);">想到就发,不要打草稿</b>。</p>
+      </div>
+      <div class="strat">
+        <div class="num">02</div>
+        <h4>Autopilot Method ⏰</h4>
+        <p>在日历里固定一个每月一次的 video call,设成 recurring。把"约时间"这件耗能的事一次性解决,后面只需要按时打开 Zoom。</p>
+      </div>
+      <div class="strat">
+        <div class="num">03</div>
+        <h4>Quality Time ✈️</h4>
+        <p>把出差或度假的路径,故意拐一下经过老朋友所在的城市。一次完整的在场胜过 50 条消息 —— 但前提是你真的<b style="color:var(--ink);">把它放进日程</b>。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TAKEAWAYS ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ Research-backed takeaways</span>
+    <h2 class="section-title display">5 个值得贴在<br/>办公桌上的洞察。</h2>
+    <div class="takeaway-list">
+      <div class="takeaway">
+        <div class="idx">01</div>
+        <div>
+          <h4>Loneliness 是和饥饿同级的生理信号</h4>
+          <p>大脑用同一套机制提醒你"缺人"和"缺食物"。不是矫情,是 evolution 留下的求生程序。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">02</div>
+        <div>
+          <h4>强社交关系直接降低慢病风险</h4>
+          <p>心脏病、糖尿病、痴呆 —— 多项研究表明有稳定友谊的人发病率明显更低。慢性孤独的死亡率风险,接近"每天抽 15 支烟"。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">03</div>
+        <div>
+          <h4>The Liking Gap:你被喜欢的程度,远超你以为的</h4>
+          <p>人会系统性地低估别人对自己的好感,也低估别人收到联系时的开心程度。<b style="color:var(--ink);">"先发那条消息"</b>的成本几乎为 0,回报通常远高于预期。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">04</div>
+        <div>
+          <h4>Stress Buffering Hypothesis:在场就能降皮质醇</h4>
+          <p>仅仅"和人在一起"这件事就能在生理层面降低皮质醇和炎症水平。压力大的时候,独自硬扛是最贵的方案。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">05</div>
+        <div>
+          <h4>最小剂量很小:10 分钟通话也算数</h4>
+          <p>不需要每次"清空一个晚上"。一通 10 分钟的电话、一条主动发出的消息,在研究上都能测到孤独感的下降。门槛低到没有借口。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- numbers strip -->
+    <div class="stats-strip">
+      <div class="stat">
+        <div class="v danger">~1,000h</div>
+        <div class="l">年轻人每年和朋友相处的时间比 20 年前减少的小时数</div>
+      </div>
+      <div class="stat">
+        <div class="v warn">72%</div>
+        <div class="l">美国人每月社交 0–2 次</div>
+      </div>
+      <div class="stat">
+        <div class="v warn">79%</div>
+        <div class="l">承认"成年后交新朋友很难"</div>
+      </div>
+      <div class="stat">
+        <div class="v pos">86%</div>
+        <div class="l">表示<b style="color:var(--ink);">想要</b>更深的友谊 —— 需求一直在,只是没人迈第一步</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section style="padding-top: 0; padding-bottom: 0;">
+  <div class="wrap">
+    <div class="cta">
+      <h2 class="display">这周,先动一下<br/><span class="accent">第一格。</span></h2>
+      <p>
+        不需要重建社交圈,先 ping 一个 6 个月没联系的人。一句"想到你了"。<br/>
+        如果你也想用 5-3-1 给自己做一次"社交体检",Killam 提供了免费的 Connection Plan。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.kasleykillam.com/5-3-1-plan" target="_blank" rel="noopener">
+          Get the 5-3-1 plan →
+        </a>
+        <a class="btn btn-ghost" href="https://www.youtube.com/watch?v=CZYOy58RTl8" target="_blank" rel="noopener">
+          Watch the full episode
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Notes from <a href="https://www.youtube.com/@melrobbins" target="_blank" rel="noopener">The Mel Robbins Podcast</a> · Ep 393 · guest <a href="https://www.kasleykillam.com/" target="_blank" rel="noopener">Kasley Killam, MPH</a></span>
+    <span>Filed under <a href="/fitness">/fitness</a> · Gimbo's Universe</span>
+  </div>
+</footer>
+
+</body>
+</html>

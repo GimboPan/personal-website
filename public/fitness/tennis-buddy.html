@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tennis Buddy · Project</title>
+  <meta name="description" content="A tennis social + match tracking app — find a hit, track your matches, play more tennis. Built with React, Supabase, Vercel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #00503c;
+      --green-dark: #003c2c;
+      --orange: #cc4e0e;
+      --orange-soft: #e38045;
+      --mint: #ebf6f3;
+      --peach: #fdf3ee;
+      --parchment: #faf7f2;
+      --ink: #1a1a1a;
+      --ink-soft: #5a5a5a;
+      --ink-faint: #8a8a8a;
+      --line: #e8e2d6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      line-height: 1.55;
+      font-size: 16px;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+    .display {
+      font-family: 'Francois One', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.005em;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Container ─── */
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: var(--green);
+      color: #fff;
+      padding: 120px 0 100px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(204,78,14,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .eyebrow {
+      font-family: 'Francois One', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange-soft);
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+    .hero h1 {
+      font-family: 'Francois One', sans-serif;
+      font-size: clamp(56px, 9vw, 96px);
+      line-height: 0.92;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .accent { color: var(--orange-soft); display: block; }
+    .hero .lead {
+      font-size: clamp(18px, 2vw, 22px);
+      max-width: 580px;
+      opacity: 0.85;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 24px;
+      border-radius: 9999px;
+      font-family: 'Francois One', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid transparent;
+      transition: transform .15s, background .15s, border-color .15s;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--orange-soft); transform: translateY(-2px); }
+    .btn-ghost {
+      color: #fff;
+      border-color: rgba(255,255,255,0.4);
+    }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* ─── Meta strip ─── */
+    .meta {
+      background: var(--parchment);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .meta .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .meta .item .label {
+      font-family: 'Francois One', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .meta .item .value { color: var(--ink); font-weight: 500; }
+
+    /* ─── Section base ─── */
+    section { padding: 96px 0; }
+    section.tinted-mint { background: var(--mint); }
+    section.tinted-peach { background: var(--peach); }
+    .section-tag {
+      display: inline-block;
+      font-family: 'Francois One', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--orange);
+      background: rgba(204,78,14,0.08);
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    h2.title {
+      font-family: 'Francois One', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .lead-text {
+      font-size: 18px;
+      color: var(--ink-soft);
+      max-width: 720px;
+      margin-bottom: 56px;
+    }
+
+    /* ─── Pitch grid ─── */
+    .pitch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .pitch-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    section.tinted-mint .pitch-card { background: #fff; }
+    .pitch-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 80, 60, 0.08);
+    }
+    .pitch-card .badge {
+      font-family: 'Francois One', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(204,78,14,0.08);
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .pitch-card h3 {
+      font-family: 'Francois One', sans-serif;
+      font-size: 18px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .pitch-card p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* ─── Stack section ─── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .stack-col {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .stack-col .stack-label {
+      font-family: 'Francois One', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .stack-col h4 {
+      font-family: 'Francois One', sans-serif;
+      font-size: 16px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .stack-col ul {
+      list-style: none;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .stack-col li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .stack-col li:last-child { border-bottom: none; }
+    .stack-col li .note { color: var(--ink-faint); font-size: 12px; }
+
+    /* ─── Architecture diagram ─── */
+    .arch {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 24px;
+    }
+    .arch-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      align-items: stretch;
+    }
+    .arch-node {
+      text-align: center;
+      padding: 18px 12px;
+      border-radius: 12px;
+      border: 1.5px dashed var(--line);
+      background: var(--parchment);
+    }
+    .arch-node .role {
+      font-family: 'Francois One', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .arch-node .name {
+      font-family: 'Francois One', sans-serif;
+      font-size: 15px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .arch-node .what {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+    .arch-flow {
+      text-align: center;
+      font-family: 'Francois One', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      padding: 12px 0 4px;
+      text-transform: uppercase;
+    }
+
+    /* ─── Outcomes ─── */
+    .outcomes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .outcome {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+    .outcome .num {
+      font-family: 'Francois One', sans-serif;
+      font-size: 40px;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .outcome .label {
+      font-family: 'Francois One', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .outcome p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ─── Skills tags ─── */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .skill {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-family: 'Francois One', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    /* ─── CTA / Footer ─── */
+    .cta {
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+      padding: 100px 32px;
+    }
+    .cta h2 {
+      font-family: 'Francois One', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .cta p {
+      font-size: 17px;
+      opacity: 0.85;
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+    .cta .note {
+      font-size: 12px;
+      opacity: 0.55;
+      margin-top: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── Back-link bar (to Gimbo's Universe) ─── */
+    .backbar {
+      background: var(--parchment);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+    .backbar .wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Francois One', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .backbar a {
+      color: var(--green);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .15s;
+    }
+    .backbar a:hover { color: var(--orange); }
+    .backbar .sep { color: var(--ink-faint); }
+    .backbar .here { color: var(--ink); }
+
+    /* ─── Mobile tweaks ─── */
+    @media (max-width: 640px) {
+      section { padding: 64px 0; }
+      .hero { padding: 80px 0 60px; }
+      .arch { padding: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════ BACK LINK ═══════════════ -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/fitness/tennis" aria-label="Back to Gimbo's Universe — Fitness — Tennis">
+      <span aria-hidden="true">←</span> Gimbo's Universe
+    </a>
+    <span class="sep">/</span>
+    <span class="here">Fitness · Tennis Buddy</span>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Side project · 2026</span>
+    <h1>Tennis<br/><span class="accent">Buddy</span></h1>
+    <p class="lead">
+      A social + match-tracking app for amateur tennis players —
+      find a hit partner, track your matches, play more tennis.
+    </p>
+    <div class="actions">
+      <a href="https://tennis-buddy-cyan.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
+        Open the live app →
+      </a>
+      <a href="#stack" class="btn btn-ghost">See how it's built</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ META ═══════════════ -->
+<div class="meta">
+  <div class="wrap">
+    <div class="grid">
+      <div class="item">
+        <div class="label">Role</div>
+        <div class="value">Design + Frontend + Backend + Deploy</div>
+      </div>
+      <div class="item">
+        <div class="label">Status</div>
+        <div class="value">Alpha · live in production</div>
+      </div>
+      <div class="item">
+        <div class="label">Stack</div>
+        <div class="value">React · Supabase · Vercel</div>
+      </div>
+      <div class="item">
+        <div class="label">Design</div>
+        <div class="value">Roland-Garros × Material 3</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ THE PITCH ═══════════════ -->
+<section class="tinted-mint">
+  <div class="wrap">
+    <span class="section-tag">§ The pitch</span>
+    <h2 class="title">两个老问题,放进同一个 app</h2>
+    <p class="lead-text">
+      业余网球玩家最常聊到的两件事:<b>"今天没人陪我打"</b> 和 <b>"我上次跟谁打的什么比分?"</b>。
+      Tennis Buddy 把"发现搭子"和"记录比赛"做进同一条产品线 —— 用最少的步骤把球友变成赛季数据。
+    </p>
+
+    <div class="pitch-grid">
+      <div class="pitch-card">
+        <span class="badge">Discover</span>
+        <h3>同水平的人在哪</h3>
+        <p>按距离 + NTRP 等级筛选,看到附近哪些球场常有人、谁今晚有空。不是社交首页,是"今天要不要去 hit 一场"的导航。</p>
+      </div>
+      <div class="pitch-card">
+        <span class="badge">Match</span>
+        <h3>从邀请到比分</h3>
+        <p>Request to play → 接受 → Submit Score → past 历史。一整条比赛生命周期跑在一个 tab 里,记录摩擦最小化。</p>
+      </div>
+      <div class="pitch-card">
+        <span class="badge">Profile</span>
+        <h3>赛季可视化</h3>
+        <p>每场比赛沉淀到 Profile:总场次 / 胜率 / 最常打的对手 / 最常去的球场。打了 30 场你能看到自己一年是怎么打过来的。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STACK ═══════════════ -->
+<section id="stack">
+  <div class="wrap">
+    <span class="section-tag">§ Stack</span>
+    <h2 class="title">怎么搭起来的</h2>
+    <p class="lead-text">
+      前端用 React 19 + Vite + MUI v6,设计语言以法网(Roland-Garros)的色调和字体为基础,
+      用 Material 3 的形状语言落地交互。后端是 Supabase 全家桶,部署在 Vercel 上,push 即上线。
+    </p>
+
+    <div class="stack-grid">
+      <div class="stack-col">
+        <div class="stack-label">Frontend</div>
+        <h4>UI Layer</h4>
+        <ul>
+          <li>React 19 <span class="note">SPA</span></li>
+          <li>Vite 8 <span class="note">build tool</span></li>
+          <li>MUI v6 <span class="note">components</span></li>
+          <li>Tailwind v3 <span class="note">layout utils</span></li>
+          <li>React Router 7 <span class="note">client routing</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <div class="stack-label">Backend</div>
+        <h4>Data + Auth</h4>
+        <ul>
+          <li>Postgres <span class="note">via Supabase</span></li>
+          <li>Row Level Security <span class="note">每行权限</span></li>
+          <li>Triggers <span class="note">自动同步 profile</span></li>
+          <li>Magic-link auth <span class="note">无密码登录</span></li>
+          <li>Realtime <span class="note">future</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <div class="stack-label">Deploy</div>
+        <h4>Infra</h4>
+        <ul>
+          <li>Vercel <span class="note">edge CDN</span></li>
+          <li>GitHub <span class="note">source of truth</span></li>
+          <li>CI/CD <span class="note">git push = deploy</span></li>
+          <li>Preview URLs <span class="note">per branch</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <div class="stack-label">Design</div>
+        <h4>Visual System</h4>
+        <ul>
+          <li>Francois One <span class="note">display</span></li>
+          <li>Public Sans <span class="note">body</span></li>
+          <li>RG green + clay orange <span class="note">brand</span></li>
+          <li>M3 pill buttons <span class="note">shape</span></li>
+          <li>Mint / peach bands <span class="note">page rhythm</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ─── Architecture diagram ─── -->
+    <div class="arch">
+      <div class="arch-row">
+        <div class="arch-node">
+          <div class="role">User</div>
+          <div class="name">Browser</div>
+          <div class="what">React app + cached session</div>
+        </div>
+        <div class="arch-node">
+          <div class="role">Hosting</div>
+          <div class="name">Vercel CDN</div>
+          <div class="what">Static assets globally</div>
+        </div>
+        <div class="arch-node">
+          <div class="role">Source</div>
+          <div class="name">GitHub</div>
+          <div class="what">Source of truth · auto-deploy</div>
+        </div>
+        <div class="arch-node">
+          <div class="role">Backend</div>
+          <div class="name">Supabase</div>
+          <div class="what">Postgres · Auth · RLS</div>
+        </div>
+      </div>
+      <div class="arch-flow">↓ Browser ← CDN · CDN built from GitHub · Browser ↔ Supabase ↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ OUTCOMES ═══════════════ -->
+<section class="tinted-peach">
+  <div class="wrap">
+    <span class="section-tag">§ Outcomes</span>
+    <h2 class="title">端到端做完了什么</h2>
+    <p class="lead-text">
+      从产品概念到 production live,一个人独立完成的范围 —— 设计、前端、后端、部署、用户测试。
+    </p>
+
+    <div class="outcomes">
+      <div class="outcome">
+        <div class="num">37</div>
+        <div class="label">Design frames</div>
+        <p>用 Pencil 完成完整产品 IA + 用户流,5 个 tab 加 1 个 detail page,所有 state(empty / pending / success / past)都画到。</p>
+      </div>
+      <div class="outcome">
+        <div class="num">5</div>
+        <div class="label">Live pages</div>
+        <p>Home / Explore / Match / Community / Profile + Match detail。React Router 客户端路由,Context 跨页面同步状态。</p>
+      </div>
+      <div class="outcome">
+        <div class="num">1:1</div>
+        <div class="label">Auth ↔ profile</div>
+        <p>auth.users 与 public.profiles 用 UUID 1:1 绑定,触发器在 signup 时自动建档,RLS 保证只能改自己的行。</p>
+      </div>
+      <div class="outcome">
+        <div class="num">∞</div>
+        <div class="label">git push → live</div>
+        <p>CI/CD 全自动 —— commit 上 GitHub,Vercel 监听 push,build,deploy 到 production CDN,30 秒内全球可见。</p>
+      </div>
+    </div>
+
+    <div class="skills">
+      <span class="skill">Product Design</span>
+      <span class="skill">React</span>
+      <span class="skill">TypeScript-ready</span>
+      <span class="skill">Postgres</span>
+      <span class="skill">RLS / Auth</span>
+      <span class="skill">CI/CD</span>
+      <span class="skill">Design System</span>
+      <span class="skill">UX Writing</span>
+      <span class="skill">Frontend Architecture</span>
+      <span class="skill">Full-stack</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ Lessons ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ Lessons</span>
+    <h2 class="title">学到的几个想法</h2>
+    <p class="lead-text">
+      过程比结果有意思 —— 这个 side project 给我留下几个之后想继续用的想法。
+    </p>
+
+    <div class="pitch-grid">
+      <div class="pitch-card">
+        <span class="badge">Security</span>
+        <h3>RLS 比前端校验扎实多了</h3>
+        <p>把权限规则下沉到 Postgres,前端就算被绕过,数据库也不放行。"信不过前端"应该是默认假设。</p>
+      </div>
+      <div class="pitch-card">
+        <span class="badge">UX</span>
+        <h3>Magic link &gt; 密码</h3>
+        <p>邮箱链接本身就是凭证,没"忘记密码"流程,没"先注册才能登录"两步,新老用户走同一路径。</p>
+      </div>
+      <div class="pitch-card">
+        <span class="badge">Process</span>
+        <h3>先跑通再优化</h3>
+        <p>每一步都先做最丑的能跑版,push 上 production,再回头打磨。前端不接通后端之前,UI 再精致都是 demo。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta">
+  <h2>试试看 →</h2>
+  <p>
+    Alpha 版本已经上线。你可以用任意邮箱登录,5 秒钟收到 magic link,
+    自己填一份 profile 看看整套流程。
+  </p>
+  <a href="https://tennis-buddy-cyan.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
+    Open Tennis Buddy →
+  </a>
+  <p class="note">
+    No password is ever stored. Login uses email-only magic links via Supabase Auth.
+    Your email is used solely to send the sign-in link · alpha data may be reset between iterations.
+  </p>
+</section>
+
+</body>
+</html>

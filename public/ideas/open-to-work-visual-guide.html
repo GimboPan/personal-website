@@ -1,0 +1,3109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPEN TO WORK · LinkedIn CEO 的 AI 时代职业指南 · 全书解读</title>
+<meta name="description" content="Ryan Roslansky & Aneesh Raman 合著的《Open to Work: How to Get Ahead in the Age of AI》深度解读。10 章 / 5Cs / 三桶框架 / 30-60-90 行动计划。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Noto+Serif+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Mission Control × Editorial palette */
+  --ink: #0a1118;
+  --ink-2: #101822;
+  --ink-3: #16202c;
+  --cream: #ede7d8;
+  --cream-dim: #a8a395;
+  --muted: #6f7585;
+  --line: #222a36;
+
+  /* Apollo accents */
+  --apollo: #ff8a3d;        /* Mission Control amber */
+  --apollo-soft: #ffb585;
+  --life: #94e07d;          /* 5Cs / pro-human green */
+
+  /* 10 chapter tokens — Part I red-amber, Part II indigo-rust-cyan-teal, Part III magenta-lime */
+  --ch-1:  #ffb840;  /* Ch1 · Buckle Up — alarm amber */
+  --ch-2:  #e8dfc8;  /* Ch2 · Let It Go — paint cream */
+  --ch-3:  #ec8aae;  /* Ch3 · Humans Are Coming — synapse pink */
+  --ch-4:  #d29152;  /* Ch4 · Lost Einsteins — renaissance bronze */
+  --ch-5:  #6e90d6;  /* Ch5 · Jobs = Tasks — bucket indigo */
+  --ch-6:  #d66147;  /* Ch6 · Careers = Climbing — climbing rust */
+  --ch-7:  #5fd6cc;  /* Ch7 · Companies = Work Charts — circuit cyan */
+  --ch-8:  #4cac90;  /* Ch8 · Economies — global teal */
+  --ch-9:  #d674bf;  /* Ch9 · Onlyness — personal magenta */
+  --ch-10: #a5e057;  /* Ch10 · Open to Work — mission lime */
+
+  --serif-zh: "Noto Serif SC", "Songti SC", "STSong", serif;
+  --serif-en: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --mono: "JetBrains Mono", "Menlo", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--serif-zh);
+  font-weight: 400;
+  line-height: 1.85;
+  font-size: 17px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { background: var(--apollo); color: var(--ink); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--apollo); }
+
+/* Mission Control starfield + warm haze */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1.5px 1.5px at 18% 28%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 78% 68%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 58% 18%, var(--cream-dim), transparent),
+    radial-gradient(2px 2px at 88% 38%, var(--cream), transparent),
+    radial-gradient(1px 1px at 13% 78%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 43% 53%, var(--cream-dim), transparent),
+    radial-gradient(1px 1px at 68% 88%, var(--cream), transparent),
+    radial-gradient(1px 1px at 28% 8%, var(--cream-dim), transparent),
+    radial-gradient(ellipse 900px 700px at 25% 18%, rgba(255, 138, 61, 0.05), transparent),
+    radial-gradient(ellipse 1100px 600px at 82% 82%, rgba(148, 224, 125, 0.035), transparent);
+  background-repeat: repeat;
+  background-size: 800px 800px, 600px 600px, 500px 500px, 700px 700px, 900px 900px, 400px 400px, 650px 650px, 550px 550px, 100% 100%, 100% 100%;
+  opacity: 0.6;
+}
+
+/* ============ LAYOUT ============ */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+/* ============ BACK HOME ============ */
+.back-home-link {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  background: rgba(10, 17, 24, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: color .2s, border-color .2s, background .2s, transform .2s;
+}
+.back-home-link:hover {
+  color: var(--cream);
+  border-color: var(--apollo);
+  background: rgba(10, 17, 24, 0.92);
+  transform: translateY(-1px);
+}
+@media (max-width: 640px) {
+  .back-home-link { top: 12px; left: 12px; font-size: 0.62rem; padding: 5px 8px; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8vh 0;
+  position: relative;
+}
+
+.hero-mono {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  margin-bottom: 2.4rem;
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+
+.hero-mono .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--apollo);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--apollo);
+}
+
+.hero h1 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(4rem, 13vw, 10.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-variation-settings: "SOFT" 50, "WONK" 1;
+  margin-bottom: 0.3rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.4s forwards;
+}
+
+.hero h1 .ital {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--apollo);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+.hero h2 {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  letter-spacing: 0.35em;
+  color: var(--cream-dim);
+  margin-bottom: 0.6rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.55s forwards;
+}
+
+.hero .h-sub-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  color: var(--apollo-soft);
+  margin-bottom: 2.6rem;
+  font-variation-settings: "SOFT" 100;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.65s forwards;
+}
+
+.hero-lede {
+  max-width: 620px;
+  font-size: 1.05rem;
+  line-height: 1.95;
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeUp 1.2s 0.8s forwards;
+}
+
+.hero-lede strong {
+  color: var(--apollo);
+  font-weight: 500;
+}
+.hero-lede em {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--life);
+  font-size: 1.15em;
+}
+
+.hero-meta {
+  position: absolute;
+  bottom: 6vh;
+  right: 6vw;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+  opacity: 0;
+  animation: fadeUp 1.2s 1.2s forwards;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 6vh;
+  left: 6vw;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 1.2s 1s forwards;
+}
+.scroll-cue::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--cream-dim);
+  animation: lineGrow 2s 1.4s ease-out forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes lineGrow { to { transform: scaleX(1); } }
+
+/* ============ SECTION HEADS ============ */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.section-head .num { color: var(--apollo); }
+.section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ============ TIMELINE ============ */
+.timeline-section {
+  padding: 12vh 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-2);
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-title {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 1.2rem;
+  font-variation-settings: "SOFT" 100;
+}
+
+.timeline-sub {
+  max-width: 620px;
+  color: var(--cream-dim);
+  margin-bottom: 3.5rem;
+  font-size: 1rem;
+}
+
+.timeline {
+  position: relative;
+  padding: 4rem 0 2.5rem;
+  overflow-x: auto;
+  margin: 0 -6vw;
+  padding-left: 6vw;
+  padding-right: 6vw;
+}
+
+.timeline-line {
+  position: relative;
+  min-width: 1100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--cream-dim) 5%, var(--cream-dim) 95%, transparent);
+  margin: 0 auto;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 1.5px solid currentColor;
+  margin: 0 auto;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.timeline-node:hover .timeline-dot {
+  transform: scale(1.6);
+  background: currentColor;
+  box-shadow: 0 0 24px currentColor;
+}
+
+.timeline-node .year {
+  position: absolute;
+  top: -2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--cream-dim);
+  letter-spacing: 0.1em;
+}
+
+.timeline-node .label {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif-zh);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  color: var(--cream-dim);
+  transition: color 0.3s;
+}
+
+.timeline-node:hover .label { color: currentColor; }
+
+/* ============ AUTHORS PRELUDE ============ */
+.prelude {
+  padding: 16vh 0;
+  position: relative;
+  z-index: 1;
+}
+
+.prelude-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.prelude-side {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  line-height: 2.2;
+  position: sticky;
+  top: 4rem;
+}
+
+.prelude-side .key {
+  color: var(--apollo);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.prelude-side .val {
+  color: var(--cream);
+  font-family: var(--serif-zh);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-bottom: 1.8rem;
+}
+
+.prelude h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 80;
+}
+.prelude h2 .ital {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--apollo);
+}
+
+.prelude .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.35rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2.6rem;
+}
+
+.prelude p {
+  margin-bottom: 1.4rem;
+  font-size: 1.04rem;
+  max-width: 62ch;
+}
+.prelude p strong {
+  color: var(--apollo);
+  font-weight: 500;
+}
+
+.pull {
+  border-left: 2px solid var(--apollo);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 2.4rem 0;
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--cream);
+  font-variation-settings: "SOFT" 100;
+}
+
+/* ============ 5Cs · 5-COLUMN GRID ============ */
+.dignities {
+  padding: 18vh 0;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, transparent, rgba(148,224,125,0.03), transparent);
+  border-top: 1px solid var(--line);
+}
+
+.dignities-intro {
+  max-width: 760px;
+  margin-bottom: 5rem;
+}
+.dignities h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 80;
+}
+.dignities h2 .ital {
+  font-style: italic;
+  color: var(--life);
+  font-weight: 400;
+}
+.dignities .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2.2rem;
+}
+.dignities-intro p {
+  font-size: 1.04rem;
+  line-height: 1.9;
+}
+.dignities-intro p strong {
+  color: var(--life);
+  font-weight: 500;
+}
+
+.dignity-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.6rem;
+}
+
+.dignity {
+  border-top: 1px solid var(--life);
+  padding-top: 1.5rem;
+  position: relative;
+}
+.dignity .dn {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--life);
+  margin-bottom: 1rem;
+}
+.dignity .dt-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--life);
+  margin-bottom: 0.4rem;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.2;
+}
+.dignity .dt-zh {
+  font-family: var(--serif-zh);
+  font-weight: 500;
+  font-size: 1.18rem;
+  margin-bottom: 0.9rem;
+}
+.dignity .dd {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--cream-dim);
+  margin-bottom: 0.9rem;
+}
+.dignity .dd-ai {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  color: var(--cream-dim);
+  border-top: 1px dashed var(--line);
+  padding-top: 0.8rem;
+}
+.dignity .dd-ai .ai-key {
+  color: var(--apollo);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* ============ BUCKETS FRAMEWORK ============ */
+.buckets {
+  padding: 16vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+  background: var(--ink-2);
+}
+.buckets-intro {
+  max-width: 760px;
+  margin-bottom: 4.5rem;
+}
+.buckets h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 80;
+}
+.buckets h2 .ital {
+  font-style: italic;
+  color: var(--ch-5);
+  font-weight: 400;
+}
+.buckets .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.45rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2rem;
+}
+.buckets-intro p { font-size: 1.04rem; line-height: 1.9; max-width: 60ch; }
+.buckets-intro p strong { color: var(--ch-5); font-weight: 500; }
+
+.bucket-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+.bucket {
+  border: 1px solid var(--line);
+  background: var(--ink-3);
+  padding: 2.2rem 1.8rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.bucket .b-num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 3.2rem;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  font-variation-settings: "SOFT" 100;
+}
+.bucket.b1 .b-num, .bucket.b1 .b-tag { color: var(--ch-1); }
+.bucket.b2 .b-num, .bucket.b2 .b-tag { color: var(--ch-7); }
+.bucket.b3 .b-num, .bucket.b3 .b-tag { color: var(--life); }
+.bucket.b1 { border-top: 2px solid var(--ch-1); }
+.bucket.b2 { border-top: 2px solid var(--ch-7); }
+.bucket.b3 { border-top: 2px solid var(--life); }
+.bucket .b-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+}
+.bucket h4 {
+  font-family: var(--serif-en);
+  font-weight: 400;
+  font-size: 1.3rem;
+  font-variation-settings: "SOFT" 60;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+.bucket .h-zh {
+  font-family: var(--serif-zh);
+  font-size: 0.92rem;
+  color: var(--cream-dim);
+  margin-bottom: 1.3rem;
+  letter-spacing: 0.08em;
+}
+.bucket p { font-size: 0.92rem; line-height: 1.75; color: var(--cream); margin-bottom: 1rem; }
+.bucket ul { list-style: none; padding: 0; margin: 0.4rem 0 1.2rem; }
+.bucket li {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 0.35rem 0 0.35rem 1rem;
+  position: relative;
+  color: var(--cream-dim);
+}
+.bucket li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  font-weight: 700;
+}
+.bucket.b1 li::before { color: var(--ch-1); }
+.bucket.b2 li::before { color: var(--ch-7); }
+.bucket.b3 li::before { color: var(--life); }
+.bucket .b-ask {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  color: var(--cream-dim);
+  border-top: 1px dashed var(--line);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+.bucket .b-ask strong { color: var(--cream); font-weight: 600; }
+
+.bucket-zone {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.zone {
+  border: 1px solid var(--line);
+  padding: 1.4rem 1.3rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--cream-dim);
+}
+.zone .z-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.zone.red    { border-color: rgba(214,97,71,0.5); }
+.zone.red .z-tag { color: var(--ch-6); }
+.zone.yellow { border-color: rgba(255,184,64,0.5); }
+.zone.yellow .z-tag { color: var(--ch-1); }
+.zone.green  { border-color: rgba(148,224,125,0.5); }
+.zone.green .z-tag { color: var(--life); }
+
+/* ============ PART DIVIDER ============ */
+.part-divider {
+  padding: 14vh 0 10vh;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+.part-divider .p-num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--apollo);
+  margin-bottom: 1.4rem;
+}
+.part-divider h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 60;
+}
+.part-divider h2 .ital {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--apollo);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.part-divider .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.6rem;
+  letter-spacing: 0.25em;
+  color: var(--cream-dim);
+  margin-bottom: 2rem;
+}
+.part-divider .p-lede {
+  max-width: 64ch;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--cream);
+}
+.part-divider .p-lede strong { color: var(--apollo); font-weight: 500; }
+
+/* ============ CHAPTERS ============ */
+.chapters { position: relative; z-index: 1; }
+
+.chapter {
+  --accent: var(--ch-1);
+  padding: 14vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  scroll-margin-top: 2rem;
+}
+
+.chapter[data-num="1"]  { --accent: var(--ch-1); }
+.chapter[data-num="2"]  { --accent: var(--ch-2); }
+.chapter[data-num="3"]  { --accent: var(--ch-3); }
+.chapter[data-num="4"]  { --accent: var(--ch-4); }
+.chapter[data-num="5"]  { --accent: var(--ch-5); }
+.chapter[data-num="6"]  { --accent: var(--ch-6); }
+.chapter[data-num="7"]  { --accent: var(--ch-7); }
+.chapter[data-num="8"]  { --accent: var(--ch-8); }
+.chapter[data-num="9"]  { --accent: var(--ch-9); }
+.chapter[data-num="10"] { --accent: var(--ch-10); }
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.chapter.reverse .chapter-grid { direction: rtl; }
+.chapter.reverse .chapter-grid > * { direction: ltr; }
+
+.chapter-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+.chapter-meta .num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 3rem;
+  color: var(--accent);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.chapter-meta .part-tag { color: var(--accent); }
+
+.chapter h3 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 5.2vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+  font-variation-settings: "SOFT" 60;
+}
+.chapter h3 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.chapter .zh-title {
+  font-family: var(--serif-zh);
+  font-weight: 500;
+  font-size: 1.55rem;
+  letter-spacing: 0.28em;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+.chapter .tagline {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin-bottom: 2.4rem;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.4;
+}
+
+/* Right column: glyph frame */
+.glyph-frame {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 861px) {
+  .chapter-grid > div:nth-child(2) {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+  }
+}
+
+.glyph-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(237,231,216,0.02), transparent),
+    radial-gradient(circle at center, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+}
+.glyph-frame::after {
+  content: attr(data-corner);
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.glyph-frame svg {
+  width: 70%;
+  height: 70%;
+  position: relative;
+  z-index: 1;
+}
+.glyph-frame svg path,
+.glyph-frame svg circle,
+.glyph-frame svg line,
+.glyph-frame svg polygon,
+.glyph-frame svg rect,
+.glyph-frame svg ellipse {
+  stroke: var(--accent);
+}
+.glyph-tag {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+}
+.glyph-rotate { animation: rot 60s linear infinite; transform-origin: center; transform-box: fill-box; }
+.glyph-rotate-rev { animation: rot 80s linear infinite reverse; transform-origin: center; transform-box: fill-box; }
+.glyph-pulse { animation: pulseO 4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+@keyframes rot { to { transform: rotate(360deg); } }
+@keyframes pulseO {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.chapter-body h4 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.chapter-body h4::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+}
+.chapter-body h4:first-child { margin-top: 0; }
+
+.chapter-body p {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.95;
+}
+.chapter-body p strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.chapter-quote {
+  margin: 2.4rem 0 0;
+  padding: 1.4rem 0 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--cream-dim);
+  font-variation-settings: "SOFT" 100;
+}
+.chapter-quote::before {
+  content: '"';
+  display: inline;
+  color: var(--accent);
+  font-size: 1.4em;
+  line-height: 0;
+  vertical-align: -0.2em;
+  margin-right: 0.1em;
+}
+.chapter-quote .src {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* Cast list */
+.cast { margin: 0.4rem 0 1.4rem; display: grid; gap: 0.9rem; }
+.cast .role { display: grid; grid-template-columns: 1fr; gap: 0.15rem; }
+.cast .role-name {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.98rem;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.3;
+}
+.cast .role-desc { font-size: 0.93rem; color: var(--cream-dim); line-height: 1.65; }
+
+/* Concepts list */
+.concepts { list-style: none; padding: 0; margin: 0.4rem 0 1.4rem; }
+.concepts li {
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  border-bottom: 1px dashed var(--line);
+  color: var(--cream);
+}
+.concepts li:last-child { border-bottom: none; }
+.concepts li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  color: var(--accent);
+  font-size: 0.55rem;
+}
+.concepts li strong { color: var(--accent); font-weight: 500; }
+
+/* Stat strip */
+.stats {
+  margin: 1rem 0 1.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+.stat-card {
+  border: 1px solid var(--line);
+  padding: 1rem 1.1rem;
+  background: rgba(255,255,255,0.015);
+}
+.stat-card .v {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variation-settings: "SOFT" 100;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+.stat-card .l {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  color: var(--cream-dim);
+}
+
+/* Bottom-line block */
+.bottom-line {
+  margin: 2rem 0 0;
+  padding: 1.4rem 1.4rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  line-height: 1.85;
+  color: var(--cream-dim);
+}
+.bottom-line .bl-key {
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.bottom-line ol { padding-left: 1.4rem; margin: 0; }
+.bottom-line li { margin-bottom: 0.6rem; font-family: var(--serif-zh); font-size: 0.92rem; line-height: 1.7; color: var(--cream); }
+.bottom-line li::marker { color: var(--accent); }
+.bottom-line li strong { color: var(--accent); font-weight: 500; }
+
+@media (max-width: 860px) {
+  .chapter { padding: 8vh 0; }
+  .chapter-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .chapter.reverse .chapter-grid { direction: ltr; }
+  .chapter .glyph-frame { max-width: 280px; order: -1; }
+  .bucket-grid { grid-template-columns: 1fr; }
+  .bucket-zone { grid-template-columns: 1fr; }
+  .dignity-list { grid-template-columns: 1fr; gap: 2rem; }
+  .prelude-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .prelude-side { position: static; }
+}
+
+/* ============ PEOPLE / DISCIPLES ============ */
+.people {
+  padding: 16vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+.people-intro {
+  max-width: 800px;
+  margin-bottom: 5rem;
+}
+.people h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 80;
+}
+.people h2 .ital {
+  font-style: italic;
+  color: var(--apollo);
+  font-weight: 400;
+}
+.people .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2.4rem;
+}
+.people-intro p { font-size: 1.04rem; line-height: 1.9; }
+.people-intro p strong { color: var(--apollo); font-weight: 500; }
+
+.person {
+  --accent: var(--ch-1);
+  padding: 5rem 0;
+  border-top: 1px solid var(--line);
+}
+.person[data-color="1"]  { --accent: var(--ch-1); }
+.person[data-color="2"]  { --accent: var(--ch-2); }
+.person[data-color="3"]  { --accent: var(--ch-3); }
+.person[data-color="4"]  { --accent: var(--ch-4); }
+.person[data-color="5"]  { --accent: var(--ch-5); }
+.person[data-color="6"]  { --accent: var(--ch-6); }
+.person[data-color="7"]  { --accent: var(--ch-7); }
+.person[data-color="8"]  { --accent: var(--ch-8); }
+.person[data-color="9"]  { --accent: var(--ch-9); }
+.person[data-color="10"] { --accent: var(--ch-10); }
+
+.p-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+.p-meta .p-num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 2.6rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.person h3 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+  font-variation-settings: "SOFT" 60;
+}
+.person h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
+.person .p-role {
+  font-family: var(--serif-zh);
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 2.2rem;
+}
+.p-quote {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--cream);
+  margin: 1.8rem 0 0.8rem;
+  font-variation-settings: "SOFT" 100;
+  border-left: 2px solid var(--accent);
+  padding: 0.3rem 0 0.3rem 1.8rem;
+}
+.p-body { max-width: 70ch; }
+.p-body p {
+  margin-bottom: 1.2rem;
+  line-height: 1.85;
+  font-size: 1rem;
+}
+.p-body p strong { color: var(--accent); font-weight: 500; }
+.p-tags {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.p-tags span {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--accent);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* ============ 30-60-90 ============ */
+.plan {
+  padding: 16vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+  background: var(--ink-2);
+}
+.plan-intro {
+  max-width: 760px;
+  margin-bottom: 4rem;
+}
+.plan h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 80;
+}
+.plan h2 .ital {
+  font-style: italic;
+  color: var(--ch-10);
+  font-weight: 400;
+}
+.plan .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.45rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2rem;
+}
+.plan-intro p { font-size: 1.04rem; line-height: 1.9; }
+.plan-intro p strong { color: var(--ch-10); font-weight: 500; }
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+.plan-card {
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--ch-10);
+  background: var(--ink-3);
+  padding: 2.2rem 1.8rem;
+}
+.plan-card .pc-day {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ch-10);
+  margin-bottom: 0.6rem;
+}
+.plan-card h4 {
+  font-family: var(--serif-en);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+  font-variation-settings: "SOFT" 100;
+}
+.plan-card .h-zh {
+  font-family: var(--serif-zh);
+  font-size: 0.95rem;
+  color: var(--cream-dim);
+  margin-bottom: 1.4rem;
+  letter-spacing: 0.08em;
+}
+.plan-card p { font-size: 0.92rem; line-height: 1.7; color: var(--cream); margin-bottom: 1rem; }
+.plan-card h5 {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ch-10);
+  margin: 1.4rem 0 0.6rem;
+  font-weight: 600;
+}
+.plan-card ul { list-style: none; padding: 0; margin: 0; }
+.plan-card li {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  padding: 0.3rem 0 0.3rem 0.9rem;
+  position: relative;
+}
+.plan-card li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--ch-10);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.plan-card .pc-end {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--line);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--cream-dim);
+  line-height: 1.65;
+}
+.plan-card .pc-end strong { color: var(--ch-10); font-weight: 600; }
+
+/* ============ DISCUSSION ============ */
+.discussion {
+  padding: 18vh 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+.discussion-intro {
+  max-width: 760px;
+  margin-bottom: 5rem;
+}
+.discussion h2 {
+  font-family: var(--serif-en);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+  font-variation-settings: "SOFT" 80;
+}
+.discussion h2 .ital {
+  font-style: italic;
+  color: var(--ch-9);
+  font-weight: 400;
+}
+.discussion .zh-sub {
+  font-family: var(--serif-zh);
+  font-weight: 300;
+  font-size: 1.45rem;
+  letter-spacing: 0.2em;
+  color: var(--cream-dim);
+  margin-bottom: 2rem;
+}
+.discussion-intro p { font-size: 1.04rem; line-height: 1.9; }
+.discussion-intro p strong { color: var(--ch-9); font-weight: 500; }
+
+.q-list { display: grid; gap: 1.5rem; max-width: 920px; }
+.q-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.6rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+.q-item .q-num {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--ch-9);
+  letter-spacing: -0.02em;
+}
+.q-item h4 {
+  font-family: var(--serif-zh);
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+.q-item p {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  color: var(--cream-dim);
+}
+.q-item p strong { color: var(--ch-9); }
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 10vh 0 6vh;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 2;
+}
+footer .colophon {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+footer .c-key { color: var(--apollo); display: block; margin-bottom: 0.5rem; font-size: 0.65rem; }
+footer .c-val { color: var(--cream); font-family: var(--serif-zh); font-size: 0.95rem; text-transform: none; letter-spacing: 0.05em; line-height: 1.8; }
+footer .end-mark {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--apollo);
+  font-variation-settings: "SOFT" 100;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-weight: 300;
+}
+@media (max-width: 860px) {
+  footer .colophon { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* ============ FLOATING NAV ============ */
+.floatnav {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+.floatnav.visible { opacity: 1; pointer-events: auto; }
+.floatnav a {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 1px solid var(--line);
+  transition: all 0.3s;
+  text-decoration: none;
+  position: relative;
+}
+.floatnav a:hover {
+  background: var(--cream);
+  transform: scale(1.4);
+}
+.floatnav a:hover::before {
+  content: attr(data-label);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--cream);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+@media (max-width: 860px) { .floatnav { display: none; } }
+
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s, transform 1s; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+
+<a href="/" class="back-home-link" aria-label="返回 Gimbo's Universe 主页">
+  <span aria-hidden="true">←</span>
+  <span>Gimbo's Universe</span>
+</a>
+
+<!-- Floating side nav -->
+<nav class="floatnav" id="floatnav">
+  <a href="#c1"  data-label="Ch1 · Buckle Up"           style="color:var(--ch-1)"></a>
+  <a href="#c2"  data-label="Ch2 · Let It Go"            style="color:var(--ch-2)"></a>
+  <a href="#c3"  data-label="Ch3 · Humans Are Coming"    style="color:var(--ch-3)"></a>
+  <a href="#c4"  data-label="Ch4 · Lost Einsteins"       style="color:var(--ch-4)"></a>
+  <a href="#c5"  data-label="Ch5 · Jobs = Tasks"         style="color:var(--ch-5)"></a>
+  <a href="#c6"  data-label="Ch6 · Careers = Climbing"   style="color:var(--ch-6)"></a>
+  <a href="#c7"  data-label="Ch7 · Companies = Work Chart" style="color:var(--ch-7)"></a>
+  <a href="#c8"  data-label="Ch8 · Economies"            style="color:var(--ch-8)"></a>
+  <a href="#c9"  data-label="Ch9 · Onlyness"             style="color:var(--ch-9)"></a>
+  <a href="#c10" data-label="Ch10 · Open to Work"        style="color:var(--ch-10)"></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero wrap">
+  <div class="hero-mono">
+    <span>Ryan Roslansky × Aneesh Raman</span>
+    <span class="dot"></span>
+    <span>LinkedIn · HarperCollins · 2026</span>
+    <span class="dot"></span>
+    <span>225 Pages · A Reading Guide</span>
+  </div>
+
+  <h1>Open to <span class="ital">Work.</span></h1>
+  <h2>在 AI 时代如何把工作"做活"</h2>
+  <p class="h-sub-en">How to Get Ahead in the Age of AI · A Field Manual</p>
+
+  <p class="hero-lede">
+    1970 年 4 月 14 日,Apollo 13 在距地球 20 万英里处氧气箱爆炸。控制室主任 Gene Kranz 没有问 "我们怎么完成登月" —— 他问的是 <strong>"failure is not an option,下一步该做什么。"</strong> 把不可能拆成一步一步可能的事。<br><br>
+    2022 年 11 月,ChatGPT 在两个月内突破 1 亿用户 —— 史上最快的技术采纳曲线。每个人办公桌上的警报灯,从那一刻起就一直亮着。这本书就是 LinkedIn CEO 给我们所有人的<em>Mission Control 手册</em>:不是预测未来,是把它一步一步做出来。
+  </p>
+
+  <div class="scroll-cue">Scroll · 进入解读</div>
+  <div class="hero-meta">
+    <div>A reading by Gimbo</div>
+    <div>For book club · 2026</div>
+  </div>
+</header>
+
+<!-- ============ TIMELINE ============ -->
+<section class="timeline-section">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 00</span><span>Timeline</span></div>
+    <h3 class="timeline-title">From the <em style="font-style:italic;">printing press</em> to GPT — a working person's history of disruption</h3>
+    <p class="timeline-sub">
+      书里的论证不是从 2022 年开始的 —— 它是把 600 年来 "技术改变工作" 的几次大事件串成一条 S 曲线,然后告诉你 "这次的曲线最陡"。
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-line">
+        <a href="#c4" class="timeline-node" style="color:var(--ch-4); left: 0%;"><div class="year">1450</div><div class="timeline-dot"></div><div class="label">Gutenberg 印刷术</div></a>
+        <a href="#c1" class="timeline-node" style="color:var(--ch-1); left: 9%;"><div class="year">1811</div><div class="timeline-dot"></div><div class="label">Luddites 砸毁织机</div></a>
+        <a href="#c3" class="timeline-node" style="color:var(--ch-3); left: 22%;"><div class="year">1905</div><div class="timeline-dot"></div><div class="label">Binet–Simon IQ 测试</div></a>
+        <a href="#c5" class="timeline-node" style="color:var(--ch-5); left: 34%;"><div class="year">1956</div><div class="timeline-dot"></div><div class="label">Liquid Paper 发明</div></a>
+        <a href="#c5" class="timeline-node" style="color:var(--ch-5); left: 45%;"><div class="year">1970s</div><div class="timeline-dot"></div><div class="label">ATM 进银行</div></a>
+        <a href="#c3" class="timeline-node" style="color:var(--ch-3); left: 56%;"><div class="year">1996</div><div class="timeline-dot"></div><div class="label">Goleman 情商</div></a>
+        <a href="#c4" class="timeline-node" style="color:var(--ch-4); left: 68%;"><div class="year">2007</div><div class="timeline-dot"></div><div class="label">Chetty 找 IRS 数据</div></a>
+        <a href="#c10" class="timeline-node" style="color:var(--ch-10); left: 78%;"><div class="year">2020.06</div><div class="timeline-dot"></div><div class="label">LinkedIn Open to Work</div></a>
+        <a href="#c1" class="timeline-node" style="color:var(--ch-1); left: 90%;"><div class="year">2022.11</div><div class="timeline-dot"></div><div class="label">ChatGPT 100M 用户</div></a>
+        <a href="#c10" class="timeline-node" style="color:var(--ch-10); left: 100%;"><div class="year">2026</div><div class="timeline-dot"></div><div class="label">本书出版</div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTHORS PRELUDE ============ -->
+<section class="prelude wrap">
+  <div class="section-head"><span class="num">§ 01</span><span>The Authors</span></div>
+  <div class="prelude-grid">
+    <aside class="prelude-side">
+      <span class="key">Author 01</span>
+      <span class="val">Ryan Roslansky<br>LinkedIn CEO · Microsoft EVP (Office & Copilot)</span>
+      <span class="key">Author 02</span>
+      <span class="val">Aneesh Raman<br>LinkedIn Chief Economic Opportunity Officer</span>
+      <span class="key">Foreword</span>
+      <span class="val">Brad Smith<br>Vice Chair & President, Microsoft</span>
+      <span class="key">Publisher</span>
+      <span class="val">HarperCollins · 2026<br>ISBN 9780063486461</span>
+      <span class="key">Data source</span>
+      <span class="val">10 亿 + LinkedIn 成员<br>200 + 国家与地区</span>
+    </aside>
+
+    <div>
+      <h2>From the <span class="ital">largest</span> professional network ever assembled</h2>
+      <div class="zh-sub">站在 10 亿份职业生涯之上的视角</div>
+
+      <p>这本书的可信度,本质上来自一件事 —— <strong>LinkedIn 是人类历史上规模最大的职业网络</strong>。两位作者每天看着 10 亿人的技能演变、岗位重组、薪资曲线、招聘需求 —— 这是任何咨询公司、智库、媒体都没有的真实数据。</p>
+
+      <p>Ryan Roslansky 在 2020 年接任 LinkedIn CEO,正赶上疫情爆发、远程办公席卷、然后 ChatGPT 上线。三年里他亲眼看着 "skills changing on people" 这件事的速率从每年 6% 涨到每年接近 20%。Aneesh Raman 此前在白宫做过经济政策顾问,关注的是另一头 —— 当技术加速,谁会被甩出去。</p>
+
+      <p>所以这本书有一个独特的角度:<strong>不是技术乐观派,也不是末日论者</strong>,而是一个站在 "天天看见个人和市场摩擦" 位置上的清醒视角。它的核心命题不是 "AI 多牛" 也不是 "AI 多可怕",而是 ——</p>
+
+      <div class="pull">"AI 不会取代你,但用 AI 的人会。<br>这个进程已经开始了。"</div>
+
+      <p>书名 "Open to Work" 直接借用了 LinkedIn 2020 年疫情期间上线的那个绿色头像框 —— 那个 3 亿人用过的 "我现在愿意接新机会" 的信号。两位作者借这个意象传递核心姿态:<strong>open to learning, open to experimenting, open to a new chapter</strong>。</p>
+
+      <p>整本书用 Gene Kranz 的 "failure is not an option" 作为骨架 —— 不是因为他们要把 AI 灾难化,而是因为这句话本身的精神 —— <em style="font-family:var(--serif-en); font-style:italic; color:var(--apollo);">"把不可能拆成一步步可能"</em> —— 正是他们想给到每一个职场人的方法。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5Cs ============ -->
+<section class="dignities wrap">
+  <div class="section-head"><span class="num">§ 02</span><span>The 5Cs · Human Edge</span></div>
+  <div class="dignities-intro">
+    <h2>The <span class="ital">5Cs</span></h2>
+    <div class="zh-sub">让你不可替代的五种能力</div>
+    <p>过去几百年,"hard skills"(技术/分析能力)定义了一个人在劳动市场的价值,"soft skills" 一直被当作锦上添花。书里要做的核心翻转就是:<strong>当 AI 把 hard skills 商品化之后,soft skills 就成了 hardest skills</strong>。作者访谈了神经科学家、组织心理学家、人才主管,挑出了五种最能定义人类独特优势的能力 —— 他们称之为 5Cs。这五种能力相互喂养(没有勇气的好奇变成空想,没有沟通的创造只是私人爱好),合在一起,就是 "human innovation" 的引擎。</p>
+  </div>
+
+  <div class="dignity-list">
+    <div class="dignity">
+      <div class="dn">§ 01</div>
+      <div class="dt-en">Curiosity</div>
+      <div class="dt-zh">好奇心</div>
+      <p class="dd">问 "What if we tried something completely different?" —— 不是收集信息,是质疑事物为什么是现在这样。每一次重大突破都始于一个没人问过的问题(Salk 想:死掉的病毒能不能教身体打活的?Wright 兄弟想:鸟能飞我们为什么不能?)。</p>
+      <div class="dd-ai"><span class="ai-key">AI vs Human</span>AI 能处理模式 → 只有人类会问 "如果换一种完全不同的做法呢?"</div>
+    </div>
+
+    <div class="dignity">
+      <div class="dn">§ 02</div>
+      <div class="dt-en">Courage</div>
+      <div class="dt-zh">勇气</div>
+      <p class="dd">在不确定中行动,在所有人都在等证据的时候做那个 test case。波利尼西亚航海者上独木舟靠星空横渡太平洋,Apollo 13 上发射前知道可能回不来的人 —— 勇气不是不怕,是 acting despite the fear。</p>
+      <div class="dd-ai"><span class="ai-key">AI vs Human</span>AI 能算风险 → 只有人类决定哪种风险值得冒。</div>
+    </div>
+
+    <div class="dignity">
+      <div class="dn">§ 03</div>
+      <div class="dt-en">Creativity</div>
+      <div class="dt-zh">创造力</div>
+      <p class="dd">不只是艺术 —— 是生成 "之前不存在" 的东西的能力。Jobs 把电脑+电话+随身听捏成一个设备;Sara Blakely 剪掉丝袜的脚做出 Spanx —— 看见别人没看见的可能性。每一个岗位都有它的 creative moment。</p>
+      <div class="dd-ai"><span class="ai-key">AI vs Human</span>AI 能重新组合已有的 → 只有人类能 reimagine what is possible。</div>
+    </div>
+
+    <div class="dignity">
+      <div class="dn">§ 04</div>
+      <div class="dt-en">Compassion</div>
+      <div class="dt-zh">同理心</div>
+      <p class="dd">几千年前的考古证据显示,有严重残疾的人活了好多年 —— 必然有社群在 care 他们。Compassion 是文明的地基。在职场上,它是把交易变成关系、把团队变成社群的那条线。AI 能模仿关心,但不能真的 feel it。</p>
+      <div class="dd-ai"><span class="ai-key">AI vs Human</span>AI 能模拟在乎 → 只有人类真的在乎,因为我们也不清楚自己怎么做到的。</div>
+    </div>
+
+    <div class="dignity">
+      <div class="dn">§ 05</div>
+      <div class="dt-en">Communication</div>
+      <div class="dt-zh">沟通</div>
+      <p class="dd">"I have a dream" 推动了一场运动,"That's one small step for man" 让世界一起屏息。沟通是知识在时间和空间里传递的方式。LinkedIn 2024 数据:Communication 是全球需求第一名的技能 —— 在 AI 能完美翻译语言的时代,把语言变成 meaning 反而成了稀缺品。</p>
+      <div class="dd-ai"><span class="ai-key">AI vs Human</span>AI 能翻译语言 → 只有人类能把语言变成意义。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THREE-BUCKET FRAMEWORK ============ -->
+<section class="buckets">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 03</span><span>The Three-Bucket Framework</span></div>
+    <div class="buckets-intro">
+      <h2>The <span class="ital">Three Buckets</span></h2>
+      <div class="zh-sub">把你的工作拆成三个桶</div>
+      <p>书里给出的第一件 "今晚就能做" 的事,就是这个 framework。拿张纸,写下你日常做的前 12 件事(不是 job title,是真实在做的 task),然后分进三个桶。<strong>结果会告诉你你现在处在 red / yellow / green zone</strong> —— 以及下一步该把哪些任务往哪个桶里搬。</p>
+    </div>
+
+    <div class="bucket-grid">
+      <div class="bucket b1">
+        <div class="b-num">01</div>
+        <div class="b-tag">Bucket One</div>
+        <h4>Tasks AI Can Do Alone</h4>
+        <div class="h-zh">AI 单独能干的事</div>
+        <p>有清晰规则、结构化数据、有标准答案、谁来做都一样。准确性和一致性比判断和创造重要。AI 的甜区。</p>
+        <ul>
+          <li>生成标准报表</li>
+          <li>对照清单查错</li>
+          <li>回答 FAQ</li>
+          <li>数据库检索</li>
+          <li>任何 "if this then that" 模式的事</li>
+        </ul>
+        <div class="b-ask"><strong>问自己:</strong>这件事换一个人能不能 exactly 一样地做?有没有明确对错?完美的机器是不是会做得更好?</div>
+      </div>
+
+      <div class="bucket b2">
+        <div class="b-num">02</div>
+        <div class="b-tag">Bucket Two</div>
+        <h4>Tasks You'll Do <em>with</em> AI</h4>
+        <div class="h-zh">你和 AI 一起干的事</div>
+        <p>技术能力 × 人类能力的混合区。AI 处理数据/草稿/模式,你判断 "哪些模式真的重要"、"哪些细节会触动用户"。这是 AI 时代<strong>最大的机会区</strong>。</p>
+        <ul>
+          <li>AI 分析数据 + 你判断哪些重要</li>
+          <li>AI 起草内容 + 你加入情感温度</li>
+          <li>AI 准备客户背景 + 你读 "话外之意"</li>
+          <li>AI 跑实验 + 你解释结果</li>
+        </ul>
+        <div class="b-ask"><strong>问自己:</strong>这件事需不需要数据之外的 context?要不要基于经验做判断?结合 AI + 我才会出最好结果吗?</div>
+      </div>
+
+      <div class="bucket b3">
+        <div class="b-num">03</div>
+        <div class="b-tag">Bucket Three</div>
+        <h4>Tasks That Remain <em>Uniquely Human</em></h4>
+        <div class="h-zh">只有你能干的事</div>
+        <p>5Cs 居住的区域 —— 情感智能、创造性问题求解、伦理判断、复杂关系建设。源自人类互动里那种<strong>不可化简的不确定性</strong>。读懂没说出口的情绪、建立信任、在模糊中导航、创造从未存在过的东西。</p>
+        <ul>
+          <li>感受到客户没说出口的紧张</li>
+          <li>调解冲突中的两位同事</li>
+          <li>知道什么时候该破例</li>
+          <li>带新人 / 给艰难反馈</li>
+          <li>做一个 Bette 式的全新发明</li>
+        </ul>
+        <div class="b-ask"><strong>问自己:</strong>需不需要读情绪/建立信任?涉不涉及伦理或利益冲突?是不是 "人的存在感" 会决定结果?</div>
+      </div>
+    </div>
+
+    <div class="bucket-zone">
+      <div class="zone red">
+        <span class="z-tag">Red Zone · 红色警戒</span>
+        Bucket 1 > 50% 的工作:你已经在被颠覆的曲线上,不是明天 —— 是今天。立刻找新机会,或者在现岗位上给自己开辟 Bucket 2/3 的项目。
+      </div>
+      <div class="zone yellow">
+        <span class="z-tag">Yellow Zone · 黄色提醒</span>
+        Bucket 1 ≈ 50%:你还有时间,但不多。像温水里的青蛙 —— 现在还舒服,等水变烫就来不及。本周开始用 AI 做至少一件 routine 的事。
+      </div>
+      <div class="zone green">
+        <span class="z-tag">Green Zone · 绿色安全</span>
+        Bucket 1 < 50%:暂时安全。但不要松懈 —— 这个比例对所有人都在涨。继续往 Bucket 3 倾斜,把不可替代性做厚。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PART I DIVIDER ============ -->
+<section class="part-divider wrap" id="part1">
+  <div class="p-num">§ Part One · Chapters 1–4</div>
+  <h2>The <span class="ital">Wake-Up</span> Call.</h2>
+  <div class="zh-sub">警 铃 已 响</div>
+  <p class="p-lede">
+    第一部分 confronts 我们对变化的恐惧 —— 这种恐惧不是软弱,是 <strong>生物本能</strong>。然后揭示一个对工业时代的总账:我们花了几百年把人的潜力压缩进 "more, better, faster" 的效率引擎,把 "innovation" 这件事变成了少数人的特权。AI 的到来 ironically 给了我们松绑这个引擎的机会 —— 但前提是,你要先看清自己被困在了哪里。
+  </p>
+</section>
+
+<!-- ============ CHAPTER 1 ============ -->
+<article class="chapter" data-num="1" id="c1">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">01</span>
+          <span class="part-tag">Part I</span>
+          <span>Buckle Up</span>
+        </div>
+        <h3>Buckle <em>Up</em></h3>
+        <div class="zh-title">系 紧 安 全 带</div>
+        <div class="tagline">"AI 不会取代你,但用 AI 的人会。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>这本书最常被引用的一句话就在这一章: <strong>"AI won't replace you at work, but someone using AI likely will."</strong> 作者用 LinkedIn 的 Work Change Report 数据落实了它 —— <strong>近 90% 的 C-suite 高管认为加速 AI 应用 critical;两届企业领导者中有 2/3 已经不再考虑没有 AI 技能的候选人</strong>。这件事不是 "未来要发生",是已经在发生。</p>
+
+        <p>更扎心的数据:LinkedIn 研究发现 <strong>2015–2022 平均岗位技能集变了 24%,预计到 2030 这个数字会冲到 70%</strong>。意思是 ——<strong>你不换工作,你的工作也在换你</strong>。</p>
+
+        <p>作者用一个比喻解释 AI 为什么不一样:它像一辆 <strong>"越骑越懂你的自行车"</strong> —— 技术每天在更了解你,你也每天在更了解它。每一次互动都是 a two-way upgrade。这意味着 <strong>等你不动的每一天,你和先动的人之间的差距都在拉开</strong>。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>S-Curve of Change</strong> · 新技术起初缓慢、突然陡升、最后稳定成 infrastructure。互联网 1993,社交媒体 2004,AI 2020 —— 我们正进入 AI 的陡升段。</li>
+          <li><strong>Linear vs Exponential</strong> · 人脑预期世界 linear 变化(就像今年比去年好一点)。但技术按指数走。摄影:2000 年全球一年拍 80 亿张照片,2024 年我们每几周就拍这么多。</li>
+          <li><strong>Biological fear is not weakness</strong> · 对 AI 的恐惧是<strong>杏仁核</strong>在工作 —— 它分不清扑过来的狮子和扑过来的技术。Fear beneath the fear 不是失去工作,是失去 livelihood + identity。</li>
+          <li><strong>The Red Queen's Warning</strong> · 来自《Through the Looking-Glass》:"在这里,你拼尽全力地跑,只能停在原地。" 在快速变化的环境里,站着不动 = 落后。</li>
+          <li><strong>The Luddite Lesson</strong> · 1811 年织布工砸毁织机不是因为不懂技术 —— 是因为太懂。但他们看见的是 "失去什么",看不见 "会有什么新出来"。MIT:60% 的 2018 年的工作在 1940 年并不存在。</li>
+          <li><strong>AI 101</strong> · 你不需要 build AI,你只需要 know how to use it。它是一种你可以 "像跟人说话一样" 操作的技术。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">90%</div><div class="l">C-suite 高管认为加速 AI 应用 critical</div></div>
+          <div class="stat-card"><div class="v">2/3</div><div class="l">企业领导不再考虑没有 AI 技能的候选人</div></div>
+          <div class="stat-card"><div class="v">+140%</div><div class="l">2022 以来 LinkedIn 成员加新技能的速率</div></div>
+          <div class="stat-card"><div class="v">70%</div><div class="l">预计到 2030 平均岗位技能变化比例</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Ume Habiba</div>
+            <div class="role-desc">20 多岁微软软件工程师,Instagram 8.5 万粉丝。低收入家庭、移民、被认为内向的女孩,用时尚做比喻教编程。"我知道 AI 拿不走我能带到桌面上的东西。"</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Jonetta Gresham</div>
+            <div class="role-desc">五十多岁的护士转项目经理。"老狗学新把戏 —— 而 AI 就是新把戏。" 从 "hell no to AI" 到 "I. Have. Not. Stopped." 用 AI 训练自己的语音和思路,通过了 IT 认证。</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          AI won't replace you at work, but someone using AI likely will. Maybe not today or tomorrow. Maybe not this year or even next. But eventually. And if you wait for eventually, it will be too late.
+          <span class="src">— Chapter 1 · Buckle Up</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>变化是指数,不是线性。</strong>变化永远不会比现在更慢,AI 永远不会比现在更基础。今天就开始试。</li>
+            <li><strong>你的恐惧是生理,不是软弱。</strong>胸口那一紧不是你的问题,是几百万年的进化在保护你。理解它,然后行动。</li>
+            <li><strong>不用懂 AI 怎么造,只要会用。</strong>就像你不用懂电脑怎么造也能打字。这次的差别是 —— 你用的方式是 "像跟另一个人对话"。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 01">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- S-curve -->
+            <path d="M30,170 C 60,170 70,160 80,140 C 90,120 100,80 120,50 C 135,30 150,28 170,28" stroke-width="1.5"/>
+            <circle cx="170" cy="28" r="4" fill="currentColor" class="glyph-pulse" />
+            <!-- Year markers -->
+            <line x1="30" y1="170" x2="170" y2="170" stroke-dasharray="2 4" opacity="0.4"/>
+            <line x1="30" y1="30" x2="30" y2="170" stroke-dasharray="2 4" opacity="0.4"/>
+            <text x="30" y="185" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">2020</text>
+            <text x="155" y="185" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">NOW</text>
+            <text x="14" y="34" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">+∞</text>
+            <text x="14" y="172" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">0</text>
+          </svg>
+          <span class="glyph-tag">The S-Curve, bending</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 2 ============ -->
+<article class="chapter reverse" data-num="2" id="c2">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">02</span>
+          <span class="part-tag">Part I</span>
+          <span>Let It Go</span>
+        </div>
+        <h3>Let It <em>Go</em></h3>
+        <div class="zh-title">放 下 旧 的</div>
+        <div class="tagline">"今天某种程度上,我们都是 Mary Smith。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>开篇讲了一个 100 年前的伦敦故事:Mary Smith 是个 "knocker-upper" —— 拿着 peashooter(豌豆枪)挨家挨户朝窗户射豌豆,叫醒工人上班。这是体面工作,Mary 把它做到了极致。1920 年代闹钟普及,knocker-upper 这个职业在一代人之内消失。</p>
+
+        <p>作者的点不是 "技术取代人很惨" —— 是: <strong>把整个人的潜力压缩进 "射豌豆叫醒别人" 这一件重复劳动里,本身就是浪费</strong>。Mary 失去的不是工作,是没有人帮她意识到她还能做别的。</p>
+
+        <p>"今天某种程度上,我们都是 Mary Smith。" —— 那个一周花十几个小时格式化 Excel 的金融分析师,那个修车少、填保修单多的技师,那个在医疗系统里打字多过照顾病人的护士 —— <strong>所有这些 "必要但不是我们最厉害状态" 的工作,都是 Mary 的豌豆枪</strong>。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>The Efficiency Treadmill</strong> · 工业革命之后,工作的衡量标准都是 "more output, better quality, faster delivery"。我们被训练成机器的 supporting parts。</li>
+          <li><strong>The Collar System</strong> · 蓝领/白领/粉领的分层 —— 不是按 "谁更能创造",是按 "谁更接近系统的效率引擎"。MBA(1900s 哈佛)、CS 学位(2000s 后)都在金字塔顶 —— 都还是为效率服务。</li>
+          <li><strong>"Knowledge work" wasn't actually thinking</strong> · Anne-Marie Slaughter(New America CEO):"AI 是第一种真正会拿走 knowledge jobs 而不是 manual labor 的技术。" 不是 AI 比人聪明 —— 是这些 knowledge jobs 早就没什么真的 thinking 了。</li>
+          <li><strong>The New Care Economy</strong> · AI 取代不了的:水管工诊断神秘漏水、护士安抚病人、老师 read the room。需要 human presence/judgment in context 的工作正在被重新定价。</li>
+          <li><strong>AI as colleague, not crutch</strong> · MIT 研究: <strong>纯靠 AI 做写作的人,神经连接性减弱、复述自己作品都困难</strong> —— 研究者称之为 "cognitive debt"(认知债)。用 AI 但保留思考主权,这是关键。</li>
+          <li><strong>Entrepreneurialism redefined</strong> · Paul Cheek(MIT):"创业不是非要开公司。是用你能控制的资源,创造出 unreasonable 的产出。" 一个护士改善病人沟通流程 —— 那就是创业。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">85%</div><div class="l">LinkedIn 成员的工作里,至少 25% 例行任务可被 AI 自动化</div></div>
+          <div class="stat-card"><div class="v">60%</div><div class="l">白领的时间花在 "work about work"(Asana)</div></div>
+          <div class="stat-card"><div class="v">100+</div><div class="l">白领每天平均收邮件数(Microsoft)</div></div>
+          <div class="stat-card"><div class="v">92%/93%</div><div class="l">用 AI 的白领说它促进创造力 / 帮助专注重要工作</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Neil Pretty · Aristotle Performance 创始人</div>
+            <div class="role-desc">咨询顾问。"我太聚焦于 being it(AI)而不是 being me,客户一里之外就闻得到这种假。" 后来把 AI 当 "always-on colleague":告诉它任务和初步想法,问 "from CEO 视角你会怎么想?from OD 专家视角呢?" —— 两小时做完以前要一周的事。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Taj English · ListedB 创始人</div>
+            <div class="role-desc">皇后区加勒比裔青年,coding bootcamp 出身。意识到 AI 能写代码后没慌 —— "AI 不去理发店。AI 不懂在我们社区理发店意味着什么。" 用文化洞察建了一个理发师社交平台,把 AI 当 "junior co-worker" 处理重复编码。</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          AI 不是只关于效率。它是 a force for change AND a tool for change. 我们不该跟 AI 在 "more, better, faster" 上比赛 —— 我们该让 AI 处理那部分,腾出时间做<em>只有我们能做的</em>。
+          <span class="src">— Chapter 2 · Let It Go</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>我们被困在效率跑步机上了。</strong>几百年来工作被设计成把人变成可预测的生产零件,AI 正在解构这套设计。</li>
+            <li><strong>AI 在 remix,人类在 create。</strong>AI 擅长重组已有的东西,但发明不出真正新的。用它处理 routine,不要让它代你思考。</li>
+            <li><strong>放下 "more, better, faster"。</strong>把这部分让给 AI,你才有空间去做没有算法能触及的事 —— 创造从未存在过的方案。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 02">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- Treadmill: three concentric stretched ovals + arrows -->
+            <ellipse cx="100" cy="100" rx="80" ry="22" class="glyph-rotate"/>
+            <ellipse cx="100" cy="100" rx="55" ry="14" opacity="0.6" class="glyph-rotate-rev"/>
+            <ellipse cx="100" cy="100" rx="30" ry="8" opacity="0.4" class="glyph-rotate"/>
+            <!-- Breaking arrow up -->
+            <path d="M100,100 L100,40 M90,50 L100,40 L110,50" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="3" fill="currentColor"/>
+            <text x="55" y="195" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">More · Better · Faster</text>
+          </svg>
+          <span class="glyph-tag">Step off the treadmill</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 3 ============ -->
+<article class="chapter" data-num="3" id="c3">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">03</span>
+          <span class="part-tag">Part I</span>
+          <span>The Humans Are Coming</span>
+        </div>
+        <h3>The Humans Are <em>Coming</em></h3>
+        <div class="zh-title">人 类 才 正 要 上 场</div>
+        <div class="tagline">"人脑是一个 3 磅重、耗电不到一颗灯泡的器官 —— 却产生了已知宇宙里最复杂的网络。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>整章在做一次<strong>对 IQ 中心论的拆解</strong>。1905 年 Binet–Simon 测试发明时,Binet 自己警告它不是 "完整的智力衡量" —— 但工业时代需要快速分流,1917 年美军用它把 170 万士兵分类,IQ 从此被普遍接受为 "人有多聪明" 的代名词。100 年里,这种 narrow 定义统治了我们对 "smart" 的理解。</p>
+
+        <p>但科学早就推翻了这一点。1990s 神经科学家 Eleanor Maguire 扫描伦敦出租车司机的脑 —— 后部海马体明显比常人大,而且 <strong>开得越久越大</strong>。脑像肌肉一样可以长。同期 Anders Ericsson 发现 Mozart 的 "神童" 其实是<strong>从能说话之前就开始的精心早教</strong> —— 7 岁时练琴时长已经等同职业演奏家。Excellence 不是 born,是 built by deliberate practice。</p>
+
+        <p>然后,科学家们继续扩展我们对脑的理解,经济却<strong>把对 "intelligence" 的定义反向收窄了</strong>。我们造了一套把 "creativity 比 calculus 低、compassion 次于 computation" 的世界。直到 AI 来了 —— 它把那些 narrow 的 hard skills 商品化,反而把人类那些被忽视的能力推回了价值中心。这就是 5Cs 的来历。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>The Century of IQ</strong> · 一百年的智力测量,本质上是为工业时代的标准化分流服务的。Binet 自己反对这种用法。</li>
+          <li><strong>Resilience > Stanford CS</strong> · Vivienne Ming 的研究:在程序员里,"resilience(从压力中恢复的能力)" 比 Stanford CS 学位<strong>更能预测代码质量</strong>。所谓 "soft skills" 反而更 hard。</li>
+          <li><strong>"Willing to be wrong"</strong> · Vivienne 对 6 万学生公开讨论帖的研究:那些"经常出错却敢探索"的学生比 "始终复述正确答案" 的学生在长期更成功。"Willing to be wrong in front of other people for the privilege of learning what's right."</li>
+          <li><strong>AI doesn't have to overcome failure</strong> · Vivienne:"你告诉它错了,它再做一次。再做一次。它不学 resilience,不学 emotional thinking,不学失败后重来的勇气。"</li>
+          <li><strong>The 5Cs feed each other</strong> · 不是 5 个独立的勾选项:Curiosity 没有 Courage = inaction。Creativity 没有 Communication = private hobby。Compassion 给所有的 work 注入 purpose。</li>
+          <li><strong>"Soft skills are the new hard skills"</strong> · 2024 LinkedIn 数据:Communication 排全球需求技能第一。Goleman 1990s 提出的 EQ 理论现在终于不能被忽视了。</li>
+          <li><strong>Innovation needs time AND collaboration</strong> · Da Vinci 有 patrons 保护他探索的时间;Einstein 不是孤狼 —— 他写长信、跟朋友 workshop 想法。"You and I never cease to stand like curious children before the great mystery into which we were born."</li>
+        </ul>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Eleanor Maguire</div>
+            <div class="role-desc">爱尔兰神经科学家。看电视看到伦敦出租车司机训练纪录片想到:为什么我方向感这么差?她去扫了一群出租车司机的脑,发现了脑的可塑性。颠覆了"脑成年后就固定"的旧观念。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Anders Ericsson</div>
+            <div class="role-desc">认知心理学家,《Peak》作者。证明天才源于 deliberate practice 而非天赋。Mozart 的 perfect pitch 可以被系统训练复制(Ayako Sakakibara 对学龄前儿童的研究)。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Vivienne Ming · "Professional Mad Scientist"</div>
+            <div class="role-desc">神经科学家转 AI 创业者。少年时被父亲压力 "你该拿诺贝尔",二十多岁因严重精神健康危机无家可归。爬出来后做研究 + 创业。"Everyone is amazing. 但绝大多数人永远不会拥有让 amazing 成型的人生。"</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          这些不是 5 个独立的勾选项。它们互相喂养:好奇没有勇气就只是空想。创造没有沟通就只是私人爱好。同理心给所有工作以意义。
+          <span class="src">— Vivienne Ming on the 5Cs</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>人脑是我们最被低估的资产。</strong>我们花了一个世纪用效率指标衡量 intelligence,真正的优势在那之外。</li>
+            <li><strong>5Cs 是 AI 时代让我们不可替代的核心。</strong>好奇、勇气、创造、同理、沟通 —— 这五个能力,合起来定义了"人类创新"。</li>
+            <li><strong>Innovation 需要时间和训练。</strong>历史上最大的突破都来自那些被给了空间去探索、失败、连接的人。AI 处理效率,我们终于有空间重启 deep thinking。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 03">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- 5 nodes in pentagon — 5Cs -->
+            <g class="glyph-rotate">
+              <circle cx="100" cy="40" r="6"/>
+              <circle cx="158" cy="78" r="6"/>
+              <circle cx="135" cy="148" r="6"/>
+              <circle cx="65" cy="148" r="6"/>
+              <circle cx="42" cy="78" r="6"/>
+              <line x1="100" y1="40" x2="158" y2="78"/>
+              <line x1="158" y1="78" x2="135" y2="148"/>
+              <line x1="135" y1="148" x2="65" y2="148"/>
+              <line x1="65" y1="148" x2="42" y2="78"/>
+              <line x1="42" y1="78" x2="100" y2="40"/>
+              <line x1="100" y1="40" x2="135" y2="148" opacity="0.4"/>
+              <line x1="100" y1="40" x2="65" y2="148" opacity="0.4"/>
+              <line x1="158" y1="78" x2="65" y2="148" opacity="0.4"/>
+              <line x1="158" y1="78" x2="42" y2="78" opacity="0.4"/>
+              <line x1="135" y1="148" x2="42" y2="78" opacity="0.4"/>
+            </g>
+            <text x="92" y="35" font-size="9" font-family="JetBrains Mono" fill="currentColor">C</text>
+            <text x="160" y="80" font-size="9" font-family="JetBrains Mono" fill="currentColor">C</text>
+            <text x="137" y="158" font-size="9" font-family="JetBrains Mono" fill="currentColor">C</text>
+            <text x="55" y="158" font-size="9" font-family="JetBrains Mono" fill="currentColor">C</text>
+            <text x="32" y="80" font-size="9" font-family="JetBrains Mono" fill="currentColor">C</text>
+          </svg>
+          <span class="glyph-tag">5Cs as a network</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 4 ============ -->
+<article class="chapter reverse" data-num="4" id="c4">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">04</span>
+          <span class="part-tag">Part I</span>
+          <span>The Lost Einsteins</span>
+        </div>
+        <h3>The Lost <em>Einsteins</em></h3>
+        <div class="zh-title">那 些 失 落 的 爱 因 斯 坦</div>
+        <div class="tagline">"才华是均匀分布的,机会不是。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>哈佛经济学家 Raj Chetty 2007 年向 IRS 申请整理电子档案的机会 —— 别人觉得无聊,他看到的是 "美国人收入数据的完整图谱"。他追踪了 1.2 million 申请专利的美国人,从童年回溯。结论震撼:<strong>5 年级数学测试在前 5% 的孩子里,出身高收入家庭的成为发明人的概率是低收入家庭孩子的 2 倍以上。最富 1% 家庭的孩子,概率高出 10 倍</strong> —— <strong>这个差距来自 proximity,不是 ability</strong>。</p>
+
+        <p>Chetty 把这些 "本来能发明、却从未发明" 的人称为 <strong>"Lost Einsteins"</strong>。如果所有社区都按 elite 网络的速率创新,美国会多 4 倍的发明人。这不是个体的损失,是文明的损失。</p>
+
+        <p>解决方案不是 "让更多孩子上大学" —— 是从根本上重新理解 <strong>"the ratchet effect"</strong>(棘轮效应):人类不像黑猩猩 —— 大猩猩会教大猩猩用 termite probe,但永远是同一种;<strong>人会把别人的洞见当作自己的起点</strong>,代代叠加。所以 AI 时代最大的机会是 ——<strong>第一次,任何人有想法都能 build, test, scale,而不需要先有 capital / connections / 技术学位</strong>。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>Proximity > Ability</strong> · 从波士顿搬到 Silicon Valley 长大的孩子更可能做计算机专利;从波士顿搬到 Minneapolis(医疗器械中心)的更可能做医疗器械。你接受的不只是知识,是对 "你能成为什么" 的想象。</li>
+          <li><strong>The Ratchet Effect</strong> · 考古学家 Henshilwood:"人类发明语言、仪式、故事,让 ideas 跨越村庄、跨越大陆、跨越世纪积累。" 印刷术让 Copernicus 站在 Ptolemy 和阿拉伯天文学家的肩膀上 —— "If I have seen further it is by standing upon the shoulders of giants."</li>
+          <li><strong>Lost Einsteins are everywhere</strong> · 护理助理可能在革命化病人护理 —— 但没见过她社区的人申请专利。工厂工人可能改进制造业 —— 但 "invention 是有学位的人做的事"。</li>
+          <li><strong>AI democratizes 3 things</strong> · ① <strong>Personalization</strong>(印刷术给所有人同一本书,AI 给所有人一个懂你的工具);② <strong>Access to expertise</strong>(农夫用 AI 应用土壤科学,技师跑工程仿真);③ <strong>Execution itself</strong>(社工建 app,老师建辅导工具)。</li>
+          <li><strong>Education must shift</strong> · 不是 outpace machines,是 think more deeply than them。College Board 2025 新 AP:Cybersecurity / Networking / Business with Personal Finance —— 都是 5Cs + 创业的训练。</li>
+          <li><strong>Humanities renaissance</strong> · UIUC 的 CS + Philosophy 双专业、King's College 的 Digital Humanities、亚利桑那大学的 Public/Applied Humanities —— 把 literary criticism 翻译为 ethical reasoning + critical analysis + empathy。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">10×</div><div class="l">最富 1% 家庭孩子成为发明者的概率(vs 低收入)</div></div>
+          <div class="stat-card"><div class="v">4×</div><div class="l">如果机会均等,美国会多 4 倍发明人</div></div>
+          <div class="stat-card"><div class="v">90%→50%</div><div class="l">1940 年生的孩子赚得比父母多的概率 → 1980 年只剩一半</div></div>
+          <div class="stat-card"><div class="v">70–80%</div><div class="l">Sistech 难民女性学员进入 tech 行业的比例</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Tess Posner · AI4ALL 创始 CEO</div>
+            <div class="role-desc">麻州森林里长大,十六岁去 El Salvador 跟 Habitat for Humanity 盖房子,看到三岁孩子牙齿因缺医疗烂掉 —— "human value 是 core thing,但 opportunity 不是均等分配的。" AI4ALL 通过项目制学习让年轻人解决他们社区的真实问题(早期肿瘤检测、信用卡欺诈、环境监测)。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Joséphine Goube · Sistech 创始人</div>
+            <div class="role-desc">法国社会企业家,帮乌克兰、阿富汗、叙利亚的难民女性进 tech。Sistech 正在做 AI 工具 "Lena" —— 能分析一位女性的人生经历如何积累了 5Cs:"作为五个孩子的母亲,你建立了组织和规划能力;作为十年检察官,你的取证调查能力对当地网络安全岗位极其有价值。"</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Raj Chetty</div>
+            <div class="role-desc">哈佛经济学家。看到 IRS 电子档案招标书,意识到这是<strong>美国经济流动性的完整地图</strong>。后续研究"Lost Einsteins"成为美国教育和经济政策的重要参考。</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          Jensen Huang(Nvidia CEO)最近说,他不认为 AI 会消灭工作 —— "除非世界用光了 ideas。" 我们其实可能正在迎来相反的局面:一场来自所有被锁在创新场外的人和地方的 ideas explosion。
+          <span class="src">— Chapter 4 · The Lost Einsteins</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>数百万 Lost Einsteins 一直被锁在创新场外。</strong>邮政编码比天赋更能预测谁会发明。没有 role model,brilliance 就埋了。</li>
+            <li><strong>教育必须从"机器擅长的"转向"人独有的"。</strong>AI4ALL 和新 AP 课程在示范:当教育连接到真实问题 + 人的解决方案,学生学得更好。</li>
+            <li><strong>"创新爆炸"可能正在到来。</strong>第一次,任何有 idea 的人都能 build / test / scale。突破可能从前所未有的地方涌出。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 04">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- Ratchet wheel -->
+            <circle cx="100" cy="100" r="60" class="glyph-rotate"/>
+            <g class="glyph-rotate">
+              <line x1="100" y1="40" x2="100" y2="55"/>
+              <line x1="160" y1="100" x2="145" y2="100"/>
+              <line x1="100" y1="160" x2="100" y2="145"/>
+              <line x1="40" y1="100" x2="55" y2="100"/>
+              <line x1="142" y1="58" x2="132" y2="68"/>
+              <line x1="142" y1="142" x2="132" y2="132"/>
+              <line x1="58" y1="142" x2="68" y2="132"/>
+              <line x1="58" y1="58" x2="68" y2="68"/>
+            </g>
+            <!-- Ratchet pawl -->
+            <path d="M170,90 L180,100 L170,110 Z" fill="currentColor" opacity="0.7"/>
+            <!-- Arrow showing direction -->
+            <path d="M100,80 L95,90 L105,90 Z" fill="currentColor"/>
+            <text x="60" y="195" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">Ratchet turns one way</text>
+          </svg>
+          <span class="glyph-tag">Each generation, higher</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ PART II DIVIDER ============ -->
+<section class="part-divider wrap" id="part2">
+  <div class="p-num">§ Part Two · Chapters 5–8</div>
+  <h2>What's <span class="ital">Changing</span>.</h2>
+  <div class="zh-sub">变 化 中 的 四 个 层 次</div>
+  <p class="p-lede">
+    第二部分把第一部分的大叙事拆到四个具体层次:你的<strong>工作</strong>(不再是 title,是 portfolio of tasks)、你的<strong>职业</strong>(不再是梯子,是攀岩墙)、你的<strong>公司</strong>(不再是 org chart,是 work chart)、整个<strong>经济</strong>(不能只追效率,要释放 entrepreneurialism)。每一章都给你一个 framework + 一组真实人物 + 几个可以今晚就动手的动作。
+  </p>
+</section>
+
+<!-- ============ CHAPTER 5 ============ -->
+<article class="chapter" data-num="5" id="c5">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">05</span>
+          <span class="part-tag">Part II</span>
+          <span>Jobs Are Tasks, Not Titles</span>
+        </div>
+        <h3>Jobs Are <em>Tasks</em>, Not Titles</h3>
+        <div class="zh-title">工 作 是 任 务 集 合,不 是 头 衔</div>
+        <div class="tagline">"AI 不在乎你的头衔。它来抢的是任务,一件一件地从你的岗位里掏。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>开篇是 Bette Nesmith Graham 的故事:1950 年代达拉斯的单亲妈妈秘书,打字速度慢、IBM 新电动打字机让她错得更多。她想起以前画银行招牌的经验 —— sign painter 永远不重画,他们 paint over。回家用厨房搅拌机调出颜料,带到办公室。同事们要,Liquid Paper 诞生。<strong>1979 年 Gillette 用 4750 万美元(今天约 2 亿)买下她的公司</strong>。</p>
+
+        <p>Bette 不是变成了更好的打字员 —— 新技术让她 worse at 那个 "job"。她成功是因为她意识到 <strong>真正的工作不是 "打字",是 "产出完美文档"</strong>。当技术让前者变难,她调用了 "完全无关" 的知识。</p>
+
+        <p>"Your job is not your title." 这是这一章的核心动作。<strong>AI 不在乎你的 title</strong>,它一件一件地把任务从你的工作里抽出去。如果你把自己定义为 title,你就在一个每天意义都在减少的事物上下注。把自己重新定义为 <strong>"一组任务 + 一组能力 + 一组人际"</strong>,你就回到了主驾驶座。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>Self-reflective titles</strong> · Adam Grant 在 Make-a-Wish 的研究:让员工自己取 "能体现他们怎么看自己工作" 的头衔的组织,burnout 更低、engagement 更高。</li>
+          <li><strong>Job Crafting</strong> · Amy Wrzesniewski + Jane Dutton:把工作主动塑造成跟你的 strengths/interests/values 对齐 —— 既可以是 mental(找到工作里你认为重要的影响),也可以是 real(主动加入让你更有连接感的责任)。</li>
+          <li><strong>The Three-Bucket Framework</strong> · 见 § 03。Bucket 1(AI 单干)、Bucket 2(你+AI)、Bucket 3(只有你)。把 Bucket 1 转出去,把 Bucket 2 用 AI 放大,把 Bucket 3 不停做厚。</li>
+          <li><strong>Vivienne 的提醒</strong> · "最关键的不是分桶本身,是<strong>持续地 curate</strong> 这件事 —— 这是 ongoing adaptation,不是一次性练习。"</li>
+          <li><strong>Adaptability > Prediction</strong> · 2024 LinkedIn 三大增长最快技能之一。WEF:"resilience, flexibility, agility" 是未来雇主最需要的能力。</li>
+          <li><strong>The ATM Lesson</strong> · 1973 年纽约时报预测 ATM 会取代 75% 的银行柜员。结果?<strong>柜员数 1970–2010 翻了一倍</strong>,因为银行用省下的时间做 "relationship banking"。<strong>真正干掉柜员岗位的是 30 年后的智能手机</strong>。寓意:任务自动化 ≠ 工作消失,但<strong>下一个颠覆者你不一定能预测</strong>。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">90% / 85%</div><div class="l">用 AI 的员工说它帮节省时间 / 帮专注最重要工作</div></div>
+          <div class="stat-card"><div class="v">84% / 83%</div><div class="l">促进创造力 / 让人更享受工作</div></div>
+          <div class="stat-card"><div class="v">92%</div><div class="l">美国高管同意:soft skills 比以往任何时候都更重要(2023)</div></div>
+          <div class="stat-card"><div class="v">2× (1970–2010)</div><div class="l">ATM 普及期内,美国银行柜员数翻倍</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Bette Nesmith Graham · Liquid Paper 发明人</div>
+            <div class="role-desc">1950s 单亲妈妈秘书 → 用厨房搅拌机调改正液 → 1979 年公司卖给 Gillette $47.5M(今约 $200M)。还顺便建了员工托儿所和两个支持女性的基金会。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">David Autor · MIT 经济学家</div>
+            <div class="role-desc">"自动化一个岗位的部分任务,不会让其它任务变得不必要 —— 反而让它们更重要、经济价值更高。"</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          这里有一个比喻:把工作想成一条 conveyor belt。Bucket 1 的任务会随 AI 进步消失,但 Bucket 2 的新机会会涌现。你掌握 Bucket 2 之后,会腾出空间做更深的 Bucket 3 工作 —— 那是没有算法能触及的地方。
+          <span class="src">— Chapter 5 · The Conveyor Belt</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>Your job is not your title.</strong> 放下对 title 的执念,即使只在你自己脑子里 —— 你是一组能力的组合,不是一行 LinkedIn header。</li>
+            <li><strong>AI 抢的是任务,不是工作。</strong>三桶框架告诉你 vulnerability 在哪、机会在哪。主动把 Bucket 1 → 2,Bucket 2 → 3。</li>
+            <li><strong>Adaptability 比 prediction 重要。</strong>你预测不出来哪个创新会颠覆你的行业 —— 但你可以建立无论怎样都重要的能力。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 05">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- 3 buckets -->
+            <g>
+              <path d="M30,60 L60,60 L55,130 L35,130 Z"/>
+              <text x="38" y="155" font-size="10" font-family="JetBrains Mono" fill="currentColor">B1</text>
+              <path d="M85,60 L115,60 L110,130 L90,130 Z"/>
+              <text x="93" y="155" font-size="10" font-family="JetBrains Mono" fill="currentColor">B2</text>
+              <path d="M140,60 L170,60 L165,130 L145,130 Z"/>
+              <text x="148" y="155" font-size="10" font-family="JetBrains Mono" fill="currentColor">B3</text>
+            </g>
+            <!-- Arrows moving tasks -->
+            <path d="M62,90 L83,90 M76,84 L83,90 L76,96" stroke-width="1.5" class="glyph-pulse"/>
+            <path d="M117,90 L138,90 M131,84 L138,90 L131,96" stroke-width="1.5" class="glyph-pulse"/>
+            <text x="35" y="50" font-size="7" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">AI alone</text>
+            <text x="92" y="50" font-size="7" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">You + AI</text>
+            <text x="143" y="50" font-size="7" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">Only you</text>
+            <text x="40" y="180" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">Move tasks rightward</text>
+          </svg>
+          <span class="glyph-tag">Curate your tasks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 6 ============ -->
+<article class="chapter reverse" data-num="6" id="c6">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">06</span>
+          <span class="part-tag">Part II</span>
+          <span>Careers Are Climbing Walls, Not Ladders</span>
+        </div>
+        <h3>Careers Are <em>Climbing Walls</em>, Not Ladders</h3>
+        <div class="zh-title">职 业 是 攀 岩 墙,不 是 梯 子</div>
+        <div class="tagline">"梯子有固定的下一级。攀岩墙的下一手 —— 取决于你是谁。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>Mo Beck 出生时就没有左手。十二岁夏令营 counselor 让她跳过攀岩,她爬了 —— 后来成为<strong>美国十届国家攀岩冠军</strong>,经常完成两只手的人都完不成的路线。"那块石头不在乎我是个十二岁的女孩,不在乎我有残疾。"</p>
+
+        <p>Mo 的核心洞察:攀岩墙上,<strong>路径不止一条 —— 最好的那一条对你是独一无二的</strong>。她把短的左臂塞进缝里、用脚当手、用肩膀做枢轴。"Constraint became my advantage." 这就是 AI 时代的职业模型。</p>
+
+        <p>梯子模型 —— 进大公司、按部就班升职、退休拿金表 —— 是工业时代的产物("Organization Man" 1956)。下一代的职业从来不会是这样了。LinkedIn 数据:<strong>2025 年入职的人,职业生涯里会有 2 倍于上一代 15 年前的工作数</strong>。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>历史上的非线性职业框架</strong> · Protean(Douglas Hall 1976,以希腊变形海神命名)、Portfolio(Charles Handy)、Boundaryless(Arthur & Rousseau)、Working Identity(Herminia Ibarra)、Squiggly Careers(Tupper & Ellis)—— 都在说一件事:不再 linear。</li>
+          <li><strong>The Three Questions(攀岩三问)</strong> · ① <strong>Why do you work?</strong>(你为什么干?定义自己的成功) ② <strong>What do you uniquely do?</strong>(你独特的能力组合) ③ <strong>Where are you going?</strong>(下一手往哪)。三个问题不是一次性的,是反复回到的。</li>
+          <li><strong>Force 1: Think Like an Entrepreneur</strong> · 不一定开公司,但要有 "用现有资源创造不合理产出" 的姿态。LinkedIn 2024→2025:十大经济体里,"founder" 类标题增加 67%。</li>
+          <li><strong>Force 2: Network Is Your Navigation System</strong> · 梯子里 network 是 vertical(找 mentor、sponsor 往上爬);墙上 network 是 multi-directional(包括 <strong>peers / pacing partners</strong>,也就是攀岩里的 "beta")。</li>
+          <li><strong>Your work product is the new résumé</strong> · LinkedIn 自己的 Associate Product Builder 项目,招聘时第一份提交的不是简历,是 "你做过的东西"。</li>
+          <li><strong>"Permissionless path"</strong> · Diego A. Rubio:"创业是唯一一条不用问 permission 的路。" 农村出身、被学历门槛挡在外面,2017 年创办招聘公司;现在用 AI 帮其他农村创业者建生意。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">2×</div><div class="l">2025 入职者一生工作数,vs 15 年前</div></div>
+          <div class="stat-card"><div class="v">+67%</div><div class="l">"Founder" 类 LinkedIn 标题 (2024→2025, 10 大经济体)</div></div>
+          <div class="stat-card"><div class="v">10× ︎</div><div class="l">Mo Beck 国家攀岩冠军 — 用一只手赢过两只手的人</div></div>
+          <div class="stat-card"><div class="v">150K+</div><div class="l">Ethan Evans 从 1000 → 15 万 LinkedIn 网络,通过 "share what you know"</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Maureen "Mo" Beck</div>
+            <div class="role-desc">出生时无左手。十二岁开始攀岩,十届美国国家冠军。"我不得不发明自己的攀法,因为那时还不能 google。" 用脚当手、用肩膀做枢轴、用残臂塞缝。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Ethan Evans · LinkedIn Top Voice</div>
+            <div class="role-desc">工程师 → 管理 → Amazon 15 年 → 全职职业教练。"我意识到我有 teaching, speaking, coaching 的天赋,而且做这些事让我充能而不是耗能。" 自己也是攀岩者,他的三问框架来自亲身经验。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Diego A. Rubio · 农村创业者教练</div>
+            <div class="role-desc">德州农村长大,看着父亲 2008 失去运输生意。从大学退学后被学历门槛挡住 —— 选了 "permissionless path"。2017 创办招聘公司,现在帮其它农村创业者用 AI 不用搬家就能创业。</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          The most fulfilled workers were creating their own route through continuous experimentation and learning rather than following predetermined paths. The question isn't whether you'll have a nonlinear career — it's whether you'll navigate it by accident or by design.
+          <span class="src">— Tupper & Ellis · Squiggly Careers</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>职业是攀岩墙,不是梯子。</strong>预测的路径不在了,要奖励 creativity over conformity。像 Mo 一样,把你的独特组合变成路径。</li>
+            <li><strong>Think like an entrepreneur,哪怕你不创业。</strong>把约束当机会,用现有资源建造,从失败里学习 —— 这不再可选。</li>
+            <li><strong>Network 是你的导航系统。</strong>你不是一个人攀岩。许多 peer 跟你在平行路线上,他们看见的障碍和机会,你可能漏掉。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 06">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- Climbing holds scattered on wall -->
+            <rect x="15" y="15" width="170" height="170" stroke-dasharray="3 4" opacity="0.3"/>
+            <circle cx="50" cy="160" r="5" fill="currentColor"/>
+            <circle cx="80" cy="125" r="5" fill="currentColor"/>
+            <circle cx="55" cy="95" r="5" fill="currentColor"/>
+            <circle cx="100" cy="80" r="6" fill="currentColor"/>
+            <circle cx="135" cy="65" r="5" fill="currentColor"/>
+            <circle cx="115" cy="40" r="5" fill="currentColor"/>
+            <circle cx="155" cy="30" r="5" fill="currentColor"/>
+            <!-- Path lines (the climber's actual route) -->
+            <path d="M50,160 L80,125 L55,95 L100,80 L135,65 L155,30" stroke-dasharray="3 3" opacity="0.6"/>
+            <!-- Goal marker -->
+            <path d="M150,25 L160,30 L155,40 Z" fill="currentColor" class="glyph-pulse"/>
+            <text x="35" y="195" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">Climb your own route</text>
+          </svg>
+          <span class="glyph-tag">Multi-directional</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 7 ============ -->
+<article class="chapter" data-num="7" id="c7">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">07</span>
+          <span class="part-tag">Part II</span>
+          <span>Companies Are Work Charts, Not Org Charts</span>
+        </div>
+        <h3>Companies Are <em>Work Charts</em>, Not Org Charts</h3>
+        <div class="zh-title">公 司 是 工 作 图 谱,不 是 组 织 架 构</div>
+        <div class="tagline">"AI 不是新 Excel —— 你不能把它装到旧的组织里 hope for the best。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>1890 年波士顿钞票公司装上电动机 —— 然后什么也没变。印刷机、裁纸机、皮带传动都留在原位。20 年里电动化几乎没带来生产力增长。经济学家 Paul David 解释:他们在 <strong>"doubling up"</strong> —— 把新技术叠到旧系统上,像把跑车引擎装到马车里。</p>
+
+        <p>真正的革命要等到一些先驱问:"如果不是给旧的工厂电气化,而是<strong>围绕电的可能性重建工厂本身</strong>呢?" 拆掉多层工厂、改成单层、每个工人有自己的电机和开关、工作流是直线而不是绕着传动轴 —— 1920s 这些工厂的生产力年增长突破 5%。</p>
+
+        <p><strong>每个公司今天都在面对一模一样的选择</strong>。把 AI 装到现有结构上、希望它工作 —— 还是围绕 AI 重建结构。Microsoft 叫这个新结构 <strong>"work chart"</strong>:不组织在固定岗位上,组织在 <strong>"who needs to collaborate on what"</strong> 上。挑战不是技术 —— Conor Grennan(NYU Stern 第一任 Chief AI Architect):<strong>"AI 没什么要学的,你跟它说话就行。难的是 behavioral shift —— 这不是 digital transformation,是 change management。"</strong></p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>The Doubling-Up Trap</strong> · 把新技术叠到旧结构 = 你买了 sports car 但装在 horse-drawn carriage 里。AI Center of Excellence 多半就是这种 anti-pattern。</li>
+          <li><strong>Org chart vs work chart</strong> · Org chart 围绕<strong>职位</strong>;work chart 围绕<strong>产出</strong>。Org chart 是<strong>层级</strong>;work chart 是<strong>网络</strong>。Org chart 冻结结构;work chart 让它演化。</li>
+          <li><strong>"Complete and total behavioral shift"</strong> · Conor 跑了一圈纽约公司教他们用 AI,几个月后再去 —— 大部分还是没在用。<strong>"There's nothing to learn. So what's stopping them?"</strong> 答案不是学习曲线,是行为变革。</li>
+          <li><strong>Three Shifts(公司层级)</strong> · ① <strong>Lead by Design, Not Command</strong>(像 Satya Nadella 重塑微软文化、Citigroup 砍掉 1000+ 旧系统) ② <strong>See Capabilities, Not Categories</strong>(雇你已经有的隐藏技能 —— 那位会土耳其语的市场经理) ③ <strong>Develop People, Not Tasks</strong>(经理从监工变 coach)。</li>
+          <li><strong>The STARs Population</strong> · Byron Auguste(Opportunity@Work)的统计:把学位当门槛把<strong>7000 万美国 STARs(Skilled Through Alternative Routes)</strong>排除在外。<strong>哈佛商学院 2024 研究:不要求学位的岗位中,实际不带学位录用的不到 1/700</strong> —— 嘴上 skills-based,手里 credential-based。</li>
+          <li><strong>SMB advantage</strong> · 小企业的核心优势就是 entrepreneurial DNA。$4.1T 美国生产力释放空间里,40% 来自 SMB。<strong>73% 小企业 marketer 同意 AI 帮小品牌 "punch above their weight"</strong>。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">10×</div><div class="l">Microsoft 市值首十年(Satya Nadella 任期)增长倍数</div></div>
+          <div class="stat-card"><div class="v">230,000</div><div class="l">Citigroup 推广 AI 工具的员工数</div></div>
+          <div class="stat-card"><div class="v">1/700</div><div class="l">"开放给无学位" 的岗位中,实际不带学位录用比例</div></div>
+          <div class="stat-card"><div class="v">$4.1T</div><div class="l">美国 GenAI 生产力释放潜力(40% 来自 SMB)</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Conor Grennan · NYU Stern 第一任 Chief AI Architect</div>
+            <div class="role-desc">学生院长出身。意识到自己教企业用 AI 都没人真用,根本不是学习问题。"创新不会自上而下来 —— 会从公司各角落冒出来。" Leaders 要 pro-human 而不是只 pro-AI。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Byron Auguste · Opportunity@Work CEO</div>
+            <div class="role-desc">父亲读了一年大学没钱辍学,做 shipping clerk,看到 "Learn COBOL" 广告 → 进入 IT,把家庭推进美国中产。Byron 一辈子在还这份债 —— 让 70M STARs(Skilled Through Alternative Routes)被看见。"Don't blame the tools; fix the rules."</div>
+          </div>
+          <div class="role">
+            <div class="role-name">John Wooden · UCLA 篮球教练</div>
+            <div class="role-desc">12 年里 10 个 NCAA 冠军,这个纪录今天没人破。他的遗产不是奖杯,是 "我的工作是培养赢的人,不是赢的球员"。这就是 manager → coach 的转变。</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          You could put a treadmill in every house in America, and you're not going to cure heart disease. It's not about the tool; it's about whether or not you're going to change behavior.
+          <span class="src">— Conor Grennan</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>Org chart 是过去,work chart 是未来。</strong>就像电气化年代的工厂不能只换发动机,今天的公司不能只把 AI 螺栓到旧结构上。</li>
+            <li><strong>三个 shift 让 work chart 成型。</strong>Lead by design 而非 command,看 capabilities 不只是 categories,管理变成 coaching。</li>
+            <li><strong>小公司有 big advantage。</strong>已经在 entrepreneurial 地运作,船小好掉头。AI 时代奖励的就是这种灵活。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 07">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- Org chart (left, faded) -->
+            <g opacity="0.35">
+              <rect x="80" y="20" width="40" height="18"/>
+              <rect x="40" y="55" width="40" height="18"/>
+              <rect x="120" y="55" width="40" height="18"/>
+              <rect x="20" y="88" width="30" height="14"/>
+              <rect x="55" y="88" width="30" height="14"/>
+              <rect x="115" y="88" width="30" height="14"/>
+              <rect x="150" y="88" width="30" height="14"/>
+              <line x1="100" y1="38" x2="100" y2="50"/>
+              <line x1="60" y1="50" x2="140" y2="50"/>
+              <line x1="60" y1="50" x2="60" y2="55"/>
+              <line x1="140" y1="50" x2="140" y2="55"/>
+            </g>
+            <!-- Arrow downward -->
+            <path d="M100,110 L100,130 M93,123 L100,130 L107,123" stroke-width="1.4"/>
+            <!-- Work chart (network of nodes) -->
+            <g class="glyph-rotate">
+              <circle cx="60" cy="165" r="6" fill="currentColor"/>
+              <circle cx="100" cy="150" r="6" fill="currentColor"/>
+              <circle cx="140" cy="165" r="6" fill="currentColor"/>
+              <circle cx="80" cy="185" r="5"/>
+              <circle cx="120" cy="185" r="5"/>
+              <line x1="60" y1="165" x2="100" y2="150"/>
+              <line x1="100" y1="150" x2="140" y2="165"/>
+              <line x1="60" y1="165" x2="80" y2="185"/>
+              <line x1="80" y1="185" x2="100" y2="150"/>
+              <line x1="100" y1="150" x2="120" y2="185"/>
+              <line x1="120" y1="185" x2="140" y2="165"/>
+              <line x1="80" y1="185" x2="120" y2="185" opacity="0.5"/>
+            </g>
+          </svg>
+          <span class="glyph-tag">From hierarchy to network</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 8 ============ -->
+<article class="chapter reverse" data-num="8" id="c8">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">08</span>
+          <span class="part-tag">Part II</span>
+          <span>Economies Need Innovation From All, For All</span>
+        </div>
+        <h3>Economies Need Innovation <em>From All, For All</em></h3>
+        <div class="zh-title">经 济 需 要 来 自 全 部 人 、 为 全 部 人 的 创 新</div>
+        <div class="tagline">"AI 的赢家不是发明它的人,是<strong>把它送到最多手里</strong>的人。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>Kate Kallot 把自己叫做 "Global South 的 data plumber"。她从 Nvidia 新兴市场负责人位置辞职,2022 年到内罗毕创办 Amini —— 一家给非洲建数据基础设施的公司。她的原话:<strong>"硅谷觉得 AI 突破是新的计算架构 —— 但我们没那个资源去比。非洲的 AI 创新来自 applied AI、来自用现有技术解决我们自己 context 里的问题。"</strong></p>
+
+        <p>书在这一章把视角从个人/公司拉到经济整体:为什么有些国家会赢,有些会输?作者引用电气化的历史 —— 全球各国差不多时间发明了发电站,但<strong>美国是把电送进最多家庭和工厂的那个</strong>(1929 年 2/3 美国家庭有电),所以工业革命的红利最大化地留在了美国。AI 时代,胜出靠的不是发明者,是 widest adoption。</p>
+
+        <p>同样要避免 Luddite 之痛 —— 1811 年砸织布机的工人不是错,是没人给他们 transition support。这次,我们有时间、有数据、有工具,<strong>政府不能再袖手</strong>。</p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>Access AND Adoption</strong> · 700M 人没电,sub-Saharan Africa 接近 50%。没电没 AI,没 AI 就没这本书讲的所有机会。Access 是前提,但 adoption 才决胜负。</li>
+          <li><strong>Three Shifts(经济层级)</strong> · ① <strong>Credentials AND Capabilities</strong>(印度 EY×Microsoft AI Skills Passport;Maryland 第一个砍掉学位要求,Utah 砍 98%,20+ 州跟进) ② <strong>Foundational AND Lifelong Learning</strong>(ASU Learning Enterprise 1.2M+ 学习者;Western Governors University 1997 起 competency-based) ③ <strong>Public Leadership AND Private Partnership</strong>(AFT × Microsoft/OpenAI/Anthropic 在曼哈顿建 National Academy for AI Instruction)。</li>
+          <li><strong>Karya 的乡村印度模式</strong> · 在 Karnataka 农村,付给乡村印度人 above-minimum-wage 来录音、转写他们的母语方言(Kannada / Marathi / Telugu / Hindi / Bengali / Malayalam),教 AI 理解日常语言和文化细节。capability 不在学位上,在 mother tongue 里。</li>
+          <li><strong>Singapore Biopolis</strong> · 七栋玻璃楼,sky bridges 让生物学家能看进工程师的实验室 —— 强制 cross-pollination。"竞争优势不是继承的,是 built。有时是字面意义的 built。"</li>
+          <li><strong>EU "Union of Skills"</strong> · Mario Draghi 报告:"emphasis 从 formal delivery of diplomas 转向 preparing students with the right skills。"</li>
+          <li><strong>What good leaders look like</strong> · 一位市长去本地社区大学看哪种培训真的产生就业;一位州长跟被裁员工坐下来理解他们需要什么;一位部长亲自试 AI 工具不是因为下属让他,是因为好奇怎么帮选民。</li>
+        </ul>
+
+        <h4>关键数据 · Stats</h4>
+        <div class="stats">
+          <div class="stat-card"><div class="v">700M</div><div class="l">全球无电人口(地球人 10%)</div></div>
+          <div class="stat-card"><div class="v">+170%</div><div class="l">LinkedIn 非技术从业者注册 AI 课程的激增</div></div>
+          <div class="stat-card"><div class="v">98%</div><div class="l">Utah 州政府岗位砍掉学位门槛比例</div></div>
+          <div class="stat-card"><div class="v">20M</div><div class="l">Microsoft 2025 承诺培训的 AI 技能人数</div></div>
+        </div>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Kate Kallot · Amini 创始人(Nairobi)</div>
+            <div class="role-desc">从 Nvidia 新兴市场负责人到非洲数据基建创业者。"It's not just another digital divide. It's entire generations that will be left out." 2025 年 3 月推动肯尼亚国家 AI 战略 —— 包括给 9000 内罗毕患者做 AI 辅助诊断的大规模试点。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Maria Flynn · Jobs for the Future CEO</div>
+            <div class="role-desc">在职业高中长大(母亲是校秘书)。"我们处在变化的完美风暴里。" 推动技能本位、可访问、透明的就业路径。"真正想知道的不是 future of work,是 future of me。"</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Maria Anguiano · ASU Learning Enterprise</div>
+            <div class="role-desc">在加州高中里只有不到 10% 同学上 4 年制大学。在 ASU 建了 Learning Enterprise: "如果你 18 岁没想明白人生 / 不擅长读书,你就失去了所有机会 —— 我要改这件事。" 把硕士拆成 3 个月的可堆叠证书 —— 已服务 1.2M+ 学习者。</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          建关键基础设施意味着今天要建你自己的数据基础设施。这不只是另一个 digital divide —— 是<em>整代人</em>会被锁在 AI 经济之外。
+          <span class="src">— Kate Kallot, on Africa's AI moment</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>胜负不在发明,在普及。</strong>就像电气化时代的美国,AI 时代赢的会是把它送进最多手里的经济体。</li>
+            <li><strong>三个 shift 决定一国走向。</strong>Credentials AND Capabilities、Foundational AND Lifelong Learning、Public AND Private Partnership。</li>
+            <li><strong>看懂的 leader 让社区走得通。</strong>不是 "report 里写了什么",是 "他们真的建了什么程序"。Investment in people > investment in platforms。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 08">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- Globe / network -->
+            <circle cx="100" cy="100" r="70" class="glyph-rotate-rev"/>
+            <ellipse cx="100" cy="100" rx="70" ry="30" opacity="0.5"/>
+            <ellipse cx="100" cy="100" rx="40" ry="70" opacity="0.5"/>
+            <!-- Distributed nodes (innovation from all corners) -->
+            <circle cx="50" cy="80" r="4" fill="currentColor" class="glyph-pulse"/>
+            <circle cx="150" cy="80" r="4" fill="currentColor" class="glyph-pulse"/>
+            <circle cx="70" cy="135" r="4" fill="currentColor" class="glyph-pulse"/>
+            <circle cx="130" cy="135" r="4" fill="currentColor" class="glyph-pulse"/>
+            <circle cx="100" cy="50" r="4" fill="currentColor" class="glyph-pulse"/>
+            <circle cx="100" cy="150" r="4" fill="currentColor" class="glyph-pulse"/>
+            <text x="50" y="195" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">From all · For all</text>
+          </svg>
+          <span class="glyph-tag">Innovation everywhere</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ PART III DIVIDER ============ -->
+<section class="part-divider wrap" id="part3">
+  <div class="p-num">§ Part Three · Chapters 9–10</div>
+  <h2>The <span class="ital">Path</span> Forward.</h2>
+  <div class="zh-sub">走 下 去 的 那 条 路</div>
+  <p class="p-lede">
+    第三部分把视角彻底拉回到 <strong>你</strong> —— 不是 employee 不是 worker,是 human。当 AI 处理掉所有 "generic" 的东西,留给你的就是 <strong>"only you" 的部分</strong>。最后一章给你一份具体的 30-60-90 day plan —— 把这本书的所有想法落地成本周就能做的事。
+  </p>
+</section>
+
+<!-- ============ CHAPTER 9 ============ -->
+<article class="chapter" data-num="9" id="c9">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">09</span>
+          <span class="part-tag">Part III</span>
+          <span>Nobody Beats You at Being You</span>
+        </div>
+        <h3>Nobody Beats You at <em>Being You</em></h3>
+        <div class="zh-title">没 人 比 你 更 像 你</div>
+        <div class="tagline">"全球 30 亿劳动人口,LinkedIn 上 10 亿 —— 只有一个是你。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>整个工业时代的逻辑是<strong>"让人变得可比较、可分类、可衡量"</strong>。简历、绩效考核、岗位描述,都在把你磨平。当 AI 能完美执行所有 "standard",你的差异 ——<strong>不规则的转行、跨文化的童年、看似浪费的十年</strong> —— 突然变成了你最大的资产。</p>
+
+        <p>整章建立在 Nilofer Merchant 的概念上:<strong>"Onlyness"</strong>。我们每个人站在一个只有我们一个人站着的位置上 —— 这个位置是由独特的人生经历、视角和愿望构成的。它不是 self-help,是 economic opportunity。</p>
+
+        <p>Nilofer 讲过一个故事:一位 banker 拒绝在会议上分享她关于 "underbanked"(没银行账户群体)的洞察,因为 "我不想承认我懂这个市场是因为我的 onlyness。" Nilofer 反过来告诉她:"你应该<strong>庆祝</strong>那个视角 —— 它是所有创新的引擎。" 在 AI 把技术技能商品化的时代,你的 singular experiences / judgment / empathy / resilience 才是你的边。<strong>Machines can replicate tasks. They can't replicate you.</strong></p>
+
+        <h4>关键概念 · Key Concepts</h4>
+        <ul class="concepts">
+          <li><strong>Onlyness</strong> · Nilofer Merchant 的概念(HBR + 两本书)。你站在的那个位置 —— 由你的 distinct history, experience, visions, hopes 定义。"It's not the perfection of your experience that prepares you, but what you can contribute."</li>
+          <li><strong>The power of your past</strong> · John Henry 一直为父亲是 dry cleaner 的 presser 感到羞耻。直到他的 dry cleaning side business 接下了 The Wolf of Wall Street 剧组 —— 他把衣服带给父亲,父亲用大师级的手艺压平。"我曾以为是劣势的事,原来是优势。" 21 岁公司卖了 100 万美元。</li>
+          <li><strong>The power of being first</strong> · Leena Nair 在小印度镇长大,8 岁宣布要当总理被笑;Unilever 第一个走进工厂、第一个上夜班、第一个做南印度某些艰苦岗位的女性。outsider 的眼光让她看见别人没看见的人才。后来成为 Chanel 全球 CEO。</li>
+          <li><strong>The power of speaking your mind</strong> · Scott Galloway(NYU 教授):"我成功的钥匙是 rejection,具体说是 my ability to endure it。" 在所有人 diplomatic 的时候叫学校 "luxury brands",说 "brand is dead" —— 他的 provocations 之所以 land,是因为<strong>来自真实经历</strong>。</li>
+          <li><strong>The power of being the underdog</strong> · Barbara Corcoran 的男朋友说 "You'll never succeed without me",然后离开。她建起 6600 万美元的 Corcoran Group。"I had nothing to lose, I had everything to gain. I threw everything at the wall and a lot of stuff worked." 在 Shark Tank 选角被拒,她写邮件给执行制片:"我视你的拒绝为 lucky charm." 名单列出所有 underestimate 她的人。</li>
+          <li><strong>Nilofer 的两个练习</strong> · ① <strong>列出 5 个塑造你的故事</strong>,然后问 "这意味着什么?我因此做了哪些决定?" ② <strong>如果你在 Disney 电影里拿到一根魔法棒,可以修复一件事,你会修什么?</strong></li>
+        </ul>
+
+        <h4>关键人物 · Case Studies</h4>
+        <div class="cast">
+          <div class="role">
+            <div class="role-name">Nilofer Merchant</div>
+            <div class="role-desc">"Onlyness" 概念创造者。19 岁因为家里付不起 Berkeley 学费在社区大学,被选进加州州长改革委员会 —— 才意识到她以为的劣势是别人看不见的视角。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">John Henry · 纽约多米尼加裔创业者</div>
+            <div class="role-desc">门卫 + 社区大学 → 洗衣副业 → Wolf of Wall Street 剧组 + Law and Order → 21 岁公司卖 100 万 → Harlem 孵化器 + 反偏见车险创业 + 投资。</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Leena Nair · Chanel 全球 CEO</div>
+            <div class="role-desc">小印度镇 → Unilever 第一位女性工厂经理 → Unilever 第一位女性 CHRO → Chanel CEO。"Gabrielle Chanel 也是 outsider —— 她在孤儿院学缝纫,正是因为外人视角才颠覆了时尚。"</div>
+          </div>
+          <div class="role">
+            <div class="role-name">Barbara Corcoran · Shark Tank judge</div>
+            <div class="role-desc">22 份工作做到 23 岁(从游乐场监督到热狗摊),男朋友离开后从 7 个 agent 开始建 Corcoran Group → 6600 万美元卖出。"小人物在坏时刻里总是优于大人物。"</div>
+          </div>
+        </div>
+
+        <div class="chapter-quote">
+          AI 永远不会知道你曾经引以为耻的过去,其实是无价的知识。AI 永远不会知道从 "first" 的焦虑到 "帮别人也成为 first" 的勇气是什么感觉。AI 永远不会理解所有人都在怀疑你时还能站起来的 resilience。
+          <span class="src">— Chapter 9 · Nobody Beats You at Being You</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>Onlyness 不是简历,是把你看似无关的经历串起来的那根线。</strong>那个交叉点 —— 你站过不同世界、搭过桥梁的地方 —— 就是你 only 的位置。</li>
+            <li><strong>Naval Ravikant 说得最准:"做最自然给你的事,你就没有竞争。"</strong> 不是因为你比所有人优秀,而是因为没人能成为你。</li>
+            <li><strong>Vivienne Ming 的话再听一遍:"Everyone is amazing."</strong> 问题不是你有没有独特价值 —— 是你有没有 courage 去发现、阐明、并部署它。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 09">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- A single bright point amid grid of dim ones -->
+            <g opacity="0.25">
+              <circle cx="40" cy="40" r="3"/>
+              <circle cx="80" cy="40" r="3"/>
+              <circle cx="120" cy="40" r="3"/>
+              <circle cx="160" cy="40" r="3"/>
+              <circle cx="40" cy="80" r="3"/>
+              <circle cx="80" cy="80" r="3"/>
+              <circle cx="160" cy="80" r="3"/>
+              <circle cx="40" cy="120" r="3"/>
+              <circle cx="80" cy="120" r="3"/>
+              <circle cx="120" cy="120" r="3"/>
+              <circle cx="160" cy="120" r="3"/>
+              <circle cx="40" cy="160" r="3"/>
+              <circle cx="80" cy="160" r="3"/>
+              <circle cx="120" cy="160" r="3"/>
+              <circle cx="160" cy="160" r="3"/>
+            </g>
+            <!-- The one bright node -->
+            <circle cx="120" cy="80" r="10" fill="currentColor" class="glyph-pulse"/>
+            <circle cx="120" cy="80" r="18" opacity="0.6" stroke-dasharray="3 3"/>
+            <circle cx="120" cy="80" r="28" opacity="0.3" stroke-dasharray="3 3"/>
+            <text x="55" y="195" font-size="8" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">No one stands where you stand</text>
+          </svg>
+          <span class="glyph-tag">Your onlyness</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ CHAPTER 10 ============ -->
+<article class="chapter reverse" data-num="10" id="c10">
+  <div class="wrap">
+    <div class="chapter-grid">
+      <div class="chapter-body">
+        <div class="chapter-meta">
+          <span class="num">10</span>
+          <span class="part-tag">Part III</span>
+          <span>Open to Work</span>
+        </div>
+        <h3>Open to <em>Work</em></h3>
+        <div class="zh-title">本 周 就 能 开 始 的 90 天</div>
+        <div class="tagline">"没有适合所有人的路线图。但有一些起点,所有人都能用。"</div>
+
+        <h4>核心论点 · Core Argument</h4>
+        <p>最后一章是把整本书<strong>压缩成一份 30-60-90 day plan</strong>。LinkedIn 从 10 亿成员的数据里提炼出 —— 不论你的岗位、行业、资历,这三个月的节奏都会帮你启动。</p>
+
+        <p>它的精神跟 Gene Kranz 一致:不是 "想清楚整张地图再走第一步",是 <strong>"先走第一步,然后下一步,然后下一步"</strong>。整个 plan 里反复出现的两个字是 <strong>"just start"</strong>。You're going to have false starts. You'll spend 20 minutes crafting a prompt only to get something useless. <strong>That's not a sign you're doing it wrong; it's a sign you're actually doing it.</strong></p>
+
+        <p>30-60-90 详细内容已经在下方独立 section 完整呈现。这里给出的是它的 <strong>核心精神</strong>:第一个月建立 AI fluency + 知道自己处在哪个 bucket zone;第二个月建立 5Cs(每两周练一组);第三个月回到 chapter 6 的三个问题(why / what / where)做一次彻底的职业重构。</p>
+
+        <p>书的最后一句:<strong>"Remember, there's only one you. And nothing, not even AI, can beat you at being you."</strong></p>
+
+        <h4>30-60-90 一句话总结</h4>
+        <ul class="concepts">
+          <li><strong>Days 1-30 · AI Foundations</strong> · 选一个你 dread 的重复任务 → 试 AI → 用三桶给自己做一次 vulnerability 评估 → 找 3-5 个同样在试的人组小群。</li>
+          <li><strong>Days 31-60 · Building Your 5Cs</strong> · Curiosity + Creativity 两周(给一个 stale 的项目找 5 个跨行业的灵感);Communication + Compassion 两周(挑一个关系深耕,做一次你一直在 avoid 的 difficult conversation);Courage 两周(做一件需要署名的大胆动作)。</li>
+          <li><strong>Days 61-90 · Why / What / Where</strong> · 用 30 分钟无干扰时间写下 5 年后的成功画面 → 反复问 "why" 直到触底 → 把答案拿给一个工作内 + 工作外的人 sense-check。</li>
+        </ul>
+
+        <h4>关键比喻 · Apollo 13 的回响</h4>
+        <p>书的开头是 Apollo 13 的爆炸,结尾也回到 Apollo 13。Jack Swigert 多年后说:"按 '是否完成了出发的目的' 来衡量,Apollo 13 是失败。但 Apollo 13 做到了人类历史上从未做到的事 —— 在那一瞬间,整个世界<strong>在一起</strong>了。"</p>
+
+        <p>作者借这个 frame:你不是一个人在面对 AI。你和现在全球数十亿在 reimagine work 的人在一起。"Onlyness at scale" —— 每个人都在定义自己独有的 vision,但在一个被同一个力量重塑的世界里。</p>
+
+        <div class="chapter-quote">
+          The industrial age rewarded efficiency. The AI age will reward entrepreneurialism. Big change is coming, but it's revealing an equally big truth: much of the work world we're leaving behind isn't worth defending. We can do more than survive. We can succeed by doubling down on the 5Cs.
+          <span class="src">— Chapter 9 · In It Together</span>
+        </div>
+
+        <div class="bottom-line">
+          <span class="bl-key">The Bottom Line</span>
+          <ol>
+            <li><strong>没有适合所有人的路线图,但有 starting points。</strong>30-60-90 不是按 "你必须照做" 写的,是按 "如果你不知道从哪开始,就从这开始" 写的。</li>
+            <li><strong>关键不是 perfect plan,是 act。</strong>Apollo 13 之所以成功,不是因为他们找到了完美方案 —— 是因为他们决定要继续解题。</li>
+            <li><strong>And nothing, not even AI, can beat you at being you.</strong></li>
+          </ol>
+        </div>
+      </div>
+
+      <div>
+        <div class="glyph-frame" data-corner="GLYPH · 10">
+          <svg viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+            <!-- Three concentric arcs = 30/60/90 -->
+            <path d="M40,150 A 70,70 0 0 1 160,150" stroke-width="1.5"/>
+            <path d="M55,150 A 50,50 0 0 1 145,150" opacity="0.7"/>
+            <path d="M70,150 A 30,30 0 0 1 130,150" opacity="0.5"/>
+            <!-- Mission Control / launch path -->
+            <line x1="100" y1="160" x2="100" y2="40" stroke-width="1.5"/>
+            <path d="M88,55 L100,40 L112,55" stroke-width="1.5"/>
+            <!-- Day markers -->
+            <text x="36" y="170" font-size="9" font-family="JetBrains Mono" fill="currentColor">D1</text>
+            <text x="51" y="148" font-size="9" font-family="JetBrains Mono" fill="currentColor" opacity="0.7">D30</text>
+            <text x="66" y="148" font-size="9" font-family="JetBrains Mono" fill="currentColor" opacity="0.6">D60</text>
+            <text x="155" y="170" font-size="9" font-family="JetBrains Mono" fill="currentColor">D90</text>
+            <circle cx="100" cy="40" r="5" fill="currentColor" class="glyph-pulse"/>
+          </svg>
+          <span class="glyph-tag">Failure is not an option</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ============ PEOPLE / DISCIPLES ============ -->
+<section class="people">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 04</span><span>The People · 真实故事</span></div>
+
+    <div class="people-intro">
+      <h2>The <span class="ital">People</span> Behind the Argument</h2>
+      <div class="zh-sub">让这本书有血有肉的真实工作者</div>
+      <p>书最让人记得住的不是数据,是<strong>这十几位真实在 navigate 这场变化的人</strong>。每个人都是一个 case study,但也是一个 "如果他们能,我也许也能" 的 permission slip。下面是书中最重要的几位 —— 出场顺序大致按章节,完整故事请回到对应章节。</p>
+    </div>
+  </div>
+
+  <article class="person wrap" data-color="1">
+    <div class="p-meta"><span class="p-num">01</span><span>Ch 1 · Buckle Up</span><span>SOFTWARE ENGINEER × CONTENT CREATOR</span></div>
+    <h3>Ume <em>Habiba</em></h3>
+    <div class="p-role">微软软件工程师 · Instagram 8.5 万粉丝 · 时尚 × 编程教育</div>
+    <div class="p-quote">"I always say AI is not going to take over my job, because I know what I bring to the table that AI cannot."</div>
+    <div class="p-body">
+      <p>来美移民家庭、低收入背景、小时候是 "教室里最害羞的女孩"。中学跨学区被推到一个 "再害羞也得逼自己出来" 的环境,意识到她其实不是 shy —— 她是 people person。University of Maryland 信息科学专业,大三接触 AI 后发现 <strong>"过去两年学的东西其实都可以丢给 ChatGPT,然后毕业。"</strong></p>
+      <p>但她没有恐慌 —— 她意识到她带到桌面上的东西是 AI 没有的。<strong>她的内容生成 workflow 很值得看:</strong>先给 AI 自己的 context(我是谁、为谁创作、产品偏好),让它 internalize;再提供她<strong>自己想出来的</strong>编程问题分解;然后让 AI 用 "对年轻女孩友好的、跟时尚有关的类比" 重新表达。90% 的时候第三次试就完美。她节省的时间用来更 deep 地连接她的社群。</p>
+      <div class="p-tags"><span>Curiosity</span><span>Communication</span><span>AI as collaborator</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="3">
+    <div class="p-meta"><span class="p-num">02</span><span>Ch 1 · Buckle Up</span><span>NURSE → PROJECT MANAGER</span></div>
+    <h3>Jonetta <em>Gresham</em></h3>
+    <div class="p-role">五十多岁 · 护士转项目经理 · 医疗数字化 · "I have not stopped" </div>
+    <div class="p-quote">"I'm the old dog that learned the new trick. And AI is the new trick."</div>
+    <div class="p-body">
+      <p>辛辛那提低收入社区长大,母亲清洁工。"我不想 work a job,我想 have a career —— 我觉得我妈一直在 working a job。" 做了几十年护士,孩子需要她回家后做合约工。重新进入劳动力市场时,AI 浮上来。她是 "hell no to AI" 派 —— 长在《终结者》《1984》的恐惧里。</p>
+      <p>转折点是 Merit America(帮低薪美国人转技术岗的非营利)的一份作业:用 AI 写简历。看到结果她说 <strong>"这是纸上的我。它放大了我的技能。"</strong> 从那以后没停过。学 IT 认证时,她<strong>用自己的语音和思考模式训练 AI</strong>,让它用她能理解的类比解释材料 —— 不是死记硬背。考过了。</p>
+      <div class="p-tags"><span>Courage</span><span>Lifelong learning</span><span>Adaptability</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="6">
+    <div class="p-meta"><span class="p-num">03</span><span>Ch 2 · Let It Go</span><span>FOUNDER · LISTEDB</span></div>
+    <h3>Taj <em>English</em></h3>
+    <div class="p-role">皇后区加勒比裔 · Coding bootcamp 毕业 · 理发师社交平台</div>
+    <div class="p-quote">"AI doesn't go to the barbershop. AI didn't grow up knowing what the barbershop means in some communities. But I did."</div>
+    <div class="p-body">
+      <p>13 岁开始用爸爸买的电脑建网站。向妈妈要钱买 "domain name",妈妈不知道是什么但给了。General Assembly bootcamp 2017 毕业,做 startup engineer / 教课。 2023 GitHub Copilot 和 Cursor 出现,"那种 buzz 让人感觉 it's gonna take jobs。"</p>
+      <p>但 Taj 想清楚一件事:他<strong>最好的创业想法从来不是来自他的代码能力</strong> —— 是来自他每周去理发店、看朋友在 Facebook 上问 "Who cuts your hair?"。在他的加勒比文化里,理发店不是剪发的地方,是<strong>社群、谈生意、讲故事的地方</strong>。ListedB 就建在这个洞察上 —— 理发师 + 顾客之间的口耳相传,被数字化复制。他现在把 AI 当 "junior co-worker" 处理重复编码。</p>
+      <div class="p-tags"><span>Onlyness</span><span>Cultural insight</span><span>Entrepreneur</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="4">
+    <div class="p-meta"><span class="p-num">04</span><span>Ch 3 · The Humans Are Coming</span><span>NEUROSCIENTIST × AI FOUNDER</span></div>
+    <h3>Vivienne <em>Ming</em></h3>
+    <div class="p-role">"Professional Mad Scientist" · The Human Trust 创始人</div>
+    <div class="p-quote">"Everyone is amazing. It is simply that the vast majority of people will never lead the life that allows them to actually realize that amazing."</div>
+    <div class="p-body">
+      <p>童年压力沉重("你该拿诺贝尔奖")。11 岁时第一次意识到自己不是全世界最聪明的人。少年抑郁,二十多岁因严重精神健康危机无家可归数年。"低谷里救我的是父亲一句话 —— Live a life of substance." 从便利店员工做到经理,然后回学校 —— 一路读完本科 + 研究生 + 神经科学家 + 一家公司首席科学家。</p>
+      <p>她的研究<strong>颠覆了关于 "成功的预测因素" 的常识</strong>:在 software developer 里,resilience 比 Stanford CS 学位<strong>更能预测代码质量</strong>。她和妻子 Norma Chang 对 6 万学生公开讨论帖的研究发现 ——"经常公开出错但敢探索" 的学生远比 "始终给正确答案" 的学生在长期更成功。<strong>"willing to be wrong in front of other people for the privilege of learning what's right."</strong></p>
+      <div class="p-tags"><span>Resilience</span><span>5Cs research</span><span>Anti-IQ</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="7">
+    <div class="p-meta"><span class="p-num">05</span><span>Ch 6 · Climbing Walls</span><span>10× NATIONAL CLIMBING CHAMPION</span></div>
+    <h3>Maureen "Mo" <em>Beck</em></h3>
+    <div class="p-role">出生时无左手 · "I came out screaming and lopsided"</div>
+    <div class="p-quote">"This rock didn't care that I was a twelve-year-old girl. It didn't care that I had a disability. I had to invent my way of climbing because this was before we could just google how to do something."</div>
+    <div class="p-body">
+      <p>父母从一开始就拒绝把她当残疾人对待。学拴鞋带是 "幼儿园前要会的事 —— 这样没人会嘲笑你"。12 岁夏令营 counselor 让她跳过攀岩,她爬了。<strong>"I had to invent my way of climbing,"</strong> 因为那是 google 之前的年代。</p>
+      <p>今天她是<strong>美国十届国家攀岩冠军</strong>,经常完成两只手攀岩者都完不成的路线。她把短的左臂塞进缝隙,右手摸索下一手。她横向爬、向下爬、用脚当手、用肩膀当枢轴、整个身体是工具。<strong>"constraint became her advantage."</strong> 她的故事在书里是 "career = climbing wall" 的物理化身。</p>
+      <div class="p-tags"><span>Reinvention</span><span>Multi-direction</span><span>Constraint as edge</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="5">
+    <div class="p-meta"><span class="p-num">06</span><span>Ch 6 · Climbing Walls</span><span>AMAZON 15Y → CAREER COACH</span></div>
+    <h3>Ethan <em>Evans</em></h3>
+    <div class="p-role">LinkedIn Top Voice on Careers · 全职职业教练 · 也是攀岩者</div>
+    <div class="p-quote">"You may not be the best at any one skill, but you may be among the very best at the combination."</div>
+    <div class="p-body">
+      <p>工程师出身,但很快发现 "技术拼图我喜欢,人的拼图我更上瘾。" 横向转管理,在三个 startup 做运营、然后在 Amazon 15 年。一直在带人,渐渐意识到 "在 Amazon 升职是可能的,但<strong>没有以前那么有意思了 —— 因为钱已经够了</strong>。"</p>
+      <p>他用了书中给所有人的<strong>三个问题</strong>:<strong>Why do you work?</strong>(动机) <strong>What do you uniquely do?</strong>(独特能力组合) <strong>Where do you want to go?</strong>(下一站)。2020 离开 Amazon 做全职教练。从原本 1000 多人的 LinkedIn 网络扩到 15 万人 —— "通过 share what you know"。</p>
+      <div class="p-tags"><span>Why / What / Where</span><span>Coaching</span><span>Reinvention</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="2">
+    <div class="p-meta"><span class="p-num">07</span><span>Ch 7 · Work Charts</span><span>NYU STERN · FIRST CHIEF AI ARCHITECT</span></div>
+    <h3>Conor <em>Grennan</em></h3>
+    <div class="p-role">"There's nothing to learn. All you have to do is talk."</div>
+    <div class="p-quote">"This is not a digital transformation. It's change management. You're not replacing anything here."</div>
+    <div class="p-body">
+      <p>NYU Stern 学生院长出身,看到 AI 兴起后想给学生设计课程。他跑遍纽约公司问 "你们在怎么用 AI" —— 答案大部分是 "我们没在用"。<strong>他决定先教企业用,几个月后回去看进展。结果回去时还是没什么人在用,或者只用他课上演示过的那几种用法。</strong></p>
+      <p>这个反差让他顿悟:<strong>"这不是 learning curve, 这是 a complete and total behavioral shift."</strong> 后来他成了 Stern 第一任 Chief AI Architect。他的关键洞察:<strong>"The only people who are going to figure this out are the people doing the jobs."</strong> 创新不会自上而下来,会从公司各角落涌出来。</p>
+      <div class="p-tags"><span>Change management</span><span>Pro-human leadership</span><span>Work chart</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="8">
+    <div class="p-meta"><span class="p-num">08</span><span>Ch 8 · Economies</span><span>AMINI · NAIROBI</span></div>
+    <h3>Kate <em>Kallot</em></h3>
+    <div class="p-role">"Data plumber for the Global South" · 推动肯尼亚国家 AI 战略</div>
+    <div class="p-quote">"It's not just another digital divide. It's entire generations that will be left out."</div>
+    <div class="p-body">
+      <p>法国出生,小时候经常去非洲探亲。2022 年从 Nvidia 新兴市场负责人位置辞职,搬到内罗毕创办 Amini —— 给非洲建本地控制的数据基础设施,让国家能拥有和变现自己的数据。她在政府层面 evangelize:<strong>"建关键基础设施今天意味着建你自己的 data infrastructure"</strong>。</p>
+      <p>她从 Amini 的角度也展示了 "skills-based" 招聘的实操:面试不看学位,看你能不能在受限环境里把问题搞定。一次她的技术负责人(自己没有 CS 学位)面试一位来自 Google 的候选人 —— "paper 上很好,但我意识到他从来没有自己 build 过整个网站。他在 Google 只维护一小块。" Kate 的项目推动了肯尼亚 2025 国家 AI 战略,包括一个面向 9000 内罗毕患者的 AI 辅助诊断试点。</p>
+      <div class="p-tags"><span>Global South</span><span>Adoption > Invention</span><span>Skills-based hiring</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="9">
+    <div class="p-meta"><span class="p-num">09</span><span>Ch 9 · Onlyness</span><span>FROM DOORMAN TO DEAL MAKER</span></div>
+    <h3>John <em>Henry</em></h3>
+    <div class="p-role">纽约多米尼加裔 · 19 岁公司年入百万 · 21 岁卖公司 · Harlem 孵化器</div>
+    <div class="p-quote">"I was always embarrassed of [my dad being a presser], and yet here I am in the most important moment of my career, and I brought them to my dad."</div>
+    <div class="p-body">
+      <p>母亲在公立学校做清洁工,父亲在干洗店当熨衣师傅。高中后做曼哈顿门卫养自己读社区大学。一位住户(干洗店主)看上他,因为<strong>"他从小在干洗店长大,真的懂这一行"</strong> —— 那是 John 一直为之羞耻的家庭背景。</p>
+      <p>边做边发展副业:挨家挨户接洗衣单。被门卫工作开除反而让他全力做副业。发现纽约电影剧组需要可靠的服装清洗 —— 接下 Wolf of Wall Street 剧组。<strong>把衣服带给父亲,父亲用大师级手艺压平,一起送回剧组</strong> —— 那一刻他知道父亲的手艺不是羞耻而是无价。后来连续拿下 Law and Order 等剧组,垄断了纽约影视服装清洗。21 岁卖公司 100 万美元。后续:Harlem 创业孵化器、反偏见的车险创业、投资公司。<strong>"过去你以为是劣势的事,常常是别人没有的优势。"</strong></p>
+      <div class="p-tags"><span>Onlyness</span><span>Reframe past</span><span>Permissionless path</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="10">
+    <div class="p-meta"><span class="p-num">10</span><span>Ch 9 · Onlyness</span><span>SMALL TOWN INDIA → CHANEL CEO</span></div>
+    <h3>Leena <em>Nair</em></h3>
+    <div class="p-role">Unilever 第一位女性 CHRO · Chanel 全球 CEO</div>
+    <div class="p-quote">"I felt that my purpose was to ignite the spark in others so that people who came to me would feel like the possibilities were endless."</div>
+    <div class="p-body">
+      <p>印度小镇女孩,8 岁站在班级前面宣布要当总理,被同学笑。Unilever 管培生入职后,她<strong>把 outsider 身份变成战略优势</strong> —— 第一位走进南印度工厂的女性、第一位上夜班的女性、第一位做某些艰苦岗位的女性。她不得不解码各种 unwritten rules,意外培养出了别人没有的 emotional intelligence。</p>
+      <p>她升到 Unilever 第一位女性 CHRO,管理 10 万 + 员工。然后 Chanel 打电话来。她自有 self-doubts —— 直到她意识到 <strong>Gabrielle Chanel 自己也是 outsider</strong>(孤儿院学缝纫,正因为是 outsider 才颠覆了时尚)。"我喜欢能走在她的脚印里,从她身上汲取灵感。" Outsider lens 不是负债,正是这个角色需要的。</p>
+      <div class="p-tags"><span>First in the room</span><span>EQ as edge</span><span>Outsider as asset</span></div>
+    </div>
+  </article>
+
+  <article class="person wrap" data-color="6">
+    <div class="p-meta"><span class="p-num">11</span><span>Ch 9 · Onlyness</span><span>SHARK TANK · CORCORAN GROUP</span></div>
+    <h3>Barbara <em>Corcoran</em></h3>
+    <div class="p-role">工人阶级家庭十兄妹之一 · 22 份工作做到 23 岁 · $66M 房产公司创始人</div>
+    <div class="p-quote">"I knew I was going to be successful just to prove him wrong. I knew I would die rather than let him see me fall on my face."</div>
+    <div class="p-body">
+      <p>男朋友离开她,跟她的秘书在一起,临走前说 "You'll never succeed without me。" Barbara 从 7 个 agent 开始建 Corcoran Group。她注意到她的竞争对手大多是富二代,"我感觉到他们的 cocky 那一瞬间,我就知道我要拿下他。" 她把劣势 ——<strong>working class 出身、女性、underdog</strong> —— 变成武器。</p>
+      <p>建立了第一个房产 trend reports、引入高质量照片、做社区指南、给每个房子讲个故事。"我看见你心里那束光,就像我母亲在我们身上看见的那样。" 公司卖 6600 万美元。Shark Tank 选角最初拒绝她,她写了封邮件给执行制片:<strong>"I consider your rejection a lucky charm. Everything good happens to me after I get rejected."</strong> 列出每个 underestimate 过她的人和她怎么证明他们错的。她加入了节目。</p>
+      <div class="p-tags"><span>Underdog as fuel</span><span>Scrappy edge</span><span>Rejection as gift</span></div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ 30-60-90 PLAN ============ -->
+<section class="plan">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 05</span><span>The 30-60-90 Day Plan</span></div>
+
+    <div class="plan-intro">
+      <h2>The <span class="ital">30-60-90</span> Day Plan</h2>
+      <div class="zh-sub">本 周 就 能 开 始 的 90 天</div>
+      <p>这不是 "听完讲座感慨一下" 的 plan —— 是 LinkedIn 从 10 亿成员里提炼出来的、不论你 role/industry/level 都适用的<strong>启动节奏</strong>。三段的目标分别是:fluency / 5Cs / 重新画职业。<strong>关键不是 perfect plan,是开始走。</strong></p>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan-card">
+        <div class="pc-day">Days 01 — 30</div>
+        <h4>AI Foundations</h4>
+        <div class="h-zh">建立 AI 流利度</div>
+        <p>这个月做三件事:把 AI 工具实际<strong>用起来</strong>、知道自己在<strong>哪个 bucket zone</strong>、找到 3-5 个<strong>同样在路上的人</strong>结成小群。</p>
+
+        <h5>Getting Started</h5>
+        <ul>
+          <li>挑一件你<strong>每天 dread 的重复任务</strong>(写邮件、做总结、做计划...)</li>
+          <li>问几个信任的人他们用哪个 AI 工具(Copilot / ChatGPT / Gemini / Claude)</li>
+          <li>找一门基础 prompting 课程(LinkedIn Learning 有不少免费)</li>
+          <li>每天试一个新 prompt。会有很多 false start —— <strong>这是你在做,不是你做错了</strong></li>
+        </ul>
+
+        <h5>Know Where You Stand</h5>
+        <ul>
+          <li>列出你每天/每周做的 12 件事</li>
+          <li>分桶 1 / 2 / 3,算每桶时间占比</li>
+          <li>红 / 黄 / 绿 zone 评估自己</li>
+          <li>识别可以立刻自动化或委托的 Bucket 1 任务</li>
+        </ul>
+
+        <h5>Connect With Others</h5>
+        <ul>
+          <li>follow 5-10 个跨领域的 AI 思考者</li>
+          <li>找 3-5 个 peer 组小群,定期 swap learnings</li>
+          <li>跟 manager 聊聊公司能提供什么支持</li>
+          <li>每两到三周公开 share 一条你学到的东西</li>
+        </ul>
+
+        <div class="pc-end"><strong>Day 30 你将有:</strong>对 1-2 个 AI 工具基本流利;清晰的 vulnerability 评估;几个 Bucket 1 任务在被自动化;一群同行者。</div>
+      </div>
+
+      <div class="plan-card">
+        <div class="pc-day">Days 31 — 60</div>
+        <h4>Building Your 5Cs</h4>
+        <div class="h-zh">建立人类独有能力</div>
+        <p>第一个月是 incremental wins。这个月是 long-game 投资 —— 把那些 "soft skills" 用具体练习 build 起来,无论技术怎么变都用得上。</p>
+
+        <h5>Week 1-2 · Curiosity + Creativity</h5>
+        <ul>
+          <li>找一个 stale 的项目/会议/流程</li>
+          <li>问 3 个不同行业的人会怎么解</li>
+          <li>让 AI 列 5 个意外的跨界类比</li>
+          <li>用 AI 帮你原型一个 creative solution</li>
+        </ul>
+
+        <h5>Week 3-4 · Communication + Compassion</h5>
+        <ul>
+          <li>选一段 "需要投入" 的工作关系</li>
+          <li>下次会话<strong>active listening</strong>(放下手机、问开放式问题、听情绪)</li>
+          <li>下次互动前先 reflect:"他/她现在需要从我这里得到什么?"</li>
+          <li>主动做一次<strong>你一直在 avoid 的 difficult conversation</strong></li>
+        </ul>
+
+        <h5>Week 5-6 · Courage</h5>
+        <ul>
+          <li>挑一件需要署名的大胆动作 —— pitch 给高管 / 申请 stretch role / 发表观点</li>
+          <li>用 AI 压力测试你的逻辑,让它找盲点和反方</li>
+          <li>找一个 peer 用他的 lived experience 给你 sanity check</li>
+          <li>然后做。事后反思:感觉如何?</li>
+        </ul>
+
+        <div class="pc-end"><strong>Day 60 你将有:</strong>原型过一个 creative solution;深化过一段关键关系;做过一件需要勇气的可见动作;开始建立 5Cs 的肌肉记忆。</div>
+      </div>
+
+      <div class="plan-card">
+        <div class="pc-day">Days 61 — 90</div>
+        <h4>Transformation</h4>
+        <div class="h-zh">画出你的攀岩路线</div>
+        <p>最后一个月把所有 piece 拼起来 —— 用 chapter 6 的三个问题给自己的职业做一次彻底的重新设计。这些答案不会一辈子不变,但<strong>今天的版本会让所有后续决定都有锚</strong>。</p>
+
+        <h5>Q1 · Why Do You Work?</h5>
+        <ul>
+          <li>放下 30 分钟无干扰时间,关手机</li>
+          <li>写 5 年后 "成功" 的真实画面(不是你 should 想要的,是你 actually 兴奋的)</li>
+          <li>不断问 "why"(像剥洋葱),直到底层那个真东西</li>
+          <li>把答案给一个工作内 + 一个工作外的人 sense-check</li>
+        </ul>
+
+        <h5>Q2 · What Do You Uniquely Do?</h5>
+        <ul>
+          <li>从你的 Bucket 2 + 3 里提取每件事需要的具体能力</li>
+          <li>找出你的 top 3-5 capabilities(你擅长 + 兴奋 + 被需要)</li>
+          <li>找<strong>交叉</strong>:3+ 项能力同时出现的地方 —— 那就是你 only 的位置</li>
+          <li>识别一个 capability gap,用 AI 把它从 "弱" 提升到 "够用"</li>
+        </ul>
+
+        <h5>Q3 · Where Are You Going?</h5>
+        <ul>
+          <li>写 3-5 条可能的路径(不一定是 job title,可以是描述)</li>
+          <li>从 network 里找 2-3 个走过类似路的人聊 20 分钟</li>
+          <li>用 3 个标准评估每条:用上 what?推近 why?6-12 月可行?</li>
+          <li>选分最高的做主路径 + 一条 plan B</li>
+          <li>下一周的<strong>三个具体动作</strong>(不是 "network with people in X",是 "给 X / Y / Z 三个人发信息约 20 分钟")</li>
+        </ul>
+
+        <div class="pc-end"><strong>Day 90 你将有:</strong>清晰的 why(你独特的攀岩动机);具体的 what(只属于你的能力组合);写出来的 where(具体的下一步路径)。然后你就准备好开始真正的攀爬。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOK CLUB DISCUSSION ============ -->
+<section class="discussion">
+  <div class="wrap">
+    <div class="section-head"><span class="num">§ 06</span><span>For the Book Club · 讨论题</span></div>
+
+    <div class="discussion-intro">
+      <h2>For the <span class="ital">Book Club</span></h2>
+      <div class="zh-sub">十 个 给 读 书 会 的 讨 论 题</div>
+      <p>这本书最有趣的地方不是它的预测,是它<strong>逼你回到自己的工作和生活</strong>。下面是 10 个能让讨论真正发生的提问 —— 不是 "你觉得这本书写得好不好",而是 "你自己是什么颜色"。建议每个人先各自写 2-3 分钟再轮流分享,避免被第一个发言的人定调。</p>
+    </div>
+
+    <div class="q-list">
+      <div class="q-item">
+        <div class="q-num">01</div>
+        <div>
+          <h4>"AI 不会取代你,但用 AI 的人会" —— 你周围已经看到这种 dynamics 了吗?</h4>
+          <p><strong>提示:</strong>可以是同事、可以是你看到的招聘趋势、可以是你自己的 vulnerability。如果<strong>没</strong>看到,你怀疑这是因为你的行业天然慢、还是因为你没在看?</p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">02</div>
+        <div>
+          <h4>做完三桶练习。你在<strong>什么 zone</strong>?红、黄、还是绿?</h4>
+          <p><strong>提示:</strong>愿意分享的话,具体说说你 Bucket 1 的前两件、Bucket 3 的前两件。这两组的对比常常是这本书最锋利的地方 —— 你会发现你被 paid 做的事和让你不可替代的事,可能根本不重叠。</p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">03</div>
+        <div>
+          <h4>5Cs 里,哪个是你最强的?哪个是你最弱的?</h4>
+          <p><strong>提示:</strong>不用 "我都还行" 这种安全答案 —— 排个序。然后问:<strong>你最弱的那个</strong>,如果今年只 invest 这一件事,你会怎么练?(书中给了具体的练习,见第二个月。)</p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">04</div>
+        <div>
+          <h4>你现在的职业还在"梯子" 模型里,还是已经在"攀岩墙"了?你享受这种状态吗?</h4>
+          <p><strong>提示:</strong>有人在梯子上很舒服(可预测、有指南、不用反复重新定义自己);有人在墙上很自由。这没有对错,问题是 ——<strong>如果你的行业被强制推到墙上,你准备好了吗?</strong></p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">05</div>
+        <div>
+          <h4>Nilofer Merchant 的两个 onlyness 练习。试做并分享。</h4>
+          <p><strong>提示:</strong>① 列 5 个塑造了今天的你的故事,问 "这意味着什么?" ② 如果你拿到一根魔法棒,只能修一件事,你修什么?<strong>这两题之间的连线常常就是你的 onlyness 在指方向。</strong></p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">06</div>
+        <div>
+          <h4>书的核心姿态是 "pro-human"。你买账吗?</h4>
+          <p><strong>提示:</strong>会不会其实是 LinkedIn(plus Microsoft 的 Office/Copilot)对 AI 持温和论调有商业利益?有没有可能 future 比这本书悲观得多?或者反过来更乐观?<strong>你自己的判断在哪一档?</strong></p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">07</div>
+        <div>
+          <h4>Bette Nesmith Graham / Mo Beck / Taj English / John Henry —— 哪个故事最让你 resonate?为什么?</h4>
+          <p><strong>提示:</strong>"我也是 outsider / 单亲妈妈 / 移民 / 一开始走错路的人 / 被告知 do this 但意识到要 do that 的人" —— 你能 relate 谁?<strong>你的故事跟他们哪里像,哪里不像?</strong></p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">08</div>
+        <div>
+          <h4>"AI doesn't go to the barbershop" —— 你日常生活里有什么 AI 没去过的地方?</h4>
+          <p><strong>提示:</strong>Taj 的洞察来自他每周去理发店。<strong>你<strong>不可替代</strong>的洞察、最有可能来自你生活里哪一段经历?</strong>(可能是你的方言、你的爱好、你的童年、你的某次失败 —— 那个 "AI 没去过的地方"。)</p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">09</div>
+        <div>
+          <h4>如果今晚回家就开始 30-60-90,你的<strong>第一周</strong>会做什么?具体到三件事。</h4>
+          <p><strong>提示:</strong>"我要好好用 AI" 不算具体。"周二午饭后用 Claude 帮我重写本月的项目周报模板" 才算。<strong>承诺一件事,小组里互相 check in 一周后。</strong></p>
+        </div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">10</div>
+        <div>
+          <h4>书里有一个 Apollo 13 的 frame —— "failure is not an option" 不是 catchphrase,是<strong>一种刻意选择</strong>。</h4>
+          <p><strong>提示:</strong>你现在职业生涯里有什么事 —— 你嘴上说 "我做不到" 或 "现在还不行",但其实是<strong>没下决心要做到</strong>?如果你今晚选择 "failure is not an option",那件事是什么?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <div>
+        <span class="c-key">The Book</span>
+        <span class="c-val">Open to Work: How to Get Ahead in the Age of AI<br>Ryan Roslansky & Aneesh Raman · HarperCollins · 2026<br>225 pages · ISBN 9780063486461<br>Foreword by Brad Smith, Microsoft</span>
+      </div>
+      <div>
+        <span class="c-key">This Reading</span>
+        <span class="c-val">读完全书 + 整理框架,设计成视觉指南<br>3 Parts × 10 Chapters × 5Cs × 30-60-90 plan<br>本页面为 Gimbo 的周末读书会准备</span>
+      </div>
+      <div>
+        <span class="c-key">More on the Site</span>
+        <span class="c-val">→ <a href="/ideas" style="color:var(--apollo); text-decoration:none;">/ideas</a> · 其他长文与解读<br>→ <a href="/ideas/culture-series-visual-guide.html" style="color:var(--apollo); text-decoration:none;">文明系列</a> · Iain M. Banks 的乌托邦十书<br>→ <a href="/" style="color:var(--apollo); text-decoration:none;">Gimbo's Universe</a> · 回到主页</span>
+      </div>
+    </div>
+    <div class="end-mark">— Open to Work · Open to Change · 2026 —</div>
+  </div>
+</footer>
+
+<script>
+// Floating nav visibility + active state
+(function() {
+  const nav = document.getElementById('floatnav');
+  if (!nav) return;
+  const hero = document.querySelector('.hero');
+  const heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+
+  function onScroll() {
+    if (window.scrollY > heroHeight * 0.6) nav.classList.add('visible');
+    else nav.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// Reveal-on-scroll
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || !els.length) {
+    els.forEach(el => el.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>

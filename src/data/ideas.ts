@@ -22,6 +22,17 @@ export interface TopicDef {
 
 export const articles: IdeaArticle[] = [
   {
+    index: '04',
+    title: 'Open to Work · LinkedIn CEO 的 AI 时代职业指南 · 全书解读',
+    lede: 'Ryan Roslansky（LinkedIn CEO）+ Aneesh Raman 2026 年 2 月新书的完整可视化解读：10 章 × 3 部分的论证骨架、5Cs（curiosity / courage / creativity / compassion / communication）、三桶任务框架、攀岩墙式职业模型、30-60-90 day plan，加上从书里精挑的 11 位真实工作者故事。专门为这周末的读书会做的视觉版。',
+    date: '2026.05',
+    tags: ['Economy'],
+    topicSlug: 'economy',
+    href: '/ideas/open-to-work-visual-guide.html',
+    status: 'live',
+    isNew: true,
+  },
+  {
     index: '03',
     title: '文明系列 · 十书可视化解读',
     lede: 'Iain M. Banks 用十本书、二十五年时间，雕刻出一座"工作可选"的乌托邦。这是一份可视化解读：每本书一种颜色、一个母题、一个对今天硅谷大佬的回声——从《Phlebas》的入场到《Hydrogen Sonata》的退场。',
@@ -30,7 +41,6 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'culture',
     href: '/ideas/culture-series-visual-guide.html',
     status: 'live',
-    isNew: true,
   },
   {
     index: '02',

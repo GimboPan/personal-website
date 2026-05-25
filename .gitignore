@@ -26,3 +26,7 @@ dist/
 # AI image-tool staging drop folder. Sources for the section heroes are
 # duplicated into public/landing/*-hero.png (which IS tracked).
 /public/photos produced by ai/
+
+# Local archive of old source images / alternates / scratch files.
+# Files live on disk for reference but don't ship in the repo or deploy.
+/_archive/

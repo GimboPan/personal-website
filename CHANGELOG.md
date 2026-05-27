@@ -6,6 +6,83 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [0.10.0] — 2026-05-27
+
+> **`/fitness/tennis` becomes a real page. AI Builder absorbs the Tennis Buddy build. The Library renders MasterClass-style.** Two weeks of letting v0.9 settle, then one long session that started with "the homepage gap is too big" and ended with a curated film-room sitting next to an editorial Roland-Garros live card.
+
+**Live**: https://personal-website-zeta-nine-61.vercel.app
+**New route**: `/fitness/tennis` (now a static page with three modules — replaces the `[module].astro` dynamic render for this slug)
+
+### Story of the day
+
+Three connected shifts, each pulling the next.
+
+**Homepage breathing room.** The fix that started the session: on the homepage, the bottom of the explore grid had ~210–240 px of dead space before the two pixel mascots, then another ~240 px before the footer. The mascots were swimming in white. We tightened the mascot-row top margin (`mt-24 md:mt-28` → `mt-10 md:mt-12`), shortened the row height (`h-24 md:h-28` → `h-20 md:h-24`), reduced the explore section's bottom padding (`py-20 md:py-28` → `pt-20 md:pt-28 pb-0`), and removed Footer's global `mt-32` so any section ending now sits flush with the footer's top hairline. Net: the homepage's lower third feels collected instead of stretched.
+
+**Tennis Buddy moves out of Fitness, into AI Builder.** The user reframed the build retrospective: "Tennis Buddy is an AI-build experiment, not a fitness module — the on-court work is separate from the app." So we lifted `public/fitness/tennis-buddy.html` to `public/work/tennis-buddy.html` (back-link inside the HTML fixed: `/fitness` → `/work`, breadcrumb "Fitness · Tennis Buddy" → "AI Builder · Tennis Buddy"); added a Tennis Buddy entry to `src/data/work.ts` under `ai-experiments` (status `live`, date `2026-05-08` — bumps it into the featured top-3); cleaned three Tennis-Buddy-specific articles out of `src/data/fitness.ts`'s tennis module; updated the Feed (`Tennis Buddy — FITNESS WIP /fitness/tennis` → `Tennis Buddy — WORK Shipped /work/tennis-buddy.html`); and updated the homepage AI Builder + Fitness sub-bullets.
+
+**`/fitness/tennis` rebuilt from one-article-stub to a real page.** With the app gone, the slug needed a reason to exist. Three modules now share the page:
+
+- **Module 1 · Tour · 巡回赛事** — editorial Roland-Garros card. RG-orange left border bar, pulsing LIVE pill, big `ROLAND-GARROS` Wise Sans 900 title, dates + city + day-label inline, blurb, four quick-link chips (Draws / Schedule / Order of Play / Scores) linking to rolandgarros.com, and a clay-orange primary CTA "Open Roland-Garros.com →". Footer line teases "Next slam · Wimbledon · 29 Jun – 12 Jul". Two-column on lg+ (text 7/12 left, image 5/12 right); mobile stacks. Hero image is a real Roland-Garros 2026 press photo (Balles, by Guillaume Amat) with a `mix-blend-difference` photographer credit at bottom-right that stays legible on both bright and dark areas.
+- **Module 2 · Training · 我的训练** — left card (lime border): "Now working on" with `BACKHAND` + `SLICE` in big lime display type, each with a one-line note, then an NTRP self-rating callout (3.5 — steady). Right card: home court badge (Koru Tennis Club · Auckland) + a 5-row session log using the existing `.project-row` style. Reads like a personal coach's clipboard.
+- **Module 3 · Library · 影片库** — MasterClass-style portrait cards in two stacked sub-sections (Documentaries / Tutorials), each 4-up on lg. Every card has 8 real curated entries, no placeholders left.
+
+**Library: MasterClass-style portrait cards.** The first version of Module 3 used the same landscape monogram-on-gradient cards as the `/work` featured row. User pulled up a MasterClass screenshot and asked to borrow that layout. We rebuilt: `aspect-[3/4]` portrait photo on top, big stylized name overlaid on the lower portion with a dark `from-canvas via-canvas/85` gradient for readability, then on the card body a 6 px em-dash divider, centered subtitle, and a full-width outlined pill button (`▶ WATCH ON NETFLIX` / `▶ WATCH ON MASTERCLASS` / `▶ WATCH ON YOUTUBE` / `▶ OPEN ON WTA`).
+
+Two flags emerged from real photos arriving:
+
+- **`posterMode: boolean`** — when `true`, the card skips its own gradient + name overlay because the image is an official poster with title typography already baked in (THE NETFLIX SLAM, BREAK POINT, NAOMI OSAKA, RAFA). Without this, the card-level name would duplicate the poster's own headline; with it, the poster speaks for itself.
+- **`imagePosition?: string`** — passed through as `style="object-position: ..."` on the `<img>`. Needed when a landscape-source photo (e.g. the WTA Wang Xinyu studio shot, face on the right) is cropped to portrait — default center crop would lose the subject.
+
+**Eight real images replaced eight placeholders in one session.** Tour hero (Guillaume Amat, RG 2026), four Netflix docs (The Netflix Slam · Nadal vs Alcaraz, Break Point Sabalenka key visual, Naomi Osaka docuseries, Rafa series), and four tutorial portraits (Serena Williams MasterClass, Tennis with Dylan YouTube channel, Wang Xinyu × 2 — grass action + studio portrait, framed bilingually as `Wang Xinyu` and `王欣瑜`). The Library went from "honest about being placeholder" to "actually curated".
+
+**Fitness page Tennis card rewritten for the new reality.** Status `planned` → `live`. Subtitle dropped the "separate from the app I built for it" line (no longer needed — that move is in the past) and now hints at the three concrete modules: `"Three surfaces — the slam I'm watching right now (currently Roland-Garros), my own training log off-tour (backhand + slice at Koru Club, NTRP 3.5), and a film room of docs and tutorials worth re-watching."` Tools tags `Match Log · Drills · NTRP` → `Slams · Training · Film Room` (mirrors the three module names).
+
+**Homepage feed gained a "Counting down · Rafa" row.** Today is 2026-05-27; Rafa drops 2026-05-29. Added at the top of `feed.ts` as `kind: 'ongoing'`, module `FITNESS`, linking to `/fitness/tennis` (the in-house curation, not Netflix). New action verb `Counting down` — fits the calendar-anticipation register without overlapping the existing `Shipped / Building / Reading`.
+
+### Considered, then deferred
+
+- **Custom domain.** Still pending. OG image URLs in the meta tags resolve to `gimbosuniverse.com`, which isn't bought yet. No change from v0.9.
+- **Per-image art direction for the mobile square crop.** Some heroes still center-crop fragments of in-image text (about-hero's "I AM GIMBO." for example). Untouched this session.
+- **Netflix title IDs.** Three of the four Netflix links use guessed title IDs (`81735337` for The Netflix Slam, `81097131` for Naomi Osaka, `81569920` for Break Point). The fourth (Rafa) deliberately uses a Netflix search URL since the title ID for the not-yet-released series is unknown. If any of the guessed IDs are wrong, swap to search URLs.
+- **WTA player ID for Wang Xinyu.** `wtatennis.com/players/322864/wang-xinyu` is a best guess; not verified. Easy to swap to a search URL if it 404s.
+
+### Added
+
+- `src/pages/fitness/tennis.astro` — new static page with three modules (Tour · 巡回赛事 / Training · 我的训练 / Library · 影片库). Replaces the dynamic `[module].astro` render for the `tennis` slug (Astro prefers the static match).
+- `public/work/tennis-buddy.html` — moved from `public/fitness/tennis-buddy.html`; in-file back-link patched.
+- `public/fitness/tennis/` — new directory holding 8 images: `rg-2026.avif` (Tour hero), `netflix-slam.jpg`, `break-point.webp`, `naomi-osaka.jpg`, `rafa.jpg` (Documentaries), `serena-williams.jpg`, `tennis-with-dylan.jpg`, `wang-xinyu-grass.png`, `wang-xinyu-studio.jpg` (Tutorials).
+- New `Video` type fields in `tennis.astro`: `posterMode?: boolean`, `imagePosition?: string`. Used to control whether the card renders its own name overlay (false / undefined for headshots, true for posters with baked-in title) and how the portrait crop is anchored.
+- A Tennis Buddy entry in `src/data/work.ts` under `ai-experiments` (status `live`, date `2026-05-08`, `href: '/work/tennis-buddy.html'`) — bumps it into the featured top-3 on `/work`.
+- A "Counting down · Rafa" row at the top of `src/data/feed.ts` (kind `ongoing`, module `FITNESS`).
+
+### Changed
+
+- `src/pages/index.astro` — mascot-row top margin tightened, row height shortened, explore section's bottom padding zeroed; homepage Fitness sub-bullet `Tennis Buddy · WIP` → `Tennis · SOON`.
+- `src/components/Footer.astro` — removed global `mt-32` so the footer sits flush with whatever section ends above it (used by the new homepage flow, doesn't visually harm other pages whose last sections already have their own `py`).
+- `src/pages/fitness.astro` — Tennis card: title `Tennis Buddy` → `Tennis · 网球`, status `wip` → `live`, subtitle rewritten to point at the three new modules, tools tags `Match Log · Drills · NTRP` → `Slams · Training · Film Room`, `featured={true}` removed (Fitness has no lime hero card for now — Social Health stays the wide LIVE anchor at the bottom).
+- `src/data/fitness.ts` — `tennis` module entry removed (the static page handles `/fitness/tennis` now; nutrition / strength / core still render through `[module].astro`).
+- `src/data/feed.ts` — Tennis Buddy row re-tagged: `module FITNESS → WORK`, `action Building → Shipped`, `kind wip → done`, `href /fitness/tennis → /work/tennis-buddy.html`.
+
+### Decisions logged
+
+- **Tennis-Buddy belongs in AI Builder, not Fitness.** The retrospective documents a one-person AI-augmented build — the framing is "what I shipped with AI", not "what I do for fitness". Fitness keeps the on-court work; AI Builder owns the build.
+- **Static `/fitness/tennis` over dynamic `[module].astro` for this slug.** The other three Fitness sub-pages (Nutrition / Strength / Core) are still article lists and fit the generic dynamic template fine. Tennis needs a richer three-module shape; pushing that into the dynamic schema would over-generalize. Static page wins where the layout earns the override.
+- **MasterClass-style portrait cards for the Library.** The original landscape monogram-on-gradient cards were honest about being placeholders, but the moment we had real curated content (Netflix posters, MasterClass headshots, YouTube creators), the layout needed to flatter the imagery, not paper over its absence. Portrait crops + name overlay + outlined pill CTA reads "curated film room", not "card grid".
+- **`posterMode` instead of one universal layout.** Some images come with their own title typography baked in (movie/series posters); others are clean headshots. Hard-coding either would fight the source material. The flag lets each entry's source artwork drive the layout.
+- **RG colours as a section accent, not a system swap.** `/fitness/tennis` is the first page that bring RG orange, RG green, and RG-orangeBright in as primary chrome. We resisted swapping the design system — the canvas, type, and rest of the chrome stay Wise Dark. RG accents are scoped: Tour module's left border + LIVE pill + CTA, Library section headings + hover edges. The site as a whole remains visually coherent.
+- **Footer `mt-32 → mt-0` globally.** Considered scoping this with a negative-margin hack only on the homepage. Decided to take the wider change because the other pages already pad their last sections; removing the footer's external top-margin reads as a tightening, not a regression.
+
+### Known gaps (acceptable for v0.10)
+
+- Custom domain still pending; OG previews still won't render until DNS lands on `gimbosuniverse.com`.
+- The three Netflix title IDs and the WTA player ID for Wang Xinyu are unverified guesses; swap to search URLs if any fail.
+- Tour module's content (tournament name, day label, blurb, dates, next slam) is hand-edited — needs a manual touch each time the slam calendar moves. By design for v0.10; structured data + a calendar-aware default could come later.
+- Fitness page has no `featured={true}` lime card anymore (Tennis lost it when it stopped being placeholder; Social Health didn't gain it). Section visually reads slightly flatter — acceptable but worth revisiting.
+- Tour image's photographer credit (`© Guillaume Amat / Roland-Garros`) is fine for an editorial site; verify usage rights if anything formal ever changes.
+
+---
+
 ## [0.9.0] — 2026-05-10
 
 > **Perf overhaul + persistent nav + mobile art direction + per-page OG.** A v1-readiness pass that took the section pages from "looks good on a 2k monitor at full bleed" to "actually shippable everywhere."

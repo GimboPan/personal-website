@@ -1,0 +1,561 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SectionHero from '~/components/SectionHero.astro';
+
+/* ─── Tour · current slam (Module 1) ────────────────────────────────────────
+   Hand-edited. When a new tournament starts, update these five fields and
+   the page reflects it everywhere. */
+const tour = {
+  name: 'Roland-Garros',
+  edition: '2026',
+  dates: '25 May — 8 Jun',
+  city: 'Paris',
+  status: 'LIVE', // LIVE / SOON / DONE
+  dayLabel: 'Day 3 · Round of 64',
+  blurb:
+    'The slam I watch end-to-end. Clay rewards patience — and humility. Two weeks of long rallies, drop-shot duels, and the rare best-of-five comeback that re-orders my own week.',
+  url: 'https://www.rolandgarros.com/en-us/',
+  /* Image lives in public/fitness/tennis/. Leave src empty to render the
+     wordmark placeholder. */
+  image: {
+    src: '/fitness/tennis/rg-2026.avif',
+    alt: 'Roland-Garros 2026 — tennis balls in clay, by Guillaume Amat',
+    credit: '© Guillaume Amat / Roland-Garros',
+  },
+  quickLinks: [
+    { label: 'Draws', href: 'https://www.rolandgarros.com/en-us/draws' },
+    { label: 'Schedule', href: 'https://www.rolandgarros.com/en-us/schedule' },
+    { label: 'Order of Play', href: 'https://www.rolandgarros.com/en-us/order-of-play' },
+    { label: 'Scores', href: 'https://www.rolandgarros.com/en-us/live-scores' },
+  ],
+  nextSlam: 'Wimbledon · 29 Jun – 12 Jul',
+};
+
+/* ─── Training · what I'm working on (Module 2) ─────────────────────────────
+   Edit the two arrays below as the focus changes and as sessions stack up. */
+const workingOn = [
+  { label: 'BACKHAND', note: 'Two-hander cross-court depth; loop-then-release, not muscle-through.' },
+  { label: 'SLICE', note: 'Floating ad-court block off heavy topspin — knees, not arm.' },
+];
+
+const homeCourt = {
+  name: 'Koru Tennis Club',
+  city: 'Auckland',
+};
+
+const sessions = [
+  { date: '2026-05', kind: 'Drill', focus: 'Backhand cross-court, 4-ball pattern' },
+  { date: '2026-05', kind: 'Hit', focus: 'Partner @ Koru · 90 min, mostly groundstrokes' },
+  { date: '2026-05', kind: 'Drill', focus: 'Slice block off heavy topspin, ad-court' },
+  { date: '2026-04', kind: 'Match', focus: 'Singles · NTRP 3.5 opponent · 6-4 / 4-6 / 6-3' },
+  { date: '2026-04', kind: 'Solo', focus: 'Serve toss work, 30 min wall session' },
+];
+
+const ntrp = { rating: '3.5', tag: 'steady — honest at 3.5' };
+
+/* ─── Library · the film room (Module 3) ───────────────────────────────────
+   MasterClass-style portrait cards. To swap in a real headshot/poster for any
+   entry, drop the image at public/fitness/tennis/<slug>.jpg and set imageUrl
+   to '/fitness/tennis/<slug>.jpg'. Without imageUrl the card renders a
+   gradient + monogram placeholder, keeping the same layout. */
+type Video = {
+  /** Big stylized text overlaid on the photo (lower portion). Keep short. */
+  name: string;
+  /** Small line shown below the photo: "Teaches X" / "Twelve Final Days" / etc. */
+  subtitle: string;
+  /** Platform — baked into the CTA button: "Watch on MasterClass". */
+  source: string;
+  href: string;
+  /** Placeholder colour when imageUrl is empty (gradient + monogram tint). */
+  hue: string;
+  monogram: string;
+  imageUrl?: string;
+  /** Set true when imageUrl is an official poster with title typography baked
+      into the artwork — the card then skips its own bottom gradient + name
+      overlay so the poster speaks for itself. Default (false) = headshot mode. */
+  posterMode?: boolean;
+  /** Optional CSS object-position for the portrait crop. Use when the subject
+      sits off-center in the source photo (e.g. '70% 50%' to bias right). */
+  imagePosition?: string;
+};
+
+const docs: Video[] = [
+  {
+    name: 'The Netflix Slam',
+    subtitle: 'Nadal vs Alcaraz · Las Vegas exhibition, 2024',
+    source: 'Netflix',
+    monogram: 'N',
+    hue: '#cc4e0e',
+    href: 'https://www.netflix.com/title/81735337',
+    imageUrl: '/fitness/tennis/netflix-slam.jpg',
+    posterMode: true,
+  },
+  {
+    name: 'Break Point',
+    subtitle: 'Inside the tour — Netflix tennis docuseries',
+    source: 'Netflix',
+    monogram: 'B',
+    hue: '#9fe870',
+    href: 'https://www.netflix.com/title/81569920',
+    imageUrl: '/fitness/tennis/break-point.webp',
+    posterMode: true,
+  },
+  {
+    name: 'Naomi Osaka',
+    subtitle: 'Three-part Netflix docuseries · 2021',
+    source: 'Netflix',
+    monogram: 'O',
+    hue: '#5e6ad2',
+    href: 'https://www.netflix.com/title/81097131',
+    imageUrl: '/fitness/tennis/naomi-osaka.jpg',
+    posterMode: true,
+  },
+  {
+    name: 'Rafa',
+    subtitle: 'A Netflix sports series — premieres May 29',
+    source: 'Netflix',
+    monogram: 'R',
+    hue: '#cc4e0e',
+    href: 'https://www.netflix.com/search?q=Rafa',
+    imageUrl: '/fitness/tennis/rafa.jpg',
+    posterMode: true,
+  },
+];
+
+const tutorials: Video[] = [
+  {
+    name: 'Serena Williams',
+    subtitle: 'Teaches Tennis',
+    source: 'MasterClass',
+    monogram: 'S',
+    hue: '#9fe870',
+    href: 'https://www.masterclass.com/classes/serena-williams-teaches-tennis',
+    imageUrl: '/fitness/tennis/serena-williams.jpg',
+  },
+  {
+    name: 'Tennis with Dylan',
+    subtitle: 'Coaching tips + technique breakdowns I keep coming back to',
+    source: 'YouTube',
+    monogram: 'D',
+    hue: '#cc4e0e',
+    href: 'https://www.youtube.com/channel/UCVaOxihcj9UrvyeKzpklhdQ',
+    imageUrl: '/fitness/tennis/tennis-with-dylan.jpg',
+  },
+  {
+    name: 'Wang Xinyu',
+    subtitle: '王欣瑜 · the backhand I study on tour',
+    source: 'YouTube',
+    monogram: 'W',
+    hue: '#5e6ad2',
+    href: 'https://www.youtube.com/results?search_query=Wang+Xinyu+tennis+highlights',
+    imageUrl: '/fitness/tennis/wang-xinyu-grass.png',
+  },
+  {
+    name: '王欣瑜',
+    subtitle: 'WTA · player profile — schedule & ranking',
+    source: 'WTA',
+    monogram: 'X',
+    hue: '#00503c',
+    href: 'https://www.wtatennis.com/players/322864/wang-xinyu',
+    imageUrl: '/fitness/tennis/wang-xinyu-studio.jpg',
+    imagePosition: '70% 50%',
+  },
+];
+---
+
+<BaseLayout
+  title="Tennis — Fitness — Gimbo's Universe"
+  description="Practice notes, the slam I'm watching, and the film room I keep going back to."
+  ogImage="/og-fitness.jpg"
+>
+  <SectionHero
+    index="02.1"
+    kicker="Fitness · Tennis · 网球"
+    title={['On the court,', 'I am present.']}
+    subtitle="What I'm watching on tour, what I'm working on off it, and the film room I keep going back to."
+    bandClass="border-b border-hairline"
+  />
+
+  <!-- ═══════════════ MODULE 1 · TOUR · 巡回赛事 ═══════════════ -->
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 gap-3">
+        <div>
+          <div class="terminal text-rg-orange text-[11px] mb-1.5">// what's on tour right now</div>
+          <h2 class="font-display text-3xl md:text-4xl font-black uppercase text-ink-white leading-none">
+            Tour · <span class="text-rg-orange">巡回赛事</span>
+          </h2>
+        </div>
+        <span class="font-mono text-[10px] tracking-tool text-ink-gray whitespace-nowrap hidden sm:inline">
+          slam calendar · hand-edited
+        </span>
+      </div>
+
+      <!-- The editorial card · RG-inspired · 2-column on lg+ -->
+      <article
+        class="relative card !p-0 overflow-hidden"
+        style="border-left: 4px solid #cc4e0e;"
+      >
+        <!-- Top strip · status + edition badge · full width -->
+        <div class="flex items-center justify-between gap-3 px-6 md:px-8 pt-6">
+          <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-rg-orange text-ink-white text-[11px] font-black tracking-tool">
+            <span class="h-1.5 w-1.5 rounded-full bg-ink-white animate-pulse"></span>
+            {tour.status}
+          </span>
+          <span class="font-mono text-[11px] tracking-tool text-ink-gray">
+            {tour.name.toUpperCase().replace('-', ' ')} {tour.edition}
+          </span>
+        </div>
+
+        <!-- Body · text left / image right on lg+, stacked on mobile -->
+        <div class="lg:grid lg:grid-cols-12 lg:gap-0">
+          <!-- IMAGE · DOM-first so mobile sees it after the top strip; lg pushes it right -->
+          <div class="relative lg:order-2 lg:col-span-5 aspect-[16/10] lg:aspect-auto lg:min-h-[460px] overflow-hidden border-t lg:border-t-0 lg:border-l border-hairline mt-6 lg:mt-0">
+            {tour.image.src ? (
+              <>
+                <img
+                  src={tour.image.src}
+                  alt={tour.image.alt}
+                  class="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {tour.image.credit && (
+                  <span class="absolute bottom-2 right-3 font-mono text-[9px] tracking-tool text-ink-white/70 mix-blend-difference pointer-events-none">
+                    {tour.image.credit}
+                  </span>
+                )}
+              </>
+            ) : (
+              /* Editorial wordmark placeholder · clay-court gradient + stacked RG type */
+              <div
+                class="absolute inset-0 flex items-center justify-center overflow-hidden"
+                style="background: linear-gradient(135deg, rgba(204,78,14,0.32) 0%, rgba(204,78,14,0.10) 45%, #0e0f0c 100%);"
+              >
+                <!-- soft diagonal stripes for a clay-court texture hint -->
+                <div
+                  class="absolute inset-0 opacity-[0.12]"
+                  style="background-image: repeating-linear-gradient(135deg, #cc4e0e 0 2px, transparent 2px 22px);"
+                ></div>
+                <div class="relative text-center px-6">
+                  <div class="font-mono text-[10px] tracking-tool text-rg-orangeBright opacity-70 uppercase mb-2">
+                    Photo placeholder
+                  </div>
+                  <div
+                    class="font-display font-black uppercase leading-[0.85]"
+                    style="color: rgba(204,78,14,0.55); font-size: clamp(40px, 8vw, 72px);"
+                  >
+                    Roland<br />Garros<br /><span class="text-ink-white/30">{tour.edition}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- TEXT COLUMN -->
+          <div class="lg:order-1 lg:col-span-7 px-6 md:px-8 pt-6 md:pt-8 pb-6 flex flex-col gap-6 md:gap-8">
+            <!-- Title block -->
+            <div>
+              <h3 class="font-display font-black uppercase text-ink-white leading-[0.88] text-4xl md:text-6xl lg:text-6xl xl:text-7xl break-words">
+                {tour.name}
+              </h3>
+              <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm md:text-base">
+                <span class="font-mono uppercase tracking-tool text-rg-orangeBright">
+                  {tour.dates}
+                </span>
+                <span class="text-ink-gray">·</span>
+                <span class="text-ink-mint">{tour.city}</span>
+                <span class="text-ink-gray">·</span>
+                <span class="font-mono text-[11px] tracking-tool text-ink-gray uppercase">
+                  {tour.dayLabel}
+                </span>
+              </div>
+            </div>
+
+            <!-- Blurb -->
+            <p class="text-base md:text-lg text-ink-mint leading-relaxed">
+              {tour.blurb}
+            </p>
+
+            <!-- Quick links -->
+            <div class="flex flex-wrap gap-2">
+              {tour.quickLinks.map((l) => (
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline hover:border-rg-orange hover:text-rg-orangeBright text-ink-mint font-mono text-[11px] tracking-tool uppercase transition-colors"
+                >
+                  {l.label} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+
+            <!-- Primary CTA -->
+            <div>
+              <a
+                href={tour.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rg-orange hover:bg-rg-orangeBright text-ink-white font-black tracking-tool text-sm transition-all hover:scale-[1.03]"
+              >
+                <span class="uppercase">Open Roland-Garros.com</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer · next slam · full width -->
+        <div class="px-6 md:px-8 pt-3 pb-6 border-t border-hairline flex items-center gap-2 text-[11px] font-mono tracking-tool text-ink-gray">
+          <span class="text-rg-orange">·</span>
+          <span class="uppercase">Next slam</span>
+          <span>·</span>
+          <span class="text-ink-mint">{tour.nextSlam}</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════ MODULE 2 · TRAINING · 我的训练 ═══════════════ -->
+  <section class="relative">
+    <!-- subtle warmer band -->
+    <div
+      class="absolute inset-0 -z-10"
+      style="background: linear-gradient(180deg, #0e0f0c 0%, #14110d 50%, #0e0f0c 100%);"
+    >
+    </div>
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 gap-3">
+        <div>
+          <div class="terminal text-lime text-[11px] mb-1.5">// off-tour · my own work</div>
+          <h2 class="font-display text-3xl md:text-4xl font-black uppercase text-ink-white leading-none">
+            Training · <span class="text-lime">我的训练</span>
+          </h2>
+        </div>
+        <span class="font-mono text-[10px] tracking-tool text-ink-gray whitespace-nowrap hidden sm:inline">
+          {sessions.length} recent · {homeCourt.city}
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <!-- Now working on -->
+        <div
+          class="lg:col-span-5 card !p-6 md:!p-8"
+          style="border-left: 4px solid #9fe870;"
+        >
+          <div class="tool-label mb-3">Now working on</div>
+          <ul class="space-y-5">
+            {workingOn.map((w) => (
+              <li>
+                <div class="font-display text-3xl md:text-4xl font-black text-lime leading-[0.9] uppercase">
+                  {w.label}
+                </div>
+                <p class="mt-1.5 text-sm text-ink-mint leading-relaxed">
+                  {w.note}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-8 pt-5 border-t border-hairline">
+            <div class="tool-label mb-2">NTRP self-rating</div>
+            <div class="flex items-baseline gap-3">
+              <span class="font-display text-5xl md:text-6xl font-black text-ink-white leading-none">
+                {ntrp.rating}
+              </span>
+              <span class="text-sm text-ink-mint">{ntrp.tag}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Court log -->
+        <div class="lg:col-span-7 card !p-6 md:!p-8">
+          <div class="flex items-baseline justify-between gap-3 mb-5">
+            <div>
+              <div class="tool-label mb-1">Home court</div>
+              <div class="font-sans text-lg md:text-xl font-black text-ink-white leading-none">
+                {homeCourt.name}
+              </div>
+              <div class="font-mono text-[11px] tracking-tool text-ink-gray mt-1">
+                {homeCourt.city}
+              </div>
+            </div>
+            <span class="font-mono text-[10px] tracking-tool text-ink-gray">
+              recent sessions
+            </span>
+          </div>
+
+          <ul class="space-y-1">
+            {sessions.map((s, i) => (
+              <li class="project-row project-row--static">
+                <span class="project-num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="project-body">
+                  <span class="project-title">{s.kind} · {s.focus}</span>
+                </span>
+                <span class="project-date">{s.date}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ MODULE 3 · LIBRARY · 影片库 ═══════════════ -->
+  <section class="relative">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-20">
+      <div class="flex items-end justify-between mb-6 gap-3">
+        <div>
+          <div class="terminal text-rg-green text-[11px] mb-1.5">// the film room</div>
+          <h2 class="font-display text-3xl md:text-4xl font-black uppercase text-ink-white leading-none">
+            Library · <span style="color: #00503c;">影片库</span>
+          </h2>
+        </div>
+        <span class="font-mono text-[10px] tracking-tool text-ink-gray whitespace-nowrap hidden sm:inline">
+          {docs.length + tutorials.length} on the shelf · hand-curated
+        </span>
+      </div>
+
+      <p class="text-sm text-ink-mint leading-relaxed max-w-2xl mb-10">
+        Documentaries to watch end-to-end. Tutorials I keep coming back to between sessions. Placeholder seed for now — swap in the ones you actually re-watch.
+      </p>
+
+      <div class="space-y-12 lg:space-y-16">
+        <!-- ── Documentaries ────────────────────────────────────────────── -->
+        <div>
+          <div class="flex items-end justify-between gap-3 mb-5 pb-3 border-b" style="border-color: #00503c33;">
+            <h3 class="font-display text-xl md:text-2xl font-black uppercase tracking-tight" style="color: #00503c;">
+              Documentaries · 纪录片
+            </h3>
+            <span class="font-mono text-[10px] tracking-tool text-ink-gray">
+              {docs.length} films
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {docs.map((v) => (
+              <a
+                href={v.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group block overflow-hidden rounded-2xl bg-surface border border-hairline hover:border-rg-orange/60 hover:scale-[1.02] transition-all duration-200"
+              >
+                <!-- Portrait photo / placeholder with name overlay -->
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  {v.imageUrl ? (
+                    <img
+                      src={v.imageUrl}
+                      alt={v.name}
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      style={v.imagePosition ? `object-position: ${v.imagePosition};` : undefined}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      class="absolute inset-0 flex items-center justify-center"
+                      style={`background: linear-gradient(180deg, ${v.hue}3a 0%, #1a1b17 55%, #0e0f0c 100%);`}
+                    >
+                      <span
+                        class="font-display font-black select-none pointer-events-none leading-none"
+                        style={`color: ${v.hue}; opacity: 0.18; font-size: clamp(96px, 18vw, 180px);`}
+                      >
+                        {v.monogram}
+                      </span>
+                    </div>
+                  )}
+                  {!v.posterMode && (
+                    <>
+                      <!-- Bottom dark gradient for name readability -->
+                      <div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-canvas via-canvas/85 to-transparent pointer-events-none"></div>
+                      <!-- Name overlay (bottom of photo) · skipped for posters -->
+                      <div class="absolute inset-x-0 bottom-0 px-3 pb-4 text-center">
+                        <h4 class="font-display font-black uppercase text-ink-white leading-[0.92] text-xl md:text-2xl break-words">
+                          {v.name}
+                        </h4>
+                      </div>
+                    </>
+                  )}
+                </div>
+                <!-- Card body: divider + subtitle + CTA -->
+                <div class="px-4 pt-4 pb-4 flex flex-col items-center text-center">
+                  <span class="block w-6 h-px bg-hairline mb-3" aria-hidden="true"></span>
+                  <p class="text-[13px] md:text-sm text-ink-mint leading-snug min-h-[2.5rem] flex items-center">
+                    {v.subtitle}
+                  </p>
+                  <span class="mt-4 inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 rounded-full border border-hairline text-ink-mint font-mono text-[10px] tracking-tool uppercase group-hover:border-rg-orange group-hover:text-rg-orangeBright transition-colors">
+                    <span aria-hidden="true">▶</span>
+                    Watch on {v.source}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- ── Tutorials ────────────────────────────────────────────────── -->
+        <div>
+          <div class="flex items-end justify-between gap-3 mb-5 pb-3 border-b" style="border-color: #00503c33;">
+            <h3 class="font-display text-xl md:text-2xl font-black uppercase tracking-tight" style="color: #00503c;">
+              Tutorials · 教学
+            </h3>
+            <span class="font-mono text-[10px] tracking-tool text-ink-gray">
+              {tutorials.length} resources
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {tutorials.map((v) => (
+              <a
+                href={v.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group block overflow-hidden rounded-2xl bg-surface border border-hairline hover:border-rg-orange/60 hover:scale-[1.02] transition-all duration-200"
+              >
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  {v.imageUrl ? (
+                    <img
+                      src={v.imageUrl}
+                      alt={v.name}
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      style={v.imagePosition ? `object-position: ${v.imagePosition};` : undefined}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      class="absolute inset-0 flex items-center justify-center"
+                      style={`background: linear-gradient(180deg, ${v.hue}3a 0%, #1a1b17 55%, #0e0f0c 100%);`}
+                    >
+                      <span
+                        class="font-display font-black select-none pointer-events-none leading-none"
+                        style={`color: ${v.hue}; opacity: 0.18; font-size: clamp(96px, 18vw, 180px);`}
+                      >
+                        {v.monogram}
+                      </span>
+                    </div>
+                  )}
+                  <div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-canvas via-canvas/85 to-transparent pointer-events-none"></div>
+                  <div class="absolute inset-x-0 bottom-0 px-3 pb-4 text-center">
+                    <h4 class="font-display font-black uppercase text-ink-white leading-[0.92] text-xl md:text-2xl break-words">
+                      {v.name}
+                    </h4>
+                  </div>
+                </div>
+                <div class="px-4 pt-4 pb-4 flex flex-col items-center text-center">
+                  <span class="block w-6 h-px bg-hairline mb-3" aria-hidden="true"></span>
+                  <p class="text-[13px] md:text-sm text-ink-mint leading-snug min-h-[2.5rem] flex items-center">
+                    {v.subtitle}
+                  </p>
+                  <span class="mt-4 inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 rounded-full border border-hairline text-ink-mint font-mono text-[10px] tracking-tool uppercase group-hover:border-rg-orange group-hover:text-rg-orangeBright transition-colors">
+                    <span aria-hidden="true">▶</span>
+                    Watch on {v.source}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

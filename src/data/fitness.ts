@@ -29,57 +29,9 @@ export interface FitnessModule {
 }
 
 export const fitnessModules: FitnessModule[] = [
-  {
-    slug: 'tennis',
-    meta: {
-      title: "Tennis Buddy — Fitness — Gimbo's Universe",
-      description:
-        'Match logs, hitting partners, drill notes — building a small app for finding and tracking court time.',
-      ogImage: '/og-fitness.jpg',
-    },
-    hero: {
-      index: '02.1',
-      kicker: 'Fitness · Module 01 · Tennis Buddy',
-      title: ['On the court,', 'I am present.'],
-      subtitle:
-        'Match logs, hitting partners, drill notes, NTRP-tagged sessions. The articles below track the build and the practice — both.',
-    },
-    articles: [
-      {
-        index: '01',
-        title: 'Tennis Buddy v1 — what shipped (project retrospective)',
-        lede: 'End-to-end build retro: a tennis social + match-tracking app, taken from concept to production by one person. React 19 + Supabase + Vercel, Roland-Garros visual identity over Material 3 mechanics, 37 design frames, 5 live tabs, magic-link auth, RLS-secured data, git-push-to-deploy. Pitch, stack, architecture diagram, outcomes, and the three lessons I want to keep.',
-        status: 'live',
-        href: '/fitness/tennis-buddy.html',
-        date: '2026-05',
-        tags: ['retrospective', 'build log', 'shipped'],
-      },
-      {
-        index: '02',
-        title: 'Why I am building Tennis Buddy',
-        lede: "Three years of bouncing between WhatsApp groups, court-booking apps, and a notes file called partners.txt. The problem isn't finding tennis — it is keeping the same hitting partner long enough for either of you to actually improve. So I am building the smallest possible app that solves that.",
-        status: 'planned',
-        date: '2026-Q2',
-        tags: ['intro'],
-      },
-      {
-        index: '03',
-        title: 'Match Log v0 — fields, not features',
-        lede: 'The first version of the match log has five fields and no charts. Date, opponent, NTRP, surface, score. Notes are free text. I am resisting the temptation to add a serve-percentage tracker before I have logged ten matches by hand and know what I actually want to see at the end of the year.',
-        status: 'planned',
-        date: '2026-Q2',
-        tags: ['build log'],
-      },
-      {
-        index: '04',
-        title: 'NTRP self-rating — honest at 3.5',
-        lede: 'Most adult-rec players over-rate themselves by half a notch. I have hit with 4.0s and gotten dismantled, and I have hit with 3.0s and walked off bored. After 50 matches the honest answer is 3.5 — steady forehand, weak backhand under pressure, serve that lives and dies by my second-toss height.',
-        status: 'planned',
-        date: '2026-Q2',
-        tags: ['self-eval'],
-      },
-    ],
-  },
+  /* tennis is handled by the static page src/pages/fitness/tennis.astro (richer
+     three-module layout). nutrition / strength / core still render through the
+     dynamic [module].astro using the entries below. */
   {
     slug: 'nutrition',
     meta: {

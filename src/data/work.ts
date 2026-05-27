@@ -80,6 +80,15 @@ export const projects: Project[] = [
   },
   // AI EXPERIMENTS
   {
+    slug: 'tennis-buddy',
+    title: 'Tennis Buddy',
+    summary: 'A small Roland-Garros-themed match-log + hitting-partner app — one-person build, React 19 + Supabase + Vercel, shipped end-to-end.',
+    category: 'ai-experiments',
+    status: 'live',
+    date: '2026-05-08',
+    href: '/work/tennis-buddy.html',
+  },
+  {
     slug: 'ai-data-analysis',
     title: 'AI × Data Analysis',
     summary: 'Where AI meets the spreadsheet — vendor performance dashboards, on-chain flows, market structure.',

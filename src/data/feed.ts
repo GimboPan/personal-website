@@ -29,6 +29,14 @@ export const feedUpdated = '2026.05';
 export const feed: FeedEntry[] = [
   {
     date: '2026.05',
+    action: 'Counting down',
+    kind: 'ongoing',
+    title: 'Rafa — Netflix sports series, premieres May 29',
+    module: 'FITNESS',
+    href: '/fitness/tennis',
+  },
+  {
+    date: '2026.05',
     action: 'Shipped',
     kind: 'done',
     title: 'Open to Work · LinkedIn CEO 新书的全书可视化解读',
@@ -61,11 +69,11 @@ export const feed: FeedEntry[] = [
   },
   {
     date: '2026.05',
-    action: 'Building',
-    kind: 'wip',
+    action: 'Shipped',
+    kind: 'done',
     title: 'Tennis Buddy — the smallest possible match-log app',
-    module: 'FITNESS',
-    href: '/fitness/tennis',
+    module: 'WORK',
+    href: '/work/tennis-buddy.html',
   },
   {
     date: '2026.04',

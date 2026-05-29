@@ -17,14 +17,18 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 Wanted a real-time BTC board (`btc.x.fish` — 关机币价 / 200 周均线 / 均衡价格 / MVRV / 减半倒计时 / 恐惧贪婪指数) to sit inside the site instead of being an external bookmark. Since it's a third-party tool, not an in-house build, the honest move was **iframe embed, not a copied HTML enclave** — the data and UI stay hosted at the source (always live, no broken API proxy), and the page is explicit that it's embedded and not built here. Confirmed the source sets no `X-Frame-Options`/CSP frame-ancestors, so it frames cleanly.
 
+Then the follow-up question — "what is this thing actually telling you, and can it call a buy?" We read the dashboard's own source to recover the exact thresholds it bakes in (ahr999 `<0.45` 抄底, MVRV `>3.5` 过热, `price/200WMA <1.5` 底部区, F&G `≤20` 极度恐惧…) and crystallized that into a **durable on-page "how to read it" guide** below the iframe. Key decision: the guide explains the *zones and caveats*, but **hardcodes no live numbers** — those would go stale, and they already live in the iframe above. It's framed as a cycle-position / valuation lens (定投 视角), with an explicit "what it can / can't answer" split and a not-financial-advice line.
+
 ### Added
 
 - `src/pages/work/btc-dashboard.astro` — new page serving at `/work/btc-dashboard`. Site chrome (Nav/Footer/CRT) + a header (back-link to `/work#investing`, title 比特币实时看板 / BTC Live Dashboard, "在新标签全屏打开 ↗" pill, `source: btc.x.fish · 第三方实时看板,非本站构建`), then a full-width `.card`-wrapped `<iframe src="https://btc.x.fish">` at `h-[82vh] min-h-[560px]`, with a fallback note.
+- A "how to read it" guide below the iframe (same page): five indicator-group cards (估值锚 / 成本底 / 情绪 / 周期时点 / 资金泡沫), a zone-reference table (ahr999 / MVRV / 200WMA / 恐惧贪婪 / 关机价 / 均衡价 — 便宜区 vs 过热区), a "能 / 不能回答什么" two-column split, and a not-advice disclaimer. Styled with the existing `.card` / `.terminal` / wise-dark tokens.
 - A `btc-dashboard` entry in `src/data/work.ts` under `investing` (status `live`, date `2026-05-29`, `href: '/work/btc-dashboard'`) — newest item, so it also surfaces in the featured top-3 on `/work`.
 
 ### Considered, then deferred
 
 - **Self-hosting a copy.** Rejected — the board pulls live data via JS; a copied static file could break if data routes through the source's own backend, and copying a third-party page wholesale isn't right. Iframe keeps it live and clearly attributed.
+- **Hardcoding a snapshot of today's readings into the guide.** Rejected — the live values (price, ahr999, MVRV…) change daily and would rot. The guide stays at the durable "how to interpret the zones" level; the live numbers stay in the iframe.
 - **iframe height on mobile.** Fixed at `82vh` with a `560px` floor and internal scroll; worth a glance on a real device since cross-origin auto-resize isn't possible.
 
 ---

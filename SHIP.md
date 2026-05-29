@@ -1,6 +1,6 @@
 # Ship Checklist
 
-> **Current version**: 🟢 **v0.10 — shipped 2026-05-27** ([CHANGELOG.md](./CHANGELOG.md))
+> **Current version**: 🟢 **v0.11 — shipped 2026-05-29** ([CHANGELOG.md](./CHANGELOG.md))
 > **Live URL**: https://personal-website-zeta-nine-61.vercel.app
 > **Repo**: https://github.com/GimboPan/personal-website
 > **Auto-deploy**: ✅ `git push origin main` → ~30s → live
@@ -132,14 +132,14 @@ node scripts/inspect-overflow.mjs http://localhost:4322
 
 ---
 
-## 🚀 Live Deploy Status (auto-updated 2026-05-27)
+## 🚀 Live Deploy Status (auto-updated 2026-05-29)
 
 - **Production URL**: https://personal-website-zeta-nine-61.vercel.app
 - **Vercel Project**: `panjunbao-8783s-projects/personal-website`
 - **GitHub repo**: https://github.com/GimboPan/personal-website
 - **Git auto-deploy**: ✅ enabled (every push to `main` triggers a production rebuild)
 - **Custom domain**: pending — TBD
-- **Latest version**: v0.10 (/fitness/tennis rebuilt as a real three-module page; Tennis Buddy moved to AI Builder; Library renders MasterClass-style with 8 real images)
+- **Latest version**: v0.11 (`/work/btc-dashboard` — third-party BTC live board embedded via iframe under Investing, with a durable "how to read it" guide below it)
 
 To deploy a change: `git push origin main` → wait ~30s → live.
 

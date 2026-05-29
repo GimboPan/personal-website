@@ -87,4 +87,124 @@ const embedUrl = 'https://btc.x.fish';
       >。若上方无法正常加载,请点「在新标签全屏打开」。
     </p>
   </section>
+
+  <!-- ============ HOW TO READ IT ============ -->
+  <section class="mx-auto max-w-5xl px-6 lg:px-12 pb-20 md:pb-24">
+    <div class="terminal text-lime mb-2">// 怎么读这个看板 · how to read it</div>
+    <h2
+      class="font-display text-2xl md:text-3xl font-black text-ink-white leading-tight tracking-tight mb-4"
+    >
+      它在回答一个问题:现在贵,还是便宜?
+    </h2>
+    <p class="text-ink-mint leading-relaxed mb-10">
+      这不是炒短线的交易工具,而是一个<strong class="text-ink-white"
+        >周期定位 / 估值仪表盘</strong
+      >——回答「BTC 现在处在牛熊周期哪一段、整体偏贵还是偏便宜」,而且立场明显偏<strong
+        class="text-ink-white">定投 / 抄底</strong
+      >视角(ahr999 的原名就叫「定投指数」)。它把指标分成五组:
+    </p>
+
+    <!-- indicator groups -->
+    <div class="grid sm:grid-cols-2 gap-3 mb-12">
+      {
+        [
+          {
+            k: '估值锚',
+            v: 'ahr999 · MVRV · 200 周均线 · 均衡价格',
+            d: '相对历史,现在是贵是便宜',
+          },
+          {
+            k: '成本底',
+            v: '关机币价 · 全网算力 · 盈利矿机',
+            d: '矿工的停机成本线 — 历史大底常落在附近',
+          },
+          { k: '情绪', v: '恐惧 & 贪婪指数', d: '群体情绪走极端处,往往是反向机会' },
+          { k: '周期时点', v: '减半倒计时', d: '你在四年减半周期的哪个阶段' },
+          {
+            k: '资金 / 泡沫',
+            v: 'MSTR · SBET · BMNR 的 mNAV 溢价',
+            d: '机构端是溢价(狂热)还是折价(冷清)',
+          },
+        ].map((g) => (
+          <div class="card !p-5">
+            <div class="terminal text-lime text-[11px] mb-1.5">{g.k}</div>
+            <div class="font-mono text-sm text-ink-white mb-2">{g.v}</div>
+            <div class="text-[13px] text-ink-gray leading-relaxed">{g.d}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- zone reference -->
+    <h3
+      class="font-display text-xl md:text-2xl font-black text-ink-white tracking-tight mb-1"
+    >
+      区间速查 · 看板内置的判断
+    </h3>
+    <p class="text-[13px] text-ink-gray mb-5">
+      看板对每个指标内置了颜色判断;落在绿色区间 = 历史上偏便宜 / 适合积累。
+    </p>
+    <div class="card !p-0 overflow-hidden mb-12">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-hairline text-ink-gray font-mono text-[11px] tracking-tool uppercase">
+              <th class="py-3 px-4 font-semibold">指标</th>
+              <th class="py-3 px-4 font-semibold">便宜 / 积累区</th>
+              <th class="py-3 px-4 font-semibold">贵 / 过热区</th>
+            </tr>
+          </thead>
+          <tbody class="text-ink-mint">
+            {
+              [
+                ['ahr999 定投指数', '< 0.45 抄底 · 0.45–1.2 定投', '> 1.2 偏贵,观望'],
+                ['MVRV', '< 1 历史大底 · 1–2 正常偏低', '> 3.5 过热,历史顶部'],
+                ['价格 / 200 周线', '< 1.5 接近 200WMA,底部区', '越远高于 1 越过热'],
+                ['恐惧 & 贪婪', '≤ 20 极度恐惧,可能买点', '> 80 极度贪婪,考虑止盈'],
+                ['关机币价', '价格逼近矿工停机线 → 近大底', '远高于停机线 → 矿工高利润'],
+                ['均衡价格', '价格跌向均衡价 → 深度底参考', '—'],
+              ].map((r) => (
+                <tr class="border-b border-hairline/60 last:border-0 align-top">
+                  <td class="py-3 px-4 font-mono text-[13px] text-ink-white">{r[0]}</td>
+                  <td class="py-3 px-4 text-[13px] text-lime leading-relaxed">{r[1]}</td>
+                  <td class="py-3 px-4 text-[13px] text-ink-gray leading-relaxed">{r[2]}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- can / cannot -->
+    <h3
+      class="font-display text-xl md:text-2xl font-black text-ink-white tracking-tight mb-5"
+    >
+      它能、和不能告诉你什么
+    </h3>
+    <div class="grid md:grid-cols-2 gap-4 mb-10">
+      <div class="card !p-6">
+        <div class="terminal text-lime mb-3">✅ 它能回答</div>
+        <p class="text-[14px] text-ink-mint leading-relaxed">
+          相对历史,现在估值与情绪是偏冷还是偏热。多数指标落在绿色区时,属于历史上<strong
+            class="text-ink-white">胜率较高的积累 / 定投区</strong
+          >——它最恰当的用法是支撑<strong class="text-ink-white">分批买入</strong>的节奏。
+        </p>
+      </div>
+      <div class="card !p-6">
+        <div class="font-mono text-[12px] tracking-tool text-rg-orangeBright mb-3">
+          ⚠️ 它不能回答
+        </div>
+        <ul class="text-[14px] text-ink-mint leading-relaxed space-y-2 list-disc pl-4">
+          <li>不预测未来——这些是历史概率 + 滞后指标,「便宜可以更便宜」。</li>
+          <li>不含宏观(利率、流动性)、监管、黑天鹅等真正改变结局的变量。</li>
+          <li>「现在像底部」 ≠ 「这就是底 / 现在买一定赚」。</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="font-mono text-[11px] text-ink-gray leading-relaxed border-t border-hairline pt-5">
+      // 一句话:这是一个判断「周期位置 + 估值冷热」的工具,用来辅助定投 / 分批,而不是择时一把梭。是不是你个人的好买点,还要叠加你的持仓、成本、风险承受与时间维度。以上为公开指标的解读,不构成投资建议。
+    </p>
+  </section>
 </BaseLayout>

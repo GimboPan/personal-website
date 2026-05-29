@@ -6,6 +6,29 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [0.11.0] — 2026-05-29
+
+> **A BTC live dashboard joins the Investing stream.** A short session: embed a third-party real-time Bitcoin board inside `/work` rather than just linking out, so the cycle metrics live under Gimbo's Universe chrome.
+
+**Live**: https://personal-website-zeta-nine-61.vercel.app
+**New route**: `/work/btc-dashboard`
+
+### Story of the day
+
+Wanted a real-time BTC board (`btc.x.fish` — 关机币价 / 200 周均线 / 均衡价格 / MVRV / 减半倒计时 / 恐惧贪婪指数) to sit inside the site instead of being an external bookmark. Since it's a third-party tool, not an in-house build, the honest move was **iframe embed, not a copied HTML enclave** — the data and UI stay hosted at the source (always live, no broken API proxy), and the page is explicit that it's embedded and not built here. Confirmed the source sets no `X-Frame-Options`/CSP frame-ancestors, so it frames cleanly.
+
+### Added
+
+- `src/pages/work/btc-dashboard.astro` — new page serving at `/work/btc-dashboard`. Site chrome (Nav/Footer/CRT) + a header (back-link to `/work#investing`, title 比特币实时看板 / BTC Live Dashboard, "在新标签全屏打开 ↗" pill, `source: btc.x.fish · 第三方实时看板,非本站构建`), then a full-width `.card`-wrapped `<iframe src="https://btc.x.fish">` at `h-[82vh] min-h-[560px]`, with a fallback note.
+- A `btc-dashboard` entry in `src/data/work.ts` under `investing` (status `live`, date `2026-05-29`, `href: '/work/btc-dashboard'`) — newest item, so it also surfaces in the featured top-3 on `/work`.
+
+### Considered, then deferred
+
+- **Self-hosting a copy.** Rejected — the board pulls live data via JS; a copied static file could break if data routes through the source's own backend, and copying a third-party page wholesale isn't right. Iframe keeps it live and clearly attributed.
+- **iframe height on mobile.** Fixed at `82vh` with a `560px` floor and internal scroll; worth a glance on a real device since cross-origin auto-resize isn't possible.
+
+---
+
 ## [0.10.0] — 2026-05-27
 
 > **`/fitness/tennis` becomes a real page. AI Builder absorbs the Tennis Buddy build. The Library renders MasterClass-style.** Two weeks of letting v0.9 settle, then one long session that started with "the homepage gap is too big" and ended with a curated film-room sitting next to an editorial Roland-Garros live card.

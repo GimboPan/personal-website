@@ -1,0 +1,90 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+const meta = {
+  title: '比特币实时看板 / BTC Live Dashboard',
+  subtitle:
+    '关机币价、200 周均线、均衡价格、MVRV、减半倒计时、恐惧贪婪指数 —— 一页看清 BTC 当前的周期位置。',
+  date: '2026.05',
+  topic: 'Investing · 投资',
+  source: 'btc.x.fish',
+};
+
+const embedUrl = 'https://btc.x.fish';
+---
+
+<BaseLayout
+  title={`${meta.title} — Work · Gimbo's Universe`}
+  description={meta.subtitle}
+  ogImage="/og-work.jpg"
+>
+  <header class="border-b border-hairline">
+    <div class="mx-auto max-w-5xl px-6 lg:px-12 py-12 md:py-16">
+      <a
+        href="/work#investing"
+        class="inline-flex items-center gap-2 font-mono text-[11px] tracking-tool text-ink-gray hover:text-lime transition-colors mb-6"
+      >
+        ← back to work
+      </a>
+      <div
+        class="flex flex-wrap items-center gap-x-4 gap-y-1 terminal text-lime text-[11px] mb-4"
+      >
+        <span>{meta.date}</span>
+        <span class="text-ink-gray">·</span>
+        <span>{meta.topic}</span>
+        <span class="text-ink-gray">·</span>
+        <span class="text-ink-gray">embedded live tool</span>
+      </div>
+      <h1
+        class="font-display text-3xl md:text-5xl font-black text-ink-white leading-tight tracking-tight"
+      >
+        {meta.title}
+      </h1>
+      <p class="mt-4 text-base md:text-lg text-ink-mint italic leading-relaxed">
+        {meta.subtitle}
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <a
+          href={embedUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-pill font-mono tracking-tool !text-xs"
+        >
+          在新标签全屏打开 ↗
+        </a>
+        <span class="font-mono text-[11px] text-ink-gray leading-relaxed">
+          source:
+          <a
+            href={embedUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-ink-mint hover:text-lime underline-offset-2 hover:underline"
+            >{meta.source}</a
+          > · 第三方实时看板,非本站构建
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 md:py-10">
+    <div class="card overflow-hidden !p-0">
+      <iframe
+        src={embedUrl}
+        title={meta.title}
+        loading="eager"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="w-full h-[82vh] min-h-[560px] border-0 block bg-[#1a1a2e]"
+      ></iframe>
+    </div>
+    <p class="mt-4 text-center font-mono text-[11px] text-ink-gray leading-relaxed">
+      实时数据与界面均来自第三方看板
+      <a
+        href={embedUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-ink-mint hover:text-lime underline-offset-2 hover:underline"
+        >btc.x.fish</a
+      >。若上方无法正常加载,请点「在新标签全屏打开」。
+    </p>
+  </section>
+</BaseLayout>

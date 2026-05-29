@@ -29,6 +29,16 @@ export interface CatDef {
 export const projects: Project[] = [
   // INVESTING
   {
+    slug: 'btc-dashboard',
+    title: 'BTC Live Dashboard',
+    summary:
+      '比特币实时看板 — 关机币价、200 周均线、MVRV、减半倒计时、恐惧贪婪指数,一页看清 BTC 周期位置。Embedded live tool I track (btc.x.fish).',
+    category: 'investing',
+    status: 'live',
+    date: '2026-05-29',
+    href: '/work/btc-dashboard',
+  },
+  {
     slug: 'nz-funds',
     title: 'NZ Managed Funds Guide',
     summary: '华人投资者 deep-dive on PIE funds, FIF rules, and the 5 fund families worth knowing in 2026.',

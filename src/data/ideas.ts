@@ -22,6 +22,17 @@ export interface TopicDef {
 
 export const articles: IdeaArticle[] = [
   {
+    index: '05',
+    title: '用 AI Agent 运营一家公司 · Distributor 的 Agent 原生架构',
+    lede: '如果让 AI Agent 来运营一家分销公司，人到底还留在哪里？一张可视化架构图给出答案：一个 Orchestrator 调度 4 个 Agent（客服 / 供应链 / 财务 / WMS），人只守在三件事上——搬实物、维护关系、对钱和异常负责。核心原则是「Agent 跑 happy path，人当 exception owner」，外加两道授权闸（PO 金额闸 + 付款闸）守住内控。',
+    date: '2026.05',
+    tags: ['Tech'],
+    topicSlug: 'tech',
+    href: '/ideas/ai-agent-company.html',
+    status: 'live',
+    isNew: true,
+  },
+  {
     index: '04',
     title: 'Open to Work · LinkedIn CEO 的 AI 时代职业指南 · 全书解读',
     lede: 'Ryan Roslansky（LinkedIn CEO）+ Aneesh Raman 2026 年 2 月新书的完整可视化解读：10 章 × 3 部分的论证骨架、5Cs（curiosity / courage / creativity / compassion / communication）、三桶任务框架、攀岩墙式职业模型、30-60-90 day plan，加上从书里精挑的 11 位真实工作者故事。专门为这周末的读书会做的视觉版。',
@@ -30,7 +41,6 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'economy',
     href: '/ideas/open-to-work-visual-guide.html',
     status: 'live',
-    isNew: true,
   },
   {
     index: '03',

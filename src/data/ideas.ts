@@ -22,6 +22,17 @@ export interface TopicDef {
 
 export const articles: IdeaArticle[] = [
   {
+    index: '06',
+    title: 'The Intimate Animal · 亲密的动物 · 全书可视化解读',
+    lede: 'Kinsey Institute 执行主任、演化生物学家 Justin Garcia 2026 年的新书：人类不是只被性驱动的动物，而是被「亲密」深刻塑造的 intimate animal。这份可视化解读读完了全书——从内华达沙漠里一项 2 万美元、却不一定包含性的「Girlfriend Experience」讲起，拆开社会性单偶 vs 性单偶的核心悖论、关系生命周期的 10 个阶段（Need → Love Again）、亲密危机的数据、出轨的 8 种动机，到 Aron 那套「促进亲密的 36 个问题」，以及作者关于 AI 时代如何重塑亲密关系的追问。为读书会做的视觉版。',
+    date: '2026.06',
+    tags: ['Society'],
+    topicSlug: 'society',
+    href: '/ideas/intimate-animal-visual-guide.html',
+    status: 'live',
+    isNew: true,
+  },
+  {
     index: '05',
     title: '用 AI Agent 运营一家公司 · Distributor 的 Agent 原生架构',
     lede: '如果让 AI Agent 来运营一家分销公司，人到底还留在哪里？一张可视化架构图给出答案：一个 Orchestrator 调度 4 个 Agent（客服 / 供应链 / 财务 / WMS），人只守在三件事上——搬实物、维护关系、对钱和异常负责。核心原则是「Agent 跑 happy path，人当 exception owner」，外加两道授权闸（PO 金额闸 + 付款闸）守住内控。',
@@ -30,7 +41,6 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'tech',
     href: '/ideas/ai-agent-company.html',
     status: 'live',
-    isNew: true,
   },
   {
     index: '04',
@@ -84,6 +94,7 @@ export const topicDefs: TopicDef[] = [
 
 /** Months shown in the archive timeline, newest first. */
 export const archiveMonths: string[] = [
+  '2026.06',
   '2026.05',
   '2026.04',
   '2026.03',

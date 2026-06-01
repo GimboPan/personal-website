@@ -314,18 +314,33 @@
     font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,21px);line-height:1.5;color:var(--near-black);
   }
   .q-principle b{font-style:normal;}
-  .q-sets{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;}
-  .q-set{background:var(--parchment);border:1px solid var(--border-warm);border-radius:16px;padding:28px 26px;}
-  .q-set .q-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-  .q-set h4{font-size:22px;}
-  .q-set .lvl{display:flex;gap:5px;}
-  .q-set .lvl i{width:8px;height:8px;border-radius:50%;background:var(--border-warm);display:block;}
-  .q-set .lvl i.on{background:var(--terracotta);}
-  .q-set .q-sub{font-size:12.5px;color:var(--olive);font-weight:600;letter-spacing:.4px;margin-bottom:16px;}
-  .q-set ol{margin:0;padding-left:22px;}
-  .q-set li{font-size:13.5px;line-height:1.56;color:var(--charcoal);margin-bottom:11px;padding-left:3px;}
-  .q-set li::marker{color:var(--terracotta);font-family:var(--serif);font-weight:600;}
-  @media(max-width:880px){.q-sets{grid-template-columns:1fr;}}
+  .q-sets{display:flex;flex-direction:column;gap:14px;margin-top:44px;}
+  details.q-set{
+    background:var(--parchment);border:1px solid var(--border-warm);border-radius:16px;
+    overflow:hidden;transition:border-color .2s,box-shadow .2s;
+  }
+  details.q-set[open]{border-color:#d8d5ca;box-shadow:rgba(0,0,0,.04) 0 4px 18px;}
+  details.q-set>summary{
+    list-style:none;cursor:pointer;user-select:none;
+    display:flex;align-items:center;gap:14px;padding:22px 26px;
+  }
+  details.q-set>summary::-webkit-details-marker{display:none;}
+  .q-set summary h4{
+    font-family:var(--serif);font-weight:500;font-size:21px;margin:0;
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  }
+  .q-set summary h4 .q-sub{font-family:var(--sans);font-size:12.5px;color:var(--olive);font-weight:600;letter-spacing:.4px;}
+  .q-set summary .lvl{display:flex;gap:5px;}
+  .q-set summary .lvl i{width:8px;height:8px;border-radius:50%;background:var(--border-warm);display:block;}
+  .q-set summary .lvl i.on{background:var(--terracotta);}
+  .q-set summary .count{margin-left:auto;font-family:var(--serif);font-size:14px;color:var(--stone);white-space:nowrap;}
+  .q-set summary .chev{font-size:12px;color:var(--terracotta);transition:transform .25s;flex-shrink:0;}
+  details.q-set[open] summary .chev{transform:rotate(180deg);}
+  .q-set .q-body{padding:0 26px 24px;}
+  .q-set .q-body ol{margin:0;padding-left:22px;columns:2;column-gap:36px;}
+  .q-set .q-body li{font-size:13.5px;line-height:1.56;color:var(--charcoal);margin-bottom:11px;padding-left:3px;break-inside:avoid;}
+  .q-set .q-body li::marker{color:var(--terracotta);font-family:var(--serif);font-weight:600;}
+  @media(max-width:700px){.q-set .q-body ol{columns:1;}.q-set summary{flex-wrap:wrap;}.q-set summary .count{margin-left:0;}}
 
   /* ---------- AI section ---------- */
   .ai{background:var(--near-black);color:var(--silver);}
@@ -643,63 +658,82 @@
       —— Aron 等，1997
     </div>
 
+    <p class="reveal" style="font-size:13px;color:var(--stone);margin-top:30px;">点击每组标题即可展开 / 收起。</p>
     <div class="q-sets reveal">
-      <div class="q-set">
-        <div class="q-head"><h4>第一组</h4><div class="lvl" title="亲密强度"><i class="on"></i><i></i><i></i></div></div>
-        <div class="q-sub">渐进破冰 · 轻松开场</div>
-        <ol>
-          <li>如果可以邀请世界上任何人共进晚餐，你会选谁？</li>
-          <li>你想成名吗？以什么方式成名？</li>
-          <li>打电话前，你会先在心里排练要说的话吗？为什么？</li>
-          <li>对你来说，怎样才算「完美的一天」？</li>
-          <li>你上一次唱歌给自己听是什么时候？唱给别人听呢？</li>
-          <li>如果能活到 90 岁，且最后 60 年可以保留 30 岁时的身体或头脑，你会选哪一个？</li>
-          <li>关于自己会怎样死去，你有没有一种隐秘的预感？</li>
-          <li>说出三件你和对方看起来有共同点的事。</li>
-          <li>你这一生中，最感激的是什么？</li>
-          <li>如果可以改变成长过程中的任何一件事，你会改什么？</li>
-          <li>用四分钟，尽可能详细地讲述你的人生故事。</li>
-          <li>如果明天醒来能获得一种新的品质或能力，你希望是什么？</li>
-        </ol>
-      </div>
+      <details class="q-set" open>
+        <summary>
+          <h4>第一组<span class="q-sub">渐进破冰 · 轻松开场</span></h4>
+          <div class="lvl" title="亲密强度"><i class="on"></i><i></i><i></i></div>
+          <span class="count">12 题</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </summary>
+        <div class="q-body">
+          <ol>
+            <li>如果可以邀请世界上任何人共进晚餐，你会选谁？</li>
+            <li>你想成名吗？以什么方式成名？</li>
+            <li>打电话前，你会先在心里排练要说的话吗？为什么？</li>
+            <li>对你来说，怎样才算「完美的一天」？</li>
+            <li>你上一次唱歌给自己听是什么时候？唱给别人听呢？</li>
+            <li>如果能活到 90 岁，且最后 60 年可以保留 30 岁时的身体或头脑，你会选哪一个？</li>
+            <li>关于自己会怎样死去，你有没有一种隐秘的预感？</li>
+            <li>说出三件你和对方看起来有共同点的事。</li>
+            <li>你这一生中，最感激的是什么？</li>
+            <li>如果可以改变成长过程中的任何一件事，你会改什么？</li>
+            <li>用四分钟，尽可能详细地讲述你的人生故事。</li>
+            <li>如果明天醒来能获得一种新的品质或能力，你希望是什么？</li>
+          </ol>
+        </div>
+      </details>
 
-      <div class="q-set">
-        <div class="q-head"><h4>第二组</h4><div class="lvl" title="亲密强度"><i class="on"></i><i class="on"></i><i></i></div></div>
-        <div class="q-sub">深入价值 · 触碰内心</div>
-        <ol start="13">
-          <li>如果有一颗水晶球能告诉你关于自己、人生或未来的真相，你想知道什么？</li>
-          <li>有没有一件你梦想已久却迟迟没做的事？为什么没做？</li>
-          <li>你这一生最大的成就是什么？</li>
-          <li>在一段友谊中，你最看重的是什么？</li>
-          <li>你最珍贵的记忆是什么？</li>
-          <li>你最痛苦的记忆是什么？</li>
-          <li>如果知道自己一年后会突然死去，你会改变现在的生活方式吗？为什么？</li>
-          <li>友谊对你意味着什么？</li>
-          <li>爱与情感，在你的生命里扮演着怎样的角色？</li>
-          <li>轮流说出对方身上一个你认为是优点的特质，各说五个。</li>
-          <li>你的家庭有多亲密、多温暖？你觉得自己的童年比大多数人更幸福吗？</li>
-          <li>你如何看待自己与母亲的关系？</li>
-        </ol>
-      </div>
+      <details class="q-set">
+        <summary>
+          <h4>第二组<span class="q-sub">深入价值 · 触碰内心</span></h4>
+          <div class="lvl" title="亲密强度"><i class="on"></i><i class="on"></i><i></i></div>
+          <span class="count">12 题</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </summary>
+        <div class="q-body">
+          <ol start="13">
+            <li>如果有一颗水晶球能告诉你关于自己、人生或未来的真相，你想知道什么？</li>
+            <li>有没有一件你梦想已久却迟迟没做的事？为什么没做？</li>
+            <li>你这一生最大的成就是什么？</li>
+            <li>在一段友谊中，你最看重的是什么？</li>
+            <li>你最珍贵的记忆是什么？</li>
+            <li>你最痛苦的记忆是什么？</li>
+            <li>如果知道自己一年后会突然死去，你会改变现在的生活方式吗？为什么？</li>
+            <li>友谊对你意味着什么？</li>
+            <li>爱与情感，在你的生命里扮演着怎样的角色？</li>
+            <li>轮流说出对方身上一个你认为是优点的特质，各说五个。</li>
+            <li>你的家庭有多亲密、多温暖？你觉得自己的童年比大多数人更幸福吗？</li>
+            <li>你如何看待自己与母亲的关系？</li>
+          </ol>
+        </div>
+      </details>
 
-      <div class="q-set">
-        <div class="q-head"><h4>第三组</h4><div class="lvl" title="亲密强度"><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
-        <div class="q-sub">彼此交付 · 最脆弱处</div>
-        <ol start="25">
-          <li>各说三句真实的「我们」陈述。例如：「我们此刻都在这个房间里，感到……」</li>
-          <li>补全这句话：「我希望有一个人，能和我一起分享……」</li>
-          <li>若要和对方成为亲密好友，请告诉 ta 有哪些重要的事是 ta 需要知道的。</li>
-          <li>告诉对方你喜欢 ta 的地方；这次要非常诚实，说出那些你不会对刚认识的人说的话。</li>
-          <li>和对方分享你人生中一个尴尬的时刻。</li>
-          <li>你上一次在别人面前哭是什么时候？独自一人时呢？</li>
-          <li>告诉对方一件你现在就已经欣赏 ta 的地方。</li>
-          <li>在你看来，有什么事是太严肃、不能拿来开玩笑的？</li>
-          <li>如果你今晚就要死去、且没有机会再与任何人交流，你最后悔没有告诉谁什么话？为什么至今没说？</li>
-          <li>你的房子连同所有财物着火了。救出亲人与宠物后，你还有时间冲回去抢救一样东西，你会选什么？为什么？</li>
-          <li>你的家人中，谁的离世会让你最难以承受？为什么？</li>
-          <li>分享一个你个人的难题，请对方给出建议；再请对方反过来告诉你，你对这个难题流露出怎样的感受。</li>
-        </ol>
-      </div>
+      <details class="q-set">
+        <summary>
+          <h4>第三组<span class="q-sub">彼此交付 · 最脆弱处</span></h4>
+          <div class="lvl" title="亲密强度"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          <span class="count">12 题</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </summary>
+        <div class="q-body">
+          <ol start="25">
+            <li>各说三句真实的「我们」陈述。例如：「我们此刻都在这个房间里，感到……」</li>
+            <li>补全这句话：「我希望有一个人，能和我一起分享……」</li>
+            <li>若要和对方成为亲密好友，请告诉 ta 有哪些重要的事是 ta 需要知道的。</li>
+            <li>告诉对方你喜欢 ta 的地方；这次要非常诚实，说出那些你不会对刚认识的人说的话。</li>
+            <li>和对方分享你人生中一个尴尬的时刻。</li>
+            <li>你上一次在别人面前哭是什么时候？独自一人时呢？</li>
+            <li>告诉对方一件你现在就已经欣赏 ta 的地方。</li>
+            <li>在你看来，有什么事是太严肃、不能拿来开玩笑的？</li>
+            <li>如果你今晚就要死去、且没有机会再与任何人交流，你最后悔没有告诉谁什么话？为什么至今没说？</li>
+            <li>你的房子连同所有财物着火了。救出亲人与宠物后，你还有时间冲回去抢救一样东西，你会选什么？为什么？</li>
+            <li>你的家人中，谁的离世会让你最难以承受？为什么？</li>
+            <li>分享一个你个人的难题，请对方给出建议；再请对方反过来告诉你，你对这个难题流露出怎样的感受。</li>
+          </ol>
+        </div>
+      </details>
     </div>
 
     <p class="reveal" style="margin-top:30px;font-size:14px;color:var(--olive);">

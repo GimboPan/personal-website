@@ -18,7 +18,7 @@ export interface FeedEntry {
   /** What it is, in one line */
   title: string;
   /** Which module it belongs to — shown as a tag */
-  module: 'WORK' | 'FITNESS' | 'LIFE' | 'IDEAS';
+  module: 'AI BUILDER' | 'FITNESS' | 'LIFE' | 'IDEAS';
   /** Optional deep link */
   href?: string;
 }
@@ -64,7 +64,7 @@ export const feed: FeedEntry[] = [
     action: 'Building',
     kind: 'wip',
     title: 'Supply Chain Agent — a three-agent stack for the day job',
-    module: 'WORK',
+    module: 'AI BUILDER',
     href: '/ai-builder',
   },
   {
@@ -72,7 +72,7 @@ export const feed: FeedEntry[] = [
     action: 'Shipped',
     kind: 'done',
     title: 'Tennis Buddy — the smallest possible match-log app',
-    module: 'WORK',
+    module: 'AI BUILDER',
     href: '/ai-builder/tennis-buddy.html',
   },
   {

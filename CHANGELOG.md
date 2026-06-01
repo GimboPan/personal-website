@@ -2,7 +2,41 @@
 
 Gimbo's Universe — release notes.
 
-Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioned semver-ish (0.x while UI/IA shapes, 1.0 once content is filled out and the domain is wired).
+Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioned semver-ish (0.x while UI/IA took shape; **1.0 reached 2026-06-01** — live on its own domain with a coherent, honest IA. Content keeps growing past 1.0 as a living site.).
+
+---
+
+## [1.0.0] — 2026-06-01 · 🎉 The site goes 1.0
+
+> **Gimbo's Universe is live for real.** The same day the domain landed ([0.12.0]), the homepage and IA got the pass that earns a 1.0: every nav section is a real page, every homepage claim matches what's actually shipped, and the old "Work" section is reframed as it should always have been — **AI Builder**. The site is now coherent, honest, and live on its own address. 1.0 marks the platform being *real and truthful* — not the end of writing; chapters and pieces keep landing, as a living site should.
+
+**Live & verified**: https://gimbo.co.nz — homepage 200, canonical/OG on the real domain, every `/ai-builder/*` route 200, old `/work*` routes 404, zero stale placeholders on the homepage.
+
+### The 1.0 bar — and where it stands
+
+- ✅ **Domain wired** ([0.12.0]) — apex `gimbo.co.nz`, HTTPS, canonical + sitemap all on the real domain.
+- ✅ **Every nav section is a real, navigable page** — Home · AI Builder · Fitness · Life · Ideas · About.
+- ✅ **The homepage tells the truth** — nothing live is still marked "Coming soon"; LIVE / WIP / SOON badges now match each section's actual state.
+- ✅ **Coherent naming** — the career/build surface is AI Builder end-to-end (URL, nav, page title, feed tag); no leftover "Work".
+- 🔄 **Content keeps growing — by design.** The book is 1 of 9 chapters live (ch03 in flight); Ideas has 6 pieces and counting. A living site, not a finished document.
+
+### Homepage made honest (this session)
+
+- **Ideas card**: dropped "Coming soon" → `LIVE`; subtitle is now "six pieces live and counting"; the "Up next" placeholder list was replaced with the three latest *published* pieces.
+- **Dispatch strap**: repinned from the latest Ideas piece to the **Tennis** homepage; pill relabelled `NEW` → `FEATURED` (it now pins a chosen page rather than announcing the newest dispatch).
+- **Stale `SOON` → `LIVE`**: Tennis (a full 561-line page), Reading (a 5-book shelf), and Social (4 active interest groups) were all built and populated but still flagged SOON on their homecards.
+- **AI Builder card**: surfaced all three live builds — NZ Funds, BTC Dashboard, Tennis Buddy — grouped live-first so the card leads with finished work.
+
+### Renamed: Work → AI Builder
+
+- Route `/work` → `/ai-builder` (sub-pages follow). **No redirect — old `/work` 404s, by choice.** There is no "Work" section anymore; it is AI Builder.
+- Files moved (git-tracked renames): `work.astro` → `ai-builder.astro`, `work/` → `ai-builder/`, `public/work/` → `public/ai-builder/`, `data/work.ts` → `ai-builder.ts`.
+- Repointed every internal link (nav, footer, 404, homepage card, feed, BTC back-link, in-page anchors), fixed the data import, aligned the page `<title>` + hero alt (a stray "AI X" → "AI Builder"), relabelled the 404 pill, updated the homepage module-list copy, and renamed the feed module tag `WORK` → `AI BUILDER`.
+
+### Known follow-up (cosmetic, deferred on purpose)
+
+- General-prose "work" still appears in the homepage life-OS manifesto ("…work, investing, the body…") — that's a life-domain word, not the section name, so it stays.
+- Internal asset filenames still carry the old name: `og-work.jpg`, the `work-hero.*` hero images (+ `name="work-hero"`), and the `SceneWork.astro` landing scene. Purely cosmetic — never surfaced as a section label.
 
 ---
 

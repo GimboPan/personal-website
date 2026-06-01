@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
-// Update this once the real domain is wired up.
+// Real domain wired 2026-06-01: gimbo.co.nz (apex, no-www canonical).
 // Vercel will inject VERCEL_PROJECT_PRODUCTION_URL at build time, but we still
-// set a stable canonical here for SEO.
-const SITE = process.env.SITE_URL ?? 'https://gimbosuniverse.com';
+// set a stable canonical here for SEO. Override with SITE_URL env if needed.
+const SITE = process.env.SITE_URL ?? 'https://gimbo.co.nz';
 
 export default defineConfig({
   site: SITE,

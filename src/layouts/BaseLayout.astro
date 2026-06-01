@@ -24,7 +24,7 @@ const {
 
 // Site origin — fall back to a placeholder pre-deploy.
 // Astro picks up `site` from astro.config.mjs once configured for production.
-const site = Astro.site?.toString() ?? 'https://gimbosuniverse.com/';
+const site = Astro.site?.toString() ?? 'https://gimbo.co.nz/';
 const canonical = new URL(Astro.url.pathname, site).toString();
 const ogImageUrl = new URL(ogImage, site).toString();
 

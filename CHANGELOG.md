@@ -6,6 +6,39 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [0.12.0] — 2026-06-01
+
+> **The site gets a real domain.** Registered a custom domain and wired it to the Vercel project, so Gimbo's Universe will live at its own address instead of the `*.vercel.app` preview URL. This is the "domain is wired" milestone flagged in the changelog intro — last box before 1.0 territory.
+
+**Live**: https://gimbo.co.nz — apex, no-www canonical (HTTPS verified live same day, after the .nz delegation propagated)
+**Also live**: https://personal-website-zeta-nine-61.vercel.app (Vercel preview URL, still works)
+
+### Story of the day
+
+`gimbo.com` was already taken, so after checking a few options on Cloudflare Registrar (at-cost, no renewal markup) we landed on **`gimbo.co.nz`** — clean, on-brand, and fitting for an NZ-based site. Registered it there.
+
+Wiring decision: kept the **apex `gimbo.co.nz` as the canonical URL** (declined Vercel's default "redirect apex → www") — shorter and cleaner for a personal site. Added the domain to the `gimbo-universe` Vercel project (Production), and created the single DNS record Vercel asked for on the Cloudflare side.
+
+One important config detail: the Cloudflare DNS record is set to **DNS only (grey cloud), not Proxied (orange cloud)**. Vercel needs to see the origin directly to issue its own SSL cert and route traffic; leaving Cloudflare's proxy on would fight Vercel's edge and can cause SSL-issuance failures or redirect loops. Cloudflare nags to turn proxying on — ignored on purpose here.
+
+### Added
+
+- **Domain** `gimbo.co.nz` registered via Cloudflare Registrar.
+- **Vercel**: `gimbo.co.nz` added to the `gimbo-universe` project, Production environment, apex as canonical (no www redirect).
+- **Cloudflare DNS**: one `A` record — name `@` → `216.198.79.1` (Vercel's current anycast IP; the older `76.76.21.21` also still works), **Proxy status: DNS only**, TTL Auto.
+
+### Resolved same day
+
+- The `.nz` delegation propagated within the hour; a manual **Refresh** on the Vercel Domains page flipped `gimbo.co.nz` to "Valid Configuration", Vercel auto-issued the HTTPS cert, and `https://gimbo.co.nz` now loads. (Public recursive resolvers briefly still returned a cached NXDOMAIN due to negative caching, but the site resolved and served fine.)
+- **Canonical domain wired into the build.** Replaced the `gimbosuniverse.com` placeholder with `https://gimbo.co.nz` in `astro.config.mjs` (`SITE`), `src/layouts/BaseLayout.astro` (pre-deploy fallback), and `public/robots.txt` (sitemap URL). This drives every page's `<link rel="canonical">`, OG `og:url` / `og:image`, and the sitemap URLs, so SEO/social-share previews now reference the real domain. Build verified locally (`npm run build` → `dist/` clean of the old domain), then committed and pushed.
+
+### Considered, then deferred
+
+- **`www` as canonical** (Vercel's recommended default). Deferred — apex is cleaner for a personal site. Could still add a `www` CNAME + redirect-to-apex later if desired.
+- **`gimbo.nz`** (the bare second-level, no `co`). Noted as a possible defensive registration so the shorter variant isn't sniped, but not bought.
+
+---
+
 ## [0.11.0] — 2026-05-29
 
 > **A BTC live dashboard joins the Investing stream.** A short session: embed a third-party real-time Bitcoin board inside `/work` rather than just linking out, so the cycle metrics live under Gimbo's Universe chrome.

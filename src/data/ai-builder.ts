@@ -1,5 +1,5 @@
 /* ─── Work catalog ─────────────────────────────────────────────────────────
-   Single source of truth for /work. Featured = top 3 by date across all
+   Single source of truth for /ai-builder. Featured = top 3 by date across all
    categories. Each category section shows up to 3 most-recent items; the
    page derives counts and ordering from this list. */
 
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     category: 'investing',
     status: 'live',
     date: '2026-05-29',
-    href: '/work/btc-dashboard',
+    href: '/ai-builder/btc-dashboard',
   },
   {
     slug: 'nz-funds',
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     category: 'investing',
     status: 'live',
     date: '2026-05-07',
-    href: '/work/nz-funds.html',
+    href: '/ai-builder/nz-funds.html',
   },
   {
     slug: 'ark-theses',
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     category: 'ai-experiments',
     status: 'live',
     date: '2026-05-08',
-    href: '/work/tennis-buddy.html',
+    href: '/ai-builder/tennis-buddy.html',
   },
   {
     slug: 'ai-data-analysis',

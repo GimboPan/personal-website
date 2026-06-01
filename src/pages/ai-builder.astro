@@ -2,11 +2,11 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import HeroSection from '~/components/HeroSection.astro';
 import PixelMascot from '~/components/PixelMascot.astro';
-import { projects, categories, type Category, type Project, type CatDef } from '~/data/work';
+import { projects, categories, type Category, type Project, type CatDef } from '~/data/ai-builder';
 
 /* Featured = top 3 by date across all categories. Each category section
    shows up to 3 most-recent items; counts and ordering are derived here
-   from the catalog in src/data/work.ts. */
+   from the catalog in src/data/ai-builder.ts. */
 const sortByDate = (a: Project, b: Project) => b.date.localeCompare(a.date);
 const featured = [...projects].sort(sortByDate).slice(0, 3);
 
@@ -26,13 +26,13 @@ const itemsByCategory = (cat: Category) =>
 ---
 
 <BaseLayout
-  title="AI X — Gimbo's Universe"
+  title="AI Builder — Gimbo's Universe"
   description="Building systems that scale human potential. Supply chain agents, investing research, AI experiments — what I'm building this year."
   ogImage="/og-work.jpg"
 >
   <HeroSection
     name="work-hero"
-    alt="AI X — a sculpted human form fragmenting into voxel architecture, surrounded by orbital schematics on a dark grid"
+    alt="AI Builder — a sculpted human form fragmenting into voxel architecture, surrounded by orbital schematics on a dark grid"
   />
 
   <!-- ============ FEATURED · LATEST 3 ============ -->

@@ -65,7 +65,7 @@ export const feed: FeedEntry[] = [
     kind: 'wip',
     title: 'Supply Chain Agent — a three-agent stack for the day job',
     module: 'WORK',
-    href: '/work',
+    href: '/ai-builder',
   },
   {
     date: '2026.05',
@@ -73,7 +73,7 @@ export const feed: FeedEntry[] = [
     kind: 'done',
     title: 'Tennis Buddy — the smallest possible match-log app',
     module: 'WORK',
-    href: '/work/tennis-buddy.html',
+    href: '/ai-builder/tennis-buddy.html',
   },
   {
     date: '2026.04',

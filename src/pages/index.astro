@@ -18,35 +18,35 @@ const actionColor: Record<string, string> = {
   description="My digital life OS — work, investing, the body, reading, writing, and life observations in New Zealand, all settling into one shareable place."
   hideCrt={true}
 >
-  <!-- ============ DISPATCH STRAP: editorial top-line announcing the newest piece.
+  <!-- ============ DISPATCH STRAP: editorial top-line featuring a pinned page.
        Sits between sticky nav and hero — scrolls away with the page. Pure
-       typography, no card chrome, intentionally quiet. Remove this <div>
-       when the article is no longer the latest. ============ -->
+       typography, no card chrome, intentionally quiet. Currently pinned to the
+       Tennis homepage; repoint href + copy below to feature something else. ============ -->
   <div class="relative border-b border-hairline">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
       <a
-        href="/ideas/intimate-animal-visual-guide.html"
+        href="/fitness/tennis"
         class="group flex items-center gap-3 sm:gap-4 py-2.5 text-[11px] sm:text-xs font-mono tracking-tool"
       >
-        <!-- NEW pulse pill -->
+        <!-- Featured pulse pill -->
         <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-lime text-canvas font-bold text-[10px] shrink-0">
           <span class="h-1 w-1 rounded-full bg-canvas animate-pulse"></span>
-          NEW
+          FEATURED
         </span>
 
         <!-- Meta — hidden on tiny screens to keep the line breathable -->
         <span class="hidden sm:inline text-ink-gray shrink-0">
-          // LATEST DISPATCH · 2026.06 · IDEAS
+          // FITNESS · TENNIS · 网球
         </span>
 
         <!-- Title — the heart of the message -->
         <span class="text-ink-white font-semibold group-hover:text-lime transition-colors truncate">
-          亲密的动物 · 全书可视化解读
+          On the court, I am present.
         </span>
 
         <!-- Subtitle — desktop only, fades into gray -->
         <span class="hidden lg:inline text-ink-gray truncate">
-          — Kinsey Institute 演化生物学家 Justin Garcia:人不只被性驱动,而是被「亲密」深刻塑造的 intimate animal
+          — 在看什么巡回赛、场下在练什么,以及我一再回去的那间 film room
         </span>
 
         <!-- Arrow pinned right -->

@@ -1,11 +1,11 @@
 # Ship Checklist
 
 > **Current version**: 🟢 **v0.11 — shipped 2026-05-29** ([CHANGELOG.md](./CHANGELOG.md))
-> **Live URL**: https://personal-website-zeta-nine-61.vercel.app
+> **Live URL**: https://gimbo.co.nz (custom domain wired 2026-06-01; `*.vercel.app` preview still works as fallback)
 > **Repo**: https://github.com/GimboPan/personal-website
 > **Auto-deploy**: ✅ `git push origin main` → ~30s → live
 
-Status as of 2026-05-27. Everything listed under **DONE** is wired up and committed; everything under **TODO (you)** needs your account/auth/decision.
+Status as of 2026-06-01. Everything listed under **DONE** is wired up and committed; everything under **TODO (you)** needs your account/auth/decision.
 
 ---
 
@@ -30,21 +30,11 @@ Status as of 2026-05-27. Everything listed under **DONE** is wired up and commit
 
 ## 🧑‍💻 TODO (you — needs your accounts)
 
-### 1. Pick + buy a domain
+### 1. Pick + buy a domain — ✅ DONE (2026-06-01)
 
-Open at the same time and compare price/availability:
-
-- [ ] [Cloudflare Registrar](https://dash.cloudflare.com/?to=/:account/domains) — best for cost, no markup
-- [ ] [Namecheap](https://www.namecheap.com)
-- [ ] [Porkbun](https://porkbun.com) — also no markup
-
-Recommended (in order):
-
-1. `gimbosuniverse.com` (~$10/yr) — matches the hero title verbatim
-2. `gimbo.life` (~$20–30/yr) — short, "virtual life" pun
-3. `panjunbao.com` (~$10/yr) — real name version
-
-**After purchase**: leave the registrar tab open, you'll add DNS records in step 4.
+Purchased **`gimbo.co.nz`** (apex, no-www canonical). The earlier candidates
+(`gimbosuniverse.com`, `gimbo.life`, `panjunbao.com`) were passed over in
+favour of the short NZ ccTLD.
 
 ### 2. Create the GitHub repo
 
@@ -64,34 +54,17 @@ Recommended (in order):
 4. Vercel auto-detects Astro. Defaults work — just click **Deploy**
 5. After ~30s you'll get a `*.vercel.app` preview URL. Open it. Confirm the site loads.
 
-### 4. Wire up your custom domain
+### 4. Wire up your custom domain — ✅ DONE (2026-06-01)
 
-In your new Vercel project:
+`gimbo.co.nz` added in **Vercel → Settings → Domains**, DNS records pointed at
+Vercel, and HTTPS auto-issued (Let's Encrypt). Apex serves as canonical; `www`
+redirects to apex. Site live at `https://gimbo.co.nz` ✅
 
-1. **Settings → Domains → Add**
-2. Type your purchased domain (e.g. `gimbosuniverse.com`) → Add
-3. Vercel will display the DNS records you need to add at your registrar:
-   - An `A` record for the apex (`@`) pointing to `76.76.21.21`
-   - A `CNAME` record for `www` pointing to `cname.vercel-dns.com`
-   (exact values shown by Vercel)
-4. Go back to Cloudflare/Namecheap → DNS settings → add those records
-5. Wait 5 min – 1 hr for DNS propagation
-6. HTTPS auto-issued by Vercel (Let's Encrypt)
-7. Site live at `https://gimbosuniverse.com` ✅
+### 5. Update the canonical site URL — ✅ DONE (2026-06-01)
 
-### 5. Update the canonical site URL
-
-After domain is live, update one constant so canonical URLs / sitemap / OG tags reflect the real domain:
-
-**Option A** — env var on Vercel:
-
-- Vercel → Settings → Environment Variables → add `SITE_URL=https://gimbosuniverse.com`
-- Trigger redeploy
-
-**Option B** — bake it in:
-
-- Edit `astro.config.mjs` → change `SITE` constant to your domain
-- Commit + push (auto-deploys)
+Baked in via **Option B**: `astro.config.mjs` `SITE` constant is now
+`https://gimbo.co.nz` (overridable with the `SITE_URL` env var if ever needed).
+Canonical URLs / sitemap / OG tags all reflect the real domain.
 
 ---
 
@@ -132,13 +105,14 @@ node scripts/inspect-overflow.mjs http://localhost:4322
 
 ---
 
-## 🚀 Live Deploy Status (auto-updated 2026-05-29)
+## 🚀 Live Deploy Status (auto-updated 2026-06-01)
 
-- **Production URL**: https://personal-website-zeta-nine-61.vercel.app
+- **Production URL**: https://gimbo.co.nz
+- **Preview/fallback URL**: https://personal-website-zeta-nine-61.vercel.app
 - **Vercel Project**: `panjunbao-8783s-projects/personal-website`
 - **GitHub repo**: https://github.com/GimboPan/personal-website
 - **Git auto-deploy**: ✅ enabled (every push to `main` triggers a production rebuild)
-- **Custom domain**: pending — TBD
+- **Custom domain**: ✅ `gimbo.co.nz` live (apex canonical, HTTPS via Let's Encrypt) — wired 2026-06-01
 - **Latest version**: v0.11 (`/work/btc-dashboard` — third-party BTC live board embedded via iframe under Investing, with a durable "how to read it" guide below it)
 
 To deploy a change: `git push origin main` → wait ~30s → live.

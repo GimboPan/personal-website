@@ -101,17 +101,22 @@ const spineWidth = (b) => b.spine ?? Math.min(52, Math.max(34, b.title.length * 
       {/* ── Currently reading: three covers ── */}
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentlyReading.map((b) => (
-          <article id={b.slug} class="card !p-0 overflow-hidden flex flex-col">
+          <article
+            id={b.slug}
+            class="reading-card card !p-0 overflow-hidden flex flex-col group transition-all duration-300 ease-out hover:-translate-y-1.5"
+          >
             {/* Cover */}
             {b.coverUrl ? (
-              <div class="aspect-[2/3] overflow-hidden bg-canvas">
+              <div class="aspect-[2/3] overflow-hidden bg-canvas relative">
                 <img
                   src={b.coverUrl}
                   alt={`${b.title} — ${b.author} · book cover`}
-                  class="w-full h-full object-cover"
+                  class="w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.07]"
                   loading="lazy"
                   decoding="async"
                 />
+                {/* sheen sweep on hover */}
+                <span class="cover-sheen" aria-hidden="true"></span>
               </div>
             ) : (
               <div
@@ -334,6 +339,35 @@ const spineWidth = (b) => b.spine ?? Math.min(52, Math.max(34, b.title.length * 
   </section>
 
   <style>
+    /* ── Currently-reading cover cards ───────────────────────────────── */
+    .reading-card:hover {
+      box-shadow:
+        0 0 0 1px rgba(159, 232, 112, 0.45),       /* lime ring */
+        0 22px 34px -14px rgba(0, 0, 0, 0.8);
+    }
+    /* A soft diagonal light sweep across the cover on hover */
+    .cover-sheen {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        115deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.18) 48%,
+        transparent 64%
+      );
+      transform: translateX(-120%);
+      transition: transform 0.7s ease;
+    }
+    .group:hover .cover-sheen {
+      transform: translateX(120%);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reading-card,
+      .reading-card:hover { transform: none; }
+      .cover-sheen { display: none; }
+    }
+
     /* ── Virtual wall bookshelf ──────────────────────────────────────── */
     .bookshelf {
       display: flex;

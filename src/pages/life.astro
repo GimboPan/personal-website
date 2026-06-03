@@ -1,7 +1,17 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import HeroSection from '~/components/HeroSection.astro';
-import { books, groups, talebOverview, talebBooks } from '~/data/life';
+import { currentlyReading, shelf, groups, talebOverview, talebBooks } from '~/data/life';
+
+// Split the shelf into two tiers once there are enough books to fill both;
+// with just a few, keep them together on a single plank.
+const shelfTiers =
+  shelf.length >= 4
+    ? [shelf.slice(0, Math.ceil(shelf.length / 2)), shelf.slice(Math.ceil(shelf.length / 2))]
+    : [shelf];
+// Organic spine heights (px) so the row never looks like a fence.
+const spineHeights = [208, 230, 196, 222, 204, 234, 200, 218, 212, 226];
+const spineWidth = (b) => b.spine ?? Math.min(52, Math.max(34, b.title.length * 3 + 26));
 ---
 
 <BaseLayout
@@ -78,17 +88,19 @@ import { books, groups, talebOverview, talebBooks } from '~/data/life';
     <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-16">
       <div class="flex items-end justify-between mb-8 gap-3">
         <div>
-          <div class="terminal text-lime mb-1.5 text-[11px]">// what's on the shelf</div>
+          <div class="terminal text-lime mb-1.5 text-[11px]">// what's on the table right now</div>
           <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
             Reading
           </h2>
         </div>
         <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0">
-          {books.length} on the shelf
+          {currentlyReading.length} now · {shelf.length} on the shelf
         </span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {books.map((b) => (
+
+      {/* ── Currently reading: three covers ── */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {currentlyReading.map((b) => (
           <article id={b.slug} class="card !p-0 overflow-hidden flex flex-col">
             {/* Cover */}
             {b.coverUrl ? (
@@ -142,6 +154,32 @@ import { books, groups, talebOverview, talebBooks } from '~/data/life';
               </p>
             </div>
           </article>
+        ))}
+      </div>
+
+      {/* ── The virtual shelf: read, spine-out, two tiers on the wall ── */}
+      <div class="mt-12 flex items-center gap-3">
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap">// on the shelf · 读过的</span>
+        <span class="h-px flex-1 bg-hairline"></span>
+      </div>
+
+      <div class="bookshelf mt-5">
+        {shelfTiers.map((tier) => (
+          <div class="tier">
+            <div class="books">
+              {tier.map((b, i) => (
+                <div
+                  class="spine"
+                  title={`${b.title} — ${b.author}`}
+                  style={`--hue:${b.hue}; height:${spineHeights[i % spineHeights.length]}px; width:${spineWidth(b)}px; color:${b.light ? '#1a1b17' : '#f5f5f0'};`}
+                >
+                  <span class="spine-title">{b.title}</span>
+                  <span class="spine-author">{b.author}</span>
+                </div>
+              ))}
+            </div>
+            <div class="board" aria-hidden="true"></div>
+          </div>
         ))}
       </div>
     </div>
@@ -294,4 +332,108 @@ import { books, groups, talebOverview, talebBooks } from '~/data/life';
       </ul>
     </div>
   </section>
+
+  <style>
+    /* ── Virtual wall bookshelf ──────────────────────────────────────── */
+    .bookshelf {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+      width: 100%;
+      max-width: 440px;   /* a compact wall unit, not a full-width plank */
+    }
+    .tier { position: relative; }
+
+    /* Row of standing books, sitting on the board below them */
+    .books {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      padding: 0 16px;
+      min-height: 210px;
+    }
+
+    /* A single spine — title at top, author at bottom, read vertically */
+    .spine {
+      writing-mode: vertical-rl;
+      display: flex;
+      flex-direction: row;            /* main axis = vertical in this writing mode */
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      flex: none;
+      border-radius: 3px 3px 1px 1px;
+      background:
+        linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.18) 0%,
+          rgba(255, 255, 255, 0.05) 9%,
+          transparent 17%,
+          transparent 76%,
+          rgba(0, 0, 0, 0.26) 92%,
+          rgba(0, 0, 0, 0.44) 100%
+        ),
+        var(--hue);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.22),   /* top page-block highlight */
+        0 6px 10px -6px rgba(0, 0, 0, 0.75);
+      cursor: default;
+      transition:
+        transform 0.24s cubic-bezier(0.2, 0.7, 0.3, 1),
+        box-shadow 0.24s ease;
+    }
+    .spine:hover {
+      transform: translateY(-14px);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.22),
+        0 18px 24px -10px rgba(0, 0, 0, 0.82);
+      z-index: 3;
+    }
+    .spine-title {
+      font-weight: 800;
+      font-size: 12.5px;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+      max-height: 78%;
+      overflow: hidden;
+    }
+    .spine-author {
+      font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.74;
+    }
+
+    /* The plank: a board fixed to the wall, casting a shadow beneath */
+    .board {
+      height: 15px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #2b2c22 0%, #1d1e16 55%, #141509 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(159, 232, 112, 0.16),   /* lit front edge */
+        inset 0 -2px 3px rgba(0, 0, 0, 0.5),
+        0 13px 18px -10px rgba(0, 0, 0, 0.85);       /* shadow on the wall */
+      position: relative;
+    }
+    /* Two small mounting brackets under the plank */
+    .board::before,
+    .board::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      width: 9px;
+      height: 11px;
+      background: linear-gradient(180deg, #23241c, #15160e);
+      border-radius: 0 0 2px 2px;
+    }
+    .board::before { left: 26px; }
+    .board::after { right: 26px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spine { transition: none; }
+      .spine:hover { transform: none; }
+    }
+  </style>
 </BaseLayout>

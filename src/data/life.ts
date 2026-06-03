@@ -14,6 +14,18 @@ export interface Book {
   hue?: string;
 }
 
+/** A book on the virtual shelf — shown spine-out, no cover. */
+export interface ShelfBook {
+  title: string;
+  author: string;
+  /** Spine colour. */
+  hue: string;
+  /** Use dark ink instead of light, for pale spines. */
+  light?: boolean;
+  /** Spine width in px; if omitted, derived from title length. */
+  spine?: number;
+}
+
 export interface Group {
   slug: string;
   emoji: string;
@@ -36,8 +48,8 @@ export interface TalebViz {
   status: 'live' | 'wip';
 }
 
-/* Reading list — currently on (or near) the table. */
-export const books: Book[] = [
+/* Reading list — the three currently on the table, shown cover-out. */
+export const currentlyReading: Book[] = [
   {
     slug: 'outlive',
     title: 'Outlive',
@@ -65,26 +77,13 @@ export const books: Book[] = [
     thoughts: "Half a sentence I now use weekly. The other half is 'let me'.",
     coverUrl: '/let-them.webp',
   },
-  {
-    slug: 'next-conversation',
-    title: 'The Next Conversation',
-    author: 'Jefferson Fisher',
-    tags: ['communication', 'relationships', 'argument'],
-    brief: "Argue less, talk more. Fisher (a litigator-turned-communicator) on getting to the conversation that actually matters.",
-    thoughts: "The bit on pausing before responding earns its keep on its own. The rest is bonus.",
-    coverUrl: '/next-conversation.webp',
-  },
-  {
-    slug: 'be-you-be-true',
-    title: '活出你的本來面目',
-    author: '鐘穎',
-    tags: ['psychology', 'jungian', 'self'],
-    // TODO: 用户改成自己语气的一句话
-    brief: '一本献给现代人的荣格心灵指南——在有限的人生里，剥开角色与期待，活出本来面目的真正意义。',
-    // TODO: 用户改成自己读后的真实感想
-    thoughts: '提醒自己：每一次"应该"背后，都藏着一个被让位的"我想"。',
-    coverUrl: '/book11.webp',
-  },
+];
+
+/* The virtual shelf — books already read, displayed spine-out on a
+   two-tier wall shelf. Add a line here and it slots onto the boards. */
+export const shelf: ShelfBook[] = [
+  { title: 'The Next Conversation', author: 'Jefferson Fisher', hue: '#c2603e' },
+  { title: '活出你的本來面目', author: '鐘穎', hue: '#6f8f6a' },
 ];
 
 /* ─── Taleb 专区 ──────────────────────────────────────────────────────────

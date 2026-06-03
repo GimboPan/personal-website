@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黑天鹅 The Black Swan — 深度解读</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f5f4ed; --ivory:#faf9f5; --sand:#e8e6dc; --near-black:#141413;
+    --dark-surface:#26262b; --terracotta:#c96442; --coral:#d97757; --charcoal:#4d4c48;
+    --olive:#5e5d59; --stone:#87867f; --silver:#b0aea5; --border-cream:#f0eee6;
+    --border-warm:#e8e6dc; --crimson:#b53333; --forest:#5e6a52; --gold:#b08a3e; --ink:#2a2d3a;
+    --serif:'Newsreader','Noto Serif SC',Georgia,'Songti SC',serif;
+    --sans:'Inter','Noto Sans SC',system-ui,'PingFang SC',sans-serif;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--parchment);color:var(--near-black);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ink),var(--terracotta));z-index:200;transition:width .12s ease-out;}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(245,244,237,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border-cream);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .brand{font-family:var(--serif);font-weight:500;font-size:18px;letter-spacing:.4px;color:var(--near-black);white-space:nowrap;}
+  .brand span{color:var(--terracotta);}
+  .nav-links{display:flex;gap:17px;flex-wrap:wrap;}
+  .nav-left{display:flex;align-items:center;gap:16px;}
+  .back-home{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--stone);text-decoration:none;padding:6px 12px;border:1px solid var(--border-warm);border-radius:999px;background:var(--ivory);transition:all .2s;white-space:nowrap;}
+  .back-home:hover{color:var(--accent,var(--terracotta));border-color:currentColor;transform:translateY(-1px);}
+  @media(max-width:560px){.back-home{padding:5px 10px;font-size:11px;}}
+  .nav-links a{font-size:13px;color:var(--olive);text-decoration:none;font-weight:500;transition:color .2s;white-space:nowrap;}
+  .nav-links a:hover{color:var(--terracotta);}
+  @media(max-width:1060px){.nav-links{display:none;}}
+
+  section{padding:90px 28px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+  .narrow{max-width:760px;margin:0 auto;}
+
+  .overline{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px;}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.2px;}
+  h2{font-size:clamp(29px,4.2vw,48px);line-height:1.16;margin-bottom:22px;}
+  h3{font-size:clamp(21px,2.6vw,29px);line-height:1.22;}
+  p{font-size:17px;line-height:1.74;color:var(--charcoal);}
+  .lead{font-size:clamp(18px,2.1vw,21px);line-height:1.66;color:var(--olive);}
+  .chapref{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--silver);}
+
+  /* hero */
+  .hero{padding:118px 28px 78px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 72% 56% at 50% 0%, rgba(42,45,58,.10), transparent 70%),var(--parchment);}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero .kicker{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--stone);margin-bottom:22px;}
+  .hero h1{font-size:clamp(52px,11vw,124px);line-height:.94;font-weight:500;margin-bottom:12px;letter-spacing:2px;}
+  .hero h1 .en-title{display:block;font-style:italic;color:var(--terracotta);font-size:clamp(24px,4.4vw,50px);margin-top:10px;letter-spacing:1px;}
+  .hero .subtitle{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,21px);color:var(--olive);margin:22px auto 14px;max-width:620px;}
+  .hero .author{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--olive);border:1px solid var(--border-warm);border-radius:24px;padding:8px 18px;background:var(--ivory);margin-top:14px;}
+  .hero .author b{color:var(--near-black);font-weight:600;}
+  .hero-meta{margin-top:38px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;}
+  .hero-meta .n{font-family:var(--serif);font-size:30px;color:var(--terracotta);line-height:1;}
+  .hero-meta .l{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--stone);margin-top:8px;}
+  .series-nav{margin-top:32px;font-size:13px;color:var(--stone);}
+  .series-nav a{color:var(--terracotta);text-decoration:none;border-bottom:1px solid rgba(201,100,66,.3);}
+
+  .pull{font-family:var(--serif);font-size:clamp(26px,4vw,44px);line-height:1.3;font-weight:500;color:var(--near-black);margin:30px 0;}
+  .pull em{font-style:italic;color:var(--terracotta);}
+
+  .thesis{background:var(--ivory);border-top:1px solid var(--border-cream);border-bottom:1px solid var(--border-cream);}
+
+  /* three traits */
+  .traits{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px;}
+  @media(max-width:760px){.traits{grid-template-columns:1fr;}}
+  .trait{background:var(--parchment);border:1px solid var(--border-warm);border-radius:16px;padding:28px 24px;text-align:center;}
+  .trait .tn{font-family:var(--serif);font-size:34px;color:var(--terracotta);line-height:1;}
+  .trait h4{font-size:19px;margin:12px 0 6px;}
+  .trait p{font-size:14.5px;color:var(--olive);line-height:1.6;}
+
+  /* dark sections */
+  .dark{background:var(--dark-surface);color:#e6e4dd;}
+  .dark .overline{color:var(--coral);}
+  .dark h2{color:#f5f4ed;}
+  .dark .lead{color:#b4b1a8;}
+
+  /* triplet */
+  .triplet{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;}
+  @media(max-width:760px){.triplet{grid-template-columns:1fr;}}
+  .fog{border:1px solid #43434a;border-radius:16px;padding:26px 24px;background:#2e2e34;}
+  .fog .fn{font-family:var(--serif);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#c9b78a;margin-bottom:12px;}
+  .fog h3{color:#f5f4ed;font-size:21px;margin-bottom:8px;}
+  .fog p{color:#b4b1a8;font-size:14.5px;line-height:1.62;}
+
+  /* Extremistan compare */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px;}
+  @media(max-width:680px){.compare{grid-template-columns:1fr;}}
+  .land{border-radius:16px;padding:28px 26px;border:1px solid #43434a;}
+  .land.med{background:#2c3230;}
+  .land.ext{background:#332b2b;}
+  .land .ln{font-family:var(--serif);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+  .land.med .ln{color:#9fc08a;} .land.ext .ln{color:#d98c7a;}
+  .land h3{color:#f5f4ed;font-size:23px;margin-bottom:10px;}
+  .land p{color:#b4b1a8;font-size:14.5px;line-height:1.62;margin-bottom:8px;}
+  .land ul{list-style:none;margin-top:10px;}
+  .land li{font-size:13.5px;color:#cbc8bf;padding:5px 0 5px 18px;position:relative;}
+  .land li::before{content:"›";position:absolute;left:0;color:#7d7c75;}
+
+  /* data table */
+  .dtable{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border-warm);border-radius:14px;overflow:hidden;margin:8px 0 4px;}
+  .dtable .col{padding:22px 24px;}
+  .dtable .col.g{background:var(--ivory);border-right:1px solid var(--border-warm);}
+  .dtable .col.m{background:#f3efe4;}
+  .dtable .ch{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+  .dtable .col.g .ch{color:var(--olive);} .dtable .col.m .ch{color:var(--terracotta);}
+  .dtable .rowx{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px dotted var(--border-warm);color:var(--charcoal);}
+  .dtable .rowx:last-child{border-bottom:none;}
+  .dtable .rowx b{font-family:var(--serif);font-variant-numeric:tabular-nums;color:var(--near-black);font-weight:600;}
+  .dtable-cap{font-size:13px;color:var(--stone);line-height:1.6;margin-top:14px;}
+
+  /* concept grid */
+  .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;}
+  @media(max-width:860px){.cgrid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.cgrid{grid-template-columns:1fr;}}
+  .concept{background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:22px 22px 24px;transition:transform .3s ease,box-shadow .3s ease;}
+  .concept:hover{transform:translateY(-4px);box-shadow:rgba(0,0,0,.07) 0 14px 32px;}
+  .concept .idx{font-family:var(--serif);font-size:13px;color:var(--terracotta);font-weight:600;letter-spacing:1px;}
+  .concept h4{font-size:18px;margin:8px 0 4px;color:var(--near-black);}
+  .concept .term-en{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--stone);display:block;margin-bottom:10px;}
+  .concept p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+
+  .alt{background:var(--ivory);border-top:1px solid var(--border-cream);}
+  .alt .concept{background:var(--parchment);}
+
+  .signature{border-left:3px solid var(--terracotta);padding:6px 0 6px 24px;margin:8px 0 30px;font-family:var(--serif);font-size:clamp(19px,2.4vw,26px);line-height:1.46;color:var(--near-black);font-style:italic;}
+  .signature span{display:block;font-style:normal;font-family:var(--sans);font-size:13.5px;color:var(--stone);margin-top:12px;letter-spacing:.3px;}
+
+  .story{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px;}
+  @media(max-width:760px){.story{grid-template-columns:1fr;}}
+  .case{background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:22px 24px;position:relative;}
+  .alt .case{background:var(--parchment);}
+  .case .ct{font-family:var(--serif);font-size:18.5px;color:var(--near-black);margin-bottom:3px;font-weight:500;}
+  .case .ce{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--stone);display:block;margin-bottom:11px;}
+  .case p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+  .case .pin{position:absolute;top:20px;right:22px;font-family:var(--serif);font-size:12.5px;color:var(--terracotta);font-variant-numeric:tabular-nums;font-weight:600;}
+
+  /* barbell */
+  .barbell{margin:34px 0 6px;}
+  .bb-track{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;border-radius:16px;overflow:hidden;border:1px solid var(--border-warm);}
+  @media(max-width:760px){.bb-track{grid-template-columns:1fr;}}
+  .bb-end{padding:28px 26px;background:var(--ivory);}
+  .bb-end.safe{border-right:1px solid var(--border-warm);}
+  .bb-mid{padding:28px 16px;background:repeating-linear-gradient(45deg,#efe9df,#efe9df 8px,#e8e1d4 8px,#e8e1d4 16px);display:flex;align-items:center;justify-content:center;text-align:center;}
+  .bb-mid span{font-size:13px;color:var(--crimson);font-weight:600;line-height:1.5;}
+  .bb-end .pct{font-family:var(--serif);font-size:40px;color:var(--terracotta);line-height:1;}
+  .bb-end h4{font-size:17px;margin:9px 0 6px;color:var(--near-black);}
+  .bb-end p{font-size:14px;color:var(--olive);line-height:1.56;}
+
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px;}
+  @media(max-width:760px){.rules{grid-template-columns:1fr;}}
+  .rule{display:flex;gap:16px;align-items:flex-start;background:var(--ivory);border:1px solid var(--border-warm);border-radius:12px;padding:20px 22px;}
+  .rule .r-n{font-family:var(--serif);font-size:22px;color:var(--terracotta);line-height:1;flex-shrink:0;width:30px;}
+  .rule h4{font-size:16.5px;margin-bottom:5px;color:var(--near-black);}
+  .rule p{font-size:14px;color:var(--olive);line-height:1.56;}
+
+  .qgrid{columns:2;column-gap:18px;margin-top:38px;}
+  @media(max-width:760px){.qgrid{columns:1;}}
+  .qcard{break-inside:avoid;margin-bottom:18px;background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:24px 24px 20px;}
+  .qcard .q{font-family:var(--serif);font-size:18px;line-height:1.5;color:var(--near-black);}
+  .qcard .src{display:block;font-size:12.5px;color:var(--stone);margin-top:12px;letter-spacing:.3px;}
+
+  .takeaways{background:var(--dark-surface);color:#e6e4dd;}
+  .takeaways .overline{color:var(--coral);}
+  .takeaways h2{color:#f5f4ed;}
+  .take-grid{margin-top:40px;display:flex;flex-direction:column;gap:2px;}
+  .take{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:24px 0;border-top:1px solid #43434a;}
+  .take:last-child{border-bottom:1px solid #43434a;}
+  .take .t-num{font-family:var(--serif);font-size:30px;color:var(--coral);line-height:1;}
+  .take h4{font-size:19px;color:#f5f4ed;margin-bottom:7px;}
+  .take p{font-size:14.5px;color:#b4b1a8;line-height:1.62;}
+
+  .closing{background:var(--parchment);text-align:center;}
+  .final{font-family:var(--serif);font-size:clamp(23px,3.4vw,36px);line-height:1.4;color:var(--near-black);font-weight:500;}
+  .final b{color:var(--terracotta);font-weight:600;}
+
+  footer{background:var(--near-black);color:#9a988f;padding:60px 28px;text-align:center;}
+  .ft-brand{font-family:var(--serif);font-size:20px;color:#f5f4ed;margin-bottom:16px;letter-spacing:.5px;}
+  .ft-brand span{color:var(--coral);}
+  footer p{font-size:13px;color:#9a988f;line-height:1.8;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="/life#taleb" class="back-home" aria-label="back to Gimbo's Universe"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+      <div class="brand">黑天鹅 <span>· The Black Swan</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#thesis">什么是黑天鹅</a>
+      <a href="#fog">三重迷雾</a>
+      <a href="#stan">两个世界</a>
+      <a href="#fool">如何自欺</a>
+      <a href="#predict">预测之耻</a>
+      <a href="#bell">智力大骗局</a>
+      <a href="#dowhat">怎么办</a>
+      <a href="#robust">成熟的视角</a>
+      <a href="#quotes">金句</a>
+      <a href="#takeaways">收束</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">塔勒布不确定性五部曲 · 单本深度解读 · 02</div>
+    <h1>黑天鹅<span class="en-title">The Black Swan</span></h1>
+    <p class="subtitle">如何应对不可预知的未来 · The Impact of the Highly Improbable</p>
+    <div class="author"><span>🦢</span> Nassim Nicholas Taleb · 万丹 / 刘宁 译 · 中信出版社 · 2007（升级版）</div>
+    <div class="hero-meta">
+      <div><div class="n">2007</div><div class="l">出版 · 一举封神</div></div>
+      <div><div class="n">3</div><div class="l">个特征定义一只黑天鹅</div></div>
+      <div><div class="n">1</div><div class="l">只就能推翻千年定论</div></div>
+      <div><div class="n">2008</div><div class="l">出版次年即被金融危机验证</div></div>
+    </div>
+    <p class="series-nav">这是 Incerto 系列提出“问题”的一本。 前作：<a href="#">随机漫步的傻瓜</a>（运气）→ 本书：黑天鹅（不可预测）→ 后续：<a href="#">反脆弱</a>（解法）</p>
+  </div>
+</header>
+
+<!-- THESIS -->
+<section class="thesis" id="thesis">
+  <div class="wrap narrow">
+    <div class="overline reveal">核心命题 · What Is a Black Swan</div>
+    <h2 class="reveal">发现澳洲黑天鹅之前，所有欧洲人都确信天鹅是白的</h2>
+    <p class="lead reveal">这个信念无比牢固，因为它被数百万次观察“完全证实”。可只需要<strong style="color:var(--near-black)">看见一次</strong>黑天鹅（据说很丑），千年定论就崩塌了。这说明：我们从观察和经验中获得的知识，有着<strong style="color:var(--near-black)">严重的局限性和脆弱性</strong>。</p>
+  </div>
+  <div class="wrap">
+    <div class="traits reveal">
+      <div class="trait"><div class="tn">1</div><h4>稀有性</h4><p>它在通常的预期之外——过去没有任何能确定它会发生的证据。</p></div>
+      <div class="trait"><div class="tn">2</div><h4>极大的冲击性</h4><p>它一旦发生，就产生极端的、颠覆性的影响。</p></div>
+      <div class="trait"><div class="tn">3</div><h4>事后可预测性</h4><p>尽管出乎意料，人的本性却会在事后为它编造理由，让它显得可解释、可预测。</p></div>
+    </div>
+  </div>
+  <div class="wrap narrow">
+    <p class="pull reveal">“你不知道的事，<em>比你知道的更有意义。</em>”</p>
+    <p class="reveal">少数几只黑天鹅，几乎解释了世界上发生的一切——从宗教的胜利、世界大战，到你与配偶的相遇、你突然的致富或潦倒。<strong style="color:var(--near-black)">人生是一连串重大意外的累积，几乎没有一件是按计划发生的。</strong>而我们最大的问题，是对它视而不见，还用模型假装能控制它。<span class="chapref">（序言）</span></p>
+  </div>
+</section>
+
+<!-- TRIPLET OF OPACITY -->
+<section class="dark" id="fog">
+  <div class="wrap">
+    <div class="overline reveal">认知陷阱 · The Triplet of Opacity</div>
+    <h2 class="reveal">历史不会爬行，只会跳跃</h2>
+    <p class="lead reveal narrow">塔勒布在黎巴嫩长大——一个 13 个世纪奇迹般共存的“天堂”，被一只横空出世的黑天鹅（内战）在一夜之间变成地狱。他由此看透：我们的头脑，是一台巨大的“回头看的机器”。对待历史，人类会犯三个毛病，他称之为“三重迷雾”。</p>
+    <div class="triplet reveal">
+      <div class="fog">
+        <div class="fn">迷雾一 · Illusion</div>
+        <h3>假想的理解</h3>
+        <p>在一个复杂得超出想象的世界里，我们都以为自己知道正在发生什么。每天发生着完全出乎意料的事，人们却认识不到自己没预测到——还总能在事后给出“逻辑自洽”的解释。</p>
+      </div>
+      <div class="fog">
+        <div class="fn">迷雾二 · Hindsight</div>
+        <h3>反省的偏差</h3>
+        <p>我们只能从后视镜里评价事物。历史在历史书里，比在真实经验中显得更清晰、更有条理。事后合理化降低了事件的“稀有感”，让它看上去本就可以理解。</p>
+      </div>
+      <div class="fog">
+        <div class="fn">迷雾三 · Platonicity</div>
+        <h3>高估事实 + 柏拉图化</h3>
+        <p>我们崇拜权威与饱学之士的分类。塔勒布把这种只关注纯粹、清晰“形式”的错误叫<strong style="color:#cbc8bf">柏拉图化</strong>。在“柏拉图边界”——模型与混乱现实交锋的爆炸性边界——黑天鹅就此诞生。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTREMISTAN -->
+<section id="stan">
+  <div class="wrap">
+    <div class="overline reveal">核心模型 · Two Kinds of Randomness</div>
+    <h2 class="reveal">你以为自己住在平均斯坦，其实住在极端斯坦</h2>
+    <p class="lead reveal narrow">塔勒布把世界分成两个国度。区分它们，靠一个简单测试：单个极端样本，能不能撼动整体？这决定了你能从数据里学到多少东西。</p>
+  </div>
+  <div class="wrap dark" style="border-radius:24px;padding:48px 40px;margin-top:8px;">
+    <div class="compare reveal">
+      <div class="land med">
+        <div class="ln">平均斯坦 · Mediocristan</div>
+        <h3>温和、可预测</h3>
+        <p>单个事件影响很小，只有群体影响才大。样本足够大时，最大的观察值也微不足道。</p>
+        <ul>
+          <li>身高、体重、卡路里摄入</li>
+          <li>测 100 个人就能知道平均身高</li>
+          <li>没有 2.7 米高的人</li>
+          <li>数据越多，知识越可靠</li>
+          <li>钟形曲线（高斯）适用</li>
+        </ul>
+      </div>
+      <div class="land ext">
+        <div class="ln">极端斯坦 · Extremistan</div>
+        <h3>狂野、黑天鹅的产地</h3>
+        <p>个体能对整体产生不成比例的影响。一个样本就能颠覆全部平均值。几乎所有社会问题都住在这里。</p>
+        <ul>
+          <li>财富、书籍销量、市场、伤亡</li>
+          <li>一个人可身家千亿</li>
+          <li>两人销量共 100 万 → 99.3 万 + 7000</li>
+          <li>数据再多，知识增长极慢</li>
+          <li>钟形曲线在这里是骗局</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap narrow">
+    <p class="reveal" style="margin-top:30px;"><strong style="color:var(--near-black)">这背后是“可扩展”职业的区别。</strong>牙医的收入受时间限制（非可扩展，属平均斯坦）；作家、交易员、演员的回报没有上限（可扩展，属极端斯坦）。塔勒布 22 岁时一位沃顿学长的建议——找一份“报酬具有突破性”的职业——把他引向了归纳问题，引向了黑天鹅。<span class="chapref">（第 3 章）</span></p>
+  </div>
+</section>
+
+<!-- HOW WE FOOL OURSELVES -->
+<section class="alt" id="fool">
+  <div class="wrap">
+    <div class="overline reveal">五种自欺 · How We Fool Ourselves</div>
+    <h2 class="reveal">我们如何对黑天鹅视而不见</h2>
+    <p class="lead reveal narrow">塔勒布在第一部分把“盲视”拆成五个相互独立、最终又归于同一个的机制。它们都源于一件事：<strong style="color:var(--near-black)">美化的、具体的、被证实的东西容易被看见，而抽象的、沉默的、没发生的东西被忽略。</strong></p>
+
+    <div class="signature reveal">
+      一只火鸡被喂养了 1000 天，每一次喂食都让它更确信“人类爱我”。
+      <span>感恩节前的星期三下午，一件意料之外的事发生了。当危险最大时，它的安全感却达到了最大值。“喂你的那只手，也可能是拧断你脖子的那只手。”——这就是归纳问题（罗素/休谟），1000 天的历史，不会告诉你第 1001 天的任何事。</span>
+    </div>
+
+    <div class="cgrid reveal">
+      <div class="concept">
+        <div class="idx">01</div>
+        <h4>火鸡问题（归纳问题）</h4>
+        <span class="term-en">The Turkey Problem</span>
+        <p>从过去推断未来的天真。1907 年泰坦尼克船长说：“我一生中从未遇到任何值得一提的事故。”——5 年后他的船沉了。“保守的”银行也一样：1982 年一个夏天，亏掉了美国银行业有史以来的全部盈利。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">02</div>
+        <h4>证实谬误 / 回路谬误</h4>
+        <span class="term-en">Confirmation / Round-trip Fallacy</span>
+        <p>“没有证据表明有黑天鹅” ≠ “有证据表明没有黑天鹅”。这两句之间的逻辑鸿沟巨大，但在你脑中看上去很小，于是被偷偷替换。我们天生爱找证实，而非证伪。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">03</div>
+        <h4>叙述谬误</h4>
+        <span class="term-en">The Narrative Fallacy</span>
+        <p>人脑无法忍受随机，必须给一切编一个因果故事。事后的叙事让我们以为“懂了”，其实只是更安心了。提供解释的人越聪明，解释越空洞——且看上去前后并不矛盾。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">04</div>
+        <h4>沉默的证据</h4>
+        <span class="term-en">Silent Evidence</span>
+        <p>神庙墙上挂满获救者的还愿画，可祈祷后照样淹死的人不会留下任何画。历史由幸存者书写，失败者沉默——这让我们系统性高估某些策略，也高估了世界的稳定。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">05</div>
+        <h4>游戏谬误</h4>
+        <span class="term-en">The Ludic Fallacy</span>
+        <p>赌场里的概率是规整、可计算的；现实世界的随机是野性、无边界的。把骰子和股市混为一谈，是“受过教育的傻瓜”最常犯的错。这幢建筑在柏拉图边界内，而生活在它之外。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">06</div>
+        <h4>领域特殊性</h4>
+        <span class="term-en">Domain Specificity</span>
+        <p>统计学教授一上街就会犯最基本的推断错误。人们坐手扶电梯上楼，再奔向台阶式健身器。我们的大脑缺一台“全能中央计算机”——知识无法自动从教室搬到生活。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREDICTION -->
+<section id="predict">
+  <div class="wrap">
+    <div class="overline reveal">预测之耻 · The Scandal of Prediction</div>
+    <h2 class="reveal">我们知道得越少，却越自信</h2>
+    <p class="lead reveal narrow">第二部分的核心是<strong style="color:var(--near-black)">认知自大</strong>：我们高估自己拥有的知识，低估不确定性。最糟的是——我们从不提自己在几乎所有大事上的预测失败。</p>
+
+    <div class="signature reveal">
+      请你估一个数字，并给出你 98% 确信的范围，比如“凯瑟琳女皇的情人在 34 到 63 之间”。
+      <span>按理说，错误率应该是 2%。但实验做了几十次，跨越职业与文化，实际错误率高达 45%——我们对自己知识的自信，过头了 22 倍。事件越罕见，自大越严重。哈佛商学院的学生表现尤其糟。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <span class="pin">¥1.04 亿</span>
+        <div class="ct">悉尼歌剧院</div>
+        <span class="ce">A Monument to Hubris</span>
+        <p>原计划造价 700 万澳元、1963 年开放。结果晚了 10 年、规模更小，却花了近 1.04 亿——14 倍。它是一座纪念人类“预测、计划、把握未来失败”的纪念碑。</p>
+      </div>
+      <div class="case">
+        <div class="ct">专家问题</div>
+        <span class="ce">The Expert Problem</span>
+        <p>在受黑天鹅影响的领域，所谓“专家”并不比出租车司机更懂——只是更会阐述、更会用数学把你弄晕。区别在于：出租车司机知道自己不是专家，而精英思想家以为自己什么都懂。</p>
+      </div>
+      <div class="case">
+        <div class="ct">信息有害于知识</div>
+        <span class="ce">Information Harms Knowledge</span>
+        <p>戴着耳机麦克风“与伦敦保持联系”的忙碌经理人，靠显得忙碌来邀功。掌握越多细节，越自信，却未必越准确。塔勒布于是戒掉了报纸——每年省下读上百本书的时间。</p>
+      </div>
+      <div class="case">
+        <div class="ct">结群</div>
+        <span class="ce">Herding</span>
+        <p>100 个独立记者会给你 100 种观点；但因循守旧地报道，观点多样性骤降——他们分析相同的因素，得出趋同的结论。在许多问题上，观点之间的差异，远小于平均观点与真理之间的差异。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BELL CURVE -->
+<section class="alt" id="bell">
+  <div class="wrap">
+    <div class="overline reveal">智力大骗局 · The Great Intellectual Fraud</div>
+    <h2 class="reveal">一张表，看穿钟形曲线的谎言</h2>
+    <p class="lead reveal narrow">塔勒布在法兰克福机场盯着一张印着高斯头像和钟形曲线的 10 马克纸币——而马克曾在几年内从 1 美元兑 4 马克贬到兑 4 万亿。<strong style="color:var(--near-black)">没有比这更反讽的了。</strong>钟形曲线下，极端值的概率指数级飞快归零；而财富、市场这类“极端斯坦”里，概率衰减极慢甚至不衰减（幂律/分形）。</p>
+
+    <div class="dtable reveal">
+      <div class="col g">
+        <div class="ch">高斯世界 · 身高（平均斯坦）</div>
+        <div class="rowx"><span>高于均值 10cm</span><b>1 / 6.3</b></div>
+        <div class="rowx"><span>高于均值 20cm</span><b>1 / 44</b></div>
+        <div class="rowx"><span>高于均值 60cm</span><b>1 / 10 亿</b></div>
+        <div class="rowx"><span>高于均值 70cm</span><b>1 / 7800 亿</b></div>
+        <div class="rowx"><span>高于均值 100cm</span><b>近乎为零</b></div>
+      </div>
+      <div class="col m">
+        <div class="ch">分形世界 · 财富（极端斯坦）</div>
+        <div class="rowx"><span>净资产 &gt; 100 万</span><b>1 / 62.5</b></div>
+        <div class="rowx"><span>&gt; 200 万</span><b>1 / 250</b></div>
+        <div class="rowx"><span>&gt; 400 万</span><b>1 / 1000</b></div>
+        <div class="rowx"><span>&gt; 800 万</span><b>1 / 4000</b></div>
+        <div class="rowx"><span>每翻一倍</span><b>概率只 ÷4</b></div>
+      </div>
+    </div>
+    <p class="dtable-cap reveal">身高翻不出 3 米，财富却能翻到天上。<strong style="color:var(--charcoal)">把为身高造的工具拿去量财富，就是 2008 年所有风险模型的原罪。</strong></p>
+
+    <div class="story reveal" style="margin-top:30px;">
+      <div class="case">
+        <span class="pin">20σ+</span>
+        <div class="ct">1987 年崩盘</div>
+        <span class="ce">The Crash</span>
+        <p>历史上最大的单日崩盘，是 20 多个标准差的事件。若世界真服从高斯分布，这种事要等上宇宙年龄的几十亿倍才发生一次。它却真的发生了，且不是因为任何新闻。</p>
+      </div>
+      <div class="case">
+        <div class="ct">灰天鹅 vs 黑天鹅</div>
+        <span class="ce">Gray Swan · Mandelbrot</span>
+        <p>曼德尔布罗特的分形随机性能“驯服”一部分黑天鹅，把它们变成可建模的<strong style="color:var(--olive)">灰天鹅</strong>（罕见但可想象其量级）。但仍有真正的“未知的未知”无法驯服。知道野兽在哪，你会安全得多。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO DO -->
+<section id="dowhat">
+  <div class="wrap">
+    <div class="overline reveal">怎么办 · What to Do If You Can't Predict</div>
+    <h2 class="reveal">放弃预测，转而改造你的“暴露”</h2>
+    <p class="lead reveal narrow">知道你无法预测，并不意味着你不能从未来的不可预测性中获益。所有建议归于一点：<strong style="color:var(--near-black)">不对称性</strong>——把自己放到“好结果远大于坏结果”的位置上。</p>
+
+    <div class="signature reveal">
+      做决策时，你只需了解事件的“影响”（这是你能知道的），不需要了解它的“概率”（这是你不可能知道的）。
+      <span>这就是被误称为“帕斯卡赌注”的思想内核：我不知道地震的概率，但我能想象它对旧金山的影响。稀有事件的概率不可计算，但它对你的冲击，容易判断得多。</span>
+    </div>
+
+    <div class="barbell reveal">
+      <div class="bb-track">
+        <div class="bb-end safe">
+          <div class="pct">85–90%</div>
+          <h4>极度安全</h4>
+          <p>国债等你能找到的最安全的工具。没有任何黑天鹅能击穿你的“底线”——这是你“活着等待时机”的地基。</p>
+        </div>
+        <div class="bb-mid"><span>✕<br>中等风险<br>（你怎么知道<br>它是中等？）</span></div>
+        <div class="bb-end">
+          <div class="pct">10–15%</div>
+          <h4>极度投机</h4>
+          <p>用尽可能多的杠杆（如期权）押高赔率的小赌注。最坏只亏这一截，最好被正面黑天鹅砸中——一个“凸性”组合。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="story reveal" style="margin-top:30px;">
+      <div class="case">
+        <div class="ct">区分两种黑天鹅行业</div>
+        <span class="ce">Positive vs Negative</span>
+        <p>出版、科研、风投、电影是<strong style="color:var(--olive)">正面黑天鹅</strong>行业（小损失博大收益）；银行放贷、保险是<strong style="color:var(--olive)">负面黑天鹅</strong>行业（最好收回贷款，最坏血本无归）。站对行业，比预测更重要。</p>
+      </div>
+      <div class="case">
+        <div class="ct">画家阿佩勒斯的海绵</div>
+        <span class="ce">Maximize Serendipity</span>
+        <p>画家画不出马嘴的泡沫，愤怒中把洗笔的海绵扔向画布——完美的泡沫出现了。把生活中的美好偶遇最大化：去参加聚会，收集免费的“非彩票”，机会来了取消一切计划。</p>
+      </div>
+    </div>
+
+    <div class="rules reveal">
+      <div class="rule"><div class="r-n">1</div><div><h4>在小事上犯傻，别在大事上</h4><p>保持人性，接受认知自大。可以预测下次野餐的天气，但别信政府对 2040 年社保的预测。按“危害程度”而非“好听程度”辨别观点。</p></div></div>
+      <div class="rule"><div class="r-n">2</div><div><h4>作好准备，而非预测</h4><p>把精力放在“对所有可能结果作好准备”上。小心那些神奇数字的麻痹作用。达到无限警惕是不可能的。</p></div></div>
+      <div class="rule"><div class="r-n">3</div><div><h4>爱上失败</h4><p>世界靠大的随机变化前进。美国的超常创新力，正源于它的文化鼓励失败、为世界承担小风险——先实施，再完善。</p></div></div>
+      <div class="rule"><div class="r-n">4</div><div><h4>别和预测者争论</h4><p>除非是拿他们取笑。哀叹不可预测是没用的，他们靠这个赚钱。若听到“均衡”“正态分布”，忽视他，或往他衬衣里放只老鼠。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROBUSTNESS (postscript) -->
+<section class="alt" id="robust">
+  <div class="wrap">
+    <div class="overline reveal">升级版后记 · On Robustness and Fragility</div>
+    <h2 class="reveal">写完三年后，他向最古老的智者求教：大自然</h2>
+    <p class="lead reveal narrow">升级版的长文后记，是《黑天鹅》通向《反脆弱》的桥。它把哲学落到了一个最务实的问题上——<strong style="color:var(--near-black)">既然测不准，如何让自己（和社会）变得不那么脆弱？</strong>答案是：模仿大自然这位历尽沧桑、从不患阿尔茨海默的老人。</p>
+
+    <div class="cgrid reveal">
+      <div class="concept">
+        <div class="idx">01</div>
+        <h4>冗余，而非优化</h4>
+        <span class="term-en">Redundancy not Optimization</span>
+        <p>大自然给你两个肾——看似低效，实为保险。而经济学家会让你卖掉一个、夜里出租眼睛。“天真的优化”最终会要你的命。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">02</div>
+        <h4>债务让你脆弱</h4>
+        <span class="term-en">Debt = Fragility</span>
+        <p>巴比伦人早就视债务为恶魔。借钱投资，失败了你照样欠债。债务是押在“未来可靠”上的砝码——而我们都低估黑天鹅。宗教禁令，正是为了保护我们免于认知自大。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">03</div>
+        <h4>大，就是丑陋和脆弱</h4>
+        <span class="term-en">Big is Fragile</span>
+        <p>大自然限制成员的“大小”，但不限制它们之间的互动。雷曼兄弟一倒，整座金融大厦倾覆。规模带来的“效率”是可见的，脆弱性是隐藏的。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">04</div>
+        <h4>老的，是智慧的</h4>
+        <span class="term-en">The Oldest is Wisest</span>
+        <p>几十亿年的存在，比 1000 天的生存更有说服力（林迪效应的雏形）。岁月的沧桑，意味着对黑天鹅更强的抵御力——这正是后古典经验主义医者的智慧。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">05</div>
+        <h4>对气候的审慎</h4>
+        <span class="term-en">The Precautionary Principle</span>
+        <p>“我们没有证据证明在危害大自然”——最好的回应是“我们也没有证据证明没有”。举证责任在破坏者，不在保护者。在无知与不透明下，审慎是稳妥之道。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">06</div>
+        <h4>第四象限</h4>
+        <span class="term-en">The Fourth Quadrant</span>
+        <p>在“极端斯坦 + 复杂收益”的第四象限，所有模型都危险——没有模型比任何模型都好。唯一的解法：别让自己陷进去；做不到，就用杠铃“截短”尾部曝光。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section id="quotes">
+  <div class="wrap">
+    <div class="overline reveal">原书金句 · In His Words</div>
+    <h2 class="reveal">几句留在心里的话</h2>
+    <div class="qgrid reveal">
+      <div class="qcard"><p class="q">“你所需要的，只是看见一次黑天鹅。”</p><span class="src">— 序言</span></div>
+      <div class="qcard"><p class="q">“历史和社会不是缓慢爬行的，而是在一步步地跳跃。我们却喜欢相信那些能够预测的、小的、逐步的演变。”</p><span class="src">— 第 1 章</span></div>
+      <div class="qcard"><p class="q">“某件事 1000 天的历史，不会告诉你第 1001 天的任何信息。”</p><span class="src">— 火鸡问题 · 第 4 章</span></div>
+      <div class="qcard"><p class="q">“我们尊重发生的事，忽视本来可能发生的事。也就是说，我们天生肤浅，却浑然不知。”</p><span class="src">— 第 9 章</span></div>
+      <div class="qcard"><p class="q">“做决策时，你只需要了解事件的影响，不需要了解它的可能性。”</p><span class="src">— 第 13 章</span></div>
+      <div class="qcard"><p class="q">“预测是很难的，尤其是对于未来。”</p><span class="src">— 优吉·贝拉，第 9 章引</span></div>
+      <div class="qcard"><p class="q">“当我能受到正面黑天鹅影响时，我非常冒险；当我可能被负面黑天鹅袭击时，我非常保守。”</p><span class="src">— 结语</span></div>
+      <div class="qcard"><p class="q">“错过列车，只有在你追赶它时才是痛苦的。”</p><span class="src">— 结语</span></div>
+      <div class="qcard"><p class="q">“你就是黑天鹅。”——你活着本身，就是一个概率微小的、极大的偶然。</p><span class="src">— 结语</span></div>
+      <div class="qcard"><p class="q">“我们没有证据证明自己在危害大自然，最好的回应是——我们也没有证据证明没有。”</p><span class="src">— 后记 · 强大与脆弱</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAKEAWAYS -->
+<section class="takeaways" id="takeaways">
+  <div class="wrap narrow">
+    <div class="overline reveal">收束 · Five Insights</div>
+    <h2 class="reveal">读完《黑天鹅》，留在心里的五句话</h2>
+    <div class="take-grid">
+      <div class="take reveal"><div class="t-num">1</div><div><h4>历史由极端事件主宰</h4><p>少数稀有、极端、事后才“显然”的黑天鹅，几乎解释了一切。我们却盯着细枝末节，对真正重要的东西视而不见。</p></div></div>
+      <div class="take reveal"><div class="t-num">2</div><div><h4>别做那只火鸡</h4><p>用过去的数据推断未来，恰恰在你最有信心、最安全的时刻，最危险。喂你的那只手，也可能拧断你的脖子。</p></div></div>
+      <div class="take reveal"><div class="t-num">3</div><div><h4>你住在极端斯坦</h4><p>而你的直觉和工具是为平均斯坦造的。把钟形曲线用在财富与市场上，是一场“智力大骗局”——它让你戴着“一切正常”的眼镜走向悬崖。</p></div></div>
+      <div class="take reveal"><div class="t-num">4</div><div><h4>放弃预测，改造暴露</h4><p>测不准概率，但你能判断影响。用杠铃锁死下行、敞开上行；多收集正面黑天鹅，警惕负面黑天鹅。无须预测，照样受益。</p></div></div>
+      <div class="take reveal"><div class="t-num">5</div><div><h4>谦卑，并向自然学习</h4><p>冗余而非优化，无债而非杠杆，小而非大，老而非新。在你看不懂的复杂系统面前，审慎是唯一的智慧。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap narrow">
+    <div class="overline reveal" style="color:var(--coral);">结语 · You Are the Black Swan</div>
+    <h2 class="reveal">一句话，总结这本书</h2>
+    <p class="final reveal">
+      你无法预测那只黑天鹅，<br>但你可以决定——<br>当它降临时，<b>站在受益的一边</b>，<br>而不是<b>被它击碎的一边</b>。
+    </p>
+    <p class="reveal" style="font-size:17px;color:var(--stone);margin-top:30px;">
+      不要再像一个忘恩负义者，得到一座城堡，还介意浴室里的霉菌。<br>请记住——<strong style="color:var(--olive)">你活着本身，就是一只黑天鹅。</strong>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p class="ft-brand">黑天鹅 <span>· The Black Swan</span></p>
+  <p>
+    Nassim Nicholas Taleb《黑天鹅——如何应对不可预知的未来》（升级版）· 万丹 / 刘宁 译 · 中信出版社<br>
+    本页为单本精读笔记的可视化呈现 · 仅供学习与讨论 · 全部概念与引文取自原书<br>
+    塔勒布不确定性五部曲（Incerto）系列单本深读 · 02 / 黑天鹅 · Design system: Claude — Warm &amp; Editorial
+  </p>
+</footer>
+
+<script>
+  const bar=document.getElementById('progress');
+  function onScroll(){const h=document.documentElement;bar.style.width=((h.scrollTop)/(h.scrollHeight-h.clientHeight)*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

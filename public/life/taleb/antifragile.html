@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>反脆弱 Antifragile — 深度解读</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f5f4ed; --ivory:#faf9f5; --sand:#e8e6dc; --near-black:#141413;
+    --dark-surface:#30302e; --terracotta:#c96442; --coral:#d97757; --charcoal:#4d4c48;
+    --olive:#5e5d59; --stone:#87867f; --silver:#b0aea5; --border-cream:#f0eee6;
+    --border-warm:#e8e6dc; --crimson:#b53333; --forest:#5e6a52; --gold:#b08a3e;
+    --serif:'Newsreader','Noto Serif SC',Georgia,'Songti SC',serif;
+    --sans:'Inter','Noto Sans SC',system-ui,'PingFang SC',sans-serif;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--parchment);color:var(--near-black);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--terracotta),var(--coral));z-index:200;transition:width .12s ease-out;}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(245,244,237,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border-cream);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .brand{font-family:var(--serif);font-weight:500;font-size:18px;letter-spacing:.4px;color:var(--near-black);white-space:nowrap;}
+  .brand span{color:var(--terracotta);}
+  .nav-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .nav-left{display:flex;align-items:center;gap:16px;}
+  .back-home{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--stone);text-decoration:none;padding:6px 12px;border:1px solid var(--border-warm);border-radius:999px;background:var(--ivory);transition:all .2s;white-space:nowrap;}
+  .back-home:hover{color:var(--accent,var(--terracotta));border-color:currentColor;transform:translateY(-1px);}
+  @media(max-width:560px){.back-home{padding:5px 10px;font-size:11px;}}
+  .nav-links a{font-size:13px;color:var(--olive);text-decoration:none;font-weight:500;transition:color .2s;white-space:nowrap;}
+  .nav-links a:hover{color:var(--terracotta);}
+  @media(max-width:1040px){.nav-links{display:none;}}
+
+  section{padding:90px 28px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+  .narrow{max-width:760px;margin:0 auto;}
+
+  .overline{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px;}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.2px;}
+  h2{font-size:clamp(29px,4.2vw,48px);line-height:1.16;margin-bottom:22px;}
+  h3{font-size:clamp(21px,2.6vw,29px);line-height:1.22;}
+  p{font-size:17px;line-height:1.74;color:var(--charcoal);}
+  .lead{font-size:clamp(18px,2.1vw,21px);line-height:1.66;color:var(--olive);}
+  .en{font-family:var(--serif);font-style:italic;color:var(--terracotta);font-weight:500;}
+  .chapref{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--silver);}
+
+  /* hero */
+  .hero{padding:120px 28px 80px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 0%, rgba(201,100,66,.08), transparent 70%),var(--parchment);}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero .kicker{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--stone);margin-bottom:24px;}
+  .hero h1{font-size:clamp(52px,11vw,120px);line-height:.94;font-weight:500;margin-bottom:14px;letter-spacing:2px;}
+  .hero h1 .en-title{display:block;font-style:italic;color:var(--terracotta);font-size:clamp(26px,4.6vw,52px);margin-top:10px;letter-spacing:1px;}
+  .hero .subtitle{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,21px);color:var(--olive);margin:22px auto 14px;max-width:600px;}
+  .hero .author{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--olive);border:1px solid var(--border-warm);border-radius:24px;padding:8px 18px;background:var(--ivory);margin-top:14px;}
+  .hero .author b{color:var(--near-black);font-weight:600;}
+  .hero-meta{margin-top:38px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;}
+  .hero-meta .n{font-family:var(--serif);font-size:30px;color:var(--terracotta);line-height:1;}
+  .hero-meta .l{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--stone);margin-top:8px;}
+  .series-nav{margin-top:34px;font-size:13px;color:var(--stone);}
+  .series-nav a{color:var(--terracotta);text-decoration:none;border-bottom:1px solid rgba(201,100,66,.3);}
+
+  /* big pull quote */
+  .pull{font-family:var(--serif);font-size:clamp(26px,4vw,44px);line-height:1.3;font-weight:500;color:var(--near-black);margin:30px 0;}
+  .pull em{font-style:italic;color:var(--terracotta);}
+
+  .thesis{background:var(--ivory);border-top:1px solid var(--border-cream);border-bottom:1px solid var(--border-cream);}
+
+  /* triad */
+  .triad-wrap{background:var(--dark-surface);color:#e9e7e0;}
+  .triad-wrap .overline{color:var(--coral);}
+  .triad-wrap h2{color:#faf9f5;}
+  .triad-wrap .lead{color:#b8b5ac;}
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;}
+  @media(max-width:760px){.triad{grid-template-columns:1fr;}}
+  .tri{border:1px solid #4a4946;border-radius:16px;padding:28px 24px;background:#2a2a28;position:relative;overflow:hidden;}
+  .tri .myth{font-family:var(--serif);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+  .tri.f .myth{color:#d98c7a;} .tri.r .myth{color:#c9b78a;} .tri.a .myth{color:#9fc08a;}
+  .tri h3{color:#faf9f5;font-size:23px;margin-bottom:4px;}
+  .tri .gloss{font-family:var(--serif);font-style:italic;font-size:13px;color:#8b8a83;margin-bottom:16px;}
+  .tri p{color:#b8b5ac;font-size:14.5px;line-height:1.6;}
+  .tri .mythic{font-size:13px;color:#7d7c75;margin-top:16px;padding-top:14px;border-top:1px solid #45443f;}
+  .tri .mythic b{color:#d6d3ca;font-weight:600;}
+  .triad-test{margin-top:40px;background:#262624;border:1px solid #45443f;border-radius:14px;padding:26px 28px;}
+  .triad-test p{color:#cfccc3;font-size:15.5px;line-height:1.7;}
+  .triad-test b{color:#9fc08a;}
+
+  /* concept grid */
+  .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;}
+  @media(max-width:860px){.cgrid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.cgrid{grid-template-columns:1fr;}}
+  .concept{background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:22px 22px 24px;transition:transform .3s ease,box-shadow .3s ease;}
+  .concept:hover{transform:translateY(-4px);box-shadow:rgba(0,0,0,.07) 0 14px 32px;}
+  .concept .idx{font-family:var(--serif);font-size:13px;color:var(--terracotta);font-weight:600;letter-spacing:1px;}
+  .concept h4{font-size:18px;margin:8px 0 4px;color:var(--near-black);}
+  .concept .term-en{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--stone);display:block;margin-bottom:10px;}
+  .concept p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+
+  .alt{background:var(--ivory);border-top:1px solid var(--border-cream);}
+  .alt .concept{background:var(--parchment);}
+
+  /* signature / story block */
+  .signature{border-left:3px solid var(--terracotta);padding:6px 0 6px 24px;margin:8px 0 30px;font-family:var(--serif);font-size:clamp(19px,2.4vw,26px);line-height:1.46;color:var(--near-black);font-style:italic;}
+  .signature span{display:block;font-style:normal;font-family:var(--sans);font-size:13.5px;color:var(--stone);margin-top:12px;letter-spacing:.3px;}
+  .story{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px;}
+  @media(max-width:760px){.story{grid-template-columns:1fr;}}
+  .case{background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:22px 24px;position:relative;}
+  .alt .case{background:var(--parchment);}
+  .case .ct{font-family:var(--serif);font-size:18.5px;color:var(--near-black);margin-bottom:3px;font-weight:500;}
+  .case .ce{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--stone);display:block;margin-bottom:11px;}
+  .case p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+  .case .pin{position:absolute;top:20px;right:22px;font-family:var(--serif);font-size:12.5px;color:var(--terracotta);font-variant-numeric:tabular-nums;font-weight:600;}
+
+  /* convexity diagram */
+  .convex{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:34px 0 6px;}
+  @media(max-width:680px){.convex{grid-template-columns:1fr;}}
+  .cx{border:1px solid var(--border-warm);border-radius:16px;padding:26px;text-align:center;}
+  .cx.smile{background:#f1f5ec;}
+  .cx.frown{background:#f7efe9;}
+  .cx .face{font-size:46px;line-height:1;margin-bottom:8px;}
+  .cx h4{font-size:19px;margin-bottom:4px;}
+  .cx.smile h4{color:var(--forest);} .cx.frown h4{color:var(--terracotta);}
+  .cx .lbl{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--stone);margin-bottom:12px;}
+  .cx p{font-size:14px;line-height:1.6;color:var(--olive);}
+
+  /* barbell */
+  .barbell{margin:34px 0 6px;}
+  .bb-track{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;border-radius:16px;overflow:hidden;border:1px solid var(--border-warm);}
+  @media(max-width:760px){.bb-track{grid-template-columns:1fr;}}
+  .bb-end{padding:28px 26px;background:var(--ivory);}
+  .bb-end.safe{border-right:1px solid var(--border-warm);}
+  .bb-mid{padding:28px 16px;background:repeating-linear-gradient(45deg,#efe9df,#efe9df 8px,#e8e1d4 8px,#e8e1d4 16px);display:flex;align-items:center;justify-content:center;text-align:center;}
+  .bb-mid span{font-size:13px;color:var(--crimson);font-weight:600;line-height:1.5;}
+  .bb-end .pct{font-family:var(--serif);font-size:40px;color:var(--terracotta);line-height:1;}
+  .bb-end h4{font-size:17px;margin:9px 0 6px;color:var(--near-black);}
+  .bb-end p{font-size:14px;color:var(--olive);line-height:1.56;}
+
+  /* rules list */
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px;}
+  @media(max-width:760px){.rules{grid-template-columns:1fr;}}
+  .rule{display:flex;gap:16px;align-items:flex-start;background:var(--ivory);border:1px solid var(--border-warm);border-radius:12px;padding:20px 22px;}
+  .rule .r-n{font-family:var(--serif);font-size:22px;color:var(--terracotta);line-height:1;flex-shrink:0;width:30px;}
+  .rule h4{font-size:16.5px;margin-bottom:5px;color:var(--near-black);}
+  .rule p{font-size:14px;color:var(--olive);line-height:1.56;}
+
+  /* quotes */
+  .qgrid{columns:2;column-gap:18px;margin-top:38px;}
+  @media(max-width:760px){.qgrid{columns:1;}}
+  .qcard{break-inside:avoid;margin-bottom:18px;background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:24px 24px 20px;}
+  .qcard .q{font-family:var(--serif);font-size:18px;line-height:1.5;color:var(--near-black);}
+  .qcard .src{display:block;font-size:12.5px;color:var(--stone);margin-top:12px;letter-spacing:.3px;}
+
+  /* takeaways */
+  .takeaways{background:var(--dark-surface);color:#e9e7e0;}
+  .takeaways .overline{color:var(--coral);}
+  .takeaways h2{color:#faf9f5;}
+  .take-grid{margin-top:40px;display:flex;flex-direction:column;gap:2px;}
+  .take{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:24px 0;border-top:1px solid #45443f;}
+  .take:last-child{border-bottom:1px solid #45443f;}
+  .take .t-num{font-family:var(--serif);font-size:30px;color:var(--coral);line-height:1;}
+  .take h4{font-size:19px;color:#faf9f5;margin-bottom:7px;}
+  .take p{font-size:14.5px;color:#b8b5ac;line-height:1.62;}
+
+  .closing{background:var(--parchment);text-align:center;}
+  .final{font-family:var(--serif);font-size:clamp(23px,3.4vw,36px);line-height:1.4;color:var(--near-black);font-weight:500;}
+  .final b{color:var(--terracotta);font-weight:600;}
+
+  footer{background:var(--near-black);color:#9a988f;padding:60px 28px;text-align:center;}
+  .ft-brand{font-family:var(--serif);font-size:20px;color:#f5f4ed;margin-bottom:16px;letter-spacing:.5px;}
+  .ft-brand span{color:var(--coral);}
+  footer p{font-size:13px;color:#9a988f;line-height:1.8;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="/life#taleb" class="back-home" aria-label="back to Gimbo's Universe"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+      <div class="brand">反脆弱 <span>· Antifragile</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#thesis">缺失的词</a>
+      <a href="#triad">三元结构</a>
+      <a href="#origin">从哪来</a>
+      <a href="#asym">不对称性</a>
+      <a href="#barbell">杠铃</a>
+      <a href="#option">可选择性</a>
+      <a href="#vianeg">否定法</a>
+      <a href="#birds">教鸟儿飞</a>
+      <a href="#parts">局部的脆弱</a>
+      <a href="#lindy">林迪</a>
+      <a href="#size">规模</a>
+      <a href="#quotes">金句</a>
+      <a href="#takeaways">收束</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">塔勒布不确定性五部曲 · 单本深度解读 · 03</div>
+    <h1>反脆弱<span class="en-title">Antifragile</span></h1>
+    <p class="subtitle">从无序中受益 · Things That Gain from Disorder</p>
+    <div class="author"><span>📕</span> Nassim Nicholas Taleb · 雨珂 译 · 中信出版社 · 2012</div>
+    <div class="hero-meta">
+      <div><div class="n">2012</div><div class="l">出版</div></div>
+      <div><div class="n">25</div><div class="l">章 / 7 卷</div></div>
+      <div><div class="n">1</div><div class="l">个被造出来的新词</div></div>
+      <div><div class="n">+∞</div><div class="l">凸性的上行</div></div>
+    </div>
+    <p class="series-nav">本书是 Incerto 系列的“正面答案”。 前作：<a href="#">黑天鹅</a>（问题）→ 本书：反脆弱（解法）→ 后续：<a href="#">非对称风险</a>（伦理）</p>
+  </div>
+</header>
+
+<!-- THESIS -->
+<section class="thesis" id="thesis">
+  <div class="wrap narrow">
+    <div class="overline reveal">核心命题 · The Missing Word</div>
+    <h2 class="reveal">语言里，居然没有“脆弱”的反义词</h2>
+    <p class="lead reveal">塔勒布说，他写这本书是因为发现一个惊人的语言空洞：你寄一个易碎的包裹会写“小心轻放”，但“易碎”的反义词是什么？大多数人答“坚固”“强韧”——错了。坚固的东西只是<strong style="color:var(--near-black)">不被打碎</strong>，它不会变得更好。真正的反义词，应该是包裹上写着<strong style="color:var(--near-black)">“请乱扔乱放”</strong>——它在颠簸中变得更强。</p>
+    <p class="pull reveal">“风会熄灭蜡烛，<em>却能使火越烧越旺。</em>”</p>
+    <p class="reveal">这就是反脆弱：不是抵抗冲击（那是强韧），而是<strong style="color:var(--near-black)">从冲击、波动、压力、混乱中获益</strong>。进化、肌肉、免疫系统、城邦、伟大的想法、细菌的耐药性——它们都渴望适度的混乱。塔勒布用数学的方式说：反脆弱性就是在“脆弱”前面加一个负号。我们生活中一半最有趣的事物，至今还没有被妥善命名。<span class="chapref">（前言 · 第 1 章）</span></p>
+  </div>
+</section>
+
+<!-- TRIAD -->
+<section class="triad-wrap" id="triad">
+  <div class="wrap">
+    <div class="overline reveal">核心模型 · The Triad</div>
+    <h2 class="reveal">把世间万物，放上这把尺</h2>
+    <p class="lead reveal narrow">塔勒布说，理解他全部作品只需一根线索：任何事物、政策、人生选择，都能归入三类之一。然后问自己——<em style="font-style:italic;color:var(--coral)">我能不能把它往右边挪一点？</em>注意：这是相对而非绝对的特性，债务把你推向左边，可选择性把你拉向右边。</p>
+    <div class="triad reveal">
+      <div class="tri f">
+        <div class="myth">脆弱类 · Fragile</div>
+        <h3>害怕波动</h3>
+        <div class="gloss">想要安宁，被冲击削弱</div>
+        <p>错误罕见，但一旦发生就是灾难性、不可逆的。中央集权、高杠杆债务、过度优化的系统、靠预测吃饭的人。波动是它的敌人。</p>
+        <div class="mythic">神话原型：<b>达摩克利斯之剑</b><br>头顶一根马尾毛悬着利剑，落下只是时间问题。</div>
+      </div>
+      <div class="tri r">
+        <div class="myth">强韧类 · Robust</div>
+        <h3>不在意波动</h3>
+        <div class="gloss">扛得住冲击，保持原状</div>
+        <p>抵抗得了打击，但也仅此而已。塔勒布说，在 40 亿年的随机冲击下，光靠“强韧”不够——迟早会被一道裂缝击穿。</p>
+        <div class="mythic">神话原型：<b>凤凰</b><br>烧成灰烬后，原样重生。</div>
+      </div>
+      <div class="tri a">
+        <div class="myth">反脆弱类 · Antifragile</div>
+        <h3>渴望波动</h3>
+        <div class="gloss">在混乱中变得更强</div>
+        <p>从波动、错误、压力中获益。进化、城邦、试错、肌肉、免疫系统、伟大的想法。给它一点（适度的）混乱，它回报你成长。</p>
+        <div class="mythic">神话原型：<b>九头蛇怪</b><br>砍掉一个头，长出两个。</div>
+      </div>
+    </div>
+    <div class="triad-test reveal">
+      <p>🧪 <b>一秒钟测试法：</b>如果某件事的风险加倍，它造成的伤害会<b>大于</b>两倍吗？会 → 它是脆弱的。不会、甚至受益 → 它是强韧或反脆弱的。这条简单的“非线性”法则，是全书的技术地基。<span class="chapref" style="color:#7d7c75"> （第 18 章）</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section id="origin">
+  <div class="wrap">
+    <div class="overline reveal">反脆弱从哪来 · Overcompensation</div>
+    <h2 class="reveal">杀不死你的，让你为更大的冲击做好准备</h2>
+    <p class="lead reveal narrow">反脆弱不是玄学。它的初级形态在医学里早有名字，核心机制是一个词：<strong style="color:var(--near-black)">过度补偿</strong>——身体对压力的反应总是“准备过头”，多出来的那部分，就是成长。</p>
+    <div class="cgrid reveal">
+      <div class="concept">
+        <div class="idx">01</div>
+        <h4>毒物兴奋效应</h4>
+        <span class="term-en">Hormesis</span>
+        <p>小剂量的毒害反而有益。蔬菜的好处可能不在“维生素”，而在它体内用来自卫的毒素——适量刺激了我们的机体。剥夺压力源，反而让人脆弱。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">02</div>
+        <h4>米特拉达梯解毒法</h4>
+        <span class="term-en">Mithridatization</span>
+        <p>本都国王持续服用渐增的毒物，最终百毒不侵——以至于想服毒自尽都做不到。疫苗、过敏脱敏，都是这个古老逻辑。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">03</div>
+        <h4>过度补偿 / 过度反应</h4>
+        <span class="term-en">Overcompensation</span>
+        <p>“信天翁巨大的翅膀阻碍了它的飞行。”举重时身体过度准备，于是长出更多肌肉。把急事交给最忙的人。压力释放的多余能量，成就了创新。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">04</div>
+        <h4>冗余</h4>
+        <span class="term-en">Redundancy</span>
+        <p>大自然给你两个肾。冗余看似“低效”和浪费，实则是机会主义的投资——意外总会发生，多出的那份能力，是免费的看涨期权。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">05</div>
+        <h4>卢克莱修问题</h4>
+        <span class="term-en">The Lucretius Problem</span>
+        <p>只有傻瓜才以为自己见过的最高山就是世上最高的山。风险管理者把“历史最糟”当成“未来最糟”——可历史最糟在发生时，本身就超越了当时的历史最糟。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">06</div>
+        <h4>信息是反脆弱的</h4>
+        <span class="term-en">Information is Antifragile</span>
+        <p>查禁一本书，反而让它畅销；越想辟谣，谣言传得越快。“请把我的书列为禁书。”想毁掉信息的努力，往往让它更有力量。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASYMMETRY / CONVEXITY -->
+<section class="alt" id="asym">
+  <div class="wrap">
+    <div class="overline reveal">基础不对称性 · Convexity</div>
+    <h2 class="reveal">塞内加的秘密：得到的，比失去的多</h2>
+    <p class="reveal lead narrow" style="margin-bottom:30px;">罗马首富、斯多葛哲学家塞内加，两千年前就解决了反脆弱问题。评论家都没看懂他：他不是真的鄙视财富——他保留了全部财富，只是<strong style="color:var(--near-black)">在心里先把它记为支出</strong>。归还了算赚，拿不回也不算亏。摈弃不利，留住有利。这就是最纯粹的反脆弱。</p>
+
+    <div class="signature reveal">
+      脆弱 = 失去的比得到的多 = 不利因素多于有利因素 = 不利的不对称。<br>
+      反脆弱 = 得到的比失去的多 = 有利因素多于不利因素 = 有利的不对称。
+      <span>古罗马史家李维早就写过：“坏事对人的触动，远大于好事。”——这比现代“损失厌恶”理论深刻、实用得多。</span>
+    </div>
+
+    <p class="reveal" style="margin-bottom:20px;">到了技术核心（第 18–19 章），塔勒布把这种不对称画成了一条曲线。脆弱 = <strong style="color:var(--near-black)">凹性</strong>（噘嘴脸），反脆弱 = <strong style="color:var(--near-black)">凸性</strong>（笑脸）。判断脆弱性，只需看冲击翻倍时伤害是否“加速”增长。</p>
+
+    <div class="convex reveal">
+      <div class="cx smile">
+        <div class="face">🙂</div>
+        <h4>凸性 = 反脆弱</h4>
+        <div class="lbl">Convexity · 笑脸</div>
+        <p>同等幅度的波动，向上赚的比向下亏的多。所以你<strong style="color:var(--charcoal)">喜欢波动</strong>。期权、创业、跑步（而非散步）、举一次大重量都是凸性的。</p>
+      </div>
+      <div class="cx frown">
+        <div class="face">🙁</div>
+        <h4>凹性 = 脆弱</h4>
+        <div class="lbl">Concavity · 噘嘴脸</div>
+        <p>同等幅度的波动，向下亏的比向上赚的多。罕见的大冲击会带来不成比例的伤害。这就是黑天鹅为什么专杀凹性的东西。</p>
+      </div>
+    </div>
+
+    <div class="signature reveal" style="margin-top:34px;">
+      “一块巨石，和同等重量的一千颗小石子，完全不是一回事。”
+      <span>国王发誓用大石头砸死儿子，又后悔了。智囊把石头碎成小石子去投掷——伤害是非线性的。10 磅石头的伤害，远超 5 磅的两倍。脆弱，永远藏在非线性里。</span>
+    </div>
+
+    <p class="reveal"><strong style="color:var(--near-black)">为什么脆弱必然是非线性的？</strong>因为一个尚未破碎的东西，必然已经扛过了无数次小冲击——所以对它来说，一次罕见的大冲击，远比一千次小冲击的累加更致命。如果伤害是线性的，你早就因为在客厅走来走去而死掉了。<span class="chapref">（第 18 章）</span></p>
+  </div>
+</section>
+
+<!-- BARBELL -->
+<section id="barbell">
+  <div class="wrap">
+    <div class="overline reveal">落地策略一 · The Barbell</div>
+    <h2 class="reveal">杠铃：掏空脆弱的中间</h2>
+    <p class="lead reveal narrow">如何把自己从脆弱掰成反脆弱？塔勒布说，他书里几乎每一个对不确定性的解法，最后都长成<strong style="color:var(--near-black)">杠铃</strong>的形状：两端极端，中间空无一物。迈向反脆弱的第一步，永远是<strong style="color:var(--near-black)">减少不利因素</strong>，而不是增加有利因素。</p>
+
+    <div class="barbell reveal">
+      <div class="bb-track">
+        <div class="bb-end safe">
+          <div class="pct">85–90%</div>
+          <h4>极度安全</h4>
+          <p>现金、保值资产、稳定的本职。这部分绝不能被任何黑天鹅击穿——它锁死了你的“最大损失”，是“活下去”的地基。</p>
+        </div>
+        <div class="bb-mid"><span>✕<br>脆弱的<br>“黄金中间”<br>避开</span></div>
+        <div class="bb-end">
+          <div class="pct">10–15%</div>
+          <h4>极度激进</h4>
+          <p>高赔率的小赌注：投机、副业、新技能、疯狂的想法。最坏全亏（可控），最好被正面黑天鹅砸中，回报无上限。</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="reveal" style="margin:26px 0 8px;">为什么不待在“中等风险”的中间？因为中等风险<strong style="color:var(--near-black)">最具迷惑性</strong>——它受巨大测量误差的影响，你以为安全，其实把毁灭藏在了水面下。杠铃同样活在生活的方方面面：</p>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">会计师 + 摇滚明星</div>
+        <span class="ce">The Mating Strategy</span>
+        <p>单配制的妻子嫁给稳定的会计师（控制不利），偶尔与摇滚明星偷情（争取上行基因）。鱼和熊掌不能兼得于一个“中庸之辈”身上——于是用杠铃。</p>
+      </div>
+      <div class="case">
+        <div class="ct">作家的闲职</div>
+        <span class="ce">The Sinecure</span>
+        <p>法国作家谋一份不动脑的公务员闲职，下班才写作——于是能按自己的标准写。司汤达是外交官，卡夫卡在保险公司，斯宾诺莎磨镜片。美国作家进了学术与媒体，灵魂被系统腐蚀。</p>
+      </div>
+      <div class="case">
+        <div class="ct">每周戒酒 3 天</div>
+        <span class="ce">Health Barbell</span>
+        <p>对付小酌成疾，最优策略不是“每天少喝点”，而是 3 天彻底戒、4 天自由喝。健身也一样：举你能举的最大重量，然后彻底休息——而非长时间中等强度。</p>
+      </div>
+      <div class="case">
+        <div class="ct">戴利奥的铁律</div>
+        <span class="ce">Dalio's Iron Rule</span>
+        <p>“确保发生不可接受情况（毁灭、灾难）的概率为零。”任何先把毁灭概率清零、再去博取上行的策略，本质上都是杠铃。生存的逻辑，优先级高于成功。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIONALITY -->
+<section class="alt" id="option">
+  <div class="wrap">
+    <div class="overline reveal">落地策略二 · Optionality</div>
+    <h2 class="reveal">可选择性：在不预测的前提下，赢</h2>
+    <p class="lead reveal narrow">期权是反脆弱性的纯粹代表——它给你“权利而非义务”，损失有限、收益无限。拥有可选择性，你就能在<strong style="color:var(--near-black)">不知道未来会怎样</strong>的情况下，理性地受益。</p>
+
+    <div class="signature reveal">
+      “虽然仍是冬天，但他根据天文学知识，观察到第二年一定是橄榄丰收年……”
+      <span>亚里士多德如此解释泰勒斯的致富——归功于“渊博的知识”。但他完全看错了：泰勒斯赚钱靠的不是预测，而是那份不对称的合同本身。这可能是人类历史上第一份期权。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <span class="pin">约 BC 600</span>
+        <div class="ct">泰勒斯的橄榄油榨机</div>
+        <span class="ce">Thales' Olive Presses</span>
+        <p>被嘲讽“有本事的人去经商”，哲学家泰勒斯淡季低价租下全部榨油机的使用权。丰收时需求暴涨，他坐地转租大赚。付出很小代价，损失封顶，收益巨大——纯粹的显性不对称。</p>
+      </div>
+      <div class="case">
+        <div class="ct">漫游者 vs 观光客</div>
+        <span class="ce">Flâneur vs Tourist</span>
+        <p>观光客锁死行程（目的论谬误：以为自己确切知道要去哪）。理性的漫游者带着机会主义，每一步都根据新信息修改计划。乔布斯的力量，正在于不信市场调研——人们不知道自己想要什么，直到你给他看。</p>
+      </div>
+    </div>
+
+    <div class="signature reveal" style="margin-top:34px;">
+      普罗米修斯（先知先觉）拥有可选择性；埃庇米修斯（后知后觉）只有事后叙述。
+      <span>一个犯的是可逆的、良性的错误；另一个打开了潘多拉的盒子，造成不可挽回的后果。试错不是纯随机——它需要理性去识别有利结果、知道该放弃什么。每一次失败，都比上一次更有价值。</span>
+    </div>
+  </div>
+</section>
+
+<!-- VIA NEGATIVA -->
+<section id="vianeg">
+  <div class="wrap">
+    <div class="overline reveal">落地策略三 · Via Negativa</div>
+    <h2 class="reveal">否定法：靠减法变强</h2>
+    <p class="lead reveal narrow">知识与健康的增长，更多靠<strong style="color:var(--near-black)">减法</strong>而非加法。去掉有害的，胜过添加“有益的”。最稳的预测、最稳的改善，都来自“无为”——别去碰你不理解的复杂系统。</p>
+
+    <div class="signature reveal">
+      “首先，不要造成伤害。”（Primum non nocere）
+      <span>希波克拉底在公元前 4 世纪就立下此誓，医学界却花了 24 个世纪才开始执行。在青霉素诞生前，看医生反而提高你的死亡率——医源性损伤（iatrogenics，“治疗师造成的伤害”），随着“知识增长”一度越来越严重。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">切扁桃体的级联</div>
+        <span class="ce">The Tonsillectomy Cascade</span>
+        <p>389 个孩子，174 个被建议切扁桃体；剩下的再查，又有 99 个；再查，又有 52 个……每个不必要的手术都缩短一个孩子的寿命。这就是“概率杀人”，和过度编辑你文稿的编辑是同一种病。</p>
+      </div>
+      <div class="case">
+        <div class="ct">塞梅尔维斯的悲剧</div>
+        <span class="ce">Semmelweis</span>
+        <p>他发现在医院分娩的产妇死亡率竟高于在大街上分娩，断言医生就是凶手。同行因“没有理论依据”拒绝他，把他逼进精神病院——他最终死于自己一直警告的“医院热”。</p>
+      </div>
+      <div class="case">
+        <div class="ct">拖延，是灵魂的过滤器</div>
+        <span class="ce">Procrastination</span>
+        <p>费边将军靠“拖延”几乎逼疯汉尼拔。老子讲“无为”。拖延常是身体在抵抗一个它不想做的桎梏——心理学家却急着把它当病来治。塔勒布拖到背伤自愈，省下一台手术。</p>
+      </div>
+      <div class="case">
+        <div class="ct">举证责任倒过来</div>
+        <span class="ce">Burden of Proof</span>
+        <p>“你有证据表明反式脂肪有害吗？”——危害要几十年后才显现，证据根本拿不出。规则应反过来：<strong style="color:var(--olive)">不自然的东西需自证有益，自然的事物不需要</strong>。在复杂领域，只有时间才是证据。</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="margin-top:28px;"><strong style="color:var(--near-black)">医疗里的凸性法则（第 21–22 章）：</strong>对濒死的重病人，放手一搏（医源性损伤极低，凸性为正）；对几近健康的人，大自然才是医生（凹性，干预弊大于利）。轻度高血压服药受益率仅 5.6%，重度则达 72%——所以要重点治重症，忽略边缘。塔勒布甚至推算：<strong style="color:var(--near-black)">削减非急需的医疗开支，会延长富裕国家的人均寿命。</strong>“活得长寿，但不要太长。”</p>
+  </div>
+</section>
+
+<!-- LECTURING BIRDS -->
+<section class="alt" id="birds">
+  <div class="wrap">
+    <div class="overline reveal">认识论 · Lecturing Birds How to Fly</div>
+    <h2 class="reveal">教鸟儿飞行：实践，先于理论</h2>
+    <p class="lead reveal narrow">一个被精心隐瞒的真相：技术，大多不是从学术研究流向实践的。能工巧匠先在试错中造出东西，学者再事后写论文署名。塔勒布把这个因果错觉叫<strong style="color:var(--near-black)">“苏联—哈佛派谬见”</strong>。</p>
+
+    <div class="signature reveal">
+      想象一群身穿黑袍的教授给鸟儿上“如何飞行”的课。鸟儿果然飞了。完美的证明！
+      <span>于是他们写论文，申请经费，宣称鸟类飞行离不开哈佛鸟类学系。可鸟儿不会写论文反驳。把“鸟”换成“人”，这套骗局立刻显得合情合理——这就是副现象（A 和 B 总一起出现，于是误以为 A 导致 B）。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">轮子上的旅行箱</div>
+        <span class="ce">The Wheeled Suitcase</span>
+        <p>从轮子发明到把它装在旅行箱上，人类等了将近 6000 年——还是在登月 40 年之后。最简单的技术事后看微不足道，事前却没人想到。简单，很难给人戴上桂冠。</p>
+      </div>
+      <div class="case">
+        <div class="ct">教育 ≠ 国家财富</div>
+        <span class="ce">The Arrow Points the Other Way</span>
+        <p>没有证据表明提高整体教育水平能让国家变富；倒是财富推动了教育。台湾 1960 年识字率远低于菲律宾，如今人均收入是其 10 倍。箭头反了。</p>
+      </div>
+      <div class="case">
+        <div class="ct">绿色木材谬误</div>
+        <span class="ce">The Green Lumber Fallacy</span>
+        <p>最成功的木材商，竟不知道“绿色木材”指的是新砍的湿木（他以为是漆成绿色的）。真正必要的知识，和外行以为重要的知识，根本不是一回事。</p>
+      </div>
+      <div class="case">
+        <div class="ct">胖子托尼押石油“跌”</div>
+        <span class="ce">Kuwait ≠ Oil</span>
+        <p>海湾战争人人预测油价涨，托尼反向押注：“战争和石油不是一回事——预订好日期的战争，价格早就调整过了。”油价腰斩，他 30 万变 1800 万。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAGILITY OF PARTS -->
+<section id="parts">
+  <div class="wrap">
+    <div class="overline reveal">系统层级 · Fragility of the Parts</div>
+    <h2 class="reveal">整体的反脆弱，需要局部的脆弱</h2>
+    <p class="lead reveal narrow">这是全书最深、也最“冷酷”的一章。系统是分层的：为了整体的反脆弱，某些局部<strong style="color:var(--near-black)">必须脆弱、必须牺牲</strong>。餐馆不断倒闭，所以餐饮业整体越来越好。剥夺局部的冒险与失败，就杀死了整体的进化。</p>
+
+    <div class="signature reveal">
+      “杀不死我的，让我更强壮”——尼采这句话，常被误读。
+      <span>更准确的版本是：“杀不死我的，并没让我更强壮，而是杀死了比我弱的人，于是幸存群体的平均素质提高了。”古拉格不会让囚犯更强壮，它只是淘汰了弱者。这是进化（淘汰），不是毒物兴奋（个体受益）。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">泰坦尼克的牺牲</div>
+        <span class="ce">Titanic / Plane Crashes</span>
+        <p>若泰坦尼克没沉，我们会造越来越大的船，下一次灾难更惨。每一次空难都让系统更安全——遇难者为他人的整体安全做了贡献。好系统的错误彼此独立、互不传染。</p>
+      </div>
+      <div class="case">
+        <div class="ct">银行 vs 飞机</div>
+        <span class="ce">Contagion</span>
+        <p>一架飞机坠毁不牵连其他飞机；但一家银行倒闭会提高下一家倒闭的概率。全球化经济作为一个整体运作，错误快速传染——这正是它脆弱的根源。</p>
+      </div>
+      <div class="case">
+        <div class="ct">创业者，是英雄</div>
+        <span class="ce">American Entrepreneur Day</span>
+        <p>创业者过度自信、大批失败，却为整个经济贡献了最宝贵的知识——“什么行不通”。塔勒布提议设立“美国创业者日”，像纪念阵亡士兵一样，纪念破产的创业者。</p>
+      </div>
+      <div class="case">
+        <div class="ct">救市，破坏了模型</div>
+        <span class="ce">Bailouts</span>
+        <p>政府扶持“大到不能倒”的公司，恰恰阻止了脆弱性从集体转移到不适者身上。健康的系统需要个体过度自信地冒险——只要失败不至于连累所有人。</p>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:26px;">这里藏着一个无法回避的张力：<strong style="color:var(--near-black)">个体利益 vs 集体利益</strong>。大自然冷酷无情，用局部的死亡换整体的进化。塔勒布作为人文主义者，对此心怀矛盾——这也是为什么他坚持启蒙运动把个体抬到更高位置的价值，并最终走向下一本书《非对称风险》的伦理命题：<strong style="color:var(--near-black)">谁该为风险流血。</strong></p>
+  </div>
+</section>
+
+<!-- LINDY -->
+<section class="alt" id="lindy">
+  <div class="wrap">
+    <div class="overline reveal">时间 · The Lindy Effect</div>
+    <h2 class="reveal">时间，是最冷酷也最公正的评判</h2>
+    <p class="lead reveal narrow">对于书、观念、技术这类<strong style="color:var(--near-black)">不会自然消亡</strong>的事物（区别于会衰老的人和物），已经活了多久，就还能再活多久。一项技术每多存活一年，它的预期剩余寿命反而增加。这就是林迪效应。</p>
+
+    <div class="signature reveal">
+      预言，和知识一样，是减法，而非加法。
+      <span>想象未来，正确的方式不是往现在“添加”闪亮的新科技，而是从未来中“减去”那些注定脆弱、会破碎的东西。脆弱的事物终将破碎，而幸运的是，我们能认出它们。正“黑天鹅”比负“黑天鹅”更不可预测。</span>
+    </div>
+
+    <div class="cgrid reveal">
+      <div class="concept">
+        <div class="idx">01</div>
+        <h4>新事物狂热症</h4>
+        <span class="term-en">Neomania</span>
+        <p>一种现代病：无条件求新。技术思想家患上不治之症，因为宣传过去赚不到钱。但留存到今天的，往往是消除了旧技术副作用的“隐形”技术。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">02</div>
+        <h4>跑步机效应</h4>
+        <span class="term-en">Treadmill Effect</span>
+        <p>新手机带来短暂兴奋，很快习惯，又渴望更新款。我们盯着不同版本间几个百分点的差异，却对一幅百年油画没有这种焦虑——艺术品不带“开关按钮”。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">03</div>
+        <h4>未来藏在过去之中</h4>
+        <span class="term-en">The Future is in the Past</span>
+        <p>塔勒布去 2500 年历史的小酒馆，穿着像 5300 年前木乃伊的鞋，用美索不达米亚的银器，喝 6000 年历史的酒。50 年后大概率还是这样。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">04</div>
+        <h4>别读太新的书</h4>
+        <span class="term-en">The Reading Heuristic</span>
+        <p>“尽量不读过去 20 年出版的书，除了写 50 年前历史的历史书。”流传 10 年的会再流传 10 年；流传 2000 年的还会更久。一篇论文 5 年后仍重要的概率不到万分之一。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">05</div>
+        <h4>恩培多克勒的狗</h4>
+        <span class="term-en">Empedocles' Dog</span>
+        <p>狗为什么总睡同一块瓷砖？因为狗和瓷砖之间有某种契合。长期循环出现，胜过理性主义的解释——能经受时间的东西，才是我们永远需要的。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">06</div>
+        <h4>先知谈的是现在</h4>
+        <span class="term-en">The Prophet Warns</span>
+        <p>地中海传统里，先知不是预测未来，而是<strong style="color:var(--olive)">警告</strong>现在该减去什么。这是一份不受欢迎的差事——“没人在自己的土地上成为先知”。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIZE -->
+<section id="size">
+  <div class="wrap">
+    <div class="overline reveal">规模 · Size &amp; Fragility</div>
+    <h2 class="reveal">大象摔断腿，猫有九条命</h2>
+    <p class="lead reveal narrow">把猫从数倍于自身的高度抛下，它能活；大象却会摔断腿。规模本身制造脆弱——这是“巨石与小石子”的另一种写照。所谓“规模经济”，在压力下会反过来伤害你（“忍痛效应”）。</p>
+
+    <div class="story reveal">
+      <div class="case">
+        <span class="pin">2008.1</span>
+        <div class="ct">法兴银行的贱卖</div>
+        <span class="ce">SocGen / Kerviel</span>
+        <p>流氓交易员科维尔的隐藏头寸曝光，法兴一次性抛售 700 亿美元，亏 60 亿。但若抛售量只有 1/10，市场会平静吸收、毫无损失。10 家小银行各配一个“小科维尔”，总损失微乎其微。问题不是贪婪，是规模。</p>
+      </div>
+      <div class="case">
+        <div class="ct">水晶宫 9 个月建成</div>
+        <span class="ce">Crystal Palace</span>
+        <p>1851 年伦敦水晶宫，从概念到开幕仅 9 个月、按时竣工。而今天的大项目几乎都超支、超时。差别不是心理上的“规划谬误”，而是项目的<strong style="color:var(--olive)">非线性结构</strong>——复杂、相互依存、信息化。</p>
+      </div>
+      <div class="case">
+        <div class="ct">飞机为什么不能提前到</div>
+        <span class="ce">Planes Can't Arrive Early</span>
+        <p>飞行时间不会为负，任何意外都只会让它<strong style="color:var(--olive)">变长</strong>——偶尔早到 20 分钟，却可能晚到几小时。这种不对称解释了时间的不可逆，也解释了为何战争成本总被低估 20 倍。</p>
+      </div>
+      <div class="case">
+        <div class="ct">逃出电影院</div>
+        <span class="ce">The Bottleneck</span>
+        <p>一有人喊“着火了”，10 个人争抢同一个出口。剧院的脆弱性随规模上升——每多一人逃生就多一分踩踏。瓶颈，是一切忍痛效应的源头。集中消费（人人喝同款葡萄酒、吃同种金枪鱼）同样有害。</p>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:26px;">所以塔勒布给政府定了一条黄金法则：<strong style="color:var(--near-black)">不准借钱，强制财政平衡</strong>。城邦制、小公司、分权，更容易在未来幸存；而被“效率”和“优化”逼到满负荷运转的系统（欧洲的机场、铁路），只要乘客多 5%，就会陷入混乱。强调“效率”的地方，偏偏最缺乏效率。</p>
+  </div>
+</section>
+
+<!-- HOW TO LIVE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="overline reveal">落地 · How to Become Antifragile</div>
+    <h2 class="reveal">六条可以随身带走的法则</h2>
+    <div class="rules reveal">
+      <div class="rule"><div class="r-n">1</div><div><h4>先求不死</h4><p>用杠铃锁死“最大损失”，避免任何不可逆的爆仓。可逆的错误尽管多犯，不可逆的风险一次都嫌多。生存优先于成功。</p></div></div>
+      <div class="rule"><div class="r-n">2</div><div><h4>多做减法</h4><p>否定法：去掉糖、债、噪声、不必要的药与手术、脆弱的中间地带。减去有害的，往往胜过添加“有益的”。</p></div></div>
+      <div class="rule"><div class="r-n">3</div><div><h4>收集可选择性</h4><p>广撒有权利、无义务的小赌注，保持机动。让不对称的上行替你思考——你不需要预测，只需在机会来时认出它。</p></div></div>
+      <div class="rule"><div class="r-n">4</div><div><h4>敬畏时间（林迪）</h4><p>优先选经过时间筛选的东西——老书、老食谱、老智慧、老朋友。新事物狂热症是一种昂贵的病。</p></div></div>
+      <div class="rule"><div class="r-n">5</div><div><h4>别去教鸟儿飞</h4><p>对你不理解的复杂系统（经济、身体、生态）保持谦卑与“无为”。天真的干预制造的灾难，常大于它想解决的问题。</p></div></div>
+      <div class="rule"><div class="r-n">6</div><div><h4>拥抱适度的压力</h4><p>毒物兴奋：让自己（和孩子）经历一点（不致命的）压力、饥饿、波动、失败。无菌的舒适，会让人悄悄变脆。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section id="quotes">
+  <div class="wrap">
+    <div class="overline reveal">原书金句 · In His Words</div>
+    <h2 class="reveal">几句留在心里的话</h2>
+    <div class="qgrid reveal">
+      <div class="qcard"><p class="q">“风会熄灭蜡烛，却能使火越烧越旺。对随机性、不确定性和混乱也是如此：你要利用它们，而不是躲避它们。你要成为火，渴望得到风的吹拂。”</p><span class="src">— 前言</span></div>
+      <div class="qcard"><p class="q">“我们生活中的一半事物——非常有趣的一半事物——都还没有被妥善命名。”</p><span class="src">— 第 1 章</span></div>
+      <div class="qcard"><p class="q">“只有傻瓜才会认为，世界上最高的山脉，就是他亲眼所见的最高的那座。”</p><span class="src">— 卢克莱修问题 · 第 2 章</span></div>
+      <div class="qcard"><p class="q">“伟大的天才只是找寻到了前辈的足迹，实用性的创新只是践行了祖辈的理论。”</p><span class="src">— 教鸟儿飞行 · 第 13 章</span></div>
+      <div class="qcard"><p class="q">“职业专家奢谈知识，就好像妓女奢谈爱情。”</p><span class="src">— 林迪效应 · 第 20 章</span></div>
+      <div class="qcard"><p class="q">“破碎的东西将永远破碎。要赚钱，最好先考虑生存问题。”</p><span class="src">— 杠铃 · 第 11 章</span></div>
+      <div class="qcard"><p class="q">“做最坏的打算，最好的情况总能水到渠成。”</p><span class="src">— 意第绪谚语，第 11 章引</span></div>
+      <div class="qcard"><p class="q">“大自然的行为背后有其严格的逻辑，直到你能证明并非如此；人类和科学的行为有其缺陷，直到你能证明并非如此。”</p><span class="src">— 医疗与不透明 · 第 21 章</span></div>
+      <div class="qcard"><p class="q">“现代斯多葛主义者，是能够把恐惧转化为谨慎、把痛苦转化为信息、把错误转化为启示、把欲望转变为事业的人。”</p><span class="src">— 塞内加 · 第 10 章</span></div>
+      <div class="qcard"><p class="q">“没有过去的人，就没有未来。”</p><span class="src">— 阿拉伯谚语，林迪一章引</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAKEAWAYS -->
+<section class="takeaways" id="takeaways">
+  <div class="wrap narrow">
+    <div class="overline reveal">收束 · Five Insights</div>
+    <h2 class="reveal">读完《反脆弱》，留在心里的五句话</h2>
+    <div class="take-grid">
+      <div class="take reveal"><div class="t-num">1</div><div><h4>反脆弱 ≠ 强韧</h4><p>强韧只是“扛住”，反脆弱是“变强”。在 40 亿年的随机冲击下，仅仅强韧远远不够。真正的目标，是站到从无序中受益的那一边。</p></div></div>
+      <div class="take reveal"><div class="t-num">2</div><div><h4>不对称，是一切的钥匙</h4><p>反脆弱 = 凸性 = 得到的比失去的多。凡是上行大于下行的东西，都会爱上波动。脆弱则相反——它藏在每一个非线性里。</p></div></div>
+      <div class="take reveal"><div class="t-num">3</div><div><h4>用结构代替预测</h4><p>你测不准未来，但你能改造自己暴露的“形状”：杠铃锁死下行、可选择性敞开上行、否定法去掉脆弱。无须预测，照样赢。</p></div></div>
+      <div class="take reveal"><div class="t-num">4</div><div><h4>实践，先于理论</h4><p>技术来自能工巧匠的试错，不是学者的论文。别去教鸟儿飞行，也别让没入局的人替你设计人生。时间和实践，藏着意见捕捉不到的秘密。</p></div></div>
+      <div class="take reveal"><div class="t-num">5</div><div><h4>无序，是养料</h4><p>过度的舒适、保护与稳定，会让人、组织、系统悄悄变脆。压力、试错、小失败，是反脆弱事物获取信息、不断变强的食物。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap narrow">
+    <div class="overline reveal" style="color:var(--coral);">结语 · Become the Fire</div>
+    <h2 class="reveal">一句话，总结这本书</h2>
+    <p class="final reveal">
+      你无法预测风暴，<br>但你可以决定——<br>做<b>风中的蜡烛</b>，还是<b>风里的火</b>。
+    </p>
+    <p class="reveal" style="font-size:17px;color:var(--stone);margin-top:30px;">
+      《反脆弱》不是教你如何变强，而是教你<strong style="color:var(--olive)">如何摆放自己</strong>，让这个你看不懂、测不准的世界，<strong style="color:var(--olive)">在波动里把你越吹越旺</strong>。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p class="ft-brand">反脆弱 <span>· Antifragile</span></p>
+  <p>
+    Nassim Nicholas Taleb《反脆弱——从无序中受益》· 雨珂 译 · 中信出版社 · 2012<br>
+    本页为单本精读笔记的可视化呈现 · 仅供学习与讨论 · 全部概念与引文取自原书<br>
+    塔勒布不确定性五部曲（Incerto）系列单本深读 · 03 / 反脆弱 · Design system: Claude — Warm &amp; Editorial
+  </p>
+</footer>
+
+<script>
+  const bar=document.getElementById('progress');
+  function onScroll(){const h=document.documentElement;bar.style.width=((h.scrollTop)/(h.scrollHeight-h.clientHeight)*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

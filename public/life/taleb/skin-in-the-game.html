@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>非对称风险 Skin in the Game — 深度解读</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f5f4ed; --ivory:#faf9f5; --sand:#e8e6dc; --near-black:#141413;
+    --dark-surface:#2a2422; --terracotta:#c96442; --coral:#d97757; --charcoal:#4d4c48;
+    --olive:#5e5d59; --stone:#87867f; --silver:#b0aea5; --border-cream:#f0eee6;
+    --border-warm:#e8e6dc; --crimson:#a8332f; --crimson-soft:#b8524e; --forest:#5e6a52; --gold:#b08a3e;
+    --serif:'Newsreader','Noto Serif SC',Georgia,'Songti SC',serif;
+    --sans:'Inter','Noto Sans SC',system-ui,'PingFang SC',sans-serif;
+    --accent:var(--crimson);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--parchment);color:var(--near-black);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--crimson),var(--coral));z-index:200;transition:width .12s ease-out;}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(245,244,237,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border-cream);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .brand{font-family:var(--serif);font-weight:500;font-size:18px;letter-spacing:.4px;color:var(--near-black);white-space:nowrap;}
+  .brand span{color:var(--crimson);}
+  .nav-links{display:flex;gap:16px;flex-wrap:wrap;}
+  .nav-left{display:flex;align-items:center;gap:16px;}
+  .back-home{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--stone);text-decoration:none;padding:6px 12px;border:1px solid var(--border-warm);border-radius:999px;background:var(--ivory);transition:all .2s;white-space:nowrap;}
+  .back-home:hover{color:var(--accent,var(--terracotta));border-color:currentColor;transform:translateY(-1px);}
+  @media(max-width:560px){.back-home{padding:5px 10px;font-size:11px;}}
+  .nav-links a{font-size:13px;color:var(--olive);text-decoration:none;font-weight:500;transition:color .2s;white-space:nowrap;}
+  .nav-links a:hover{color:var(--crimson);}
+  @media(max-width:1080px){.nav-links{display:none;}}
+
+  section{padding:90px 28px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+  .narrow{max-width:760px;margin:0 auto;}
+
+  .overline{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:var(--crimson);margin-bottom:18px;}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.2px;}
+  h2{font-size:clamp(29px,4.2vw,48px);line-height:1.16;margin-bottom:22px;}
+  h3{font-size:clamp(21px,2.6vw,29px);line-height:1.22;}
+  p{font-size:17px;line-height:1.74;color:var(--charcoal);}
+  .lead{font-size:clamp(18px,2.1vw,21px);line-height:1.66;color:var(--olive);}
+  .chapref{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--silver);}
+
+  .hero{padding:118px 28px 78px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 72% 56% at 50% 0%, rgba(168,51,47,.09), transparent 70%),var(--parchment);}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero .kicker{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--stone);margin-bottom:22px;}
+  .hero h1{font-size:clamp(44px,9vw,108px);line-height:.95;font-weight:500;margin-bottom:12px;letter-spacing:1px;}
+  .hero h1 .en-title{display:block;font-style:italic;color:var(--crimson);font-size:clamp(24px,4.4vw,50px);margin-top:12px;letter-spacing:1px;}
+  .hero .subtitle{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,21px);color:var(--olive);margin:22px auto 14px;max-width:640px;}
+  .hero .author{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--olive);border:1px solid var(--border-warm);border-radius:24px;padding:8px 18px;background:var(--ivory);margin-top:14px;}
+  .hero .author b{color:var(--near-black);font-weight:600;}
+  .hero-meta{margin-top:38px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;}
+  .hero-meta .n{font-family:var(--serif);font-size:30px;color:var(--crimson);line-height:1;}
+  .hero-meta .l{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--stone);margin-top:8px;}
+  .series-nav{margin-top:32px;font-size:13px;color:var(--stone);}
+  .series-nav a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(168,51,47,.3);}
+
+  .pull{font-family:var(--serif);font-size:clamp(26px,4vw,44px);line-height:1.3;font-weight:500;color:var(--near-black);margin:30px 0;}
+  .pull em{font-style:italic;color:var(--crimson);}
+
+  .thesis{background:var(--ivory);border-top:1px solid var(--border-cream);border-bottom:1px solid var(--border-cream);}
+
+  /* dark sections */
+  .dark{background:var(--dark-surface);color:#e8e2dc;}
+  .dark .overline{color:var(--coral);}
+  .dark h2{color:#f5f0ea;}
+  .dark .lead{color:#b8b0a8;}
+
+  /* two-rule compare (silver vs golden) */
+  .rulecmp{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px;}
+  @media(max-width:680px){.rulecmp{grid-template-columns:1fr;}}
+  .rc{border-radius:16px;padding:28px 26px;border:1px solid var(--border-warm);}
+  .rc.gold{background:#f6f1e6;}
+  .rc.silver{background:#eef0ee;}
+  .rc .rt{font-family:var(--serif);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+  .rc.gold .rt{color:var(--gold);} .rc.silver .rt{color:var(--forest);}
+  .rc h3{font-size:21px;margin-bottom:10px;color:var(--near-black);}
+  .rc p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+  .rc .verdict{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border-warm);font-size:13.5px;color:var(--charcoal);}
+  .rc.silver .verdict b{color:var(--forest);}
+
+  /* concept grid */
+  .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;}
+  @media(max-width:860px){.cgrid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.cgrid{grid-template-columns:1fr;}}
+  .concept{background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:22px 22px 24px;transition:transform .3s ease,box-shadow .3s ease;}
+  .concept:hover{transform:translateY(-4px);box-shadow:rgba(0,0,0,.07) 0 14px 32px;}
+  .concept .idx{font-family:var(--serif);font-size:13px;color:var(--crimson);font-weight:600;letter-spacing:1px;}
+  .concept h4{font-size:18px;margin:8px 0 4px;color:var(--near-black);}
+  .concept .term-en{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--stone);display:block;margin-bottom:10px;}
+  .concept p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+
+  .alt{background:var(--ivory);border-top:1px solid var(--border-cream);}
+  .alt .concept{background:var(--parchment);}
+
+  .signature{border-left:3px solid var(--crimson);padding:6px 0 6px 24px;margin:8px 0 30px;font-family:var(--serif);font-size:clamp(19px,2.4vw,26px);line-height:1.46;color:var(--near-black);font-style:italic;}
+  .signature span{display:block;font-style:normal;font-family:var(--sans);font-size:13.5px;color:var(--stone);margin-top:12px;letter-spacing:.3px;}
+
+  .story{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px;}
+  @media(max-width:760px){.story{grid-template-columns:1fr;}}
+  .case{background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:22px 24px;position:relative;}
+  .alt .case{background:var(--parchment);}
+  .case .ct{font-family:var(--serif);font-size:18.5px;color:var(--near-black);margin-bottom:3px;font-weight:500;}
+  .case .ce{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--stone);display:block;margin-bottom:11px;}
+  .case p{font-size:14.5px;line-height:1.62;color:var(--olive);}
+  .case .pin{position:absolute;top:20px;right:22px;font-family:var(--serif);font-size:12.5px;color:var(--crimson);font-variant-numeric:tabular-nums;font-weight:600;}
+
+  /* ergodicity diagram */
+  .ergo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:34px 0 6px;}
+  @media(max-width:680px){.ergo{grid-template-columns:1fr;}}
+  .eg{border:1px solid #45403d;border-radius:16px;padding:26px;text-align:center;background:#332c29;}
+  .eg .eh{font-family:var(--serif);font-size:17px;margin-bottom:6px;color:#f0d9d4;}
+  .eg .el{font-family:var(--serif);font-style:italic;font-size:12.5px;color:#a89e96;margin-bottom:14px;}
+  .eg .big{font-family:var(--serif);font-size:30px;color:var(--coral);line-height:1.15;margin-bottom:12px;}
+  .eg p{font-size:14px;line-height:1.6;color:#b8b0a8;}
+
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px;}
+  @media(max-width:760px){.rules{grid-template-columns:1fr;}}
+  .rule{display:flex;gap:16px;align-items:flex-start;background:var(--ivory);border:1px solid var(--border-warm);border-radius:12px;padding:20px 22px;}
+  .rule .r-n{font-family:var(--serif);font-size:22px;color:var(--crimson);line-height:1;flex-shrink:0;width:30px;}
+  .rule h4{font-size:16.5px;margin-bottom:5px;color:var(--near-black);}
+  .rule p{font-size:14px;color:var(--olive);line-height:1.56;}
+
+  .qgrid{columns:2;column-gap:18px;margin-top:38px;}
+  @media(max-width:760px){.qgrid{columns:1;}}
+  .qcard{break-inside:avoid;margin-bottom:18px;background:var(--ivory);border:1px solid var(--border-warm);border-radius:14px;padding:24px 24px 20px;}
+  .qcard .q{font-family:var(--serif);font-size:18px;line-height:1.5;color:var(--near-black);}
+  .qcard .src{display:block;font-size:12.5px;color:var(--stone);margin-top:12px;letter-spacing:.3px;}
+
+  .takeaways{background:var(--dark-surface);color:#e8e2dc;}
+  .takeaways .overline{color:var(--coral);}
+  .takeaways h2{color:#f5f0ea;}
+  .take-grid{margin-top:40px;display:flex;flex-direction:column;gap:2px;}
+  .take{display:grid;grid-template-columns:64px 1fr;gap:8px;padding:24px 0;border-top:1px solid #45403d;}
+  .take:last-child{border-bottom:1px solid #45403d;}
+  .take .t-num{font-family:var(--serif);font-size:30px;color:var(--coral);line-height:1;}
+  .take h4{font-size:19px;color:#f5f0ea;margin-bottom:7px;}
+  .take p{font-size:14.5px;color:#b8b0a8;line-height:1.62;}
+
+  .closing{background:var(--parchment);text-align:center;}
+  .final{font-family:var(--serif);font-size:clamp(23px,3.4vw,36px);line-height:1.4;color:var(--near-black);font-weight:500;}
+  .final b{color:var(--crimson);font-weight:600;}
+
+  footer{background:var(--near-black);color:#9a988f;padding:60px 28px;text-align:center;}
+  .ft-brand{font-family:var(--serif);font-size:20px;color:#f5f4ed;margin-bottom:16px;letter-spacing:.5px;}
+  .ft-brand span{color:var(--coral);}
+  footer p{font-size:13px;color:#9a988f;line-height:1.8;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="/life#taleb" class="back-home" aria-label="back to Gimbo's Universe"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+      <div class="brand">非对称风险 <span>· Skin in the Game</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#thesis">核心命题</a>
+      <a href="#rubin">鲍勃·鲁宾</a>
+      <a href="#minority">顽固少数派</a>
+      <a href="#real">入局才真实</a>
+      <a href="#iyi">聪明的白痴</a>
+      <a href="#surgeon">外科医生</a>
+      <a href="#lindy">林迪</a>
+      <a href="#ergo">遍历性</a>
+      <a href="#religion">信仰</a>
+      <a href="#quotes">金句</a>
+      <a href="#takeaways">收束</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">塔勒布不确定性五部曲 · 单本深度解读 · 04</div>
+    <h1>非对称风险<span class="en-title">Skin in the Game</span></h1>
+    <p class="subtitle">英文直译：把你的皮肤放进游戏里 · Hidden Asymmetries in Daily Life</p>
+    <div class="author"><span>🩸</span> Nassim Nicholas Taleb · 周洛华 译 · 中信出版集团 · 2018</div>
+    <div class="hero-meta">
+      <div><div class="n">2018</div><div class="l">五部曲收官</div></div>
+      <div><div class="n">19</div><div class="l">章 / 8 卷</div></div>
+      <div><div class="n">3800</div><div class="l">年前《汉谟拉比法典》已懂</div></div>
+      <div><div class="n">1</div><div class="l">条贯穿伦理的对称律</div></div>
+    </div>
+    <p class="series-nav">这是 Incerto 系列的“伦理收口”。 前作：<a href="#">反脆弱</a>（如何从无序中获益）→ 本书：非对称风险（谁该为风险流血）</p>
+  </div>
+</header>
+
+<!-- THESIS -->
+<section class="thesis" id="thesis">
+  <div class="wrap narrow">
+    <div class="overline reveal">核心命题 · The One Rule</div>
+    <h2 class="reveal">不承担后果的人，没有资格做决定</h2>
+    <p class="lead reveal">希腊神话里，巨人安泰俄斯只要双脚不离大地母亲，就力大无穷；大力神赫拉克勒斯把他举到空中，他就不堪一击。<strong style="color:var(--near-black)">把“知识”想象成安泰俄斯，把“实践”想象成大地。</strong>脱离实践的知识，虚弱得一击即溃。要理解这个世界，你必须双脚踩在地上——亲身参与“风险共担”，付出代价，承担后果。</p>
+    <p class="pull reveal">“别告诉我你怎么想，<em>告诉我你的投资组合里有什么。</em>”</p>
+    <p class="reveal">这就是全书的伦理内核：风险共担 = <strong style="color:var(--near-black)">风险与收益的对称</strong>。说话的人必须入局；给建议的人必须为错误的建议付出代价。这既是公平、互惠、商业效率，也是人类得以进化和生存的底层机制。塔勒布给出了一句斩钉截铁的结论——<strong style="color:var(--near-black)">没有“风险共担”，就一事无成，也没有进化。</strong><span class="chapref">（绪论）</span></p>
+  </div>
+</section>
+
+<!-- BOB RUBIN + HAMMURABI + SILVER -->
+<section id="rubin">
+  <div class="wrap">
+    <div class="overline reveal">最恶劣的非对称 · The Bob Rubin Trade</div>
+    <h2 class="reveal">正面我赢，反面你买单</h2>
+    <p class="lead reveal narrow">鲍勃·鲁宾，美国财政部前部长，危机前 10 年从花旗银行赚走超 1.2 亿美元。2008 年银行濒临破产，政府用<strong style="color:var(--near-black)">纳税人的钱</strong>把它救回来——而他一分钱没掏，把锅甩给了“黑天鹅”。<strong style="color:var(--near-black)">收益归个人，风险归社会。</strong>这就是塔勒布最痛恨的“鲍勃·鲁宾的勾当”。</p>
+
+    <div class="signature reveal">
+      “如果建筑师建造的房子倒塌，致屋主死亡，那么建造房子的建筑师应该被处死。”
+      <span>3800 年前的《汉谟拉比法典》就懂这个道理——它比今天的法律更先进。一个“风险后果”与“责任权力”相互不匹配的系统，会慢慢积累不平衡，最终垮掉。</span>
+    </div>
+
+    <h3 class="reveal" style="margin-top:50px;margin-bottom:8px;">银律，胜于金律</h3>
+    <p class="reveal" style="max-width:720px;margin-bottom:6px;">对称的伦理，最牢靠的版本不是“金律”，而是更谦逊的“银律”：</p>
+    <div class="rulecmp reveal">
+      <div class="rc gold">
+        <div class="rt">金律 · Golden Rule</div>
+        <h3>“你想被怎样对待，就怎样待人。”</h3>
+        <p>听上去崇高，却暗藏一个漏洞：它默认你有权把“你以为对他好的东西”强加给别人。干涉主义者，正是用这条律令把战争和“政权更迭”输出到世界各地。</p>
+      </div>
+      <div class="rc silver">
+        <div class="rt">银律 · Silver Rule</div>
+        <h3>“己所不欲，勿施于人。”</h3>
+        <p>更牢不可破。它告诫你：管好自己的事，别替别人决定什么对他有利。相对于判断什么有利，我们更清楚什么有害。</p>
+        <div class="verdict">⚖️ <b>不作恶，先于行善。</b>美国《宪法》第一修正案的内核，正是这种对称性：你有信仰的自由，只要你也允许我有。</div>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:26px;"><strong style="color:var(--near-black)">代理人问题</strong>无处不在：别听以“咨询”谋生的人的建议，除非他要为错误的建议接受惩罚。在“一生难得一次”的买卖里（买房、买车），供应商和你没有长期利益，他可能对你隐瞒关键信息。而真正的承诺，是<strong style="color:var(--near-black)">可衡量、不容反悔</strong>的——就像订婚时那颗昂贵的钻石，胜过千言万语的誓言（显示性偏好）。<span class="chapref">（绪论 · 第 19 章）</span></p>
+  </div>
+</section>
+
+<!-- MINORITY RULE -->
+<section class="dark" id="minority">
+  <div class="wrap">
+    <div class="overline reveal">非对称之母 · The Minority Rule</div>
+    <h2 class="reveal">最不宽容者获胜</h2>
+    <p class="lead reveal narrow">复杂系统最反直觉的一条规律：只要有 <strong style="color:#f0d9d4">3%–4% 永不妥协、又均匀分布</strong>的顽固少数派，整个社会最终都会服从他们的偏好。多数人是温和、灵活、随便的——于是被一小撮绝不让步的人，悄悄定义了规则。</p>
+
+    <div class="story reveal">
+      <div class="case" style="background:#332c29;border-color:#45403d;">
+        <div class="ct" style="color:#f0d9d4;">为什么饮料都符合犹太教规？</div>
+        <span class="ce" style="color:#a89e96;">Kosher · Halal · GMO</span>
+        <p style="color:#b8b0a8;">犹太人占美国人口不到 0.3%，但市面上几乎所有饮料都是“洁食”。因为：守规的人<strong style="color:#cbc1b9">绝不吃</strong>不洁食，而不守规的人<strong style="color:#cbc1b9">可以吃</strong>洁食。只要成本相差不大，全部做成洁食最省事。清真食品、有机食品、非转基因，同理。</p>
+      </div>
+      <div class="case" style="background:#332c29;border-color:#45403d;">
+        <div class="ct" style="color:#f0d9d4;">重整化</div>
+        <span class="ce" style="color:#a89e96;">Renormalization</span>
+        <p style="color:#b8b0a8;">一个只吃非转基因的固执女儿，改造了全家；全家去烧烤，邻居被迫全买非转基因；本地超市跟着调整；批发商为简化流程全面转向。一层层放大，少数派的偏好最终成为 100% 的选择。语言、宗教、道德，都这样传播。</p>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:26px;color:#b8b0a8;">这也解释了为什么<strong style="color:#f0d9d4">去中心化</strong>如此重要：如果顽固少数派恰好占全国 3%，但分布不均，那么有的州在阈值之上、有的在阈值之下——分权让一部分系统免于被少数派碾压。市场和科学同样由“偏锋”驱动：一个固执的卖家就能让市场瞬间下跌 10%。社会进步从不来自共识、投票或委员会，而来自<strong style="color:#f0d9d4">一小撮全身心入局的顽固者</strong>。<span class="chapref" style="color:#7d746c">（第 2 章）</span></p>
+  </div>
+</section>
+
+<!-- REAL LIFE -->
+<section id="real">
+  <div class="wrap">
+    <div class="overline reveal">活着就要承担风险 · Real Life Requires Risk</div>
+    <h2 class="reveal">伤疤，是你曾经入局的信号</h2>
+    <p class="lead reveal narrow">真实的生活需要付出牺牲、承担风险。塔勒布用一连串鲜活的例子说明：人们能本能地察觉到，谁在第一线流过血，谁只在后台动嘴。</p>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">魔术师戴维·布莱恩的冰锥</div>
+        <span class="ce">David Blaine</span>
+        <p>晚宴上，他突然用冰锥刺穿自己的手心。塔勒布事后看到他在衣帽间用餐巾擦真血——这哥们儿表演时真的在冒险。一个真实的、承担了风险的人，立刻赢得了尊重。</p>
+      </div>
+      <div class="case">
+        <div class="ct">耶稣必须是人</div>
+        <span class="ce">Jesus Took Risk</span>
+        <p>基督教坚持耶稣同时是神和人。为什么？因为他要在十字架上<strong style="color:var(--charcoal)">牺牲自己</strong>。一个被剥夺人性的神无法受难、无法入局。如果受难的是神而非人，那只是一场幻象魔术。</p>
+      </div>
+      <div class="case">
+        <div class="ct">《黑客帝国》没有吸收壁</div>
+        <span class="ce">The Matrix</span>
+        <p>插上电缆体验的“经验”，永远不能用于真实的风险共担——因为关掉电源后，对你的生活没有不可逆的伤害，没有单向流逝的时间，没有“吸收壁”。梦境不是现实，正在于此。</p>
+      </div>
+      <div class="case">
+        <div class="ct">为什么特朗普会赢</div>
+        <span class="ce">The Scars Signal</span>
+        <p>关掉电视声音，塔勒布就断定特朗普会赢初选。他有明显的缺陷，这让他显得真实。说他是“失败的企业家”反而帮了他——伤疤、瑕疵，证明他是个真人，而不是幽灵。</p>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:26px;"><strong style="color:var(--near-black)">显示性偏好（Revealed Preferences）：</strong>只靠询问，你永远不知道人们真正想要什么——连他们自己都不知道。重要的是观察他们<strong style="color:var(--near-black)">花钱买了什么</strong>。信仰只是廉价的空谈；唯有付诸行动、需要承担后果的，才暴露真实。<span class="chapref">（第 5 章）</span></p>
+  </div>
+</section>
+
+<!-- IYI -->
+<section class="alt" id="iyi">
+  <div class="wrap">
+    <div class="overline reveal">聪明的白痴 · Intellectual Yet Idiot</div>
+    <h2 class="reveal">把他们放到椰子岛上，他们找不到椰子</h2>
+    <p class="lead reveal narrow">塔勒布造了一个词：<strong style="color:var(--near-black)">“白知”（IYI）</strong>——高智商的聪明白痴。受过良好教育、从不入局、却热衷于替别人设计人生的一群人。他们数量不多（不到 1%），却常踞智库、媒体和大学社会科学系，影响巨大。</p>
+
+    <div class="signature reveal">
+      “白知”的书架上摆着《黑天鹅》精装首印版，却把“没有证据表明”和“证据表明没有”混为一谈。
+      <span>你刚给他解释完遍历性，他立刻就忘。他懂理论不懂世界，会写论文不会骑车。当公众投票符合他期望时叫“民主”，不符合时叫“民粹”。他要小心——就像打算给人做脑外科手术的理发师。</span>
+    </div>
+
+    <div class="cgrid reveal">
+      <div class="concept">
+        <div class="idx">01</div>
+        <h4>错把无知当反常</h4>
+        <span class="term-en">Mislabels the Rational</span>
+        <p>他们把自己无法理解的行为定义为“非理性”“病态”，却从不怀疑是自己理解力有限。平民按合理但他看不懂的方式做事，他就说人家“没教养”。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">02</div>
+        <h4>科学 vs 唯科学主义</h4>
+        <span class="term-en">Science vs Scientism</span>
+        <p>他们混淆二者，甚至认为唯科学主义更“科学”。心理学可重复率不到 40%，宏观经济学比占星术还不靠谱——他们却用这些来指导你的人生。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">03</div>
+        <h4>只懂一阶逻辑</h4>
+        <span class="term-en">First-Order Only</span>
+        <p>他们能理解一阶函数，但对二阶、高阶以及复杂系统就望洋兴叹。他们以为理解了蚂蚁就理解了蚁穴，理解了个体就掌握了市场。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">04</div>
+        <h4>从不入局</h4>
+        <span class="term-en">No Skin in the Game</span>
+        <p>最明显的标志：他们根本不参与风险共担，不愿承担任何风险和责任——甚至在健身房做举重时，都不愿承担杠铃的重量。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">05</div>
+        <h4>祖母比他可靠</h4>
+        <span class="term-en">Grandmother Beats the Nerd</span>
+        <p>与其听这些制定政策的书呆子，不如依赖自己的生物本能，或听祖母的建议（以及经岁月考验的经典）——祖母比他们可靠得多。</p>
+      </div>
+      <div class="concept">
+        <div class="idx">06</div>
+        <h4>别和俄国人喝酒</h4>
+        <span class="term-en">Never Drinks with Russians</span>
+        <p>他参加艺术节、吃黄瓜三明治、一次只吃一小口；吃牛排必配红酒；从不让自己醉到摔杯子。他活在体面里，唯独不入局。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SURGEON -->
+<section id="surgeon">
+  <div class="wrap">
+    <div class="overline reveal">外貌与能力 · The Surgeon</div>
+    <h2 class="reveal">两个外科医生，选那个像屠夫的</h2>
+    <p class="lead reveal narrow">水平相当的两位医生：一个银丝眼镜、谈吐优雅、常春藤文凭，活像电影里的外科医生；另一个像屠夫，肥胖、邋遢、纽约口音、镶颗金牙。<strong style="color:var(--near-black)">选屠夫。</strong></p>
+
+    <div class="signature reveal">
+      一个看起来不像、却干了很久的人，必然是用过硬的实力扛住了别人以貌取人的不信任，否则早被淘汰了。
+      <span>时间和现实联手帮我们过滤掉能力不足的人，而它们不在乎长相。当一项事业因脱离风险共担而缺乏筛选机制时，它就会挤满形象逼真、满嘴术语、却对核心一无所知的人。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">唯科学主义比科学更像科学</div>
+        <span class="ce">Scientism Looks More Like Science</span>
+        <p>就像那个衣冠楚楚开法拉利的人看起来比蓬头垢面的亿万富翁更有钱。真正有知识的人，应该看起来不像知识分子。绿色木材谬误的另一面：你最该雇的交易员，是你完全看不懂他在做什么的那个。</p>
+      </div>
+      <div class="case">
+        <div class="ct">快刀斩乱结</div>
+        <span class="ce">The Gordian Knot</span>
+        <p>亚历山大面对解不开的戈尔迪之结，后退两步说“神谕不在意怎么解开”，拔剑一劈两半。重大问题的解决方案应直击问题本身。头疼吃阿司匹林，不是做脑部手术——尽管后者听起来更“科学”。</p>
+      </div>
+      <div class="case">
+        <div class="ct">真正的健身房没有花哨器材</div>
+        <span class="ce">A Real Gym Is a Barbell</span>
+        <p>那些花哨、五颜六色、像宇宙飞船装备的器械，看起来很“科学”，其实是唯科学主义。最简单的杠铃，才是唯一能练全身、最便宜、有 2500 年历史的工具。健身房不该看起来像健身房。</p>
+      </div>
+      <div class="case">
+        <div class="ct">教育是奢侈品消费</div>
+        <span class="ce">Education as Luxury</span>
+        <p>常春藤成了亚洲新富的终极奢侈品，像 LV 包。证据表明：不是教育推动了国家财富，而是财富水平决定了教育消费。同等技能下，雇那个文凭最差的人——他要战胜的困难更多。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINDY -->
+<section class="alt" id="lindy">
+  <div class="wrap">
+    <div class="overline reveal">时间 · The Lindy Effect</div>
+    <h2 class="reveal">谁来评判专家？时间</h2>
+    <p class="lead reveal narrow">林迪是纽约一家熟食店。人们发现：已经连演 100 天的剧目，往往还能再演 100 天。对于书、观念、技术这类<strong style="color:var(--near-black)">不会自然衰老</strong>的事物——已经活了多久，就还能再活多久。脆弱性，直接导致了林迪效应。</p>
+
+    <div class="signature reveal">
+      时间，是“风险共担”的组织者和裁判者。
+      <span>那些经过时间洗礼而幸存的事物，向我们揭示了它们的强韧。你骗不了林迪：《纽约时报》热门作家的书，5 年存活率往往还不如胰腺癌患者。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">同行评议是一种腐败</div>
+        <span class="ce">Peer Review</span>
+        <p>“你作为学者会受到其他学者的评判。”——塔勒布听到这话差点吐了。一个真正自由的人，命运不依赖于同行评议。20 人组个圈子相互附和着说疯话，就能在大学开一个系。任何东西一旦带有竞赛意味，就会扼杀对知识的探索。</p>
+      </div>
+      <div class="case">
+        <div class="ct">祖母 vs 研究员</div>
+        <span class="ce">Grandmother vs Researcher</span>
+        <p>听祖母和老人的建议，90% 的时间有效；听心理学家和行为科学家的，可能不到 10% 对——除非祖母也这么说，那要心理学家干嘛？关键不在于古老知识存活了下来，而在于<strong style="color:var(--olive)">接受这些知识的人都活了下来，我们是他们的后代</strong>。</p>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:26px;">塔勒布给波普尔的证伪主义打了个补丁：一个想法要接受风险共担的检验，不是用已知真理去验证，而是<strong style="color:var(--near-black)">用各种灾难和意外去验证</strong>。能存活的，就是好的、对的、有用的、无害的。一个好想法同时也是一个好的风险管理者——它必须能提升人们的反脆弱性，至少降低脆弱性。<span class="chapref">（第 8 章）</span></p>
+  </div>
+</section>
+
+<!-- ERGODICITY -->
+<section class="dark" id="ergo">
+  <div class="wrap">
+    <div class="overline reveal">全书的地基 · Ergodicity</div>
+    <h2 class="reveal">承担风险的逻辑：活着，是一切的前提</h2>
+    <p class="lead reveal narrow">塔勒布把最重要的一章放在最后。它揭穿了一个被整个决策理论界忽略了 250 年的致命错误——混淆<strong style="color:#f0d9d4">“集合概率”</strong>与<strong style="color:#f0d9d4">“时间概率”</strong>。这是连接全套书的最强概念。</p>
+
+    <div class="ergo reveal">
+      <div class="eg">
+        <div class="eh">100 个人各赌一次</div>
+        <div class="el">Ensemble Probability · 集合概率</div>
+        <div class="big">≈ 1% 爆仓</div>
+        <p>第 28 号赌徒爆仓了，第 29 号会受影响吗？不会。这是一个横截面——听上去很安全。</p>
+      </div>
+      <div class="eg">
+        <div class="eh">同一个人连赌 100 天</div>
+        <div class="el">Time Probability · 时间概率</div>
+        <div class="big">→ 必然爆仓</div>
+        <p>第 28 天爆仓，就再没有第 29 天了。这是一条路径——只要存在“爆仓点”，结局注定。</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="color:#b8b0a8;margin-top:30px;">市场长期回报再漂亮，对一个有“爆仓点”的<strong style="color:#f0d9d4">个体</strong>毫无意义。俄罗斯轮盘赌六中选五赢 100 万，期望收益 83 万——成本收益模型会让你去玩，但只要一直玩下去，结局必然躺进坟墓。<strong style="color:#f0d9d4">只要存在不可逆的毁灭，所有期望值计算都归零。</strong>这就是物理学家彼得斯与盖尔曼指出的遍历性，也是凯利、香农、索普这些幸存者早就懂的——经济学家却整整误解了 250 年，因为他们没有入局。</p>
+
+    <div class="signature reveal" style="border-left-color:var(--coral);color:#f0d9d4;margin-top:34px;">
+      勇气，和审慎，其实是一回事。
+      <span style="color:#a89e96;">为救溺水的孩子牺牲自己，既是勇气也是审慎——你用较低层级的个人风险，换取了更高层级的集体安全。个人的死亡可以再生，但人类整体和生态一旦毁灭就无可逆转。所以：理性的核心只有一个——避免系统性毁灭，活下去。</span>
+    </div>
+  </div>
+</section>
+
+<!-- RELIGION -->
+<section id="religion">
+  <div class="wrap">
+    <div class="overline reveal">信仰与理性 · Religion &amp; Rationality</div>
+    <h2 class="reveal">教皇是无神论者吗？</h2>
+    <p class="lead reveal narrow">人们谈“宗教”时，往往各说各话：对早期犹太人和穆斯林，宗教是<strong style="color:var(--near-black)">法律</strong>；对罗马人，是社交与节庆；对佛教徒、印度教徒，是<strong style="color:var(--near-black)">哲学</strong>。要判断一个人是不是信徒，不能看他口头宣称的信仰，而要看他的<strong style="color:var(--near-black)">行为</strong>。</p>
+
+    <div class="signature reveal">
+      1981 年教皇遇刺，救护车直奔意大利最好的医院，而非教堂祈祷。
+      <span>教皇和罗马皇帝，都是先找医生、再求助于神，顺序一贯如此。把这个顺序颠倒过来反而会被视为疯狂。可见：在重大决策上，大多数信徒的行为，和无神论者罕有不同。</span>
+    </div>
+
+    <div class="story reveal">
+      <div class="case">
+        <div class="ct">神不喜欢廉价信号</div>
+        <span class="ce">God Dislikes Cheap Signals</span>
+        <p>帕斯卡的赌注错了：信仰不是一个免费的期权。斋戒让你为复活节付出代价，祭坛上的排血槽是古老的牺牲遗迹。信仰的力量，不来自神显灵，而来自<strong style="color:var(--olive)">信众在自己的风险共担中所展现的力量</strong>。</p>
+      </div>
+      <div class="case">
+        <div class="ct">亚伯拉罕的献祭</div>
+        <span class="ce">The Ultimate Asymmetry</span>
+        <p>上帝用最不对称的礼物测试亚伯拉罕的忠诚：把你的孩子献给我。这不是一笔有来有往的交易，而是无条件的奉献——它终结了所有交易。“没有奉献的爱，就是偷盗。”</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="margin-top:26px;"><strong style="color:var(--near-black)">理性 = 生存。</strong>塔勒布给“理性”重新下了定义：信仰本身无所谓理性与否，理性只存在于<strong style="color:var(--near-black)">行动</strong>之中。迷信里的预防原则，恰恰是理性的风险管理。事情未必都有起因，但能幸存下来必定有原因。宗教之所以存在，是为了建立尾部风险管理体系，并把它传给下一代。一句话道尽全书后半部的主旨——<strong style="color:var(--near-black)">先有生存，然后才有真理和科学。</strong><span class="chapref">（第 16–18 章）</span></p>
+  </div>
+</section>
+
+<!-- HOW TO LIVE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="overline reveal">落地 · How to Live with Honor</div>
+    <h2 class="reveal">六条挺直脊梁的法则</h2>
+    <div class="rules reveal">
+      <div class="rule"><div class="r-n">1</div><div><h4>入局，才有发言权</h4><p>如果你不能为自己的言论承担后果，那么你等于什么都没说。给建议、做决定的人，必须亲自承担风险。</p></div></div>
+      <div class="rule"><div class="r-n">2</div><div><h4>只信入局者</h4><p>别听以咨询谋生、却不为错误付代价的人。看一个人押了什么、会因为错而失去什么——而不是他说了什么。</p></div></div>
+      <div class="rule"><div class="r-n">3</div><div><h4>先求不死</h4><p>避免任何不可逆的“爆仓”。只要存在毁灭风险，再漂亮的期望值都是陷阱。理性的核心，就是活下去。</p></div></div>
+      <div class="rule"><div class="r-n">4</div><div><h4>守住银律</h4><p>己所不欲，勿施于人。管好自己的事，别替别人决定什么对他好。不作恶，先于行善。</p></div></div>
+      <div class="rule"><div class="r-n">5</div><div><h4>把灵魂放进工作</h4><p>像手工匠人那样：先求生存，再谈营利；有些事即使报酬诱人也绝不做。抄近路，本身就是一种不诚实。</p></div></div>
+      <div class="rule"><div class="r-n">6</div><div><h4>敬畏时间（林迪）</h4><p>焚朽木，饮陈酿，读古书，交老友。让时间替你筛选——它是唯一不会被收买的专家。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section id="quotes">
+  <div class="wrap">
+    <div class="overline reveal">原书金句 · In His Words</div>
+    <h2 class="reveal">几句留在心里的话</h2>
+    <div class="qgrid reveal">
+      <div class="qcard"><p class="q">“没有‘风险共担’，就没有进化。”</p><span class="src">— 绪论</span></div>
+      <div class="qcard"><p class="q">“你永远无法说服一个人他错了，只有现实才能教育他。而现实并不在乎对错，生存才是最重要的。”</p><span class="src">— 绪论</span></div>
+      <div class="qcard"><p class="q">“相比于理解，我们更善于行动。”</p><span class="src">— 绪论</span></div>
+      <div class="qcard"><p class="q">“尊严就是有些事情你永远都不会去做，无论报酬有多么诱人。”</p><span class="src">— 绪论</span></div>
+      <div class="qcard"><p class="q">“你在书本中学到的勇气，并不会使你变得勇敢——就像吃牛肉不会让你变蠢一样。”</p><span class="src">— 绪论 · 英雄不是书虫</span></div>
+      <div class="qcard"><p class="q">“伤疤，是你曾经亲身参与‘风险共担’的信号。”</p><span class="src">— 第 5 章</span></div>
+      <div class="qcard"><p class="q">“当一个人的命运不依赖于同行评议时，他才是一个真正自由的人。”</p><span class="src">— 林迪 · 第 8 章</span></div>
+      <div class="qcard"><p class="q">“要赚钱，你首先得活得长。”</p><span class="src">— 巴菲特，第 18 章引</span></div>
+      <div class="qcard"><p class="q">“先有生存，然后才有真理和科学。”</p><span class="src">— 第 18 章</span></div>
+      <div class="qcard"><p class="q">“信仰的力量，不来自神显灵，而来自信众在自己的风险共担中所展现的力量。”</p><span class="src">— 第 16 章</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAKEAWAYS -->
+<section class="takeaways" id="takeaways">
+  <div class="wrap narrow">
+    <div class="overline reveal">收束 · Five Insights</div>
+    <h2 class="reveal">读完《非对称风险》，留在心里的五句话</h2>
+    <div class="take-grid">
+      <div class="take reveal"><div class="t-num">1</div><div><h4>对称，是一切公平的根</h4><p>风险与收益必须对称。收益归个人、风险归社会的“鲍勃·鲁宾的勾当”，是最恶劣的不对称——3800 年前的《汉谟拉比法典》就懂这个道理。</p></div></div>
+      <div class="take reveal"><div class="t-num">2</div><div><h4>入局，才是真实</h4><p>脱离实践的知识一击即溃。说话的人必须承担后果，伤疤是入局的信号。别看他怎么说，看他押了什么、会因错而失去什么。</p></div></div>
+      <div class="take reveal"><div class="t-num">3</div><div><h4>少数派定义规则</h4><p>3% 绝不妥协的顽固者，能让整个社会服从。社会进步从不来自共识、投票或委员会，而来自一小撮全身心入局的人。</p></div></div>
+      <div class="take reveal"><div class="t-num">4</div><div><h4>活下来是唯一的理性</h4><p>集合概率不等于时间概率。只要存在不可逆的爆仓，期望值就是骗局。先确保不被任何一次冲击清零，复利和好运才有意义。</p></div></div>
+      <div class="take reveal"><div class="t-num">5</div><div><h4>时间，是不被收买的裁判</h4><p>林迪效应、银律、避免“白知”、敬畏古老智慧——让时间替你筛选。能穿越世代而幸存的，才是真的、对的、有用的。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap narrow">
+    <div class="overline reveal" style="color:var(--crimson);">结语 · Put Your Skin in the Game</div>
+    <h2 class="reveal">一句话，总结这本书</h2>
+    <p class="final reveal">
+      你无法用语言赢得世界，<br>你只能<b>用承担</b>赢得它——<br>把你的皮肤，<br><b>放进游戏里。</b>
+    </p>
+    <p class="reveal" style="font-size:17px;color:var(--stone);margin-top:30px;">
+      塔勒布用十七年的“投资协奏曲”收束于此：智慧不只是看清世界，更是<strong style="color:var(--olive)">为自己的判断，亲自流血</strong>。<br>承担后果的人，判断更真、灵魂更重。没有风险共担，就没有公平、没有进化，也没有真正的知识。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p class="ft-brand">非对称风险 <span>· Skin in the Game</span></p>
+  <p>
+    Nassim Nicholas Taleb《非对称风险》· 周洛华 译 · 中信出版集团 · 2018<br>
+    本页为单本精读笔记的可视化呈现 · 仅供学习与讨论 · 全部概念与引文取自原书<br>
+    塔勒布不确定性五部曲（Incerto）系列单本深读 · 04 / 非对称风险 · Design system: Claude — Warm &amp; Editorial
+  </p>
+</footer>
+
+<script>
+  const bar=document.getElementById('progress');
+  function onScroll(){const h=document.documentElement;bar.style.width=((h.scrollTop)/(h.scrollHeight-h.clientHeight)*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import HeroSection from '~/components/HeroSection.astro';
-import { books, groups } from '~/data/life';
+import { books, groups, talebOverview, talebBooks } from '~/data/life';
 ---
 
 <BaseLayout
@@ -143,6 +143,107 @@ import { books, groups } from '~/data/life';
             </div>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODULE 2.5 · TALEB ZONE ============ -->
+  <section id="taleb" class="relative border-t border-hairline scroll-mt-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-14 md:py-16">
+      <div class="flex items-end justify-between mb-8 gap-3">
+        <div>
+          <div class="terminal text-lime mb-1.5 text-[11px]">// read the whole shelf, then drew the map</div>
+          <h2 class="font-display text-2xl md:text-3xl font-black uppercase tracking-tight text-ink-white">
+            塔勒布专区 · Taleb
+          </h2>
+          <p class="mt-2 text-sm text-ink-mint leading-relaxed max-w-2xl">
+            Nassim Taleb 的 Incerto「不确定性五部曲」。每一本都逐字读透，
+            做成一份可视化深读 —— 核心模型、原书故事、关键金句，
+            按章节出处标注。给读书会，也给未来的自己。
+          </p>
+        </div>
+        <span class="font-mono text-[11px] tracking-tool text-ink-gray whitespace-nowrap shrink-0 hidden sm:block">
+          {talebBooks.filter((b) => b.status === 'live').length + 1} / {talebBooks.length + 1} live
+        </span>
+      </div>
+
+      {/* Featured overview card */}
+      <a
+        href={talebOverview.href}
+        class="block group card !p-0 overflow-hidden hover:scale-[1.005] transition-transform duration-200 mb-4"
+        style={`border-color:${talebOverview.hue}33;`}
+      >
+        <div class="flex flex-col lg:flex-row">
+          <div
+            class="lg:w-[34%] flex flex-col items-center justify-center px-8 py-9 lg:py-10 text-center"
+            style={`background: linear-gradient(160deg, ${talebOverview.hue}1f 0%, #1a1b17 72%);`}
+          >
+            <div class="font-display text-3xl md:text-4xl font-black uppercase tracking-tight leading-none" style={`color:${talebOverview.hue};`}>
+              Incerto
+            </div>
+            <div class="mt-3 font-mono text-[10px] tracking-tool text-ink-mint">{talebOverview.year} · 5 BOOKS</div>
+          </div>
+          <div class="flex-1 p-7 md:p-8 flex flex-col justify-between gap-5">
+            <div>
+              <div class="font-mono text-[10px] tracking-tool text-ink-gray mb-2">{talebOverview.titleEn}</div>
+              <h3 class="font-sans text-lg md:text-xl font-black text-ink-white leading-tight">{talebOverview.title}</h3>
+              <p class="mt-3 text-sm text-ink-mint leading-relaxed">{talebOverview.thesis}</p>
+            </div>
+            <div class="pt-4 border-t border-hairline flex items-center justify-between">
+              <span class="font-mono text-[10px] tracking-tool text-ink-gray">从这里开始 · start here</span>
+              <span class="font-mono text-xs opacity-70 group-hover:opacity-100 transition-opacity" style={`color:${talebOverview.hue};`}>打开总览 →</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      {/* Five-book grid */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {talebBooks.map((b) => {
+          const Tag = b.status === 'live' ? 'a' : 'div';
+          return (
+            <Tag
+              {...(b.status === 'live' ? { href: b.href } : {})}
+              class:list={[
+                'card !p-0 overflow-hidden flex flex-col group',
+                b.status === 'live'
+                  ? 'hover:scale-[1.01] transition-transform duration-200'
+                  : 'opacity-70',
+              ]}
+              style={`border-color:${b.hue}26;`}
+            >
+              {/* Accent header */}
+              <div
+                class="px-5 pt-5 pb-4 flex items-start justify-between"
+                style={`background: linear-gradient(155deg, ${b.hue}1c 0%, transparent 80%); border-bottom:1px solid ${b.hue}22;`}
+              >
+                <div>
+                  <div class="font-display text-3xl font-black leading-none" style={`color:${b.hue};`}>{b.no}</div>
+                  <div class="mt-2 font-sans text-base font-black text-ink-white leading-tight">{b.title}</div>
+                  <div class="mt-0.5 font-mono text-[10px] tracking-tool text-ink-gray">{b.titleEn} · {b.year}</div>
+                </div>
+                {b.status === 'wip' && (
+                  <span class="font-mono text-[9px] tracking-tool px-2 py-0.5 rounded-full bg-canvas text-ink-gray border border-hairline whitespace-nowrap shrink-0">
+                    进行中
+                  </span>
+                )}
+              </div>
+              {/* Body */}
+              <div class="p-5 flex-1 flex flex-col gap-4">
+                <p class="text-xs text-ink-mint leading-relaxed flex-1">{b.thesis}</p>
+                <div class="pt-3 border-t border-hairline">
+                  {b.status === 'live' ? (
+                    <span class="font-mono text-[11px] opacity-70 group-hover:opacity-100 transition-opacity" style={`color:${b.hue};`}>
+                      打开可视化 →
+                    </span>
+                  ) : (
+                    <span class="font-mono text-[11px] text-ink-gray">深读进行中…</span>
+                  )}
+                </div>
+              </div>
+            </Tag>
+          );
+        })}
       </div>
     </div>
   </section>

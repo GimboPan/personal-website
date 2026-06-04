@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Personal AI Fleet · Project</title>
+  <meta name="description" content="Not one chatbot — an org chart of agents. A chief of staff that sees the whole board, and specialists it delegates to: investing, personal brand, and the day-job planning stack. How a one-person life runs like a company." />
+  <meta property="og:title" content="The Personal AI Fleet" />
+  <meta property="og:description" content="An org chart of agents running a one-person life — a chief of staff plus specialists that draft, while the human decides." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --card: #1a1b17;
+      --line: #ffffff1f;
+      --green: #9fe870;
+      --green-dim: #9fe87022;
+      --darkgreen: #163300;
+      --mint: #e2f6d5;
+      --mint-2: #b6c7ad;
+      --white: #ffffff;
+      --gray: #868685;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--mint);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--green); color: var(--darkgreen); }
+    a { color: inherit; }
+
+    /* Display — Wise Sans 900 manifesto (Inter fallback, as on the live site) */
+    .display {
+      font-family: 'Wise Sans', 'Inter', system-ui, sans-serif;
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      color: var(--white);
+      overflow-wrap: anywhere;
+    }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+    /* CRT overlay + stars (from the site's globals.css) */
+    .crt-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 60;
+      background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0,0,0,0.06) 3px, transparent 4px);
+      mix-blend-mode: multiply;
+    }
+    .crt-beam { position: fixed; inset: 0; pointer-events: none; z-index: 61; overflow: hidden; }
+    .crt-beam::after {
+      content: ''; position: absolute; left: 0; right: 0; height: 8px;
+      background: linear-gradient(to bottom, transparent, rgba(159,232,112,0.08), transparent);
+      animation: scan 8s linear infinite;
+    }
+    @keyframes scan { 0% { top: -8px; } 100% { top: 100%; } }
+    .stars {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.55;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, #fff 50%, transparent 50%),
+        radial-gradient(1px 1px at 60% 70%, var(--green) 50%, transparent 50%),
+        radial-gradient(1px 1px at 80% 20%, var(--mint) 50%, transparent 50%),
+        radial-gradient(1px 1px at 30% 80%, #fff 50%, transparent 50%),
+        radial-gradient(2px 2px at 40% 40%, var(--green) 50%, transparent 50%),
+        radial-gradient(2px 2px at 85% 85%, #fff 50%, transparent 50%);
+      background-size: 400px 400px; image-rendering: pixelated;
+    }
+
+    /* Back-link bar */
+    .backbar { border-bottom: 1px solid var(--line); padding: 14px 0; position: relative; z-index: 2; }
+    .backbar .wrap { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); font-weight: 700; }
+    .backbar a { color: var(--green); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--mint); }
+    .backbar .here { color: var(--white); }
+    .backbar .sep { color: var(--gray); }
+
+    /* Hero */
+    .hero { position: relative; padding: 110px 0 80px; overflow: hidden; }
+    .hero .eyebrow { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 26px; }
+    .hero h1 { font-size: clamp(48px, 9vw, 104px); margin-bottom: 28px; }
+    .hero h1 .g { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 2vw, 21px); max-width: 620px; color: var(--mint); margin-bottom: 36px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 9999px; font-weight: 700; font-size: 14px; text-decoration: none; transition: transform .15s; }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background: var(--green); color: var(--darkgreen); }
+    .btn-ghost { background: rgba(255,255,255,0.08); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+
+    /* Meta strip */
+    .meta { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; position: relative; z-index: 2; }
+    .meta .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 22px; }
+    .meta .label { font-size: 10px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+    .meta .value { color: var(--white); font-weight: 600; font-size: 14px; }
+
+    /* Sections */
+    section { padding: 84px 0; position: relative; z-index: 2; }
+    .tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); background: var(--green-dim); padding: 6px 12px; border-radius: 9999px; margin-bottom: 20px; }
+    h2.title { font-family: 'Wise Sans','Inter',sans-serif; font-weight: 900; font-size: clamp(30px, 5vw, 46px); color: var(--white); line-height: 1; letter-spacing: -0.01em; margin-bottom: 18px; }
+    .lead-text { font-size: 18px; color: var(--mint-2); max-width: 720px; margin-bottom: 48px; }
+    .lead-text b { color: var(--white); font-weight: 700; }
+
+    /* Cards */
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 30px; padding: 28px; }
+    .card-feature { background: var(--green); color: var(--darkgreen); border-radius: 30px; padding: 28px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 20px; }
+
+    .cell .role { font-size: 10px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+    .cell h3 { font-size: 21px; font-weight: 900; color: var(--white); margin-bottom: 6px; }
+    .cell .zh { font-size: 13px; color: var(--gray); font-weight: 600; margin-bottom: 14px; }
+    .cell p { font-size: 14.5px; color: var(--mint); line-height: 1.6; margin-bottom: 14px; }
+    .rule { font-size: 12px; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 6px; background: var(--green-dim); padding: 6px 12px; border-radius: 9999px; }
+    .card-feature .role { color: var(--darkgreen); opacity: 0.7; }
+    .card-feature h3 { color: var(--darkgreen); }
+    .card-feature .zh { color: var(--darkgreen); opacity: 0.65; }
+    .card-feature p { color: var(--darkgreen); }
+    .card-feature .rule { background: #16330014; color: var(--darkgreen); }
+
+    /* Org chart */
+    .org { background: var(--card); border: 1px solid var(--line); border-radius: 30px; padding: 36px 28px; }
+    .org-top { display: flex; justify-content: center; margin-bottom: 8px; }
+    .node { border: 1.5px solid var(--line); border-radius: 16px; padding: 16px 18px; text-align: center; background: #0e0f0c; min-width: 0; }
+    .node.boss { border-color: var(--green); border-style: solid; background: var(--green-dim); }
+    .node .nrole { font-size: 9.5px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+    .node .nname { font-size: 15px; font-weight: 900; color: var(--white); }
+    .node.boss .nname { color: var(--green); }
+    .node .nwhat { font-size: 11.5px; color: var(--mint-2); margin-top: 4px; line-height: 1.4; }
+    .org-stem { text-align: center; color: var(--green); font-size: 18px; line-height: 1; padding: 6px 0; }
+    .org-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 6px; }
+    .org-caption { text-align: center; font-size: 11px; color: var(--gray); margin-top: 18px; letter-spacing: 0.05em; }
+    @media (max-width: 880px) { .org-row { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .org-row { grid-template-columns: 1fr; } }
+
+    /* Principles list */
+    .principles { display: grid; gap: 14px; }
+    .principle { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; }
+    .principle .n { font-family: 'JetBrains Mono',monospace; font-size: 13px; font-weight: 800; color: var(--green); padding-top: 2px; }
+    .principle h4 { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
+    .principle p { font-size: 14px; color: var(--mint-2); line-height: 1.55; }
+
+    /* Closing */
+    .closing { text-align: center; padding: 110px 0; }
+    .closing h2 { font-family: 'Wise Sans','Inter',sans-serif; font-weight: 900; font-size: clamp(34px,6vw,68px); color: var(--white); text-transform: uppercase; line-height: 0.9; letter-spacing: -0.015em; margin-bottom: 22px; }
+    .closing h2 .g { color: var(--green); }
+    .closing p { font-size: 16px; color: var(--mint-2); max-width: 540px; margin: 0 auto; }
+    .closing .sig { margin-top: 28px; font-size: 12px; color: var(--gray); letter-spacing: 0.05em; }
+
+    footer { border-top: 1px solid var(--line); padding: 36px 0; text-align: center; position: relative; z-index: 2; }
+    footer a { color: var(--green); text-decoration: none; font-weight: 700; font-size: 14px; }
+
+    @media (max-width: 640px) { section { padding: 60px 0; } .hero { padding: 70px 0 50px; } .org { padding: 24px 18px; } }
+  </style>
+</head>
+
+<body>
+<div class="crt-overlay"></div>
+<div class="crt-beam"></div>
+
+<!-- BACK LINK -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/ai-builder" aria-label="Back to Gimbo's Universe — AI Builder"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+    <span class="sep">/</span>
+    <span class="here">AI Builder · The Personal AI Fleet</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="stars"></div>
+  <div class="wrap">
+    <span class="eyebrow">AI Experiments · Living system · 2026</span>
+    <h1 class="display">I run my life<br/>with a <span class="g">fleet</span><br/>of agents.</h1>
+    <p class="lead">
+      Not one chatbot. An <b>org chart</b> of them — a chief of staff that sees the whole board,
+      and specialists it delegates to. This is how a one-person life starts to run like a company:
+      each agent owns a domain, drafts the work, and stops at the line only a human should cross.
+    </p>
+    <div class="actions">
+      <a href="#fleet" class="btn btn-primary">Meet the fleet ↓</a>
+      <a href="#lessons" class="btn btn-ghost">What I learned</a>
+    </div>
+  </div>
+</header>
+
+<!-- META -->
+<div class="meta">
+  <div class="wrap">
+    <div class="grid">
+      <div><div class="label">Role</div><div class="value">Architect · Builder · Operator</div></div>
+      <div><div class="label">Status</div><div class="value">Live · running daily</div></div>
+      <div><div class="label">Pattern</div><div class="value">Manager-of-agents · brain + skills + ledgers</div></div>
+      <div><div class="label">Built with</div><div class="value">Claude · markdown brains · cron</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THE SHIFT -->
+<section>
+  <div class="wrap">
+    <span class="tag">§ The shift</span>
+    <h2 class="title">From doing the work<br/>to managing a fleet</h2>
+    <p class="lead-text">
+      For a year I used AI like everyone else: one chat, one task, repeat. The shift came when I stopped
+      asking <b>"do this for me"</b> and started asking <b>"who on my team should own this?"</b> — and then
+      built the team. A chief of staff at the top. Specialists underneath. Each with a written-down version
+      of <b>my own judgment</b>, so they can make the small calls and hand me only the ones that matter.
+    </p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="cell"><div class="role">Before</div><h3>One doer</h3><p>Me + a chatbot, starting from scratch every time. Context died with each conversation. Nothing accumulated.</p></div>
+      </div>
+      <div class="card">
+        <div class="cell"><div class="role">After</div><h3>A fleet</h3><p>An org of agents, each owning a domain, each with memory, ledgers, and a daily rhythm. Work compounds.</p></div>
+      </div>
+      <div class="card-feature">
+        <div class="cell"><div class="role">The lever</div><h3>Leverage, not automation</h3><p>The win isn't speed. It's that a single person can hold six lanes of life at once — and not drop the ball.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE FLEET / ORG CHART -->
+<section id="fleet">
+  <div class="wrap">
+    <span class="tag">§ The org chart</span>
+    <h2 class="title">A chief of staff,<br/>and the specialists it delegates to</h2>
+    <p class="lead-text">
+      The top of the chart sees the whole board and routes work. Each specialist owns one domain and
+      inherits the same "virtual twin" of how I think — so nothing contradicts itself.
+    </p>
+
+    <div class="org">
+      <div class="org-top">
+        <div class="node boss" style="max-width:340px;">
+          <div class="nrole">Meta-agent · 参谋长</div>
+          <div class="nname">Chief of Staff</div>
+          <div class="nwhat">Sees the whole board · daily briefing · routes work to the right specialist · catches what's falling through the cracks</div>
+        </div>
+      </div>
+      <div class="org-stem">│ &nbsp; delegates to &nbsp; ↓</div>
+      <div class="org-row">
+        <div class="node">
+          <div class="nrole">投资官 · CIO</div>
+          <div class="nname">Chief Investment Officer</div>
+          <div class="nwhat">Researches & monitors the portfolio with a value-investing discipline — never executes a trade</div>
+        </div>
+        <div class="node" style="border-color: var(--green);">
+          <div class="nrole">营销官 · CMO</div>
+          <div class="nname">Chief Marketing Officer</div>
+          <div class="nwhat">Turns what I make into things people can read — drafts & adapts per channel, never auto-publishes</div>
+        </div>
+        <div class="node">
+          <div class="nrole">健康官 · CHO</div>
+          <div class="nname">Chief Health Officer</div>
+          <div class="nwhat">Keeps the health line from slipping — movement, food, and mental wellbeing — by lowering the bar to log, never by nagging</div>
+        </div>
+        <div class="node">
+          <div class="nrole">Day job · 供应链</div>
+          <div class="nname">Planning Agents</div>
+          <div class="nwhat">A planning + ordering + reconciliation stack for my work in NZ healthcare distribution</div>
+        </div>
+      </div>
+      <div class="org-caption">↑ This very page was drafted by the CMO cell, then published by me. That gap is the whole point.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW EACH IS BUILT -->
+<section>
+  <div class="wrap">
+    <span class="tag">§ The pattern</span>
+    <h2 class="title">Every agent is built<br/>the same four ways</h2>
+    <p class="lead-text">No agent is a clever prompt. Each is a small, durable system that the next one can copy.</p>
+    <div class="grid-2">
+      <div class="card"><div class="cell"><div class="role">1 · Brain</div><h3>A virtual twin</h3><p>Markdown files that write down who I am, how I decide, and the voice to report back in. Specialists <b>inherit</b> the top-level brain instead of duplicating it — one source of "how Gimbo thinks."</p></div></div>
+      <div class="card"><div class="cell"><div class="role">2 · Skills</div><h3>Invocable on call</h3><p>Each agent is a skill I summon by name. It reads its brain, does the domain work, and reports in a tight, scannable format — never a wall of text.</p></div></div>
+      <div class="card"><div class="cell"><div class="role">3 · Ledgers</div><h3>One source of truth</h3><p>Open loops, a portfolio, a content pipeline — living files, not vibes. State survives between sessions, so the work compounds instead of resetting.</p></div></div>
+      <div class="card"><div class="cell"><div class="role">4 · Rhythm</div><h3>It runs itself</h3><p>Scheduled jobs wake the right agent at the right time — a morning briefing on weekdays, a portfolio review tied to the tax year. The fleet has a heartbeat.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section id="lessons">
+  <div class="wrap">
+    <span class="tag">§ What I learned</span>
+    <h2 class="title">Five rules that make<br/>a fleet you can trust</h2>
+    <p class="lead-text">Building it taught me more about delegation — to people <i>and</i> to machines — than any management book.</p>
+    <div class="principles">
+      <div class="principle"><div class="n">01</div><div><h4>Agents draft. Humans decide.</h4><p>Every specialist stops before the irreversible act — no trade is ever executed, nothing is ever auto-posted. The agent does 95% and hands me the last 5% that actually carries risk.</p></div></div>
+      <div class="principle"><div class="n">02</div><div><h4>One source of truth per domain.</h4><p>If a fact lives in two places, it's already wrong in one. Each domain has exactly one ledger, and everything else reads from it.</p></div></div>
+      <div class="principle"><div class="n">03</div><div><h4>Honesty beats coverage.</h4><p>If a run fails or data didn't load, the agent says so — plainly. A confident wrong answer is worse than a flagged gap. No fabricated numbers, ever.</p></div></div>
+      <div class="principle"><div class="n">04</div><div><h4>Privacy is a first-class constraint.</h4><p>Anything that might go public is desensitized first — no employer, no real names, no private figures. The rule is wired into the agents, not left to memory.</p></div></div>
+      <div class="principle"><div class="n">05</div><div><h4>Inherit, don't duplicate.</h4><p>Specialists share one brain for "how I think," and only add what's unique to their domain. Change my mind once, and the whole fleet updates.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap">
+    <h2>The point isn't<br/>automation.<br/>It's <span class="g">leverage.</span></h2>
+    <p>A fleet you can trust runs on written-down rules, not vibes — and it gives one person the reach of a small team.</p>
+    <div class="sig">A living system · still growing · drafted by the fleet, shipped by the human</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><a href="/ai-builder">← Back to AI Builder</a></div>
+</footer>
+
+</body>
+</html>

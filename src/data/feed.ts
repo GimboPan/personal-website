@@ -28,6 +28,14 @@ export const feedUpdated = '2026.05';
 
 export const feed: FeedEntry[] = [
   {
+    date: '2026.06',
+    action: 'Shipped',
+    kind: 'done',
+    title: 'The Personal AI Fleet — a chief of staff + specialists running a one-person life',
+    module: 'AI BUILDER',
+    href: '/ai-builder/ai-fleet.html',
+  },
+  {
     date: '2026.05',
     action: 'Counting down',
     kind: 'ongoing',

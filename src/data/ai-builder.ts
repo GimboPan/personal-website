@@ -90,6 +90,16 @@ export const projects: Project[] = [
   },
   // AI EXPERIMENTS
   {
+    slug: 'ai-fleet',
+    title: 'The Personal AI Fleet',
+    summary:
+      'An org chart of agents running a one-person life — a chief of staff plus specialists (investing, personal brand, the day-job planning stack) that draft the work while the human decides.',
+    category: 'ai-experiments',
+    status: 'live',
+    date: '2026-06-04',
+    href: '/ai-builder/ai-fleet.html',
+  },
+  {
     slug: 'tennis-buddy',
     title: 'Tennis Buddy',
     summary: 'A small Roland-Garros-themed match-log + hitting-partner app — one-person build, React 19 + Supabase + Vercel, shipped end-to-end.',

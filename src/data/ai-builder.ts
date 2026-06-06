@@ -44,7 +44,7 @@ export const projects: Project[] = [
     summary: '华人投资者 deep-dive on PIE funds, FIF rules, and the 5 fund families worth knowing in 2026.',
     category: 'investing',
     status: 'live',
-    date: '2026-05-07',
+    date: '2026-06-06',
     href: '/ai-builder/nz-funds.html',
   },
   {

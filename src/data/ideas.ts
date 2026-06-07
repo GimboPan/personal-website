@@ -9,6 +9,10 @@ export interface IdeaArticle {
   date: string; // YYYY.MM
   tags: string[];
   topicSlug: string;
+  /** Optional extra topic columns this piece also belongs to. When omitted,
+      the piece lives only in `topicSlug`. Used for cross-cutting ideas that
+      legitimately sit in two columns (e.g. Tech + Economy). */
+  topics?: string[];
   href: string;
   status: 'live' | 'wip' | 'planned';
   isNew?: boolean;
@@ -26,8 +30,9 @@ export const articles: IdeaArticle[] = [
     title: '不是一人公司,是几个人的公司 · OPC 的真实形态 · 视频导读',
     lede: 'AI 火了之后,人人都想做一家 OPC(一人公司)——「一个人在家,几个 Agent 干掉过去一整个团队」。但 Gumroad 创始人、《小而美》作者 Sahil Lavingia(这个领域的 OG)说:真要把用户体验做好,最后大概不是 1 个人,而是几个人。基于一期《科技早知道》的视频导读:Gumroad 是怎么被 VC「逼」小、年入 2000 万却只靠 3 个工程师 + 半个 CFO + 1.5 个客服跑起来的;5 个核心观点(AI 能写代码但找不到客户 / 最好的软件不一定躺赢 / AI 当 CEO 人类负责热爱);以及把「想象中的一人公司」和「真实形态」摆在一起的那个核心落点 —— 极简不是把人减到 0,而是减到刚好还能保证体验的那几个。',
     date: '2026.06',
-    tags: ['Tech'],
+    tags: ['Tech', 'Economy'],
     topicSlug: 'tech',
+    topics: ['tech', 'economy'],
     href: '/ideas/few-person-company.html',
     status: 'live',
     isNew: true,

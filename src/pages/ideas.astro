@@ -10,7 +10,8 @@ const topics = topicDefs.map((t) => ({
   count:
     t.slug === 'all'
       ? articles.length
-      : articles.filter((a) => a.topicSlug === t.slug).length,
+      : articles.filter((a) => (a.topics ?? [a.topicSlug]).includes(t.slug))
+          .length,
   active: t.slug === 'all',
 }));
 
@@ -79,7 +80,7 @@ const TOPIC_IDLE =
         <!-- MIDDLE — article list -->
         <main class="space-y-4">
           {articles.map((a) => (
-            <div class="idea-item" data-topic={a.topicSlug} data-date={a.date}>
+            <div class="idea-item" data-topic={(a.topics ?? [a.topicSlug]).join(' ')} data-date={a.date}>
               <ArticleRow
                 index={a.index}
                 title={a.title}
@@ -163,7 +164,9 @@ const TOPIC_IDLE =
   function apply() {
     let shown = 0;
     for (const el of items) {
-      const okTopic = topic === 'all' || el.dataset.topic === topic;
+      const okTopic =
+        topic === 'all' ||
+        (el.dataset.topic?.split(' ').includes(topic) ?? false);
       const okDate = date === 'all' || el.dataset.date === date;
       const visible = okTopic && okDate;
       el.hidden = !visible;

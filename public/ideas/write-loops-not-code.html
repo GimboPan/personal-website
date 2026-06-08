@@ -102,6 +102,15 @@
     .video-cap a { color: var(--green); font-weight: 600; }
     .video-cap a:hover { color: var(--green-tint); }
 
+    /* ─── Infographics ─── */
+    .figs { display: flex; flex-direction: column; gap: 22px; }
+    .fig { margin: 0; }
+    .fig a { display: block; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #000; transition: border-color .2s, transform .2s; }
+    .fig a:hover { border-color: rgba(159,232,112,0.40); transform: translateY(-2px); }
+    .fig img { width: 100%; height: auto; display: block; }
+    .fig figcaption { font-size: 13px; color: var(--ink-faint); margin-top: 12px; line-height: 1.5; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .fig figcaption .zoom { color: var(--green); font-weight: 600; white-space: nowrap; }
+
     /* ─── Number / arc strip ─── */
     .arc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .arc { background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 28px 22px; }
@@ -275,6 +284,37 @@
         是「如何成为一个『好』模型」,就像教自己的孩子,如何成为一个好人。
         这也是我把这条记下来的原因:它是 AI 发展里,一个值得标记的瞬间。
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INFOGRAPHICS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 一图读懂 · NotebookLM 生成</span>
+    <h2 class="section-title display">把整期,<br/>画成两张图。</h2>
+    <p class="section-lead">
+      这两张信息图是基于完整字幕用 NotebookLM 生成的可视化总览 —— 一张走 Boris 的时间线,一张拆 AI 工程的结构。点开可看高清大图。
+    </p>
+    <div class="figs">
+      <figure class="fig">
+        <a href="/ideas/boris-builder-full.png" target="_blank" rel="noopener">
+          <img src="/ideas/boris-builder.jpg" alt="Evolution of an AI Builder — Boris Cherny 的 Claude 之路:三个阶段信息图" loading="lazy" width="2752" height="1536" />
+        </a>
+        <figcaption>
+          <span>① Boris 的 Claude 之路 —— 原型期 → 阶跃式跃迁 → Loop 时代</span>
+          <span class="zoom">点击看高清 →</span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="/ideas/boris-engineering-full.png" target="_blank" rel="noopener">
+          <img src="/ideas/boris-engineering.jpg" alt="The Evolution of AI Engineering：抽象的演变 / 筒仓之死 / 用 token 扩张 / 未来的 Alpha 信息图" loading="lazy" width="2752" height="1536" />
+        </a>
+        <figcaption>
+          <span>② AI 工程的演变 —— 抽象的跃升 · 筒仓之死 · 用 token 而非人扩张 · 未来的 Alpha</span>
+          <span class="zoom">点击看高清 →</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

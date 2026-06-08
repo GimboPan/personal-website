@@ -1,0 +1,285 @@
+---
+/* IdeaThumb — a generative, animated abstract geometric thumbnail for the
+   /ideas article list. Pure SVG + CSS (no raster). Each article picks a
+   `motif` + `accent` + `seed`; the seed deterministically varies geometry so
+   no two cards look identical. Honors prefers-reduced-motion. */
+export interface Props {
+  motif?: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop';
+  accent?: string; // hex
+  seed?: number;
+  index?: string;  // optional corner label
+}
+const { motif = 'orbit', accent = '#9fe870', seed = 1, index } = Astro.props;
+
+// Deterministic PRNG (mulberry-ish) from the seed.
+function makeRand(s: number) {
+  let x = (s * 2654435761) % 2147483647;
+  if (x <= 0) x += 2147483646;
+  return () => {
+    x = (x * 16807) % 2147483647;
+    return (x - 1) / 2147483646;
+  };
+}
+const rand = makeRand(seed);
+const rnd = (min: number, max: number) => min + rand() * (max - min);
+
+const W = 220;
+const H = 165;
+const CX = W / 2;
+const CY = H / 2;
+
+// Unique id namespace so gradient/filter ids never collide across instances.
+const uid = `it_${motif}_${seed}`;
+
+// ── Precompute geometry per motif ──────────────────────────────────────────
+// constellation: nodes + nearest-neighbour edges
+const conNodes: { x: number; y: number; r: number; d: number }[] = [];
+const conEdges: { x1: number; y1: number; x2: number; y2: number }[] = [];
+if (motif === 'constellation') {
+  const n = Math.round(rnd(5, 6)) + (seed % 5); // varied count
+  const count = Math.max(4, Math.min(11, n));
+  for (let i = 0; i < count; i++) {
+    conNodes.push({ x: rnd(24, W - 24), y: rnd(20, H - 20), r: rnd(1.6, 3.4), d: rnd(0, 6) });
+  }
+  // connect each node to its 2 nearest neighbours
+  for (let i = 0; i < conNodes.length; i++) {
+    const dists = conNodes
+      .map((p, j) => ({ j, d: (p.x - conNodes[i].x) ** 2 + (p.y - conNodes[i].y) ** 2 }))
+      .filter((o) => o.j !== i)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 2);
+    for (const o of dists) {
+      if (o.j > i) conEdges.push({ x1: conNodes[i].x, y1: conNodes[i].y, x2: conNodes[o.j].x, y2: conNodes[o.j].y });
+    }
+  }
+}
+
+// orbit: concentric rings, each with a node riding it
+const orbitRings = motif === 'orbit'
+  ? [0, 1, 2].map((i) => ({
+      rx: 30 + i * 24 + rnd(-4, 4),
+      ry: (30 + i * 24) * rnd(0.6, 0.78),
+      dur: 14 + i * 7,
+      rev: i % 2 === 1,
+      tilt: rnd(-25, 25),
+      op: 0.5 - i * 0.1,
+    }))
+  : [];
+
+// bars: ascending columns
+const bars = motif === 'bars'
+  ? Array.from({ length: 9 }, (_, i) => ({
+      x: 22 + i * 19,
+      h: rnd(28, 120),
+      dur: rnd(2.6, 4.4),
+      delay: -rnd(0, 3),
+    }))
+  : [];
+
+// rings: overlapping circles (intimacy / connection)
+const rings = motif === 'rings'
+  ? Array.from({ length: 3 }, (_, i) => ({
+      cx: CX + (i - 1) * rnd(22, 30),
+      cy: CY + rnd(-8, 8),
+      r: rnd(34, 46),
+      dur: rnd(5, 8),
+      delay: -i * 1.3,
+    }))
+  : [];
+
+// spiral: archimedean spiral path
+function spiralPath() {
+  const turns = 3.2;
+  const steps = 120;
+  let d = '';
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * turns * Math.PI * 2;
+    const r = 4 + (i / steps) * 64;
+    const x = CX + Math.cos(t) * r * 1.18;
+    const y = CY + Math.sin(t) * r * 0.82;
+    d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+  }
+  return d;
+}
+const spiralD = motif === 'spiral' ? spiralPath() : '';
+
+// wave: stacked sine paths
+function wavePath(yBase: number, amp: number, phase: number) {
+  const steps = 36;
+  let d = '';
+  for (let i = 0; i <= steps; i++) {
+    const x = (i / steps) * (W + 40) - 20;
+    const y = yBase + Math.sin((i / steps) * Math.PI * 4 + phase) * amp;
+    d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+  }
+  return d;
+}
+const waves = motif === 'wave'
+  ? [0, 1, 2].map((i) => ({
+      d: wavePath(CY + (i - 1) * 24, 14 - i * 2, i * 1.1 + seed),
+      op: 0.7 - i * 0.18,
+      dur: 7 + i * 2,
+    }))
+  : [];
+---
+
+<div class="ideathumb" data-motif={motif} style={`--accent:${accent};`}>
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id={`${uid}_bg`} cx="50%" cy="42%" r="75%">
+        <stop offset="0%" stop-color={accent} stop-opacity="0.10" />
+        <stop offset="55%" stop-color={accent} stop-opacity="0.02" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id={`${uid}_glow`} cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color={accent} stop-opacity="0.9" />
+        <stop offset="100%" stop-color={accent} stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id={`${uid}_stroke`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color={accent} stop-opacity="0.95" />
+        <stop offset="100%" stop-color={accent} stop-opacity="0.35" />
+      </linearGradient>
+    </defs>
+
+    <rect x="0" y="0" width={W} height={H} fill={`url(#${uid}_bg)`} />
+
+    {motif === 'orbit' && (
+      <g fill="none">
+        {orbitRings.map((r) => (
+          <g class={r.rev ? 'spin-rev' : 'spin'} style={`--dur:${r.dur}s; transform-origin:${CX}px ${CY}px;`}>
+            <g transform={`rotate(${r.tilt} ${CX} ${CY})`}>
+              <ellipse cx={CX} cy={CY} rx={r.rx} ry={r.ry} stroke={`url(#${uid}_stroke)`} stroke-width="1" opacity={r.op} />
+              <circle cx={CX + r.rx} cy={CY} r="3" fill="var(--accent)" class="twinkle" />
+            </g>
+          </g>
+        ))}
+        <circle cx={CX} cy={CY} r="14" fill={`url(#${uid}_glow)`} class="breathe" />
+        <circle cx={CX} cy={CY} r="3.4" fill="#fff" opacity="0.92" />
+      </g>
+    )}
+
+    {motif === 'constellation' && (
+      <g>
+        <g stroke="var(--accent)" stroke-width="0.8" opacity="0.34">
+          {conEdges.map((e) => (
+            <line x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} />
+          ))}
+        </g>
+        {conNodes.map((p) => (
+          <g class="float" style={`--dur:${(5 + p.d).toFixed(1)}s; --dx:${rnd(-5, 5).toFixed(1)}px; --dy:${rnd(-5, 5).toFixed(1)}px;`}>
+            <circle cx={p.x} cy={p.y} r={p.r + 4} fill={`url(#${uid}_glow)`} opacity="0.5" />
+            <circle cx={p.x} cy={p.y} r={p.r} fill="var(--accent)" class="twinkle" style={`--delay:-${p.d.toFixed(1)}s;`} />
+          </g>
+        ))}
+      </g>
+    )}
+
+    {motif === 'bars' && (
+      <g>
+        {bars.map((b) => (
+          <rect
+            x={b.x}
+            y={H - 18}
+            width="11"
+            height={b.h}
+            rx="3"
+            fill="var(--accent)"
+            class="rise"
+            style={`transform-origin:${b.x + 5.5}px ${H - 18}px; --dur:${b.dur}s; --delay:${b.delay}s; --op:${rnd(0.45, 0.95).toFixed(2)};`}
+          />
+        ))}
+        <line x1="10" y1={H - 18} x2={W - 10} y2={H - 18} stroke="var(--accent)" stroke-width="1" opacity="0.4" />
+      </g>
+    )}
+
+    {motif === 'rings' && (
+      <g fill="none" stroke-width="1.4">
+        {rings.map((r) => (
+          <circle
+            cx={r.cx}
+            cy={r.cy}
+            r={r.r}
+            stroke="var(--accent)"
+            class="pulse"
+            style={`transform-origin:${r.cx}px ${r.cy}px; --dur:${r.dur}s; --delay:${r.delay}s;`}
+          />
+        ))}
+        <circle cx={CX} cy={CY} r="4" fill="var(--accent)" class="breathe" />
+      </g>
+    )}
+
+    {motif === 'spiral' && (
+      <g class="spin" style={`--dur:36s; transform-origin:${CX}px ${CY}px;`}>
+        <path d={spiralD} fill="none" stroke={`url(#${uid}_stroke)`} stroke-width="1.4" stroke-linecap="round" class="dash" />
+        <circle cx={CX} cy={CY} r="3" fill="#fff" opacity="0.9" />
+      </g>
+    )}
+
+    {motif === 'wave' && (
+      <g fill="none" stroke-width="1.6" stroke-linecap="round">
+        {waves.map((w) => (
+          <path d={w.d} stroke="var(--accent)" opacity={w.op} class="flow" style={`--dur:${w.dur}s;`} />
+        ))}
+      </g>
+    )}
+
+    {motif === 'loop' && (
+      <g fill="none">
+        <ellipse cx={CX} cy={CY} rx="58" ry="40" stroke="var(--accent)" stroke-width="1.4" opacity="0.5" />
+        <ellipse cx={CX} cy={CY} rx="42" ry="58" stroke="var(--accent)" stroke-width="1" opacity="0.28"
+          stroke-dasharray="4 7" class="spin-rev" style={`--dur:24s; transform-origin:${CX}px ${CY}px;`} />
+        <g class="spin" style={`--dur:9s; transform-origin:${CX}px ${CY}px;`}>
+          <circle cx={CX + 58} cy={CY} r="11" fill={`url(#${uid}_glow)`} />
+          <circle cx={CX + 58} cy={CY} r="3.6" fill="#fff" opacity="0.95" />
+        </g>
+        <circle cx={CX} cy={CY} r="14" fill={`url(#${uid}_glow)`} class="breathe" opacity="0.7" />
+      </g>
+    )}
+  </svg>
+  {index && <span class="ideathumb__idx">{index}</span>}
+</div>
+
+<style>
+  .ideathumb {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 100% at 50% 0%, #1d1f1a 0%, #131410 60%, #0e0f0c 100%);
+    overflow: hidden;
+  }
+  .ideathumb svg { width: 100%; height: 100%; display: block; }
+  .ideathumb__idx {
+    position: absolute;
+    bottom: 7px;
+    right: 11px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .spin { animation: it-spin var(--dur, 20s) linear infinite; }
+  .spin-rev { animation: it-spin var(--dur, 20s) linear infinite reverse; }
+  .float { animation: it-float var(--dur, 6s) ease-in-out infinite alternate; }
+  .twinkle { animation: it-twinkle 3.2s ease-in-out infinite; animation-delay: var(--delay, 0s); }
+  .breathe { animation: it-breathe 4s ease-in-out infinite; }
+  .rise { animation: it-rise var(--dur, 3s) ease-in-out infinite alternate; animation-delay: var(--delay, 0s); transform: scaleY(0.15); opacity: var(--op, 0.7); }
+  .pulse { animation: it-pulse var(--dur, 6s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
+  .dash { stroke-dasharray: 5 9; animation: it-dash 8s linear infinite; }
+  .flow { animation: it-flow var(--dur, 8s) linear infinite; }
+
+  @keyframes it-spin { to { transform: rotate(360deg); } }
+  @keyframes it-float { from { transform: translate(0, 0); } to { transform: translate(var(--dx, 4px), var(--dy, 4px)); } }
+  @keyframes it-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @keyframes it-breathe { 0%, 100% { transform: scale(0.85); opacity: 0.75; } 50% { transform: scale(1.12); opacity: 1; } }
+  @keyframes it-rise { from { transform: scaleY(0.15); } to { transform: scaleY(1); } }
+  @keyframes it-pulse { 0%, 100% { transform: scale(0.92); opacity: 0.35; } 50% { transform: scale(1.06); opacity: 0.8; } }
+  @keyframes it-dash { to { stroke-dashoffset: -140; } }
+  @keyframes it-flow { from { transform: translateX(0); } to { transform: translateX(-40px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ideathumb * { animation: none !important; }
+    .rise { transform: scaleY(0.7); }
+  }
+</style>

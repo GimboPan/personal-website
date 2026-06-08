@@ -1,4 +1,6 @@
 ---
+import IdeaThumb from './IdeaThumb.astro';
+
 export interface Props {
   index: string;
   title: string;
@@ -8,6 +10,11 @@ export interface Props {
   date?: string;
   tags?: string[];
   isNew?: boolean;
+  art?: {
+    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop';
+    accent: string;
+    seed: number;
+  };
 }
 
 const {
@@ -19,6 +26,7 @@ const {
   date,
   tags = [],
   isNew = false,
+  art,
 } = Astro.props;
 
 const statusMeta = {
@@ -38,10 +46,16 @@ const Tag = href ? 'a' : 'article';
     href ? 'article-row--link' : 'article-row--static',
   ]}
 >
-  <!-- Left: image placeholder -->
+  <!-- Left: generative thumbnail (ideas) or placeholder (everything else) -->
   <div class="article-row__media">
-    <span class="article-row__media-mark font-mono">// image</span>
-    <span class="article-row__media-index font-mono">{index}</span>
+    {art ? (
+      <IdeaThumb motif={art.motif} accent={art.accent} seed={art.seed} index={index} />
+    ) : (
+      <>
+        <span class="article-row__media-mark font-mono">// image</span>
+        <span class="article-row__media-index font-mono">{index}</span>
+      </>
+    )}
   </div>
 
   <!-- Right: title + lede + meta -->

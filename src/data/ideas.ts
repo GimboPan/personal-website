@@ -16,6 +16,13 @@ export interface IdeaArticle {
   href: string;
   status: 'live' | 'wip' | 'planned';
   isNew?: boolean;
+  /** Generative thumbnail for the list preview (left media slot). Picks a
+      geometric motif + accent + seed; rendered by <IdeaThumb />. */
+  art?: {
+    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop';
+    accent: string;
+    seed: number;
+  };
 }
 
 export interface TopicDef {
@@ -36,6 +43,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/write-loops-not-code.html',
     status: 'live',
     isNew: true,
+    art: { motif: 'loop', accent: '#9fe870', seed: 8 },
   },
   {
     index: '07',
@@ -48,6 +56,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/few-person-company.html',
     status: 'live',
     isNew: true,
+    art: { motif: 'constellation', accent: '#38c8ff', seed: 7 },
   },
   {
     index: '06',
@@ -59,6 +68,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/intimate-animal-visual-guide.html',
     status: 'live',
     isNew: true,
+    art: { motif: 'rings', accent: '#ff7a82', seed: 6 },
   },
   {
     index: '05',
@@ -69,6 +79,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'tech',
     href: '/ideas/ai-agent-company.html',
     status: 'live',
+    art: { motif: 'orbit', accent: '#9fe870', seed: 5 },
   },
   {
     index: '04',
@@ -79,6 +90,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'economy',
     href: '/ideas/open-to-work-visual-guide.html',
     status: 'live',
+    art: { motif: 'bars', accent: '#ffd11a', seed: 4 },
   },
   {
     index: '03',
@@ -89,6 +101,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'culture',
     href: '/ideas/culture-series-visual-guide.html',
     status: 'live',
+    art: { motif: 'constellation', accent: '#9fe870', seed: 3 },
   },
   {
     index: '02',
@@ -99,6 +112,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'culture',
     href: '/ideas/culture-series',
     status: 'live',
+    art: { motif: 'spiral', accent: '#38c8ff', seed: 2 },
   },
   {
     index: '01',
@@ -109,6 +123,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'economy',
     href: '/ideas/yang-ubi',
     status: 'live',
+    art: { motif: 'wave', accent: '#ffd11a', seed: 1 },
   },
 ];
 

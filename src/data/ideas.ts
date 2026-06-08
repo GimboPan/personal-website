@@ -27,8 +27,8 @@ export interface TopicDef {
 export const articles: IdeaArticle[] = [
   {
     index: '08',
-    title: '不再写代码,而是写 Loop · Boris Cherny 聊 Claude Code · 视频导读',
-    lede: 'Claude Code 的创造者 Boris Cherny 在 Acquired × WorkOS 的访谈,基于完整字幕整理的视频导读。Claude Code 怎么从一个「产品悬垂」时期的原型长出来(从只会写 10–20% 的代码,到他已经 6 个月没亲手写过一行、11 月直接卸载 IDE、~200 个 Claude 在后台常驻);工程师的角色怎样被重写 ——「写代码 → 写 prompt → 写 loop」,以及「通才的黄金时代」里设计师、财务、幕僚长都在发布代码;为什么编程是 AI 安全研究干净得不可思议的「培养皿」;还有几个很辣的反直觉判断 —— 资深要先 unlearn、代码品味常是愚蠢的执念、故意让团队人手不足 +无限 token(「几个人的公司」的工程版)、拉平头衔减少盲从。最后落在:人类最终教给模型的,会是价值观。',
+    title: '连「品味」也不再是人类独有 · Boris Cherny 聊 Claude Code · 视频导读',
+    lede: '社媒上那句「连品味都不再是人类独有」把我抓住了——它来自 Claude Code 创造者 Boris Cherny 的访谈。很多人以为人类最后的护城河是「产品品味」,但 Boris 判断这道墙 3–6 个月内也会被攻破(模型自动生成的想法已有约 20% 是好主意);真正留给人的，是教模型「成为一个好模型」的价值观，像教孩子做一个好人。顺着完整字幕往下，是一整套关于 AI 发展的切片:Claude Code 怎么从「产品悬垂」时期的原型长出来(他已 6 个月没亲手写代码、11 月卸载 IDE、~200 个 Claude 后台常驻)、工程师从「写代码」变成「写 Loop」、为什么编程是 AI 安全干净得不可思议的「培养皿」，以及几个很辣的反直觉判断(资深要先 unlearn、代码品味常是愚蠢执念、故意让团队人手不足 +无限 token、拉平头衔减少盲从)。',
     date: '2026.06',
     tags: ['Tech', 'Economy'],
     topicSlug: 'tech',

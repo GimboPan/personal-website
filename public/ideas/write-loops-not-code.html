@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>不再写代码,而是写 Loop · Boris Cherny 聊 Claude Code — Ideas — Gimbo's Universe</title>
-  <meta name="description" content="Claude Code 的创造者 Boris Cherny 在 Acquired × WorkOS 的访谈:Claude Code 怎么长出来、工程师为什么从「写代码」变成「写 Loop」、为什么编程是 AI 安全的完美培养皿,以及当 AI 越来越强,人类最后还剩什么独特价值。一份基于完整字幕的视频导读。" />
+  <title>连「品味」也不再是人类独有 · Boris Cherny 聊 Claude Code — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="社媒上那句「连品味都不再是人类独有」把我抓住了 —— 它来自 Claude Code 创造者 Boris Cherny 的访谈。产品品味这道护城河 3–6 个月内也会被攻破,人类最后留下的是教模型「成为一个好模型」的价值观。一份基于完整字幕的视频导读,记录 AI 发展的一个切片:从工程师「写 Loop」、编程作为 AI 安全的培养皿,到几个很辣的反直觉判断。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -84,6 +84,15 @@
     .stat-banner .copy p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
     .stat-banner .copy p b { color: var(--ink); font-weight: 700; }
     @media (max-width: 760px) { .stat-banner { grid-template-columns: 1fr; padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── Pull quote (the hook) ─── */
+    .quote { background: var(--surface-2); border: 1px solid rgba(159,232,112,0.30); border-radius: 40px; padding: 56px 52px; }
+    .quote .mark { color: var(--green); font-size: 80px; line-height: 0.4; font-weight: 900; display: block; height: 36px; }
+    .quote blockquote { font-size: clamp(30px, 4.4vw, 52px); font-weight: 900; line-height: 1.02; letter-spacing: -0.02em; margin: 22px 0 30px; max-width: 20ch; }
+    .quote blockquote .accent { color: var(--green); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 60ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 40px 28px; border-radius: 30px; } }
 
     /* ─── YouTube embed ─── */
     .video-wrap { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 20px; margin-top: 32px; }
@@ -177,7 +186,7 @@
       <span aria-hidden="true">←</span> Gimbo's Universe
     </a>
     <span class="sep">/</span>
-    <span class="here">Ideas · 写 Loop,不写代码</span>
+    <span class="here">Ideas · 品味不再独有</span>
   </div>
 </div>
 
@@ -186,13 +195,13 @@
   <div class="wrap">
     <span class="eyebrow">§ Video notes · Acquired Unplugged × WorkOS</span>
     <h1 class="display">
-      不再写代码,<br/>
-      而是写 <span class="accent">Loop</span>。
+      连「品味」,<br/>
+      也不再是<span class="accent">人类独有</span>。
     </h1>
     <p class="lead">
-      Boris Cherny 是 Claude Code 的创造者。在这期访谈里,他讲了 Claude Code 怎么从一个原型长出来、
-      工程师的角色正在被怎样重写 —— 从「写代码」到「写 prompt」再到<b style="color:var(--ink);">「写 loop」</b>,
-      以及当 AI 越来越强,人类最后还剩下什么独特价值。一份基于完整字幕的视频导读。
+      我其实没看完整期 —— 是社交媒体上的一句话先抓住了我:<b style="color:var(--ink);">连「品味」都不再是人类独有的能力。</b>
+      它来自 Claude Code 创造者 Boris Cherny 的这期访谈。顺着完整字幕读下去会发现,这不是一句标题党:
+      它背后是一整套关于工程师角色、AI 安全、以及「人类最后还剩什么」的判断。这一页,是把它记下来 —— 当作 AI 发展的一个切片。
     </p>
     <div class="credits">
       <div class="item"><div class="label">Source</div><div class="value">Acquired Unplugged × WorkOS</div></div>
@@ -246,6 +255,25 @@
       <div class="video-cap">
         <span>Acquired Unplugged · presented by WorkOS · 嘉宾 Boris Cherny(Claude Code 创造者)</span>
         <a href="https://www.youtube.com/watch?v=RkQQ7WEor7w" target="_blank" rel="noopener">Open on YouTube →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE HOOK — pull quote ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ 真正打动我的那一句</span>
+    <div class="quote">
+      <span class="mark">“</span>
+      <blockquote class="display">连「品味」,也不再是<span class="accent">人类独有</span>。</blockquote>
+      <div class="body">
+        很多人以为,当下人类的护城河(alpha)是「<b>产品品味</b>」—— 一种说不清、却以为 AI 学不会的东西。
+        Boris 的判断很直接:<b>这道墙 3–6 个月内也会被攻破。</b>现在模型自动生成的想法里已经约有 <b>20%</b>
+        是好主意,他预测很快大部分都会是。<br/><br/>
+        那人类还剩什么?他给的答案不是某种技能,而是 <b>价值观</b> —— 我们最终要教给模型的,
+        是「如何成为一个『好』模型」,就像教自己的孩子,如何成为一个好人。
+        这也是我把这条记下来的原因:它是 AI 发展里,一个值得标记的瞬间。
       </div>
     </div>
   </div>
@@ -464,10 +492,10 @@
 <section style="padding-top: 0; padding-bottom: 0;">
   <div class="wrap">
     <div class="cta">
-      <h2 class="display">人类最后教给模型的,<br/>会是<span class="accent">价值观</span>。</h2>
+      <h2 class="display">记录一下 ——<br/>AI 发展的一个<span class="accent">切片</span>。</h2>
       <p>
-        很多人以为现在人类的壁垒是「产品品味」—— 但 Boris 认为这 3–6 个月内也会被攻破,模型很快会大规模产出靠谱的好主意。
-        真正留给人的,是教模型如何「成为一个好模型」—— 就像教自己的孩子,如何成为一个好人。
+        我没看完整期,是社媒上「品味不再独有」那句话先抓住了我。但它够好、够有重量 ——
+        值得放进来,当作 AI 发展路上一个值得标记的瞬间。如果你也好奇,去看完整访谈。
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="https://www.youtube.com/watch?v=RkQQ7WEor7w" target="_blank" rel="noopener">

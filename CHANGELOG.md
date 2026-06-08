@@ -6,6 +6,32 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.1.0] — 2026-06-09 · Ideas grows up
+
+> **A living-site content + craft session.** Two new Ideas deep-reads built from videos, a generative animated-thumbnail system for the whole Ideas list, multi-column topic filtering, and a couple of AI Builder updates. Workflow learning of the day: YouTube caption download is now walled (PO-token), so **NotebookLM is the transcription path** — the user runs the video through it and pastes the transcript/infographics; I turn that into the page.
+
+### Added — Ideas content (video deep-reads)
+
+- **不再写代码,而是写 Loop · Boris Cherny 聊 Claude Code** (`/ideas/write-loops-not-code.html`, index 08) — from the Acquired × WorkOS interview. Re-anchored on the line that actually hooked the user: *"连「品味」也不再是人类独有 → 人类最后剩价值观"*; "写 Loop" demoted to a section. Includes origin arc, an 8-number strip, role-shift / petri-dish / 4 contrarian cards, and **two embedded NotebookLM infographics** (1600px JPEG inline, full-res PNG on click). Filed Tech + Economy.
+- **不是一人公司,是几个人的公司 · OPC** (`/ideas/few-person-company.html`, index 07) — from the 科技早知道 × Sahil Lavingia podcast. Hero thesis "a few-person company," $20M-on-a-handful stat hook, myth-vs-real compare, 3 takeaways. Filed Tech + Economy; cross-linked from the Boris page (underfund + infinite tokens = its engineering sibling).
+
+### Added — generative thumbnails
+
+- **`<IdeaThumb>`** (`src/components/IdeaThumb.astro`) — per-article animated abstract geometric art in the Ideas list's left media slot. Pure SVG + CSS (no raster), seed-driven, honors `prefers-reduced-motion`. Lightweight motifs (`orbit/constellation/bars/spiral/wave/rings/loop`) + bespoke high-detail ones (`core` #08, `team` #07, `orchestrator` #05, `ascent` #04) with gradients, blurred glow, and `packet` data-flow animation. `ArticleRow` takes an optional `art` prop — `/fitness` rows keep the old placeholder.
+
+### Changed
+
+- **Ideas filtering** — a piece can now live in **multiple topic columns** via an optional `topics: string[]` (counts + client-side filter match on membership; backward compatible). The two new pieces sit in both Tech and Economy.
+- **Ideas thumbnail frame** — when a generative thumb fills the media slot, the leftover dashed placeholder border is swapped for a clean solid hairline + nested radius (was reading as unfinished against the card).
+- **AI Builder — The Personal AI Fleet** (`/ai-builder/ai-fleet.html`) — added the **Chief Evolution Officer (EVO)** horizontal "feeds every cell" layer to the org diagram.
+- **AI Builder — NZ Managed Funds Guide** (`/ai-builder/nz-funds.html`) — replaced with the expanded 华人投资者 deep-dive (reuses the same URL + nav entry; date bumped).
+
+### Tooling
+
+- Installed `yt-dlp` on the Mac for video transcript pulls. Caveat: YouTube's PO-token wall blocks anonymous caption download and `--cookies-from-browser chrome` hangs (Keychain / app-bound cookies) — so the working path is NotebookLM, not yt-dlp. See memory `project_video_to_idea_pipeline`.
+
+---
+
 ## [1.0.0] — 2026-06-01 · 🎉 The site goes 1.0
 
 > **Gimbo's Universe is live for real.** The same day the domain landed ([0.12.0]), the homepage and IA got the pass that earns a 1.0: every nav section is a real page, every homepage claim matches what's actually shipped, and the old "Work" section is reframed as it should always have been — **AI Builder**. The site is now coherent, honest, and live on its own address. 1.0 marks the platform being *real and truthful* — not the end of writing; chapters and pieces keep landing, as a living site should.

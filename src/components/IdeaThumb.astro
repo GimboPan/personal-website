@@ -4,7 +4,7 @@
    `motif` + `accent` + `seed`; the seed deterministically varies geometry so
    no two cards look identical. Honors prefers-reduced-motion. */
 export interface Props {
-  motif?: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core';
+  motif?: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core' | 'team' | 'orchestrator' | 'ascent';
   accent?: string; // hex
   seed?: number;
   index?: string;  // optional corner label
@@ -158,6 +158,44 @@ const cometD = motif === 'core' ? ellipseArc(cometRx, cometRy, -95, 0) : '';
 const cometTail = ellipsePt(cometRx, cometRy, -95);
 const cometHead = ellipsePt(cometRx, cometRy, 0);
 const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
+
+// ── team: a few connected people forming a company (article #07) ───────────
+const teamPeople = motif === 'team'
+  ? [-90, 0, 90, 180].map((deg, i) => {
+      const [x, y] = ellipsePt(58, 38, deg);
+      return { x, y, d: i * 1.3 };
+    })
+  : [];
+const teamLinks: { x1: number; y1: number; x2: number; y2: number; hub: boolean }[] = [];
+if (motif === 'team') {
+  for (let i = 0; i < teamPeople.length; i++) {
+    const p = teamPeople[i];
+    teamLinks.push({ x1: CX, y1: CY, x2: p.x, y2: p.y, hub: true });
+    const q = teamPeople[(i + 1) % teamPeople.length];
+    teamLinks.push({ x1: p.x, y1: p.y, x2: q.x, y2: q.y, hub: false });
+  }
+}
+
+// ── orchestrator: hub + 4 agent satellites (article #05) ───────────────────
+const orchAgents = motif === 'orchestrator'
+  ? [-45, 45, 135, 225].map((deg, i) => {
+      const [x, y] = ellipsePt(64, 42, deg);
+      return { x, y, d: i * 1.1 };
+    })
+  : [];
+
+// ── ascent: a climbing route + holds (article #04) ─────────────────────────
+const ascentHolds = motif === 'ascent'
+  ? Array.from({ length: 11 }, () => ({ x: rnd(14, W - 14), y: rnd(18, H - 14), r: rnd(1.3, 3), d: rnd(0, 5) }))
+  : [];
+const climbStart = [16, H - 16] as const;
+const climbEnd = [W - 14, 16] as const;
+const ascentWaypoints = [
+  climbStart, [54, H - 44], [92, H - 66], [132, H - 100], [172, 40], climbEnd,
+];
+const ascentD = motif === 'ascent'
+  ? ascentWaypoints.map((p, i) => (i ? 'L' : 'M') + p[0] + ' ' + p[1]).join(' ')
+  : '';
 ---
 
 <div class="ideathumb" data-motif={motif} style={`--accent:${accent};`}>
@@ -176,11 +214,13 @@ const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
         <stop offset="0%" stop-color={accent} stop-opacity="0.95" />
         <stop offset="100%" stop-color={accent} stop-opacity="0.35" />
       </linearGradient>
+      {(motif === 'core' || motif === 'orchestrator' || motif === 'ascent' || motif === 'team') && (
+        <filter id={`${uid}_blur`} x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="2.4" />
+        </filter>
+      )}
       {motif === 'core' && (
         <>
-          <filter id={`${uid}_blur`} x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="2.6" />
-          </filter>
           <linearGradient
             id={`${uid}_comet`}
             gradientUnits="userSpaceOnUse"
@@ -196,6 +236,17 @@ const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
             <stop offset="100%" stop-color={accent} stop-opacity="0" />
           </radialGradient>
         </>
+      )}
+      {motif === 'ascent' && (
+        <linearGradient
+          id={`${uid}_path`}
+          gradientUnits="userSpaceOnUse"
+          x1={climbStart[0]} y1={climbStart[1]}
+          x2={climbEnd[0]} y2={climbEnd[1]}
+        >
+          <stop offset="0%" stop-color={accent} stop-opacity="0.15" />
+          <stop offset="100%" stop-color={accent} stop-opacity="0.95" />
+        </linearGradient>
       )}
     </defs>
 
@@ -339,6 +390,91 @@ const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
         <circle cx={CX} cy={CY} r="3.3" fill="#fff" />
       </g>
     )}
+
+    {motif === 'team' && (
+      <g>
+        {/* the company — a soft enclosing boundary */}
+        <ellipse cx={CX} cy={CY} rx="86" ry="58" fill="none" stroke="var(--accent)" stroke-width="1"
+          opacity="0.16" stroke-dasharray="2 10" class="spin-rev" style={`--dur:50s; transform-origin:${CX}px ${CY}px;`} />
+        {/* links between people + to the shared hub */}
+        <g stroke="var(--accent)">
+          {teamLinks.map((l) => (
+            <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke-width={l.hub ? 0.8 : 1} opacity={l.hub ? 0.22 : 0.4} />
+          ))}
+        </g>
+        {/* data packets pulsing out from the hub */}
+        {teamLinks.filter((l) => l.hub).map((l, i) => (
+          <g class="packet" style={`--dx:${(l.x2 - l.x1).toFixed(1)}px; --dy:${(l.y2 - l.y1).toFixed(1)}px; --dur:${(2.6 + i * 0.4).toFixed(1)}s;`}>
+            <circle cx={l.x1} cy={l.y1} r="1.8" fill="var(--accent)" />
+          </g>
+        ))}
+        {/* the few people, each amplified by a small agent satellite */}
+        {teamPeople.map((p) => (
+          <g class="float" style={`--dx:${((p.x - CX) * 0.08).toFixed(1)}px; --dy:${((p.y - CY) * 0.08).toFixed(1)}px; --dur:${(5 + p.d).toFixed(1)}s;`}>
+            <circle cx={p.x} cy={p.y} r="9" fill={`url(#${uid}_glow)`} opacity="0.6" />
+            <circle cx={p.x} cy={p.y} r="4" fill="var(--accent)" filter={`url(#${uid}_blur)`} />
+            <circle cx={p.x} cy={p.y} r="2.4" fill="#fff" />
+            <g class="spin" style={`--dur:${(6 + p.d).toFixed(1)}s; transform-origin:${p.x}px ${p.y}px;`}>
+              <circle cx={p.x + 11} cy={p.y} r="1.6" fill="var(--accent)" class="twinkle" />
+            </g>
+          </g>
+        ))}
+        <circle cx={CX} cy={CY} r="3" fill="var(--accent)" opacity="0.7" class="breathe" />
+      </g>
+    )}
+
+    {motif === 'orchestrator' && (
+      <g>
+        <ellipse cx={CX} cy={CY} rx="86" ry="56" fill="none" stroke="var(--accent)" stroke-width="1"
+          opacity="0.14" stroke-dasharray="2 9" class="spin-rev" style={`--dur:46s; transform-origin:${CX}px ${CY}px;`} />
+        {/* the orchestrating hub-and-spoke system, slowly turning */}
+        <g class="spin" style={`--dur:54s; transform-origin:${CX}px ${CY}px;`}>
+          <g stroke="var(--accent)" stroke-width="1" opacity="0.3">
+            {orchAgents.map((s) => (<line x1={CX} y1={CY} x2={s.x} y2={s.y} />))}
+          </g>
+          {orchAgents.map((s, i) => (
+            <g class="packet" style={`--dx:${(s.x - CX).toFixed(1)}px; --dy:${(s.y - CY).toFixed(1)}px; --dur:${(2.4 + i * 0.3).toFixed(1)}s;`}>
+              <circle cx={CX} cy={CY} r="1.8" fill="var(--accent)" />
+            </g>
+          ))}
+          {orchAgents.map((s) => (
+            <g>
+              <circle cx={s.x} cy={s.y} r="8" fill={`url(#${uid}_glow)`} opacity="0.5" />
+              <rect x={s.x - 4} y={s.y - 4} width="8" height="8" fill="var(--accent)"
+                transform={`rotate(45 ${s.x} ${s.y})`} class="twinkle" style={`--delay:-${s.d.toFixed(1)}s;`} />
+            </g>
+          ))}
+        </g>
+        {/* central orchestrator */}
+        <circle cx={CX} cy={CY} r="20" fill={`url(#${uid}_glow)`} class="breathe" />
+        <circle cx={CX} cy={CY} r="10" fill="none" stroke="var(--accent)" stroke-width="1.2" opacity="0.5"
+          class="pulse" style={`transform-origin:${CX}px ${CY}px; --dur:4s;`} />
+        <circle cx={CX} cy={CY} r="5" fill="var(--accent)" filter={`url(#${uid}_blur)`} />
+        <circle cx={CX} cy={CY} r="3" fill="#fff" />
+      </g>
+    )}
+
+    {motif === 'ascent' && (
+      <g>
+        {/* level lines — 30 / 60 / 90 */}
+        <g stroke="var(--accent)" stroke-width="1" opacity="0.10">
+          <line x1="8" y1={(H * 0.34).toFixed(0)} x2={W - 8} y2={(H * 0.34).toFixed(0)} stroke-dasharray="3 7" />
+          <line x1="8" y1={(H * 0.58).toFixed(0)} x2={W - 8} y2={(H * 0.58).toFixed(0)} stroke-dasharray="3 7" />
+          <line x1="8" y1={(H * 0.8).toFixed(0)} x2={W - 8} y2={(H * 0.8).toFixed(0)} stroke-dasharray="3 7" />
+        </g>
+        {/* climbing-wall holds */}
+        {ascentHolds.map((h) => (
+          <circle cx={h.x} cy={h.y} r={h.r} fill="var(--accent)" opacity="0.45" class="twinkle" style={`--delay:-${h.d.toFixed(1)}s;`} />
+        ))}
+        {/* the route */}
+        <path d={ascentD} fill="none" stroke={`url(#${uid}_path)`} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        {/* the climber, ascending on a loop */}
+        <g class="packet" style={`--dx:${(climbEnd[0] - climbStart[0]).toFixed(1)}px; --dy:${(climbEnd[1] - climbStart[1]).toFixed(1)}px; --dur:6s;`}>
+          <circle cx={climbStart[0]} cy={climbStart[1]} r="9" fill={`url(#${uid}_glow)`} filter={`url(#${uid}_blur)`} />
+          <circle cx={climbStart[0]} cy={climbStart[1]} r="3.2" fill="#fff" />
+        </g>
+      </g>
+    )}
   </svg>
   {index && <span class="ideathumb__idx">{index}</span>}
 </div>
@@ -372,6 +508,7 @@ const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
   .pulse { animation: it-pulse var(--dur, 6s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
   .dash { stroke-dasharray: 5 9; animation: it-dash 8s linear infinite; }
   .flow { animation: it-flow var(--dur, 8s) linear infinite; }
+  .packet { animation: it-packet var(--dur, 3s) linear infinite; }
 
   @keyframes it-spin { to { transform: rotate(360deg); } }
   @keyframes it-float { from { transform: translate(0, 0); } to { transform: translate(var(--dx, 4px), var(--dy, 4px)); } }
@@ -381,6 +518,12 @@ const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
   @keyframes it-pulse { 0%, 100% { transform: scale(0.92); opacity: 0.35; } 50% { transform: scale(1.06); opacity: 0.8; } }
   @keyframes it-dash { to { stroke-dashoffset: -140; } }
   @keyframes it-flow { from { transform: translateX(0); } to { transform: translateX(-40px); } }
+  @keyframes it-packet {
+    0% { transform: translate(0, 0); opacity: 0; }
+    12% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translate(var(--dx, 0), var(--dy, 0)); opacity: 0; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .ideathumb * { animation: none !important; }

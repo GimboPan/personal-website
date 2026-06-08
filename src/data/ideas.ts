@@ -19,7 +19,7 @@ export interface IdeaArticle {
   /** Generative thumbnail for the list preview (left media slot). Picks a
       geometric motif + accent + seed; rendered by <IdeaThumb />. */
   art?: {
-    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core';
+    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core' | 'team' | 'orchestrator' | 'ascent';
     accent: string;
     seed: number;
   };
@@ -56,7 +56,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/few-person-company.html',
     status: 'live',
     isNew: true,
-    art: { motif: 'constellation', accent: '#38c8ff', seed: 7 },
+    art: { motif: 'team', accent: '#38c8ff', seed: 7 },
   },
   {
     index: '06',
@@ -79,7 +79,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'tech',
     href: '/ideas/ai-agent-company.html',
     status: 'live',
-    art: { motif: 'orbit', accent: '#9fe870', seed: 5 },
+    art: { motif: 'orchestrator', accent: '#9fe870', seed: 5 },
   },
   {
     index: '04',
@@ -90,7 +90,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'economy',
     href: '/ideas/open-to-work-visual-guide.html',
     status: 'live',
-    art: { motif: 'bars', accent: '#ffd11a', seed: 4 },
+    art: { motif: 'ascent', accent: '#ffd11a', seed: 4 },
   },
   {
     index: '03',

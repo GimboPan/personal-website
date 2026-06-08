@@ -19,7 +19,7 @@ export interface IdeaArticle {
   /** Generative thumbnail for the list preview (left media slot). Picks a
       geometric motif + accent + seed; rendered by <IdeaThumb />. */
   art?: {
-    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop';
+    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core';
     accent: string;
     seed: number;
   };
@@ -43,7 +43,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/write-loops-not-code.html',
     status: 'live',
     isNew: true,
-    art: { motif: 'loop', accent: '#9fe870', seed: 8 },
+    art: { motif: 'core', accent: '#9fe870', seed: 8 },
   },
   {
     index: '07',

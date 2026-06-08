@@ -4,7 +4,7 @@
    `motif` + `accent` + `seed`; the seed deterministically varies geometry so
    no two cards look identical. Honors prefers-reduced-motion. */
 export interface Props {
-  motif?: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop';
+  motif?: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core';
   accent?: string; // hex
   seed?: number;
   index?: string;  // optional corner label
@@ -121,6 +121,43 @@ const waves = motif === 'wave'
       dur: 7 + i * 2,
     }))
   : [];
+
+// ── core: bespoke flagship composition (article #08) ───────────────────────
+function ellipsePt(rx: number, ry: number, deg: number) {
+  const a = (deg * Math.PI) / 180;
+  return [CX + Math.cos(a) * rx, CY + Math.sin(a) * ry] as const;
+}
+function ellipseArc(rx: number, ry: number, a0: number, a1: number, steps = 30) {
+  let d = '';
+  for (let i = 0; i <= steps; i++) {
+    const [x, y] = ellipsePt(rx, ry, a0 + ((a1 - a0) * i) / steps);
+    d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+  }
+  return d;
+}
+function wedgePath(r: number, a0: number, a1: number) {
+  const [x0, y0] = [CX + Math.cos((a0 * Math.PI) / 180) * r, CY + Math.sin((a0 * Math.PI) / 180) * r * 0.6];
+  const [x1, y1] = [CX + Math.cos((a1 * Math.PI) / 180) * r, CY + Math.sin((a1 * Math.PI) / 180) * r * 0.6];
+  return `M ${CX} ${CY} L ${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${(r * 0.6).toFixed(1)} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
+}
+const coreParticles = motif === 'core'
+  ? Array.from({ length: 16 }, () => ({
+      x: rnd(8, W - 8), y: rnd(6, H - 6), r: rnd(0.6, 1.9),
+      d: rnd(0, 6), dx: rnd(-7, 7), dy: rnd(-7, 7),
+    }))
+  : [];
+const coreOrbits = motif === 'core'
+  ? [
+      { rx: 80, ry: 30, tilt: -26, dur: 24, rev: false },
+      { rx: 56, ry: 62, tilt: 30, dur: 17, rev: true },
+      { rx: 38, ry: 22, tilt: 76, dur: 12, rev: false },
+    ]
+  : [];
+const cometRx = 80, cometRy = 30, cometTilt = -26;
+const cometD = motif === 'core' ? ellipseArc(cometRx, cometRy, -95, 0) : '';
+const cometTail = ellipsePt(cometRx, cometRy, -95);
+const cometHead = ellipsePt(cometRx, cometRy, 0);
+const sweepD = motif === 'core' ? wedgePath(98, -22, 16) : '';
 ---
 
 <div class="ideathumb" data-motif={motif} style={`--accent:${accent};`}>
@@ -139,6 +176,27 @@ const waves = motif === 'wave'
         <stop offset="0%" stop-color={accent} stop-opacity="0.95" />
         <stop offset="100%" stop-color={accent} stop-opacity="0.35" />
       </linearGradient>
+      {motif === 'core' && (
+        <>
+          <filter id={`${uid}_blur`} x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.6" />
+          </filter>
+          <linearGradient
+            id={`${uid}_comet`}
+            gradientUnits="userSpaceOnUse"
+            x1={cometTail[0]} y1={cometTail[1]}
+            x2={cometHead[0]} y2={cometHead[1]}
+          >
+            <stop offset="0%" stop-color={accent} stop-opacity="0" />
+            <stop offset="72%" stop-color={accent} stop-opacity="0.45" />
+            <stop offset="100%" stop-color={accent} stop-opacity="1" />
+          </linearGradient>
+          <radialGradient id={`${uid}_sweep`} gradientUnits="userSpaceOnUse" cx={CX} cy={CY} r="98">
+            <stop offset="0%" stop-color={accent} stop-opacity="0.20" />
+            <stop offset="100%" stop-color={accent} stop-opacity="0" />
+          </radialGradient>
+        </>
+      )}
     </defs>
 
     <rect x="0" y="0" width={W} height={H} fill={`url(#${uid}_bg)`} />
@@ -233,6 +291,52 @@ const waves = motif === 'wave'
           <circle cx={CX + 58} cy={CY} r="3.6" fill="#fff" opacity="0.95" />
         </g>
         <circle cx={CX} cy={CY} r="14" fill={`url(#${uid}_glow)`} class="breathe" opacity="0.7" />
+      </g>
+    )}
+
+    {motif === 'core' && (
+      <g>
+        {/* drifting fleet of particles (the ~200 background Claudes) */}
+        {coreParticles.map((p) => (
+          <g class="float" style={`--dur:${(5 + p.d).toFixed(1)}s; --dx:${p.dx}px; --dy:${p.dy}px;`}>
+            <circle cx={p.x} cy={p.y} r={p.r} fill="var(--accent)" class="twinkle" style={`--delay:-${p.d.toFixed(1)}s;`} opacity="0.65" />
+          </g>
+        ))}
+
+        {/* radar sweep — agents scanning Twitter / GitHub / Slack */}
+        <g class="spin" style={`--dur:11s; transform-origin:${CX}px ${CY}px;`}>
+          <path d={sweepD} fill={`url(#${uid}_sweep)`} />
+        </g>
+
+        {/* outer dashed plane */}
+        <ellipse cx={CX} cy={CY} rx="92" ry="55" fill="none" stroke="var(--accent)" stroke-width="1"
+          opacity="0.14" stroke-dasharray="2 9" class="spin-rev" style={`--dur:44s; transform-origin:${CX}px ${CY}px;`} />
+
+        {/* three tilted orbit loops, each carrying an agent node */}
+        {coreOrbits.map((o) => (
+          <g class={o.rev ? 'spin-rev' : 'spin'} style={`--dur:${o.dur}s; transform-origin:${CX}px ${CY}px;`}>
+            <g transform={`rotate(${o.tilt} ${CX} ${CY})`}>
+              <ellipse cx={CX} cy={CY} rx={o.rx} ry={o.ry} fill="none" stroke={`url(#${uid}_stroke)`} stroke-width="1" opacity="0.42" />
+              <circle cx={CX + o.rx} cy={CY} r="2.6" fill="var(--accent)" class="twinkle" />
+            </g>
+          </g>
+        ))}
+
+        {/* comet sweeping the main loop */}
+        <g class="spin" style={`--dur:7s; transform-origin:${CX}px ${CY}px;`}>
+          <g transform={`rotate(${cometTilt} ${CX} ${CY})`}>
+            <path d={cometD} fill="none" stroke={`url(#${uid}_comet)`} stroke-width="2.4" stroke-linecap="round" />
+            <circle cx={cometHead[0]} cy={cometHead[1]} r="9" fill={`url(#${uid}_glow)`} filter={`url(#${uid}_blur)`} />
+            <circle cx={cometHead[0]} cy={cometHead[1]} r="3" fill="#fff" />
+          </g>
+        </g>
+
+        {/* the core — model / values */}
+        <circle cx={CX} cy={CY} r="24" fill={`url(#${uid}_glow)`} class="breathe" />
+        <circle cx={CX} cy={CY} r="11" fill="none" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"
+          class="pulse" style={`transform-origin:${CX}px ${CY}px; --dur:4s;`} />
+        <circle cx={CX} cy={CY} r="5.5" fill="var(--accent)" filter={`url(#${uid}_blur)`} />
+        <circle cx={CX} cy={CY} r="3.3" fill="#fff" />
       </g>
     )}
   </svg>

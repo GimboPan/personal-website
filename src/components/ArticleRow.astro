@@ -11,7 +11,7 @@ export interface Props {
   tags?: string[];
   isNew?: boolean;
   art?: {
-    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop';
+    motif: 'orbit' | 'constellation' | 'bars' | 'spiral' | 'wave' | 'rings' | 'loop' | 'core';
     accent: string;
     seed: number;
   };
@@ -47,7 +47,7 @@ const Tag = href ? 'a' : 'article';
   ]}
 >
   <!-- Left: generative thumbnail (ideas) or placeholder (everything else) -->
-  <div class="article-row__media">
+  <div class:list={['article-row__media', art && 'article-row__media--art']}>
     {art ? (
       <IdeaThumb motif={art.motif} accent={art.accent} seed={art.seed} index={index} />
     ) : (

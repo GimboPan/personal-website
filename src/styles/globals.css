@@ -413,6 +413,17 @@
     border: 1px dashed #ffffff14;
     overflow: hidden;
   }
+  /* When a real generative thumbnail fills the slot, drop the dashed
+     placeholder frame for a clean solid hairline that echoes the card's
+     own border + a slightly larger radius that nests inside it. */
+  .article-row__media--art {
+    border: 1px solid #ffffff14;
+    border-radius: 10px;
+    background: #0e0f0c;
+  }
+  .article-row--link:hover .article-row__media--art {
+    border-color: rgba(159, 232, 112, 0.22);
+  }
   .article-row__media-mark {
     position: absolute;
     top: 8px;

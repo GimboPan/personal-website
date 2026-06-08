@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>不再写代码,而是写 Loop · Boris Cherny 聊 Claude Code — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="Claude Code 的创造者 Boris Cherny 在 Acquired × WorkOS 的访谈:Claude Code 怎么长出来、工程师为什么从「写代码」变成「写 Loop」、为什么编程是 AI 安全的完美培养皿,以及当 AI 越来越强,人类最后还剩什么独特价值。一份基于完整字幕的视频导读。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* ─── Back-link bar ─── */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-faint); font-weight: 600;
+    }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .sep { color: var(--ink-faint); }
+    .backbar .here { color: var(--ink); }
+
+    /* ─── Hero ─── */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow {
+      display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30);
+      padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700;
+    }
+    .hero h1 { font-size: clamp(52px, 8.5vw, 104px); margin-bottom: 28px; max-width: 16ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 62ch; line-height: 1.5; margin-bottom: 32px; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* ─── Section base ─── */
+    section { padding: 72px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(36px, 5.5vw, 64px); margin-bottom: 18px; max-width: 20ch; }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 48px; }
+
+    /* ─── Stat banner ─── */
+    .stat-banner { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 56px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; }
+    .stat-banner .num { font-weight: 900; line-height: 0.82; letter-spacing: -0.04em; font-size: clamp(72px, 12vw, 168px); color: var(--green); }
+    .stat-banner .num .small { display: block; font-size: 0.26em; color: var(--ink); margin-top: 14px; line-height: 1.2; letter-spacing: -0.01em; }
+    .stat-banner .copy h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .stat-banner .copy p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .stat-banner .copy p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .stat-banner { grid-template-columns: 1fr; padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── YouTube embed ─── */
+    .video-wrap { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 20px; margin-top: 32px; }
+    .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 18px; background: #000; }
+    .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-cap { font-size: 13px; color: var(--ink-faint); margin-top: 14px; padding: 0 8px; display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: space-between; }
+    .video-cap a { color: var(--green); font-weight: 600; }
+    .video-cap a:hover { color: var(--green-tint); }
+
+    /* ─── Number / arc strip ─── */
+    .arc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .arc { background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 28px 22px; }
+    .arc .v { font-weight: 900; font-size: clamp(30px, 3.6vw, 44px); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .arc .v.danger { color: var(--coral); }
+    .arc .v.warn { color: var(--amber); }
+    .arc .v.pos { color: var(--green); }
+    .arc .v.sky { color: var(--sky); }
+    .arc .v.dim { color: var(--ink); }
+    .arc .l { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+    .arc .l b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .arc-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ─── Observation cards ─── */
+    .obs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .obs { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 34px 30px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s, border-color .2s; }
+    .obs:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+    .obs.span2 { grid-column: span 2; }
+    .obs .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; }
+    .obs .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .obs h4 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; line-height: 1.0; letter-spacing: -0.01em; }
+    .obs p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .obs p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .obs-grid { grid-template-columns: 1fr; } .obs.span2 { grid-column: span 1; } }
+
+    /* ─── Compare ─── */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .compare .col { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 34px 30px; }
+    .compare .col.myth { border-color: rgba(255,209,26,0.35); }
+    .compare .col.real { border-color: rgba(159,232,112,0.35); }
+    .compare .col h4 { font-size: 24px; font-weight: 900; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; line-height: 1.05; }
+    .compare .col.myth h4 { color: var(--amber); }
+    .compare .col.real h4 { color: var(--green); }
+    .compare .col .sub { font-size: 13px; color: var(--ink-faint); margin-bottom: 22px; }
+    .compare ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .compare li { font-size: 15px; color: var(--ink); padding: 12px 16px; background: var(--surface-3); border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+    .compare li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; margin-top: 9px; flex-shrink: 0; }
+    .compare .col.myth li::before { background: var(--amber); }
+    .compare .col.real li::before { background: var(--green); }
+    @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+
+    /* ─── Takeaways ─── */
+    .takeaway-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .takeaway { background: var(--surface-2); border: 1px solid var(--line); border-radius: 24px; padding: 26px 30px; display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: center; }
+    .takeaway .idx { font-weight: 900; font-size: 44px; line-height: 0.9; color: var(--green); letter-spacing: -0.02em; }
+    .takeaway h4 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .takeaway p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+    .takeaway p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 600px) { .takeaway { grid-template-columns: 1fr; gap: 8px; padding: 22px 24px; } .takeaway .idx { font-size: 32px; } }
+
+    /* ─── CTA ─── */
+    .cta { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 64px 48px; text-align: center; margin: 40px 0 80px; }
+    .cta h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 18px; max-width: 22ch; margin-left: auto; margin-right: auto; }
+    .cta h2 .accent { color: var(--green); }
+    .cta p { font-size: 16px; color: var(--ink-soft); max-width: 56ch; margin: 0 auto 32px; }
+    .cta .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 9999px; font-weight: 700; font-size: 14px; letter-spacing: 0.02em; transition: transform .15s, background .15s, color .15s; border: 1px solid transparent; }
+    .btn-primary { background: var(--green); color: var(--green-deep); }
+    .btn-primary:hover { transform: scale(1.04); }
+    .btn-ghost { color: var(--ink); border-color: var(--line-strong); }
+    .btn-ghost:hover { background: var(--surface-3); }
+
+    /* ─── Footer ─── */
+    footer { padding: 40px 0 60px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+    footer a { color: var(--green); }
+
+    @media (max-width: 640px) {
+      section { padding: 56px 0; }
+      .hero { padding: 56px 0 40px; }
+      .wrap { padding: 0 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════ BACK LINK ═══════════════ -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/ideas" aria-label="Back to Gimbo's Universe — Ideas">
+      <span aria-hidden="true">←</span> Gimbo's Universe
+    </a>
+    <span class="sep">/</span>
+    <span class="here">Ideas · 写 Loop,不写代码</span>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">§ Video notes · Acquired Unplugged × WorkOS</span>
+    <h1 class="display">
+      不再写代码,<br/>
+      而是写 <span class="accent">Loop</span>。
+    </h1>
+    <p class="lead">
+      Boris Cherny 是 Claude Code 的创造者。在这期访谈里,他讲了 Claude Code 怎么从一个原型长出来、
+      工程师的角色正在被怎样重写 —— 从「写代码」到「写 prompt」再到<b style="color:var(--ink);">「写 loop」</b>,
+      以及当 AI 越来越强,人类最后还剩下什么独特价值。一份基于完整字幕的视频导读。
+    </p>
+    <div class="credits">
+      <div class="item"><div class="label">Source</div><div class="value">Acquired Unplugged × WorkOS</div></div>
+      <div class="item"><div class="label">主角</div><div class="value">Boris Cherny · Claude Code 创造者</div></div>
+      <div class="item"><div class="label">机构</div><div class="value">Anthropic</div></div>
+      <div class="item"><div class="label">Topic</div><div class="value">Coding Agents · 工程的未来</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ STAT BANNER ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="stat-banner">
+      <div class="num">
+        ~200
+        <span class="small">个 Claude,在他电脑后台常驻运行。</span>
+      </div>
+      <div class="copy">
+        <h3>他已经大约 6 个月,没亲手写过一行代码了。</h3>
+        <p>
+          Boris 现在不写代码,甚至不太写 prompt —— 他写的是 <b>loop</b>。
+          大约 <b>200 个 Claude</b> 在后台持续跑,抓取 Twitter、GitHub issues、Slack 上的反馈,
+          自己决定下一步做什么。今年 <b>11 月</b>他直接把 IDE 卸载了 —— 因为完全用不上。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ VIDEO ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ Watch first</span>
+    <h2 class="section-title display">先看完原片,<br/>再读下面的笔记。</h2>
+    <p class="section-lead">
+      下面所有的框架和数字都来自这期访谈的完整字幕。我把它整理成视觉笔记是为了之后能反复回查 ——
+      但原片里 Boris 临场的例子和语气,是文字留不住的东西。
+    </p>
+    <div class="video-wrap">
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/RkQQ7WEor7w"
+          title="Boris Cherny: Claude Code & the Future of Engineering — Acquired Unplugged × WorkOS"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <div class="video-cap">
+        <span>Acquired Unplugged · presented by WorkOS · 嘉宾 Boris Cherny(Claude Code 创造者)</span>
+        <a href="https://www.youtube.com/watch?v=RkQQ7WEor7w" target="_blank" rel="noopener">Open on YouTube →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ORIGIN ARC ═══════════════ -->
+<section>
+  <div class="wrap">
+    <span class="section-tag">§ How Claude Code happened</span>
+    <h2 class="section-title display">它不是规划出来的 ——<br/>是从一次原型探索里长出来的。</h2>
+    <p class="section-lead">
+      2024 年底 Boris 加入 Anthropic 的 Labs 原型团队。当时有一种强烈的「产品悬垂」(product overhang)——
+      模型能力很强,却没有任何产品能完全发挥它。那时的编程工具大多只会自动补全、或只答不写。
+      于是他们决定 All in,做一个纯粹的编程 agent。
+    </p>
+    <div class="arc-grid">
+      <div class="arc">
+        <div class="v danger">10–20%</div>
+        <div class="l">早期很烂 —— 一开始只能帮他写大约一两成的代码。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">Sonnet 4 → Opus 4.5</div>
+        <div class="l">阶跃式提升主要来自<b>底层模型的迭代</b>,而非产品本身。</div>
+      </div>
+      <div class="arc">
+        <div class="v dim">CLI 起步</div>
+        <div class="l">最初只有命令行界面 —— 朴素,但够用。</div>
+      </div>
+      <div class="arc">
+        <div class="v sky">全平台</div>
+        <div class="l">为适配工程师极强的偏好,长出桌面 / 移动 / Slack / GitHub。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ KEY NUMBERS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 把变化讲清楚的数字</span>
+    <h2 class="section-title display">几个数字,<br/>就能感到拐点。</h2>
+    <div class="arc-grid">
+      <div class="arc">
+        <div class="v danger">10–20%</div>
+        <div class="l">AI 最初只写他这点比例的代码。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">6 个月</div>
+        <div class="l">他没在工作里亲手写过代码的时长。</div>
+      </div>
+      <div class="arc">
+        <div class="v dim">11 月</div>
+        <div class="l">直接卸载了 IDE —— 用不上了。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">数百 %</div>
+        <div class="l">内部 PR 增幅。早先公开的「3×」<b>已严重过时</b>。</div>
+      </div>
+      <div class="arc">
+        <div class="v sky">几周 → 2 天</div>
+        <div class="l">新人上手时间 —— 直接问 Claude、让它查库。</div>
+      </div>
+      <div class="arc">
+        <div class="v warn">5–10 → ~200</div>
+        <div class="l">并行后台 Claude 数量的演进。</div>
+      </div>
+      <div class="arc">
+        <div class="v warn">20%</div>
+        <div class="l">模型自动生成的想法里「好主意」的比例 —— 他预测 3–6 个月后多数都会是。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">8–9 天</div>
+        <div class="l">Claude Co-work 由 Claude Code <b>100% 写成</b>的耗时。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ROLE SHIFT ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 工程师角色的演变</span>
+    <h2 class="section-title display">抽象又升了一级,<br/>这是通才的黄金时代。</h2>
+    <p class="section-lead">
+      编程一直是抽象层级不断抬升的过程:打孔卡 → 汇编 → 高级语言 → Python。现在又升了一级 ——
+      工程师不再直接写代码。
+    </p>
+    <div class="obs-grid">
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>从 Prompt 到 Loop</div>
+        <h4>你写的不是代码,<br/>是编排。</h4>
+        <p>
+          Boris 说他连提示词都不太写了。工作变成<b>编写循环</b> —— 由这些 loop 去提示并编排 Claude,
+          再让系统自己决定下一步做什么。人退到了「设计流程」的那一层。
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>通才的黄金时代</div>
+        <h4>流水线消失了,<br/>人人都是 builder。</h4>
+        <p>
+          过去「用户研究 → 设计师 → PM → 工程师」的分工流水线已经不在了 —— 大家融合成统一的
+          <b>builder</b>。设计师、财务、幕僚长都在发布代码。想同时做好几件事,<b>从没像现在这么容易、这么有意思。</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WHY CODE — PETRI DISH ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 为什么偏偏是「编程」</span>
+    <h2 class="section-title display">一个干净得<br/>不可思议的宇宙。</h2>
+    <p class="section-lead">
+      Anthropic 存在的根本是研究 AI 安全 —— 而安全不能只在实验室里看,必须看模型「在真实世界中」(in the wild)
+      的表现。编程恰好是模型天然理解的语言,也是一个验证极其干净的领域。
+    </p>
+    <div class="compare">
+      <div class="col myth">
+        <h4>📜 英语 / 诗</h4>
+        <p class="sub">无限种「正确」,没有清晰边界。</p>
+        <ul>
+          <li>一句话有无限种优美的写法</li>
+          <li>「好」与「坏」高度主观</li>
+          <li>很难给出确定的 pass / fail</li>
+        </ul>
+      </div>
+      <div class="col real">
+        <h4>💻 代码</h4>
+        <p class="sub">有限、受限,有清晰的对错。</p>
+        <ul>
+          <li>正确解是有限且高度受限的</li>
+          <li>能不能编译、能不能跑通 —— 清晰的 pass / fail</li>
+          <li>逻辑严密的闭环,是研究 AI 认知与对齐的完美培养皿</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTRARIAN ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 反直觉的判断</span>
+    <h2 class="section-title display">几个让人意外<br/>的结论。</h2>
+    <div class="obs-grid">
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>反直觉 01</div>
+        <h4>资深反而要先「卸载」旧习。</h4>
+        <p>
+          20–30 年经验现在是包袱 —— 资深工程师要花几个月去 <b>unlearn</b> 那些不再相关的习惯。
+          反倒是 AI-native 的应届生,能教 Boris 怎么更好地用 Claude Code。
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>反直觉 02</div>
+        <h4>代码「品味」常常是<br/>愚蠢的执念。</h4>
+        <p>
+          他曾洁癖到代码库绝不许出现 Class(坚持函数式)。后来人和模型偷偷写了 Class ——
+          只要商业目标更快达成、质量也没变差,他发现那份个人执念<b>根本不重要</b>。
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>反直觉 03</div>
+        <h4>故意让团队<br/>人手不足一点。</h4>
+        <p>
+          给创始人的建议:看起来要 4 个工程师的项目,<b>只放 2 个人 + 无限 API token</b>。
+          逼出自动化 —— 前期贵(像预编译),但长期人效复利、运营成本大降。
+          (这正是<a href="/ideas/few-person-company.html" style="color:var(--green);">「几个人的公司」</a>的工程版本。)
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>反直觉 04</div>
+        <h4>拉平头衔,<br/>减少盲从。</h4>
+        <p>
+          在 Meta 时所有人都叫「软件工程师」,没有 Senior / Principal 之分。头衔一高,
+          别人会出于敬畏而<b>盲从你的坏主意</b> —— 拉平头衔是一种很好的文化强制功能。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TAKEAWAYS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 3 个 Takeaway</span>
+    <h2 class="section-title display">如果只记三件事。</h2>
+    <div class="takeaway-list">
+      <div class="takeaway">
+        <div class="idx">01</div>
+        <div>
+          <h4>抽象层级又升了一级。</h4>
+          <p>工程师从「写代码」变成「<b>写 loop、编排 agent</b>」。会用工具的人,和会设计流程的人,差距开始拉开。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">02</div>
+        <div>
+          <h4>这是通才的黄金时代。</h4>
+          <p>分工流水线消失,人人都是 builder。<b>想做多件事,从没像现在这么容易。</b></p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">03</div>
+        <div>
+          <h4>人类的 alpha 从「品味」转向「价值观」。</h4>
+          <p>「产品品味」这道壁垒 3–6 个月内也会被攻破;真正留给人的,是教模型<b>怎么做一个好模型</b>。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section style="padding-top: 0; padding-bottom: 0;">
+  <div class="wrap">
+    <div class="cta">
+      <h2 class="display">人类最后教给模型的,<br/>会是<span class="accent">价值观</span>。</h2>
+      <p>
+        很多人以为现在人类的壁垒是「产品品味」—— 但 Boris 认为这 3–6 个月内也会被攻破,模型很快会大规模产出靠谱的好主意。
+        真正留给人的,是教模型如何「成为一个好模型」—— 就像教自己的孩子,如何成为一个好人。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=RkQQ7WEor7w" target="_blank" rel="noopener">
+          看完整访谈 →
+        </a>
+        <a class="btn btn-ghost" href="/ai-builder/ai-fleet.html">
+          看我自己的「AI 舰队」实验
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Notes from Acquired Unplugged × WorkOS · 嘉宾 Boris Cherny(Claude Code 创造者)</span>
+    <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+  </div>
+</footer>
+
+</body>
+</html>

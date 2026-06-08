@@ -26,6 +26,18 @@ export interface TopicDef {
 
 export const articles: IdeaArticle[] = [
   {
+    index: '08',
+    title: '不再写代码,而是写 Loop · Boris Cherny 聊 Claude Code · 视频导读',
+    lede: 'Claude Code 的创造者 Boris Cherny 在 Acquired × WorkOS 的访谈,基于完整字幕整理的视频导读。Claude Code 怎么从一个「产品悬垂」时期的原型长出来(从只会写 10–20% 的代码,到他已经 6 个月没亲手写过一行、11 月直接卸载 IDE、~200 个 Claude 在后台常驻);工程师的角色怎样被重写 ——「写代码 → 写 prompt → 写 loop」,以及「通才的黄金时代」里设计师、财务、幕僚长都在发布代码;为什么编程是 AI 安全研究干净得不可思议的「培养皿」;还有几个很辣的反直觉判断 —— 资深要先 unlearn、代码品味常是愚蠢的执念、故意让团队人手不足 +无限 token(「几个人的公司」的工程版)、拉平头衔减少盲从。最后落在:人类最终教给模型的,会是价值观。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy'],
+    href: '/ideas/write-loops-not-code.html',
+    status: 'live',
+    isNew: true,
+  },
+  {
     index: '07',
     title: '不是一人公司,是几个人的公司 · OPC 的真实形态 · 视频导读',
     lede: 'AI 火了之后,人人都想做一家 OPC(一人公司)——「一个人在家,几个 Agent 干掉过去一整个团队」。但 Gumroad 创始人、《小而美》作者 Sahil Lavingia(这个领域的 OG)说:真要把用户体验做好,最后大概不是 1 个人,而是几个人。基于一期《科技早知道》的视频导读:Gumroad 是怎么被 VC「逼」小、年入 2000 万却只靠 3 个工程师 + 半个 CFO + 1.5 个客服跑起来的;5 个核心观点(AI 能写代码但找不到客户 / 最好的软件不一定躺赢 / AI 当 CEO 人类负责热爱);以及把「想象中的一人公司」和「真实形态」摆在一起的那个核心落点 —— 极简不是把人减到 0,而是减到刚好还能保证体验的那几个。',

@@ -33,6 +33,19 @@ export interface TopicDef {
 
 export const articles: IdeaArticle[] = [
   {
+    index: '09',
+    title: '把人,安全地移出信任链 · Claude Code 一周年 × Boris · 专题',
+    lede: '同一周,两支都来自 Claude Code 创造者团队的视频:团队的「一年回望」(Reflecting on a Year of Claude Code)和 Boris Cherny 的「未来判断」(#08)。两份完整字幕读完做成的专题——它们在讲同一件事:这一年所有的工程,本质是把人类一步步、安全地移出信任链。分三幕走:【退场】人怎么被一层层移走(交互对象从源码→agent→Loop、模型替人做更多、专业身份融化、维护杂活交给 routines)→【为什么敢退】把信任做成可证明的(验证从跑 lint 变成「run the thing」、classifier+红队+eval 证明 Auto 比人更安全、错误写进 CLAUDE.md 让 loop 永远跑不歪)→【退场之后】把文件柜扔掉让 Claude 坐到流程正中央,连「品味」也退场,剩下的只有价值观。「人类退场」一辑的压轴。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy'],
+    href: '/ideas/claude-code-one-year.html',
+    status: 'live',
+    isNew: true,
+    art: { motif: 'loop', accent: '#38c8ff', seed: 9 },
+  },
+  {
     index: '08',
     title: '连「品味」也不再是人类独有 · Boris Cherny 聊 Claude Code · 视频导读',
     lede: '社媒上那句「连品味都不再是人类独有」把我抓住了——它来自 Claude Code 创造者 Boris Cherny 的访谈。很多人以为人类最后的护城河是「产品品味」,但 Boris 判断这道墙 3–6 个月内也会被攻破(模型自动生成的想法已有约 20% 是好主意);真正留给人的，是教模型「成为一个好模型」的价值观，像教孩子做一个好人。顺着完整字幕往下，是一整套关于 AI 发展的切片:Claude Code 怎么从「产品悬垂」时期的原型长出来(他已 6 个月没亲手写代码、11 月卸载 IDE、~200 个 Claude 后台常驻)、工程师从「写代码」变成「写 Loop」、为什么编程是 AI 安全干净得不可思议的「培养皿」，以及几个很辣的反直觉判断(资深要先 unlearn、代码品味常是愚蠢执念、故意让团队人手不足 +无限 token、拉平头衔减少盲从)。',

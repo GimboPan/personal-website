@@ -30,7 +30,7 @@ When auditing or revising existing content, run a sweep against all three rules 
 
 - **Framework**: Astro 5 (static, no SSR)
 - **Styling**: Tailwind 3.4 + custom Wise-Dark tokens in `src/styles/globals.css`
-- **Display font**: Wise Sans (fallback Inter), weight 900, line-height 0.85, **uppercase + period** for hero manifestos
+- **Display font**: Inter, weight 900 (Wise Sans was never licensed/loaded — Inter IS the display font), line-height 0.85, **uppercase + period** for hero manifestos
 - **Routes**: `/`, `/work`, `/fitness`, `/life`, `/ideas`, `/about` + `/404` (no nesting; each page is independent)
 - **Modules**: `<ModuleCard />` — pass `href` to make clickable; `featured={true}` for ONE lime-green hero card per section
 

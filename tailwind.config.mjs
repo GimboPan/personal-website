@@ -20,6 +20,8 @@ export default {
           white: '#ffffff',
           mint: '#e2f6d5',
           gray: '#868685',
+          // warm cream matching the manifesto type painted into the hero art
+          cream: '#ece7d8',
         },
         // border / hairline
         hairline: '#ffffff1f',
@@ -31,7 +33,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Wise Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'Helvetica', 'Arial', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"IBM Plex Mono"', 'ui-monospace', 'monospace'],
         pixel: ['"Press Start 2P"', '"VT323"', 'monospace'],

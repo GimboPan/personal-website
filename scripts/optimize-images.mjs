@@ -46,10 +46,26 @@ const RESPONSIVE_WIDTHS = [768, 1280];
    biting into the scene below. */
 const CROP_TOP_PX = 80;
 
-/** Source after top-crop is 1536×944. Mobile gets a centered square cut
-   (944×944) so the AI scene retains presence on phone-sized viewports
-   without the cover-crop guesswork at narrow widths. */
+/** Source after top-crop is 1536×944. Mobile gets a square cut so the AI
+   scene retains presence on phone-sized viewports without the cover-crop
+   guesswork at narrow widths. */
 const MOBILE_CROP_SIZE = 944;
+
+/** Per-hero mobile crop windows, in ORIGINAL 1536×1024 master coordinates
+   (`top` must be ≥ CROP_TOP_PX so the painted nav stays excluded).
+
+   The manifestos painted into each scene live OUTSIDE these windows — the
+   mobile square must contain no baked text, because <HeroSection> overlays
+   the real headline as HTML on mobile. The centered default crop used to
+   slice the painted headlines mid-word ("DING / NEXT / ADE / THER.").
+   Heroes not listed fall back to the centered square. */
+const MOBILE_CROPS = {
+  'homepage-hero': { left: 592, top: 80, size: 944 }, // statue + voxel blocks; text ends x≈540
+  'work-hero': { left: 590, top: 160, size: 720 }, // head centered; left text ends x≈580, right column starts x≈1328
+  'fitness-hero': { left: 800, top: 240, size: 736 }, // player + net; headline ends x≈780
+  'life-hero': { left: 680, top: 124, size: 856 }, // Sky Tower + crescent; text ends x≈660
+  'about-hero': { left: 588, top: 375, size: 536 }, // statue + figure; "NODE // A-01" annotation ends (620, 370), bottom strip ends x≈577, creed card starts x≈1128
+};
 
 /** Returns a sharp pipeline with the painted-nav strip cropped off. */
 async function loadCropped(src) {
@@ -62,9 +78,19 @@ async function loadCropped(src) {
   });
 }
 
-/** Returns a sharp pipeline with the painted-nav crop AND a centered
-   square crop applied — the source for mobile <picture> branches. */
-async function loadMobileSquare(src) {
+/** Returns a sharp pipeline with the mobile square crop applied — the
+   source for mobile <picture> branches. Uses the hero's text-free window
+   from MOBILE_CROPS when defined, else a centered square. */
+async function loadMobileSquare(src, name) {
+  const custom = MOBILE_CROPS[name];
+  if (custom) {
+    return sharp(src).extract({
+      top: custom.top,
+      left: custom.left,
+      width: custom.size,
+      height: custom.size,
+    });
+  }
   const meta = await sharp(src).metadata();
   const remainingHeight = meta.height - CROP_TOP_PX;
   const size = Math.min(remainingHeight, MOBILE_CROP_SIZE);
@@ -105,7 +131,7 @@ async function genResponsive(name, width, format, ext, opts) {
 async function genMobile(name, format, ext, opts) {
   const out = path.join(outDir, `${name}-mobile.${ext}`);
   const src = path.join(sourceDir, `${name}.png`);
-  const pipeline = await loadMobileSquare(src);
+  const pipeline = await loadMobileSquare(src, name);
   const info = await pipeline[format](opts).toFile(out);
   console.log(`    mobile ${ext.padEnd(4)} → ${kb(await fileSize(out))}  (${info.width}×${info.height})`);
 }

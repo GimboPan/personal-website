@@ -17,9 +17,19 @@ export interface Props {
   alt: string;
   /** Render a hairline bottom border under the hero. Default: true. */
   border?: boolean;
+  /** Real-text manifesto matching the headline painted into the desktop
+   *  artwork. Rendered visibly on mobile (<768px, where the square crop
+   *  is text-free) and screen-reader-only on md+ (where the painted
+   *  typography carries the visual) — so every breakpoint gets a real
+   *  <h1> without doubling the desktop art. */
+  headline?: string;
+  /** Trailing word(s) of the headline rendered in lime, e.g. "together." */
+  accent?: string;
+  /** Mono subline under the headline. */
+  subline?: string;
 }
 
-const { name, alt, border = true } = Astro.props;
+const { name, alt, border = true, headline, accent, subline } = Astro.props;
 const sectionClass = [
   'relative w-full overflow-hidden hero-fullbleed',
   border ? 'border-b border-hairline' : '',
@@ -28,4 +38,21 @@ const sectionClass = [
 
 <section class={sectionClass}>
   <HeroPicture name={name} alt={alt} />
+  {headline && (
+    <>
+      <div
+        class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-canvas via-canvas/45 to-transparent md:hidden"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="absolute inset-x-0 bottom-0 px-5 pb-7 md:sr-only">
+        <h1 class="display-mega text-ink-cream text-[2.5rem] leading-[0.9]">
+          {headline}{accent && ' '}{accent && <span class="text-lime">{accent}</span>}
+        </h1>
+        {subline && (
+          <p class="terminal mt-4 text-ink-mint/90">{subline}</p>
+        )}
+      </div>
+    </>
+  )}
 </section>

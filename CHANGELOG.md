@@ -6,6 +6,30 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.1.1] — 2026-06-10 · Mobile heroes fixed (live: 21bf253)
+
+> **A fix-and-polish session driven by a full site audit.** The structural flaw the audit flagged as P0 — hero headlines baked into the AI artwork, sliced mid-word by the mobile crop ("DING / NEXT / ADE / THER.") — is fixed at the root: mobile now gets **real HTML headlines over text-free image crops**. Plus three P2 polish items (CRT, headline wrapping, ghost font). Pushed and verified live on gimbo.co.nz.
+
+### Fixed — mobile hero text (audit P0)
+
+- **`<HeroSection>` gains `headline` / `accent` / `subline` props** — rendered on mobile (<768px) as a real `<h1>` (display-mega, lime accent, mono subline) over a bottom canvas gradient; `sr-only` on md+ where the painted typography carries the visual. Text can never be cropped again — it's text.
+- **Wired up: Home** ("Building the next decade **together.**") and **AI Builder** ("Building systems that scale **human potential.**", copy matching the painted manifesto). These are the site's first real `<h1>`s — SEO + screen readers fixed in the same move. Desktop verified pixel-identical.
+- **Per-hero text-free mobile crop windows** in `optimize-images.mjs` (`MOBILE_CROPS`); all five `-mobile` images regenerated. The about window was re-tuned (530,296,594 → 588,375,536) to dodge the "NODE // A-01" annotation and the bottom strip's "…LAND." tail.
+- **Deliberately deferred**: fitness / life / about mobile show the clean text-free crop with *no* headline for now — each is a one-line `headline` prop away when wanted.
+
+### Fixed — polish (audit P2)
+
+- **CRT effects**: the moving beam now respects `prefers-reduced-motion` (removed entirely — a frozen beam is a stray lime bar); book chapter pages (`ChapterLayout`) pass `hideCrt` so long-form reading no longer sits under scanlines.
+- **`.display-mega` gets `text-wrap: balance`** — multi-line hero headlines break into even lines (visible on the live mobile homepage: three balanced lines).
+- **'Wise Sans' removed from all font stacks** — it was referenced in 5 stacks but never loaded (no `@font-face`, and it's Wise's proprietary brand font — never licensable). Inter is and always was the display font; project docs updated to say so. Zero visual change.
+
+### Audit backlog (not this session)
+
+- **P1**: mobile nav (hamburger / tap targets / `aria-current`), About HTML text version + social links (`sameAs` is empty), RSS feed, `:focus-visible` styles, `lang="zh-CN"` → `en`.
+- **P2 remaining**: self-hosted font subsets (#9), small-text density sweep — 96 uses of 9–11px (#11).
+
+---
+
 ## [1.1.0] — 2026-06-09 · Ideas grows up
 
 > **A living-site content + craft session.** Two new Ideas deep-reads built from videos, a generative animated-thumbnail system for the whole Ideas list, multi-column topic filtering, and a couple of AI Builder updates. Workflow learning of the day: YouTube caption download is now walled (PO-token), so **NotebookLM is the transcription path** — the user runs the video through it and pastes the transcript/infographics; I turn that into the page.

@@ -6,6 +6,22 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.2.0] — 2026-06-12 · Supply chain thread lands: retro essay, Series, bilingual org diagrams
+
+> **A content + one-feature session.** The two-week supply-chain-agent arc (5.30 concept exploration → 6.11 operational sims → upcoming real-work pilot) gets written up as an original Ideas retro; Ideas gains a reusable **Series (专辑)** mechanism; and AI Builder's supply chain stream gets a bilingual animated diagram page comparing agent-run vs AI-native org models.
+
+### Added — Ideas
+
+- **两次模拟,一条火线 · 复盘** (`/ideas/two-simulations.html`, index 10) — first-person retro of the two simulations (telescope: 5.30 "what is a company"; wrench: 6.11 miniature model + Glacis-style Action Center + mock-D365 scenarios, 27/27 assertions) and what was actually being asked: *where does my expertise stay valuable once cognition is free*. Ends on the real-work pilot design (shadow → assisted → whitelist) and the hook "下一篇是六周后的那张数据表". Filed Tech + Economy.
+- **Series (专辑) mechanism** — `seriesDefs` + optional `seriesSlug` in `src/data/ideas.ts`; sidebar list under Topics (same button style, derived counts, tooltip description, AND-combining filter). First series: **供应链 AI Agent** (#05 + #10). Adding a future series (e.g. AI 发展观察) is one def + one line per article.
+
+### Added — AI Builder
+
+- **Agent-Run vs AI-Native · org evolution diagrams** (`/ai-builder/org-evolution.html`, supply-chain category, featured by date) — two SMIL-animated SVG flow diagrams: Mode A relay pipeline (dept agents, flows pass the baton, humans as PO/payment gates) vs Mode B force field (one pulsing core optimizer, edge agents by interface, flows solved jointly, humans at the two ends), plus a 7-dimension comparison table and a closing note framing A→B as one evolutionary path (cross-linked to Ideas #05/#10).
+- **Bilingual EN/中文** — default English; sticky backbar carries a 中文版/English toggle (62 paired attribute labels + 30 paired rich-text blocks, `?lang=zh` deep link, localStorage memory, `<html lang>` + title swap). Copy rigor pass: hedged extrapolations ("can turn negative", "extrapolated end state"), removed spurious specificity (45-day terms), pilot described as *starting*, EN grammar fixes.
+
+---
+
 ## [1.1.1] — 2026-06-10 · Mobile heroes fixed (live: 21bf253)
 
 > **A fix-and-polish session driven by a full site audit.** The structural flaw the audit flagged as P0 — hero headlines baked into the AI artwork, sliced mid-word by the mobile crop ("DING / NEXT / ADE / THER.") — is fixed at the root: mobile now gets **real HTML headlines over text-free image crops**. Plus three P2 polish items (CRT, headline wrapping, ghost font). Pushed and verified live on gimbo.co.nz.

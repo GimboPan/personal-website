@@ -16,6 +16,8 @@ export interface IdeaArticle {
   href: string;
   status: 'live' | 'wip' | 'planned';
   isNew?: boolean;
+  /** Optional series (专辑) this piece belongs to — see `seriesDefs`. */
+  seriesSlug?: string;
   /** Generative thumbnail for the list preview (left media slot). Picks a
       geometric motif + accent + seed; rendered by <IdeaThumb />. */
   art?: {
@@ -31,7 +33,42 @@ export interface TopicDef {
   sub: string;
 }
 
+/* ─── Series (专辑) ─────────────────────────────────────────────────────────
+   A series groups articles that belong to one ongoing thread. Articles opt in
+   via `seriesSlug`; the /ideas page renders one card per series and filters
+   the list when clicked. Counts are derived — no manual updates. */
+export interface SeriesDef {
+  slug: string;
+  label: string;
+  sub: string;
+  description: string;
+}
+
+export const seriesDefs: SeriesDef[] = [
+  {
+    slug: 'supply-chain-agent',
+    label: '供应链 AI Agent',
+    sub: 'Supply Chain × Agent',
+    description:
+      '一条进行中的线:从一个分销商沙盘出发,问到「AI 原生公司是什么」,再把愿景拧回地面——缩微模型、能跑的 Action Center、模拟 ERP 上的断言,最后接上真实工作的火线。信念 → 证据 → 信任,每一步都留一篇记录。',
+  },
+];
+
 export const articles: IdeaArticle[] = [
+  {
+    index: '10',
+    title: '两次模拟,一条火线 · 从「公司是什么」到「周五选供应商」 · 复盘',
+    lede: '两周里我做了两次供应链模拟。第一次(05.30)从「帮我模拟一个分销商」一路追问到「AI 原生公司是什么」——产出 deck 和研究报告,验证方式是推演自洽,它产出信念。第二次(06.11)方向反过来:把我自己的日常工作做成等比例缩微模型(3 医院 / 3 供应商 / 9 SKU,FCST·MM·BTO),克隆行业标杆做成能跑的 Action Center,再接上模拟的 D365 跑通 7 个场景 27 条断言——验证方式是 assertion,它产出证据。复盘这两次,我真正在找的答案只有一个:认知变免费之后,我的专业值钱在哪一段。两次模拟的共同盲区是「自己出题自己阅卷」,所以第三步不是第三次模拟,而是真实工作里的试点:一个供应商 × PO 确认段,shadow → assisted → 白名单,六周出数。信念 → 证据 → 信任。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy'],
+    href: '/ideas/two-simulations.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'supply-chain-agent',
+    art: { motif: 'orbit', accent: '#9fe870', seed: 10 },
+  },
   {
     index: '09',
     title: '把人,安全地移出信任链 · Claude Code 一周年 × Boris · 专题',
@@ -92,6 +129,7 @@ export const articles: IdeaArticle[] = [
     topicSlug: 'tech',
     href: '/ideas/ai-agent-company.html',
     status: 'live',
+    seriesSlug: 'supply-chain-agent',
     art: { motif: 'orchestrator', accent: '#9fe870', seed: 5 },
   },
   {

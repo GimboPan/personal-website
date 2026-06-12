@@ -65,6 +65,16 @@ export const projects: Project[] = [
   },
   // SUPPLY CHAIN
   {
+    slug: 'org-evolution',
+    title: 'Agent 运营 vs AI 原生 · 组织演变双流图',
+    summary:
+      '同一家分销公司的两种未来,做成两张动态信息流图:模式 A 把部门换成 agent(换芯的旧公司,三流接力、人是审批闸);模式 B 是 AI 原生(一个核心优化器 + 按接口排列的边缘 agent,三流被同时求解,人只在两端)。外加一张七维对比表 — 演变到底发生在哪里。',
+    category: 'supply-chain',
+    status: 'live',
+    date: '2026-06-12',
+    href: '/ai-builder/org-evolution.html',
+  },
+  {
     slug: 'supply-chain-agent',
     title: 'Supply Chain Agent',
     summary: 'Three-agent stack running NZ + AU MRP, PO routing, vendor confirmations and settlement.',

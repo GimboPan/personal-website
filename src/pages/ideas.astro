@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ArticleRow from '~/components/ArticleRow.astro';
-import { articles, topicDefs, archiveMonths } from '~/data/ideas';
+import { articles, topicDefs, archiveMonths, seriesDefs } from '~/data/ideas';
 
 // Topic counts + archive timeline are derived from the article list — keeps
 // the sidebar numbers honest without a manual update step.
@@ -20,6 +20,12 @@ const archiveCounts = articles.reduce<Record<string, number>>((acc, a) => {
   return acc;
 }, {});
 const archive = archiveMonths.map((ym) => ({ ym, count: archiveCounts[ym] ?? 0 }));
+
+// Series (专辑) cards — counts derived from articles, same as topics.
+const series = seriesDefs.map((s) => ({
+  ...s,
+  count: articles.filter((a) => a.seriesSlug === s.slug).length,
+}));
 
 // Shared class fragments for the topic filter buttons. JS swaps these on
 // click so the active state stays in sync with the live filter.
@@ -75,12 +81,39 @@ const TOPIC_IDLE =
               </li>
             ))}
           </ul>
+
+          <!-- 专辑 / Series — ongoing threads that cut across topics. Clicking
+               filters the list to that series; click again to clear. Counts
+               derive from `seriesSlug` on articles. -->
+          {series.length > 0 && (
+            <>
+              <h2 class="font-mono text-[10px] tracking-tool uppercase text-ink-gray mt-8 mb-4">
+                Series · 专辑
+              </h2>
+              <ul class="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+                {series.map((s) => (
+                  <li>
+                    <button
+                      type="button"
+                      data-series-filter={s.slug}
+                      aria-pressed="false"
+                      title={s.description}
+                      class:list={[TOPIC_BASE, TOPIC_IDLE]}
+                    >
+                      <span class="min-w-0 truncate">{s.label}</span>
+                      <span class="font-mono text-[10px] tracking-tool text-ink-gray">{s.count}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </aside>
 
         <!-- MIDDLE — article list -->
         <main class="space-y-4">
           {articles.map((a) => (
-            <div class="idea-item" data-topic={(a.topics ?? [a.topicSlug]).join(' ')} data-date={a.date}>
+            <div class="idea-item" data-topic={(a.topics ?? [a.topicSlug]).join(' ')} data-date={a.date} data-series={a.seriesSlug ?? ''}>
               <ArticleRow
                 index={a.index}
                 title={a.title}
@@ -157,10 +190,14 @@ const TOPIC_IDLE =
   const dateBtns = Array.from(
     document.querySelectorAll<HTMLButtonElement>('[data-date-filter]'),
   );
+  const seriesBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('[data-series-filter]'),
+  );
   const countEl = document.getElementById('idea-count');
 
   let topic = 'all';
   let date = 'all';
+  let series = 'all';
 
   function apply() {
     let shown = 0;
@@ -169,7 +206,8 @@ const TOPIC_IDLE =
         topic === 'all' ||
         (el.dataset.topic?.split(' ').includes(topic) ?? false);
       const okDate = date === 'all' || el.dataset.date === date;
-      const visible = okTopic && okDate;
+      const okSeries = series === 'all' || el.dataset.series === series;
+      const visible = okTopic && okDate && okSeries;
       el.hidden = !visible;
       if (visible) shown += 1;
     }
@@ -194,6 +232,12 @@ const TOPIC_IDLE =
       btn.setAttribute('aria-pressed', String(on));
       btn.classList.toggle('text-lime', on);
     }
+    for (const btn of seriesBtns) {
+      const on = btn.dataset.seriesFilter === series;
+      btn.setAttribute('aria-pressed', String(on));
+      btn.classList.remove(...(on ? TOPIC_IDLE : TOPIC_ACTIVE));
+      btn.classList.add(...(on ? TOPIC_ACTIVE : TOPIC_IDLE));
+    }
   }
 
   for (const btn of topicBtns) {
@@ -206,6 +250,13 @@ const TOPIC_IDLE =
     btn.addEventListener('click', () => {
       const value = btn.dataset.dateFilter ?? 'all';
       date = date === value ? 'all' : value;
+      apply();
+    });
+  }
+  for (const btn of seriesBtns) {
+    btn.addEventListener('click', () => {
+      const value = btn.dataset.seriesFilter ?? 'all';
+      series = series === value ? 'all' : value;
       apply();
     });
   }

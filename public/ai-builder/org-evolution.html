@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agent-Run vs AI-Native · Two Futures of the Org — AI Builder — Gimbo's Universe</title>
+<meta name="description" content="Two futures for the same distribution company, drawn as two animated flow diagrams. Mode A swaps each department's people for agents — automated, but still the old company with a new engine: flows run as a relay and humans are the approval gates. Mode B is AI-native — one core optimizer plus edge agents arranged by interface, the three flows solved jointly, humans only at the two ends. Plus a seven-dimension comparison of where the evolution actually happens. 中英双语 · Bilingual EN/中文." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0e0f0c; --surface-1:#14160f; --surface-2:#1a1b17; --surface-3:#21241f;
+  --ink:#f5f5f0; --ink-soft:#c6c8c0; --ink-faint:#8a8c84;
+  --line:rgba(255,255,255,0.08); --line-strong:rgba(255,255,255,0.16);
+  --green:#9fe870; --green-deep:#163300; --amber:#ffd11a; --sky:#38c8ff; --coral:#ff7a82;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;
+  background:var(--bg); color:var(--ink); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; font-feature-settings:"calt";
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:.88;letter-spacing:-.02em}
+
+/* language visibility */
+[data-lang="en"] .l-zh{display:none!important}
+[data-lang="zh"] .l-en{display:none!important}
+
+/* backbar */
+.backbar{position:sticky;top:0;z-index:40;background:rgba(14,15,12,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.backbar a{color:var(--green)}
+.backbar a:hover{color:#d8f5b8}
+.backbar .here{color:var(--ink)}
+.lang-toggle{
+  margin-left:auto;cursor:pointer;font-family:inherit;
+  background:rgba(159,232,112,0.10);color:var(--green);
+  border:1px solid rgba(159,232,112,0.35);border-radius:9999px;
+  font-size:12px;font-weight:700;letter-spacing:.06em;padding:7px 16px;
+  transition:all .15s;white-space:nowrap;text-transform:none;
+}
+.lang-toggle:hover{transform:scale(1.05);background:rgba(159,232,112,0.18)}
+.lang-toggle:active{transform:scale(0.95)}
+
+/* hero */
+.hero{padding:72px 0 48px}
+.eyebrow{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#cc4e0e;background:rgba(204,78,14,.12);border:1px solid rgba(204,78,14,.35);padding:6px 12px;border-radius:9999px;margin-bottom:26px;font-weight:700}
+.hero h1{font-size:clamp(44px,7vw,86px);margin-bottom:24px;max-width:18ch}
+.hero h1 .a{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,19px);color:var(--ink-soft);max-width:68ch;line-height:1.6}
+.hero .lead b{color:var(--ink)}
+
+/* legend */
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:18px;height:3px;border-radius:2px;display:inline-block}
+.legend .info i{background:var(--green)}
+.legend .goods i{background:var(--amber)}
+.legend .cash i{background:var(--sky)}
+.legend .human i{width:10px;height:10px;border-radius:3px;background:var(--coral)}
+
+/* diagram panels */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px 0 8px}
+@media(max-width:980px){.duo{grid-template-columns:1fr}}
+.panel{background:var(--surface-2);border:1px solid var(--line);border-radius:30px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.panel .chip{align-self:flex-start;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:9999px}
+.panel.a .chip{background:rgba(255,209,26,.12);color:var(--amber);border:1px solid rgba(255,209,26,.3)}
+.panel.b .chip{background:rgba(159,232,112,.12);color:var(--green);border:1px solid rgba(159,232,112,.3)}
+.panel h2{font-size:clamp(22px,2.4vw,30px);font-weight:900;line-height:1.05}
+.panel .sub{font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+.panel .sub b{color:var(--ink)}
+.panel svg{width:100%;height:auto;display:block;background:var(--surface-1);border:1px solid var(--line);border-radius:20px}
+.panel .traits{display:flex;flex-direction:column;gap:7px;margin-top:2px}
+.panel .traits div{font-size:13px;color:var(--ink-soft);line-height:1.5;padding-left:14px;position:relative}
+.panel .traits div::before{content:'▸';position:absolute;left:0;font-weight:900}
+.panel.a .traits div::before{color:var(--amber)}
+.panel.b .traits div::before{color:var(--green)}
+.panel .traits b{color:var(--ink)}
+
+/* svg text */
+svg text{font-family:'Inter','PingFang SC',sans-serif}
+.n-label{font-size:11px;font-weight:700;fill:var(--ink)}
+.n-sub{font-size:8.5px;font-weight:600;fill:var(--ink-faint)}
+.lane-label{font-size:9px;font-weight:800;letter-spacing:.08em}
+.core-pulse{animation:pulse 3.2s ease-in-out infinite;transform-origin:300px 268px}
+@keyframes pulse{0%,100%{opacity:.18}50%{opacity:.42}}
+
+/* compare table */
+.cmp{padding:56px 0}
+.section-tag{display:inline-block;font-size:11px;letter-spacing:.16em;color:var(--green);text-transform:uppercase;font-weight:700;margin-bottom:16px}
+.cmp h2{font-size:clamp(30px,4.5vw,52px);margin-bottom:34px}
+.table{border:1px solid var(--line);border-radius:26px;overflow:hidden}
+.trow{display:grid;grid-template-columns:170px 1fr 1fr;border-bottom:1px solid var(--line)}
+.trow:last-child{border-bottom:none}
+.trow.h{background:var(--surface-2)}
+.tcell{padding:15px 20px;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+.tcell.dim{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;display:flex;align-items:center}
+.trow.h .tcell{font-weight:900;color:var(--ink);font-size:15px}
+.trow.h .tcell .s{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:3px}
+.trow.h .tcell.ca .s{color:var(--amber)}
+.trow.h .tcell.cb .s{color:var(--green)}
+.tcell b{color:var(--ink)}
+.tcell .g{color:var(--green);font-weight:700}
+@media(max-width:760px){.trow{grid-template-columns:1fr}.tcell.dim{background:var(--surface-1)}}
+
+/* outro */
+.outro{padding:24px 0 90px}
+.note{background:var(--surface-2);border:1px solid rgba(159,232,112,.28);border-radius:30px;padding:36px 38px}
+.note h3{font-size:clamp(20px,2.2vw,26px);font-weight:900;margin-bottom:12px}
+.note p{font-size:15px;color:var(--ink-soft);line-height:1.7;max-width:78ch}
+.note p b{color:var(--ink)}
+.note a{color:var(--green);font-weight:700}
+.note a:hover{color:#d8f5b8}
+footer{border-top:1px solid var(--line);padding:26px 0 46px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ink-faint)}
+footer a{color:var(--green);font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="backbar">
+  <div class="wrap">
+    <a href="/">← Gimbo's Universe</a><span>/</span>
+    <a href="/ai-builder">AI Builder</a><span>/</span>
+    <span class="here" data-en="Org Evolution" data-zh="组织演变双流图">Org Evolution</span>
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文版 →</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-en="Supply Chain · How the Org Evolves" data-zh="供应链 · 未来组织演变">Supply Chain · How the Org Evolves</span>
+    <h1 class="display">
+      <span class="l-en">One company,<br/><span class="a">two futures.</span></span>
+      <span class="l-zh">同一家公司,<br/><span class="a">两种未来.</span></span>
+    </h1>
+    <p class="lead">
+      <span class="l-en">Hand a distribution company to AI and there are two distinct steps — don't conflate them. <b>Mode A</b> swaps each department's people for agents: automated, yes, but still the old company with a new engine — the three flows still run as a relay. <b>Mode B</b> is AI-native: no departments; one core optimizer treats the three flows as a single problem and solves them jointly, with agents existing only at the edges, on the interfaces. Two animated flow diagrams — watch how information moves, and where the humans stand.</span>
+      <span class="l-zh">把一家分销公司交给 AI,有两个台阶,别混为一谈。<b>模式 A</b> 把每个部门的「人」换成 agent——自动化了,但仍是「换芯的旧公司」,三流照旧接力;<b>模式 B</b> 是 AI 原生——没有部门,一个核心优化器把三流当作一个问题同时求解,agent 只存在于边缘接口上。两张动态流图,看信息怎么流、人站在哪里。</span>
+    </p>
+    <div class="legend">
+      <span class="info"><i></i><span data-en="Information flow" data-zh="信息流">Information flow</span></span>
+      <span class="goods"><i></i><span data-en="Goods flow" data-zh="物流">Goods flow</span></span>
+      <span class="cash"><i></i><span data-en="Cash flow" data-zh="资金流">Cash flow</span></span>
+      <span class="human"><i></i><span data-en="Where humans sit" data-zh="人的位置">Where humans sit</span></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap duo">
+
+  <!-- ============ MODE A: relay pipeline ============ -->
+  <div class="panel a">
+    <span class="chip" data-en="Mode A · Agent-Run Company" data-zh="模式 A · AI Agent 运营公司">Mode A · Agent-Run Company</span>
+    <h2>
+      <span class="l-en">Old company, new engine: the relay pipeline</span>
+      <span class="l-zh">换芯的旧公司:接力流水线</span>
+    </h2>
+    <p class="sub">
+      <span class="l-en">The org chart stays untouched — each department's people are simply replaced by agents. The three flows still <b>pass the baton segment by segment</b>: one step finishes, then hands off to the next. Coordination relies on an orchestrator plus human approval gates.</span>
+      <span class="l-zh">组织结构原封不动,只是把每个部门的「人」换成「agent」。三流仍然<b>逐段接力</b>:一个环节做完,交给下一个;协调靠 Orchestrator 调度 + 人工审批闸。</span>
+    </p>
+
+    <svg viewBox="0 0 600 560" role="img" aria-label="Mode A: departmental agents on a relay pipeline (animated)">
+      <defs>
+        <marker id="arrA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="rgba(255,255,255,0.25)"/>
+        </marker>
+      </defs>
+
+      <!-- Owner -->
+      <rect x="218" y="18" width="164" height="44" rx="12" fill="rgba(255,122,130,0.10)" stroke="#ff7a82" stroke-opacity="0.55"/>
+      <text x="300" y="37" text-anchor="middle" class="n-label" fill="#ff7a82" data-en="Human · General Manager" data-zh="人 · 总经理">Human · General Manager</text>
+      <text x="300" y="51" text-anchor="middle" class="n-sub" data-en="approves POs &amp; payments · takes escalations" data-zh="批 PO · 批付款 · 接异常升级">approves POs &amp; payments · takes escalations</text>
+
+      <!-- Orchestrator -->
+      <rect x="210" y="92" width="180" height="46" rx="12" fill="#21241f" stroke="rgba(255,255,255,0.2)"/>
+      <text x="300" y="111" text-anchor="middle" class="n-label">Orchestrator</text>
+      <text x="300" y="126" text-anchor="middle" class="n-sub" data-en="task routing · still split by department" data-zh="任务调度 · 仍按部门分工">task routing · still split by department</text>
+      <line x1="300" y1="62" x2="300" y2="92" stroke="rgba(255,122,130,0.45)" stroke-width="1.2" stroke-dasharray="3 4"/>
+
+      <!-- dept agents -->
+      <g>
+        <rect x="22"  y="178" width="100" height="52" rx="11" fill="#1a1b17" stroke="var(--line-strong)"/>
+        <text x="72"  y="199" text-anchor="middle" class="n-label" data-en="Orders Agent" data-zh="客服 Agent">Orders Agent</text>
+        <text x="72"  y="214" text-anchor="middle" class="n-sub" data-en="order entry · acks" data-zh="订单录入 · 确认">order entry · acks</text>
+        <rect x="136" y="178" width="100" height="52" rx="11" fill="#1a1b17" stroke="var(--line-strong)"/>
+        <text x="186" y="199" text-anchor="middle" class="n-label" data-en="Planning Agent" data-zh="供应链 Agent">Planning Agent</text>
+        <text x="186" y="214" text-anchor="middle" class="n-sub" data-en="MRP · raises POs" data-zh="MRP · 下 PO">MRP · raises POs</text>
+        <rect x="250" y="178" width="100" height="52" rx="11" fill="#1a1b17" stroke="var(--line-strong)"/>
+        <text x="300" y="199" text-anchor="middle" class="n-label" data-en="Logistics Agent" data-zh="物流 Agent">Logistics Agent</text>
+        <text x="300" y="214" text-anchor="middle" class="n-sub" data-en="in-transit · customs" data-zh="在途 · 清关">in-transit · customs</text>
+        <rect x="364" y="178" width="100" height="52" rx="11" fill="#1a1b17" stroke="var(--line-strong)"/>
+        <text x="414" y="199" text-anchor="middle" class="n-label" data-en="Warehouse Agent" data-zh="仓库 Agent">Warehouse Agent</text>
+        <text x="414" y="214" text-anchor="middle" class="n-sub" data-en="GRN · FEFO" data-zh="GRN · FEFO">GRN · FEFO</text>
+        <rect x="478" y="178" width="100" height="52" rx="11" fill="#1a1b17" stroke="var(--line-strong)"/>
+        <text x="528" y="199" text-anchor="middle" class="n-label" data-en="Finance Agent" data-zh="财务 Agent">Finance Agent</text>
+        <text x="528" y="214" text-anchor="middle" class="n-sub" data-en="3-way match · pay" data-zh="三方核对 · 付款">3-way match · pay</text>
+      </g>
+      <g stroke="rgba(255,255,255,0.14)" stroke-width="1">
+        <path d="M240,138 L72,178" fill="none"/><path d="M270,138 L186,178" fill="none"/>
+        <path d="M300,138 L300,178" fill="none"/><path d="M330,138 L414,178" fill="none"/>
+        <path d="M360,138 L528,178" fill="none"/>
+      </g>
+
+      <!-- info lane -->
+      <text x="22" y="262" class="lane-label" fill="#9fe870" data-en="INFO · order → MRP → PO → ASN → GRN → invoice (relay)" data-zh="信息流 · 订单 → MRP → PO → ASN → GRN → 发票(接力)">INFO · order → MRP → PO → ASN → GRN → invoice (relay)</text>
+      <path id="a-info" d="M30,282 H570" fill="none" stroke="rgba(159,232,112,0.22)" stroke-width="2" marker-end="url(#arrA)"/>
+      <rect x="222" y="272" width="20" height="20" rx="4" transform="rotate(45 232 282)" fill="rgba(255,122,130,0.18)" stroke="#ff7a82" stroke-opacity="0.8"/>
+      <text x="232" y="312" text-anchor="middle" class="n-sub" fill="#ff7a82" data-en="PO value gate (human)" data-zh="PO 金额闸(人)">PO value gate (human)</text>
+      <circle r="4" fill="#9fe870"><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0.36;0.36;1" keyTimes="0;0.35;0.55;1" calcMode="linear"><mpath href="#a-info"/></animateMotion></circle>
+      <circle r="4" fill="#9fe870" opacity="0.7"><animateMotion dur="6s" begin="3s" repeatCount="indefinite" keyPoints="0;0.36;0.36;1" keyTimes="0;0.35;0.55;1" calcMode="linear"><mpath href="#a-info"/></animateMotion></circle>
+
+      <!-- goods lane -->
+      <text x="22" y="356" class="lane-label" fill="#ffd11a" data-en="GOODS · supplier → warehouse → customer (waits on info)" data-zh="物流 · 供应商 → 仓库 → 客户(等信息流走完才动)">GOODS · supplier → warehouse → customer (waits on info)</text>
+      <g>
+        <rect x="30" y="372" width="92" height="40" rx="10" fill="#1a1b17" stroke="rgba(255,209,26,0.35)"/>
+        <text x="76" y="396" text-anchor="middle" class="n-label" data-en="Supplier" data-zh="供应商">Supplier</text>
+        <rect x="254" y="372" width="92" height="40" rx="10" fill="#1a1b17" stroke="rgba(255,209,26,0.35)"/>
+        <text x="300" y="396" text-anchor="middle" class="n-label" data-en="Warehouse" data-zh="仓库">Warehouse</text>
+        <text x="300" y="424" text-anchor="middle" class="n-sub" fill="#ff7a82" data-en="human · moves goods" data-zh="人 · 搬实物">human · moves goods</text>
+        <rect x="478" y="372" width="92" height="40" rx="10" fill="#1a1b17" stroke="rgba(255,209,26,0.35)"/>
+        <text x="524" y="396" text-anchor="middle" class="n-label" data-en="Customer" data-zh="客户">Customer</text>
+      </g>
+      <path d="M122,392 H254 M346,392 H478" fill="none" stroke="rgba(255,209,26,0.25)" stroke-width="2" marker-end="url(#arrA)"/>
+      <path id="a-goods1" d="M122,392 H254" fill="none" stroke="none"/>
+      <path id="a-goods2" d="M346,392 H478" fill="none" stroke="none"/>
+      <circle r="4" fill="#ffd11a"><animateMotion dur="5s" begin="1.2s" repeatCount="indefinite"><mpath href="#a-goods1"/></animateMotion></circle>
+      <circle r="4" fill="#ffd11a"><animateMotion dur="5s" begin="3.7s" repeatCount="indefinite"><mpath href="#a-goods2"/></animateMotion></circle>
+
+      <!-- cash lane -->
+      <text x="22" y="468" class="lane-label" fill="#38c8ff" data-en="CASH · customer pays on terms ← supplier paid after dual sign-off" data-zh="资金流 · 客户按账期回款 ← 供应商付款过双签(再等一程)">CASH · customer pays on terms ← supplier paid after dual sign-off</text>
+      <path id="a-cash1" d="M478,494 H346" fill="none" stroke="rgba(56,200,255,0.25)" stroke-width="2" marker-end="url(#arrA)"/>
+      <path id="a-cash2" d="M254,494 H122" fill="none" stroke="rgba(56,200,255,0.25)" stroke-width="2" marker-end="url(#arrA)"/>
+      <rect x="290" y="484" width="20" height="20" rx="4" transform="rotate(45 300 494)" fill="rgba(255,122,130,0.18)" stroke="#ff7a82" stroke-opacity="0.8"/>
+      <text x="300" y="532" text-anchor="middle" class="n-sub" fill="#ff7a82" data-en="dual-sign payment gate (human)" data-zh="付款双签闸(人)">dual-sign payment gate (human)</text>
+      <circle r="4" fill="#38c8ff"><animateMotion dur="7s" begin="2s" repeatCount="indefinite"><mpath href="#a-cash1"/></animateMotion></circle>
+      <circle r="4" fill="#38c8ff"><animateMotion dur="7s" begin="5.5s" repeatCount="indefinite"><mpath href="#a-cash2"/></animateMotion></circle>
+    </svg>
+
+    <div class="traits">
+      <div>
+        <span class="l-en"><b>Same object of management:</b> still managing processes — agents are faster employees slotted into the same departmental boxes</span>
+        <span class="l-zh"><b>管理对象不变:</b>还是「管流程」——agent 像更快的员工,嵌进原来的部门格子</span>
+      </div>
+      <div>
+        <span class="l-en"><b>Flows run as a relay:</b> goods wait on information, cash waits on goods — delay compounds stage by stage</span>
+        <span class="l-zh"><b>三流接力:</b>物流等信息流,资金流等物流——延迟逐级累积</span>
+      </div>
+      <div>
+        <span class="l-en"><b>Humans are the gates:</b> PO value gate, dual-sign payments, exception escalation — people sit mid-stream in every flow</span>
+        <span class="l-zh"><b>人是审批闸:</b>PO 金额闸、付款双签、异常升级——人嵌在每条流的中段</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODE B: force field ============ -->
+  <div class="panel b">
+    <span class="chip" data-en="Mode B · AI-Native Company" data-zh="模式 B · AI 原生公司">Mode B · AI-Native Company</span>
+    <h2>
+      <span class="l-en">A new species: one core, agents at the edge</span>
+      <span class="l-zh">新物种:一个核心,一圈边缘</span>
+    </h2>
+    <p class="sub">
+      <span class="l-en">No departments. At the centre sits <b>one</b> coupled optimizer (a world model + an objective function); edge agents are arranged by <b>interface</b>, not by function. The three flows no longer relay — they are <b>solved jointly</b> against a single objective: cash constrains goods, goods constrain promises, all resolved in one pass.</span>
+      <span class="l-zh">没有部门。中心是<b>一个</b>耦合优化器(世界模型 + 目标函数),边缘 agent 按<b>接口</b>排列而不是按职能;三流不再接力,而是被同一个目标<b>同时求解</b>——钱约束货、货约束承诺,一次算清。</span>
+    </p>
+
+    <svg viewBox="0 0 600 560" role="img" aria-label="Mode B: AI-native force field with one core optimizer (animated)">
+      <defs>
+        <radialGradient id="coreG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#9fe870" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#9fe870" stop-opacity="0.18"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Owner -->
+      <rect x="210" y="14" width="180" height="46" rx="12" fill="rgba(255,122,130,0.10)" stroke="#ff7a82" stroke-opacity="0.55"/>
+      <text x="300" y="33" text-anchor="middle" class="n-label" fill="#ff7a82" data-en="Human · Owner (central banker)" data-zh="人 · Owner(央行行长)">Human · Owner (central banker)</text>
+      <text x="300" y="48" text-anchor="middle" class="n-sub" data-en="sets objective weights · risk appetite · constraints" data-zh="设目标权重 / 风险偏好 / 约束">sets objective weights · risk appetite · constraints</text>
+      <line x1="300" y1="60" x2="300" y2="196" stroke="rgba(255,122,130,0.4)" stroke-width="1.2" stroke-dasharray="3 5"/>
+      <circle r="3.5" fill="#ff7a82"><animateMotion dur="9s" repeatCount="indefinite" path="M300,62 L300,194"/></circle>
+      <text x="318" y="120" class="n-sub" fill="#ff7a82" data-en="rare, high-leverage" data-zh="稀少而高杠杆">rare, high-leverage</text>
+
+      <!-- orbit rings -->
+      <g fill="none" stroke-dasharray="4 7">
+        <circle cx="300" cy="268" r="106" stroke="rgba(159,232,112,0.25)" stroke-width="1.4">
+          <animateTransform attributeName="transform" type="rotate" from="0 300 268" to="360 300 268" dur="30s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="268" r="128" stroke="rgba(255,209,26,0.22)" stroke-width="1.4">
+          <animateTransform attributeName="transform" type="rotate" from="360 300 268" to="0 300 268" dur="38s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="268" r="150" stroke="rgba(56,200,255,0.20)" stroke-width="1.4">
+          <animateTransform attributeName="transform" type="rotate" from="0 300 268" to="360 300 268" dur="46s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <text x="300" y="156" text-anchor="middle" class="n-sub" fill="#9fe870" data-en="demand loop" data-zh="需求环">demand loop</text>
+      <text x="424" y="345" text-anchor="middle" class="n-sub" fill="#ffd11a" data-en="supply loop" data-zh="供给环">supply loop</text>
+      <text x="176" y="345" text-anchor="middle" class="n-sub" fill="#38c8ff" data-en="capital loop" data-zh="资本环">capital loop</text>
+
+      <!-- core -->
+      <circle cx="300" cy="268" r="86" fill="url(#coreG)" class="core-pulse"/>
+      <circle cx="300" cy="268" r="64" fill="#163300" stroke="#9fe870" stroke-width="1.6"/>
+      <text x="300" y="258" text-anchor="middle" class="n-label" fill="#9fe870" style="font-size:13px" data-en="Core Optimizer" data-zh="核心优化器">Core Optimizer</text>
+      <text x="300" y="276" text-anchor="middle" class="n-sub" fill="#cdffad" data-en="world model + objective fn" data-zh="世界模型 + 目标函数">world model + objective fn</text>
+      <text x="300" y="291" text-anchor="middle" class="n-sub" fill="#cdffad" data-en="three flows solved jointly" data-zh="三流同时求解 · 连续">three flows solved jointly</text>
+
+      <!-- edge agents -->
+      <g>
+        <rect x="20"  y="150" width="118" height="48" rx="11" fill="#1a1b17" stroke="rgba(159,232,112,0.4)"/>
+        <text x="79"  y="170" text-anchor="middle" class="n-label" data-en="Demand Interface" data-zh="需求接口 Agent">Demand Interface</text>
+        <text x="79"  y="185" text-anchor="middle" class="n-sub" data-en="orders · promises · pricing" data-zh="客户订单 / 承诺 / 价格">orders · promises · pricing</text>
+
+        <rect x="462" y="150" width="118" height="48" rx="11" fill="#1a1b17" stroke="rgba(255,209,26,0.4)"/>
+        <text x="521" y="170" text-anchor="middle" class="n-label" data-en="Supply Interface" data-zh="供给接口 Agent">Supply Interface</text>
+        <text x="521" y="185" text-anchor="middle" class="n-sub" data-en="suppliers · POs · confirms" data-zh="供应商 / PO / 确认">suppliers · POs · confirms</text>
+
+        <rect x="20"  y="346" width="118" height="48" rx="11" fill="#1a1b17" stroke="rgba(56,200,255,0.4)"/>
+        <text x="79"  y="366" text-anchor="middle" class="n-label" data-en="Capital Interface" data-zh="资本接口 Agent">Capital Interface</text>
+        <text x="79"  y="381" text-anchor="middle" class="n-sub" data-en="terms · FX · cash cycle" data-zh="账期 / FX / 现金周期">terms · FX · cash cycle</text>
+
+        <rect x="462" y="346" width="118" height="48" rx="11" fill="#1a1b17" stroke="rgba(255,209,26,0.4)"/>
+        <text x="521" y="366" text-anchor="middle" class="n-label" data-en="Logistics Interface" data-zh="物流接口 Agent">Logistics Interface</text>
+        <text x="521" y="381" text-anchor="middle" class="n-sub" data-en="forwarders · customs · ETA" data-zh="货代 / 清关 / ETA">forwarders · customs · ETA</text>
+      </g>
+
+      <!-- bidirectional flows -->
+      <g stroke-width="1.4" fill="none">
+        <path id="b-d1" d="M138,182 L242,236" stroke="rgba(159,232,112,0.3)"/>
+        <path id="b-d2" d="M242,236 L138,182" stroke="none"/>
+        <path id="b-s1" d="M462,182 L358,236" stroke="rgba(255,209,26,0.3)"/>
+        <path id="b-s2" d="M358,236 L462,182" stroke="none"/>
+        <path id="b-c1" d="M138,362 L242,302" stroke="rgba(56,200,255,0.3)"/>
+        <path id="b-c2" d="M242,302 L138,362" stroke="none"/>
+        <path id="b-l1" d="M462,362 L358,302" stroke="rgba(255,209,26,0.3)"/>
+        <path id="b-l2" d="M358,302 L462,362" stroke="none"/>
+      </g>
+      <circle r="3.5" fill="#9fe870"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#b-d1"/></animateMotion></circle>
+      <circle r="3.5" fill="#9fe870" opacity="0.75"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#b-d2"/></animateMotion></circle>
+      <circle r="3.5" fill="#ffd11a"><animateMotion dur="2.8s" begin="0.4s" repeatCount="indefinite"><mpath href="#b-s1"/></animateMotion></circle>
+      <circle r="3.5" fill="#ffd11a" opacity="0.75"><animateMotion dur="2.8s" begin="1.8s" repeatCount="indefinite"><mpath href="#b-s2"/></animateMotion></circle>
+      <circle r="3.5" fill="#38c8ff"><animateMotion dur="3.1s" begin="0.8s" repeatCount="indefinite"><mpath href="#b-c1"/></animateMotion></circle>
+      <circle r="3.5" fill="#38c8ff" opacity="0.75"><animateMotion dur="3.1s" begin="2.3s" repeatCount="indefinite"><mpath href="#b-c2"/></animateMotion></circle>
+      <circle r="3.5" fill="#ffd11a"><animateMotion dur="2.6s" begin="0.2s" repeatCount="indefinite"><mpath href="#b-l1"/></animateMotion></circle>
+      <circle r="3.5" fill="#ffd11a" opacity="0.75"><animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite"><mpath href="#b-l2"/></animateMotion></circle>
+
+      <!-- physical layer -->
+      <rect x="200" y="478" width="200" height="46" rx="12" fill="rgba(255,122,130,0.10)" stroke="#ff7a82" stroke-opacity="0.55"/>
+      <text x="300" y="497" text-anchor="middle" class="n-label" fill="#ff7a82" data-en="Human · Physical Layer" data-zh="人 · 实物层">Human · Physical Layer</text>
+      <text x="300" y="512" text-anchor="middle" class="n-sub" data-en="moving · receiving · installs · in-person relationships" data-zh="搬货 · 点收 · 装机 · 关系现场">moving · receiving · installs · in-person relationships</text>
+      <line x1="300" y1="340" x2="300" y2="478" stroke="rgba(255,122,130,0.4)" stroke-width="1.2" stroke-dasharray="3 5"/>
+      <circle r="3.5" fill="#ffd11a"><animateMotion dur="4.5s" begin="1s" repeatCount="indefinite" path="M300,342 L300,476"/></circle>
+
+      <text x="300" y="548" text-anchor="middle" class="n-sub" data-en="agents scale with interfaces — not with functions" data-zh="agent 数随「接口」扩展,不随「职能」扩展">agents scale with interfaces — not with functions</text>
+    </svg>
+
+    <div class="traits">
+      <div>
+        <span class="l-en"><b>Management moves up a level:</b> managing the objective function — the Owner doesn't approve documents, they tune weights, the way a central bank sets rates</span>
+        <span class="l-zh"><b>管理对象升维:</b>「管目标函数」——Owner 不批单据,只调权重,像央行设利率</span>
+      </div>
+      <div>
+        <span class="l-en"><b>Flows solved jointly:</b> one incoming order resolves its promise date, its procurement and its cash impact in a single pass — no relay latency</span>
+        <span class="l-zh"><b>三流同时求解:</b>一张订单进来,承诺、采购、现金影响在核心里一次算清——没有接力延迟</span>
+      </div>
+      <div>
+        <span class="l-en"><b>Humans at the two ends only:</b> defining what "good" means at the top, touching the physical world at the bottom — no human-shaped gates in between</span>
+        <span class="l-zh"><b>人只在两端:</b>最顶定义「什么是好」,最底接触实物——中间没有人形审批闸</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ comparison ============ -->
+<section class="cmp">
+  <div class="wrap">
+    <span class="section-tag">Side by Side</span>
+    <h2 class="display">
+      <span class="l-en">Where the evolution actually happens<span style="color:var(--green)">.</span></span>
+      <span class="l-zh">演变发生在哪里<span style="color:var(--green)">.</span></span>
+    </h2>
+    <div class="table">
+      <div class="trow h">
+        <div class="tcell dim"></div>
+        <div class="tcell ca"><span class="s" data-en="Mode A" data-zh="模式 A">Mode A</span><span data-en="Agent-run company" data-zh="Agent 运营公司">Agent-run company</span></div>
+        <div class="tcell cb"><span class="s" data-en="Mode B" data-zh="模式 B">Mode B</span><span data-en="AI-native company" data-zh="AI 原生公司">AI-native company</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="Object of management" data-zh="管理对象">Object of management</div>
+        <div class="tcell"><span class="l-en">Processes — agents slotted into departmental boxes</span><span class="l-zh">管流程——agent 嵌进部门格子</span></div>
+        <div class="tcell"><span class="l-en"><b>The objective function</b> — departments dissolve</span><span class="l-zh"><b>管目标函数</b>——部门消失</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="Shape of the three flows" data-zh="三流形态">Shape of the three flows</div>
+        <div class="tcell"><span class="l-en">Relay pipeline: information → goods → cash; delay compounds stage by stage</span><span class="l-zh">接力流水线:信息 → 物 → 钱,延迟逐级累积</span></div>
+        <div class="tcell"><span class="l-en"><b>A force field</b>: solved jointly against one objective, coupled in real time</span><span class="l-zh"><b>力场</b>:被同一个目标同时求解,实时耦合</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="Coordination" data-zh="协调方式">Coordination</div>
+        <div class="tcell"><span class="l-en">Orchestrator scheduling + human gates + the residue of meetings</span><span class="l-zh">Orchestrator 调度 + 人工卡点 + 开会的残留</span></div>
+        <div class="tcell"><span class="l-en"><b>Explicitly engineered</b> into the core optimizer — no longer free, but no longer meetings either</span><span class="l-zh">被<b>显式工程化</b>进核心优化器——不再免费,但也不再靠会议</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="Where humans sit" data-zh="人的位置">Where humans sit</div>
+        <div class="tcell"><span class="l-en">Mid-stream: approving POs, dual-signing payments, taking escalations</span><span class="l-zh">嵌在流程中段:批 PO、双签付款、接升级</span></div>
+        <div class="tcell"><span class="l-en"><b>At the two ends only</b>: defining "good" (weights, constraints) at the top; the physical world at the bottom</span><span class="l-zh"><b>只在两端</b>:顶部定义「好」(权重/约束),底部接触实物</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="How agent count grows" data-zh="Agent 数量逻辑">How agent count grows</div>
+        <div class="tcell"><span class="l-en">With functions — one per department, the org chart copied over</span><span class="l-zh">随职能涨——每个部门一个,组织图照搬</span></div>
+        <div class="tcell"><span class="l-en">With <b>interfaces</b> — a new agent only when there's a new external interface</span><span class="l-zh">随<b>接口</b>涨——多一个外部接口,才多一个 agent</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="Inventory &amp; cash" data-zh="库存与现金">Inventory &amp; cash</div>
+        <div class="tcell"><span class="l-en">Three-policy monthly MRP — the concession to human bandwidth persists</span><span class="l-zh">三策略月度 MRP——对人脑带宽的妥协还在</span></div>
+        <div class="tcell"><span class="l-en">Continuous per-SKU tuning; inventory driven toward zero, <span class="g">the cash conversion cycle can turn negative</span> — growth flips from consuming cash to producing it</span><span class="l-zh">逐 SKU 连续调参;库存压向零,<span class="g">现金转换周期可转负</span>——增长从吃现金翻转为产现金</span></div>
+      </div>
+      <div class="trow">
+        <div class="tcell dim" data-en="Distance from today" data-zh="离今天多远">Distance from today</div>
+        <div class="tcell"><span class="l-en"><b>Buildable today</b> — my Action Center build and the shadow-mode work pilot sit in this box</span><span class="l-zh"><b>今天就能搭</b>——我的 Action Center 和 shadow 起步的真实工作试点都在这一格</span></div>
+        <div class="tcell"><span class="l-en">What's missing is engineered coordination and earned trust — this is the end state, not the starting point</span><span class="l-zh">缺的是协调层工程化与组织信任——这是终态,不是起点</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ note ============ -->
+<div class="outro">
+  <div class="wrap">
+    <div class="note">
+      <h3>
+        <span class="l-en">These aren't two options — they're one evolutionary path.</span>
+        <span class="l-zh">这两张图不是二选一,是一条演变路径。</span>
+      </h3>
+      <p>
+        <span class="l-en">Mode A is the <b>necessary step</b>: trust is earned one action type at a time, and the human-shaped gates are both its signature and its value — the supply chain Action Center I'm building, and the shadow-mode pilot I'm starting at work, sit in this box. Mode B is the <b>extrapolated end state</b>: once coordination is engineered and every SKU can be tuned continuously, the department as a shape loses its reason to exist. The distance from A to B isn't model capability — it's two things: engineering the coordination layer, and earning organizational trust.</span>
+        <span class="l-zh">模式 A 是<b>必经的台阶</b>:信任要按动作类型一个一个赢回来,人形审批闸既是它的特征也是它的价值——我正在做的供应链 Action Center 和正要以 shadow 模式启动的真实工作试点,都在这一格。模式 B 是<b>推演出来的终态</b>:当协调被工程化、当每个 SKU 都能连续调参,「部门」这个形状本身就失去了存在的理由。从 A 到 B 的距离,不是模型能力,而是两件事:协调层的工程化,和组织信任的赢得。</span>
+      </p>
+      <p style="margin-top:14px">
+        <span class="l-en">Full reasoning: <a href="/ideas/ai-agent-company.html">Running a Company on AI Agents</a> · <a href="/ideas/two-simulations.html">Two Simulations, One Live Wire (retro)</a></span>
+        <span class="l-zh">完整推演:<a href="/ideas/ai-agent-company.html">用 AI Agent 运营一家公司</a> · <a href="/ideas/two-simulations.html">两次模拟,一条火线(复盘)</a></span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Gimbo's Universe · AI Builder · Supply Chain · 2026.06</span>
+    <span><a href="/ai-builder" data-en="← Back to AI Builder" data-zh="← 返回 AI Builder">← Back to AI Builder</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var TITLES = {
+    en: 'Agent-Run vs AI-Native · Two Futures of the Org — AI Builder — Gimbo’s Universe',
+    zh: 'Agent 运营 vs AI 原生 · 组织演变双流图 — AI Builder — Gimbo’s Universe'
+  };
+  var btn = document.getElementById('langToggle');
+  var swapEls = document.querySelectorAll('[data-en]');
+
+  function setLang(l) {
+    document.documentElement.setAttribute('data-lang', l);
+    document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    swapEls.forEach(function (el) {
+      el.textContent = el.getAttribute(l === 'zh' ? 'data-zh' : 'data-en');
+    });
+    document.title = TITLES[l];
+    btn.textContent = l === 'zh' ? 'English →' : '中文版 →';
+    try { localStorage.setItem('org-evolution-lang', l); } catch (e) {}
+  }
+
+  btn.addEventListener('click', function () {
+    setLang(document.documentElement.getAttribute('data-lang') === 'zh' ? 'en' : 'zh');
+  });
+
+  var initial = 'en'; // default English
+  try {
+    var qp = new URLSearchParams(location.search).get('lang');
+    initial = qp === 'zh' ? 'zh' : qp === 'en' ? 'en' : (localStorage.getItem('org-evolution-lang') || 'en');
+  } catch (e) {}
+  setLang(initial);
+})();
+</script>
+
+</body>
+</html>

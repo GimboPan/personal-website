@@ -12,14 +12,14 @@
  * the gap, a path leading toward it — reads as a threshold / the long view,
  * which is why it landed on Life ("the slow lane is the long lane").
  *
- * Background video is hotlinked from the reference asset host — if this look
- * is kept, self-host it under /public/landing/ for reliability.
+ * Background video and poster are self-hosted under /public/landing/ (the
+ * poster is a still frame from the video, so the poster→video hand-off is
+ * seamless).
  *
  * Faithful black/white liquid-glass EXCEPT the primary CTA, rendered in the
  * site's lime so the hero doesn't read as a generic template.
  */
-const VIDEO_SRC =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4';
+const VIDEO_SRC = '/landing/life-cine.mp4';
 ---
 
 <section
@@ -34,7 +34,7 @@ const VIDEO_SRC =
     loop
     playsinline
     preload="metadata"
-    poster="/landing/life-hero.webp"
+    poster="/landing/life-cine-poster.jpg"
     aria-hidden="true"
     data-cine-video
   >

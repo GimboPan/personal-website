@@ -6,6 +6,30 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.3.0] — 2026-06-13 · Life gets a cinematic video hero (live: f705132)
+
+> **A one-feature design session.** Sparked by a motion-design reference, the Life hero moves from a static AI painting to a code-driven **cinematic video hero** — full-bleed background video, bottom-only frosted blur, liquid-glass buttons, staggered entrance. The reference clip (two monoliths with sunset light through the gap, a path leading toward it) reads as *a threshold / the long view*, which is why it landed on Life rather than the AI Builder page it was first prototyped on. Built, previewed, and shipped to gimbo.co.nz.
+
+### Added — Life
+
+- **`<CinematicHero>` component** (`src/components/CinematicHero.astro`) — a video-backed hero ported from a streaming-hero reference prompt and adapted to this Astro site: no duplicate navbar (the sticky `<Nav>` already routes), an in-page tall hero (`min-h-[88vh]`) instead of a full-viewport takeover so the page still scrolls, and inline Lucide SVGs (no React). Mechanics kept faithful — full-bleed `<video>` (autoplay/muted/loop/playsinline), a **bottom-only frosted blur** over it (`mask: linear-gradient(to top, black 0%, transparent 45%)`, blur only, no dark gradient), liquid-glass buttons, and a staggered `blurFadeUp` entrance (meta 300ms → title 400 → copy 500 → CTAs 600/700 → scroll cue 900).
+- **Life-semantic copy** — title **"Step Through. The Long View."** (keeps the reference's "Step Through" against the door-of-light frame), meta row *The slow lane · Ten years, nine chapters · Aotearoa*, lime primary CTA **Read the book** → `/life/book`, glass CTA + bobbing scroll cue → new `#more` anchor on the Writing-the-Book section.
+- **Lime primary CTA** — the one departure from the faithful black/white liquid-glass palette, so the hero doesn't read as a generic template.
+
+### Added — shared
+
+- **Reusable motion utilities in `globals.css`** — `.liquid-glass` (near-transparent frosted glass with a `mask-composite` edge-highlight `::before`), `@keyframes blurFadeUp` + `.animate-blur-fade-up`, `.cine-bottom-blur`, and `.cine-bob`. All disabled under `prefers-reduced-motion` (entrance shows instantly; the video holds its first frame via a small inline script). Any page can get the same cinematic hero by reusing `<CinematicHero>`.
+
+### Changed — Life
+
+- **Self-hosted media, no external dependency** — background video `public/landing/life-cine.mp4` (9.4MB) and **poster `life-cine-poster.jpg` (a still frame extracted from the video)**. The poster being a video frame makes the poster→video hand-off seamless — an earlier build flashed the old `life-hero` skyline poster before the video loaded; that's gone.
+
+### Notes
+
+- **AI Builder hero unchanged** — the cinematic treatment was first prototyped there, then reverted once we agreed the clip had no semantic tie to AI building. `work-hero` static hero is exactly as before.
+
+---
+
 ## [1.2.0] — 2026-06-12 · Supply chain thread lands: retro essay, Series, bilingual org diagrams
 
 > **A content + one-feature session.** The two-week supply-chain-agent arc (5.30 concept exploration → 6.11 operational sims → upcoming real-work pilot) gets written up as an original Ideas retro; Ideas gains a reusable **Series (专辑)** mechanism; and AI Builder's supply chain stream gets a bilingual animated diagram page comparing agent-run vs AI-native org models.

@@ -45,3 +45,13 @@ When auditing or revising existing content, run a sweep against all three rules 
 - Hosted on Vercel; Git auto-deploy from `main` branch is wired up
 - `git push origin main` → 30s → live at `https://personal-website-zeta-nine-61.vercel.app`
 - Manual deploy: `npx vercel@latest deploy --prod`
+
+## Changelog & versioning (always)
+
+Every **substantial** change gets recorded in `CHANGELOG.md` as part of the same piece of work — don't wait to be asked.
+
+- **What counts as substantial**: a new page / section / component, a new feature or mechanism, a visible design or hero change, a content drop (Ideas piece, book chapter, dashboard), or a notable fix. **Skip** for trivial copy tweaks, typo fixes, or tiny style nudges.
+- **Add a new top entry** under the format already in the file: `## [x.y.z] — YYYY-MM-DD · <one-line title>`, a `>` blockquote summary, then `### Added / Changed / Fixed / Notes` sections. Match the existing editorial voice (concrete, names files/paths, explains the *why*).
+- **Bump the version (semver-ish)**: new feature/page/section → **minor** (1.2 → 1.3); fix/polish only → **patch** (1.2.0 → 1.2.1). 1.0 was reached 2026-06-01.
+- **Stamp the live commit** in the header once pushed, e.g. `(live: f705132)` — matches prior entries.
+- Use today's date from the session (convert any relative date to absolute).

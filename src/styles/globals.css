@@ -866,6 +866,72 @@
     }
   }
 
+  /* ===== Cinematic hero experiment (AI Builder) =====
+     Liquid-glass buttons + staggered blur-fade-up entrance, ported from a
+     streaming-hero reference prompt. Scoped to the cinematic hero; currently
+     an experiment on /ai-builder. */
+
+  /* Near-transparent frosted glass with a thin top/bottom edge highlight. */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.15) 80%,
+      rgba(255, 255, 255, 0.45) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Staggered entrance — each element gets an inline animationDelay. */
+  @keyframes blurFadeUp {
+    from { opacity: 0; filter: blur(20px); transform: translateY(40px); }
+    to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
+  }
+  .animate-blur-fade-up {
+    opacity: 0;
+    animation: blurFadeUp 1s ease-out forwards;
+  }
+
+  /* Bottom-only frosted fade over the background video — blur, no darkening. */
+  .cine-bottom-blur {
+    -webkit-mask-image: linear-gradient(to top, black 0%, transparent 45%);
+    mask-image: linear-gradient(to top, black 0%, transparent 45%);
+  }
+
+  /* Soft scroll cue bob. */
+  @keyframes cine-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(6px); }
+  }
+  .cine-bob { animation: cine-bob 2.4s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blur-fade-up { animation: none; opacity: 1; filter: none; transform: none; }
+    .cine-bob { animation: none; }
+  }
+
   /* Display-mega billboard heading — UPPERCASE + 句号 = Rewired-style
      manifesto rhythm. Period-as-statement-mark is a Wise/Linear pattern. */
   .display-mega {

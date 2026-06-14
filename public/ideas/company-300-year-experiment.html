@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公司可能是一个 300 年的临时实验 · 公司形态的过去与下一站 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="公司作为人类默认的组织形态，满打满算只有约 300 年。从行会到工业化、从科斯的《企业的性质》到 AI 把交易成本砍下来——一份关于公司形态从哪来、为什么会向 3–10 人收敛的图解深读。灵感来自花叔的一篇小红书，下面是我读后的重述与图解。" />
+  <meta property="og:title" content="公司可能是一个 300 年的临时实验" />
+  <meta property="og:description" content="公司不是永恒的存在，而是工业化为了解决一个具体问题而被发明的临时容器。它服役 300 年，正在退潮。" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Newsreader:ital,opt@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* warm parchment palette — Claude (Anthropic) editorial */
+      --bg:        #f5f4ed;   /* parchment */
+      --ivory:     #faf9f5;   /* card surface */
+      --white:     #ffffff;
+      --sand:      #e8e6dc;
+      --ink:       #141413;   /* near black, warm */
+      --ink-2:     #3d3d3a;
+      --ink-3:     #5e5d59;   /* olive gray, body */
+      --ink-4:     #87867f;   /* stone gray, meta */
+      --line:      #e8e6dc;
+      --line-soft: #f0eee6;
+      --brand:     #c96442;   /* terracotta */
+      --coral:     #d97757;
+      --olive:     #6f7a4a;   /* guild era — muted green */
+      --olive-soft:#eef0e3;
+      --brand-soft:#f6e7df;
+      --ochre:     #b1822e;   /* new-era warm gold */
+      --ochre-soft:#f3ecda;
+      /* dark section */
+      --dk-bg:     #141413;
+      --dk-surface:#1e1e1c;
+      --dk-line:   #30302e;
+      --dk-ink:    #faf9f5;
+      --dk-soft:   #b0aea5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { max-width: 100%; display: block; }
+    .serif { font-family: 'Noto Serif SC', 'Newsreader', Georgia, serif; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+    .wrap-wide { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+    /* ─── Back-link bar ─── */
+    .backbar { background: var(--ivory); border-bottom: 1px solid var(--line); padding: 15px 0; position: sticky; top: 0; z-index: 20; backdrop-filter: blur(6px); }
+    .backbar .wrap-wide { display: flex; align-items: center; gap: 11px; font-size: 12.5px; letter-spacing: 0.04em; color: var(--ink-4); }
+    .backbar a { color: var(--brand); transition: color .15s; }
+    .backbar a:hover { color: var(--coral); }
+    .backbar .sep { color: var(--ink-4); opacity: .6; }
+    .backbar .here { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ─── Hero ─── */
+    .hero { padding: 84px 0 26px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--brand); font-weight: 700; margin-bottom: 30px;
+    }
+    .eyebrow::before { content: ""; width: 22px; height: 1.5px; background: var(--brand); display: inline-block; }
+    .hero h1 {
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(36px, 6.4vw, 62px);
+      line-height: 1.16;
+      letter-spacing: -0.005em;
+      margin-bottom: 26px;
+      color: var(--ink);
+    }
+    .hero h1 .accent { color: var(--brand); }
+    .hero .sub {
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.6;
+      color: var(--ink-3);
+      font-weight: 400;
+      max-width: 40ch;
+      margin-bottom: 34px;
+    }
+    .credits {
+      display: flex; flex-wrap: wrap; gap: 14px 30px;
+      padding-top: 24px; border-top: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-4);
+    }
+    .credits .item .k { display: block; font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 3px; }
+    .credits .item .v { color: var(--ink-2); font-weight: 500; }
+
+    /* ─── Source note ─── */
+    .sourcenote {
+      background: var(--brand-soft);
+      border: 1px solid #ecd8cd;
+      border-radius: 16px;
+      padding: 22px 26px;
+      margin: 38px 0 4px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+    .sourcenote strong { color: var(--brand); font-weight: 700; }
+
+    /* ─── Section / prose ─── */
+    section { padding: 30px 0; }
+    .kicker {
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--brand); font-weight: 700; margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(26px, 3.6vw, 37px);
+      line-height: 1.28;
+      letter-spacing: -0.005em;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    h2 .num { color: var(--brand); font-weight: 600; margin-right: .4em; }
+    h3 {
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-weight: 600; font-size: 21px; line-height: 1.4;
+      margin: 30px 0 10px; color: var(--ink);
+    }
+    p { margin: 0 0 18px; color: var(--ink-2); }
+    p.lead-p { font-size: 19px; color: var(--ink-2); }
+    .prose strong, .prose b { color: var(--ink); font-weight: 700; }
+    .prose em { font-style: normal; color: var(--brand); font-weight: 600; }
+    .prose a.ref { color: var(--brand); border-bottom: 1px solid #e2c5b8; }
+
+    /* pull-quote */
+    .pull {
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.42;
+      font-weight: 500;
+      color: var(--ink);
+      border-left: 3px solid var(--brand);
+      padding: 6px 0 6px 26px;
+      margin: 40px 0;
+    }
+    .pull .who { display: block; font-family: 'Noto Sans SC', sans-serif; font-size: 14px; font-weight: 500; color: var(--ink-4); margin-top: 14px; letter-spacing: .02em; }
+
+    /* ─── Figure block ─── */
+    figure { margin: 44px 0; }
+    .fig-card {
+      background: var(--ivory);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 34px 30px 26px;
+      box-shadow: rgba(20,20,19,0.05) 0px 4px 24px;
+    }
+    .fig-card svg { width: 100%; height: auto; }
+    figcaption {
+      font-size: 13.5px; color: var(--ink-4); line-height: 1.65;
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-soft);
+    }
+    figcaption .fnum { color: var(--brand); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; margin-right: 8px; }
+
+    /* svg text defaults */
+    svg text { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+    .svg-serif { font-family: 'Noto Serif SC', Georgia, serif; }
+
+    /* ─── Dark interlude ─── */
+    .dark { background: var(--dk-bg); color: var(--dk-ink); padding: 64px 0; margin: 56px 0; }
+    .dark .kicker { color: var(--coral); }
+    .dark h2 { color: var(--dk-ink); }
+    .dark p { color: var(--dk-soft); }
+    .dark .prose strong { color: var(--dk-ink); }
+    .dark .pull { color: var(--dk-ink); border-left-color: var(--coral); }
+    .dark .fig-card { background: var(--dk-surface); border-color: var(--dk-line); box-shadow: none; }
+    .dark figcaption { color: var(--dk-soft); border-top-color: var(--dk-line); }
+
+    /* ─── stat row ─── */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 34px 0; }
+    .stat { background: var(--ivory); border: 1px solid var(--line); border-radius: 14px; padding: 20px 18px; }
+    .stat .big { font-family: 'Noto Serif SC', Georgia, serif; font-size: 30px; font-weight: 600; color: var(--brand); line-height: 1; }
+    .stat .lbl { font-size: 13px; color: var(--ink-3); margin-top: 8px; line-height: 1.5; }
+    .dark .stat { background: var(--dk-surface); border-color: var(--dk-line); }
+    .dark .stat .big { color: var(--coral); }
+    .dark .stat .lbl { color: var(--dk-soft); }
+
+    /* ─── my-take box ─── */
+    .mytake {
+      background: var(--olive-soft);
+      border: 1px solid #dde0cb;
+      border-radius: 20px;
+      padding: 34px 32px;
+      margin: 18px 0;
+    }
+    .mytake .tag { display: inline-block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--olive); margin-bottom: 14px; }
+    .mytake h3 { margin-top: 0; }
+    .mytake p { color: var(--ink-2); }
+    .mytake .row { display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+    .mytake .row:last-child { margin-bottom: 0; }
+    .mytake .row .n { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--olive); color: #fff; font-family: 'Noto Serif SC', serif; font-weight: 600; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+    .mytake .row .t { flex: 1; }
+    .mytake .row .t b { color: var(--ink); }
+    .mytake .row .t p { margin: 4px 0 0; font-size: 15.5px; }
+
+    /* related */
+    .related { border-top: 1px solid var(--line); padding-top: 36px; margin-top: 10px; }
+    .related .rk { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); font-weight: 700; margin-bottom: 16px; }
+    .rcard { display: block; background: var(--ivory); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; transition: border-color .15s, transform .15s; }
+    .rcard:hover { border-color: var(--coral); transform: translateY(-1px); }
+    .rcard .rt { font-family: 'Noto Serif SC', serif; font-weight: 600; color: var(--ink); font-size: 16.5px; margin-bottom: 4px; }
+    .rcard .rd { font-size: 13.5px; color: var(--ink-4); }
+
+    /* footer */
+    footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 30px 0 60px; }
+    footer .wrap-wide { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--ink-4); }
+    footer a { color: var(--brand); }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .hero { padding: 56px 0 18px; }
+      .stats { grid-template-columns: 1fr; }
+      .fig-card { padding: 22px 16px 18px; }
+      .pull { font-size: 21px; padding-left: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap-wide">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">公司可能是一个 300 年的临时实验</span>
+    </div>
+  </div>
+
+  <!-- ───────────── HERO ───────────── -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Ideas · 经济 × 科技 · 图解深读</span>
+      <h1>公司可能是一个<br><span class="accent">300 年</span>的临时实验</h1>
+      <p class="sub serif">公司是工业化的产物。当 AI 把交易成本系统性砍下来，未来或许会向 3–10 人的规模收敛。</p>
+      <div class="credits">
+        <div class="item"><span class="k">Source</span><span class="v">灵感来自花叔的一篇小红书</span></div>
+        <div class="item"><span class="k">Form</span><span class="v">我读后的重述 + 图解</span></div>
+        <div class="item"><span class="k">Filed</span><span class="v">经济 / 科技 · 2026.06</span></div>
+        <div class="item"><span class="k">Read</span><span class="v">约 12 分钟</span></div>
+      </div>
+
+      <div class="sourcenote">
+        独立开发者<strong> 花叔 </strong>写过一篇小红书，把一个我一直隐约在想、却没能说清的问题摆到了台面上：<strong>「公司」作为人类默认的组织形态，到底存在了多久？</strong>他翻完历史和经济学后给的答案是——满打满算，约 300 年。这个数字击中了我。下面是我读完后的重述与图解：我会顺着他的历史线走一遍，配上自己画的逻辑图，再在最后写下我作为一个供应链计划员 + 业余 builder 的批注。
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────── FIGURE 1 · timeline ───────────── -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 300" role="img" aria-label="三段历史时间轴：行会 500 年、公司 300 年、新常态">
+          <!-- baseline -->
+          <line x1="40" y1="170" x2="880" y2="170" stroke="#d8d6cc" stroke-width="2"/>
+          <!-- era bars -->
+          <rect x="40"  y="150" width="370" height="40" rx="8" fill="#eef0e3" stroke="#cdd2b8"/>
+          <rect x="420" y="150" width="280" height="40" rx="8" fill="#f6e7df" stroke="#ecccbb"/>
+          <rect x="710" y="150" width="170" height="40" rx="8" fill="#f3ecda" stroke="#e6d4ab" stroke-dasharray="6 5"/>
+          <!-- era labels -->
+          <text x="225" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#5b6438" class="svg-serif">匠师 · 行会</text>
+          <text x="560" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#b4502f" class="svg-serif">公司</text>
+          <text x="795" y="176" text-anchor="middle" font-size="15" font-weight="700" fill="#9b7327" class="svg-serif">新常态？</text>
+          <!-- durations -->
+          <text x="225" y="130" text-anchor="middle" font-size="13" fill="#6f7a4a" font-weight="700">≈ 500 年</text>
+          <text x="560" y="130" text-anchor="middle" font-size="13" fill="#c96442" font-weight="700">≈ 300 年</text>
+          <text x="795" y="130" text-anchor="middle" font-size="13" fill="#b1822e" font-weight="700">刚刚开始</text>
+          <!-- era sub -->
+          <text x="225" y="214" text-anchor="middle" font-size="12" fill="#87867f">家庭作坊 · 隐性知识师徒相传</text>
+          <text x="560" y="214" text-anchor="middle" font-size="12" fill="#87867f">大规模雇佣 · 内部分工 · 长期资本</text>
+          <text x="795" y="214" text-anchor="middle" font-size="12" fill="#87867f">独立创造者 + AI + 网络</text>
+          <!-- markers -->
+          <g font-size="11.5" fill="#5e5d59">
+            <circle cx="120" cy="170" r="4" fill="#6f7a4a"/>
+            <text x="120" y="258" text-anchor="middle">约 1270</text>
+            <text x="120" y="274" text-anchor="middle" fill="#87867f">行会成熟</text>
+
+            <circle cx="420" cy="170" r="5" fill="#c96442"/>
+            <text x="420" y="258" text-anchor="middle" font-weight="700" fill="#b4502f">1769</text>
+            <text x="420" y="274" text-anchor="middle" fill="#87867f">瓦特专利</text>
+
+            <circle cx="600" cy="170" r="4" fill="#c96442"/>
+            <text x="600" y="258" text-anchor="middle">1937</text>
+            <text x="600" y="274" text-anchor="middle" fill="#87867f">科斯《企业的性质》</text>
+
+            <circle cx="710" cy="170" r="5" fill="#b1822e"/>
+            <text x="712" y="258" text-anchor="middle" font-weight="700" fill="#9b7327">≈ 2022</text>
+            <text x="712" y="274" text-anchor="middle" fill="#87867f">AI agent 起飞</text>
+          </g>
+          <!-- title -->
+          <text x="40" y="44" font-size="19" font-weight="700" fill="#141413" class="svg-serif">人类组织形态的三段史</text>
+          <text x="40" y="68" font-size="12.5" fill="#87867f">公司只是中间那一段——而且是最短的一段</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 1</span>把时钟拉长来看，「公司」既不是自古以来，也不是终点；它是夹在 500 年行会秩序与一个尚未成形的新常态之间、约 300 年的一段。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ───────────── §1 ───────────── -->
+  <section>
+    <div class="wrap prose">
+      <div class="kicker">第一幕 · 公司之前</div>
+      <h2><span class="num">一</span>行会的世界：一张比公司更密的网</h2>
+      <p class="lead-p">先把概念说准。这里说的「公司」是它的<strong>现代形态</strong>——大规模雇佣陌生人、严密的内部分工、长期的资本承诺。东印度公司、梅迪奇银行那种是合伙制特许商号或家族银行，不是同一物种。</p>
+      <p>把时钟拨回去：1769 年瓦特拿到分离冷凝器专利，1776 年装出第一批商用蒸汽机。在那之前，欧洲城市经济主要靠<strong>行会和家庭作坊</strong>。结构很清晰——匠师（master）、帮工（journeyman）、学徒（apprentice）三级。行会解决的，是一个连今天大公司都没解决好的问题：<em>一个人脑子里的隐性知识，怎么传给另一个人。</em></p>
+      <p>关键在于：匠师从来不是「一个人」。他嵌在一张极密的网里——行会管定价、管收徒、管能否跨城开业；教会管伦理；家族管资金继承。这张网比公司更密、更长寿、更不可替代。工业化之前，这套秩序在欧洲跑了大约 <strong>500 年</strong>。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 2 · the master's web -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 420" role="img" aria-label="匠师嵌在行会、教会、家族、城市客户的网里">
+          <text x="40" y="40" font-size="19" font-weight="700" fill="#141413" class="svg-serif">匠师不是「一个人」</text>
+          <text x="40" y="64" font-size="12.5" fill="#87867f">他嵌在一张密网里——这张网，才是真正的组织</text>
+
+          <!-- outer web ring -->
+          <circle cx="300" cy="250" r="150" fill="none" stroke="#cdd2b8" stroke-width="1.5" stroke-dasharray="3 5"/>
+          <!-- center: master -->
+          <circle cx="300" cy="250" r="46" fill="#6f7a4a"/>
+          <text x="300" y="246" text-anchor="middle" font-size="17" font-weight="700" fill="#fff" class="svg-serif">匠师</text>
+          <text x="300" y="266" text-anchor="middle" font-size="10.5" fill="#e4ead0">master</text>
+
+          <!-- three-tier below -->
+          <line x1="300" y1="296" x2="300" y2="332" stroke="#b9c0a0" stroke-width="2"/>
+          <rect x="232" y="332" width="136" height="30" rx="7" fill="#eef0e3" stroke="#cdd2b8"/>
+          <text x="300" y="352" text-anchor="middle" font-size="12.5" fill="#5b6438" font-weight="600">帮工 journeyman</text>
+          <line x1="300" y1="362" x2="300" y2="378" stroke="#b9c0a0" stroke-width="2"/>
+          <rect x="232" y="378" width="136" height="30" rx="7" fill="#f4f5ec" stroke="#d8ddc4"/>
+          <text x="300" y="398" text-anchor="middle" font-size="12.5" fill="#5b6438" font-weight="600">学徒 apprentice</text>
+
+          <!-- web nodes around -->
+          <g font-size="13" font-weight="600">
+            <!-- guild -->
+            <circle cx="300" cy="120" r="34" fill="#fff" stroke="#cdd2b8" stroke-width="1.5"/>
+            <text x="300" y="116" text-anchor="middle" fill="#5b6438">行会</text>
+            <text x="300" y="133" text-anchor="middle" font-size="9.5" fill="#87867f">定价·收徒·准入</text>
+            <line x1="300" y1="154" x2="300" y2="204" stroke="#cdd2b8" stroke-width="1.5"/>
+            <!-- church -->
+            <circle cx="148" cy="200" r="34" fill="#fff" stroke="#cdd2b8" stroke-width="1.5"/>
+            <text x="148" y="196" text-anchor="middle" fill="#5b6438">教会</text>
+            <text x="148" y="213" text-anchor="middle" font-size="9.5" fill="#87867f">伦理</text>
+            <line x1="180" y1="214" x2="258" y2="240" stroke="#cdd2b8" stroke-width="1.5"/>
+            <!-- family -->
+            <circle cx="452" cy="200" r="34" fill="#fff" stroke="#cdd2b8" stroke-width="1.5"/>
+            <text x="452" y="196" text-anchor="middle" fill="#5b6438">家族</text>
+            <text x="452" y="213" text-anchor="middle" font-size="9.5" fill="#87867f">资金继承</text>
+            <line x1="420" y1="214" x2="342" y2="240" stroke="#cdd2b8" stroke-width="1.5"/>
+          </g>
+
+          <!-- right annotation -->
+          <g>
+            <line x1="470" y1="250" x2="560" y2="250" stroke="#d8d6cc" stroke-width="1.5"/>
+            <rect x="560" y="150" width="320" height="200" rx="14" fill="#faf9f5" stroke="#e8e6dc"/>
+            <text x="582" y="186" font-size="14.5" font-weight="700" fill="#141413" class="svg-serif">这张网的特点</text>
+            <g font-size="13" fill="#5e5d59">
+              <text x="582" y="220">· 比公司更<tspan font-weight="700" fill="#5b6438">密</tspan>——管到收徒、定价、跨城</text>
+              <text x="582" y="252">· 比公司更<tspan font-weight="700" fill="#5b6438">长寿</tspan>——跑了约 500 年</text>
+              <text x="582" y="284">· 比公司更<tspan font-weight="700" fill="#5b6438">不可替代</tspan>——它兜底</text>
+              <text x="582" y="324" font-size="12" fill="#87867f">行会 = 隐性知识 + 声誉 + 风险的</text>
+              <text x="582" y="342" font-size="12" fill="#87867f">承载者。记住「兜底」这个词。</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 2</span>真正的组织单位不是匠师个人，而是他身后那张由行会、教会、家族编织的网。它替个人兜底——这一点，是后面整篇文章的暗线。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ───────────── §2 ───────────── -->
+  <section>
+    <div class="wrap prose">
+      <div class="kicker">第二幕 · 公司的诞生</div>
+      <h2><span class="num">二</span>公司，是工业化的副作用</h2>
+      <p>为什么 1769 年之后变了？花叔的理解很有意思：<strong>工业化最大的副作用，是让市场交易成本急剧上升。</strong></p>
+      <p>匠师作坊能跑，是因为规模小、协作链短、技术稳定。蒸汽机来了之后，三关都过不去——</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 3 · three gates -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 360" role="img" aria-label="工业化抬高交易成本的三关：规模、资本、信任，催生公司这个容器">
+          <text x="40" y="40" font-size="19" font-weight="700" fill="#141413" class="svg-serif">市场过不去的三关</text>
+          <text x="40" y="64" font-size="12.5" fill="#87867f">蒸汽机之后，「每天早上去市场喊一声」不再可行</text>
+
+          <!-- three gates -->
+          <g>
+            <!-- gate 1 scale -->
+            <rect x="40" y="100" width="220" height="150" rx="14" fill="#faf9f5" stroke="#e8e6dc"/>
+            <circle cx="76" cy="138" r="16" fill="#f6e7df"/><text x="76" y="143" text-anchor="middle" font-size="15" fill="#c96442" font-weight="700">规</text>
+            <text x="102" y="135" font-size="15" font-weight="700" fill="#141413">规模</text>
+            <text x="102" y="153" font-size="11" fill="#87867f">Scale</text>
+            <text x="62" y="190" font-size="12.5" fill="#5e5d59">没法每天早上去市场喊</text>
+            <text x="62" y="210" font-size="12.5" fill="#5e5d59">「今天要 200 个会开</text>
+            <text x="62" y="230" font-size="12.5" fill="#5e5d59">蒸汽机的人」。</text>
+          </g>
+          <g>
+            <!-- gate 2 capital -->
+            <rect x="290" y="100" width="220" height="150" rx="14" fill="#faf9f5" stroke="#e8e6dc"/>
+            <circle cx="326" cy="138" r="16" fill="#f6e7df"/><text x="326" y="143" text-anchor="middle" font-size="15" fill="#c96442" font-weight="700">资</text>
+            <text x="352" y="135" font-size="15" font-weight="700" fill="#141413">资本</text>
+            <text x="352" y="153" font-size="11" fill="#87867f">Capital</text>
+            <text x="312" y="190" font-size="12.5" fill="#5e5d59">铁路、电报、流水线都</text>
+            <text x="312" y="210" font-size="12.5" fill="#5e5d59">不便宜，回本好几年——</text>
+            <text x="312" y="230" font-size="12.5" fill="#5e5d59">人、设备、料、销路要锁住。</text>
+          </g>
+          <g>
+            <!-- gate 3 trust -->
+            <rect x="540" y="100" width="220" height="150" rx="14" fill="#fdf6f2" stroke="#ecccbb"/>
+            <circle cx="576" cy="138" r="16" fill="#c96442"/><text x="576" y="143" text-anchor="middle" font-size="15" fill="#fff" font-weight="700">信</text>
+            <text x="602" y="135" font-size="15" font-weight="700" fill="#141413">信任</text>
+            <text x="602" y="153" font-size="11" fill="#b4502f" font-weight="600">最关键</text>
+            <text x="562" y="190" font-size="12.5" fill="#5e5d59">know-how 真正值钱，</text>
+            <text x="562" y="210" font-size="12.5" fill="#5e5d59">一旦被人跳槽带走就废了；</text>
+            <text x="562" y="230" font-size="12.5" fill="#5e5d59">行会被打碎，声誉机制失灵。</text>
+          </g>
+
+          <!-- arrow -->
+          <text x="810" y="180" text-anchor="middle" font-size="30" fill="#c96442">→</text>
+
+          <!-- container -->
+          <rect x="40" y="278" width="840" height="58" rx="14" fill="#141413"/>
+          <text x="64" y="305" font-size="14.5" font-weight="700" fill="#faf9f5" class="svg-serif">于是「公司」被发明出来：</text>
+          <text x="64" y="324" font-size="13" fill="#b0aea5">一个能在匿名社会里，重新制造「长期信任」的容器。雇佣关系的本质，是一份承诺机制。</text>
+          <text x="858" y="316" text-anchor="end" font-size="12" fill="#d97757" font-weight="600">容器</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 3</span>规模、资本、信任三关里，信任是核心。公司不是为了「更有效率」而生，而是为了在一个挤满陌生人的城市里，重新造出行会曾经提供的那种长期信任。</figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="wrap prose">
+      <p><strong>信任这一关最关键。</strong>技术 know-how 在工业革命后真正值钱，一旦工艺被人跳槽带走，你就废了。匠师时代有行会兜底，但工业化打碎了行会，城市涌入大量陌生人，传统声誉机制失灵。于是「公司」被发明出来——<em>它是一个能在匿名社会里重新制造长期信任的容器。</em>雇佣关系的本质是承诺机制：我给你稳定收入，你给我稳定产出、保密、不带 know-how 跳槽。</p>
+      <p>时间表为证：标准石油 1870、贝尔电话 1877、福特 1903、通用 1908；福特 T 型车到 1927 年共产 1500 万辆。从蒸汽机到「公司成为默认形态」全面铺开，差不多用了一个多世纪。</p>
+      <div class="stats">
+        <div class="stat"><div class="big">1769</div><div class="lbl">瓦特拿到分离冷凝器专利，工业化起点</div></div>
+        <div class="stat"><div class="big">≈ 100 年</div><div class="lbl">从蒸汽机到「公司」成为默认形态全面铺开</div></div>
+        <div class="stat"><div class="big">1500 万</div><div class="lbl">福特 T 型车到 1927 年的累计产量</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── §3 DARK · Coase ───────────── -->
+  <div class="dark">
+    <div class="wrap prose">
+      <div class="kicker">第三幕 · 一把双向的尺子</div>
+      <h2><span class="num">三</span>科斯：公司的边界在哪？</h2>
+      <p>1937 年，经济学家罗纳德·科斯写了《企业的性质》（<em style="color:var(--coral)">The Nature of the Firm</em>）。教科书说市场是最有效的资源配置，但科斯看到真实世界里的大公司内部根本不靠价格调度——工头说怎么干就怎么干，工人不会每天跟老板谈新价。</p>
+      <p>他问了一个朴素问题：<strong>如果市场这么牛，公司为什么存在？</strong></p>
+      <p>答案：因为<strong>用市场也有成本</strong>——找谁、谈价、签合同、监督执行、出问题打官司，这些都是真实成本。如果这些成本太高，把活动搬进公司内部反而更便宜。公司的边界，就落在「内部协调成本 = 市场交易成本」的那个点上。</p>
+    </div>
+    <div class="wrap-wide">
+      <figure>
+        <div class="fig-card">
+          <svg viewBox="0 0 920 340" role="img" aria-label="科斯的边界：内部协调成本与市场交易成本的天平">
+            <text x="40" y="42" font-size="19" font-weight="700" fill="#faf9f5" class="svg-serif">公司的边界 = 两种成本相等的那个点</text>
+            <text x="40" y="66" font-size="12.5" fill="#b0aea5">科斯这把尺子最厉害的地方：它是双向的</text>
+
+            <!-- fulcrum -->
+            <polygon points="460,250 430,300 490,300" fill="#d97757"/>
+            <rect x="380" y="300" width="160" height="10" rx="4" fill="#30302e"/>
+            <!-- beam (balanced) -->
+            <rect x="150" y="200" width="620" height="12" rx="6" fill="#b0aea5" transform="rotate(0 460 206)"/>
+            <line x1="460" y1="206" x2="460" y2="250" stroke="#b0aea5" stroke-width="4"/>
+
+            <!-- left pan -->
+            <line x1="230" y1="206" x2="230" y2="150" stroke="#5a5a56" stroke-width="2"/>
+            <rect x="120" y="110" width="220" height="44" rx="10" fill="#1e1e1c" stroke="#30302e"/>
+            <text x="230" y="130" text-anchor="middle" font-size="13.5" font-weight="700" fill="#faf9f5">放进公司内部</text>
+            <text x="230" y="147" text-anchor="middle" font-size="11" fill="#b0aea5">内部协调成本</text>
+
+            <!-- right pan -->
+            <line x1="690" y1="206" x2="690" y2="150" stroke="#5a5a56" stroke-width="2"/>
+            <rect x="580" y="110" width="220" height="44" rx="10" fill="#1e1e1c" stroke="#30302e"/>
+            <text x="690" y="130" text-anchor="middle" font-size="13.5" font-weight="700" fill="#faf9f5">用市场</text>
+            <text x="690" y="147" text-anchor="middle" font-size="11" fill="#b0aea5">交易成本：找·谈·签·盯·告</text>
+
+            <!-- fulcrum label -->
+            <text x="460" y="330" text-anchor="middle" font-size="12.5" fill="#d97757" font-weight="700">← 公司的边界 →</text>
+
+            <!-- bidirectional note -->
+            <text x="40" y="295" font-size="12" fill="#b0aea5">市场成本↑</text>
+            <text x="40" y="313" font-size="12" fill="#b0aea5">→ 公司变大</text>
+            <text x="880" y="295" text-anchor="end" font-size="12" fill="#9fe870" font-weight="700">市场成本↓</text>
+            <text x="880" y="313" text-anchor="end" font-size="12" fill="#9fe870" font-weight="700">→ 公司应当缩小</text>
+          </svg>
+        </div>
+        <figcaption><span class="fnum">图 4</span>科斯的工具是一把双向的尺子。它既解释了公司为什么会变大（市场成本太高），也内含了一个逆命题：<strong style="color:#faf9f5">如果哪天市场交易成本系统性下降到比内部还低，公司就应该缩小。</strong></figcaption>
+      </figure>
+    </div>
+    <div class="wrap prose">
+      <p class="pull">科斯 1991 年才拿诺奖，2013 年去世。但他的工具，到 AI 时代忽然变得锋利。<span class="who">—— 这把尺子一直都在，只是缺一个让市场成本暴跌的技术</span></p>
+    </div>
+  </div>
+
+  <!-- ───────────── §4 AI ───────────── -->
+  <section>
+    <div class="wrap prose">
+      <div class="kicker">第四幕 · 尺子开始反向走</div>
+      <h2><span class="num">四</span>AI 来了：交易成本被系统性砍下来</h2>
+      <p>花叔做独立开发者三年最直观的感受：<strong>AI 正在系统性地把市场交易成本砍下来。</strong>过去十几二十人才能做的事，现在一个人加一组 AI agent 就能做——代码交给 Cursor、Claude Code 和各种 agent，产品分析、商业计划、财务建模、投放、客服也都能交出去。</p>
+      <p>他不是个例。Anthropic 5 月发布的《创始人手册》（<em>The Founder's Playbook</em>）35 页都在描绘「10 人独角兽」。注意是「10 人」不是「1 人」：Midjourney 2022 年起步只有 11 人，到 2026 也才约 100–200 人，估值破百亿、年收入冲 5 亿美元，人均贡献超 500 万美元——但核心团队始终是十几个人。</p>
+      <h3>为什么是 3–10 人，而不是 1 个人？</h3>
+      <p>回到信任那条线。AI 让协调、搜索、执行都便宜了，但有一件事 AI 没让它变便宜——<em>长期承诺</em>。agent 能跑 70% 的活，但你需要有人和你一起熬三年、为同一个愿景拒掉别的机会、在你心态崩了时顶住。这是 agent 做不到的，只能找人，而且这种人不多。<strong>承诺是稀缺的，没法批量生产。</strong></p>
+    </div>
+  </section>
+
+  <!-- FIGURE 5 · reverse Coase / convergence -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 380" role="img" aria-label="AI 砍下交易成本，公司规模沿曲线下降，但被承诺这条地板拦在 3 到 10 人">
+          <text x="40" y="40" font-size="19" font-weight="700" fill="#141413" class="svg-serif">公司收敛，但不会收敛到 1</text>
+          <text x="40" y="64" font-size="12.5" fill="#87867f">交易成本下降推着规模往下走，「承诺」是 AI 砍不动的地板</text>
+
+          <!-- axes -->
+          <line x1="90" y1="110" x2="90" y2="320" stroke="#d8d6cc" stroke-width="1.5"/>
+          <line x1="90" y1="320" x2="860" y2="320" stroke="#d8d6cc" stroke-width="1.5"/>
+          <text x="70" y="120" text-anchor="end" font-size="11.5" fill="#87867f" class="svg-serif">公司</text>
+          <text x="70" y="135" text-anchor="end" font-size="11.5" fill="#87867f" class="svg-serif">规模</text>
+          <text x="855" y="342" text-anchor="end" font-size="11.5" fill="#87867f">AI 把交易成本越砍越低 →</text>
+
+          <!-- declining curve -->
+          <path d="M 110 130 C 280 150, 360 250, 520 280 C 640 300, 720 300, 840 300" fill="none" stroke="#c96442" stroke-width="3.5"/>
+          <!-- start blob (big firm) -->
+          <circle cx="120" cy="132" r="26" fill="#f6e7df" stroke="#ecccbb"/>
+          <text x="120" y="129" text-anchor="middle" font-size="10.5" fill="#b4502f" font-weight="700">大公司</text>
+          <text x="120" y="143" text-anchor="middle" font-size="9" fill="#c96442">数百~数千人</text>
+
+          <!-- floor line -->
+          <line x1="90" y1="300" x2="860" y2="300" stroke="#b1822e" stroke-width="2" stroke-dasharray="7 5"/>
+          <text x="858" y="293" text-anchor="end" font-size="12" fill="#9b7327" font-weight="700">承诺地板 · AI 砍不动</text>
+
+          <!-- end cluster 3-10 -->
+          <g>
+            <circle cx="788" cy="300" r="5.5" fill="#c96442"/>
+            <circle cx="806" cy="294" r="5.5" fill="#c96442"/>
+            <circle cx="806" cy="306" r="5.5" fill="#c96442"/>
+            <circle cx="822" cy="300" r="5.5" fill="#d97757"/>
+            <text x="806" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#b4502f" class="svg-serif">3–10 人</text>
+          </g>
+
+          <!-- what AI absorbs vs not -->
+          <rect x="120" y="190" width="200" height="92" rx="12" fill="#faf9f5" stroke="#e8e6dc"/>
+          <text x="140" y="216" font-size="12.5" font-weight="700" fill="#5b6438">AI 让它变便宜</text>
+          <text x="140" y="240" font-size="12" fill="#5e5d59">搜索 · 协调 · 执行</text>
+          <text x="140" y="262" font-size="11.5" fill="#87867f">research / coding / design</text>
+          <text x="140" y="278" font-size="11.5" fill="#87867f">运营 都有 agent</text>
+
+          <rect x="560" y="120" width="220" height="92" rx="12" fill="#fdf6f2" stroke="#ecccbb"/>
+          <text x="580" y="146" font-size="12.5" font-weight="700" fill="#b4502f">AI 没让它变便宜</text>
+          <text x="580" y="170" font-size="12" fill="#5e5d59">长期承诺：和你熬三年、</text>
+          <text x="580" y="190" font-size="12" fill="#5e5d59">拒掉别的机会、在你崩</text>
+          <text x="580" y="204" font-size="12" fill="#5e5d59">的时候顶住——只能找人</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 5</span>把图 4 的尺子反过来用：AI 让市场成本暴跌，公司规模沿曲线一路下滑——但不会滑到 1，因为「承诺」这条地板 AI 砍不动。更准确的预言不是「公司消失」，而是规模快速向 <strong>3–10 人</strong> 的新平衡点收敛。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ───────────── §5 ───────────── -->
+  <section>
+    <div class="wrap prose">
+      <div class="kicker">第五幕 · 工匠回来了</div>
+      <h2><span class="num">五</span>独立工匠回来了，只是换了套工具</h2>
+      <p class="lead-p">今天的「一人公司」「独立开发者」，本质上是 18 世纪那个「独立匠师」的现代变奏。结构惊人地相似——只是中间那个庞然大物（公司）不见了。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 6 · master vs indie -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 330" role="img" aria-label="18 世纪匠师与 21 世纪独立开发者的结构对照，中间的公司缺席">
+          <text x="40" y="40" font-size="19" font-weight="700" fill="#141413" class="svg-serif">同一种结构，跨越三个世纪</text>
+
+          <!-- left card: 18c master -->
+          <rect x="40" y="70" width="330" height="230" rx="16" fill="#eef0e3" stroke="#cdd2b8"/>
+          <text x="64" y="104" font-size="15" font-weight="700" fill="#5b6438" class="svg-serif">18 世纪 · 匠师</text>
+          <g font-size="13.5" fill="#41471f">
+            <text x="64" y="142">🔨　锤子 · 工坊</text>
+            <text x="64" y="178">👥　几个学徒</text>
+            <text x="64" y="214">🏙　城市里的客户网络</text>
+            <text x="64" y="250">🛡　行会兜底</text>
+          </g>
+          <text x="64" y="284" font-size="11.5" fill="#6f7a4a">自给自足 · 自负盈亏</text>
+
+          <!-- right card: 21c indie -->
+          <rect x="550" y="70" width="330" height="230" rx="16" fill="#f6e7df" stroke="#ecccbb"/>
+          <text x="574" y="104" font-size="15" font-weight="700" fill="#b4502f" class="svg-serif">21 世纪 · 独立开发者</text>
+          <g font-size="13.5" fill="#7a3b22">
+            <text x="574" y="142">💻　Claude Code · MacBook</text>
+            <text x="574" y="178">🤖　一组 AI agent</text>
+            <text x="574" y="214">🌐　GitHub 上的开源协作网</text>
+            <text x="574" y="250" fill="#b4502f">🛡　行会？——没有</text>
+          </g>
+          <text x="574" y="284" font-size="11.5" fill="#c96442">自给自足 · 自负盈亏</text>
+
+          <!-- middle: company absent -->
+          <g>
+            <rect x="392" y="140" width="136" height="90" rx="14" fill="#faf9f5" stroke="#d8d6cc" stroke-dasharray="6 5"/>
+            <line x1="404" y1="152" x2="516" y2="218" stroke="#cf8f7d" stroke-width="2.5"/>
+            <line x1="516" y1="152" x2="404" y2="218" stroke="#cf8f7d" stroke-width="2.5"/>
+            <text x="460" y="178" text-anchor="middle" font-size="14" font-weight="700" fill="#a8a69c" class="svg-serif">公司</text>
+            <text x="460" y="200" text-anchor="middle" font-size="10.5" fill="#a8a69c">那个庞然大物</text>
+            <text x="460" y="258" text-anchor="middle" font-size="12" fill="#c96442" font-weight="700">不存在了</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 6</span>工具变了——锤子换成 Claude Code，学徒换成 agent，城市客户网换成 GitHub——但结构没变：一个独立的人 + 一组工具 + 一个网络。唯独中间那个「公司」被抽掉了。注意右下角那个空缺：<strong>匠师有行会兜底，今天的独立开发者没有。</strong></figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="wrap prose">
+      <p>花叔自己就是活例子：2024 年底做「小猫补光灯」，第一版用 Cursor 花了 1 小时，后来冲上 App Store 付费榜 Top 1，被人民日报、央视报道；做《Claude Code 橙皮书》登上微信读书热榜第一；做女娲 skill，GitHub 20000+ star。这些放在 10 年前，每一件都需要一个团队。</p>
+      <p>但他诚实地泼了盆冷水：<strong>这事可能没那么好复制。</strong>中世纪匠师有行会兜底；他能这么干三年，靠的是过去十几年积累的声誉资本、判断力、品味，加上相对宽松的家庭条件——这些 AI 给不了，而且分布极不均匀。</p>
+      <p class="pull">形态在复归，不等于条件在复归。匠师有行会兜底，今天的独立开发者没有——这件事谁来解决，他也不知道。</p>
+      <p>所以「未来人人都是独立创造者」这个预言太顺滑了。更可能的图景是：<strong>少数有声誉资本和品味的人比以前更自由，大多数没有这些资本的人反而更脆弱</strong>——因为公司退场不只带走了「打工」，也带走了它附带的保护：稳定工资、医保、技能培训、抱团议价。</p>
+    </div>
+  </section>
+
+  <!-- ───────────── §6 ───────────── -->
+  <section>
+    <div class="wrap prose">
+      <div class="kicker">第六幕 · 更深的那层</div>
+      <h2><span class="num">六</span>比「公司消失」更大的，是「员工」消失</h2>
+      <p>「公司作为默认组织形态」可能是 300 年的临时实验——但更深一层，<strong>「员工」这个心智模型本身，也是 300 年的临时产物。</strong></p>
+      <p>公司这种形态，训练了几代人怎么想自己：你的身份是「员工 / 老板 / manager / 下属 / 同事」；时间被切成「上班 / 下班」；人生被切成「在职 / 失业」；价值被「工资 / 年终奖」量化；圈子是「办公室」，归属感来自「组织」，伦理标准是「职业」。这套语言不是自古以来的，是工业化教给我们的——而且训练得太成功，成功到我们以为它就是「人怎么工作」本身。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 7 · vocabulary -> identity vacuum -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 330" role="img" aria-label="工业化教给我们的一整套词汇，在公司退潮后留下身份真空">
+          <text x="40" y="40" font-size="19" font-weight="700" fill="#141413" class="svg-serif">公司退潮，带走的是一整套语言</text>
+
+          <!-- left: vocab -->
+          <rect x="40" y="70" width="330" height="232" rx="16" fill="#faf9f5" stroke="#e8e6dc"/>
+          <text x="64" y="102" font-size="13.5" font-weight="700" fill="#5e5d59">工业化教给我们的词汇</text>
+          <g font-size="13" fill="#3d3d3a">
+            <text x="64" y="136">身份：员工 / 老板 / 下属 / 同事</text>
+            <text x="64" y="166">时间：上班 / 下班</text>
+            <text x="64" y="196">人生：在职 / 失业</text>
+            <text x="64" y="226">价值：工资 / 年终奖</text>
+            <text x="64" y="256">圈子：办公室 / 组织</text>
+            <text x="64" y="286">伦理：职业</text>
+          </g>
+
+          <!-- arrow -->
+          <text x="460" y="180" text-anchor="middle" font-size="13" fill="#87867f">公司退潮</text>
+          <text x="460" y="206" text-anchor="middle" font-size="32" fill="#c96442">→</text>
+
+          <!-- right: identity vacuum -->
+          <rect x="550" y="70" width="330" height="232" rx="16" fill="#f3ecda" stroke="#e6d4ab"/>
+          <text x="574" y="102" font-size="13.5" font-weight="700" fill="#9b7327">身份真空</text>
+          <text x="715" y="170" text-anchor="middle" font-size="60" fill="#d9b86a" class="svg-serif">?</text>
+          <g font-size="12.5" fill="#7a6322">
+            <text x="574" y="222">没上班，但没失业</text>
+            <text x="574" y="246">交了税，但没雇主</text>
+            <text x="574" y="270">签的不是劳动合同，</text>
+            <text x="574" y="290">是按贡献分账的松散协议</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 7</span>花叔自己：三年没上班，但没失业；做的事不少，但没「职业」可描述；和合作者签的是松散的分账协议；半开玩笑地用「老板」指 Claude。这些词都不顺——他现在没法用现成的语言描述自己是什么。<strong>公司退潮带来的不是失业潮，是身份真空。</strong></figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="wrap prose">
+      <p>如果公司变小变少，这套语言会一起退场，而新的语言还没长出来。他猜这件事未来 10 年会很普遍：不是工作消失了，是我们<em>理解工作的语言要重写</em>——因为人的心智模型，才是最难改的东西。</p>
+    </div>
+  </section>
+
+  <!-- ───────────── §7 ───────────── -->
+  <section>
+    <div class="wrap prose">
+      <div class="kicker">第七幕 · 回到那个问题</div>
+      <h2><span class="num">七</span>什么会变小，什么仍然合理</h2>
+      <p>「公司」到底存在多久？现在的答案：作为人类经济活动的默认形态，大概 300 年；在这之前 500 年常态是匠师和行会；300 年之后，我们可能正进入一个新常态——<strong>独立创造者 + AI + 全球网络，加一些还没长出来的新型协作关系。</strong></p>
+      <p>公司不会一夜消失。区别在于一件事的<em>底层属性</em>：</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 8 · shrink vs stay -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 920 320" role="img" aria-label="软件媒体设计等会快速变小，重资产强监管长期资本的行业仍然合理">
+          <text x="40" y="40" font-size="19" font-weight="700" fill="#141413" class="svg-serif">分水岭：重资产 · 强监管 · 长期资本承诺</text>
+
+          <!-- left: shrinks -->
+          <rect x="40" y="70" width="400" height="220" rx="16" fill="#f6e7df" stroke="#ecccbb"/>
+          <text x="64" y="104" font-size="15" font-weight="700" fill="#b4502f" class="svg-serif">会快速变小 ↓</text>
+          <text x="64" y="126" font-size="11.5" fill="#c96442">过去靠堆人头的领域</text>
+          <g font-size="13.5" fill="#7a3b22">
+            <text x="64" y="162">软件 · 媒体 · 设计</text>
+            <text x="64" y="194">咨询 · 教育 · 内容</text>
+            <text x="64" y="226">研究 · 营销</text>
+          </g>
+          <text x="64" y="268" font-size="12" fill="#c96442">认知与协调成本被 AI 砍穿</text>
+
+          <!-- right: stays -->
+          <rect x="480" y="70" width="400" height="220" rx="16" fill="#eef0e3" stroke="#cdd2b8"/>
+          <text x="504" y="104" font-size="15" font-weight="700" fill="#5b6438" class="svg-serif">仍然合理 →</text>
+          <text x="504" y="126" font-size="11.5" fill="#6f7a4a">重资产 / 强监管 / 长期资本</text>
+          <g font-size="13.5" fill="#41471f">
+            <text x="504" y="162">造芯片 · 修地铁</text>
+            <text x="504" y="194">开银行 · 运营核电站</text>
+          </g>
+          <text x="504" y="240" font-size="12" fill="#6f7a4a">这些事的协调与承诺成本</text>
+          <text x="504" y="258" font-size="12" fill="#6f7a4a">不会因为 AI 就塌下来</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 8</span>软件、媒体、设计、咨询、教育、内容、研究、营销——这些过去靠堆人头的领域，公司会快速变小；造芯片、修地铁、开银行、运营核电站——这些重资产、强监管、需要长期资本承诺的事，公司仍然合理。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ───────────── DARK closing ───────────── -->
+  <div class="dark">
+    <div class="wrap prose">
+      <div class="kicker">尾声</div>
+      <h2>「你的行会在哪儿？」</h2>
+      <p>花叔设想：如果一个 14 世纪佛罗伦萨的金匠看到他现在的样子，会不会觉得熟悉？会熟悉一半——同样是一个独立的人、一组工具、一个网络，自给自足、自负盈亏。但金匠大概会问他一句——</p>
+      <p class="pull" style="font-size:clamp(26px,4vw,40px)">「你的行会在哪儿？」<span class="who">—— 他答不出来。</span></p>
+      <p>「公司」是工业化为了解决一个具体问题而被发明的临时容器。它服役了 300 年，正在退潮。新的形态是什么、「一人公司」是不是答案，他说不知道。也许这个问题本就没有标准答案，答案该由一群人探索和书写出来。他挺喜欢这种不确定的、充满可能性的未来——希望你也是。</p>
+    </div>
+  </div>
+
+  <!-- ───────────── MY TAKE ───────────── -->
+  <section>
+    <div class="wrap">
+      <div class="mytake">
+        <span class="tag">我的批注 · Gimbo</span>
+        <h3>读完之后，我自己想补三点</h3>
+        <p style="margin-bottom:22px">我把这篇收进来，是因为它给了我一个一直缺的历史尺度：我平时在「AI 原生公司」这条线上来回想，但很少把它放回 800 年的组织演化里看。作为一个供应链计划员 + 业余 builder，我有三点想接着说：</p>
+        <div class="row">
+          <div class="n">1</div>
+          <div class="t"><b>「行会兜底」才是真正的题眼。</b><p>整篇最打动我的不是「公司会变小」，而是那个反复出现的暗线：行会替个人兜底，公司也替个人兜底（医保、稳定工资、抱团议价），而独立创造者两头都没有。所以真问题不是「要不要做一人公司」，而是<b>新的「行会」由谁来重建</b>——是平台、是 DAO、是某种创作者工会，还是一套新的社会保障？这块是空的，谁补上谁定义下一个时代。</p></div>
+        </div>
+        <div class="row">
+          <div class="n">2</div>
+          <div class="t"><b>不是所有环节都「认知化」了——我这行就是反例。</b><p>科斯的尺子在软件里反向走得很快，但我每天在做的供应链，<b>实物还在那里</b>：货要搬、关系要维护、钱和异常要有人负责。这恰好对上图 8 的右栏。我之前那篇「用 AI Agent 运营一家公司」的结论也是同一个——agent 跑 happy path，人当 exception owner。AI 砍的是协调成本，砍不动的是物理世界和最后的问责。</p></div>
+        </div>
+        <div class="row">
+          <div class="n">3</div>
+          <div class="t"><b>「身份真空」这件事，我已经站在里面了。</b><p>白天我是计划员（典型的「员工」语言），晚上我做的东西没有一个现成词能描述。花叔说「没法用现成语言描述自己是什么」——这句我太有共鸣。这也正是我做这个网站的原因：与其等新语言长出来，不如<b>自己先把人生当成一个 OS 来运营</b>，先用产出定义自己，而不是用职位。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- related -->
+  <section>
+    <div class="wrap">
+      <div class="related">
+        <div class="rk">专辑 · 公司的形态</div>
+        <a class="rcard" href="/ideas/few-person-company.html">
+          <div class="rt">不是一人公司，是几个人的公司 · OPC 的真实形态 →</div>
+          <div class="rd">同一专辑的另一面：Gumroad 创始人 Sahil Lavingia 说，极简不是把人减到 0，而是减到刚好还能保证体验的那几个——正好对上这篇「向 3–10 人收敛」的落点。</div>
+        </a>
+        <div class="rk" style="margin-top:30px">延伸阅读</div>
+        <a class="rcard" href="/ideas/ai-agent-company.html">
+          <div class="rt">用 AI Agent 运营一家公司 · Distributor 的 Agent 原生架构</div>
+          <div class="rd">一张架构图：Agent 跑 happy path，人当 exception owner，守住搬实物·维护关系·对钱负责三件事。</div>
+        </a>
+        <a class="rcard" href="/ideas/write-loops-not-code.html">
+          <div class="rt">连「品味」也不再是人类独有 · Boris Cherny 聊 Claude Code</div>
+          <div class="rd">工程师从「写代码」变成「写 Loop」，留给人的是教模型成为一个好模型的价值观。</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap-wide">
+      <span>灵感来自花叔的一篇小红书 · 本页为我读后的重述与图解</span>
+      <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe · <a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

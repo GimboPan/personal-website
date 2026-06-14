@@ -52,9 +52,30 @@ export const seriesDefs: SeriesDef[] = [
     description:
       '一条进行中的线:从一个分销商沙盘出发,问到「AI 原生公司是什么」,再把愿景拧回地面——缩微模型、能跑的 Action Center、模拟 ERP 上的断言,最后接上真实工作的火线。信念 → 证据 → 信任,每一步都留一篇记录。',
   },
+  {
+    slug: 'company-form',
+    label: '公司的形态',
+    sub: 'The Shape of the Company',
+    description:
+      '公司不是永恒的。AI 把交易成本砍下来之后,这个工业化容器会变成什么样?一条追问公司形态的线:从「一人公司是不是真的」(真要把体验做好,最后大概是几个人),到把镜头拉到 800 年尺度——公司可能只是工业化的一段临时实验,正向 3–10 人收敛。它从哪来、会不会变小、退场之后留下什么。',
+  },
 ];
 
 export const articles: IdeaArticle[] = [
+  {
+    index: '11',
+    title: '公司可能是一个 300 年的临时实验 · 公司形态的过去与下一站 · 图解深读',
+    lede: '独立开发者花叔的一篇小红书把一个我一直没想清的问题摆上台面:「公司」作为人类默认的组织形态,到底存在了多久?他翻完历史和经济学后给的答案是——满打满算,约 300 年。这是我读后的重述 + 自己画的 8 张逻辑图:从行会的 500 年(匠师嵌在一张行会·教会·家族的密网里,这张网替个人兜底)、到工业化抬高交易成本的三关(规模·资本·信任)催生了「公司」这个在匿名社会重造长期信任的容器、到科斯 1937 年那把双向的尺子(公司边界 = 内部协调成本 = 市场交易成本),最后把尺子反过来用:AI 系统性砍下交易成本,公司规模沿曲线下滑——但被「承诺」这条 AI 砍不动的地板拦在 3–10 人。结构在向 18 世纪的独立匠师复归,但匠师有行会兜底,今天的独立开发者没有。比「公司消失」更大的,是「员工」这个心智模型的消失——身份真空。结尾那句金匠的发问:「你的行会在哪儿?」我答不出来。附我作为供应链计划员 + builder 的三点批注。',
+    date: '2026.06',
+    tags: ['Economy', 'Tech'],
+    topicSlug: 'economy',
+    topics: ['economy', 'tech'],
+    href: '/ideas/company-300-year-experiment.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'company-form',
+    art: { motif: 'spiral', accent: '#ffd11a', seed: 11 },
+  },
   {
     index: '10',
     title: '两次模拟,一条火线 · 从「公司是什么」到「周五选供应商」 · 复盘',
@@ -106,6 +127,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/few-person-company.html',
     status: 'live',
     isNew: true,
+    seriesSlug: 'company-form',
     art: { motif: 'team', accent: '#38c8ff', seed: 7 },
   },
   {

@@ -6,6 +6,24 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.4.0] — 2026-06-14 · Ideas: 「公司是 300 年的临时实验」图解深读 (Claude-editorial)
+
+> **A content session.** Turns a 小红书 essay by independent developer 花叔 — *「公司」作为人类默认组织形态到底存在多久?* (his answer: ~300 years) — into an original 图解深读 reframed in my own voice. First Ideas piece deliberately rendered in the **Claude (Anthropic) editorial** design system (warm parchment, Noto Serif SC headlines, terracotta accent, ring shadows, light/dark chapter alternation) rather than the site-default Wise-Dark — the content (economic history + Coase + AI) suits the literary treatment.
+
+### Added — Ideas
+
+- **公司可能是一个 300 年的临时实验** (`/ideas/company-300-year-experiment.html`, index 11) — a retelling + 8 hand-built inline-SVG logic diagrams walking the argument: 三段史时间轴 (行会 500y → 公司 300y → 新常态) · 匠师嵌在行会·教会·家族的密网里 · 工业化抬高交易成本的三关 (规模·资本·信任) → 公司作为重造长期信任的容器 · 科斯 1937 那把**双向**的尺子 (公司边界 = 内部协调成本 = 市场交易成本) · 把尺子反过来用 (AI 砍交易成本 → 规模沿曲线下滑,被「承诺」地板拦在 3–10 人) · 18 世纪匠师 vs 21 世纪独立开发者结构对照 (中间的公司缺席) · 旧词汇 → 身份真空 · 什么变小 vs 什么仍合理. Source credited to 花叔 (灵感来源), framed as my reading; ends with a 三点「我的批注」box. Filed Economy + Tech (cross-cutting `topics`).
+
+- **New Series (专辑): 公司的形态 / The Shape of the Company** — second series added to `seriesDefs`. Groups the new piece with **不是一人公司,是几个人的公司** (`few-person-company.html`, index 07) via `seriesSlug: 'company-form'` on both. The two are the same question from opposite ends: "is the one-person company real (→ a few people)" and "is the company itself only a 300-year experiment (→ converging to 3–10)". Shows as its own card under Topics on `/ideas`; counts derive automatically.
+- **Mutual cross-links** — `company-300-year-experiment.html` now has a "专辑 · 公司的形态" related card pointing to `few-person-company.html`; `few-person-company.html` gains a matching "专辑 · 公司的形态" block (Wise-Dark inline styles) pointing back. Each piece links to the other.
+
+### Notes
+
+- **Design-system exception, on purpose** — the site standard is Wise-Dark and all prior `/ideas` deep-reads use it; this one uses Claude-editorial at the user's explicit request. The /ideas list thumbnail still renders in the Wise-Dark list style (`art.motif: 'spiral'`, accent `#ffd11a`) so the catalog stays visually coherent.
+- **Three red lines clean** — no company names (花叔 is a public independent developer; Anthropic/Midjourney/Ford etc. are public companies referenced, not the user's employers/clients), no private friend/colleague names, no personal financial figures.
+
+---
+
 ## [1.3.0] — 2026-06-13 · Life gets a cinematic video hero (live: f705132)
 
 > **A one-feature design session.** Sparked by a motion-design reference, the Life hero moves from a static AI painting to a code-driven **cinematic video hero** — full-bleed background video, bottom-only frosted blur, liquid-glass buttons, staggered entrance. The reference clip (two monoliths with sunset light through the gap, a path leading toward it) reads as *a threshold / the long view*, which is why it landed on Life rather than the AI Builder page it was first prototyped on. Built, previewed, and shipped to gimbo.co.nz.

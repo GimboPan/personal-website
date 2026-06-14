@@ -6,6 +6,16 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.5.1] — 2026-06-15 · Ideas: 极简创业手册加「这套方法从哪来」边栏
+
+> **Small content add.** Sahil Lavingia open-sourced Gumroad's full production source under MIT (`github.com/antiwork/gumroad`). Added an amber sidebar to the minimalist playbook closing the origin loop: a near-failed e-commerce startup → forced the "small & beautiful" way of living → encoded into 10 skills → now the whole company open-sourced. Shows he lives his own "Dare to Be Open" value.
+
+### Added — Ideas
+
+- **「边栏 · 这套方法从哪来」** in `minimalist-entrepreneur-playbook.html` — a 4-node loop diagram (Gumroad 差点失败 → 《小而美》→ 10 个 skill → antiwork/gumroad 开源) with a dashed loop-back arrow "同一个人 · 把『少做·盈利·透明』活出来", plus a note that Gumroad's full source is now MIT-licensed and Antiwork holds public shareholder meetings. Ties the article's Gumroad value #4 (*Dare to Be Open*) to the real-world act. Hero title overlap from earlier also fixed in this window (line-height 0.98 + controlled CJK line breaks).
+
+---
+
 ## [1.5.0] — 2026-06-14 · Ideas: 极简创业操作手册 (把一本书拆成 10 个 skill)
 
 > **A content session.** Synthesizes my 10 minimalist-entrepreneur advisor skills (an encoding of Sahil Lavingia's *The Minimalist Entrepreneur* into invokable Claude Code skills) into one operational deep-read. The hook is the meta-layer: I didn't just take notes on a book — I turned it into a 10-skill advisory fleet, and this piece chains those skills into a single 0→profit journey. Wise-Dark (site default; matches the same-author `few-person-company`). Joins the **公司的形态** series as its "how-to / practice" anchor.

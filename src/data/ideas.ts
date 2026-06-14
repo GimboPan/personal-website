@@ -65,7 +65,7 @@ export const articles: IdeaArticle[] = [
   {
     index: '12',
     title: '极简创业操作手册 · 把《小而美》拆成 10 个能调用的 skill · 操作手册',
-    lede: '我把 Sahil Lavingia《小而美 / The Minimalist Entrepreneur》拆成了 10 个能在 Claude Code 里直接调用的创业参谋 skill——等于把一本书变成了一支创业参谋团队。这篇把它们按出场顺序串成一条从 0 到盈利的完整动线:① 找方向(find-community 不从点子开始而从你已属于的社区开始 + validate-idea 验证靠卖不靠造,附绿灯/红灯清单)→ ② 做出来(processize 先手动跑通的「魔法纸」、mvp 的四个动手问题、pricing 哪怕只收 1 块的零价格效应 + 财务自由算式:$10×200 客户=$2000/月,每工作日成交一个不到一年)→ ③ 卖出去(first-customers 的亲友/社区/陌生人销售同心圆、marketing-plan 的五步漏斗 + 教育/激励/娱乐三层内容 + 邮件才是自己的地)→ ④ 活下去(grow-sustainably 盈利即超能力、先用机器人再用人、default alive/dead、company-values 的 Gumroad 四条)→ ⑤ 持续校准(minimalist-review 的 8 问决策表)。一个普通人怎么不融资、不招人、从第一天就盈利地建一家小而美的公司。附我作为 builder 的三点批注:AI 把「手动→产品化」压扁了、这个网站本身就是一次极简创业、盈利即超能力对打工人也成立。',
+    lede: 'Sahil Lavingia 把《小而美 / The Minimalist Entrepreneur》亲手开源成了 10 个能在 Claude Code 里调用的创业参谋 skill(github.com/slavingia/skills),我把它们装进自己的 fleet——等于把一本书变成了一支创业参谋团队。这篇把它们按出场顺序串成一条从 0 到盈利的完整动线:① 找方向(find-community 不从点子开始而从你已属于的社区开始 + validate-idea 验证靠卖不靠造,附绿灯/红灯清单)→ ② 做出来(processize 先手动跑通的「魔法纸」、mvp 的四个动手问题、pricing 哪怕只收 1 块的零价格效应 + 财务自由算式:$10×200 客户=$2000/月,每工作日成交一个不到一年)→ ③ 卖出去(first-customers 的亲友/社区/陌生人销售同心圆、marketing-plan 的五步漏斗 + 教育/激励/娱乐三层内容 + 邮件才是自己的地)→ ④ 活下去(grow-sustainably 盈利即超能力、先用机器人再用人、default alive/dead、company-values 的 Gumroad 四条)→ ⑤ 持续校准(minimalist-review 的 8 问决策表)。一个普通人怎么不融资、不招人、从第一天就盈利地建一家小而美的公司。附我作为 builder 的三点批注:AI 把「手动→产品化」压扁了、这个网站本身就是一次极简创业、盈利即超能力对打工人也成立。',
     date: '2026.06',
     tags: ['Economy', 'Tech'],
     topicSlug: 'economy',

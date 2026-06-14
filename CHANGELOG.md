@@ -17,6 +17,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 ### Changed — Ideas
 
 - **Series 公司的形态 now holds 3 pieces** — added `seriesSlug: 'company-form'` to index 12. Mutual cross-links: the new piece links to both `few-person-company` (same author, "how many people") and `company-300-year-experiment` ("the 800-year frame"); reads as the practice/how-to anchor of the trio.
+- **Source attribution corrected** — the 10 skills are Sahil Lavingia's *own* official open-source release, not my own splitting of the book. Fleet callout + footer + list lede now credit **github.com/slavingia/skills** with a link, and phrasing changed from "我把这本书拆成了…" to "作者亲手开源…我装进 fleet". (Provenance confirmed: downloaded 2026-04-04; repo identified by skill-name fingerprint since the machine recorded no source URL.)
 
 ---
 

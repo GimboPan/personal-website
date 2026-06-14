@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>极简创业操作手册 · 把《小而美》拆成 10 个能调用的 skill — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="我把 Sahil Lavingia《小而美 / The Minimalist Entrepreneur》拆成了 10 个能在 Claude Code 里直接调用的创业参谋 skill,再串成一条完整动线:找社区 → 验证 → 手动化 → MVP → 定价 → 头 100 个客户 → 内容营销 → 可持续增长 → 价值观 → 极简复盘。一个普通人怎么不融资、不招人、从第一天就盈利地建一家小而美的公司。" />
+  <meta property="og:title" content="极简创业操作手册 · 把一本书拆成 10 个能调用的 skill" />
+  <meta property="og:description" content="不融资、不招人、从第一天就盈利。一条从「找社区」到「极简复盘」的完整创业动线。" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg); color: var(--ink);
+      font-size: 16px; line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { max-width: 100%; display: block; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+    .wrap-wide { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; }
+    .mono { font-variant-numeric: tabular-nums; }
+    code { font-family: 'SF Mono', ui-monospace, Menlo, monospace; font-size: 0.86em; background: var(--surface-3); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; color: var(--green-tint); }
+
+    /* backbar */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 15px 0; position: sticky; top: 0; z-index: 20; }
+    .backbar .wrap-wide { display: flex; align-items: center; gap: 11px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .sep { color: var(--ink-faint); opacity: .55; }
+    .backbar .here { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* hero */
+    .hero { padding: 78px 0 30px; }
+    .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30); padding: 6px 13px; border-radius: 9999px; margin-bottom: 30px; font-weight: 700; }
+    .hero h1 { font-size: clamp(46px, 9vw, 94px); margin-bottom: 26px; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.7vw, 20px); color: var(--ink-soft); max-width: 60ch; line-height: 1.55; margin-bottom: 30px; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 16px 30px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
+    .hero .credits .label { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 3px; }
+    .hero .credits .val { color: var(--ink-soft); font-weight: 500; }
+
+    /* fleet callout */
+    .fleet { background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 18px; padding: 26px 28px; margin: 8px 0 2px; }
+    .fleet .ft { font-size: 13px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 18px; }
+    .fleet .ft b { color: var(--green-tint); font-weight: 700; }
+    .fleet .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .fleet .chip { font-family: 'SF Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: var(--green); background: rgba(159,232,112,0.07); border: 1px solid rgba(159,232,112,0.22); border-radius: 7px; padding: 5px 10px; }
+
+    /* section */
+    section { padding: 30px 0; }
+    .kicker { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: 11px; display: flex; align-items: center; gap: 10px; }
+    .kicker .ph { font-family: 'SF Mono', monospace; color: var(--ink-faint); font-weight: 600; letter-spacing: 0; }
+    h2 { font-size: clamp(27px, 4vw, 40px); line-height: 1.1; letter-spacing: -0.015em; font-weight: 800; margin-bottom: 14px; }
+    h2 .accent { color: var(--green); }
+    h3 { font-size: 19px; font-weight: 700; margin: 26px 0 9px; letter-spacing: -0.01em; }
+    p { margin: 0 0 16px; color: var(--ink-soft); }
+    p.lead-p { font-size: 18px; color: var(--ink); }
+    strong, b { color: var(--ink); font-weight: 700; }
+    em { font-style: normal; color: var(--green); font-weight: 600; }
+    .sk { font-family: 'SF Mono', monospace; font-size: .9em; color: var(--green); }
+
+    .pull { font-size: clamp(21px, 3vw, 29px); line-height: 1.32; font-weight: 800; letter-spacing: -0.015em; color: var(--ink); border-left: 3px solid var(--green); padding: 4px 0 4px 24px; margin: 36px 0; }
+    .pull .who { display: block; font-size: 13px; font-weight: 500; color: var(--ink-faint); margin-top: 13px; letter-spacing: .02em; }
+
+    /* figure */
+    figure { margin: 40px 0; }
+    .fig-card { background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 30px 26px 22px; }
+    .fig-card svg { width: 100%; height: auto; }
+    figcaption { font-size: 13px; color: var(--ink-faint); line-height: 1.6; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+    figcaption .fnum { color: var(--green); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; margin-right: 8px; }
+    svg text { font-family: 'Inter', 'PingFang SC', system-ui, sans-serif; }
+
+    /* two-col cards (flags) */
+    .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+    .panel { border-radius: 16px; padding: 22px 22px; border: 1px solid var(--line); }
+    .panel.good { background: rgba(159,232,112,0.06); border-color: rgba(159,232,112,0.25); }
+    .panel.bad { background: rgba(255,122,130,0.05); border-color: rgba(255,122,130,0.22); }
+    .panel .ph { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 13px; }
+    .panel.good .ph { color: var(--green); }
+    .panel.bad .ph { color: var(--coral); }
+    .panel ul { list-style: none; }
+    .panel li { font-size: 14px; color: var(--ink-soft); padding: 6px 0 6px 22px; position: relative; line-height: 1.5; }
+    .panel li::before { position: absolute; left: 0; top: 6px; }
+    .panel.good li::before { content: "✓"; color: var(--green); font-weight: 700; }
+    .panel.bad li::before { content: "✕"; color: var(--coral); font-weight: 700; }
+
+    /* 4-question grid */
+    .qgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 26px 0; }
+    .qcard { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .qcard .qn { font-family: 'SF Mono', monospace; font-size: 12px; color: var(--green); margin-bottom: 8px; }
+    .qcard .qt { font-size: 15.5px; font-weight: 700; color: var(--ink); line-height: 1.35; }
+    .qcard .qd { font-size: 13px; color: var(--ink-faint); margin-top: 6px; }
+
+    /* value cards */
+    .vgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
+    .vcard { background: var(--surface-1); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+    .vcard .vn { font-size: 16px; font-weight: 800; color: var(--green-tint); margin-bottom: 6px; }
+    .vcard .vd { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+
+    /* decision table */
+    .dtable { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px; }
+    .dtable th { text-align: left; padding: 12px 14px; background: var(--surface-2); color: var(--ink-faint); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+    .dtable td { padding: 12px 14px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+    .dtable td:first-child { color: var(--ink); font-weight: 600; }
+    .dtable td .ok { color: var(--green); font-weight: 700; }
+
+    /* my take */
+    .mytake { background: rgba(56,200,255,0.05); border: 1px solid rgba(56,200,255,0.22); border-radius: 20px; padding: 30px 30px; margin: 14px 0; }
+    .mytake .tag { display: inline-block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--sky); margin-bottom: 12px; }
+    .mytake h3 { margin-top: 0; }
+    .mytake .row { display: flex; gap: 15px; margin: 16px 0; }
+    .mytake .row .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--sky); color: var(--bg); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .mytake .row .t b { color: var(--ink); }
+    .mytake .row .t p { margin: 3px 0 0; font-size: 14.5px; }
+
+    /* series / related */
+    .related { border-top: 1px solid var(--line); padding-top: 34px; margin-top: 16px; }
+    .rk { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: 15px; }
+    .rcard { display: block; background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; transition: border-color .15s, transform .15s; }
+    .rcard:hover { border-color: var(--green); transform: translateY(-1px); }
+    .rcard .rt { font-weight: 700; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+    .rcard .rd { font-size: 13px; color: var(--ink-faint); line-height: 1.55; }
+
+    footer { border-top: 1px solid var(--line); margin-top: 56px; padding: 26px 0 56px; }
+    footer .wrap-wide { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: var(--ink-faint); }
+    footer a { color: var(--green); }
+
+    @media (max-width: 640px) {
+      .cols2, .qgrid, .vgrid { grid-template-columns: 1fr; }
+      .hero { padding: 54px 0 20px; }
+      .fig-card { padding: 20px 14px 16px; }
+      .dtable { font-size: 13px; }
+      .dtable th, .dtable td { padding: 9px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap-wide">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">极简创业操作手册</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">§ 操作手册 · The Minimalist Entrepreneur × 我的 fleet</span>
+      <h1 class="display">极简创业，<br>是一套<span class="accent">照着做</span>的手册。</h1>
+      <p class="lead">我把 Sahil Lavingia《小而美 / The Minimalist Entrepreneur》拆成了 <b style="color:var(--ink)">10 个能在 Claude Code 里直接调用的创业参谋 skill</b>，再把它们串成一条完整动线——一个普通人，怎么<em>不融资、不招人、从第一天就盈利地</em>，建一家小而美的公司。</p>
+      <div class="credits">
+        <div><span class="label">Source</span><span class="val">Sahil Lavingia · 《小而美》</span></div>
+        <div><span class="label">Form</span><span class="val">10 个 skill 合成的操作手册</span></div>
+        <div><span class="label">Series</span><span class="val">公司的形态</span></div>
+        <div><span class="label">Filed</span><span class="val">经济 / 科技 · 2026.06</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLEET CALLOUT -->
+  <div class="wrap">
+    <div class="fleet">
+      <div class="ft">这篇不是读书笔记。我把这本书拆成了 <b>10 个真实的 skill</b>，平时遇到对应的决策，我直接在终端里调用它们当参谋——等于<b>把一本书变成了一支创业参谋团队</b>。下面这篇，是把这 10 个参谋按出场顺序排好、连成一条从 0 到盈利的动线。</div>
+      <div class="chips">
+        <span class="chip">/find-community</span>
+        <span class="chip">/validate-idea</span>
+        <span class="chip">/processize</span>
+        <span class="chip">/mvp</span>
+        <span class="chip">/pricing</span>
+        <span class="chip">/first-customers</span>
+        <span class="chip">/marketing-plan</span>
+        <span class="chip">/grow-sustainably</span>
+        <span class="chip">/company-values</span>
+        <span class="chip">/minimalist-review</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGURE 1 · the 10-step journey -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 1000 360" role="img" aria-label="极简创业 10 步动线，分为找方向、做出来、卖出去、活下去、持续校准五个阶段">
+          <text x="36" y="38" font-size="19" font-weight="800" fill="#f5f5f0">一条动线 · 从 0 到盈利的 10 步</text>
+          <text x="36" y="60" font-size="12.5" fill="#8a8c84">每一步对应一个能调用的 skill；底层只有一句话——先卖,再造;先盈利,再增长</text>
+
+          <!-- phase backplates -->
+          <g>
+            <rect x="36"  y="92" width="180" height="210" rx="14" fill="rgba(159,232,112,0.05)" stroke="rgba(159,232,112,0.20)"/>
+            <rect x="232" y="92" width="270" height="210" rx="14" fill="rgba(159,232,112,0.05)" stroke="rgba(159,232,112,0.20)"/>
+            <rect x="518" y="92" width="184" height="210" rx="14" fill="rgba(159,232,112,0.05)" stroke="rgba(159,232,112,0.20)"/>
+            <rect x="718" y="92" width="184" height="210" rx="14" fill="rgba(159,232,112,0.05)" stroke="rgba(159,232,112,0.20)"/>
+            <rect x="918" y="92" width="46"  height="210" rx="14" fill="rgba(56,200,255,0.06)" stroke="rgba(56,200,255,0.22)"/>
+          </g>
+          <!-- phase labels -->
+          <g font-size="12.5" font-weight="700" fill="#9fe870">
+            <text x="126" y="116" text-anchor="middle">① 找方向</text>
+            <text x="367" y="116" text-anchor="middle">② 做出来</text>
+            <text x="610" y="116" text-anchor="middle">③ 卖出去</text>
+            <text x="810" y="116" text-anchor="middle">④ 活下去</text>
+          </g>
+          <text x="941" y="180" text-anchor="middle" font-size="11.5" font-weight="700" fill="#38c8ff" transform="rotate(90 941 180)">⑤ 持续校准</text>
+
+          <!-- step nodes -->
+          <g font-size="12" fill="#f5f5f0">
+            <!-- phase 1 -->
+            <g>
+              <rect x="52" y="140" width="148" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="64" y="160" font-size="12.5" font-weight="700">找社区</text>
+              <text x="64" y="176" font-size="10" fill="#8a8c84">find-community</text>
+              <rect x="52" y="200" width="148" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="64" y="220" font-size="12.5" font-weight="700">验证</text>
+              <text x="64" y="236" font-size="10" fill="#8a8c84">validate-idea</text>
+            </g>
+            <!-- phase 2 -->
+            <g>
+              <rect x="248" y="140" width="118" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="260" y="160" font-size="12.5" font-weight="700">手动化</text>
+              <text x="260" y="176" font-size="10" fill="#8a8c84">processize</text>
+              <rect x="372" y="140" width="118" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="384" y="160" font-size="12.5" font-weight="700">MVP</text>
+              <text x="384" y="176" font-size="10" fill="#8a8c84">mvp</text>
+              <rect x="248" y="200" width="242" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="260" y="220" font-size="12.5" font-weight="700">定价 · 哪怕只收 1 块</text>
+              <text x="260" y="236" font-size="10" fill="#8a8c84">pricing</text>
+            </g>
+            <!-- phase 3 -->
+            <g>
+              <rect x="534" y="140" width="152" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="546" y="160" font-size="12.5" font-weight="700">头 100 个客户</text>
+              <text x="546" y="176" font-size="10" fill="#8a8c84">first-customers</text>
+              <rect x="534" y="200" width="152" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="546" y="220" font-size="12.5" font-weight="700">内容营销</text>
+              <text x="546" y="236" font-size="10" fill="#8a8c84">marketing-plan</text>
+            </g>
+            <!-- phase 4 -->
+            <g>
+              <rect x="734" y="140" width="152" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="746" y="160" font-size="12.5" font-weight="700">可持续增长</text>
+              <text x="746" y="176" font-size="10" fill="#8a8c84">grow-sustainably</text>
+              <rect x="734" y="200" width="152" height="44" rx="9" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+              <text x="746" y="220" font-size="12.5" font-weight="700">公司价值观</text>
+              <text x="746" y="236" font-size="10" fill="#8a8c84">company-values</text>
+            </g>
+          </g>
+
+          <!-- flow arrows between phases -->
+          <g fill="#9fe870" font-size="18">
+            <text x="223" y="170" text-anchor="middle">›</text>
+            <text x="509" y="170" text-anchor="middle">›</text>
+            <text x="709" y="170" text-anchor="middle">›</text>
+          </g>
+
+          <!-- bottom rule line -->
+          <text x="36" y="288" font-size="11.5" fill="#ffd11a">⑤ minimalist-review 不在动线上,而是每一步都回来照一次的镜子:这步服务社区吗?最简吗?更盈利吗?可逆吗?</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 1</span>10 个 skill 排成一条动线，分四个阶段推进，外加一个随时回照的「极简复盘」。整本书的内核其实只有一句：<strong>先卖再造，先盈利再增长。</strong></figcaption>
+    </figure>
+  </div>
+
+  <!-- ACT 1 -->
+  <section>
+    <div class="wrap">
+      <div class="kicker"><span class="ph">phase 01</span> 找方向</div>
+      <h2>不从「点子」开始，<br>从<span class="accent">社区</span>开始。</h2>
+      <p class="lead-p">绝大多数人创业的第一步错了：先想一个 idea，再去找人买。极简创业反过来——<em>先有你已经身处其中的社区，再在里面发现一个反复被抱怨的问题。</em></p>
+      <p><span class="sk">/find-community</span> 的核心：你不是去「找」一个社区，你本来就属于好几个——职业圈、兴趣组、校友会、某个 subreddit、某个微信群。真正的好生意，长在你已经听得懂行话、能贡献价值的那个社区里反复出现的痛点上。</p>
+      <p>有了方向，<span class="sk">/validate-idea</span> 接手，规则只有一条——<strong>验证靠卖，不靠造（Validation happens through selling, not building）。</strong>别写代码、别花钱，先看能不能手动地把这件事卖出去。Gumroad 一开始就是 Sahil 手动收 PayPal 邮箱、一个一个给创作者打款。</p>
+
+      <div class="cols2">
+        <div class="panel good">
+          <div class="ph">✓ 值得做（绿灯）</div>
+          <ul>
+            <li>人们已经在为「更差的方案」付费</li>
+            <li>你手动帮几个人解决过，他们很满意</li>
+            <li>社区里有人在反复抱怨这个问题</li>
+            <li>你能一句话说清客户和他的痛点</li>
+            <li>你在挠自己的痒处</li>
+          </ul>
+        </div>
+        <div class="panel bad">
+          <div class="ph">✕ 别做（红灯）</div>
+          <ul>
+            <li>没人在尝试解决它（连凑合的办法都没有）</li>
+            <li>你说不出 10 个有这个问题的具体的人</li>
+            <li>唯一的validation是「朋友觉得这点子酷」</li>
+            <li>你得先教育人们「你有这个问题」</li>
+            <li>你在为一个自己不属于的社区造东西</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACT 2 -->
+  <section>
+    <div class="wrap">
+      <div class="kicker"><span class="ph">phase 02</span> 做出来</div>
+      <h2>先把活儿<span class="accent">手动</span>干一遍，<br>再谈写代码。</h2>
+      <p class="lead-p"><span class="sk">/processize</span> 是整套打法里最反直觉、也最关键的一步：<strong>Processize before you productize ——先把流程跑通，再谈产品化。</strong>每一个伟大产品，最早都是某个人用手把活儿干出来的。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 2 · three stages -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 1000 320" role="img" aria-label="手动、处理化、产品化三阶段，中间是一张魔法纸">
+          <text x="36" y="36" font-size="19" font-weight="800" fill="#f5f5f0">三阶段:手动 → 处理化 → 产品化</text>
+          <text x="36" y="58" font-size="12.5" fill="#8a8c84">只自动化你已经手动证明过能跑通的东西</text>
+
+          <!-- stage 1 -->
+          <rect x="36" y="86" width="280" height="180" rx="16" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+          <circle cx="68" cy="120" r="15" fill="rgba(159,232,112,0.15)"/><text x="68" y="125" text-anchor="middle" font-size="14" fill="#9fe870" font-weight="800">1</text>
+          <text x="94" y="118" font-size="15" font-weight="800" fill="#f5f5f0">手动</text>
+          <text x="94" y="135" font-size="11" fill="#8a8c84">Manual · 你就是产品</text>
+          <text x="56" y="170" font-size="12.5" fill="#c6c8c0">你一个人是客服、是交付、</text>
+          <text x="56" y="190" font-size="12.5" fill="#c6c8c0">是工程师。用一部手机 +</text>
+          <text x="56" y="210" font-size="12.5" fill="#c6c8c0">一张表格,把活儿干完。</text>
+          <text x="56" y="240" font-size="11.5" fill="#9fe870">Gumroad:手动收邮箱、逐个打款</text>
+
+          <!-- arrow -->
+          <text x="336" y="182" text-anchor="middle" font-size="26" fill="#9fe870">→</text>
+
+          <!-- stage 2 (magic paper) -->
+          <rect x="360" y="86" width="280" height="180" rx="16" fill="#14160f" stroke="rgba(255,209,26,0.35)"/>
+          <circle cx="392" cy="120" r="15" fill="rgba(255,209,26,0.15)"/><text x="392" y="125" text-anchor="middle" font-size="14" fill="#ffd11a" font-weight="800">2</text>
+          <text x="418" y="118" font-size="15" font-weight="800" fill="#f5f5f0">处理化</text>
+          <text x="418" y="135" font-size="11" fill="#8a8c84">Processized · 魔法纸</text>
+          <text x="380" y="170" font-size="12.5" fill="#c6c8c0">把每一步写在一张纸上,</text>
+          <text x="380" y="190" font-size="12.5" fill="#c6c8c0">清楚到你去度假,别人</text>
+          <text x="380" y="210" font-size="12.5" fill="#c6c8c0">照着也能接手运营。</text>
+          <text x="380" y="240" font-size="11.5" fill="#ffd11a">触发 · 步骤 · 工具 · 耗时 · 交付</text>
+
+          <!-- arrow -->
+          <text x="660" y="182" text-anchor="middle" font-size="26" fill="#9fe870">→</text>
+
+          <!-- stage 3 -->
+          <rect x="684" y="86" width="280" height="180" rx="16" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+          <circle cx="716" cy="120" r="15" fill="rgba(56,200,255,0.15)"/><text x="716" y="125" text-anchor="middle" font-size="14" fill="#38c8ff" font-weight="800">3</text>
+          <text x="742" y="118" font-size="15" font-weight="800" fill="#f5f5f0">产品化</text>
+          <text x="742" y="135" font-size="11" fill="#8a8c84">Productized · 才写软件</text>
+          <text x="704" y="170" font-size="12.5" fill="#c6c8c0">现在才自动化每一步,</text>
+          <text x="704" y="190" font-size="12.5" fill="#c6c8c0">让客户不靠你也能用。</text>
+          <text x="704" y="210" font-size="12.5" fill="#c6c8c0">先自动化最耗时的那一步。</text>
+          <text x="704" y="240" font-size="11.5" fill="#38c8ff">大多数 app 不过是「表单 + 列表」</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 2</span>中间那张<strong style="color:var(--amber)">「魔法纸」</strong>是枢纽：把手动流程写到别人能照着接手的程度，你才真正拥有了一套「系统」，而不只是一身忙碌。只有当你手动交付给 10+ 付费客户、步骤几周不再变，才轮到写代码。</figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <p><span class="sk">/mvp</span> 给出动手前必须回答的<strong>四个问题</strong>——任何一个答不上，就砍需求，直到能答上为止：</p>
+      <div class="qgrid">
+        <div class="qcard"><div class="qn">Q1</div><div class="qt">一个周末能上线吗？</div><div class="qd">不能就减范围，减到能为止</div></div>
+        <div class="qcard"><div class="qn">Q2</div><div class="qt">它让客户的生活好了一点点吗？</div><div class="qd">这就是 MVP 的及格线</div></div>
+        <div class="qcard"><div class="qn">Q3</div><div class="qt">有客户愿意为它付钱吗？</div><div class="qd">从第 1 个客户起就盈利</div></div>
+        <div class="qcard"><div class="qn">Q4</div><div class="qt">能很快拿到反馈吗？</div><div class="qd">反馈越快，越快做出值钱的东西</div></div>
+      </div>
+      <p>然后是 <span class="sk">/pricing</span>，它只反复强调一件事：<strong>一定要收钱，哪怕只收 1 块。</strong>行为经济学的「零价格效应」——免费的布朗尼有人排队，收 1 分钱队伍就消失了。<em>免费用户给你的信号是零。</em>收费哪怕 1 块，才证明有人真的在乎。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 3 · financial independence math -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 1000 240" role="img" aria-label="财务自由的算式：10 美元每月乘以 200 个客户等于 2000 美元每月，每个工作日一个客户不到一年达成">
+          <text x="36" y="38" font-size="19" font-weight="800" fill="#f5f5f0">财务自由,其实是一道很小的算式</text>
+          <text x="36" y="60" font-size="12.5" fill="#8a8c84">你需要的客户,比你想象的少得多</text>
+
+          <!-- equation -->
+          <g>
+            <rect x="40" y="92" width="160" height="84" rx="14" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+            <text x="120" y="130" text-anchor="middle" font-size="26" font-weight="900" fill="#9fe870" class="mono">$10</text>
+            <text x="120" y="156" text-anchor="middle" font-size="12" fill="#8a8c84">每月 / 客户</text>
+
+            <text x="222" y="142" text-anchor="middle" font-size="28" fill="#8a8c84">×</text>
+
+            <rect x="244" y="92" width="160" height="84" rx="14" fill="#1a1c19" stroke="rgba(255,255,255,0.12)"/>
+            <text x="324" y="130" text-anchor="middle" font-size="26" font-weight="900" fill="#9fe870" class="mono">200</text>
+            <text x="324" y="156" text-anchor="middle" font-size="12" fill="#8a8c84">个客户</text>
+
+            <text x="426" y="142" text-anchor="middle" font-size="28" fill="#8a8c84">=</text>
+
+            <rect x="448" y="92" width="190" height="84" rx="14" fill="rgba(159,232,112,0.10)" stroke="rgba(159,232,112,0.35)"/>
+            <text x="543" y="130" text-anchor="middle" font-size="26" font-weight="900" fill="#9fe870" class="mono">$2,000</text>
+            <text x="543" y="156" text-anchor="middle" font-size="12" fill="#d8f5b8">每月 · 养活自己</text>
+
+            <text x="662" y="142" text-anchor="middle" font-size="28" fill="#8a8c84">→</text>
+
+            <rect x="686" y="92" width="278" height="84" rx="14" fill="#14160f" stroke="rgba(255,209,26,0.30)"/>
+            <text x="700" y="126" font-size="14" font-weight="700" fill="#f5f5f0">每个工作日 1 个新客户</text>
+            <text x="700" y="150" font-size="13" fill="#ffd11a">260 天/年 → <tspan font-weight="800">不到一年</tspan> 到 200</text>
+            <text x="700" y="168" font-size="11" fill="#8a8c84">Slack 上市时 575 个客户 = 40% 收入</text>
+          </g>
+
+          <text x="36" y="216" font-size="12" fill="#8a8c84">起步价定低,随产品变好慢慢涨;分层定价（经济舱/商务舱/头等舱）是后期的目标。价格不是永久的,是又一个可迭代的东西。</text>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 3</span>不需要爆款，不需要百万用户。一个 $10/月的产品，200 个客户就能让你财务独立——按「每个工作日成交一个」算，不到一年。这就是「小而美」在数学上为什么成立。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ACT 3 -->
+  <section>
+    <div class="wrap">
+      <div class="kicker"><span class="ph">phase 03</span> 卖出去</div>
+      <h2>别搞「发布」，<br>一个一个地<span class="accent">卖</span>。</h2>
+      <p class="lead-p"><span class="sk">/first-customers</span> 的第一句话就是反鸡汤的：<strong>「病毒式成功」是个神话，根本不存在。</strong>每个看起来一夜爆红的背后，都是几个月几年的笨功夫。你的任务是一个一个地卖，从最在乎你的人，卖到最不在乎你的人。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 4 · concentric circles -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 1000 360" role="img" aria-label="销售同心圆：从亲友到社区到陌生人，由内向外卖">
+          <text x="36" y="36" font-size="19" font-weight="800" fill="#f5f5f0">销售同心圆 · 由内向外卖</text>
+          <text x="36" y="58" font-size="12.5" fill="#8a8c84">从最信任你的人开始,每一次拒绝都是一次学习</text>
+
+          <!-- circles -->
+          <g transform="translate(250,210)">
+            <circle r="140" fill="rgba(56,200,255,0.05)" stroke="rgba(56,200,255,0.25)"/>
+            <circle r="96" fill="rgba(255,209,26,0.06)" stroke="rgba(255,209,26,0.30)"/>
+            <circle r="52" fill="rgba(159,232,112,0.12)" stroke="rgba(159,232,112,0.45)"/>
+            <text y="-2" text-anchor="middle" font-size="13" font-weight="800" fill="#9fe870">亲友</text>
+            <text y="15" text-anchor="middle" font-size="9.5" fill="#d8f5b8">圈 1</text>
+            <text y="-70" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffd11a">你的社区</text>
+            <text y="-55" text-anchor="middle" font-size="9.5" fill="#8a8c84">圈 2</text>
+            <text y="-120" text-anchor="middle" font-size="12.5" font-weight="700" fill="#38c8ff">陌生人 · 冷启动</text>
+            <text y="-105" text-anchor="middle" font-size="9.5" fill="#8a8c84">圈 3</text>
+          </g>
+
+          <!-- annotations right -->
+          <g>
+            <rect x="470" y="86" width="494" height="78" rx="12" fill="#1a1c19" stroke="rgba(159,232,112,0.25)"/>
+            <text x="490" y="114" font-size="14" font-weight="800" fill="#9fe870">圈 1 · 亲友</text>
+            <text x="490" y="138" font-size="12.5" fill="#c6c8c0">尴尬也要做。把他们当第一批「客户」,不是投资人。</text>
+            <text x="490" y="156" font-size="12.5" fill="#c6c8c0">要诚实反馈,别要朋友圈转发。他们不买,谁买?</text>
+
+            <rect x="470" y="172" width="494" height="78" rx="12" fill="#1a1c19" stroke="rgba(255,209,26,0.25)"/>
+            <text x="490" y="200" font-size="14" font-weight="800" fill="#ffd11a">圈 2 · 社区</text>
+            <text x="490" y="224" font-size="12.5" fill="#c6c8c0">列出所有写过/分享过同类东西的人,逐个私聊,</text>
+            <text x="490" y="242" font-size="12.5" fill="#c6c8c0">走查产品、请顿饭,做上几百次。</text>
+
+            <rect x="470" y="258" width="494" height="78" rx="12" fill="#1a1c19" stroke="rgba(56,200,255,0.25)"/>
+            <text x="490" y="286" font-size="14" font-weight="800" fill="#38c8ff">圈 3 · 陌生人</text>
+            <text x="490" y="310" font-size="12.5" fill="#c6c8c0">冷邮件真的有用——Gumroad 就是这么长起来的。</text>
+            <text x="490" y="328" font-size="12.5" fill="#c6c8c0">每封都personalize,别复制粘贴;每次拒绝都打磨你。</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 4</span>销售不是脏字——你不是在说服谁，你是在帮人。<strong>手动销售 = 早期 99% 的增长；口碑 = 后期 99% 的增长。</strong>攒够 100 个付费客户再「发布」——而且发布是一场感谢社区的派对，不是获客手段。</figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <p>等你有了 ~100 个会自己回来的客户（这就是 product-market fit），<span class="sk">/marketing-plan</span> 才登场。它的定义很关键：<strong>营销是规模化的销售（marketing is sales at scale）</strong>——但别把营销和打广告搞混。先花时间，别花钱：博客、社媒、邮件都是免费的。</p>
+    </div>
+  </section>
+
+  <!-- FIGURE 5 · funnel + content levels -->
+  <div class="wrap-wide">
+    <figure>
+      <div class="fig-card">
+        <svg viewBox="0 0 1000 300" role="img" aria-label="营销漏斗五步，以及教育、激励、娱乐三层内容">
+          <text x="36" y="36" font-size="19" font-weight="800" fill="#f5f5f0">漏斗 + 三层内容</text>
+          <text x="36" y="58" font-size="12.5" fill="#8a8c84">每个客户都要走完五步,一步都跳不过;内容越往上,触达越广</text>
+
+          <!-- funnel -->
+          <g font-size="12.5" font-weight="700" fill="#0e0f0c">
+            <rect x="40" y="86" width="380" height="34" rx="6" fill="#9fe870"/><text x="60" y="108" fill="#163300">① 遇见 Engage · 刷到你的内容</text>
+            <rect x="70" y="128" width="320" height="34" rx="6" fill="#b9ee8f"/><text x="90" y="150" fill="#163300">② 关注 Follow</text>
+            <rect x="100" y="170" width="260" height="34" rx="6" fill="#d8f5b8"/><text x="120" y="192" fill="#163300">③ 研究 Research</text>
+            <rect x="130" y="212" width="200" height="34" rx="6" fill="#e9f9d4"/><text x="150" y="234" fill="#163300">④ 考虑 Consider</text>
+            <rect x="160" y="254" width="140" height="34" rx="6" fill="#ffffff"/><text x="180" y="276" fill="#163300">⑤ 购买 Buy</text>
+          </g>
+
+          <!-- three content levels -->
+          <g>
+            <rect x="470" y="86" width="494" height="58" rx="12" fill="#1a1c19" stroke="rgba(159,232,112,0.25)"/>
+            <text x="490" y="112" font-size="14" font-weight="800" fill="#9fe870">Level 1 · 教育 Educate</text>
+            <text x="490" y="132" font-size="12" fill="#c6c8c0">有 100 个客户,你就学到了 100 件值得分享的事。不必精致,只要持续。</text>
+
+            <rect x="470" y="152" width="494" height="58" rx="12" fill="#1a1c19" stroke="rgba(255,209,26,0.25)"/>
+            <text x="490" y="178" font-size="14" font-weight="800" fill="#ffd11a">Level 2 · 激励 Inspire</text>
+            <text x="490" y="198" font-size="12" fill="#c6c8c0">分享你的旅程、挣扎与成功。真诚、脆弱,记录过程而不只是专业。</text>
+
+            <rect x="470" y="218" width="494" height="58" rx="12" fill="#1a1c19" stroke="rgba(56,200,255,0.25)"/>
+            <text x="490" y="244" font-size="14" font-weight="800" fill="#38c8ff">Level 3 · 娱乐 Entertain</text>
+            <text x="490" y="264" font-size="12" fill="#c6c8c0">最难但触达最广。娱乐是所有平台的内容之王。</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><span class="fnum">图 5</span>社媒是「租来的地」（算法说变就变），<strong>邮件才是「自己的地」</strong>——立刻开始攒邮件列表。钱要最后花：你看到的大多数增长都是付费买来的，别被骗了；只在已经有机增长、且清楚客户画像后，才投广告。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ACT 4 -->
+  <section>
+    <div class="wrap">
+      <div class="kicker"><span class="ph">phase 04</span> 活下去</div>
+      <h2><span class="accent">盈利</span>，就是一种超能力。</h2>
+      <p class="lead-p"><span class="sk">/grow-sustainably</span> 把它说透了：<strong>盈利给你无限的跑道、清醒和控制权。</strong>赚得比花得多，公司就能永远活下去；反过来，迟早完蛋。当你盈利，你可以慢慢来、做对的决定、按自己的节奏走——而不是别人的节奏。</p>
+      <p class="pull">别人可能在性感的指标上火箭般超过你，但 10 年后他们不在了，你还在。<span class="who">—— 盈利的底气</span></p>
+      <h3>省钱铁律 · 先用机器人，再用人</h3>
+      <p>最大的固定成本永远是「人」。所以顺序是：<strong>你 + 你的机器人大军 → 自由职业者 → 全职员工</strong>。雇软件，别雇人（记账、发薪、自动化都有现成工具）；自己先拿最低工资（Sahil 起步 $36K，2015 年公司不行时给自己开 $0）；别租办公室、别搬去硅谷——远程是默认，低成本 = 更快盈利。</p>
+      <p>每个决策都过一遍「<strong>default alive or default dead</strong>」：照现在的收支，公司是默认活着，还是默认死掉？再看一条——<em>这个决定可逆吗？</em>避开不可逆的坑（长租约、大招聘、苛刻的 VC 条款）。</p>
+
+      <h3>先有文化，再招人 · <span class="sk">/company-values</span></h3>
+      <p>价值观不是两个字的口号，是「在没人盯着的时候该怎么做」。好的价值观能吸引对的人（「这工作简直为我而设！」）、劝退错的人——两者都有价值。Gumroad 的四条，可以当起点：</p>
+      <div class="vgrid">
+        <div class="vcard"><div class="vn">Judged by the Work</div><div class="vd">只看创作者和客户拿到的体验。发布后才收到「本可以更好」的反馈，算一次失败。</div></div>
+        <div class="vcard"><div class="vn">Seek Superlinearities</div><div class="vd">时间固定，能创造的价值无限。每天都该在你的时间上产生超线性回报。</div></div>
+        <div class="vcard"><div class="vn">Everyone is a CEO</div><div class="vd">你是你那块的 CEO。像向董事会要批准那样思考，而不是向经理要方向。</div></div>
+        <div class="vcard"><div class="vn">Dare to Be Open</div><div class="vd">追求完全的信息对称：公开入职文档、在推上晒财务、对内公开薪水。无会议、无秘密。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACT 5 -->
+  <section>
+    <div class="wrap">
+      <div class="kicker"><span class="ph">phase 05</span> 持续校准</div>
+      <h2>每个决定，<br>都回来照一次<span class="accent">镜子</span>。</h2>
+      <p class="lead-p"><span class="sk">/minimalist-review</span> 不在动线上，它是贯穿始终的那面镜子。任何一个决定、计划、岔路口，都拿这张表过一遍——它会把「我以为该做的」和「真正该做的」分开。</p>
+      <table class="dtable">
+        <thead><tr><th>照镜子问一句</th><th>极简的答案应该是</th></tr></thead>
+        <tbody>
+          <tr><td>这事服务我的社区/客户吗？</td><td><span class="ok">是</span>——不是出于虚荣或「成功公司都这么做」</td></tr>
+          <tr><td>这是最简单的做法吗？</td><td><span class="ok">是</span>——能手动先别自动，能周末上线别拖一月</td></tr>
+          <tr><td>它让我更接近盈利吗？</td><td><span class="ok">是</span>——default alive，不是 default dead</td></tr>
+          <tr><td>如果不行，可逆吗？</td><td><span class="ok">可逆</span>——躲开长租约、大招聘、苛刻条款</td></tr>
+          <tr><td>我花的是时间还是钱？</td><td><span class="ok">时间优先</span>——钱只用来加速已经在转的东西</td></tr>
+          <tr><td>是客户在要，还是我在猜？</td><td><span class="ok">客户在要</span>——按客户的速度增长</td></tr>
+          <tr><td>这符合我的价值观吗？</td><td><span class="ok">符合</span>——盖一座我自己愿意住的房子</td></tr>
+          <tr><td>一年后我还想要这个吗？</td><td><span class="ok">想</span>——建一个不会反过来占有你的生意</td></tr>
+        </tbody>
+      </table>
+      <p class="pull">为自己「自私」地建对的生意，同时「无私」地服务一群人。<span class="who">—— Build the right business for yourself selfishly, while serving a community selflessly.</span></p>
+    </div>
+  </section>
+
+  <!-- MY TAKE -->
+  <section>
+    <div class="wrap">
+      <div class="mytake">
+        <span class="tag">我的批注 · Gimbo</span>
+        <h3>为什么我把一本书拆成了 10 个 skill</h3>
+        <p style="margin-bottom:6px">我读这本书最大的收获，不是某一条具体建议，而是意识到：这套打法<b>本身就是「可调用的」</b>——每一章都对应一个会反复遇到的决策时刻。于是我把它做成了 fleet 里的 10 个 skill。三点我自己的延伸：</p>
+        <div class="row"><div class="n">1</div><div class="t"><b>AI 把「手动 → 产品化」那条线压扁了。</b><p>书里手动阶段要熬很久才敢写代码。但现在 <code>/processize</code> 的「魔法纸」，本身就是一份能喂给 Claude Code 的 spec——手动和产品化之间的距离，被 AI 砍掉了大半。这正好接上我那篇<a href="/ideas/company-300-year-experiment.html" style="color:var(--green)">「公司是 300 年的临时实验」</a>的结论：交易成本塌了，小公司更成立了。</p></div></div>
+        <div class="row"><div class="n">2</div><div class="t"><b>这个网站本身，就是一次极简创业的实践。</b><p>没融资、没团队、先有「我属于的社区」（AI builder / 读书 / NZ 生活），用时间不用钱，build in public。我没在卖产品，但同一套肌肉——找社区、持续产出、自己的地（这个站）而不是租来的地（平台）——是一样的。</p></div></div>
+        <div class="row"><div class="n">3</div><div class="t"><b>「盈利即超能力」对打工人也成立。</b><p>把「盈利」换成「不依赖单一雇主的现金流与技能」，default alive / default dead 这把尺子照样能照自己的人生。这也是我整个 fleet 想干的事:把公司管理的工具,搬来运营「一个人」。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERIES + RELATED -->
+  <section>
+    <div class="wrap">
+      <div class="related">
+        <div class="rk">专辑 · 公司的形态</div>
+        <a class="rcard" href="/ideas/few-person-company.html">
+          <div class="rt">不是一人公司，是几个人的公司 · OPC 的真实形态 →</div>
+          <div class="rd">同一作者 Sahil Lavingia 的另一面：极简不是把人减到 0，而是减到刚好还能保证体验的那几个。这篇是「怎么做」，那篇是「最后剩几个人」。</div>
+        </a>
+        <a class="rcard" href="/ideas/company-300-year-experiment.html">
+          <div class="rt">公司可能是一个 300 年的临时实验 →</div>
+          <div class="rd">把镜头拉到 800 年尺度：公司只是工业化的一段临时容器，正向 3–10 人收敛。这篇手册，就是在那个新尺度里「怎么建一家小公司」的具体打法。</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap-wide">
+      <span>Source · Sahil Lavingia《The Minimalist Entrepreneur / 小而美》 · 拆解为我 fleet 里的 10 个 skill</span>
+      <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe · <a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

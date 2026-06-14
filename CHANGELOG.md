@@ -6,6 +6,20 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.5.0] — 2026-06-14 · Ideas: 极简创业操作手册 (把一本书拆成 10 个 skill)
+
+> **A content session.** Synthesizes my 10 minimalist-entrepreneur advisor skills (an encoding of Sahil Lavingia's *The Minimalist Entrepreneur* into invokable Claude Code skills) into one operational deep-read. The hook is the meta-layer: I didn't just take notes on a book — I turned it into a 10-skill advisory fleet, and this piece chains those skills into a single 0→profit journey. Wise-Dark (site default; matches the same-author `few-person-company`). Joins the **公司的形态** series as its "how-to / practice" anchor.
+
+### Added — Ideas
+
+- **极简创业操作手册** (`/ideas/minimalist-entrepreneur-playbook.html`, index 12) — walks the full arc in 5 acts + 5 inline-SVG diagrams: ① 找方向 (find-community + validate-idea, green/red-flag panels) · ② 做出来 (processize→mvp→pricing; the 三阶段「魔法纸」diagram, 4 build-question grid, the financial-independence equation $10×200=$2k/mo) · ③ 卖出去 (first-customers concentric-circles diagram, marketing funnel + 3 content levels) · ④ 活下去 (grow-sustainably: profit/default-alive, 先用机器人再用人; company-values: Gumroad's 4) · ⑤ 持续校准 (minimalist-review 8-question decision table). Opens with a `/skill` chip row exposing the 10 real skills; ends with a 三点「我的批注」box tying it to the website itself as a minimalist-business practice. Filed Economy + Tech.
+
+### Changed — Ideas
+
+- **Series 公司的形态 now holds 3 pieces** — added `seriesSlug: 'company-form'` to index 12. Mutual cross-links: the new piece links to both `few-person-company` (same author, "how many people") and `company-300-year-experiment` ("the 800-year frame"); reads as the practice/how-to anchor of the trio.
+
+---
+
 ## [1.4.0] — 2026-06-14 · Ideas: 「公司是 300 年的临时实验」图解深读 (Claude-editorial)
 
 > **A content session.** Turns a 小红书 essay by independent developer 花叔 — *「公司」作为人类默认组织形态到底存在多久?* (his answer: ~300 years) — into an original 图解深读 reframed in my own voice. First Ideas piece deliberately rendered in the **Claude (Anthropic) editorial** design system (warm parchment, Noto Serif SC headlines, terracotta accent, ring shadows, light/dark chapter alternation) rather than the site-default Wise-Dark — the content (economic history + Coase + AI) suits the literary treatment.

@@ -63,6 +63,20 @@ export const seriesDefs: SeriesDef[] = [
 
 export const articles: IdeaArticle[] = [
   {
+    index: '12',
+    title: '极简创业操作手册 · 把《小而美》拆成 10 个能调用的 skill · 操作手册',
+    lede: '我把 Sahil Lavingia《小而美 / The Minimalist Entrepreneur》拆成了 10 个能在 Claude Code 里直接调用的创业参谋 skill——等于把一本书变成了一支创业参谋团队。这篇把它们按出场顺序串成一条从 0 到盈利的完整动线:① 找方向(find-community 不从点子开始而从你已属于的社区开始 + validate-idea 验证靠卖不靠造,附绿灯/红灯清单)→ ② 做出来(processize 先手动跑通的「魔法纸」、mvp 的四个动手问题、pricing 哪怕只收 1 块的零价格效应 + 财务自由算式:$10×200 客户=$2000/月,每工作日成交一个不到一年)→ ③ 卖出去(first-customers 的亲友/社区/陌生人销售同心圆、marketing-plan 的五步漏斗 + 教育/激励/娱乐三层内容 + 邮件才是自己的地)→ ④ 活下去(grow-sustainably 盈利即超能力、先用机器人再用人、default alive/dead、company-values 的 Gumroad 四条)→ ⑤ 持续校准(minimalist-review 的 8 问决策表)。一个普通人怎么不融资、不招人、从第一天就盈利地建一家小而美的公司。附我作为 builder 的三点批注:AI 把「手动→产品化」压扁了、这个网站本身就是一次极简创业、盈利即超能力对打工人也成立。',
+    date: '2026.06',
+    tags: ['Economy', 'Tech'],
+    topicSlug: 'economy',
+    topics: ['economy', 'tech'],
+    href: '/ideas/minimalist-entrepreneur-playbook.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'company-form',
+    art: { motif: 'bars', accent: '#9fe870', seed: 12 },
+  },
+  {
     index: '11',
     title: '公司可能是一个 300 年的临时实验 · 公司形态的过去与下一站 · 图解深读',
     lede: '独立开发者花叔的一篇小红书把一个我一直没想清的问题摆上台面:「公司」作为人类默认的组织形态,到底存在了多久?他翻完历史和经济学后给的答案是——满打满算,约 300 年。这是我读后的重述 + 自己画的 8 张逻辑图:从行会的 500 年(匠师嵌在一张行会·教会·家族的密网里,这张网替个人兜底)、到工业化抬高交易成本的三关(规模·资本·信任)催生了「公司」这个在匿名社会重造长期信任的容器、到科斯 1937 年那把双向的尺子(公司边界 = 内部协调成本 = 市场交易成本),最后把尺子反过来用:AI 系统性砍下交易成本,公司规模沿曲线下滑——但被「承诺」这条 AI 砍不动的地板拦在 3–10 人。结构在向 18 世纪的独立匠师复归,但匠师有行会兜底,今天的独立开发者没有。比「公司消失」更大的,是「员工」这个心智模型的消失——身份真空。结尾那句金匠的发问:「你的行会在哪儿?」我答不出来。附我作为供应链计划员 + builder 的三点批注。',

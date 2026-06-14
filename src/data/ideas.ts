@@ -63,19 +63,6 @@ export const seriesDefs: SeriesDef[] = [
 
 export const articles: IdeaArticle[] = [
   {
-    index: '13',
-    title: 'DOGE 的日子 · Sahil Lavingia 亲历记 · 全文翻译',
-    lede: '《小而美》作者、Gumroad / Antiwork 创始人 Sahil Lavingia,2025 年 3–5 月进了「政府效率部」(DOGE),给 47.3 万人的退伍军人事务部(VA)当了 55 天 $0 工资的软件工程师。这是他第一人称随笔《DOGE Days》的中文全文翻译,页顶附我写的作者简介(从 19 岁创立 Gumroad、2015 差点失败、写《小而美》、把书开源成 10 个 skill、把公司源码 MIT 开源,到这趟 DOGE)。逐日记:Day 0 在 VA 医院录指纹、把"雇员/承包商/志愿者"那栏留空;Day 1 头衔"幕僚长高级顾问"、薪水 $0、第一个任务是用 LLM 脚本审 9 万份合同;Day 2 发现政府像大科技公司——战略外包给国会、工程外包给 IBM/埃森哲/德勤,而政府笔记本连 Git/Python/Cursor 都装不了;Day 3 裁员规则残酷而确定(源自 1944《退伍军人优先法》:先裁最新来的人,资历压绩效);Day 8 看清 DOGE 没有直接权力、是各机构负责人的"背锅侠";Day 13 在唯一一次全员会上当面问埃隆能否开源代码;Day 55 因一篇报道被毫无预警地撤权踢出。结尾他诚实地说:学到很多、心怀感激,但也失望——最想做的"改善退伍军人理赔体验"始终没能推上生产。"也许,下次吧。"忠实翻译,政治判断属他本人。',
-    date: '2026.06',
-    tags: ['Society', 'Tech'],
-    topicSlug: 'society',
-    topics: ['society', 'tech'],
-    href: '/ideas/sahil-doge-days.html',
-    status: 'live',
-    isNew: true,
-    art: { motif: 'core', accent: '#ffd11a', seed: 13 },
-  },
-  {
     index: '12',
     title: '极简创业操作手册 · 把《小而美》拆成 10 个能调用的 skill · 操作手册',
     lede: 'Sahil Lavingia 把《小而美 / The Minimalist Entrepreneur》亲手开源成了 10 个能在 Claude Code 里调用的创业参谋 skill(github.com/slavingia/skills),我把它们装进自己的 fleet——等于把一本书变成了一支创业参谋团队。这篇把它们按出场顺序串成一条从 0 到盈利的完整动线:① 找方向(find-community 不从点子开始而从你已属于的社区开始 + validate-idea 验证靠卖不靠造,附绿灯/红灯清单)→ ② 做出来(processize 先手动跑通的「魔法纸」、mvp 的四个动手问题、pricing 哪怕只收 1 块的零价格效应 + 财务自由算式:$10×200 客户=$2000/月,每工作日成交一个不到一年)→ ③ 卖出去(first-customers 的亲友/社区/陌生人销售同心圆、marketing-plan 的五步漏斗 + 教育/激励/娱乐三层内容 + 邮件才是自己的地)→ ④ 活下去(grow-sustainably 盈利即超能力、先用机器人再用人、default alive/dead、company-values 的 Gumroad 四条)→ ⑤ 持续校准(minimalist-review 的 8 问决策表)。一个普通人怎么不融资、不招人、从第一天就盈利地建一家小而美的公司。附我作为 builder 的三点批注:AI 把「手动→产品化」压扁了、这个网站本身就是一次极简创业、盈利即超能力对打工人也成立。',

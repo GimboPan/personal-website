@@ -146,6 +146,44 @@
     .rcard .rt { font-weight: 700; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
     .rcard .rd { font-size: 13px; color: var(--ink-faint); line-height: 1.55; }
 
+    /* author facts chips */
+    .afacts { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 4px; }
+    .afacts span { font-size: 12px; color: var(--ink-soft); background: var(--surface-3); border: 1px solid var(--line); border-radius: 7px; padding: 4px 10px; }
+
+    /* collapsible index (折叠) */
+    .fold { border: 1px solid var(--line-strong); border-radius: 16px; background: var(--surface-1); margin: 30px 0 8px; overflow: hidden; }
+    .fold > summary { list-style: none; cursor: pointer; padding: 22px 24px; display: flex; flex-direction: column; gap: 5px; transition: background .15s; }
+    .fold > summary::-webkit-details-marker { display: none; }
+    .fold > summary:hover { background: var(--surface-2); }
+    .fold .fk { font-family: 'SF Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+    .fold .ftt { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+    .fold .fhint { font-size: 12.5px; color: var(--ink-faint); }
+    .fold .fhint::after { content: "点击展开全文 ▾"; }
+    .fold[open] .fhint::after { content: "收起 ▴"; color: var(--green); }
+    .fold[open] > summary { border-bottom: 1px solid var(--line); }
+    .fold-body { padding: 8px 24px 26px; }
+    .fold-body p { margin: 0 0 15px; color: var(--ink-soft); font-size: 15px; line-height: 1.78; }
+    .fold-body strong { color: var(--ink); }
+    .fold-body em { color: var(--green); font-style: normal; font-weight: 600; }
+    .fold-body a { color: var(--green); }
+    .fold-body ul { list-style: none; margin: 6px 0 16px; }
+    .fold-body ul li { position: relative; padding: 4px 0 4px 22px; color: var(--ink-soft); font-size: 14.5px; }
+    .fold-body ul li::before { content: ""; position: absolute; left: 4px; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .tnote { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 14px 0 22px; font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
+    .tnote b { color: var(--amber); }
+    .dday { margin: 30px 0 4px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .dday .dl { font-family: 'SF Mono', monospace; font-size: 11.5px; letter-spacing: .06em; color: var(--amber); font-weight: 700; }
+    .dday .dh { font-size: 19px; font-weight: 700; color: var(--ink); margin-top: 2px; line-height: 1.3; }
+    .dday .dh .dt { color: var(--ink-faint); font-weight: 400; font-size: 14px; }
+    blockquote.eo { border-left: 3px solid var(--line-strong); background: var(--surface-2); border-radius: 0 10px 10px 0; padding: 15px 18px; margin: 18px 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.72; }
+    blockquote.eo .cite { display: block; margin-top: 10px; font-size: 12px; color: var(--ink-faint); }
+    .doget { background: var(--surface-3); border: 1px solid var(--line-strong); border-radius: 14px; padding: 22px 24px; margin: 22px 0; }
+    .doget .dgt { font-size: 16px; font-weight: 800; color: var(--green-tint); margin-bottom: 12px; }
+    .doget ul li::before { content: "✓"; background: none; color: var(--green); top: 4px; left: 2px; font-weight: 700; width:auto; height:auto; }
+    .dtweet { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 22px 0; font-size: 14px; color: var(--ink-soft); }
+    .dtweet .twh { font-size: 11.5px; color: var(--ink-faint); margin-bottom: 7px; font-weight: 600; }
+    .dtweet .twb { font-style: italic; line-height: 1.65; }
+
     footer { border-top: 1px solid var(--line); margin-top: 56px; padding: 26px 0 56px; }
     footer .wrap-wide { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: var(--ink-faint); }
     footer a { color: var(--green); }
@@ -635,6 +673,96 @@
 
         <p style="color:var(--ink-faint); font-size:13px; margin:18px 0 0; padding-top:15px; border-top:1px solid var(--line);">2026 年，Gumroad（母公司已改名 <strong style="color:var(--ink)">Antiwork</strong>）把<strong style="color:var(--ink)">整个生产源码以 MIT 协议开源</strong>（<a href="https://github.com/antiwork/gumroad" target="_blank" rel="noopener" style="color:var(--amber)">github.com/antiwork/gumroad</a>），还开了公开股东会晒财务。这正是上面「活下去」一幕里 Gumroad 第 4 条价值观 <em>Dare to Be Open</em> 推到极致的样子——他真的按自己说的活。</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ABOUT AUTHOR + DOGE (folded index) -->
+  <section>
+    <div class="wrap">
+      <div class="kicker"><span class="ph">附录</span> 关于作者</div>
+      <h2>顺便，认识一下作者<br><span class="accent">Sahil Lavingia</span>。</h2>
+      <p class="lead-p">这套方法的作者，本身就是个很有意思的人。<strong>2011 年，19 岁的他创立了 Gumroad</strong>——一个让任何创作者「几分钟内就能开始收钱」的电商平台。他一度融了大钱冲「十亿美元独角兽」，<strong>2015 年却差点死掉</strong>：大裁员、增长停滞，他写下那篇著名的《Reflecting on My Failure to Build a Billion-Dollar Company》。</p>
+      <p>之后他做了个反主流的决定：<em>不再追求做大，把公司刻意做小、做到盈利</em>。这段转变长成了《小而美》，也就是上面这 10 个 skill 的来源。他还把「Dare to Be Open」推到极致——公开财务、开公开股东会，2025 年把 Gumroad 整个源码 MIT 开源、公司改名 <strong>Antiwork</strong>。</p>
+      <p>也正是这份「什么都该开源」的信念，把他带去了一个出人意料的地方——<strong>2025 年 3 月，他加入了 DOGE（美国政府效率部）</strong>，给 47.3 万人的退伍军人事务部（VA）当了 55 天 $0 工资的软件工程师。他把这段经历逐日写成了随笔《DOGE Days》。我把全文翻成了中文，收在下面（默认折叠，点开看）：</p>
+      <div class="afacts">
+        <span>Gumroad 创始人（2011 · 19 岁）</span>
+        <span>《小而美》作者</span>
+        <span>把书开源成 10 个 skill</span>
+        <span>把公司源码 MIT 开源</span>
+        <span>2025 进 DOGE</span>
+      </div>
+
+      <details class="fold">
+        <summary>
+          <span class="fk">番外 · 全文翻译</span>
+          <span class="ftt">《DOGE 的日子》—— 他在「政府效率部」给 VA 写代码的 55 天</span>
+          <span class="fhint"></span>
+        </summary>
+        <div class="fold-body">
+          <div class="tnote"><b>译者按。</b>下面是 Sahil 第一人称随笔《DOGE Days》（2025-05-28）的中文全文翻译。这是他的亲历与个人观点，文中的政治与人事判断都属于他本人；我只做忠实翻译、不替他表态。原文：<a href="https://www.sahillavingia.com/doge" target="_blank" rel="noopener">sahillavingia.com/doge</a>。</div>
+
+          <p>2014 年 8 月，奥巴马总统与国会创立了「美国数字服务局」（USDS）。2025 年 1 月，特朗普总统签署行政命令，把它更名、重组为「美国 DOGE 服务局」。</p>
+          <blockquote class="eo">在与 USDS 协商后，各机构负责人应在本命令签署之日起三十天内，于本机构内组建一个至少由四名雇员组成的 DOGE 团队。每个 DOGE 团队通常包括一名团队负责人、一名工程师、一名人力资源专员和一名律师。<span class="cite">—— 第 14123 号行政命令《建立并实施总统的政府效率部》</span></blockquote>
+          <p>2025 年 3 月 17 日，我以软件工程师的身份加入 DOGE，为退伍军人事务部（VA）工作。</p>
+
+          <div class="dday"><div class="dl">Day 0</div><div class="dh">报到前一天</div></div>
+          <p>开始上班前的那个周五，我去曼哈顿的 VA 医疗中心录指纹。填表时，「雇员 / 承包商 / 志愿者」那一栏我留了空白——因为我也不知道该填哪个。我只知道一件事：我想为联邦政府写代码。VA 每年的影响力约 <strong>3500 亿美元</strong>，有 <strong>47.3 万名雇员</strong>。</p>
+          <p>2016 年，我为伯尼·桑德斯拉过票。在内华达的第一天，我顶着沙漠高温挨家敲门，手机电量将尽，手里攥着一叠打印的潜在选民名单，心想：「这事儿真该有个 app。」而这一次，是一个做点更大的事的机会。</p>
+
+          <div class="dday"><div class="dl">Day 1</div><div class="dh">上班第一天 <span class="dt">· 2025 年 3 月 17 日</span></div></div>
+          <p>我一早到了华盛顿特区的 VA 中央办公室，宣了誓，领了政府 ID。在入职培训上，我得知自己的头衔——<strong>幕僚长 Christopher Syrek 的高级顾问</strong>，以及薪水：<strong>0 美元</strong>。第一项任务是审查合同。</p>
+          <blockquote class="eo">各机构负责人应审查所有现行的相关合同与拨款，并在适当且合法的情况下，终止或修改（包括重新谈判）这些合同，以削减联邦总开支或提升效率。<span class="cite">—— 第 14124 号行政命令《实施总统的政府效率部成本效率倡议》</span></blockquote>
+          <p>现行做法既手动又繁琐：找出 PDF、联系负责人、判断是否必要。VA 有超过 <strong>9 万份在执行的合同</strong>，从 IT 支持到园林绿化都有。为理顺流程，我提议写一个简单脚本：</p>
+          <ul><li>遍历所有合同 PDF</li><li>抽取其中的文本</li><li>用大语言模型（LLM）标记可能可以取消的合同</li><li>把被标记的合同汇总成 CSV，方便审阅</li></ul>
+          <p>我还建议做一个仪表盘，让 VA 的合同官员方便查看被标记出来的合同。</p>
+
+          <div class="dday"><div class="dl">Day 2</div><div class="dh">政府像一家大科技公司</div></div>
+          <p>在行政部门里工作，感觉就像在一家大型科技公司上班——只不过<em>商业战略被外包给了国会，软件工程被外包给了承包商</em>，比如 IBM、埃森哲、德勤、博思艾伦。我本想帮 VA 把软件「内包」回来，但也渐渐明白了为什么这么多软件是外包的：我始终被那台权限受限的政府笔记本卡着，出于安全策略，我装不了 Git、Python，也用不了 Cursor。要从根上解决需要国会出手；相比之下，继续花钱外包反而更「实际」。</p>
+
+          <div class="dday"><div class="dl">Day 3</div><div class="dh">裁员，是一套残酷而确定的规则</div></div>
+          <p>这天大部分时间在和 VA 领导层开会，讨论即将到来的「裁员」（RIF），包括部长 Doug Collins 和幕僚长 Mark Engelbaum。我本以为会碰到一堆零散的 HR 系统，但 VA 早已把人事数据整合进 IBM 的 HR Smart。当天下午，我抽出数据、搭出了一个 MVP 级的组织架构可视化工具，呈现了近五十万名雇员。然后是关于裁员规则的当头一棒——它残酷地确定无疑：</p>
+          <ul><li><strong>工龄最重要</strong>——新入职的人最先被裁</li><li>其次是<strong>退伍军人优先</strong></li><li><strong>服务年限压过绩效</strong>——资历胜过能力</li><li>绩效评分只用来打破剩下的平局</li></ul>
+          <p>这套规则源自 <strong>1944 年的《退伍军人优先法》</strong>。和私营企业「砍中层冗余、砍低绩效」不同，政府是<em>不管绩效，先裁最新来的人</em>。任何在过去两年内被提拔过的人，也算「试用期」，同样最先被裁。</p>
+
+          <div class="dday"><div class="dl">Day 5</div><div class="dh">也许政府真的能把软件内包、开源</div></div>
+          <p>在和 CTO 办公室开会时，我发现了一些雄心勃勃的项目，比如把退伍军人福利申领从 <strong>133 天压缩到一周以内</strong>。我还了解到 VA 的好几个代码库早就是开源的；世界上第一套电子病历系统 VistA，就是 VA 雇员 40 多年前自己搭的。也许政府终究<em>是能</em>把软件栈内包、开源的。我对政府笔记本的不满其实也有解：CTO Charles Worthington 建议我去申请一台软件工程级的 MacBook。我很纳闷，为什么没有一份集中的「DOGE 工程手册」——DOGE 内部知识共享之匮乏让我意外，每个工程师都像从零开始。</p>
+
+          <div class="dday"><div class="dl">Day 8</div><div class="dh">DOGE 更像「嵌进各机构的麦肯锡志愿者」</div></div>
+          <p>现实开始清晰：DOGE 与其说是革命性力量，不如说更像被嵌进各机构里的「麦肯锡志愿者」——就是埃隆（在白宫）、Steven Davis（做协调），以及散落在各机构的其他人。公众从新闻里看到一波波冷酷的大规模解雇，很多人想当然以为是 DOGE 直接干的。但事实上，<strong>DOGE 并没有直接权力</strong>。真正的决定来自特朗普任命的各机构负责人——他们很「聪明」地让 DOGE 去当不得人心决策的「背锅侠」。</p>
+
+          <div class="dday"><div class="dl">Day 13</div><div class="dh">第一次、也是最后一次 DOGE 全员会</div></div>
+          <p>我参加了第一次、也是最后一次 DOGE 全员大会。与其说是有结构的会议，不如说更像和埃隆的一场坦诚问答。当他问大家如何改善 DOGE 的公众形象时，我问他：能不能把我写的代码开源？他说可以——这和 DOGE「最大化透明」的目标一致。代码就在 GitHub（<a href="https://github.com/slavingia/va" target="_blank" rel="noopener">slavingia/va</a>）。</p>
+
+          <div class="dday"><div class="dl">Day 21</div><div class="dh">回纽约，在 VA 医院地下室远程办公 <span class="dt">· 2025 年 4 月 1 日</span></div></div>
+          <p>我回到纽约的家，在曼哈顿 VA 医疗中心的地下室里远程办公。尽管 DOGE 没达到我对「有凝聚力团队文化」的期待，但对自己在 VA 能产生的个人影响，我感到乐观——分派给我的活儿（砍合同、协助裁员、技术建议）并没占多少时间。我开始着手两个 VA 专属项目：</p>
+          <ul><li>把内部版的 ChatGPT（叫 VAGPT）现代化</li><li>一个能在退伍军人访问 VA.gov 时帮他们的 AI 聊天机器人</li></ul>
+
+          <div class="dday"><div class="dl">Day 34</div><div class="dh">把 VAGPT 现代化，并争取到开源</div></div>
+          <p>我完成了 VAGPT 的前端迁移，换成 NextJS、Tailwind、ShadCN，最重要的是让它能在手机上自适应。我还争取到 VA 同意把 VAGPT 开源——其他联邦机构就能免费用上同一套代码，非政府雇员（比如最终的我自己）也能贡献。最后，我们把新 AI 聊天机器人的黑客松定在 2025 年 5 月 19 日开始。</p>
+
+          <div class="dday"><div class="dl">Day 55</div><div class="dh">我被 DOGE 踢了出来 <span class="dt">· 2025 年 5 月 9 日</span></div></div>
+          <p>我被 DOGE 扫地出门了。我联系了一位曾写过 Gumroad 开源转型的记者，在那场后来发表于《Fast Company》的采访里，我被问到在 DOGE 的经历——而这段经历此前已通过一篇《WIRED》报道被公开了。文章发表后不久，我的权限就被毫无预警地撤销了。我的 DOGE 生涯，结束了。</p>
+
+          <div class="doget">
+            <div class="dgt">我到底做成了什么？</div>
+            <ul>
+              <li>写了一个<strong>用 LLM 标记浪费性开支</strong>的合同分析脚本</li>
+              <li>把这个工具<strong>产品化并部署</strong>到了 VA 的云上</li>
+              <li>做了<strong>组织架构工具</strong>：为 47.3 万名雇员的裁员执行提供交互式可视化</li>
+              <li>把内部的 ChatGPT（<strong>VAGPT</strong>）做了现代化</li>
+              <li>交付了一个 <strong>VA 聊天机器人 demo</strong>，帮退伍军人在 VA.gov 上找服务</li>
+              <li>加速 AI 落地：据一位 VA 工程师说，把采用进度<strong>提前了「12 个月」</strong></li>
+            </ul>
+          </div>
+
+          <p>最后，我学到了很多，也得以为联邦政府写了一些代码。为此，我心怀感激。但我也很失望：我没能在「改善退伍军人申报伤残补助的体验」、或「自动化 / 加速理赔处理」上取得任何进展——而这些正是我一开始满怀希望想做的事。我搭了好几个原型，却始终没能拿到批准，把任何真正能改善美国人生活、同时为纳税人省钱的东西推上生产环境。<strong>也许，下次吧。</strong></p>
+
+          <div class="dtweet">
+            <div class="twh">@DOGE · 2025 年 4 月 2 日</div>
+            <div class="twb">「@DeptVetAffairs 干得漂亮。VA 此前为一些小幅网站改动，每月支付约 38 万美元。该合同已不再续签，同样的工作现在由 VA 内部 1 名软件工程师完成，每周约花 10 小时。」</div>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 

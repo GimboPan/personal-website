@@ -6,17 +6,21 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.6.0] — 2026-06-15 · Ideas: 《DOGE 的日子》Sahil Lavingia 亲历记全文翻译 + 作者简介
+## [1.6.0] — 2026-06-15 · Ideas: 作者简介 + 《DOGE 的日子》折叠进极简创业手册
 
-> **A translation + author-intro content drop.** Full Chinese translation of Sahil Lavingia's first-person essay *DOGE Days* (his 55 days as a $0-salary software engineer at DOGE inside the VA, Mar–May 2025), topped with a Gimbo-written author intro that consolidates the whole Sahil arc the recent Ideas thread has built up. Claude-editorial (warm, prose-first reading) — fits a long first-person diary better than Wise-Dark. Standalone (not in the 公司的形态 series), filed Society + Tech.
+> **An author-intro + folded translation, merged into an existing page (not a new article).** Added a visible **「附录 · 关于作者 Sahil Lavingia」** section to the minimalist playbook, and folded the full Chinese translation of his first-person essay *DOGE Days* (his 55 days as a $0-salary engineer at DOGE inside the VA, Mar–May 2025) into a collapsible `<details>` index right below it. Per the user's call: don't spin it off as its own piece — keep it inside the 极简创业 page, as a collapsed index entry. Restyled from the original Claude-editorial draft to Wise-Dark to match the playbook.
 
-### Added — Ideas
+### Added — Ideas (in `minimalist-entrepreneur-playbook.html`)
 
-- **DOGE 的日子 · Sahil Lavingia 亲历记** (`/ideas/sahil-doge-days.html`, index 13) — faithful day-by-day translation (Day 0 → Day 55: fingerprinting with the employee/contractor/volunteer box left blank → $0 "Senior Advisor" title → LLM contract-review script over 90k contracts → the 1944 Veterans' Preference Act RIF rules → DOGE as agency 'fall guy' → asking Elon to open-source his code → abrupt access revocation), with the executive-order block-quotes rendered as cited blockquotes, a dark "我到底做成了什么" accomplishments panel, and the closing "也许，下次吧". Topped with an **author-intro card** (Gumroad at 19 → near-failure 2015 → 《小而美》 → 10 open-sourced skills → MIT-open-sourced company → DOGE) and a 译者按 noting the politics are the author's own and the translation is faithful. Cross-links to the minimalist playbook and few-person-company.
+- **「附录 · 关于作者」** — a visible prose intro to Sahil (Gumroad at 19 → near-failure 2015 → 《小而美》 → 10 open-sourced skills → MIT-open-sourced company/Antiwork → DOGE), with author-fact chips.
+- **Folded full translation of《DOGE Days》** — a `<details>` collapsible (默认折叠, "点击展开全文") containing the faithful day-by-day translation (Day 0→55: blank employee/contractor box → $0 "Senior Advisor" → LLM script over 90k contracts → 1944 Veterans' Preference Act RIF rules → DOGE as agency 'fall guy' → asking Elon to open-source his code → abrupt access revocation → "也许，下次吧"), with EO block-quotes, a "我到底做成了什么" panel, the @DOGE tweet, and a 译者按 flagging the politics as the author's own.
+
+### Removed
+
+- **`public/ideas/sahil-doge-days.html`** — the briefly-shipped standalone Claude-editorial page (and its `ideas.ts` index-13 catalog entry) was removed; the content now lives folded inside the playbook instead.
 
 ### Notes
 
-- **Second Claude-editorial Ideas page** (after `company-300-year-experiment`); chosen for long-form prose readability. Catalog list thumbnail stays Wise-Dark (`art.motif: 'core'`, accent `#ffd11a`).
 - **Red lines clean** — Sahil and the named officials (Collins, Engelbaum, Syrek, Worthington, Musk, Davis) are public figures in public roles in a translated public essay; no user-personal names, employers, or financial figures involved.
 
 ---

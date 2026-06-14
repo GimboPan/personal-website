@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOGE 的日子 · Sahil Lavingia 亲历记 · 全文翻译 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="《小而美》作者、Gumroad 创始人 Sahil Lavingia 2025 年 3–5 月在「政府效率部」(DOGE) 给退伍军人事务部(VA)当 $0 工资软件工程师的 55 天逐日亲历记。中文全文翻译 + 作者简介。" />
+  <meta property="og:title" content="DOGE 的日子 · Sahil Lavingia 亲历记" />
+  <meta property="og:description" content="一个开源创业者，进了政府效率部，给 47 万人的退伍军人事务部写代码的 55 天。" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#f5f4ed; --ivory:#faf9f5; --white:#fff; --sand:#e8e6dc;
+      --ink:#141413; --ink-2:#3d3d3a; --ink-3:#5e5d59; --ink-4:#87867f;
+      --line:#e8e6dc; --line-soft:#f0eee6;
+      --brand:#c96442; --coral:#d97757; --brand-soft:#f6e7df;
+      --olive:#6f7a4a; --olive-soft:#eef0e3;
+      --ochre:#b1822e;
+      --dk-bg:#141413; --dk-surface:#1e1e1c; --dk-line:#30302e; --dk-ink:#faf9f5; --dk-soft:#b0aea5;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB',system-ui,sans-serif; background:var(--bg); color:var(--ink); font-size:17px; line-height:1.82; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    a { color:inherit; text-decoration:none; }
+    img,svg { max-width:100%; display:block; }
+    .serif { font-family:'Noto Serif SC',Georgia,serif; }
+    .wrap { max-width:720px; margin:0 auto; padding:0 28px; }
+    .wrap-wide { max-width:920px; margin:0 auto; padding:0 28px; }
+
+    .backbar { background:var(--ivory); border-bottom:1px solid var(--line); padding:15px 0; position:sticky; top:0; z-index:20; backdrop-filter:blur(6px); }
+    .backbar .wrap-wide { display:flex; align-items:center; gap:11px; font-size:12.5px; letter-spacing:.04em; color:var(--ink-4); }
+    .backbar a { color:var(--brand); transition:color .15s; }
+    .backbar a:hover { color:var(--coral); }
+    .backbar .sep { color:var(--ink-4); opacity:.6; }
+    .backbar .here { color:var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+    .hero { padding:80px 0 24px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--brand); font-weight:700; margin-bottom:28px; }
+    .eyebrow::before { content:""; width:22px; height:1.5px; background:var(--brand); display:inline-block; }
+    .hero h1 { font-family:'Noto Serif SC',Georgia,serif; font-weight:600; font-size:clamp(40px,7vw,68px); line-height:1.12; letter-spacing:-.01em; margin-bottom:22px; }
+    .hero h1 .accent { color:var(--brand); }
+    .hero .sub { font-family:'Noto Serif SC',Georgia,serif; font-size:clamp(18px,2.2vw,22px); line-height:1.6; color:var(--ink-3); font-weight:400; max-width:42ch; margin-bottom:32px; }
+    .credits { display:flex; flex-wrap:wrap; gap:14px 30px; padding-top:24px; border-top:1px solid var(--line); font-size:13px; color:var(--ink-4); }
+    .credits .k { display:block; font-size:10px; letter-spacing:.13em; text-transform:uppercase; margin-bottom:3px; }
+    .credits .v { color:var(--ink-2); font-weight:500; }
+    .credits .v a { color:var(--brand); border-bottom:1px solid #e2c5b8; }
+
+    /* author intro */
+    .author { background:var(--ivory); border:1px solid var(--line); border-radius:20px; padding:30px 32px; margin:38px 0 6px; box-shadow:rgba(20,20,19,.05) 0 4px 24px; }
+    .author .at { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--brand); font-weight:700; margin-bottom:14px; }
+    .author h2 { font-family:'Noto Serif SC',serif; font-size:25px; font-weight:600; margin-bottom:4px; }
+    .author .role { font-size:13.5px; color:var(--ink-4); margin-bottom:16px; }
+    .author p { font-size:15px; color:var(--ink-2); margin-bottom:13px; line-height:1.78; }
+    .author p:last-child { margin-bottom:0; }
+    .author strong { color:var(--ink); font-weight:700; }
+    .author a.ref { color:var(--brand); border-bottom:1px solid #e2c5b8; }
+    .author .facts { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 4px; }
+    .author .facts span { font-size:12px; color:var(--ink-3); background:var(--brand-soft); border:1px solid #ecd8cd; border-radius:7px; padding:4px 10px; }
+
+    /* translator note */
+    .tnote { background:var(--olive-soft); border:1px solid #dde0cb; border-radius:14px; padding:18px 22px; margin:26px 0; font-size:14px; line-height:1.7; color:var(--ink-2); }
+    .tnote b { color:var(--olive); }
+
+    section { padding:18px 0; }
+    .prose p { margin:0 0 18px; color:var(--ink-2); }
+    .prose p.lead-p { font-size:19px; }
+    .prose strong { color:var(--ink); font-weight:700; }
+    .prose em { font-style:normal; color:var(--brand); font-weight:600; }
+    .prose a.ref { color:var(--brand); border-bottom:1px solid #e2c5b8; }
+
+    .day { margin:46px 0 6px; padding-top:24px; border-top:1px solid var(--line); }
+    .day .dlabel { font-family:'Noto Serif SC',serif; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--brand); font-weight:600; }
+    .day h3 { font-family:'Noto Serif SC',serif; font-size:27px; font-weight:600; line-height:1.25; margin-top:4px; color:var(--ink); }
+    .day h3 .date { color:var(--ink-4); font-weight:400; font-size:18px; }
+
+    blockquote.eo { border-left:3px solid var(--sand); background:var(--ivory); border-radius:0 12px 12px 0; padding:18px 22px; margin:24px 0; font-size:14.5px; color:var(--ink-3); line-height:1.72; }
+    blockquote.eo .cite { display:block; margin-top:12px; font-size:12.5px; color:var(--ink-4); }
+    blockquote.eo .cite a { color:var(--brand); border-bottom:1px solid #e2c5b8; }
+
+    ul.clean { list-style:none; margin:8px 0 20px; }
+    ul.clean li { position:relative; padding:5px 0 5px 24px; color:var(--ink-2); }
+    ul.clean li::before { content:""; position:absolute; left:4px; top:14px; width:6px; height:6px; border-radius:50%; background:var(--brand); }
+
+    .pull { font-family:'Noto Serif SC',serif; font-size:clamp(22px,3vw,30px); line-height:1.4; font-weight:500; color:var(--ink); border-left:3px solid var(--brand); padding:6px 0 6px 26px; margin:38px 0; }
+
+    .didget { background:var(--dk-bg); color:var(--dk-ink); border-radius:20px; padding:34px 32px; margin:40px 0; }
+    .didget .dt { font-family:'Noto Serif SC',serif; font-size:24px; font-weight:600; margin-bottom:16px; }
+    .didget ul { list-style:none; }
+    .didget li { position:relative; padding:8px 0 8px 26px; color:var(--dk-soft); border-bottom:1px solid var(--dk-line); font-size:15px; }
+    .didget li:last-child { border-bottom:none; }
+    .didget li::before { content:"✓"; position:absolute; left:0; top:8px; color:var(--coral); font-weight:700; }
+    .didget li strong { color:var(--dk-ink); font-weight:700; }
+
+    .tweet { background:var(--ivory); border:1px solid var(--line); border-radius:16px; padding:22px 24px; margin:32px 0; font-size:14.5px; color:var(--ink-2); line-height:1.7; }
+    .tweet .th { font-size:12px; color:var(--ink-4); margin-bottom:8px; font-weight:600; }
+    .tweet .tb { font-style:italic; }
+
+    .related { border-top:1px solid var(--line); padding-top:34px; margin-top:30px; }
+    .rk { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-4); font-weight:700; margin-bottom:15px; }
+    .rcard { display:block; background:var(--ivory); border:1px solid var(--line); border-radius:14px; padding:17px 20px; margin-bottom:11px; transition:border-color .15s, transform .15s; }
+    .rcard:hover { border-color:var(--coral); transform:translateY(-1px); }
+    .rcard .rt { font-family:'Noto Serif SC',serif; font-weight:600; color:var(--ink); font-size:16px; margin-bottom:3px; }
+    .rcard .rd { font-size:13px; color:var(--ink-4); }
+
+    footer { border-top:1px solid var(--line); margin-top:54px; padding:28px 0 56px; }
+    footer .wrap-wide { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; color:var(--ink-4); }
+    footer a { color:var(--brand); }
+
+    @media (max-width:640px){ body{font-size:16px;} .hero{padding:54px 0 16px;} .author,.didget{padding:24px 20px;} }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap-wide">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">DOGE 的日子 · Sahil Lavingia 亲历记</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Ideas · 译文 · 第一人称亲历记</span>
+      <h1>DOGE 的日子</h1>
+      <p class="sub serif">一个开源创业者进了「政府效率部」，给 47 万人的退伍军人事务部写代码的 55 天。</p>
+      <div class="credits">
+        <div><span class="k">原作者</span><span class="v">Sahil Lavingia</span></div>
+        <div><span class="k">原文</span><span class="v"><a href="https://www.sahillavingia.com/doge" target="_blank" rel="noopener">sahillavingia.com/doge</a> · 2025-05-28</span></div>
+        <div><span class="k">翻译 + 简介</span><span class="v">Gimbo</span></div>
+        <div><span class="k">Filed</span><span class="v">社会 / 科技 · 2026.06</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTHOR INTRO -->
+  <div class="wrap">
+    <div class="author">
+      <div class="at">作者简介 · 他是谁</div>
+      <h2>Sahil Lavingia（萨希尔·拉文吉亚）</h2>
+      <div class="role">Gumroad / Antiwork 创始人 · 《小而美 / The Minimalist Entrepreneur》作者 · 极致开源主义者</div>
+      <p><strong>2011 年，19 岁的 Sahil 创立了 Gumroad</strong>——一个让任何创作者「几分钟内就能开始收钱」的电商平台（卖电子书、课程、模板、软件、会员）。他一度融了大钱、冲着「十亿美元独角兽」去，结果 <strong>2015 年差点死掉</strong>：大裁员、增长停滞。他写下那篇著名的《Reflecting on My Failure to Build a Billion-Dollar Company》（反思我没能造出十亿美元公司）。</p>
+      <p>之后他做了一个反主流的决定：<strong>不再追求规模，把公司刻意做小、做到盈利</strong>——一支极小的团队，年入数千万。这段「从追求做大到刻意做小」的转变，长成了他 2021 年的书 <a class="ref" href="/ideas/minimalist-entrepreneur-playbook.html">《小而美》</a>，也正是我把它拆成 10 个可调用 skill 的那套方法论。</p>
+      <p>他把「<em>Dare to Be Open</em>（敢于公开）」做到了极致：公开公司财务、开公开股东会，2025 年更<strong>把 Gumroad 的整个生产源码以 MIT 协议开源</strong>（<a class="ref" href="https://github.com/antiwork/gumroad" target="_blank" rel="noopener">antiwork/gumroad</a>），公司也改名 <strong>Antiwork</strong>。他的信念是：所有写出来的代码都应该开源。</p>
+      <p>也正是这份信念，把他带进了下面这段经历——<strong>2025 年 3 月，他加入了 DOGE（政府效率部）</strong>，给退伍军人事务部（VA）当一名 $0 工资的软件工程师。这篇就是他逐日记下的 55 天。</p>
+      <div class="facts">
+        <span>Gumroad 创始人（2011，19 岁）</span>
+        <span>《小而美》作者</span>
+        <span>把书开源成 10 个 Claude skill</span>
+        <span>把公司源码 MIT 开源</span>
+        <span>2025 年进 DOGE</span>
+      </div>
+    </div>
+
+    <div class="tnote">
+      <b>译者按。</b>下面是 Sahil 第一人称随笔《DOGE Days》的中文全文翻译。这是他的亲历与个人观点，文中涉及的政治与人事判断都属于他本人；我只做忠实翻译、不替他表态。之所以译它，是因为这位作者在我最近这条「公司的形态 / 极简创业」的线上反复出现——这篇让你看到他这个人更完整的一面：一个把「开源」当信仰的创业者，走进政府机器内部的 55 天。
+    </div>
+  </div>
+
+  <!-- TRANSLATION -->
+  <section>
+    <div class="wrap prose">
+
+      <p class="lead-p">2014 年 8 月，奥巴马总统与国会创立了「美国数字服务局」（United States Digital Service，USDS）。</p>
+      <p>2025 年 1 月，特朗普总统签署了一项行政命令，把它更名、重组为「美国 DOGE 服务局」（United States DOGE Service）。</p>
+
+      <blockquote class="eo">
+        在与 USDS 协商后，各机构负责人应在本命令签署之日起三十天内，于本机构内组建一个至少由四名雇员组成的 DOGE 团队（可包含特别政府雇员）。机构负责人应在与 USDS 局长协商后遴选 DOGE 团队成员。每个 DOGE 团队通常包括一名 DOGE 团队负责人、一名工程师、一名人力资源专员和一名律师。机构负责人应确保 DOGE 团队负责人与 USDS 协调工作，并就落实总统的 DOGE 议程向本机构负责人提供建议。
+        <span class="cite">—— 第 14123 号行政命令《建立并实施总统的政府效率部》（<a href="https://www.federalregister.gov/documents/2025/01/29/2025-02005/establishing-and-implementing-the-presidents-department-of-government-efficiency" target="_blank" rel="noopener">Federal Register</a>）</span>
+      </blockquote>
+
+      <p>2025 年 3 月 17 日，我以软件工程师的身份加入 DOGE，为退伍军人事务部（Department of Veterans Affairs，VA）工作。</p>
+
+      <div class="day"><div class="dlabel">Day 0</div><h3>报到前一天</h3></div>
+      <p>开始上班前的那个周五，我去了曼哈顿的 VA 医疗中心录指纹。填表时，「雇员 / 承包商 / 志愿者」那一栏我留了空白——因为我也不知道该填哪个。</p>
+      <p>我只知道一件事：我想为联邦政府写代码。VA 每年的影响力大约是 <strong>3500 亿美元</strong>，有 <strong>47.3 万名雇员</strong>。</p>
+      <p>2016 年，我为伯尼·桑德斯拉过票。在内华达的第一天，我顶着沙漠的高温挨家挨户敲门，手机电量将尽，手里攥着一叠打印出来的潜在选民名单，心想：「这事儿真该有个 app。」最后我写了一些 Google Apps 代码，用来上报党团会议（caucus）的计票结果。</p>
+      <p>而这一次，是一个做点更大的事的机会。</p>
+
+      <div class="day"><div class="dlabel">Day 1</div><h3>上班第一天 <span class="date">· 2025 年 3 月 17 日</span></h3></div>
+      <p>我一早就到了华盛顿特区的 VA 中央办公室，宣了誓，领了政府 ID，参加了入职培训。在那里，我得知了自己的头衔——<strong>幕僚长 Christopher Syrek 的高级顾问</strong>，以及我的薪水：<strong>0 美元</strong>。</p>
+      <p>我的第一项任务是审查合同。</p>
+      <blockquote class="eo">
+        各机构负责人应在与本机构 DOGE 团队负责人协商后，审查所有现行的相关合同与拨款，并在适当且符合相关法律的情况下，终止或修改（包括通过重新谈判）这些合同与拨款，以削减联邦总开支，或重新分配开支以提升效率、推进本届政府的政策。
+        <span class="cite">—— 第 14124 号行政命令《实施总统的政府效率部成本效率倡议》（<a href="https://www.federalregister.gov/documents/2025/03/03/2025-03527/implementing-the-presidents-department-of-government-efficiency-cost-efficiency-initiative" target="_blank" rel="noopener">Federal Register</a>）</span>
+      </blockquote>
+      <p>现行的做法既手动又繁琐：找出 PDF、联系对应负责人、判断是否必要。VA 有超过 <strong>9 万份在执行的合同</strong>，从 IT 支持到园林绿化，什么都有。</p>
+      <p>为了把流程理顺，我提议写一个简单的脚本：</p>
+      <ul class="clean">
+        <li>遍历所有合同 PDF</li>
+        <li>抽取其中的文本</li>
+        <li>用大语言模型（LLM）标记出可能可以取消的合同</li>
+        <li>把被标记的合同汇总成一个 CSV，方便审阅</li>
+      </ul>
+      <p>我还建议做一个仪表盘，让 VA 的合同官员能方便地查看被标记出来的合同。</p>
+
+      <div class="day"><div class="dlabel">Day 2</div><h3>政府像一家大科技公司</h3></div>
+      <p>在行政部门里工作，感觉就像在一家大型科技公司上班——只不过，<em>商业战略被外包给了国会，软件工程被外包给了承包商</em>，比如 IBM、埃森哲（Accenture）、德勤（Deloitte）、博思艾伦（Booz Allen Hamilton）。</p>
+      <p>我本来很兴奋，想帮 VA 把软件「内包」回来；但我也渐渐明白了，为什么这么多软件是外包出去的。举个例子，我始终被那台权限受限的政府笔记本卡着——它让写代码、跑代码都很困难。出于政府安全策略，我装不了 Git、装不了 Python，也用不了 Cursor 这类工具。</p>
+      <p>要从根上解决这个问题——让雇员更容易动手干活——需要国会出手干预；相比之下，继续花大把钱把软件开发外包给承包商，反而更「实际」。</p>
+
+      <div class="day"><div class="dlabel">Day 3</div><h3>裁员，是一套残酷而确定的规则</h3></div>
+      <p>这一天大部分时间都在和 VA 的领导层开会，讨论即将到来的「裁员」（Reduction in Force，RIF），包括部长 Doug Collins 和幕僚长 Mark Engelbaum，商讨组织重组的方案。</p>
+      <blockquote class="eo">
+        机构负责人应与本机构内的政府效率部（DOGE）团队负责人协作，制定用于「机构裁减重组计划」（ARRP）的竞争性范围。
+        <span class="cite">—— 第 14159 号行政命令《实施总统的政府效率部劳动力优化倡议》（<a href="https://www.federalregister.gov/documents/2025/02/14/2025-02762/implementing-the-presidents-department-of-government-efficiency-workforce-optimization-initiative" target="_blank" rel="noopener">Federal Register</a>）</span>
+      </blockquote>
+      <p>一开始，我以为会碰到一堆零散割裂的 HR 系统；但我了解到，VA 早已把人事数据整合进了 IBM 的 HR Smart 系统。当天下午晚些时候，我成功抽出了所需数据，搭出了一个 MVP 级别的组织架构可视化工具，把 VA 近五十万名雇员都呈现了出来。</p>
+      <p>然后是关于裁员规则的一记「现实当头一棒」——这套规则原来是残酷地确定无疑的：</p>
+      <ul class="clean">
+        <li><strong>工龄最重要</strong>——新入职的人最先被裁</li>
+        <li>其次是<strong>退伍军人优先</strong>——退伍军人比非退伍军人受保护</li>
+        <li><strong>服务年限压过绩效</strong>——资历胜过能力</li>
+        <li>绩效评分只用来打破剩下的平局</li>
+      </ul>
+      <p>这套裁员规则源自 <strong>1944 年的《退伍军人优先法》</strong>，让我和很多人都很意外。和私营企业「砍中层冗余、砍低绩效者」的裁员不同，政府是<em>不管绩效如何，先裁最新来的人</em>。任何在过去两年内被提拔过的人，也被视为「试用期」——同样排在最先被裁的队列里。</p>
+
+      <div class="day"><div class="dlabel">Day 5</div><h3>也许政府真的能把软件内包、开源</h3></div>
+      <p>在和首席技术官（CTO）办公室开会时，我发现了一些雄心勃勃、正在推进的软件项目，比如把退伍军人福利申领的处理时间从 <strong>133 天压缩到一周以内</strong>。我还了解到，VA 的好几个代码库其实早就是开源的；而世界上第一套电子病历系统 <a class="ref" href="https://www.politico.com/agenda/story/2017/03/vista-computer-history-va-conspiracy-000367/" target="_blank" rel="noopener">VistA</a>，就是 VA 的雇员在 40 多年前自己搭出来的。</p>
+      <p>也许，政府终究<em>是能</em>把自己的软件栈内包、开源的。</p>
+      <p>我还了解到，我对那台政府笔记本的种种不满<em>其实是有解的</em>：VA 的 CTO Charles Worthington 建议我去申请一台软件工程级别的 MacBook。</p>
+      <p>我很纳闷，为什么没有一份集中的、汇集了我们所有经验教训的「DOGE 软件工程手册」；总的来说，DOGE 内部知识共享之匮乏让我很意外。看起来每个工程师都是从零开始。</p>
+
+      <div class="day"><div class="dlabel">Day 8</div><h3>DOGE 更像「嵌进各机构的麦肯锡志愿者」</h3></div>
+      <p>现实开始清晰起来：DOGE 与其说是我想象中那股革命性的力量，不如说更像是一群被嵌进各个机构里的「麦肯锡志愿者」。它就是埃隆（在白宫里）、Steven Davis（做协调），以及散落在各机构里的其他所有人。</p>
+      <p>与此同时，公众从新闻里看到的是一波波看起来冷酷无情的大规模解雇，很多人想当然地以为这些都是 DOGE 直接干的。</p>
+      <p>但事实上，<strong>DOGE 并没有直接的权力</strong>。真正的决定，来自特朗普总统任命的各机构负责人——而他们很「聪明」地让 DOGE 去当那些不得人心决策的「背锅侠」。</p>
+
+      <div class="day"><div class="dlabel">Day 13</div><h3>我的第一次、也是最后一次 DOGE 全员会</h3></div>
+      <p>我参加了第一次、也是最后一次 DOGE 全员大会。与其说是一场有结构的会议，不如说更像是和埃隆的一场坦诚问答。当他问在座众人，如何改善 DOGE 的公众形象时，我问他：我能不能把自己一直在写的代码开源？他说可以——这和 DOGE「最大化透明」的目标是一致的。</p>
+      <p>代码就在 GitHub <a class="ref" href="https://github.com/slavingia/va" target="_blank" rel="noopener">这里</a>。</p>
+
+      <div class="day"><div class="dlabel">Day 21</div><h3>回到纽约，在 VA 医疗中心的地下室远程办公 <span class="date">· 2025 年 4 月 1 日</span></h3></div>
+      <p>我回到纽约的家，在曼哈顿 VA 医疗中心的地下室里远程办公。</p>
+      <p>尽管 DOGE 并没有达到我对「一支有凝聚力团队文化」的期待，但对自己在 VA 能产生的个人影响，我感到乐观。关于如何用软件改善退伍军人的医疗、同时又省钱，我有很多想法；而分派给我的那些活儿——砍合同、协助裁员、提供技术建议——并没有占去我多少时间。</p>
+      <p>我开始着手两个 VA 专属的项目：</p>
+      <ul class="clean">
+        <li>把我们内部版的 ChatGPT（叫 VAGPT）现代化</li>
+        <li>一个能在退伍军人访问 <a class="ref" href="https://VA.gov" target="_blank" rel="noopener">VA.gov</a> 时帮他们获得帮助的 AI 聊天机器人</li>
+      </ul>
+
+      <div class="day"><div class="dlabel">Day 34</div><h3>把 VAGPT 现代化，并争取到开源</h3></div>
+      <p>我完成了 VAGPT 的前端迁移，换成了更现代的技术栈：NextJS、Tailwind、ShadCN。最重要的是，我让它能在手机上自适应显示了。</p>
+      <p>我还争取到了 VA 的同意，把 VAGPT 的代码库开源——这样其他联邦机构就能免费用上同一套代码。这也意味着，非政府雇员——比如最终的我自己——也能为它贡献代码。</p>
+      <p>最后，我们计划了一场针对新 AI 聊天机器人的黑客松（hackathon），定在 2025 年 5 月 19 日开始。</p>
+
+      <div class="day"><div class="dlabel">Day 55</div><h3>我被 DOGE 踢了出来 <span class="date">· 2025 年 5 月 9 日</span></h3></div>
+      <p>我被 DOGE 扫地出门了。</p>
+      <p>我联系了一位曾写过 Gumroad 近期开源转型的记者。在那场后来发表于 <a class="ref" href="https://www.fastcompany.com/91330297/doge-sahil-lavignia-gumroad" target="_blank" rel="noopener">《Fast Company》</a> 的采访中，我被问到了在 DOGE 工作的经历——而这段经历此前已通过 <a class="ref" href="https://www.wired.com/story/doge-department-of-veterans-affairs-ai/" target="_blank" rel="noopener">一篇《WIRED》报道</a>被公开了。</p>
+      <p>文章发表后不久，我的权限就被毫无预警地撤销了。</p>
+      <p>我的 DOGE 生涯，结束了。</p>
+
+      <div class="didget">
+        <div class="dt">我到底做成了什么？</div>
+        <ul>
+          <li>写了一个<strong>用 LLM 标记浪费性开支</strong>的合同分析脚本</li>
+          <li>把这个合同分析工具<strong>产品化并部署</strong>到了 VA 的云上</li>
+          <li>做了<strong>组织架构工具</strong>：为 47.3 万名雇员的裁员执行提供交互式可视化</li>
+          <li>把我们内部的 ChatGPT（<strong>VAGPT</strong>）做了现代化</li>
+          <li>交付了一个 <a class="ref" href="https://helper-va-demo.vercel.app" target="_blank" rel="noopener" style="color:#d97757">VA 聊天机器人 demo</a>，帮退伍军人在 VA.gov 上找服务</li>
+          <li>加速了 AI 的落地：据一位 VA 工程师说，把采用进度<strong>提前了「12 个月」</strong></li>
+        </ul>
+      </div>
+
+      <p>最后，我学到了很多，也得以为联邦政府写了一些代码。为此，我心怀感激。</p>
+      <p>但我也很失望。我没能在「改善退伍军人申报伤残补助的体验」、或「自动化 / 加速理赔处理」上取得任何进展——而这些，正是我一开始满怀希望想做的事。我搭了好几个原型，却始终没能拿到批准，把任何真正能改善美国人生活、同时又为纳税人省钱的东西，推上生产环境。</p>
+      <p class="pull">也许，下次吧。</p>
+
+      <div class="tweet">
+        <div class="th">Department of Government Efficiency · @DOGE · 2025 年 4 月 2 日</div>
+        <div class="tb">「@DeptVetAffairs 干得漂亮。VA 此前为一些小幅网站改动，每月支付约 38 万美元。该合同已不再续签，同样的工作现在由 VA 内部 1 名软件工程师完成，每周约花 10 小时。」</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RELATED -->
+  <section>
+    <div class="wrap">
+      <div class="related">
+        <div class="rk">同一位作者 · 延伸阅读</div>
+        <a class="rcard" href="/ideas/minimalist-entrepreneur-playbook.html">
+          <div class="rt">极简创业操作手册 · 把《小而美》拆成 10 个能调用的 skill →</div>
+          <div class="rd">Sahil 把他这套「不融资、不招人、从第一天就盈利」的方法论开源成了 10 个 Claude skill，我串成了一条从 0 到盈利的动线。</div>
+        </a>
+        <a class="rcard" href="/ideas/few-person-company.html">
+          <div class="rt">不是一人公司，是几个人的公司 · OPC 的真实形态 →</div>
+          <div class="rd">同一位作者：极简不是把人减到 0，而是减到刚好还能保证体验的那几个。</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap-wide">
+      <span>原作者 Sahil Lavingia · 原文 <a href="https://www.sahillavingia.com/doge" target="_blank" rel="noopener">sahillavingia.com/doge</a>（2025-05-28）· 中文翻译 + 作者简介为本人所作</span>
+      <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+    </div>
+  </footer>
+
+</body>
+</html>

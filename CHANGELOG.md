@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.7.0] — 2026-06-16 · Ideas: 认知四象限 · 自我觉察方法论的图解深读
+## [1.7.0] — 2026-06-16 · Ideas: 认知四象限 · 自我觉察方法论的图解深读 (live: dcbb16e)
 
 > **A new Ideas deep-read.** A standalone visual essay on the four-quadrant cognition model (known knowns → unknown unknowns), reframed as an actionable self-awareness method rather than a Rumsfeld punchline. Two axes (am-I-aware? × do-I-have-it?), a "flashlight in a dark room" intro analogy, the real lineage (1955 Johari Window → 2002 Rumsfeld's three quadrants → Žižek completing the fourth), then three applications each with its own framework diagram: job-hunting (the résumé-as-mirror, why Chinese job-seekers should seek a *different-refraction* Kiwi/local Career Coach — your Q4 is their Q1), investing (the trap of mistaking Q3 "I think I understand" for Q1 "I really do"; black swans you survive structurally, not predict), and interpersonal (most misunderstandings = "I don't know that the other person doesn't know"). Deepened per the user's "讲给别人听" bar: the two faces of Q3 (buried talent vs. willful self-deception), a "learning to drive" four-stage ladder showing quadrants *flow* (④→②→①→③), and a closing note of recursive humility (the map itself has blind spots). **Built in Claude warm-editorial (Georgia/宋体 serif, parchment + terracotta), not the site-default Wise-Dark — a deliberate per-piece choice the user iterated on.**
 

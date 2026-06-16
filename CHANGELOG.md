@@ -6,6 +6,22 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.7.0] — 2026-06-16 · Ideas: 认知四象限 · 自我觉察方法论的图解深读
+
+> **A new Ideas deep-read.** A standalone visual essay on the four-quadrant cognition model (known knowns → unknown unknowns), reframed as an actionable self-awareness method rather than a Rumsfeld punchline. Two axes (am-I-aware? × do-I-have-it?), a "flashlight in a dark room" intro analogy, the real lineage (1955 Johari Window → 2002 Rumsfeld's three quadrants → Žižek completing the fourth), then three applications each with its own framework diagram: job-hunting (the résumé-as-mirror, why Chinese job-seekers should seek a *different-refraction* Kiwi/local Career Coach — your Q4 is their Q1), investing (the trap of mistaking Q3 "I think I understand" for Q1 "I really do"; black swans you survive structurally, not predict), and interpersonal (most misunderstandings = "I don't know that the other person doesn't know"). Deepened per the user's "讲给别人听" bar: the two faces of Q3 (buried talent vs. willful self-deception), a "learning to drive" four-stage ladder showing quadrants *flow* (④→②→①→③), and a closing note of recursive humility (the map itself has blind spots). **Built in Claude warm-editorial (Georgia/宋体 serif, parchment + terracotta), not the site-default Wise-Dark — a deliberate per-piece choice the user iterated on.**
+
+### Added — Ideas
+
+- **`public/ideas/cognition-four-quadrants.html`** — the standalone deep-read. Claude warm-editorial design system; a centerpiece 2×2 matrix (lightness darkening toward Q4), an origin timeline, a left/right "self-reflection vs. needs-a-mirror" split, two-faces-of-Q3 cards, three per-application mini-matrices + misalignment/flow diagrams, a "象限会流动" driving ladder, and a one-tool-per-quadrant cheat-sheet. Includes the required `← Gimbo's Universe` back link.
+- **`ideas.ts` index-13 catalog entry** — topic 文化/社会 (`culture` + `society`), `rings` thumbnail in terracotta `#c96442`, `isNew`.
+
+### Notes
+
+- **Red lines clean** — no company names, no friend/colleague names, no specific financial positions. "Kiwi" = New Zealand local (clarified by the user), not a person or company. The investing section stays category-level (risk types, black-swan structure), no holdings.
+- **Design divergence is intentional** — most recent Ideas pieces are Wise-Dark; this one is Claude warm-editorial because the user explicitly asked for and iterated on that look. Not a candidate for a later Wise-Dark restyle unless the user asks.
+
+---
+
 ## [1.6.0] — 2026-06-15 · Ideas: 作者简介 + 《DOGE 的日子》折叠进极简创业手册
 
 > **An author-intro + folded translation, merged into an existing page (not a new article).** Added a visible **「附录 · 关于作者 Sahil Lavingia」** section to the minimalist playbook, and folded the full Chinese translation of his first-person essay *DOGE Days* (his 55 days as a $0-salary engineer at DOGE inside the VA, Mar–May 2025) into a collapsible `<details>` index right below it. Per the user's call: don't spin it off as its own piece — keep it inside the 极简创业 page, as a collapsed index entry. Restyled from the original Claude-editorial draft to Wise-Dark to match the playbook.

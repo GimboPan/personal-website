@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>如何健康地吃 · Mastering the Art of Healthy Eating</title>
+<meta name="description" content="一次关于「吃」的个人分享 —— 营养科学 · 审美与愉悦 · 归属感。">
+<style>
+  :root {
+    --bg:#FBF3E0; --title:#5C2E1A; --accent:#C9542E; --sage:#6B8E4E;
+    --mustard:#D4C14F; --muted:#8B6F4E; --ink:#3D2817; --card:#fffaf0;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:880px; margin:0 auto; padding:0 22px; }
+
+  /* ---- back-link bar ---- */
+  .backbar { background:#f4ead2; border-bottom:1px solid rgba(92,46,26,.14); padding:14px 0; }
+  .backbar .wrap { display:flex; align-items:center; gap:12px; font-size:12px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  .backbar a { color:var(--accent); text-decoration:none; display:inline-flex; align-items:center;
+    gap:6px; transition:color .15s; }
+  .backbar a:hover { color:var(--title); }
+  .backbar .sep { color:var(--muted); } .backbar .here { color:var(--title); }
+
+  /* ---- hero ---- */
+  .hero { padding:72px 0 34px; border-bottom:1px solid rgba(92,46,26,.14); }
+  .kicker { color:var(--accent); font-weight:700; letter-spacing:.34em;
+    font-size:12px; text-transform:uppercase; margin:0 0 18px; }
+  .hero h1 { font-family:var(--serif); margin:0; color:var(--title);
+    line-height:1.02; letter-spacing:-.5px; }
+  .hero h1 .l1 { display:block; font-style:italic; font-weight:500; font-size:clamp(34px,7vw,62px); }
+  .hero h1 .l2 { display:block; font-weight:700; font-size:clamp(40px,8.4vw,76px); }
+  .hero h1 .dot { color:var(--accent); }
+  .pillars-line { font-family:var(--serif); font-style:italic; font-size:clamp(17px,3.4vw,22px);
+    margin:22px 0 0; }
+  .pillars-line .s1 { color:var(--accent); } .pillars-line .s2 { color:var(--sage); }
+  .pillars-line .s3 { color:var(--title); } .pillars-line .sep { color:var(--muted); margin:0 .5em; }
+  .lead { font-size:17px; color:var(--ink); max-width:64ch; margin:26px 0 0; }
+  .meta { display:flex; align-items:center; gap:14px; margin-top:28px;
+    color:var(--muted); font-size:14px; }
+  .meta .badge { font-family:var(--serif); font-style:italic; font-weight:600;
+    color:var(--title); border:1px solid rgba(92,46,26,.4); padding:7px 18px; }
+
+  /* ---- sticky nav ---- */
+  nav.toc { position:sticky; top:0; z-index:5; background:rgba(251,243,224,.92);
+    backdrop-filter:blur(8px); border-bottom:1px solid rgba(92,46,26,.12);
+    display:flex; gap:10px; flex-wrap:wrap; padding:12px 22px; justify-content:center; }
+  nav.toc a { text-decoration:none; font-size:13.5px; font-weight:600; color:var(--c);
+    border:1px solid color-mix(in srgb,var(--c) 38%,transparent); border-radius:999px;
+    padding:5px 16px; transition:.18s; }
+  nav.toc a:hover { background:var(--c); color:#fff; }
+
+  /* ---- chapters ---- */
+  .chapter { padding:54px 0 8px; }
+  .chapter-head { margin:0 0 28px; padding-left:16px; border-left:4px solid var(--c); }
+  .chapter-en { display:block; text-transform:uppercase; letter-spacing:.28em;
+    font-size:11.5px; font-weight:700; color:var(--c); margin-bottom:5px; }
+  .chapter-head h2 { font-family:var(--serif); margin:0; font-size:clamp(24px,5vw,34px);
+    color:var(--title); font-weight:600; }
+
+  /* ---- slides ---- */
+  .slide { margin:0 0 46px; }
+  .slide img { width:100%; display:block; border-radius:10px;
+    border:1px solid rgba(92,46,26,.12);
+    box-shadow:0 18px 38px -22px rgba(61,40,23,.5); }
+  .slide.bare { margin-bottom:30px; }
+  figcaption { margin-top:15px; padding-left:2px; }
+  .cap-title { display:block; font-family:var(--serif); font-size:19px; font-weight:600;
+    color:var(--title); margin-bottom:4px; }
+  .cap-desc { display:block; color:var(--muted); font-size:15.5px; max-width:62ch; }
+
+  /* ---- footer ---- */
+  footer { margin-top:30px; padding:40px 0 64px; border-top:1px solid rgba(92,46,26,.14);
+    text-align:center; color:var(--muted); font-size:13.5px; }
+  footer .fserif { font-family:var(--serif); font-style:italic; font-size:18px;
+    color:var(--title); margin-bottom:10px; }
+
+  @media (max-width:560px) {
+    .hero { padding:48px 0 28px; }
+    .meta { flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+  <div class="backbar">
+    <div class="wrap">
+      <a href="/fitness" aria-label="Back to Gimbo's Universe — Fitness"><span aria-hidden="true">&larr;</span> Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <span class="here">Fitness · Nutrition · 如何健康地吃</span>
+    </div>
+  </div>
+
+  <nav class="toc">
+      <a href="#ch1" style="--c:var(--accent)">营养科学</a>
+      <a href="#ch2" style="--c:var(--sage)">审美与愉悦</a>
+      <a href="#ch3" style="--c:var(--title)">归属感</a>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <p class="kicker">A Personal Lens on Eating</p>
+      <h1>
+        <span class="l1">Mastering the art of</span>
+        <span class="l2">healthy eating<span class="dot">.</span></span>
+      </h1>
+      <p class="pillars-line">
+        <span class="s1">营养科学</span><span class="sep">/</span><span class="s2">审美与愉悦</span><span class="sep">/</span><span class="s3">归属感</span>
+      </p>
+      <p class="lead">
+        这是我在一次线下读书会的分享 —— 不是一套饮食法则，而是移居新西兰十年、读了一堆书、看了一堆纪录片、还戴着动态血糖仪给自己做实验之后，攒出来的三个看「吃」的切面：用<b>科学</b>看身体、用<b>审美</b>找愉悦、用一顿饭找回<b>归属</b>。下面是全套 27 页幻灯片，配了一句话的导读。
+      </p>
+      <div class="meta">
+        <span class="badge">Gimbo</span>
+        <span>Sharing session · 2026 · 新西兰</span>
+      </div>
+    </header>
+
+    <section id="opening" class="chapter" style="--c:var(--muted)">
+      <header class="chapter-head">
+        <span class="chapter-en">Opening</span>
+        <h2>开场</h2>
+      </header>
+      <figure class="slide bare"><img src="/fitness/how-to-eat/slides/p-01.jpg" loading="lazy" alt=""></figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-02.jpg" loading="lazy" alt="从《Outlive》的五大长寿支柱讲起">
+        <figcaption><span class="cap-title">从《Outlive》的五大长寿支柱讲起</span><span class="cap-desc">营养，只是健康这张拼图里的一块 —— 但它是我们每天都要做的选择。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-03.jpg" loading="lazy" alt="为什么聊「吃」">
+        <figcaption><span class="cap-title">为什么聊「吃」</span><span class="cap-desc">移居新西兰十年，语言、饮食、运动三件事悄悄变了，把我重新带回了餐桌。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-04.jpg" loading="lazy" alt="三支柱 · 我的个人视角">
+        <figcaption><span class="cap-title">三支柱 · 我的个人视角</span><span class="cap-desc">这不是一套饮食法则，是阅读、观察、亲身实验出来的三个切面：营养科学 / 审美愉悦 / 归属感。</span></figcaption>
+      </figure>
+    </section>
+    <section id="ch1" class="chapter" style="--c:var(--accent)">
+      <header class="chapter-head">
+        <span class="chapter-en">Nutrition Science</span>
+        <h2>第一章 · 营养科学</h2>
+      </header>
+      <figure class="slide bare"><img src="/fitness/how-to-eat/slides/p-05.jpg" loading="lazy" alt=""></figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-06.jpg" loading="lazy" alt="膳食指南">
+        <figcaption><span class="cap-title">膳食指南</span><span class="cap-desc">哈佛餐盘 × 中国居民膳食指南 —— 两套权威框架对照着看，先有地图再谈细节。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-07.jpg" loading="lazy" alt="碳水的真相">
+        <figcaption><span class="cap-title">碳水的真相</span><span class="cap-desc">每天 30g 纤维、肠癌风险下降约 30%。来源：BBC《The Truth About Carbs》。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-08.jpg" loading="lazy" alt="蛋白质 · Whole Body Reset">
+        <figcaption><span class="cap-title">蛋白质 · Whole Body Reset</span><span class="cap-desc">中年之后肌肉悄悄流失，蛋白质这一项，大多数人其实没吃够。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-09.jpg" loading="lazy" alt="脂肪 · Deep Nutrition">
+        <figcaption><span class="cap-title">脂肪 · Deep Nutrition</span><span class="cap-desc">重新认识「好脂肪」—— 别再一味怕油，关键是吃对种类。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-10.jpg" loading="lazy" alt="我的 CGM 个人实验">
+        <figcaption><span class="cap-title">我的 CGM 个人实验</span><span class="cap-desc">戴上动态血糖仪，不靠别人的结论，亲手量自己身体的真实反应。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-11.jpg" loading="lazy" alt="反直觉的结果">
+        <figcaption><span class="cap-title">反直觉的结果</span><span class="cap-desc">寿司升糖竟比披萨还猛 —— 同样的碳水，搭配不同，血糖曲线天差地别。组合怎么吃，比吃什么更重要。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-12.jpg" loading="lazy" alt="第一章收束">
+        <figcaption><span class="cap-title">第一章收束</span><span class="cap-desc">科学是指南，不是教条 —— 用数据看自己的身体。</span></figcaption>
+      </figure>
+    </section>
+    <section id="ch2" class="chapter" style="--c:var(--sage)">
+      <header class="chapter-head">
+        <span class="chapter-en">Aesthetics & Pleasure</span>
+        <h2>第二章 · 审美与愉悦</h2>
+      </header>
+      <figure class="slide bare"><img src="/fitness/how-to-eat/slides/p-13.jpg" loading="lazy" alt=""></figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-14.jpg" loading="lazy" alt="早餐星球">
+        <figcaption><span class="cap-title">早餐星球</span><span class="cap-desc">把一顿早餐，做成每天值得期待的小仪式 —— 愉悦本身就是营养。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-15.jpg" loading="lazy" alt="Fine Dining vs Fusion">
+        <figcaption><span class="cap-title">Fine Dining vs Fusion</span><span class="cap-desc">摆盘不是炫技，是一种对待食物、也对待自己的态度。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-16.jpg" loading="lazy" alt="三部美食纪录片">
+        <figcaption><span class="cap-title">三部美食纪录片</span><span class="cap-desc">推荐三部：《主厨的餐桌》/《黑白大厨》/《厨房里有哲学家》。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-17.jpg" loading="lazy" alt="主厨的餐桌 · 西安面食">
+        <figcaption><span class="cap-title">主厨的餐桌 · 西安面食</span><span class="cap-desc">一位陕西女孩，把家乡的一碗面，端给世界看。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-18.jpg" loading="lazy" alt="厨房里有哲学家 · 迈克·罗朗">
+        <figcaption><span class="cap-title">厨房里有哲学家 · 迈克·罗朗</span><span class="cap-desc">一个异乡人，用中文重新讲了一遍中餐。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-19.jpg" loading="lazy" alt="江振诚 · 中餐天花板">
+        <figcaption><span class="cap-title">江振诚 · 中餐天花板</span><span class="cap-desc">八角哲学 · 初心 · 工作美学 ——「料理不是创造，是转译。」</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-20.jpg" loading="lazy" alt="口腔三观">
+        <figcaption><span class="cap-title">口腔三观</span><span class="cap-desc">舌、牙、咽，都在参与 —— 吃，是一场多感官的艺术。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-21.jpg" loading="lazy" alt="感性 × 理性 · 吃的两种祖师爷">
+        <figcaption><span class="cap-title">感性 × 理性 · 吃的两种祖师爷</span><span class="cap-desc">用 Pollan 的眼睛选食材，用蔡澜的舌头品滋味 —— 理性守底线，感性填日常。</span></figcaption>
+      </figure>
+    </section>
+    <section id="ch3" class="chapter" style="--c:var(--title)">
+      <header class="chapter-head">
+        <span class="chapter-en">Belonging</span>
+        <h2>第三章 · 归属感</h2>
+      </header>
+      <figure class="slide bare"><img src="/fitness/how-to-eat/slides/p-22.jpg" loading="lazy" alt=""></figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-23.jpg" loading="lazy" alt="新家乡饭">
+        <figcaption><span class="cap-title">新家乡饭</span><span class="cap-desc">移民十年，用新西兰的本地食材，重造记忆里的家乡味。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-24.jpg" loading="lazy" alt="家宴">
+        <figcaption><span class="cap-title">家宴</span><span class="cap-desc">从《圆桌派》聊起 —— 家宴的重点从来不是菜，是关系。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-25.jpg" loading="lazy" alt="食物与身份">
+        <figcaption><span class="cap-title">食物与身份</span><span class="cap-desc">你吃什么，你就是谁 —— 一顿饭，把人放回某个「家」的坐标系。</span></figcaption>
+      </figure>
+    </section>
+    <section id="end" class="chapter" style="--c:var(--muted)">
+      <header class="chapter-head">
+        <span class="chapter-en">References & Thanks</span>
+        <h2>收尾</h2>
+      </header>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-26.jpg" loading="lazy" alt="References">
+        <figcaption><span class="cap-title">References</span><span class="cap-desc">参考资料：4 本书 + 5 部纪录片 / 节目。</span></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="/fitness/how-to-eat/slides/p-27.jpg" loading="lazy" alt="谢谢">
+        <figcaption><span class="cap-title">谢谢</span><span class="cap-desc">「让我们与自己，和食物，更好的相处。」</span></figcaption>
+      </figure>
+    </section>
+
+    <footer>
+      <div class="fserif">「让我们与自己，和食物，更好的相处。」</div>
+      <div>How to Eat · 27 slides · designed &amp; presented by Gimbo</div>
+    </footer>
+  </div>
+</body>
+</html>

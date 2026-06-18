@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.8.0] — 2026-06-18 · Fitness: Nutrition card goes live — 《如何健康地吃》27 页幻灯片散文
+## [1.8.0] — 2026-06-18 · Fitness: Nutrition card goes live — 《如何健康地吃》27 页幻灯片散文 (live: fc07eb4)
 
 > **The Nutrition module flips from `planned` placeholder to `live`.** A book-club talk I gave in NZ — *Mastering the art of healthy eating* — turned into a standalone 27-slide visual essay. Three lenses on food, each a colour-coded chapter: **营养科学** (dietary guidelines, carbs/protein/fat, and a personal CGM self-experiment where sushi spiked my blood sugar harder than pizza), **审美与愉悦** (breakfast rituals, plating, food docs, 江振诚's "料理不是创造，是转译"), and **归属感** (new-homeland cooking, the family banquet, food-as-identity). Built in the deck's own warm-magazine style (Georgia serif, parchment + terracotta/sage/brown chapter colours) rather than site-default Wise-Dark — kept unified with the original slides. Each slide carries a one-line 导读; sticky chapter nav up top.
 

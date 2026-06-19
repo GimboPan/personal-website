@@ -6,6 +6,19 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.9.1] — 2026-06-20 · Metis: privacy-hardening copy pass (live: pending)
+
+> **A light hardening pass on the live Metis page** to remove any phrasing that could invite an employer-inference, before any outbound push. No structural or design change — copy only.
+
+### Changed — AI Builder
+
+- **`public/ai-builder/metis.html`** + **`ai-builder.ts`** — "a real distributor's scale" → "the scale of a typical mid-size distributor (all synthetic)" in the hero lead, meta description, and catalog summary; honest-footer line "how I think about **the day job**" → "how I think about **supply-chain planning**". The synthetic-data framing is now the dominant read; nothing points at a specific employer.
+
+### Notes
+
+- **Why** — the page stays live as a generic, synthetic-data personal learning project, but the LinkedIn post + DM outreach are **held** (off-site broadcast into the professional network carried two risks the owner flagged: employer-data-leak *appearance*, and a clone-perception risk vs. an external product the build's lineage is deliberately not named). Passive page discovery is low-risk; active broadcast is paused until further notice.
+- **Red lines** — unchanged and clean: no company, vendor, or person named; no financials.
+
 ## [1.9.0] — 2026-06-19 · AI Builder: Metis — your supply pilot in the AI era (v1.0) (live: 7bd6355)
 
 > **A new Supply Chain piece goes live in AI Builder.** **Metis — *your supply pilot in the AI era*** — a v1.0 framework, built solo and run locally, at a real distributor's scale (10 vendors, 2,000 SKUs, ~200 PO lines a week). A 2-minute scrollable walk-through. Each PO **line** opens with an **MRP qty** — derived as the gap between the line's *target* level (its stock policy: Min-Max ceiling, forecast coverage, or build order) and *on-hand*, net of on-order — then walks three yes/no checkpoints: **ordered? → vendor confirmed? → warehouse received?** (with reschedule + chase self-loops). Metis auto-clears the zero-judgement lines via an **L2 autonomy tier** and escalates only the exceptions to a planner queue — framed with an autopilot metaphor: *Metis flies the routine legs; you stay pilot-in-command*. It runs against a deterministic **world simulator** (fast-forward +1 day / +1 week, seeded and reproducible) so the one number that matters can be measured: **how high the touchless rate climbs (~85%)**. Framed honestly as v1.0 — the skeleton (state machine, autonomy split, loop, simulator) is in place; the fine grain (richer per-vendor behaviour, more exception classes, real-mail ingestion) is not, yet. Standalone Wise-Dark-Dashboard HTML with custom SVG diagrams (closed loop, the four-checkpoint PO-line lifecycle) and a touchless climb-to-plateau chart. Bilingual EN/中文.

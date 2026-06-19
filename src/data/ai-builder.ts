@@ -68,7 +68,7 @@ export const projects: Project[] = [
     slug: 'metis',
     title: 'Metis — Your Supply Pilot (v1.0)',
     summary:
-      'Metis — your supply pilot in the AI era. A v1.0 framework: a procurement AI run locally at a real distributor\'s scale (10 vendors, ~200 PO lines/week). Each PO line opens with an MRP qty (target level − on-hand) then walks three checkpoints — ordered? → vendor confirmed? → warehouse received? Metis flies the routine legs and escalates only the exceptions; you stay pilot-in-command. A 2-minute walk-through, and the one number that matters: how high the touchless rate climbs (~85%). Research simulation on synthetic data.',
+      'Metis — your supply pilot in the AI era. A v1.0 framework: a procurement AI run locally at the scale of a typical mid-size distributor — entirely synthetic (10 vendors, ~200 PO lines/week). Each PO line opens with an MRP qty (target level − on-hand) then walks three checkpoints — ordered? → vendor confirmed? → warehouse received? Metis flies the routine legs and escalates only the exceptions; you stay pilot-in-command. A 2-minute walk-through, and the one number that matters: how high the touchless rate climbs (~85%). Research simulation on synthetic data.',
     category: 'supply-chain',
     status: 'live',
     date: '2026-06-19',

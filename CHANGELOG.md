@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.9.1] — 2026-06-20 · Metis: privacy-hardening copy pass (live: pending)
+## [1.9.1] — 2026-06-20 · Metis: privacy-hardening copy pass (live: 3497f76)
 
 > **A light hardening pass on the live Metis page** to remove any phrasing that could invite an employer-inference, before any outbound push. No structural or design change — copy only.
 

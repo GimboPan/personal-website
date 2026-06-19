@@ -6,6 +6,22 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.9.0] — 2026-06-19 · AI Builder: Metis — your supply pilot in the AI era (v1.0) (live: pending)
+
+> **A new Supply Chain piece goes live in AI Builder.** **Metis — *your supply pilot in the AI era*** — a v1.0 framework, built solo and run locally, at a real distributor's scale (10 vendors, 2,000 SKUs, ~200 PO lines a week). A 2-minute scrollable walk-through. Each PO **line** opens with an **MRP qty** — derived as the gap between the line's *target* level (its stock policy: Min-Max ceiling, forecast coverage, or build order) and *on-hand*, net of on-order — then walks three yes/no checkpoints: **ordered? → vendor confirmed? → warehouse received?** (with reschedule + chase self-loops). Metis auto-clears the zero-judgement lines via an **L2 autonomy tier** and escalates only the exceptions to a planner queue — framed with an autopilot metaphor: *Metis flies the routine legs; you stay pilot-in-command*. It runs against a deterministic **world simulator** (fast-forward +1 day / +1 week, seeded and reproducible) so the one number that matters can be measured: **how high the touchless rate climbs (~85%)**. Framed honestly as v1.0 — the skeleton (state machine, autonomy split, loop, simulator) is in place; the fine grain (richer per-vendor behaviour, more exception classes, real-mail ingestion) is not, yet. Standalone Wise-Dark-Dashboard HTML with custom SVG diagrams (closed loop, the four-checkpoint PO-line lifecycle) and a touchless climb-to-plateau chart. Bilingual EN/中文.
+
+### Added — AI Builder
+
+- **`public/ai-builder/metis.html`** — the standalone demo page: hero (lime **Metis.** wordmark + *Your supply pilot in the AI era* tagline, eyebrow tagged `v1.0 framework`) + 4-stat band (one lime hero tile), the closed-loop SVG, the four-stage PO-line lifecycle SVG (**MRP qty (target − on-hand) → ordered → confirmed → received** with Y/N gates), the auto-vs-human autonomy split (autopilot framing), a touchless-rate trend chart + KPI rail, a six-views "what's inside" grid, and an honest "what this is / isn't (it's v1.0)" footer. Includes the required `← Gimbo's Universe` back link and the site-standard bilingual toggle.
+- **`ai-builder.ts`** — new `supply-chain` catalog entry `metis`, title `Metis — Your Supply Pilot (v1.0)`, `status: live`, dated 2026-06-19. Becomes the newest Supply Chain item (ahead of `org-evolution`).
+
+### Notes
+
+- **Naming** — the system is named **Metis** (Greek goddess of wise counsel / planning), tagline *your supply pilot in the AI era*; the earlier working names (Supply Chain Action Center → Auto Supply Agent) and the source build's external-product lineage are deliberately not surfaced. "Buyer" language removed throughout — the human is a "planner / pilot-in-command".
+- **v1.0 review pass** — reconciled one logic clash: a proactive **standard reorder** (auto) vs a vendor change that **pushes net availability below the reorder point** (escalate) are now worded distinctly; tied the two diagrams together (Replenish node now reads *gap → MRP qty*).
+- **Red lines clean** — a **research simulation on fully synthetic data**: ten fictional vendors, two thousand generated SKUs, a deterministic simulator. No real company, vendor, or person named; no financial positions. "A real distributor's scale" stays role/scale-level; the reorder threshold is described as "the routine reorder threshold," not a figure.
+- **Outbound intent** — this is the publishable, abstracted one of the supply-chain sims, framed as a door-opener artifact for AU/NZ supply-chain × AI conversations.
+
 ## [1.8.0] — 2026-06-18 · Fitness: Nutrition card goes live — 《如何健康地吃》27 页幻灯片散文 (live: fc07eb4)
 
 > **The Nutrition module flips from `planned` placeholder to `live`.** A book-club talk I gave in NZ — *Mastering the art of healthy eating* — turned into a standalone 27-slide visual essay. Three lenses on food, each a colour-coded chapter: **营养科学** (dietary guidelines, carbs/protein/fat, and a personal CGM self-experiment where sushi spiked my blood sugar harder than pizza), **审美与愉悦** (breakfast rituals, plating, food docs, 江振诚's "料理不是创造，是转译"), and **归属感** (new-homeland cooking, the family banquet, food-as-identity). Built in the deck's own warm-magazine style (Georgia serif, parchment + terracotta/sage/brown chapter colours) rather than site-default Wise-Dark — kept unified with the original slides. Each slide carries a one-line 导读; sticky chapter nav up top.

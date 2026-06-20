@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.10.0] — 2026-06-20 · Ideas #14 — Agency is the Key + new 「AI 前沿人物」series
+## [1.10.0] — 2026-06-20 · Ideas #14 — Agency is the Key + new 「AI 前沿人物」series (live: 7894fab)
 
 > **A new `/ideas` video deep-read** built from the full transcript of a Fei-Fei Li × David Rogier conversation (thesis Gimbo anchored on: what decides whether you're sidelined or amplified by a cognitively powerful technology is **agency**, not your degree or title — "entrepreneurial is a synonym to agency"), **plus a new 专辑 that buckets the site's top-AI-figure talks into one filterable thread.**
 

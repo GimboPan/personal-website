@@ -6,6 +6,27 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.10.0] — 2026-06-20 · Ideas #14 — Agency is the Key + new 「AI 前沿人物」series
+
+> **A new `/ideas` video deep-read** built from the full transcript of a Fei-Fei Li × David Rogier conversation (thesis Gimbo anchored on: what decides whether you're sidelined or amplified by a cognitively powerful technology is **agency**, not your degree or title — "entrepreneurial is a synonym to agency"), **plus a new 专辑 that buckets the site's top-AI-figure talks into one filterable thread.**
+
+### Added — Ideas
+
+- **`public/ideas/agency-is-the-key.html`** — Wise-Dark video-deep-read (same template as `write-loops-not-code.html`): backbar → hero (`Agency, 就是那把钥匙`) → `$80k → $100` education stat banner → embedded YouTube (`subu-xHrp1w`) → hook pull-quote → polarization compare (utopia/doom vs the missing nuanced middle) → four big ideas (CEO's tool stack is self-built apps · don't vibe-code your dashboard · the barbell of specialists + high-agency generalists · "intelligence cost → zero" is reductive) → key-numbers strip → **spatial intelligence** 4-up (understand · reason · generate · interact, World Labs on 3D) → how-to-train-agency (reject praise-seeking) → 3 takeaways → CTA. Includes one first-person builder annotation tying David's self-built tool stack back to Gimbo's AI fleet.
+- **`src/data/ideas.ts`** — registered as index `14`, `status: 'live'`, `isNew: true`, filed **Tech + Economy + Society** (`topicSlug: 'tech'`, `topics: ['tech','economy','society']`), `art: { motif: 'ascent', accent: '#9fe870', seed: 14 }`.
+- **New 专辑 `ai-voices` — 「AI 前沿人物 · Voices in AI」**: a curated series bucketing the site's top-AI-figure conversation deep-reads — scholar / creator / entrepreneur each a lens: Fei-Fei Li (#14), Boris Cherny (#08 write-loops, #09 claude-code-one-year), Sahil Lavingia (#07 few-person-company). Renders as a clickable filter card in the **Series · 专辑** rail; count derives from membership (**4**).
+
+### Changed — Ideas IA
+
+- **Multi-series membership** — extended the `/ideas` data model so a piece can belong to more than one 专辑. Added optional `seriesSlugs: string[]` to `IdeaArticle` (when present it supersedes `seriesSlug`, mirroring how `topics` supersedes `topicSlug`); `ideas.astro` now derives series membership via a `seriesOf()` helper, emits a space-joined `data-series`, and the client filter matches on `.includes()`. `#07 few-person-company` now sits in **both** 「公司的形态」and 「AI 前沿人物」(`seriesSlugs: ['company-form','ai-voices']`) — 公司的形态 count unchanged at 3.
+
+### Notes
+
+- **Pipeline** — transcript was supplied directly (no NotebookLM step needed this time); page built to the established `/ideas` video-deep-read spec.
+- **Red lines** — clean: speakers are public figures (Fei-Fei Li, David Rogier, Boris Cherny, Sahil Lavingia); companies named are public (World Labs, MasterClass, Anthropic, Gumroad), none Gimbo's employer/client; no financials.
+
+---
+
 ## [1.9.1] — 2026-06-20 · Metis: privacy-hardening copy pass (live: 3497f76)
 
 > **A light hardening pass on the live Metis page** to remove any phrasing that could invite an employer-inference, before any outbound push. No structural or design change — copy only.

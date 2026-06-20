@@ -21,10 +21,16 @@ const archiveCounts = articles.reduce<Record<string, number>>((acc, a) => {
 }, {});
 const archive = archiveMonths.map((ym) => ({ ym, count: archiveCounts[ym] ?? 0 }));
 
+// A piece can belong to more than one 专辑: `seriesSlugs` is the complete list
+// when present, otherwise fall back to the single `seriesSlug` (mirrors how
+// `topics` supersedes `topicSlug`).
+const seriesOf = (a: (typeof articles)[number]): string[] =>
+  a.seriesSlugs ?? (a.seriesSlug ? [a.seriesSlug] : []);
+
 // Series (专辑) cards — counts derived from articles, same as topics.
 const series = seriesDefs.map((s) => ({
   ...s,
-  count: articles.filter((a) => a.seriesSlug === s.slug).length,
+  count: articles.filter((a) => seriesOf(a).includes(s.slug)).length,
 }));
 
 // Shared class fragments for the topic filter buttons. JS swaps these on
@@ -113,7 +119,7 @@ const TOPIC_IDLE =
         <!-- MIDDLE — article list -->
         <main class="space-y-4">
           {articles.map((a) => (
-            <div class="idea-item" data-topic={(a.topics ?? [a.topicSlug]).join(' ')} data-date={a.date} data-series={a.seriesSlug ?? ''}>
+            <div class="idea-item" data-topic={(a.topics ?? [a.topicSlug]).join(' ')} data-date={a.date} data-series={seriesOf(a).join(' ')}>
               <ArticleRow
                 index={a.index}
                 title={a.title}
@@ -206,7 +212,9 @@ const TOPIC_IDLE =
         topic === 'all' ||
         (el.dataset.topic?.split(' ').includes(topic) ?? false);
       const okDate = date === 'all' || el.dataset.date === date;
-      const okSeries = series === 'all' || el.dataset.series === series;
+      const okSeries =
+        series === 'all' ||
+        (el.dataset.series?.split(' ').includes(series) ?? false);
       const visible = okTopic && okDate && okSeries;
       el.hidden = !visible;
       if (visible) shown += 1;

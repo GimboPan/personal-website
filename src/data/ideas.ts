@@ -18,6 +18,10 @@ export interface IdeaArticle {
   isNew?: boolean;
   /** Optional series (专辑) this piece belongs to — see `seriesDefs`. */
   seriesSlug?: string;
+  /** When a piece belongs to MORE than one 专辑, list every series here. When
+      present this is the complete list and supersedes `seriesSlug` (mirrors how
+      `topics` supersedes `topicSlug`). */
+  seriesSlugs?: string[];
   /** Generative thumbnail for the list preview (left media slot). Picks a
       geometric motif + accent + seed; rendered by <IdeaThumb />. */
   art?: {
@@ -46,6 +50,13 @@ export interface SeriesDef {
 
 export const seriesDefs: SeriesDef[] = [
   {
+    slug: 'ai-voices',
+    label: 'AI 前沿人物',
+    sub: 'Voices in AI',
+    description:
+      '把站里这些「顶尖 AI 人物」的对谈/访谈导读收成一条线——学者、创造者、创业者各一种视角:李飞飞(World Labs,空间智能与「agency 是钥匙」)、Boris Cherny(Claude Code 创造者,写 Loop 不写代码)、Sahil Lavingia(Gumroad,几个人的公司)。读他们怎么判断 AI 的下一步,以及人在其中的位置。',
+  },
+  {
     slug: 'supply-chain-agent',
     label: '供应链 AI Agent',
     sub: 'Supply Chain × Agent',
@@ -62,6 +73,20 @@ export const seriesDefs: SeriesDef[] = [
 ];
 
 export const articles: IdeaArticle[] = [
+  {
+    index: '14',
+    title: 'Agency 就是那把钥匙 · 李飞飞 × MasterClass 创始人聊 AI 时代 · 视频导读',
+    lede: '李飞飞(Fei-Fei Li,做出 ImageNet、现在创办 World Labs)和 David Rogier(MasterClass 创始人)的一场对谈。我读完整份字幕做成的视觉笔记——他们在反复讲同一个判断:在一个认知能力强到「自动我们的智能」的技术面前,决定你被甩下、还是被放大的,不是学历、不是岗位,而是 agency(能动性)。真正打动我的那句是李飞飞的「entrepreneurial 几乎就是 agency 的同义词」——你可以是专科医生、可以是 K12 老师,身份不重要,重要的是有没有勇气抓住工具、命令它、为自己所用。沿着字幕往下拆四块:① CEO 的工具栈已是他自己用 Claude Code 建的 app(含模仿他写信语气的 Davidify、一个超 1.5 天就逼你「现在做/扔掉/派人」的待办 app),造一个 app 从「几个月」掉到「一个周末」;② 别 vibe code 你的 dashboard——只有前端、不接真实数据,好用一小时然后就坏;③ 工作的杠铃效应:顶尖 1% 专才 + 高能动性通才,中间「还行」被抹平;④ 「智能成本归零」是不负责任的化约——人类还有感知/空间/物理/情感智能和创造力,LLM 只是语言这一块。再补上李飞飞的空间智能四件事(理解·推理·生成·交互,World Labs 攻 3D)、教育的分叉($80k/年→约 $100、用 AI 学省 60% 时间)、以及怎么练 agency(拒绝「求表扬」、人人都说好的点子大概不好)。给害怕 AI 的人的唯一建议:找一个 25 岁以下、你信任的孩子,牵你的手用一个周末。附我作为 builder 的一点批注:这几乎是我那套 AI 舰队的外部印证。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy', 'society'],
+    href: '/ideas/agency-is-the-key.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'ai-voices',
+    art: { motif: 'ascent', accent: '#9fe870', seed: 14 },
+  },
   {
     index: '13',
     title: '认知四象限 · 把「我不知道我不知道」变成一张能用的地图 · 图解深读',
@@ -128,6 +153,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/claude-code-one-year.html',
     status: 'live',
     isNew: true,
+    seriesSlug: 'ai-voices',
     art: { motif: 'loop', accent: '#38c8ff', seed: 9 },
   },
   {
@@ -141,6 +167,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/write-loops-not-code.html',
     status: 'live',
     isNew: true,
+    seriesSlug: 'ai-voices',
     art: { motif: 'core', accent: '#9fe870', seed: 8 },
   },
   {
@@ -154,7 +181,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/few-person-company.html',
     status: 'live',
     isNew: true,
-    seriesSlug: 'company-form',
+    seriesSlugs: ['company-form', 'ai-voices'],
     art: { motif: 'team', accent: '#38c8ff', seed: 7 },
   },
   {

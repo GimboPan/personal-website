@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agency 就是那把钥匙 · 李飞飞 × David Rogier 聊 AI 时代 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="李飞飞(Fei-Fei Li,World Labs)和 David Rogier(MasterClass 创始人)的一场对谈。一份基于完整字幕的视频导读:在一个认知能力极强的技术面前,决定你被甩下还是被放大的,不是学历、不是岗位,而是 agency(能动性)。从『CEO 的工具栈是他自己建的 app』,到『智能成本归零是不负责任的说法』、空间智能、教育的分叉、工作的杠铃效应。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* ─── Back-link bar ─── */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-faint); font-weight: 600;
+    }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .sep { color: var(--ink-faint); }
+    .backbar .here { color: var(--ink); }
+
+    /* ─── Hero ─── */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow {
+      display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30);
+      padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700;
+    }
+    .hero h1 { font-size: clamp(52px, 8.5vw, 104px); margin-bottom: 28px; max-width: 16ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 62ch; line-height: 1.5; margin-bottom: 32px; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* ─── Section base ─── */
+    section { padding: 72px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(36px, 5.5vw, 64px); margin-bottom: 18px; max-width: 20ch; }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 48px; }
+
+    /* ─── Stat banner ─── */
+    .stat-banner { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 56px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; }
+    .stat-banner .num { font-weight: 900; line-height: 0.82; letter-spacing: -0.04em; font-size: clamp(72px, 12vw, 168px); color: var(--green); }
+    .stat-banner .num .small { display: block; font-size: 0.22em; color: var(--ink); margin-top: 14px; line-height: 1.3; letter-spacing: -0.01em; }
+    .stat-banner .copy h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .stat-banner .copy p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .stat-banner .copy p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .stat-banner { grid-template-columns: 1fr; padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── Pull quote (the hook) ─── */
+    .quote { background: var(--surface-2); border: 1px solid rgba(159,232,112,0.30); border-radius: 40px; padding: 56px 52px; }
+    .quote .mark { color: var(--green); font-size: 80px; line-height: 0.4; font-weight: 900; display: block; height: 36px; }
+    .quote blockquote { font-size: clamp(30px, 4.4vw, 52px); font-weight: 900; line-height: 1.04; letter-spacing: -0.02em; margin: 22px 0 30px; max-width: 22ch; }
+    .quote blockquote .accent { color: var(--green); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 60ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── YouTube embed ─── */
+    .video-wrap { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 20px; margin-top: 32px; }
+    .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 18px; background: #000; }
+    .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-cap { font-size: 13px; color: var(--ink-faint); margin-top: 14px; padding: 0 8px; display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: space-between; }
+    .video-cap a { color: var(--green); font-weight: 600; }
+    .video-cap a:hover { color: var(--green-tint); }
+
+    /* ─── Number / arc strip ─── */
+    .arc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .arc { background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 28px 22px; }
+    .arc .v { font-weight: 900; font-size: clamp(26px, 3.2vw, 40px); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .arc .v.danger { color: var(--coral); }
+    .arc .v.warn { color: var(--amber); }
+    .arc .v.pos { color: var(--green); }
+    .arc .v.sky { color: var(--sky); }
+    .arc .v.dim { color: var(--ink); }
+    .arc .l { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+    .arc .l b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .arc-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ─── Observation cards ─── */
+    .obs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .obs { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 34px 30px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s, border-color .2s; }
+    .obs:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+    .obs.span2 { grid-column: span 2; }
+    .obs .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; }
+    .obs .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .obs h4 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; line-height: 1.04; letter-spacing: -0.01em; }
+    .obs p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .obs p b { color: var(--ink); font-weight: 700; }
+    .obs a.inline { color: var(--green); font-weight: 600; }
+    @media (max-width: 760px) { .obs-grid { grid-template-columns: 1fr; } .obs.span2 { grid-column: span 1; } }
+
+    /* ─── Quad (spatial intelligence 4-up) ─── */
+    .quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .q { background: var(--surface-1); border: 1px solid var(--line); border-radius: 24px; padding: 30px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .q .qn { font-weight: 900; font-size: 40px; line-height: 0.9; color: var(--sky); letter-spacing: -0.03em; }
+    .q h5 { font-size: 19px; font-weight: 800; line-height: 1.1; }
+    .q .en { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+    .q p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+    @media (max-width: 880px) { .quad { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .quad { grid-template-columns: 1fr; } }
+
+    /* ─── Compare ─── */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .compare .col { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 34px 30px; }
+    .compare .col.myth { border-color: rgba(255,209,26,0.35); }
+    .compare .col.real { border-color: rgba(159,232,112,0.35); }
+    .compare .col h4 { font-size: 24px; font-weight: 900; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; line-height: 1.05; }
+    .compare .col.myth h4 { color: var(--amber); }
+    .compare .col.real h4 { color: var(--green); }
+    .compare .col .sub { font-size: 13px; color: var(--ink-faint); margin-bottom: 22px; }
+    .compare ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .compare li { font-size: 15px; color: var(--ink); padding: 12px 16px; background: var(--surface-3); border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+    .compare li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; margin-top: 9px; flex-shrink: 0; }
+    .compare .col.myth li::before { background: var(--amber); }
+    .compare .col.real li::before { background: var(--green); }
+    @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+
+    /* ─── Gimbo annotation note ─── */
+    .note { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 18px; padding: 26px 30px; margin-top: 28px; }
+    .note .who { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: 10px; }
+    .note p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; }
+    .note p b { color: var(--ink); font-weight: 700; }
+    .note a { color: var(--green); font-weight: 600; }
+
+    /* ─── Takeaways ─── */
+    .takeaway-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .takeaway { background: var(--surface-2); border: 1px solid var(--line); border-radius: 24px; padding: 26px 30px; display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: center; }
+    .takeaway .idx { font-weight: 900; font-size: 44px; line-height: 0.9; color: var(--green); letter-spacing: -0.02em; }
+    .takeaway h4 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .takeaway p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+    .takeaway p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 600px) { .takeaway { grid-template-columns: 1fr; gap: 8px; padding: 22px 24px; } .takeaway .idx { font-size: 32px; } }
+
+    /* ─── CTA ─── */
+    .cta { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 64px 48px; text-align: center; margin: 40px 0 80px; }
+    .cta h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 18px; max-width: 22ch; margin-left: auto; margin-right: auto; }
+    .cta h2 .accent { color: var(--green); }
+    .cta p { font-size: 16px; color: var(--ink-soft); max-width: 56ch; margin: 0 auto 32px; }
+    .cta .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 9999px; font-weight: 700; font-size: 14px; letter-spacing: 0.02em; transition: transform .15s, background .15s, color .15s; border: 1px solid transparent; }
+    .btn-primary { background: var(--green); color: var(--green-deep); }
+    .btn-primary:hover { transform: scale(1.04); }
+    .btn-ghost { color: var(--ink); border-color: var(--line-strong); }
+    .btn-ghost:hover { background: var(--surface-3); }
+
+    /* ─── Footer ─── */
+    footer { padding: 40px 0 60px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+    footer a { color: var(--green); }
+
+    @media (max-width: 640px) {
+      section { padding: 56px 0; }
+      .hero { padding: 56px 0 40px; }
+      .wrap { padding: 0 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════ BACK LINK ═══════════════ -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/ideas" aria-label="Back to Gimbo's Universe — Ideas">
+      <span aria-hidden="true">←</span> Gimbo's Universe
+    </a>
+    <span class="sep">/</span>
+    <a href="/ideas">Ideas</a>
+    <span class="sep">/</span>
+    <span class="here">Agency is the Key · 视频导读</span>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">§ Video notes · 李飞飞 × David Rogier</span>
+    <h1 class="display">
+      Agency,<br/>
+      就是那把<span class="accent">钥匙</span>。
+    </h1>
+    <p class="lead">
+      李飞飞(Fei-Fei Li,做出 ImageNet、现在创办 World Labs)和 David Rogier(MasterClass 创始人)的一场对谈。
+      他们在讲同一个判断:在一个认知能力强到「自动我们的智能」的技术面前,决定你被甩下、还是被放大的,
+      <b style="color:var(--ink);">不是学历,不是岗位,而是 agency(能动性)</b> —— 主动抓住工具、命令它、为自己重塑工作流的那股劲。
+      这一页,是把完整字幕读完后整理的视觉笔记。
+    </p>
+    <div class="credits">
+      <div class="item"><div class="label">Source</div><div class="value">YouTube 对谈</div></div>
+      <div class="item"><div class="label">主角</div><div class="value">Fei-Fei Li · David Rogier</div></div>
+      <div class="item"><div class="label">机构</div><div class="value">World Labs · MasterClass</div></div>
+      <div class="item"><div class="label">Topic</div><div class="value">Agency · 工作 · 教育 · 空间智能</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ STAT BANNER ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="stat-banner">
+      <div class="num">
+        $100
+        <span class="small">AI 能把过去 $80,000/年 的教育,送到几乎每个人手里。</span>
+      </div>
+      <div class="copy">
+        <h3>过去 60 年我们早就知道:最好的学习,是一对一。</h3>
+        <p>
+          那为什么我们还坐在 20 人、300 人的教室里?David 说答案只有一个字 —— <b>贵</b>。
+          一对一私教太贵,没法配给每个人。而现在,AI 已经能提供「几乎一样好」的一对一辅导:
+          小学一年 <b>$12,000</b>、某些学校一年 <b>$80,000</b> 的教育,成本被压到约 <b>$100</b>。
+          而且用 AI 学,同样的东西还能省下 <b>60%</b> 的时间。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ VIDEO ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ Watch first</span>
+    <h2 class="section-title display">先看完原片,<br/>再读下面的笔记。</h2>
+    <p class="section-lead">
+      下面所有的框架、数字和金句,都来自这场对谈的完整字幕。我整理成视觉笔记是为了能反复回查 ——
+      但原片里两个人临场的语气和例子(尤其李飞飞讲「折衣服」那段),是文字留不住的东西。
+    </p>
+    <div class="video-wrap">
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/subu-xHrp1w"
+          title="Fei-Fei Li × David Rogier — Agency is the Key"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <div class="video-cap">
+        <span>对谈嘉宾:Fei-Fei Li(World Labs)· David Rogier(MasterClass 创始人)</span>
+        <a href="https://www.youtube.com/watch?v=subu-xHrp1w" target="_blank" rel="noopener">Open on YouTube →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE HOOK — pull quote ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ 真正打动我的那一句</span>
+    <div class="quote">
+      <span class="mark">“</span>
+      <blockquote class="display">「Entrepreneurial」,几乎就是 <span class="accent">Agency</span> 的同义词。</blockquote>
+      <div class="body">
+        在硅谷,「entrepreneurial(创业精神)」常被窄化成「去特拉华注册一家 startup」。李飞飞不同意 ——
+        她说这个词真正的意思是 <b>agency(能动性)</b>:你可以是个专科医生,可以是个 K12 老师,身份不重要;
+        重要的是在一个认知能力极强的技术面前,你有没有勇气抓住它、命令它、为自己所用。<br/><br/>
+        「<b>Don't be afraid. Don't shy away from it.</b>」—— 因为历史的车轮正朝那个方向转。
+        这,就是整场对谈反复回到的那个词,也是我把它记下来的原因。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE DANGER — polarization ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ 李飞飞最担心的事</span>
+    <h2 class="section-title display">最危险的,<br/>是缺席的中间。</h2>
+    <p class="section-lead">
+      公共讨论被劈成两半:一半人说 AI 是神、会拯救世界;另一半说它是魔鬼、会毁掉一切。
+      李飞飞说这两个极端都很危险 —— 真正重要、却恰恰缺席的,是「有细节的中间地带」。
+    </p>
+    <div class="compare">
+      <div class="col myth">
+        <h4>⚡ 两种极端叙事</h4>
+        <p class="sub">乌托邦 ↔ 末日,都在抢麦克风</p>
+        <ul>
+          <li>乌托邦:AI 拯救世界,我们再也不用工作,躺着领钱「chill」</li>
+          <li>末日:AI 抢光所有工作、夺走人的能动性</li>
+          <li>头条全是「大裁员」「不再需要你了」—— 喂大了对 AI 的恐惧与抵触</li>
+        </ul>
+      </div>
+      <div class="col real">
+        <h4>🎯 有细节的中间</h4>
+        <p class="sub">它是工具 —— 强大,但仍是工具</p>
+        <ul>
+          <li>人类可以用它把事情做得更好,但要非常警惕「怎么用」</li>
+          <li>我们教孩子用火、用刀、用互联网 —— 现在要把「用 AI」也学会</li>
+          <li>真正的问题:怎么用它向善?怎么避开陷阱?作为文明怎么往前走?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOUR BIG IDEAS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 四个最有信息量的点</span>
+    <h2 class="section-title display">把整场对谈,<br/>拆成四块。</h2>
+    <div class="obs-grid">
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>Idea 01 · 工具</div>
+        <h4>CEO 的工具栈,<br/>是他自己建的 app。</h4>
+        <p>
+          David 说,几个月前他会列 Claude、ChatGPT;<b>现在他用的大部分 app,是他自己用 Claude Code / Codex 建的</b> ——
+          包括一个模仿他写信语气的 "Davidify",和一个待办 app:任何事在列表上超过 1.5 天,就必须三选一 ——
+          现在做 / 扔掉 / 派给人。造一个 app 的成本,从「几个月」掉到「一个周末」。
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>Idea 02 · 反例</div>
+        <h4>别 vibe code<br/>你的 dashboard。</h4>
+        <p>
+          David 直接反对:vibe code 出来的 dashboard 只有前端、<b>不接真实数据源</b> ——「好用一小时,然后就坏了」。
+          想真正帮人入门,他会坐下来陪同事手把手做一遍 deep research;那一下「解锁」,比让他们自己看十个 YouTube 都管用。
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>Idea 03 · 工作</div>
+        <h4>杠铃效应:顶尖专才<br/>+ 高能动性通才。</h4>
+        <p>
+          未来人才向两端走:一端是<b>顶尖 1% 的专才</b>(还行的文案谁都能用 LLM 写,但顶尖的你赢不了);
+          另一端是<b>高能动性的通才</b> —— 判断力强、什么都能搞定一点。被抹平的,是中间那批「还行」。
+          两端的人都有 agency,只是形态不同。
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>Idea 04 · 警告</div>
+        <h4>「智能成本归零」<br/>是不负责任的说法。</h4>
+        <p>
+          李飞飞最不能接受的话术。人类智能深得我们自己都没搞懂:除了语言智能,还有<b>感知、空间、物理、情感智能</b>,
+          以及不知从何而来的创造力。LLM 只是「语言智能」这一块 —— 把它说成「自动化了人类智能」,
+          是一种 reductive(化约式)的危险简化。工业革命也没有「自动化劳动」,它只是让劳动更高效。
+        </p>
+      </div>
+    </div>
+    <div class="note">
+      <div class="who">我的批注 · Gimbo</div>
+      <p>
+        David 那句「我的工具栈,全是我自己建的 app」,几乎就是我这套 <a href="/ai-builder/ai-fleet.html">AI 舰队</a>的外部印证 ——
+        把读到的、想要的工作流,自己 vibe 出来,而不是等别人做产品。而他对 vibe-code dashboard 的警告,
+        对我做供应链 / 投资面板是具体的提醒:<b>前端漂亮没用,数据接不回去,一小时后就废了。</b>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ KEY NUMBERS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 把变化讲清楚的数字</span>
+    <h2 class="section-title display">几个数字,<br/>就能感到拐点。</h2>
+    <div class="arc-grid">
+      <div class="arc">
+        <div class="v pos">$80k → $100</div>
+        <div class="l">一年的教育成本,被 AI 一对一辅导压到的量级。</div>
+      </div>
+      <div class="arc">
+        <div class="v sky">省 60%</div>
+        <div class="l">用 AI 学,学同样的东西能省下的时间。</div>
+      </div>
+      <div class="arc">
+        <div class="v dim">5 亿年</div>
+        <div class="l">演化打磨「空间智能」用掉的时间 —— 语言智能只用了很短。</div>
+      </div>
+      <div class="arc">
+        <div class="v danger">收入 −⅕ · 死亡率 ×2</div>
+        <div class="l">过去技术变革里<b>不适应的人</b>:终身收入降逾五分之一、头一年死亡率翻倍。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">月 → 周末</div>
+        <div class="l">造一个 app 的成本坍塌幅度。</div>
+      </div>
+      <div class="arc">
+        <div class="v warn">top 1%</div>
+        <div class="l">LLM 替不掉的那一端 —— 顶尖专才的护城河。</div>
+      </div>
+      <div class="arc">
+        <div class="v sky">< 25 岁</div>
+        <div class="l">给害怕 AI 的人:去找一个这个年纪、你信任的孩子带你入门。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">~50 年</div>
+        <div class="l">李飞飞赌:空间智能成熟,「有生之年能见」,但绝不是一年。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SPATIAL INTELLIGENCE ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ World Labs 在做的事</span>
+    <h2 class="section-title display">语言之外,<br/>还有空间智能。</h2>
+    <p class="section-lead">
+      李飞飞认为,没有空间智能,AI 的图景就不完整。她不爱用 AGI 这个词(作为学者,觉得那个「G」不够严谨),
+      但她把空间智能拆成四件事 —— 它和语言智能是互补的,人做的几乎每件事都是这几种智能的混合。
+    </p>
+    <div class="quad">
+      <div class="q">
+        <div class="qn">1</div>
+        <div class="en">Understanding</div>
+        <h5>理解</h5>
+        <p>在一个三维(加上运动是四维)环境里,看懂正在发生什么 —— 我看到人、设备、这间房子。</p>
+      </div>
+      <div class="q">
+        <div class="qn">2</div>
+        <div class="en">Reasoning</div>
+        <h5>推理</h5>
+        <p>想去冰箱拿瓶水 —— 我要对空间推理:认出冰箱、规划上楼梯、规划自己的移动路径。</p>
+      </div>
+      <div class="q">
+        <div class="qn">3</div>
+        <div class="en">Generation</div>
+        <h5>生成</h5>
+        <p>哪怕没看到你的客厅,我脑海里也能「看见」它的样子;更好的艺术家能生成 2D/3D/4D 的视觉作品。</p>
+      </div>
+      <div class="q">
+        <div class="qn">4</div>
+        <div class="en">Interaction</div>
+        <h5>交互</h5>
+        <p>怎么和空间互动 —— 比如折衣服:每件怎么叠、怎么挂进衣柜,是高度交互、高度具身的动作。</p>
+      </div>
+    </div>
+    <p class="section-lead" style="margin-top: 28px; margin-bottom: 0;">
+      2D 这块今天已经相当成熟(认花、画图、改图);World Labs 攻的是 <b style="color:var(--ink);">3D</b> ——
+      它对机器人交互、可控创作、设计、建筑、游戏、特效都是地基。投篮的那一刻里,
+      既有语言推理(知道得失分),又有空间感知(看球场、看队友),还有物理动作(身体怎么发力)—— 它们一起工作。
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ AGENCY HOW-TO ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ Agency 怎么练</span>
+    <h2 class="section-title display">能动性,<br/>是对「求表扬」的拒绝。</h2>
+    <div class="obs-grid">
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>David · MasterClass 创始人</div>
+        <h4>先学会不被<br/>「表扬」牵着走。</h4>
+        <p>
+          我们从小被训练去讨表扬 —— 父母、老师、老板。而 agency、创业精神,几乎是对这套价值观的一种<b>拒绝</b>。
+          当年所有人都说 MasterClass 是个不可能、糟糕的点子;现在有人说「这不可能」,他反而想往里钻 ——
+          「如果一个点子人人都说好,那它大概率不是个好点子。」
+        </p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>李飞飞 · 反主流</div>
+        <h4>我其实<br/>羡慕下一代。</h4>
+        <p>
+          很多同代人哀叹网络、社媒、AI 太多;她唱反调 —— 新一代天生活在一个<b>充满声音、充满可能</b>的异质世界里,
+          不再是「一个老师、一个家长说了算」。这恰恰能用来提醒年轻人:在一个没有人独占麦克风的世纪里,
+          <b>是你的声音最重要</b> —— 如果你愿意相信。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TAKEAWAYS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 3 个 Takeaway</span>
+    <h2 class="section-title display">如果只记三件事。</h2>
+    <div class="takeaway-list">
+      <div class="takeaway">
+        <div class="idx">01</div>
+        <div>
+          <h4>Agency,是那把钥匙。</h4>
+          <p>不管你是专才还是通才,在一个认知极强的技术面前,决定你被甩下、还是被放大的,是<b>能动性</b> —— 主动抓工具、命令它、为自己重塑工作流。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">02</div>
+        <div>
+          <h4>别信「AI 救世」,也别信「智能归零」。</h4>
+          <p>真正重要的对话在缺席的中间:它是强大的工具,人可以用它把事做得更好,但要像学用火、用刀一样,<b>谨慎地学着用它</b>。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">03</div>
+        <div>
+          <h4>入门,只差一个周末。</h4>
+          <p>给害怕 AI 的职业者:别报班、别学 CS,<b>找一个 25 岁以下、你信任的孩子,让 ta 牵你的手用一个周末</b>。带着好奇,而不是焦虑。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section style="padding-top: 0; padding-bottom: 0;">
+  <div class="wrap">
+    <div class="cta">
+      <h2 class="display">Agency<br/>is the <span class="accent">key</span>.</h2>
+      <p>
+        这场对谈跟我自己这套操作系统,几乎是同一种语言:工具放大人、entrepreneurial = 能动性、反对「智能归零」。
+        如果你也好奇,去看完整原片 —— 文字留不住的,是他们临场的那股劲。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=subu-xHrp1w" target="_blank" rel="noopener">
+          看完整对谈 →
+        </a>
+        <a class="btn btn-ghost" href="/ideas/write-loops-not-code.html">
+          和 Boris「写 Loop」合看 →
+        </a>
+        <a class="btn btn-ghost" href="/ai-builder/ai-fleet.html">
+          看我自己的「AI 舰队」实验
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Video notes · Fei-Fei Li(World Labs)× David Rogier(MasterClass 创始人)</span>
+    <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+  </div>
+</footer>
+
+</body>
+</html>

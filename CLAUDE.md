@@ -52,6 +52,10 @@ Every **substantial** change gets recorded in `CHANGELOG.md` as part of the same
 
 - **What counts as substantial**: a new page / section / component, a new feature or mechanism, a visible design or hero change, a content drop (Ideas piece, book chapter, dashboard), or a notable fix. **Skip** for trivial copy tweaks, typo fixes, or tiny style nudges.
 - **Add a new top entry** under the format already in the file: `## [x.y.z] — YYYY-MM-DD · <one-line title>`, a `>` blockquote summary, then `### Added / Changed / Fixed / Notes` sections. Match the existing editorial voice (concrete, names files/paths, explains the *why*).
-- **Bump the version (semver-ish)**: new feature/page/section → **minor** (1.2 → 1.3); fix/polish only → **patch** (1.2.0 → 1.2.1). 1.0 was reached 2026-06-01.
+- **Bump the version (semver-ish)** — set by the owner on 2026-06-20:
+  - **Just adding a new `/ideas` piece (a new "ID") → bump the THIRD digit (patch)**: 1.10.0 → 1.10.1. A plain content drop into Ideas is *not* a minor bump.
+  - **A change to another module, a new section/feature/mechanism, or any big structural / IA / design change → bump the SECOND digit (minor)**: 1.10.x → 1.11.0.
+  - Fix/polish only → patch (third digit) as well.
+  - 1.0 was reached 2026-06-01. When a batch mixes both (e.g. a new Ideas piece *and* an IA change), the largest change wins → minor.
 - **Stamp the live commit** in the header once pushed, e.g. `(live: f705132)` — matches prior entries.
 - Use today's date from the session (convert any relative date to absolute).

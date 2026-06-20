@@ -6,6 +6,21 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.11.1] — 2026-06-20 · Homepage FEATURED strap → Metis
+
+> Repointed the homepage dispatch strap (the FEATURED top-line) from Tennis to **Metis**, the supply-pilot build.
+
+### Changed — Homepage
+
+- **`src/pages/index.astro`** — dispatch strap now links `/ai-builder/metis.html`; meta `// AI BUILDER · METIS · SUPPLY PILOT`, title "Metis flies the routine. I keep command.", subtitle frames it as a synthetic-data supply pilot with ~85% touchless rate (mirrors the privacy-hardened `ai-builder.ts` copy).
+
+### Notes
+
+- **Versioning** — patch (third digit): an editorial repoint of one strap, not a module/feature change.
+- **Red lines** — clean: synthetic-data framing kept; no employer, vendor, or financials.
+
+---
+
 ## [1.11.0] — 2026-06-20 · Homepage refresh — feed + Ideas card caught up (live: de194d9)
 
 > **Brought the homepage back in sync with the content that's actually shipped.** The activity feed had drifted to May and the Ideas module card still claimed "six pieces". Both now reflect reality (14 Ideas pieces, the latest being Agency is the Key).

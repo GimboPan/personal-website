@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.0] — 2026-06-20 · Homepage refresh — feed + Ideas card caught up
+## [1.11.0] — 2026-06-20 · Homepage refresh — feed + Ideas card caught up (live: de194d9)
 
 > **Brought the homepage back in sync with the content that's actually shipped.** The activity feed had drifted to May and the Ideas module card still claimed "six pieces". Both now reflect reality (14 Ideas pieces, the latest being Agency is the Key).
 

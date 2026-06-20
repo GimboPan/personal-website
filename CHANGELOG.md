@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.1] — 2026-06-20 · Homepage FEATURED strap → Metis
+## [1.11.1] — 2026-06-20 · Homepage FEATURED strap → Metis (live: d7d1d54)
 
 > Repointed the homepage dispatch strap (the FEATURED top-line) from Tennis to **Metis**, the supply-pilot build.
 

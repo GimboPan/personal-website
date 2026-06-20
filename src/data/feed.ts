@@ -24,9 +24,33 @@ export interface FeedEntry {
 }
 
 /** Month this feed was last edited by hand — shown as a freshness stamp. */
-export const feedUpdated = '2026.05';
+export const feedUpdated = '2026.06';
 
 export const feed: FeedEntry[] = [
+  {
+    date: '2026.06',
+    action: 'Shipped',
+    kind: 'done',
+    title: 'Agency is the Key — 李飞飞 × MasterClass 创始人对谈,开了「AI 前沿人物」专辑',
+    module: 'IDEAS',
+    href: '/ideas/agency-is-the-key.html',
+  },
+  {
+    date: '2026.06',
+    action: 'Shipped',
+    kind: 'done',
+    title: '认知四象限 — 把「我不知道我不知道」变成一张能用的地图',
+    module: 'IDEAS',
+    href: '/ideas/cognition-four-quadrants.html',
+  },
+  {
+    date: '2026.06',
+    action: 'Shipped',
+    kind: 'done',
+    title: '极简创业操作手册 — 把《小而美》拆成 10 个能调用的 skill',
+    module: 'IDEAS',
+    href: '/ideas/minimalist-entrepreneur-playbook.html',
+  },
   {
     date: '2026.06',
     action: 'Shipped',

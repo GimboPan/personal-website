@@ -6,6 +6,23 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.11.0] — 2026-06-20 · Homepage refresh — feed + Ideas card caught up
+
+> **Brought the homepage back in sync with the content that's actually shipped.** The activity feed had drifted to May and the Ideas module card still claimed "six pieces". Both now reflect reality (14 Ideas pieces, the latest being Agency is the Key).
+
+### Changed — Homepage
+
+- **`src/data/feed.ts`** — added three June `IDEAS` rows at the top (Agency is the Key + the new 「AI 前沿人物」专辑, 认知四象限, 极简创业操作手册); bumped `feedUpdated` `2026.05` → `2026.06`. "Recent across the universe" now leads with what just landed (11 updates).
+- **`src/pages/index.astro`** — Ideas `ModuleCard` subtitle `Six pieces live` → `Fourteen pieces live`; **Latest** list refreshed from the stale `06/05/04` to the current top three `14 Agency 是钥匙 · 李飞飞 × MasterClass / 13 认知四象限 / 12 极简创业操作手册`.
+
+### Notes
+
+- **Versioning** — minor bump (second digit) because this touches the **homepage module**, per the rule refined 2026-06-20 (a plain new `/ideas` piece would be a patch; a module change is a minor).
+- The dispatch strap (FEATURED pin) is left pointing at Tennis by deliberate editorial choice — repoint on request.
+- **Red lines** — clean: no company/person/financials added.
+
+---
+
 ## [1.10.0] — 2026-06-20 · Ideas #14 — Agency is the Key + new 「AI 前沿人物」series (live: 7894fab)
 
 > **A new `/ideas` video deep-read** built from the full transcript of a Fei-Fei Li × David Rogier conversation (thesis Gimbo anchored on: what decides whether you're sidelined or amplified by a cognitively powerful technology is **agency**, not your degree or title — "entrepreneurial is a synonym to agency"), **plus a new 专辑 that buckets the site's top-AI-figure talks into one filterable thread.**

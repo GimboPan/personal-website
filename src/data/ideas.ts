@@ -74,6 +74,32 @@ export const seriesDefs: SeriesDef[] = [
 
 export const articles: IdeaArticle[] = [
   {
+    index: '16',
+    title: 'AI 不会取代你,用 AI 的人会 · 把两本书熔成一个职场跃迁 skill · 操作手册',
+    lede: '读书会发下来两本讲「AI 时代怎么工作」的书:LinkedIn CEO 的《Open to Work》和 McKinsey 的《Agents, Robots, and Us》。我没停在写读后感——把两本完整读完、蒸馏,熔成了一个职场跃迁教练 Navi,并开源:用 Claude 的人 clone 成 skill,不用 Claude 的人直接在 ChatGPT 里打开 Custom GPT 版就能聊。这篇是它的操作手册。两本书正好互补:报告给「人机到底怎么分工」的硬数据(57% 工作小时理论上可自动化、但 72% 的技能落在「人机伙伴区」、AI fluency 需求两年涨近 7 倍、最有价值的人正从 executor 变成 orchestrator/validator),书给「人怎么重新定位自己」的那一面(5C 人类能力、把工作拆成三桶的任务自评、职业是攀岩墙不是梯子、anxiety→agency→aspiration 的情绪弧)。核心是把这一切收成一条一次只爬一级的 6 级阶梯:L0 焦虑回避者 → L1 AI 使用者 → L2 任务架构师 → L3 编排者/验证者 → L4 人类优势创新者 → L5 新型职场人,每级都有认知转变、动手练习和升级判据。贯穿全篇的校准是同一句:自动化冲着任务来不冲着头衔(放射科医生在 AI 大举进入后就业还年增约 3%),真正的风险不是 AI 取代你,是「用 AI 的人」取代你——这条阶梯就是让你成为那个人。附 builder 批注:这又是一次「把读到的变成能交出去的」。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy', 'society'],
+    href: '/ideas/ai-native-professional.html',
+    status: 'live',
+    isNew: true,
+    art: { motif: 'ascent', accent: '#9fe870', seed: 16 },
+  },
+  {
+    index: '15',
+    title: '能力已经到了,差的是把它用起来的速度 · Code with Claude 伦敦 2026 现场笔记 · 现场笔记',
+    lede: 'Anthropic 第一次把 Code with Claude 开到旧金山之外——伦敦站,24 场讲座。我把整个播放列表逐场拉出完整字幕、读完,做成这份现场笔记(全 24 场已整理)。贯穿全场那句话来自开场 keynote:能力其实早就到位了,真正剩下的差距是我们把它用起来有多快(平台 API 调用量同比 17×、人均每周用 20+ 小时、12 个月出 8 个前沿模型)。先提炼贯穿全场的 9 条主线——① 指数 vs 线性(为下一个模型设计)② 编程不再是瓶颈(敢审敢杀旧流程)③ 能力来自工具不是指令(每次新模型砍掉缝合怪 prompt)④ eval 是进步的单位(按「每个成功结果最便宜」选模型、警惕饱和 eval)⑤ 思考是杠杆不是开关 ⑥ 基础设施才是新约束(Managed Agents 原语+自托管沙箱+MCP tunnel)⑦ Memory+Dreaming 组织级自学习 ⑧ 上下文即护城河(被治理的 skills)⑨ 从工具到队友(routines/验证循环/council 评审/远程遥控)——再按 6 大主题逐场拆讲者·主旨·要点·数字·金句:keynote、AI 原生工程组织、prompting playbook、选模型/thinking lever、capability curve、记忆与做梦、托管 agent、Beyond the basics/Stop babysitting/What\'s new、Foundry/AWS/Google Cloud、以及 Man Group(自动交易信号)、Legora(法律)、Lovable、Spotify(2.5M 自动 PR)、Delivery Hero(Hurigen council 85%)、Base44(一人到 80)等客户故事。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy'],
+    href: '/ideas/code-with-claude-london-2026.html',
+    status: 'live',
+    isNew: true,
+    art: { motif: 'constellation', accent: '#9fe870', seed: 15 },
+  },
+  {
     index: '14',
     title: 'Agency 就是那把钥匙 · 李飞飞 × MasterClass 创始人聊 AI 时代 · 视频导读',
     lede: '李飞飞(Fei-Fei Li,做出 ImageNet、现在创办 World Labs)和 David Rogier(MasterClass 创始人)的一场对谈。我读完整份字幕做成的视觉笔记——他们在反复讲同一个判断:在一个认知能力强到「自动我们的智能」的技术面前,决定你被甩下、还是被放大的,不是学历、不是岗位,而是 agency(能动性)。真正打动我的那句是李飞飞的「entrepreneurial 几乎就是 agency 的同义词」——你可以是专科医生、可以是 K12 老师,身份不重要,重要的是有没有勇气抓住工具、命令它、为自己所用。沿着字幕往下拆四块:① CEO 的工具栈已是他自己用 Claude Code 建的 app(含模仿他写信语气的 Davidify、一个超 1.5 天就逼你「现在做/扔掉/派人」的待办 app),造一个 app 从「几个月」掉到「一个周末」;② 别 vibe code 你的 dashboard——只有前端、不接真实数据,好用一小时然后就坏;③ 工作的杠铃效应:顶尖 1% 专才 + 高能动性通才,中间「还行」被抹平;④ 「智能成本归零」是不负责任的化约——人类还有感知/空间/物理/情感智能和创造力,LLM 只是语言这一块。再补上李飞飞的空间智能四件事(理解·推理·生成·交互,World Labs 攻 3D)、教育的分叉($80k/年→约 $100、用 AI 学省 60% 时间)、以及怎么练 agency(拒绝「求表扬」、人人都说好的点子大概不好)。给害怕 AI 的人的唯一建议:找一个 25 岁以下、你信任的孩子,牵你的手用一个周末。附我作为 builder 的一点批注:这几乎是我那套 AI 舰队的外部印证。',

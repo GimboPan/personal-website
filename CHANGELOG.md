@@ -6,6 +6,40 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.11.3] — 2026-06-22 · Ideas #15 — Code with Claude 伦敦 2026 现场笔记(总览 + 6 章系列)(live: pending)
+
+> New Ideas piece (现场笔记), shipped as a **multi-page series**: I pulled the full transcript of every talk in Anthropic's *Code with Claude · London 2026* playlist (24 sessions), read them all, and distilled them. The hub page is the overview (9 cross-talk threads + key numbers); 6 chapter sub-pages go a layer deeper (per-talk thesis / points / numbers / quotes / so-what). The spine is the keynote line — *capability is already here; the gap is how fast we put it to work.*
+
+### Added — Ideas
+
+- **`public/ideas/code-with-claude-london-2026.html`** — the **hub / 总览** (Wise-Dark video-deep-read template). Hero + 17× stat banner + embedded full playlist + **9 cross-talk threads** + 8 key numbers (SWE-bench 60→87%, Spotify 2.5M auto-merged PRs, Hurigen ~173 PR/day @85% council, Legora $1M→$100M ARR, Lovable 200k apps/day…) + a **6-chapter nav** + 3 takeaways + CTA.
+- **6 chapter sub-pages** — `public/ideas/ccl-london-2026-{vision,craft,claude-code,agents-infra,clouds,in-the-wild}.html`. Each is a deeper deep-read of its group with prev/next/hub navigation. Grouping: ① 愿景与组织 ② 工艺(prompt·模型·思考)③ Claude Code 进阶 ④ Managed Agents 与基础设施 ⑤ 云平台 ⑥ 行业落地. Kept **off** the flat `/ideas` list by design (navigated from the hub) so the catalog stays clean — only the hub is registered.
+- **`src/data/ideas.ts`** — new article entry index `15` (the hub), topics tech/economy, `art` motif `constellation`, `status: 'live'`, `isNew: true`.
+
+### Notes
+
+- **Versioning** — patch (third digit): a new Ideas piece, per the rule set 2026-06-20. (A multi-page series, but one catalog entry + a content drop → still patch.)
+- **Transcripts** — 12 talks via NotebookLM; the other 12 (which NotebookLM hard-rejected at the video-ID level) via local faster-whisper. Auto-transcription, so minor errors exist; summaries grounded in what was actually said.
+- **Red lines** — clean: public conference talks by Anthropic + partner/customer companies (public figures and companies presenting publicly); no employer, colleague, or financial specifics of the owner.
+
+---
+
+## [1.11.2] — 2026-06-22 · Ideas #16 — 把两本书熔成一个职场跃迁 skill (live: pending)
+
+> New Ideas piece (Artifact / 操作手册): I read both reading-club books on working in the age of AI — *Open to Work* (LinkedIn CEO Ryan Roslansky) and *Agents, Robots, and Us* (McKinsey) — and fused them into a runnable coach (Navi) that walks an AI-anxious professional up a 6-rung literacy ladder. Shipped two ways: a **Claude Skill** (open-sourced at github.com/GimboPan/ai-native-professional) and a **ChatGPT Custom GPT** for people who don't use Claude. This page is its operating manual.
+
+### Added — Ideas
+
+- **`public/ideas/ai-native-professional.html`** — Wise-Dark deep-read built off the `agency-is-the-key.html` template. Sections: the AI-anxiety reframe (automation comes for tasks not titles; radiologist employment still grew ~3%/yr as AI arrived; the real risk is "someone using AI"), what each book contributes (McKinsey = why/what: 72% partnership zone, AI fluency +6.8x, orchestrator-not-executor; *Open to Work* = how/who: the 5Cs, three-bucket task sort, climbing-wall careers, anxiety→agency→aspiration), the 6-rung ladder (L0 Anxious Avoider → L5 AI-Native Professional) as the spine, the three-bucket + 5C tools, and a builder's note. CTA + skill section now offer **both entry points**: a ChatGPT Custom GPT (zero-install, for non-Claude users) and the open-source GitHub skill.
+- **`src/data/ideas.ts`** — new article entry index `16`, topics tech/economy/society, `art` motif `ascent`, `status: 'live'`, `isNew: true`. Catalog counts/timeline derive automatically.
+
+### Notes
+
+- **Versioning** — patch (third digit): a plain new Ideas piece, per the rule set 2026-06-20.
+- **Red lines** — clean: content is about two published books + an open-source skill; no employer, colleague, or financial specifics. *Open to Work* itself already lives on the site as Ideas #04 (visual guide) — this piece is the distinct skill/artifact angle, not a duplicate summary.
+
+---
+
 ## [1.11.1] — 2026-06-20 · Homepage FEATURED strap → Metis (live: d7d1d54)
 
 > Repointed the homepage dispatch strap (the FEATURED top-line) from Tennis to **Metis**, the supply-pilot build.

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 不会取代你,用 AI 的人会 · 把两本书熔成一个职场跃迁 skill — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="我把两本关于「AI 时代怎么工作」的书 —— LinkedIn CEO 的《Open to Work》和 McKinsey 的《Agents, Robots, and Us》—— 熔成了一个能在 Claude Code 里调用、并开源的职场跃迁教练 skill。一条 6 级阶梯:从焦虑回避者,一步步爬到 AI 时代的新型职场人。报告给 why/what(72% 人机伙伴区、AI fluency 两年 +6.8x、orchestrator-not-executor),书给 how/who(5C、三桶法、攀岩墙、anxiety→agency→aspiration)。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* ─── Back-link bar ─── */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-faint); font-weight: 600;
+    }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .sep { color: var(--ink-faint); }
+    .backbar .here { color: var(--ink); }
+
+    /* ─── Hero ─── */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow {
+      display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30);
+      padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700;
+    }
+    .hero h1 { font-size: clamp(48px, 8vw, 96px); margin-bottom: 28px; max-width: 18ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.5; margin-bottom: 32px; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* ─── Section base ─── */
+    section { padding: 72px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(36px, 5.5vw, 64px); margin-bottom: 18px; max-width: 20ch; }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 48px; }
+
+    /* ─── Stat banner ─── */
+    .stat-banner { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 56px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; }
+    .stat-banner .num { font-weight: 900; line-height: 0.82; letter-spacing: -0.04em; font-size: clamp(80px, 13vw, 184px); color: var(--green); }
+    .stat-banner .num .small { display: block; font-size: 0.16em; color: var(--ink); margin-top: 14px; line-height: 1.3; letter-spacing: -0.01em; }
+    .stat-banner .copy h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .stat-banner .copy p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .stat-banner .copy p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .stat-banner { grid-template-columns: 1fr; padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── Pull quote (the hook) ─── */
+    .quote { background: var(--surface-2); border: 1px solid rgba(159,232,112,0.30); border-radius: 40px; padding: 56px 52px; }
+    .quote .mark { color: var(--green); font-size: 80px; line-height: 0.4; font-weight: 900; display: block; height: 36px; }
+    .quote blockquote { font-size: clamp(28px, 4vw, 48px); font-weight: 900; line-height: 1.04; letter-spacing: -0.02em; margin: 22px 0 30px; max-width: 24ch; }
+    .quote blockquote .accent { color: var(--green); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 60ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── Number / arc strip ─── */
+    .arc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .arc { background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 28px 22px; }
+    .arc .v { font-weight: 900; font-size: clamp(24px, 3vw, 38px); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .arc .v.danger { color: var(--coral); }
+    .arc .v.warn { color: var(--amber); }
+    .arc .v.pos { color: var(--green); }
+    .arc .v.sky { color: var(--sky); }
+    .arc .v.dim { color: var(--ink); }
+    .arc .l { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+    .arc .l b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .arc-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ─── Compare ─── */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .compare .col { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 34px 30px; }
+    .compare .col.bookA { border-color: rgba(56,200,255,0.32); }
+    .compare .col.bookB { border-color: rgba(159,232,112,0.35); }
+    .compare .col h4 { font-size: 23px; font-weight: 900; margin-bottom: 4px; line-height: 1.08; }
+    .compare .col.bookA h4 { color: var(--sky); }
+    .compare .col.bookB h4 { color: var(--green); }
+    .compare .col .au { font-size: 12px; color: var(--ink-faint); margin-bottom: 6px; font-weight: 600; }
+    .compare .col .sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 22px; font-style: italic; }
+    .compare ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .compare li { font-size: 14.5px; color: var(--ink); padding: 12px 16px; background: var(--surface-3); border-radius: 14px; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+    .compare li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; margin-top: 9px; flex-shrink: 0; }
+    .compare .col.bookA li::before { background: var(--sky); }
+    .compare .col.bookB li::before { background: var(--green); }
+    .compare .verdict { grid-column: span 2; text-align: center; font-size: 15px; color: var(--ink-soft); padding: 4px 0; }
+    .compare .verdict b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } .compare .verdict { grid-column: span 1; } }
+
+    /* ─── Ladder (the spine) ─── */
+    .ladder { display: flex; flex-direction: column; gap: 12px; }
+    .rung { background: var(--surface-2); border: 1px solid var(--line); border-radius: 28px; padding: 30px 32px; display: grid; grid-template-columns: 92px 1fr; gap: 28px; align-items: start; transition: transform .2s, border-color .2s; position: relative; }
+    .rung:hover { transform: translateX(4px); border-color: var(--line-strong); }
+    .rung .lv { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+    .rung .lv .code { font-weight: 900; font-size: clamp(34px, 4vw, 46px); line-height: 0.85; letter-spacing: -0.03em; color: var(--green); }
+    .rung .lv .emo { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding: 3px 8px; border-radius: 9999px; }
+    .rung .lv .emo.fear { color: var(--coral); background: rgba(255,122,130,0.12); }
+    .rung .lv .emo.stir { color: var(--amber); background: rgba(255,209,26,0.12); }
+    .rung .lv .emo.agency { color: var(--sky); background: rgba(56,200,255,0.12); }
+    .rung .lv .emo.aspire { color: var(--green); background: rgba(159,232,112,0.14); }
+    .rung .body h4 { font-size: clamp(20px, 2.3vw, 26px); font-weight: 900; line-height: 1.05; margin-bottom: 4px; }
+    .rung .body h4 .en { color: var(--ink-faint); font-weight: 700; font-size: 0.6em; letter-spacing: 0.02em; }
+    .rung .body .state { font-size: 14px; color: var(--ink-faint); margin-bottom: 16px; font-style: italic; }
+    .rung .body .shift { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px; }
+    .rung .body .shift b { color: var(--ink); font-weight: 700; }
+    .rung .body .gate { font-size: 13.5px; color: var(--ink); background: var(--surface-3); border-radius: 12px; padding: 11px 15px; display: flex; gap: 9px; align-items: flex-start; line-height: 1.5; }
+    .rung .body .gate::before { content: '✓'; color: var(--green); font-weight: 900; flex-shrink: 0; }
+    .rung .body .gate b { color: var(--green); font-weight: 700; }
+    @media (max-width: 600px) { .rung { grid-template-columns: 1fr; gap: 14px; padding: 26px 24px; } .rung .lv { flex-direction: row; align-items: center; gap: 12px; } }
+
+    /* ─── Three buckets ─── */
+    .buckets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .bucket { background: var(--surface-1); border: 1px solid var(--line); border-radius: 26px; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px; }
+    .bucket .bn { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+    .bucket.b1 { border-color: rgba(255,122,130,0.30); } .bucket.b1 .bn { color: var(--coral); }
+    .bucket.b2 { border-color: rgba(255,209,26,0.30); } .bucket.b2 .bn { color: var(--amber); }
+    .bucket.b3 { border-color: rgba(159,232,112,0.32); } .bucket.b3 .bn { color: var(--green); }
+    .bucket h5 { font-size: 19px; font-weight: 900; line-height: 1.1; }
+    .bucket p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+    .bucket p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 720px) { .buckets { grid-template-columns: 1fr; } }
+
+    /* ─── 5C grid ─── */
+    .five { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .c { background: var(--surface-1); border: 1px solid var(--line); border-radius: 22px; padding: 26px 20px; display: flex; flex-direction: column; gap: 9px; }
+    .c .cn { font-weight: 900; font-size: 34px; line-height: 0.85; color: var(--green); letter-spacing: -0.03em; }
+    .c h5 { font-size: 17px; font-weight: 800; line-height: 1.1; }
+    .c .en { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+    .c p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+    @media (max-width: 900px) { .five { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 460px) { .five { grid-template-columns: 1fr; } }
+
+    /* ─── Gimbo annotation note ─── */
+    .note { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 18px; padding: 26px 30px; margin-top: 28px; }
+    .note .who { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: 10px; }
+    .note p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; }
+    .note p b { color: var(--ink); font-weight: 700; }
+    .note a { color: var(--green); font-weight: 600; }
+
+    /* ─── Skill how-to (terminal-ish) ─── */
+    .how { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 40px 38px; }
+    .how .step { display: grid; grid-template-columns: 44px 1fr; gap: 20px; align-items: start; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .how .step:last-child { border-bottom: 0; padding-bottom: 0; }
+    .how .step:first-child { padding-top: 0; }
+    .how .step .sn { font-weight: 900; font-size: 26px; color: var(--green); line-height: 1; }
+    .how .step h5 { font-size: 17px; font-weight: 800; margin-bottom: 5px; }
+    .how .step p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .how .step p code { background: var(--surface-3); color: var(--green-tint); padding: 2px 7px; border-radius: 6px; font-size: 13px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    /* ─── CTA ─── */
+    .cta { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 64px 48px; text-align: center; margin: 40px 0 80px; }
+    .cta h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 18px; max-width: 24ch; margin-left: auto; margin-right: auto; }
+    .cta h2 .accent { color: var(--green); }
+    .cta p { font-size: 16px; color: var(--ink-soft); max-width: 56ch; margin: 0 auto 32px; }
+    .cta .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 9999px; font-weight: 700; font-size: 14px; letter-spacing: 0.02em; transition: transform .15s, background .15s, color .15s; border: 1px solid transparent; }
+    .btn-primary { background: var(--green); color: var(--green-deep); }
+    .btn-primary:hover { transform: scale(1.04); }
+    .btn-ghost { color: var(--ink); border-color: var(--line-strong); }
+    .btn-ghost:hover { background: var(--surface-3); }
+
+    /* ─── Footer ─── */
+    footer { padding: 40px 0 60px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+    footer a { color: var(--green); }
+
+    @media (max-width: 640px) {
+      section { padding: 56px 0; }
+      .hero { padding: 56px 0 40px; }
+      .wrap { padding: 0 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════ BACK LINK ═══════════════ -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/ideas" aria-label="Back to Gimbo's Universe — Ideas">
+      <span aria-hidden="true">←</span> Gimbo's Universe
+    </a>
+    <span class="sep">/</span>
+    <a href="/ideas">Ideas</a>
+    <span class="sep">/</span>
+    <span class="here">AI 时代新型职场人 · 操作手册</span>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">§ 操作手册 · 把两本书熔成一个 skill</span>
+    <h1 class="display">
+      AI 不会取代你。<br/>
+      用 AI 的人,<span class="accent">会。</span>
+    </h1>
+    <p class="lead">
+      这是一本书的开场警告,也是这一页的起点。我读完两本关于「AI 时代怎么工作」的书 ——
+      LinkedIn CEO 的《Open to Work》和 McKinsey 的《Agents, Robots, and Us》——
+      把它们熔成了一个<b style="color:var(--ink);">能在 Claude Code 里调用、并开源的职场跃迁教练 skill</b>。
+      核心是一条 6 级阶梯:从「焦虑回避者」,一步步爬到 AI 时代的新型职场人。
+      不是学会被取代,是学会<b style="color:var(--ink);">在人机协作里当主导的那一方</b>。
+    </p>
+    <div class="credits">
+      <div class="item"><div class="label">书 · How / Who</div><div class="value">Open to Work — Ryan Roslansky (LinkedIn CEO)</div></div>
+      <div class="item"><div class="label">报告 · Why / What</div><div class="value">Agents, Robots, and Us — McKinsey</div></div>
+      <div class="item"><div class="label">产出</div><div class="value">一个开源 Claude Skill「Navi」</div></div>
+      <div class="item"><div class="label">Filed</div><div class="value">2026.06 · Tech · Economy · Society</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ STAT BANNER — 72% ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="stat-banner">
+      <div class="num">
+        72%
+        <span class="small">的今日技能,落在「人机伙伴区」—— 既不会纯被 AI 干,也不全是人干。</span>
+      </div>
+      <div class="copy">
+        <h3>关于 AI 抢工作,最重要的一个数字。</h3>
+        <p>
+          McKinsey 把约 6,800 个技能逐个过了一遍:只有 <b>11%</b> 是纯人类活、<b>17%</b> 会主要交给 AI ——
+          剩下 <b>72%</b> 落在中间的「shared / 伙伴区」。也就是说,绝大多数工作的未来不是「人 vs AI」的非此即彼,
+          而是<b>人机协作</b>。焦虑没错,但焦虑的方式错了:真正的问题不是「我会不会被替掉」,
+          而是「在这 72% 里,我是当主导、还是被边缘的那一方」。这本手册,就是教你当主导的那一方。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 焦虑校准 ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ 先把焦虑校准一下</span>
+    <h2 class="section-title display">恐惧是真的,<br/>但你怕错了东西。</h2>
+    <p class="section-lead">
+      恐惧本身不是软弱 —— 是生物本能。杏仁核分不清扑过来的狮子和快速变化的技术,所以你 freeze / fight / flee。
+      承认它,然后用几个数字把模糊的怕,换成清醒的判断。
+    </p>
+    <div class="arc-grid">
+      <div class="arc">
+        <div class="v dim">任务 ≠ 岗位</div>
+        <div class="l">自动化冲着<b>任务</b>来,不冲着头衔。David Autor:自动化部分任务,会让其余任务<b>更</b>重要、价值更高。</div>
+      </div>
+      <div class="arc">
+        <div class="v pos">+3%/年</div>
+        <div class="l">放射科医生被认为最该「被 AI 取代」—— 可 2017–2024 就业每年还<b>增长约 3%</b>,Mayo 还扩编 50%。增强 ≠ 替代。</div>
+      </div>
+      <div class="arc">
+        <div class="v sky">+6.8×</div>
+        <div class="l">两年里 <b>AI fluency</b> 的招聘需求涨了近 7 倍 —— 比任何其它技能都快。会用 AI 的人正在被系统性奖励。</div>
+      </div>
+      <div class="arc">
+        <div class="v warn">57%</div>
+        <div class="l">今天技术「理论上」能自动化的工作小时 —— 但这是<b>技术潜力,不是失业预测</b>;落地要数年到数十年。</div>
+      </div>
+    </div>
+    <div class="note">
+      <div class="who">一句话校准</div>
+      <p>
+        把这句记死:<b>真正的风险不是「AI 取代你」,是「用 AI 的人取代你」。</b>
+        这本手册存在的全部理由,就是让你成为那个用 AI 的人 —— 趁现在,而不是等到「终会」。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 两本书各给什么 ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 为什么是这两本</span>
+    <h2 class="section-title display">一本给地图,<br/>一本给走法。</h2>
+    <p class="section-lead">
+      它们刚好互补,合起来才完整:McKinsey 的报告是冷静的<b>结构与硬数据</b>,告诉你人机到底怎么分工(why / what);
+      LinkedIn CEO 的书是<b>人的那一面</b>,告诉你一个具体的人怎么重新定位自己(how / who)。
+    </p>
+    <div class="compare">
+      <div class="col bookA">
+        <h4>Agents, Robots, and Us</h4>
+        <div class="au">McKinsey Global Institute · 报告</div>
+        <div class="sub">冷的:结构、分工、硬数据 —— why / what</div>
+        <ul>
+          <li>72% 技能在「人机伙伴区」,11% 纯人类、17% 归 AI</li>
+          <li>Skill Change Index:技能分三路 —— 消失 / 进化 / 留存</li>
+          <li>AI fluency = Use AI（日常用）+ Manage AI（编排团队）</li>
+          <li>核心转身:从 executor → <b>orchestrator / validator</b></li>
+          <li>人做判断与框定,AI 出草稿与找模式,协作占大头</li>
+        </ul>
+      </div>
+      <div class="col bookB">
+        <h4>Open to Work</h4>
+        <div class="au">Ryan Roslansky（LinkedIn CEO）· 书</div>
+        <div class="sub">热的:身份、心态、行动 —— how / who</div>
+        <ul>
+          <li>「效率不是你的优势,创新才是」—— human with AI</li>
+          <li>5C:好奇 / 勇气 / 创造 / 同理 / 沟通,AI 复制不了</li>
+          <li>三桶法:把任务分成 AI 独做 / 人机合做 / 唯独人做</li>
+          <li>职业是攀岩墙,不是梯子;工作是任务,不是头衔</li>
+          <li>情绪弧线:anxiety → agency → aspiration</li>
+        </ul>
+      </div>
+      <div class="verdict">
+        报告说「<b>世界会变成什么样</b>」,书说「<b>那你该怎么活</b>」。我把两者拧成一条能一步步爬的阶梯。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 核心:6 级阶梯 ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 核心 · 这本手册的脊柱</span>
+    <h2 class="section-title display">一条 6 级阶梯。<br/>一次只爬一级。</h2>
+    <p class="section-lead">
+      每个人从自己所在的那一级开始。每级都有:要发生的<b style="color:var(--ink);">认知转变</b>,和一条
+      <b style="color:var(--ink);">升级判据</b> —— 满足了才上下一级。爬稳 > 爬快,因为 L3 的编排能力,
+      建立在 L1 每天用 AI 的习惯之上。底色是那条情绪弧线:从焦虑(coral)→ 能动(sky)→ 抱负(green)。
+    </p>
+    <div class="ladder">
+
+      <div class="rung">
+        <div class="lv"><span class="code">L0</span><span class="emo fear">焦虑</span></div>
+        <div class="body">
+          <h4>焦虑回避者 <span class="en">Anxious Avoider</span></h4>
+          <div class="state">「AI 会取代我」—— 但其实还没真正用过。</div>
+          <p class="shift">恐惧是生物本能,不是软弱。把心里那句「它会让我没用」拎出来,用数据反驳它:不是 human <b>versus</b> AI,是 human <b>with</b> AI;自动化冲着任务来,不冲着你整个人。</p>
+          <div class="gate"><span><b>升级判据:</b>能说出一个具体的恐惧 + 一个你想交给 AI 的具体任务,并且愿意真的去试一次。</span></div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="lv"><span class="code">L1</span><span class="emo stir">松动</span></div>
+        <div class="body">
+          <h4>AI 使用者 <span class="en">AI User</span></h4>
+          <div class="state">开始每天用 AI 卸载几个讨厌的任务。</div>
+          <p class="shift">「你不需要造 AI,只需要会用它。」练 prompting 四件套:<b>上下文 + 人设 + 受众/目标 + 迭代</b>。失败的开头是正常的 —— 那不是你做错了,是你真在做。用 AI 触发思考,别当拐杖。</p>
+          <div class="gate"><span><b>升级判据:</b>已经习惯性地(每天/每周)用 AI 做真实任务,能写带上下文和人设的 prompt,并会把输出改成自己的声音。</span></div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="lv"><span class="code">L2</span><span class="emo stir">清醒</span></div>
+        <div class="body">
+          <h4>任务架构师 <span class="en">Task Architect</span></h4>
+          <div class="state">看清自己的工作其实是一堆任务。</div>
+          <p class="shift">从「我是个 ___(头衔)」转到「我做这些任务」。用<b>三桶法</b>把约 12 个任务分类,定红黄绿区。焦虑在这一级会大降 —— 因为模糊的恐惧被换成了一张清单。72% 的你都落在「人机合做」那一桶。</p>
+          <div class="gate"><span><b>升级判据:</b>有一张分好桶、标了红黄绿区的任务表,并且已经动手把至少一个「桶 1」任务交给了 AI。</span></div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="lv"><span class="code">L3</span><span class="emo agency">掌控</span></div>
+        <div class="body">
+          <h4>编排者 / 验证者 <span class="en">Orchestrator</span></h4>
+          <div class="state">指挥并验证 AI,而不是和它抢着干活。</div>
+          <p class="shift">本手册最关键的一跃。McKinsey 的结论:专家越来越多地当 <b>orchestrator 和 validator,而不是 executor</b>。你的价值从「做这件事」变成「框定问题 → 派给 AI → 批判性验证 → 定稿」。默认质疑每一个输出,不照单全收。</p>
+          <div class="gate"><span><b>升级判据:</b>能把一个复杂任务框定→派给 AI→验证→定稿,且默认对 AI 输出做批判性检查,而非全盘接收。</span></div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="lv"><span class="code">L4</span><span class="emo agency">创造</span></div>
+        <div class="body">
+          <h4>人类优势创新者 <span class="en">Human-Edge Innovator</span></h4>
+          <div class="state">把省下的时间,投到只有你能做的事。</div>
+          <p class="shift">效率上去后,别把省下的时间又塞满常规活 —— 那是在 AI 的赛道上和它赛跑。把时间投到<b>5C</b> 和你的 <b>onlyness</b>:重新想象、建立关系、做判断、交出署你名的作品。「你的作品,是新的简历。」</p>
+          <div class="gate"><span><b>升级判据:</b>能指出自己最近一件「只有你能创造」的产出(5C / onlyness 驱动、AI 只是助手)。</span></div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="lv"><span class="code">L5</span><span class="emo aspire">抱负</span></div>
+        <div class="body">
+          <h4>新型职场人 <span class="en">AI-Native Professional</span></h4>
+          <div class="state">在攀岩墙上自主导航,持续重新跃迁。</div>
+          <p class="shift">把升级从「一次性」变成「活法」。用<b>职业三问</b>(你为什么工作 / 你独特地做什么 / 你想去哪)定方向;把人脉当导航系统、公开构建让自己被找到。每季度重做一次三桶法 —— 因为任务一直在变(红皇后:得拼命跑才能停在原地)。</p>
+          <div class="gate"><span><b>「毕业」状态:</b>你不再问「AI 会不会取代我」,而是问「下一步我想用 AI + 我的人类优势,去解决什么真实问题」。</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 工具 1:三桶法 ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 随身工具 ① · 来自《Open to Work》</span>
+    <h2 class="section-title display">三桶法:<br/>把你的工作摊开。</h2>
+    <p class="section-lead">
+      L2 的核心动作。列出你最常做的约 12 个任务,丢进三个桶,算桶 1 的占比 ——
+      桶 1 超一半是 🔴 红区(现在就被颠覆),约一半是 🟡 黄区,不到一半是 🟢 绿区。
+      脆弱性不在单个任务,在<b style="color:var(--ink);">三个桶之间的关系</b>。
+    </p>
+    <div class="buckets">
+      <div class="bucket b1">
+        <div class="bn">Bucket 1 · 红</div>
+        <h5>AI 能独立做</h5>
+        <p>常规、规则化、结构化数据、「if this, then that」。<b>把它们自动化 / 委派出去</b> —— 腾出的时间是你的本钱。</p>
+      </div>
+      <div class="bucket b2">
+        <div class="bn">Bucket 2 · 黄</div>
+        <h5>你和 AI 一起做</h5>
+        <p>AI 放大你,但替代不了你的<b>经验、直觉、对微妙之处的把握</b>。这一桶需要 AI 素养 —— 也是 72% 伙伴区的所在。</p>
+      </div>
+      <div class="bucket b3">
+        <div class="bn">Bucket 3 · 绿</div>
+        <h5>唯独属于人</h5>
+        <p>5C、信任、伦理、模糊性、创造新东西。<b>把自己往这一桶搬</b> —— 这是 AI 复制不了的护城河。</p>
+      </div>
+    </div>
+    <div class="note">
+      <div class="who">传送带</div>
+      <p>
+        三桶不是静态快照。刻意启动一条<b>传送带</b>:把任务从桶 1 → 桶 2 → 桶 3 迁移,
+        同时把你自己持续往桶 3 推。Vivienne Ming 把这叫「主动策展任务的元技能」—— 这正是 L2 通向 L4 的路。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 工具 2:5C ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 随身工具 ② · 来自《Open to Work》</span>
+    <h2 class="section-title display">5C:<br/>AI 复制不了的引擎。</h2>
+    <p class="section-lead">
+      L4 的核心。每一个都与 AI 对照着定义 —— 它们不是清单上的五个独立项,而是<b>彼此喂养</b>:
+      没有勇气的好奇导致不行动,没有沟通的创造只是私人爱好。soft skills 是新的硬技能。
+    </p>
+    <div class="five">
+      <div class="c">
+        <div class="cn">C</div>
+        <div class="en">Curiosity</div>
+        <h5>好奇</h5>
+        <p>AI 能处理模式。只有人会问:要不试点<b style="color:var(--ink);">完全不同的</b>?</p>
+      </div>
+      <div class="c">
+        <div class="cn">C</div>
+        <div class="en">Courage</div>
+        <h5>勇气</h5>
+        <p>AI 能计算风险。只有人决定<b style="color:var(--ink);">什么风险值得冒</b>。</p>
+      </div>
+      <div class="c">
+        <div class="cn">C</div>
+        <div class="en">Creativity</div>
+        <h5>创造</h5>
+        <p>AI 能重组已有。只有人<b style="color:var(--ink);">重新想象</b>什么是可能的。</p>
+      </div>
+      <div class="c">
+        <div class="cn">C</div>
+        <div class="en">Compassion</div>
+        <h5>同理</h5>
+        <p>AI 能模拟关心。只有人<b style="color:var(--ink);">真正感受</b>并表达它。</p>
+      </div>
+      <div class="c">
+        <div class="cn">C</div>
+        <div class="en">Communication</div>
+        <h5>沟通</h5>
+        <p>AI 能翻译语言。只有人把语言变成<b style="color:var(--ink);">意义</b>。(LinkedIn 头号紧缺技能)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 我把它做成了 skill ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 把读到的,变成能交出去的</span>
+    <h2 class="section-title display">所以我没停在<br/>「读完两本书」。</h2>
+    <p class="section-lead">
+      我把这条阶梯、三桶法、5C、定位诊断和一套练习库,全部写成了一个 <b style="color:var(--ink);">AI 时代的职场跃迁教练「Navi」</b> ——
+      它不只是一篇总结,是一个会陪你一步步爬的伙伴。<b style="color:var(--ink);">已经开源,而且两种用法:</b>
+      用 Claude 的人 clone 成 Skill;不用 Claude 的人,直接在 ChatGPT 里打开 <a href="https://chatgpt.com/g/g-6a38da6b57e081918c164f217a3d133c-navi-ai-native-professional-coach" target="_blank" rel="noopener" style="color:var(--green);border-bottom:1px solid var(--green);">Custom GPT 版</a> 就能聊,零安装。
+    </p>
+    <div class="how">
+      <div class="step">
+        <div class="sn">1</div>
+        <div><h5>一句话触发</h5><p>跟它说「我被 AI 搞得很焦虑」「帮我做个三桶任务自评」或「给我个 90 天 AI 上手计划」,Navi 就上线。</p></div>
+      </div>
+      <div class="step">
+        <div class="sn">2</div>
+        <div><h5>先定位,再教学</h5><p>它先用 6 个问题判断你在 <code>L0–L5</code> 哪一级,然后<b style="color:var(--ink);">只攻当前级</b> —— 不会一次把六级倒给你把你淹没。</p></div>
+      </div>
+      <div class="step">
+        <div class="sn">3</div>
+        <div><h5>给练习,对判据</h5><p>从 17 个练习里挑一个给你,产出是<b style="color:var(--ink);">能拿出来的东西</b>(清单 / 作品 / 承诺)。做完对升级判据,满了才上下一级。</p></div>
+      </div>
+    </div>
+    <div class="note">
+      <div class="who">我的批注 · Gimbo</div>
+      <p>
+        这件事本身就是这本手册的演示:消费(读两本书)只是输入,<b>只有变成别人能打开、能用的东西,价值才兑现。</b>
+        我用一个下午读完两本、蒸馏、设计阶梯、写成 skill、开源 —— 这正是 L4 那一桶:用 AI 当助手,
+        交出一件署我名的作品。仓库是 MIT 开源(蒸馏文件版权归原作者),欢迎你 clone 进自己的 Claude Code 用。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section style="padding-top: 0; padding-bottom: 0;">
+  <div class="wrap">
+    <div class="cta">
+      <h2 class="display">别等到「<span class="accent">终会</span>」。</h2>
+      <p>
+        AI 不会取代你,用 AI 的人会 —— 但你完全可以成为那个人。
+        从你所在的那一级开始,一次爬一级。用 ChatGPT 点开就聊,用 Claude 可 clone 成 skill,书强烈建议读原著。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://chatgpt.com/g/g-6a38da6b57e081918c164f217a3d133c-navi-ai-native-professional-coach" target="_blank" rel="noopener">
+          在 ChatGPT 里直接聊 Navi →
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/GimboPan/ai-native-professional" target="_blank" rel="noopener">
+          看 / clone 这个 skill(GitHub）→
+        </a>
+        <a class="btn btn-ghost" href="/ideas/open-to-work-visual-guide.html">
+          《Open to Work》可视化解读 →
+        </a>
+        <a class="btn btn-ghost" href="/ideas/agency-is-the-key.html">
+          和李飞飞「Agency 是钥匙」合看 →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>操作手册 · 熔自《Open to Work》(Ryan Roslansky)+《Agents, Robots, and Us》(McKinsey)</span>
+    <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+  </div>
+</footer>
+
+</body>
+</html>

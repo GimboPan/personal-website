@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>云平台 · 生态 · Code with Claude 伦敦 2026 — Ideas — Gimbo's Universe</title>
+<meta name="description" content="Claude 怎么落到三大云的企业栈里:Google Cloud(ADC 免密钥 + 全流程部署)、Microsoft Foundry(Agent Framework + MCP 工具)、AWS(Bedrock / Claude Platform on AWS / 合并计费三种用法 + 企业安全)。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0f0c;--surface-1:#14160f;--surface-2:#1a1c19;--surface-3:#21241f;--ink:#f5f5f0;--ink-soft:#c6c8c0;--ink-faint:#8a8c84;--line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);--green:#9fe870;--green-deep:#163300;--green-tint:#d8f5b8;--amber:#ffd11a;--coral:#ff7a82;--sky:#38c8ff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"calt","ss01";}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:0.85;letter-spacing:-0.02em}
+.backbar{background:var(--surface-1);border-bottom:1px solid var(--line);padding:16px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;flex-wrap:wrap}
+.backbar a{color:var(--green);display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.backbar a:hover{color:var(--green-tint)}.backbar .sep{color:var(--ink-faint)}.backbar .here{color:var(--ink)}
+.hero{padding:72px 0 40px}
+.hero .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);background:rgba(159,232,112,0.10);border:1px solid rgba(159,232,112,0.30);padding:6px 12px;border-radius:9999px;margin-bottom:24px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.4vw,76px);margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);color:var(--ink-soft);max-width:62ch;line-height:1.55}
+.hero .meta{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);display:flex;gap:10px 22px;flex-wrap:wrap}
+.hero .meta b{color:var(--ink);font-weight:600}
+section{padding:8px 0 40px}
+.talk{background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:32px 34px;margin-bottom:18px}
+.talk .top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.talk .no{font-weight:900;font-size:34px;line-height:0.9;color:var(--green);letter-spacing:-0.02em;flex-shrink:0;min-width:52px}
+.talk h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.1;letter-spacing:-0.01em}
+.talk .who{font-size:13px;color:var(--ink-faint);font-weight:600;margin:8px 0 0 66px}
+.talk .body{margin:18px 0 0 66px}
+.talk .thesis{font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.talk .thesis b{color:var(--green-tint);font-weight:700}
+.talk ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.talk li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.talk li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.7}
+.talk li b{color:var(--ink);font-weight:700}
+.meta-row{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.chip{font-size:13.5px;line-height:1.55;display:flex;gap:10px}
+.chip .k{flex-shrink:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding-top:3px;width:60px}
+.chip.num .k{color:var(--sky)}.chip.quote .k{color:var(--amber)}.chip.sw .k{color:var(--green)}
+.chip .v{color:var(--ink-soft)}.chip .v b{color:var(--ink);font-weight:700}
+.chip.quote .v{font-style:italic;color:var(--ink)}
+.talk .watch{display:inline-flex;margin:16px 0 0 66px;font-size:13px;color:var(--green);font-weight:600}
+.talk .watch:hover{color:var(--green-tint)}
+@media(max-width:680px){.talk{padding:26px 22px}.talk .who,.talk .body,.talk .watch{margin-left:0}.talk .no{min-width:42px;font-size:28px}}
+.chapnav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 70px}
+.chapnav a{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.chapnav a:hover{border-color:rgba(159,232,112,.4);transform:translateY(-2px)}
+.chapnav .dir{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:800;margin-bottom:8px}
+.chapnav .t{font-size:16px;font-weight:800;color:var(--ink);line-height:1.2}
+.chapnav a.next{text-align:right}
+.chapnav a.hub{grid-column:span 2;text-align:center;background:var(--surface-1)}
+.chapnav a.hub .t{color:var(--green)}
+@media(max-width:560px){.chapnav{grid-template-columns:1fr}.chapnav a.next{text-align:left}.chapnav a.hub{grid-column:span 1}}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}footer a{color:var(--green)}
+@media(max-width:640px){.hero{padding:48px 0 32px}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="backbar"><div class="wrap">
+  <a href="/ideas"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+  <span class="sep">/</span>
+  <a href="/ideas/code-with-claude-london-2026.html">Code with Claude 伦敦 2026</a>
+  <span class="sep">/</span>
+  <span class="here">⑤ · 云平台 · 生态</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">§ 现场笔记 · 第 ⑤ 章 / 共 6</span>
+  <h1 class="display">三朵云,<span class="accent">同一个 Claude</span>。</h1>
+  <p class="lead">Claude 怎么落到三大云的企业栈里:Google Cloud(ADC 免密钥 + 全流程部署)、Microsoft Foundry(Agent Framework + MCP 工具)、AWS(Bedrock / Claude Platform on AWS / 合并计费三种用法 + 企业安全)。</p>
+  <div class="meta">
+    <span><b>3</b> 场</span>
+    <span>主题:<b>On the clouds</b></span>
+    <span>来自 Code with Claude · London 2026</span>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<article class="talk">
+  <div class="top"><span class="no">08</span><h2>Building with Claude on Google Cloud</h2></div>
+  <div class="who">Iman Nardini · Google Cloud(与 Anthropic 合作)</div>
+  <div class="body">
+    <p class="thesis">Claude Code(跑在 Google Cloud 托管的 Claude 模型上)能带一个非专家走完<b>从想法到部署的整个生命周期</b>——UI、后端、安全评审、分析——在 Google Cloud 上建并部署一个真 app,而无需懂 Google Cloud。</p>
+    <ul><li>上手简单:用应用默认凭据(ADC,无需存/轮换 API key);向导检测项目/区域、核对可用的 Claude 模型。</li><li>五角色 demo,一职能一顶帽子:PM(草图→线框)、UI/UX(线框→4 个页面)、SWE(后端+部署)、安全(评审→上生产)、分析(指标→看板)。</li><li>展示 Claude Code 特性:CLAUDE.md 角色文件、plan mode、subagents(并行模拟团队冲刺)、MCP、skills、自定义插件。</li><li>两个新 GCP 集成:官方 Google Cloud Skills + Developer Knowledge API/MCP(文档每 24h 刷新)。</li><li>落地架构:Cloud Run(API,serverless)+ Firestore(库)+ BigQuery(分析仓)+ Looker(看板);CI/CD 由 Claude 用 Cloud Build + Cloud Deploy 自动建(PR 合并触发,先 dev 再手动 promote 到生产)。</li><li>安全评审用自定义插件(公司规则,OWASP 式 + 输入校验 + 最小权限);Claude 修复、重跑测试、开新 PR。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">按 token 计费(无消息上限);可选 provisioned throughput;文档每 24h 刷新;多区域端点。产品:Cloud Run、Firestore、BigQuery、Looker、Cloud Build、Cloud Deploy。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“你居然在不懂 Google Cloud 的情况下,把东西部署到了 Google Cloud 上。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">用 ADC 认证 + Developer Knowledge MCP + 官方 GCP skills,Claude Code 能设计并部署一整套 Cloud Run/Firestore/BigQuery/Looker + CI/CD,哪怕你没有 GCP 经验。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=l8fxVYIP4HQ" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">20</span><h2>Build AI agents using Claude in Microsoft Foundry</h2></div>
+  <div class="who">Marlene Mangami 等 · Microsoft(动手 workshop)</div>
+  <div class="body">
+    <p class="thesis">动手实操:在 <b>Microsoft Foundry</b> 部署 Claude → 用 Microsoft Agent Framework 把模型接成 agent → 用 MCP server 给它真工具——最后做出一个会下单蛋糕的「Sparkles」agent。</p>
+    <ul><li>立意:行业从单轮 chat 转向会规划/推理/行动的 agentic 系统;三挑战:长上下文多步推理、企业级可靠/可观测/安全、连外部工具与数据。「不能光等模型变好,得有系统把智能执行出来」。</li><li>Foundry = 统一平台(配 GitHub、VS Code、Visual Studio、Copilot Studio);产品:Foundry 模型(含 Claude)、Agent Service、工具/集成、ML 服务。</li><li>选 Claude + Foundry 的四个理由:最佳 agent 推理(Opus 当主力)、能编排 agent 并给工具、企业能力开箱(Defender/Purview/Entra ID,「不用老跟 .env 打交道」)、原型到生产更快(内置 eval/可观测/监控)。</li><li>流程:Foundry 部署 Claude → Playground 测 → 进 VS Code(.env 的 URI 要以 anthropic 结尾、去掉末尾 v1/messages)→ 用 Microsoft Agent Framework(Python)建 agent → 接蛋糕店 MCP server 当工具 → 从 MCP 拉人设/欢迎语等可复用 prompt。</li><li>要点:MCP 暴露的不只是工具,还有 prompts 和 resources。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">Foundry 自带 1,400+ 连接器/MCP 工具;模型:Claude Sonnet 4.6(workshop 用)、Opus 4.7;集成:Defender、Purview、Entra ID、SAP、ServiceNow。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“用 MCP,你只要一个 URL,就拿到对 agent 友好的整套 API。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">要把 Claude agent 装进微软/Azure 企业栈:Foundry 部署模型、Microsoft Agent Framework 搭 agent,用 MCP server 提供能力(工具 + 可复用 prompt + resources),而不是硬编码。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=TQd_YQvydVg" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">22</span><h2>AI with Claude on AWS: From code to orchestration</h2></div>
+  <div class="who">Antonio Rodriguez · AWS(自称「Claude whisperer」,动手 workshop)</div>
+  <div class="body">
+    <p class="thesis">「better together」+ 实操:把 Claude app 从本地原型搬上 AWS 生产——讲清 AWS 上用 Claude 的<b>三种方式</b>,以及安全/计费/可扩展的好处。</p>
+    <ul><li>AWS–Anthropic 合作:Amazon 数十亿投资、AWS 为主云、Anthropic 承诺 1000 亿+ AWS 用量;Project Rainier 是最大 AI 算力之一;Trainium 第三代。</li><li>三个技术角度:Bedrock 全平台(AWS 是唯一能在云上 fine-tune Haiku 的)、安全(数据留你的 AWS 边界、最新推理引擎零运营方访问、不拿你数据训练)、近乎无限扩展 + 区域选择(可只在伦敦/欧盟跑以合 GDPR)。</li><li>Bedrock 生态:评估、prompt 优化、fine-tune、蒸馏、托管知识库(RAG)、Guardrails(内容过滤/禁topic/PII 脱敏/幻觉检查)。</li><li>Bedrock AgentCore:安全的 agent 托管,兼容 LangChain、CrewAI、Claude Agent SDK。</li><li>三种用法:① Bedrock 直接调 Claude(刚加 Opus 4.7 + Messages API)② <b>Claude Platform on AWS</b>(几天前 GA,直连 Anthropic 体验、AWS 当网关、功能对齐)③ Claude Desktop/Cowork/Code 走 AWS 合并账单(Marketplace 或新 Claude 3P 连接器)。</li><li>workshop:用 Excalidraw 仓库让 Claude Code 画/改架构图;模块从基础 → 上下文工程 + Playwright MCP 截图 + git → 子 agent/插件/skill/hook。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">数十亿投资 / 1000 亿+ 用量承诺;Trainium 三代;Bedrock 上 Opus 4.7 + Messages API;Claude Platform on AWS 已 GA;零运营方访问。合规:FedRAMP、HIPAA。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“如今我们基本是在「轻语」模型,而不是真在写代码。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">已经在 AWS 上的话,可三种方式跑 Claude(Bedrock API、刚 GA 的 Claude Platform 网关、或 Desktop/Code 合并计费),拿到企业安全/私网/可观测,并在 AgentCore 上托管 Agent SDK——不出你现有的合规/计费边界。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=5YHIrTYxM3w" target="_blank" rel="noopener">看原片 →</a>
+</article></div></section>
+
+<section style="padding-top:0;"><div class="wrap"><div class="chapnav"><a class="prev" href="/ideas/ccl-london-2026-agents-infra.html"><div class="dir">← 上一章</div><div class="t">④ · Managed Agents 与基础设施</div></a><a class="next" href="/ideas/ccl-london-2026-in-the-wild.html"><div class="dir">下一章 →</div><div class="t">⑥ · 行业落地 · 客户故事</div></a><a class="hub" href="/ideas/code-with-claude-london-2026.html"><div class="dir">↑ 回总览</div><div class="t">Code with Claude 伦敦 2026 · 现场笔记</div></a></div></div></section>
+
+<footer><div class="wrap">
+  <span>Field notes · Code with Claude London 2026 · 第 ⑤ 章 云平台 · 生态</span>
+  <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+</div></div></footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>行业落地 · 客户故事 · Code with Claude 伦敦 2026 — Ideas — Gimbo's Universe</title>
+<meta name="description" content="五场客户故事,看 agent 在真钱、真法务、真规模上的样子:Man Group 的自动交易信号、Legora 的法律 agent、Lovable 的自愈平台、三家企业的 AI-native 落地、以及 Spotify 把编程从瓶颈拿掉之后的工程体系。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0f0c;--surface-1:#14160f;--surface-2:#1a1c19;--surface-3:#21241f;--ink:#f5f5f0;--ink-soft:#c6c8c0;--ink-faint:#8a8c84;--line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);--green:#9fe870;--green-deep:#163300;--green-tint:#d8f5b8;--amber:#ffd11a;--coral:#ff7a82;--sky:#38c8ff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"calt","ss01";}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:0.85;letter-spacing:-0.02em}
+.backbar{background:var(--surface-1);border-bottom:1px solid var(--line);padding:16px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;flex-wrap:wrap}
+.backbar a{color:var(--green);display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.backbar a:hover{color:var(--green-tint)}.backbar .sep{color:var(--ink-faint)}.backbar .here{color:var(--ink)}
+.hero{padding:72px 0 40px}
+.hero .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);background:rgba(159,232,112,0.10);border:1px solid rgba(159,232,112,0.30);padding:6px 12px;border-radius:9999px;margin-bottom:24px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.4vw,76px);margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);color:var(--ink-soft);max-width:62ch;line-height:1.55}
+.hero .meta{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);display:flex;gap:10px 22px;flex-wrap:wrap}
+.hero .meta b{color:var(--ink);font-weight:600}
+section{padding:8px 0 40px}
+.talk{background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:32px 34px;margin-bottom:18px}
+.talk .top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.talk .no{font-weight:900;font-size:34px;line-height:0.9;color:var(--green);letter-spacing:-0.02em;flex-shrink:0;min-width:52px}
+.talk h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.1;letter-spacing:-0.01em}
+.talk .who{font-size:13px;color:var(--ink-faint);font-weight:600;margin:8px 0 0 66px}
+.talk .body{margin:18px 0 0 66px}
+.talk .thesis{font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.talk .thesis b{color:var(--green-tint);font-weight:700}
+.talk ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.talk li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.talk li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.7}
+.talk li b{color:var(--ink);font-weight:700}
+.meta-row{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.chip{font-size:13.5px;line-height:1.55;display:flex;gap:10px}
+.chip .k{flex-shrink:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding-top:3px;width:60px}
+.chip.num .k{color:var(--sky)}.chip.quote .k{color:var(--amber)}.chip.sw .k{color:var(--green)}
+.chip .v{color:var(--ink-soft)}.chip .v b{color:var(--ink);font-weight:700}
+.chip.quote .v{font-style:italic;color:var(--ink)}
+.talk .watch{display:inline-flex;margin:16px 0 0 66px;font-size:13px;color:var(--green);font-weight:600}
+.talk .watch:hover{color:var(--green-tint)}
+@media(max-width:680px){.talk{padding:26px 22px}.talk .who,.talk .body,.talk .watch{margin-left:0}.talk .no{min-width:42px;font-size:28px}}
+.chapnav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 70px}
+.chapnav a{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.chapnav a:hover{border-color:rgba(159,232,112,.4);transform:translateY(-2px)}
+.chapnav .dir{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:800;margin-bottom:8px}
+.chapnav .t{font-size:16px;font-weight:800;color:var(--ink);line-height:1.2}
+.chapnav a.next{text-align:right}
+.chapnav a.hub{grid-column:span 2;text-align:center;background:var(--surface-1)}
+.chapnav a.hub .t{color:var(--green)}
+@media(max-width:560px){.chapnav{grid-template-columns:1fr}.chapnav a.next{text-align:left}.chapnav a.hub{grid-column:span 1}}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}footer a{color:var(--green)}
+@media(max-width:640px){.hero{padding:48px 0 32px}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="backbar"><div class="wrap">
+  <a href="/ideas"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+  <span class="sep">/</span>
+  <a href="/ideas/code-with-claude-london-2026.html">Code with Claude 伦敦 2026</a>
+  <span class="sep">/</span>
+  <span class="here">⑥ · 行业落地 · 客户故事</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">§ 现场笔记 · 第 ⑥ 章 / 共 6</span>
+  <h1 class="display">把它放进<span class="accent">真实世界</span>里。</h1>
+  <p class="lead">五场客户故事,看 agent 在真钱、真法务、真规模上的样子:Man Group 的自动交易信号、Legora 的法律 agent、Lovable 的自愈平台、三家企业的 AI-native 落地、以及 Spotify 把编程从瓶颈拿掉之后的工程体系。</p>
+  <div class="meta">
+    <span><b>5</b> 场</span>
+    <span>主题:<b>In the wild</b></span>
+    <span>来自 Code with Claude · London 2026</span>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<article class="talk">
+  <div class="top"><span class="no">09</span><h2>Building signals that trade themselves</h2></div>
+  <div class="who">Tashara Fernando · Man Group 数据与 AI 负责人($200B+ AUM)</div>
+  <div class="body">
+    <p class="thesis">交易信号那个点子只是冰山一角——真正让 AI 驱动系统化交易跑起来的,是<b>被治理的、共享的 skills</b>,把 Claude 接到公司的专有数据、能力和工作流。没治理,skill 就是局部 hack;有治理,它们就成了护城河。</p>
+    <ul><li>Man Group 已有交易信号在生产里用真钱跑:AI 出想法、取数、跑回测、写策略提案、产品化——人审所有输出(信号本身是 IP,不披露)。</li><li>系统化交易用「梦幻足球」类比:按因子(如过去 3 月收益)给证券排名、做多赢家做空输家、回测 15+ 年跨多种宏观周期。</li><li>他们没靠 fine-tune 教 Claude,而是通过 skills 把数据/能力/工作流的访问权给它(连接他们「制度知识」这个超能力的那层)。</li><li>翻车:大力推广(workshop/黑客松/博客)推出的是 power user 而非 process owner → 局部优化。报销 skill 把某人 cost-center 写死,结果所有人的报销都路由给一个审批人。</li><li>解法:skills 治理 = 一个公共市场(「图书馆」):每个 skill 可见、打标、过 eval、由工作流 owner 拥有、用量可追、可评审、有生命周期(含退役)、人人可装。</li><li>demo:装一个另类数据 skill 找到美国消费者信用卡数据,画亚马逊信用卡消费 vs 股价、回测、再用分布式算力扩到所有零售商。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">$200B+ AUM;~1.78 万员工;750 人用 Claude Code(开发/quant/财务);100+ 治理 skill + 至少同等数量社区 skill;demo 回测:2021 年投 $1000 现约 $2500。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“上下文,是 AI 里少数还安全的地方,它是你的护城河。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">你的专有上下文和工作流——做成被治理、有归属、过 eval 的 skills——才是企业 AI 真正的护城河;在扩张前先把 owner/评审/退役机制建好,否则只会量产挡住企业级使用的局部 hack。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=EOg4gY0Yln0" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">12</span><h2>What legal agents inherit from coding agents: Lessons from Legora</h2></div>
+  <div class="who">Jacob Emmeling · Legora(给律师的协作式 AI,斯德哥尔摩)</div>
+  <div class="body">
+    <p class="thesis">编程 agent 远超其他垂直,所以任何领域 agent 都能靠系统性地「偷」编程 agent 快速进步——三桶:1:1 复用、翻译适配、发明。核心心法是让一个非编程模型<b>「感觉自己在一个编程 agent 的 harness 里」</b>,从而继承编程导向 RL/微调的红利。</p>
+    <ul><li>编程与法律(以及多数知识工作)深层相似:重度依赖先例、文本文档、严格的组织规范、强评审/签字文化(PR review ≈ 合伙人审律师初稿)。</li><li>三桶框架:① 1:1 复用——todo、规划、子 agent、沙箱、人类介入(Agent SDK 免费给);② 翻译——形似但要适配;③ 发明——真正领域专有的最后 ~20%。</li><li>翻译·文档编辑:旧做法用「编辑标记」在多模型间交接,导致交接问题、偷懒/不完整编辑;新做法照搬编程的 read→edit→verify 循环——把 .docx 转成扁平文本中间表示,给读/写工具让模型循环、看到自己的编辑、再读。</li><li>翻译·「法律文档的 ESLint」:静态 lint(如删了被引用段落造成的断引用)+ LLM lint,给 agent 编程式反馈回路。</li><li>发明·规模化尽调「Tabular Review」:网格——每行一份文档、每列定义要抽取的结构化字段,带可核验引用 + 人工核验追踪。</li><li>收尾心法:你不需要知道为什么编程领先,只要看编程 agent 发什么新东西,就 复用/翻译/发明 到你的垂直——「偷过来,享受红利」。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">Legora 1000+ 客户(含全球最大律所);估值 >$50 亿;创纪录 $1M→$100M ARR 冲刺;英→瑞典逐段翻译 POC 跑在 Haiku(非前沿模型)上;demo ~5 份雇佣协议 + ~100 文件尽调项目。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“你要让模型几乎感觉自己就在一个编程 agent 的 harness 里,只不过干的是法律活。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">建垂直 agent 时,把每项能力刻意归到 复用/翻译/发明 三桶,并把工具设计成模仿编程 agent 的 harness(扁平文本 + read/edit/verify 循环 + lint),白嫖模型编程训练出来的行为。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=nho1YAEPuwA" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">16</span><h2>How Lovable vibecodes production software at scale</h2></div>
+  <div class="who">Lovable 团队(联创 Anton,GPT-Engineer 作者,被提及)</div>
+  <div class="body">
+    <p class="thesis">Lovable 的愿景是<b>平台上建的每个 app 都该帮下一个变更好</b>——所以平台必须「自愈」,别让非技术用户卡死。两套自愈系统:Lovable Overflow(精剪的知识语料)和一个「vent」反馈工具。</p>
+    <ul><li>产品:左聊天右预览(自创立没变),给不会写代码的「99%」;模型大约 1.5 年前才让这个抽象可行,每 ~3 个月一跳。</li><li>「卡住」是被追踪的指标(is_stuck),小分类模型推断(连说 3 次「修一下」、抱怨实现、问完就走)。三桶:可重新 prompt 解(黄色预卡死区,能不能在用户卡住前就修)、理论易但平台不支持(边缘自愈)、真平台缺口(如上周发的 SSR for SEO)。</li><li><b>Lovable Overflow</b>(致敬 Stack Overflow):problem→solution 语料,轻模型把相关上下文改写、注入主 agent;<b>狠剪</b>是关键——每个知识文件追踪成功率、过时即删(知识有半衰期)。</li><li><b>vent 工具</b>(vent --send_feedback):工具/文档/平台明显拖后腿时,agent 每条消息最多吐槽一次 → 进 Slack → 另一个 agent 去重/调查 → 开 PR 给工程师评审。</li><li>vent 的意外收获:先于告警系统发现生产事故(推理挂了、缺沙箱、网络故障都表现为 vent 尖峰);一次 agent vent 了 43 次,然后自己提了个去重保护 PR(被合并)。</li><li>自愈需要持续调参 + 好信号(之前一次因没调参失败);学习是模型相关的,每个新模型要重调或重剪。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">GPT-Engineer ~35 个月前;已建 5000 万产品;Lovable 站点月访问 6 亿;每天新建 20 万 app;最大功能用户群是工程师(整体最大=创始人);卡住率 −5%(≈ 一代基础模型),发布率 +2%;每天 ~10 个 vent 驱动的修复合并、~50% vent PR 靠谱;一个 vent→生产 PR 用了 10 分钟。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“你没有人可以倾诉,所以你需要 vent。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">把 agent 的「挫败」和用户的反复失败当成一等遥测——给 agent 一个工具去上报坏掉的工具链,接到「去重→调查→PR」回路,并维护一个按成功率狠剪的知识语料,而不是一份静态 prompt。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=mhW-XXnDFSU" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">17</span><h2>Building AI-native at enterprise scale: monday.com, Doctolib, Delivery Hero</h2></div>
+  <div class="who">面板 · 主持 Rebecca(Anthropic GTM) + monday.com(Ruslan)/Doctolib(Alex)/Delivery Hero(技术基础 VP),公司成立 2011–2013</div>
+  <div class="body">
+    <p class="thesis">三家十多年的成熟公司(不是 greenfield)讲怎么把 Claude 插进十年老、常常是 monolith 的代码库,变成 AI-native。反复出现的教训:<b>为下一个模型设计、重思一切(架构/流程/身份)、先用起来</b>。</p>
+    <ul><li>Delivery Hero 建了「Hurigen」:把 Jira/GitHub issue 一路做到可合并 PR,集成进现有工具(不是新 chat UI),工程师只管派单。</li><li>Delivery Hero 的成功关键:「<b>council of agents</b>」——多个不同模型评审同一段代码,抵消单模型盲点 → 成功率(合并 vs 拒绝)推到 ~85%,且没怎么加成本。</li><li>monday.com 发了「Monday Vibe」(prompt→详细 PRD→几分钟出可用 app);早年押注开放外部开发者平台,让他们几天就做出 PoC;agent(含把外部 agent 当一等公民)挑战身份和权限模型。</li><li>Doctolib 抓全员赋能:skills 市场(可发现、看趋势)、预配置好的开发环境(工具自动接、热门 skill 打包)、实验性 skill 插件、活跃的「Build with AI」频道——平台团队去掉瓶颈、把最佳实践工业化,而不是各自为战。</li><li>新模型 = 一次迁移,不是直接换:monday 从 Opus 4.5→4.6 打破了之前的优化(「完全是两个东西」),要重调 prompt;流程是内部 eval → 生产 A/B。</li><li>架构教训:monolith 外、小而有主见、文档好的代码库,适配工具快得多;monolith 内必须明确告诉模型「新方式」,否则它照抄旧模式。编程便宜后,每个剩下的人工触点都成了新的贵瓶颈。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">代码库 ~14 年;Doctolib ~100% 采用(工程/PM/设计 + 非技术「Claude co-workers」);Delivery Hero 60+ 市场,Hurigen 第一季度上线、近 10 天日均 ~173 个合并 PR、上线至今 ~7000 个合并 PR;council ~85% 成功率;monday 留在 Opus 4.5、迁移过 4.5→4.6。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“为下一个模型设计,而不是现在这个。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">把 agent 集成进现有工作流(派一张工单,而不是开一个新 chat),用多模型「council」把 PR 通过率推到 ~85%,把每个新模型当一次完整迁移(重调 prompt + A/B),并尽早投资 API-first 边界和「agent 作为一等用户」的身份体系。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=XFaeIbL-lvE" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">21</span><h2>Coding is no longer the constraint: Scaling devex at Spotify</h2></div>
+  <div class="who">Niklas · Spotify 工程负责人(~15 年)</div>
+  <div class="body">
+    <p class="thesis">AI 编程工具把编程从首要瓶颈拿掉了,约束转到<b>人的决策(做什么、追哪个想法)和 PR review 量</b>。强工程实践——验证、一致/标准化的代码库、重度埋点——比以往更重要,也让 agent 效力大增。</p>
+    <ul><li>Claude Code 采用在 Opus 4.5(11 月)前后爆发,是 Spotify 史上最快的工具采用曲线;>99% 工程师每周用 AI 编程工具。</li><li>「Fleet management / Fleet Shift」:AI 之前就有的全机队变更(版本升、API 弃用、安全修)。「Honk」(他们的 code-mod 工具)现在底层跑 Claude(Agent SDK),包在自己的 K8s harness 里、配可信验证(多 OS CI 构建);Fleet Shift 编排、Honk 改代码。诞生因为确定性迁移脚本撞上每个边角(Hyrum 定律)。</li><li>Honk 演化:工程师开始在 Slack 里 @honk 拿 PR;Honk V2(本次 Hack Week 发,实际第 8 版)接入 agent 编排工具「Chirp」做大量并行会话 + 多人共享会话(「给 Claude 的 Google Docs」)+ 项目级分组。</li><li>代码一致性是 agent 效力杠杆:技术越少越快,代码越一致 Claude 干得越好;碎片化的代码库肉眼可见让 Claude 变差。靠 tech radar、golden state、Soundcheck 推标准化。</li><li>「Backstage」(他们开源的开发者门户)是人和 agent 的统一入口,作为 MCP/CLI 暴露给 agent(Claude 能查组件 owner、Slack 戳团队);静态分析/lint 给 Claude 在库内即时自纠。</li><li>编程不再是瓶颈:在真实生产客户端 monorepo 里做原型从几天/几周掉到几分钟(连 CEO 都做原型)。约束现在是人的决策 + PR review。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">~3000 工程师;~4500 次/天 生产部署;4000 万行后端 monorepo + 数千 polyrepo;<b>250 万个自动合并的维护 PR</b>(绝大多数无人介入);代码库曾以 7× 于人数的速度增长;PR 频率 +76%(于是多 76% 要 review);94% 工程师自评 AI 让他们更高效;最近一次 Java 迁移用了 3 天。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“要 review 的 PR 实在太多了。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">投资代码一致性、可验证的 CI、丰富的工具暴露(MCP/门户/lint)——这些才是让 agent 大规模自主跑的前提;预期你的瓶颈会从「写代码」挪到「review 代码」和「决定做什么」。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=zFslvuvYifQ" target="_blank" rel="noopener">看原片 →</a>
+</article></div></section>
+
+<section style="padding-top:0;"><div class="wrap"><div class="chapnav"><a class="prev" href="/ideas/ccl-london-2026-clouds.html"><div class="dir">← 上一章</div><div class="t">⑤ · 云平台 · 生态</div></a><span></span><a class="hub" href="/ideas/code-with-claude-london-2026.html"><div class="dir">↑ 回总览</div><div class="t">Code with Claude 伦敦 2026 · 现场笔记</div></a></div></div></section>
+
+<footer><div class="wrap">
+  <span>Field notes · Code with Claude London 2026 · 第 ⑥ 章 行业落地 · 客户故事</span>
+  <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+</div></div></footer>
+</body>
+</html>

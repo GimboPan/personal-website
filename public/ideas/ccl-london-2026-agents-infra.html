@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Managed Agents 与基础设施 · Code with Claude 伦敦 2026 — Ideas — Gimbo's Universe</title>
+<meta name="description" content="智能跑赢了周边设施。三场讲 Claude Managed Agents:用 agent/environment/session/events 四个原语搭生产级 agent、自托管沙箱 + MCP tunnel 把私有算力和数据留在自己边界内,以及 Memory + Dreaming 的组织级自学习。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0f0c;--surface-1:#14160f;--surface-2:#1a1c19;--surface-3:#21241f;--ink:#f5f5f0;--ink-soft:#c6c8c0;--ink-faint:#8a8c84;--line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);--green:#9fe870;--green-deep:#163300;--green-tint:#d8f5b8;--amber:#ffd11a;--coral:#ff7a82;--sky:#38c8ff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"calt","ss01";}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:0.85;letter-spacing:-0.02em}
+.backbar{background:var(--surface-1);border-bottom:1px solid var(--line);padding:16px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;flex-wrap:wrap}
+.backbar a{color:var(--green);display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.backbar a:hover{color:var(--green-tint)}.backbar .sep{color:var(--ink-faint)}.backbar .here{color:var(--ink)}
+.hero{padding:72px 0 40px}
+.hero .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);background:rgba(159,232,112,0.10);border:1px solid rgba(159,232,112,0.30);padding:6px 12px;border-radius:9999px;margin-bottom:24px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.4vw,76px);margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);color:var(--ink-soft);max-width:62ch;line-height:1.55}
+.hero .meta{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);display:flex;gap:10px 22px;flex-wrap:wrap}
+.hero .meta b{color:var(--ink);font-weight:600}
+section{padding:8px 0 40px}
+.talk{background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:32px 34px;margin-bottom:18px}
+.talk .top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.talk .no{font-weight:900;font-size:34px;line-height:0.9;color:var(--green);letter-spacing:-0.02em;flex-shrink:0;min-width:52px}
+.talk h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.1;letter-spacing:-0.01em}
+.talk .who{font-size:13px;color:var(--ink-faint);font-weight:600;margin:8px 0 0 66px}
+.talk .body{margin:18px 0 0 66px}
+.talk .thesis{font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.talk .thesis b{color:var(--green-tint);font-weight:700}
+.talk ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.talk li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.talk li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.7}
+.talk li b{color:var(--ink);font-weight:700}
+.meta-row{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.chip{font-size:13.5px;line-height:1.55;display:flex;gap:10px}
+.chip .k{flex-shrink:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding-top:3px;width:60px}
+.chip.num .k{color:var(--sky)}.chip.quote .k{color:var(--amber)}.chip.sw .k{color:var(--green)}
+.chip .v{color:var(--ink-soft)}.chip .v b{color:var(--ink);font-weight:700}
+.chip.quote .v{font-style:italic;color:var(--ink)}
+.talk .watch{display:inline-flex;margin:16px 0 0 66px;font-size:13px;color:var(--green);font-weight:600}
+.talk .watch:hover{color:var(--green-tint)}
+@media(max-width:680px){.talk{padding:26px 22px}.talk .who,.talk .body,.talk .watch{margin-left:0}.talk .no{min-width:42px;font-size:28px}}
+.chapnav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 70px}
+.chapnav a{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.chapnav a:hover{border-color:rgba(159,232,112,.4);transform:translateY(-2px)}
+.chapnav .dir{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:800;margin-bottom:8px}
+.chapnav .t{font-size:16px;font-weight:800;color:var(--ink);line-height:1.2}
+.chapnav a.next{text-align:right}
+.chapnav a.hub{grid-column:span 2;text-align:center;background:var(--surface-1)}
+.chapnav a.hub .t{color:var(--green)}
+@media(max-width:560px){.chapnav{grid-template-columns:1fr}.chapnav a.next{text-align:left}.chapnav a.hub{grid-column:span 1}}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}footer a{color:var(--green)}
+@media(max-width:640px){.hero{padding:48px 0 32px}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="backbar"><div class="wrap">
+  <a href="/ideas"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+  <span class="sep">/</span>
+  <a href="/ideas/code-with-claude-london-2026.html">Code with Claude 伦敦 2026</a>
+  <span class="sep">/</span>
+  <span class="here">④ · Managed Agents 与基础设施</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">§ 现场笔记 · 第 ④ 章 / 共 6</span>
+  <h1 class="display">瓶颈是<span class="accent">基础设施</span>，<br/>不是智能。</h1>
+  <p class="lead">智能跑赢了周边设施。三场讲 Claude Managed Agents:用 agent/environment/session/events 四个原语搭生产级 agent、自托管沙箱 + MCP tunnel 把私有算力和数据留在自己边界内,以及 Memory + Dreaming 的组织级自学习。</p>
+  <div class="meta">
+    <span><b>3</b> 场</span>
+    <span>主题:<b>Agents & infra</b></span>
+    <span>来自 Code with Claude · London 2026</span>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<article class="talk">
+  <div class="top"><span class="no">11</span><h2>Memory and dreaming for self-learning agents</h2></div>
+  <div class="who">Ravi · Anthropic(API Knowledge 团队)</div>
+  <div class="body">
+    <p class="thesis">两个新功能:<b>Memory</b>(文件系统式的记忆库,agent 跨任务、跨 agent 读写,把学到的东西带下去)+ <b>Dreaming</b>(离线进程,分析过往会话来全局整理和调和记忆)= 组织规模的持续自学习。</p>
+    <ul><li>时间线:MCP(2024)→ Claude Code + Agent SDK(2025)→ Skills(2025)→ Managed Agents(上月);主线是 agent 在越来越长的时间跨度上工作。</li><li>记忆建成文件系统是刻意的(「让它发挥」);Opus 4.7 在文件系统式记忆、以及判断该存什么、怎么组织上是 SOTA。</li><li>多 agent:共享记忆库有只读 scope(全组级、不常更新)和读写 scope(per-task),形成层级;乐观并发控制防止互相覆盖。</li><li>企业:版本控制/审计轨迹、版本 diff、按 agent 归因写入、独立 Memory API(CRUD + 导出/脱敏)。</li><li>规模上的问题:记忆更新局部最优但全局不优(重复、碎片、各 agent 独立地重犯同一错)。<b>Dreaming</b>(研究预览):解耦的反馈回路,分析 transcript + 现有记忆,产出一份经核验、组织更好的记忆快照。可按需/每晚/每小时/事件触发。</li><li>Dreaming 本身建在 managed agents 上(派并行子 agent 分析 transcript);在热路径之外 = 不加延迟,是一种 test-time compute。demo:SRE 值班分诊,Dreaming 在 ~5 个会话里发现「CPU 飙升后 ~60s 告警」的重试模式。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">Rakuten 生产 agent 首过错误 −97%;Harvey 法律基准完成率 6×;Wise Docs 用跨会话记忆减少常见问题;METR 2025:agent 任务长度每 ~7 个月翻倍。模型:Opus 4.7。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“Dreaming 是从今天的记忆,通往组织规模记忆的那座桥。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">跑多 agent 系统就用带 scope 的共享记忆 + 定时 Dreaming,让 agent 互相从对方的 transcript 学、别再重犯同样的错——还不碰延迟敏感的主循环。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=IGo225tfF2I" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">13</span><h2>How to get to production faster(Managed Agents 面板)</h2></div>
+  <div class="who">Michael & Harrison · Anthropic + Vercel/Modal/Daytona/Cloudflare</div>
+  <div class="body">
+    <p class="thesis">模型智能跑赢了周边基础设施——<b>更长时跨 agent 的瓶颈现在是 infra,不是智能</b>。Claude Managed Agents 给出可组合、生产就绪的原语(基建、agent 原语、可观测),让团队建产品而不是建管道。</p>
+    <ul><li>能力弧:Claude 3(短任务、每个工具都要批准)→ Opus 4 + Claude Code(驱动整个 feature、提 PR)→ Opus 4.7(清空 backlog、醒来就是可合并 PR)→ 不久:几小时干几个季度的活、成群 agent 跑完整 M&A 流水线。</li><li>agent 要更多:安全凭据、内部系统、私有仓库、agent 自己的身份/鉴权;交互从对话文本转向面向结果 + 可恢复会话。</li><li>头号阻碍(他们的调研):上下文/记忆、基础设施(第一阻碍:可靠/可扩展/安全/延迟)、可观测。</li><li>三步起步:定义 agent → 定义 environment(沙箱+网络白名单+预装包)→ 起 session,用事件流观测。事件分类:user/agent/session/span。</li><li>新发布:<b>自托管沙箱</b>(在自己 VPC 里跑工具;Cloudflare/Daytona/Modal/Vercel)+ <b>MCP tunnel</b>(研究预览,把私有 MCP server 经安全隧道暴露给 Claude,不走公网)。</li><li>面板:各家 infra 哲学不同(Vercel fluid compute;Modal 自有调度器、GPU 沙箱;Daytona pause/resume/fork;Cloudflare 毫秒级 isolate)。共同难题:身份沿 agent 链传递、出口过滤、可恢复性、同步↔异步翻转。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">模型:Claude 3、Opus 4、Opus 4.7;DoorDash 在 Modal 上;Modal 几分钟起几十万沙箱;Cloudflare isolate 毫秒级;MCP tunnel = 研究预览。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“提升能力的瓶颈,其实是这些模型周围的基础设施,而不是智能本身。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">别再手搓 agent 循环/沙箱/状态恢复/鉴权——组合 Managed Agents 原语,用自托管沙箱 + MCP tunnel 把私有算力和数据留在自己边界内,让 Claude 来编排。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=zenIB7XLZxQ" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">14</span><h2>Build a production-ready agent(workshop)</h2></div>
+  <div class="who">Anthropic 技术员 · Managed Agents(与 13 同团队的动手版)</div>
+  <div class="body">
+    <p class="thesis">从一个 starter 仓库出发,用四个原语在今天就能搭一个可部署的<b>多 agent、带 outcome、带记忆</b>的生产级 agent——不用自己造循环、存储、沙箱、鉴权。</p>
+    <ul><li>Managed Agents = 一组任意 API key 可用的端点;Anthropic 负责电脑访问、凭据 vault、MCP 鉴权注入、工具调用 harness、重试/纠错、记忆/上下文、多 agent、可观测。</li><li>四原语:agent(模板:提示/skill/工具/MCP/逐工具权限)、environment(沙箱:网络+包+自托管选项)、session(一段对话,可含仓库/文件)、events(事件流)。</li><li>现场:做一个虚构 M&A「deal」web app,用 Anthropic SDK 手写 sessions.list/get,Bun 本地跑;较难的 streaming 端点交给 Claude Code(自带 Claude API skill)写——「Claude 帮你造你自己的 Claude」(也老实说 Claude 偷懒了、得催它做完)。</li><li>outcomes demo:给评分 rubric 评三家虚构公司,Claude 迭代自评直到满意。</li><li>多 agent demo:主 agent 派 4 个子 agent(各有人设/上下文),控制台里每个是独立横轨、带逐工具计时,方便 debug。</li><li>凭据 vault 注入 MCP token,「永不进入 Claude 的上下文」;版本化 agent 可回滚、记忆库可编辑。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">Opus 4.7(长生成偏慢);工具:Anthropic SDK、Bun、Claude Code + Claude API skill、公开 starter 仓库、CLI、cookbook;多 agent ~两周前发布。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“Claude 能帮你造出你自己的 Claude。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">今天就能交付一个生产 agent:接好 agent/environment/session/events 四个原语,大部分集成让 Claude Code(带 Claude API skill)替你写。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=jWWsLe4Gh5Y" target="_blank" rel="noopener">看原片 →</a>
+</article></div></section>
+
+<section style="padding-top:0;"><div class="wrap"><div class="chapnav"><a class="prev" href="/ideas/ccl-london-2026-claude-code.html"><div class="dir">← 上一章</div><div class="t">③ · Claude Code 进阶</div></a><a class="next" href="/ideas/ccl-london-2026-clouds.html"><div class="dir">下一章 →</div><div class="t">⑤ · 云平台 · 生态</div></a><a class="hub" href="/ideas/code-with-claude-london-2026.html"><div class="dir">↑ 回总览</div><div class="t">Code with Claude 伦敦 2026 · 现场笔记</div></a></div></div></section>
+
+<footer><div class="wrap">
+  <span>Field notes · Code with Claude London 2026 · 第 ④ 章 Managed Agents 与基础设施</span>
+  <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+</div></div></footer>
+</body>
+</html>

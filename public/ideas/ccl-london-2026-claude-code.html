@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Claude Code 进阶 · Code with Claude 伦敦 2026 — Ideas — Gimbo's Universe</title>
+<meta name="description" content="四场围绕 Claude Code 本身的进阶:怎么定制 harness 让它够到你够到的一切、怎么用 routines 让它主动起来、怎么靠验证循环停止「人肉 QA」、以及最近的更新清单。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0f0c;--surface-1:#14160f;--surface-2:#1a1c19;--surface-3:#21241f;--ink:#f5f5f0;--ink-soft:#c6c8c0;--ink-faint:#8a8c84;--line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);--green:#9fe870;--green-deep:#163300;--green-tint:#d8f5b8;--amber:#ffd11a;--coral:#ff7a82;--sky:#38c8ff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"calt","ss01";}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:0.85;letter-spacing:-0.02em}
+.backbar{background:var(--surface-1);border-bottom:1px solid var(--line);padding:16px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;flex-wrap:wrap}
+.backbar a{color:var(--green);display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.backbar a:hover{color:var(--green-tint)}.backbar .sep{color:var(--ink-faint)}.backbar .here{color:var(--ink)}
+.hero{padding:72px 0 40px}
+.hero .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);background:rgba(159,232,112,0.10);border:1px solid rgba(159,232,112,0.30);padding:6px 12px;border-radius:9999px;margin-bottom:24px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.4vw,76px);margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);color:var(--ink-soft);max-width:62ch;line-height:1.55}
+.hero .meta{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);display:flex;gap:10px 22px;flex-wrap:wrap}
+.hero .meta b{color:var(--ink);font-weight:600}
+section{padding:8px 0 40px}
+.talk{background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:32px 34px;margin-bottom:18px}
+.talk .top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.talk .no{font-weight:900;font-size:34px;line-height:0.9;color:var(--green);letter-spacing:-0.02em;flex-shrink:0;min-width:52px}
+.talk h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.1;letter-spacing:-0.01em}
+.talk .who{font-size:13px;color:var(--ink-faint);font-weight:600;margin:8px 0 0 66px}
+.talk .body{margin:18px 0 0 66px}
+.talk .thesis{font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.talk .thesis b{color:var(--green-tint);font-weight:700}
+.talk ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.talk li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.talk li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.7}
+.talk li b{color:var(--ink);font-weight:700}
+.meta-row{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.chip{font-size:13.5px;line-height:1.55;display:flex;gap:10px}
+.chip .k{flex-shrink:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding-top:3px;width:60px}
+.chip.num .k{color:var(--sky)}.chip.quote .k{color:var(--amber)}.chip.sw .k{color:var(--green)}
+.chip .v{color:var(--ink-soft)}.chip .v b{color:var(--ink);font-weight:700}
+.chip.quote .v{font-style:italic;color:var(--ink)}
+.talk .watch{display:inline-flex;margin:16px 0 0 66px;font-size:13px;color:var(--green);font-weight:600}
+.talk .watch:hover{color:var(--green-tint)}
+@media(max-width:680px){.talk{padding:26px 22px}.talk .who,.talk .body,.talk .watch{margin-left:0}.talk .no{min-width:42px;font-size:28px}}
+.chapnav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 70px}
+.chapnav a{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.chapnav a:hover{border-color:rgba(159,232,112,.4);transform:translateY(-2px)}
+.chapnav .dir{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:800;margin-bottom:8px}
+.chapnav .t{font-size:16px;font-weight:800;color:var(--ink);line-height:1.2}
+.chapnav a.next{text-align:right}
+.chapnav a.hub{grid-column:span 2;text-align:center;background:var(--surface-1)}
+.chapnav a.hub .t{color:var(--green)}
+@media(max-width:560px){.chapnav{grid-template-columns:1fr}.chapnav a.next{text-align:left}.chapnav a.hub{grid-column:span 1}}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}footer a{color:var(--green)}
+@media(max-width:640px){.hero{padding:48px 0 32px}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="backbar"><div class="wrap">
+  <a href="/ideas"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+  <span class="sep">/</span>
+  <a href="/ideas/code-with-claude-london-2026.html">Code with Claude 伦敦 2026</a>
+  <span class="sep">/</span>
+  <span class="here">③ · Claude Code 进阶</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">§ 现场笔记 · 第 ③ 章 / 共 6</span>
+  <h1 class="display">把键盘<span class="accent">移出热路径</span>。</h1>
+  <p class="lead">四场围绕 Claude Code 本身的进阶:怎么定制 harness 让它够到你够到的一切、怎么用 routines 让它主动起来、怎么靠验证循环停止「人肉 QA」、以及最近的更新清单。</p>
+  <div class="meta">
+    <span><b>4</b> 场</span>
+    <span>主题:<b>Going deeper with Claude Code</b></span>
+    <span>来自 Code with Claude · London 2026</span>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<article class="talk">
+  <div class="top"><span class="no">02</span><h2>Beyond the basics with Claude Code</h2></div>
+  <div class="who">Daisy Holman · Anthropic(Claude Code,前 C++ 委员会主席)</div>
+  <div class="body">
+    <p class="thesis">开箱即用的 Claude Code 处理「编程任务」,但真正大规模的软件工程需要你定制 agentic harness,让 Claude 够到你够到的一切。硬约束是<b>固定的上下文窗口</b>——选能扩展到 10 万+ skill 的抽象。</p>
+    <ul><li>agent 干你的活要三样:access、knowledge、tooling;测试:不离开 Claude 终端干一整天,每次 alt-tab 都是一处缺失的连接。</li><li>别为代码规范/制度记忆 fine-tune(对churning 的前沿模型不划算,还可能增加幻觉);用 in-context learning =「文本文件的高级说法」。苦涩的教训:通用 AI 打败专用 AI。</li><li>用 post-tool-use <b>hooks</b> 给 agent 做「红波浪线」(linter/LSP):「让 agent 变好最快的不是更聪明的模型,是更紧的反馈回路」。</li><li>KV 缓存:改早期 token 会让整段下游缓存失效(未缓存 ~10× 成本)→ 稳定内容放前面,易变的 per-task 放后面。</li><li>四种插件原语按可扩展性:MCP(撑大系统提示,只给非技术用户用)、skills(惰性 body、description 常驻)、hooks(零上下文开销,最佳)、subagents(独立上下文,但 description 仍占父提示)。</li><li>异步/并行工作流:git worktree + 每个一个常驻 Claude、Claude 间消息、/loop 看 PR/CI、auto mode(~+30-40% token)跑通宵、agents 面板 + 远程遥控。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">Opus 4.7 ~1M token 上下文(近一年保持 ~1M);未缓存 ~10×;auto mode +30-40% token;一个工程师靠 agents 视图一月 ~1000 PR;有公司在 monorepo 里撞到 1万-10万 skill 的天花板。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“如果 Claude 不能做你能做的一切,它就没法和你一起做你的工作。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">把 Claude 接进你用的每一个信息源,并用「如果有 10 万个会怎样?」来选定制原语(优先 hooks,慎用 MCP/CLAUDE.md)——上下文窗口才是稀缺资源。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=tuY2ChJIx48" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">19</span><h2>Build a proactive agent workflow(Routines)</h2></div>
+  <div class="who">Maya · Anthropic Applied AI</div>
+  <div class="body">
+    <p class="thesis">「编程 agent 不该等你按回车。」新的 <b>routines</b> 把 Claude Code 从被动工具变成主动队友:跑在托管基础设施上,按计划或事件触发,同时仍然可交互、可引导。</p>
+    <ul><li>DIY 的痛:在哪跑(笔记本一关就死)、托管/持久化/鉴权样板、触发方式、headless 会话看不见也插不上手。</li><li>Routines:只定义 prompt + 仓库 + 连接器 + 触发器,Claude Code 负责托管、会话状态、连接器鉴权。</li><li>三目标:始终在线;主动(时间表/原生 GitHub 事件/自定义 webhook,payload 当上下文);可交互可引导(每个 routine 都是真会话,可从 web/CLI/桌面打开、观看、引导、续跑)。</li><li>三决策:触发器(何时)、上下文(成功的天花板)、可引导性(怎么保持它不跑歪)。</li><li>内部案例:Claude Code 周 PR 自年初 +200% 压垮了单个文档维护者 → 她用 /schedule 每周 diff 主干 vs 文档、自动开更新 PR。</li><li>可引导模式:agent 互审(生成器/批评者)、实时人类介入、输出验证(渲染改后的页面确认)。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">Claude Code 周 PR 自年初 +200%;触发器:计划/GitHub 事件/webhook;连接器:GitHub、Slack、Google Drive、Datadog、Grafana、Twilio。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“我们想让 Claude 从一个工具,变成一个队友。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">用 Claude Code routines 替掉你为后台 agent 手搓的 cron + 托管:定义 prompt + 仓库 + 连接器 + 触发器,再加 agent 互审或实时引导保质量。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=eSP7PLTXNy8" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">23</span><h2>Stop babysitting your agents</h2></div>
+  <div class="who">Sidh Bhattacharya · Claude Code 创始工程师 · Anthropic</div>
+  <div class="body">
+    <p class="thesis">模型越聪明,工程师越在浪费时间当「人肉 QA」。夺回这些时间靠叠三样能力:<b>验证循环、多开 Claude、后台循环</b>——让 Claude 可靠地自查自己的活、不用你守在键盘前。</p>
+    <ul><li>前置(「Claude Code 301」):高质量 CLAUDE.md(单点杠杆最高)、连上你的工具/MCP(Slack/Linear/Datadog/BigQuery)、配好远程环境(算力和笔记本解耦)。</li><li>为 agent(不是人)重构工具:「你的代码库里,有什么是人类视为理所当然、而 agent 需要的?」</li><li>验证 = 教 Claude 走人类那套:写码 → build/typecheck → 跑起来 → 查副作用(浏览器/日志/DB)→ 单测 → staging。循环 = 写、查失败、debug、重复到成功态。</li><li>前端循环四件套:跑 app(dev server)+ 驱动浏览器(Claude-in-Chrome /chrome 或 Playwright)+ 用前后截图证明 + 处理鉴权/状态。把循环打包成<b>会自我记录的 skill</b>(每次卡住就写文档)。</li><li>多开 Claude(注意力是稀缺,他上限 ~4-5):桌面 app 侧栏、终端 Claude Agents(按需注意排序)、云(claude.ai/code)、手机远程遥控(/remote-control,他最爱)。</li><li>后台循环:/loop 按间隔跑(「/loop 10 分钟,看着我的开 PR」);Routines = /loop 跑在云容器里,时间或事件触发。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">现场:几乎人人每天用 Claude Code,~50% 配过 CLAUDE.md + 连了工具;Claude Agents ~一周前发布;验证循环搭起来 ~5-10 分钟;个人同时 ~4-5 个会话。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“把你的键盘,移出热路径。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">给 Claude 工具和指令去闭合一个验证循环,打包成会自我改进的 skill,再把例行活(PR/文档/triage)扔给 /loop 和 Routines,让你稀缺的注意力只去该去的地方。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=wI0ptqCSL0I" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">24</span><h2>What's new in Claude Code</h2></div>
+  <div class="who">Ralf · Anthropic 技术团队(对接欧洲伙伴/客户)</div>
+  <div class="body">
+    <p class="thesis">最近发布的两条主线:<b>开发体验</b>(让工具用着舒服)和<b>自治</b>(让 Claude 在不需要时别打断你、自己多干)。</p>
+    <ul><li>远程遥控:电脑上起会话,手机 app/任意浏览器接着用,需要输入时收通知(settings.json 设成常开)。</li><li>无闪烁全屏 TUI(/tui full-screen):虚拟化滚动区(内存恒定),支持可点/可展开元素。</li><li>桌面端刷新:会话按项目分组,看 plan + 行内评论(推回 Claude)、PR diff、逐行评论、GitHub 集成。</li><li>auto mode:分类器逐动作判断「破坏性/会后悔吗 + 像 prompt 注入吗」,安全就自己干,不安全找绕法,只在没有安全路径时才问你。</li><li>原生 worktree(claude-worktree):每会话把仓库复制到隔离子目录,并行 Claude 不打架。</li><li>auto memory:Claude 干活时自动记笔记进 memory.md(干活的笔记)≠ CLAUDE.md(入职手册);短索引 + 渐进披露;跨会话共享、留本地、/memory 可审。</li><li>code review:每个 PR 上多 agent 两阶段(找 bug/漏洞 → 对真实代码验真降误报),GitHub app 原生或 /ultra-review。</li><li>Routines(研究预览)+ Agent View(公测,claude agents:所有会话按状态分组,空格 peek/发指令不进入)。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">auto mode = 两查分类器;命令:/ultra-review、/tui full-screen、claude agents。企业:更好的 Windows 支持、GCP/AWS 部署向导、治理用原生二进制。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“现在 Claude Code 就是终端。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">打开那些自治特性(auto mode、auto memory、原生 worktree、远程遥控),把评审和例行活交给 /ultra-review 和 Routines,这样你能异步跑 Claude、只在它真需要时介入。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=sRvUXLquiRg" target="_blank" rel="noopener">看原片 →</a>
+</article></div></section>
+
+<section style="padding-top:0;"><div class="wrap"><div class="chapnav"><a class="prev" href="/ideas/ccl-london-2026-craft.html"><div class="dir">← 上一章</div><div class="t">② · 工艺:prompt · 模型 · 思考</div></a><a class="next" href="/ideas/ccl-london-2026-agents-infra.html"><div class="dir">下一章 →</div><div class="t">④ · Managed Agents 与基础设施</div></a><a class="hub" href="/ideas/code-with-claude-london-2026.html"><div class="dir">↑ 回总览</div><div class="t">Code with Claude 伦敦 2026 · 现场笔记</div></a></div></div></section>
+
+<footer><div class="wrap">
+  <span>Field notes · Code with Claude London 2026 · 第 ③ 章 Claude Code 进阶</span>
+  <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+</div></div></footer>
+</body>
+</html>

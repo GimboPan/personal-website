@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>能力已经到了,差的是把它用起来的速度 · Code with Claude 伦敦 2026 现场笔记 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="Anthropic 第一次把 Code with Claude 开到旧金山之外——伦敦站,24 场讲座。这是基于完整字幕的现场笔记:先提炼贯穿全场的 9 条主线(指数 vs 线性、编程不再是瓶颈、能力来自工具而非指令、eval 是进步的单位、思考是杠杆不是开关、基础设施才是新约束、记忆+做梦、上下文即护城河、从工具到队友),再按主题逐场拆讲者·主旨·要点·数字·金句。全部 24 场已整理。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* ─── Back-link bar ─── */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-faint); font-weight: 600;
+    }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .sep { color: var(--ink-faint); }
+    .backbar .here { color: var(--ink); }
+
+    /* ─── Hero ─── */
+    .hero { padding: 80px 0 56px; }
+    .hero .eyebrow {
+      display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30);
+      padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700;
+    }
+    .hero h1 { font-size: clamp(44px, 7.4vw, 92px); margin-bottom: 28px; max-width: 17ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.5; margin-bottom: 32px; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* ─── Section base ─── */
+    section { padding: 64px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(34px, 5.2vw, 60px); margin-bottom: 18px; max-width: 20ch; }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 66ch; line-height: 1.55; margin-bottom: 44px; }
+
+    /* ─── Stat banner ─── */
+    .stat-banner { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 56px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; }
+    .stat-banner .num { font-weight: 900; line-height: 0.82; letter-spacing: -0.04em; font-size: clamp(64px, 11vw, 150px); color: var(--green); }
+    .stat-banner .num .small { display: block; font-size: 0.22em; color: var(--ink); margin-top: 14px; line-height: 1.2; letter-spacing: -0.01em; }
+    .stat-banner .copy h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .stat-banner .copy p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .stat-banner .copy p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .stat-banner { grid-template-columns: 1fr; padding: 40px 28px; border-radius: 30px; } }
+
+    /* ─── YouTube embed ─── */
+    .video-wrap { background: var(--surface-2); border: 1px solid var(--line); border-radius: 30px; padding: 20px; margin-top: 32px; }
+    .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 18px; background: #000; }
+    .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-cap { font-size: 13px; color: var(--ink-faint); margin-top: 14px; padding: 0 8px; display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: space-between; }
+    .video-cap a { color: var(--green); font-weight: 600; }
+    .video-cap a:hover { color: var(--green-tint); }
+
+    /* ─── Threads (the 9 spine cards) ─── */
+    .obs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .obs { background: var(--surface-2); border: 1px solid var(--line); border-radius: 26px; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; transition: transform .2s, border-color .2s; }
+    .obs:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+    .obs .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; }
+    .obs .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .obs h4 { font-size: clamp(19px, 2vw, 23px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; }
+    .obs p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
+    .obs p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 920px) { .obs-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .obs-grid { grid-template-columns: 1fr; } }
+
+    /* ─── Key numbers strip ─── */
+    .arc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .arc { background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 28px 22px; }
+    .arc .v { font-weight: 900; font-size: clamp(26px, 3.2vw, 40px); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .arc .v.danger { color: var(--coral); }
+    .arc .v.warn { color: var(--amber); }
+    .arc .v.pos { color: var(--green); }
+    .arc .v.sky { color: var(--sky); }
+    .arc .v.dim { color: var(--ink); }
+    .arc .l { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+    .arc .l b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .arc-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ─── Talk cards ─── */
+    .grouphd { display: flex; align-items: baseline; gap: 14px; margin: 8px 0 18px; flex-wrap: wrap; }
+    .grouphd .gt { font-size: clamp(20px, 2.4vw, 26px); font-weight: 900; letter-spacing: -0.01em; }
+    .grouphd .gs { font-size: 13px; color: var(--ink-faint); }
+    .talklist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 40px; }
+    .talk { background: var(--surface-2); border: 1px solid var(--line); border-radius: 22px; padding: 26px 26px; display: flex; flex-direction: column; gap: 12px; transition: transform .2s, border-color .2s; }
+    .talk:hover { transform: translateY(-2px); border-color: rgba(159,232,112,0.40); }
+    .talk .top { display: flex; align-items: baseline; gap: 12px; }
+    .talk .no { font-weight: 900; font-size: 26px; line-height: 0.9; color: var(--green); letter-spacing: -0.02em; flex-shrink: 0; min-width: 40px; }
+    .talk h4 { font-size: 17.5px; font-weight: 800; line-height: 1.2; }
+    .talk .who { font-size: 12.5px; color: var(--ink-faint); font-weight: 600; }
+    .talk .thesis { font-size: 14.5px; color: var(--ink); line-height: 1.55; }
+    .talk .thesis b { color: var(--green-tint); font-weight: 700; }
+    .talk ul { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+    .talk li { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; padding-left: 16px; position: relative; }
+    .talk li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); opacity: 0.7; }
+    .talk .watch { margin-top: auto; font-size: 12.5px; color: var(--green); font-weight: 600; padding-top: 4px; }
+    .talk .watch:hover { color: var(--green-tint); }
+    @media (max-width: 760px) { .talklist { grid-template-columns: 1fr; } }
+
+    /* ─── Takeaways ─── */
+    .takeaway-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .takeaway { background: var(--surface-2); border: 1px solid var(--line); border-radius: 24px; padding: 26px 30px; display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: center; }
+    .takeaway .idx { font-weight: 900; font-size: 44px; line-height: 0.9; color: var(--green); letter-spacing: -0.02em; }
+    .takeaway h4 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .takeaway p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+    .takeaway p b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 600px) { .takeaway { grid-template-columns: 1fr; gap: 8px; padding: 22px 24px; } .takeaway .idx { font-size: 32px; } }
+
+    /* ─── CTA ─── */
+    .cta { background: var(--surface-2); border: 1px solid var(--line); border-radius: 40px; padding: 60px 48px; text-align: center; margin: 40px 0 80px; }
+    .cta h2 { font-size: clamp(30px, 4.2vw, 50px); font-weight: 900; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 18px; max-width: 22ch; margin-left: auto; margin-right: auto; }
+    .cta h2 .accent { color: var(--green); }
+    .cta p { font-size: 16px; color: var(--ink-soft); max-width: 58ch; margin: 0 auto 32px; }
+    .cta .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 9999px; font-weight: 700; font-size: 14px; letter-spacing: 0.02em; transition: transform .15s, background .15s, color .15s; border: 1px solid transparent; }
+    .btn-primary { background: var(--green); color: var(--green-deep); }
+    .btn-primary:hover { transform: scale(1.04); }
+    .btn-ghost { color: var(--ink); border-color: var(--line-strong); }
+    .btn-ghost:hover { background: var(--surface-3); }
+
+    /* ─── Footer ─── */
+    footer { padding: 40px 0 60px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+    footer a { color: var(--green); }
+
+    @media (max-width: 640px) {
+      section { padding: 52px 0; }
+      .hero { padding: 52px 0 36px; }
+      .wrap { padding: 0 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════ BACK LINK ═══════════════ -->
+<div class="backbar">
+  <div class="wrap">
+    <a href="/ideas" aria-label="Back to Gimbo's Universe — Ideas">
+      <span aria-hidden="true">←</span> Gimbo's Universe
+    </a>
+    <span class="sep">/</span>
+    <span class="here">Ideas · Code with Claude 伦敦 2026</span>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">§ 现场笔记 · Code with Claude London 2026</span>
+    <h1 class="display">
+      能力已经到了 ——<br/>
+      差的是把它<span class="accent">用起来</span>的速度。
+    </h1>
+    <p class="lead">
+      Anthropic 第一次把 Code with Claude 开到旧金山之外 —— 伦敦站,<b style="color:var(--ink);">24 场讲座</b>。
+      我把整个播放列表逐场拉出完整字幕、读完,整理成这份现场笔记。
+      贯穿全场的那句话来自开场 keynote:<b style="color:var(--ink);">能力其实早就到位了,真正剩下的差距,是我们把它用起来有多快。</b>
+      这一页先提炼 9 条主线,再按主题逐场拆讲者 · 主旨 · 要点 · 数字。
+    </p>
+    <div class="credits">
+      <div class="item"><div class="label">活动</div><div class="value">Code with Claude · London 2026</div></div>
+      <div class="item"><div class="label">主办</div><div class="value">Anthropic</div></div>
+      <div class="item"><div class="label">规模</div><div class="value">24 场 · keynote + 专题 + workshop</div></div>
+      <div class="item"><div class="label">方法</div><div class="value">完整字幕 → 逐场蒸馏</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ STAT BANNER ═══════════════ -->
+<section style="padding-top: 8px;">
+  <div class="wrap">
+    <div class="stat-banner">
+      <div class="num">
+        17×
+        <span class="small">Claude 平台 API 调用量的同比增长 —— 能力曲线在指数级抬升。</span>
+      </div>
+      <div class="copy">
+        <h3>模型在指数级变强,组织却在线性地采用。</h3>
+        <p>
+          这是贯穿整场的底层判断:能力(capability)沿指数曲线走,而大多数公司的采用(adoption)是线性的 ——
+          中间那道<b>越张越大的口子</b>,就是开发者的活。平均每个 Claude Code 开发者现在<b>每周用 Claude 20+ 小时</b>;
+          过去 12 个月 Anthropic 出了 <b>8 个前沿模型</b>。开场那句话于是成立:<b>能力已就位,差的是落地速度。</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WATCH ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ Watch first</span>
+    <h2 class="section-title display">先过一遍原片,<br/>再读下面的笔记。</h2>
+    <p class="section-lead">
+      下面所有的框架、数字和金句都来自这 24 场的完整字幕。整理成视觉笔记是为了之后能反复回查 ——
+      但讲者临场的例子和 demo,是文字留不住的。下面嵌的是整个播放列表,可直接连播。
+    </p>
+    <div class="video-wrap">
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/videoseries?list=PLmWCw1CzcFilPJdvw6scjHjbBripZWFps"
+          title="Code with Claude — London 2026 (full playlist)"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <div class="video-cap">
+        <span>Code with Claude · London 2026 · 24-video playlist · Anthropic</span>
+        <a href="https://www.youtube.com/playlist?list=PLmWCw1CzcFilPJdvw6scjHjbBripZWFps" target="_blank" rel="noopener">Open playlist on YouTube →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE 9 THREADS ═══════════════ -->
+<section style="padding-top: 24px;">
+  <div class="wrap">
+    <span class="section-tag">§ 贯穿全场的 9 条主线</span>
+    <h2 class="section-title display">24 场,<br/>其实在讲 9 件事。</h2>
+    <p class="section-lead">
+      不同的讲者、不同的公司、不同的云,但反复回到同一组判断。先把这 9 条主线立起来,
+      再回头看每一场,会清楚很多。(基于全部 24 场。)
+    </p>
+    <div class="obs-grid">
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 01</div>
+        <h4>指数 vs 线性</h4>
+        <p>模型指数级变强,组织线性地采用 —— 中间的差距就是你的活。<b>为下一个模型设计,而不是现在这个。</b></p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 02</div>
+        <h4>编程不再是瓶颈</h4>
+        <p>新瓶颈是验证、谁来 review、决定做什么。为保护工程带宽建的老流程会悄悄失效 —— <b>敢审、敢杀、敢 Claudify。</b></p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 03</div>
+        <h4>能力来自工具,不是指令</h4>
+        <p>「指令不增加能力」。把能力放进工具 / hooks / 子 agent 循环;每次新模型都该<b>砍掉「缝合怪 prompt」</b>里过时的脚手架。</p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 04</div>
+        <h4>Eval 是进步的单位</h4>
+        <p>一个自建的小 eval,比任何公开 benchmark 都重要,还要警惕<b>「饱和的 eval」</b>。选模型按「每个成功结果最便宜」。</p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 05</div>
+        <h4>思考是杠杆,不是开关</h4>
+        <p>测试时计算(test-time compute)能换智能。用 effort 等级 + 自适应思考 —— 默认 extra-high,max 只留给真·难题。</p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 06</div>
+        <h4>基础设施才是新约束</h4>
+        <p>智能跑赢了周边设施。Managed Agents 原语(agent/environment/session/events)+ 自托管沙箱 + MCP tunnel,<b>让你建产品,不是建管道。</b></p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 07</div>
+        <h4>记忆 + 做梦</h4>
+        <p>文件系统式 Memory 抬高每个 agent 的地板;Dreaming 在离线、不占延迟热路径处复盘整理。(Claude Code 现也有 auto-memory。)</p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 08</div>
+        <h4>上下文即护城河</h4>
+        <p>你的专有上下文 / 工作流 —— 做成<b>被治理、有归属、过 eval 的 skills</b> —— 是前沿实验室复制不了的 IP。采用是人的问题。</p>
+      </div>
+      <div class="obs">
+        <div class="badge"><span class="dot"></span>主线 09</div>
+        <h4>从工具到队友</h4>
+        <p>Routines / <code>/schedule</code>、验证循环、auto mode、council-of-agents 评审、远程遥控 —— agent 自己跑,你只在<b>真需要时</b>介入。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ KEY NUMBERS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 把变化讲清楚的数字</span>
+    <h2 class="section-title display">几个数字,<br/>就能感到拐点。</h2>
+    <div class="arc-grid">
+      <div class="arc"><div class="v pos">17×</div><div class="l">Claude 平台 API 调用量同比增长。</div></div>
+      <div class="arc"><div class="v sky">60% → 87%</div><div class="l">SWE-bench Verified:Sonnet 3.7(去年)→ Opus 4.7,约 3 倍 issue。</div></div>
+      <div class="arc"><div class="v pos">2.5M</div><div class="l">Spotify 自动合并的维护型 PR(绝大多数无人介入)。</div></div>
+      <div class="arc"><div class="v dim">~173 /天</div><div class="l">Delivery Hero「Hurigen」每天合并进生产的 PR;council 成功率 ~85%。</div></div>
+      <div class="arc"><div class="v pos">$1M → $100M</div><div class="l">Legora 的 ARR 冲刺(法律 agent,估值 &gt;$5B)。</div></div>
+      <div class="arc"><div class="v warn">200k /天</div><div class="l">Lovable 上每天新建的 app 数;已建 5000 万个产品。</div></div>
+      <div class="arc"><div class="v pos">−97%</div><div class="l">Rakuten 生产 agent 首过错误率下降(用 Memory)。</div></div>
+      <div class="arc"><div class="v sky">几月 → 几分钟</div><div class="l">在真实生产 monorepo 里做原型的耗时(Spotify)。</div></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-faint);margin-top:16px;line-height:1.5;">
+      数字来自各场讲者口述,经自动转写(可能有个别误差);模型版本以现场为准(Opus 4.7、Sonnet 4.6、Haiku 4.5 等)。
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ 6 CHAPTERS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 逐场笔记 · 分 6 章</span>
+    <h2 class="section-title display">把 24 场,<br/>拆成 6 章细读。</h2>
+    <p class="section-lead">
+      这是一个多页系列:这一页是总览,下面 6 章各自把那一组讲座拆得更深(讲者 · 主旨 · 要点 · 数字 · 金句 · so-what)。挑你关心的那章进去。
+    </p>
+    <div class="obs-grid">
+      <a class="obs" href="/ideas/ccl-london-2026-vision.html">
+        <div class="badge"><span class="dot"></span>第 ① 章 · 01·03·07·18</div>
+        <h4>愿景与组织</h4>
+        <p>当编程不再是瓶颈,组织得重写——keynote 的总框架,加三家把 AI 织进团队的现身说法。</p>
+        <span style="color:var(--green);font-weight:600;font-size:13px;">读这一章 →</span>
+      </a>
+      <a class="obs" href="/ideas/ccl-london-2026-craft.html">
+        <div class="badge"><span class="dot"></span>第 ② 章 · 04·05·06·10·15</div>
+        <h4>工艺:prompt · 模型 · 思考</h4>
+        <p>最「手上功夫」的五场:prompting、选模型、思考杠杆、能力曲线、平台缓存与上下文工程。</p>
+        <span style="color:var(--green);font-weight:600;font-size:13px;">读这一章 →</span>
+      </a>
+      <a class="obs" href="/ideas/ccl-london-2026-claude-code.html">
+        <div class="badge"><span class="dot"></span>第 ③ 章 · 02·19·23·24</div>
+        <h4>Claude Code 进阶</h4>
+        <p>Claude Code 本身:定制 harness、routines 主动化、验证循环、最近的更新清单。</p>
+        <span style="color:var(--green);font-weight:600;font-size:13px;">读这一章 →</span>
+      </a>
+      <a class="obs" href="/ideas/ccl-london-2026-agents-infra.html">
+        <div class="badge"><span class="dot"></span>第 ④ 章 · 11·13·14</div>
+        <h4>Managed Agents 与基础设施</h4>
+        <p>瓶颈是基建不是智能:四原语、自托管沙箱 + MCP tunnel、Memory + Dreaming。</p>
+        <span style="color:var(--green);font-weight:600;font-size:13px;">读这一章 →</span>
+      </a>
+      <a class="obs" href="/ideas/ccl-london-2026-clouds.html">
+        <div class="badge"><span class="dot"></span>第 ⑤ 章 · 08·20·22</div>
+        <h4>云平台 · 生态</h4>
+        <p>三朵云同一个 Claude:Google Cloud、Microsoft Foundry、AWS。</p>
+        <span style="color:var(--green);font-weight:600;font-size:13px;">读这一章 →</span>
+      </a>
+      <a class="obs" href="/ideas/ccl-london-2026-in-the-wild.html">
+        <div class="badge"><span class="dot"></span>第 ⑥ 章 · 09·12·16·17·21</div>
+        <h4>行业落地 · 客户故事</h4>
+        <p>真钱、真法务、真规模:Man Group、Legora、Lovable、企业落地、Spotify。</p>
+        <span style="color:var(--green);font-weight:600;font-size:13px;">读这一章 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TAKEAWAYS ═══════════════ -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <span class="section-tag">§ 如果只带走三件事</span>
+    <h2 class="section-title display">三个 Takeaway。</h2>
+    <div class="takeaway-list">
+      <div class="takeaway">
+        <div class="idx">01</div>
+        <div>
+          <h4>为下一个模型设计。</h4>
+          <p>能力沿指数走,你的架构要能在下一次跃迁时<b>自动吃到红利</b> —— 靠通用原语 + eval,而不是把今天的脚手架焊死。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">02</div>
+        <div>
+          <h4>能力进工具,不进指令。</h4>
+          <p>「指令不增加能力」。把要算的、要查的、要约束的,做成工具 / harness / 小循环 —— 而不是把一段巨型 prompt 越写越长。</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <div class="idx">03</div>
+        <div>
+          <h4>护城河是上下文,不是模型。</h4>
+          <p>模型是公共的;你的专有上下文和工作流,做成<b>被治理、有归属、过 eval 的 skills</b>,才是别人复制不了的那部分。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section style="padding-top: 0; padding-bottom: 0;">
+  <div class="wrap">
+    <div class="cta">
+      <h2 class="display">能力已就位 ——<br/>剩下的是<span class="accent">把它用起来</span>。</h2>
+      <p>
+        这是一份把整场伦敦路演 24 讲读完后的现场笔记 —— 我做它,是想把这一场里反复出现的判断
+        固定下来,当作 AI 工程的一个时间切片。如果某条主线戳中你,去看对应那场的完整原片。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.youtube.com/playlist?list=PLmWCw1CzcFilPJdvw6scjHjbBripZWFps" target="_blank" rel="noopener">
+          看完整播放列表 →
+        </a>
+        <a class="btn btn-ghost" href="/ideas/write-loops-not-code.html">
+          和 Boris「写 Loop 不写代码」合看 →
+        </a>
+        <a class="btn btn-ghost" href="/ai-builder/ai-fleet.html">
+          看我自己的「AI 舰队」实验
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Field notes from Code with Claude · London 2026 · Anthropic · 全 24 讲完整字幕 → 逐场蒸馏</span>
+    <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+  </div>
+</footer>
+
+</body>
+</html>

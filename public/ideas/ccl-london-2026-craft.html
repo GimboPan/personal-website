@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>工艺:prompt · 模型 · 思考 · Code with Claude 伦敦 2026 — Ideas — Gimbo's Universe</title>
+<meta name="description" content="五场最「手上功夫」的讲座:prompting 是对着 eval 调试、选模型按「每个成功结果最便宜」、思考是 effort 杠杆不是开关、能力曲线怎么骑、以及平台层(缓存+上下文工程)怎么把成本砍一个量级。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0f0c;--surface-1:#14160f;--surface-2:#1a1c19;--surface-3:#21241f;--ink:#f5f5f0;--ink-soft:#c6c8c0;--ink-faint:#8a8c84;--line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);--green:#9fe870;--green-deep:#163300;--green-tint:#d8f5b8;--amber:#ffd11a;--coral:#ff7a82;--sky:#38c8ff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"calt","ss01";}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:0.85;letter-spacing:-0.02em}
+.backbar{background:var(--surface-1);border-bottom:1px solid var(--line);padding:16px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;flex-wrap:wrap}
+.backbar a{color:var(--green);display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.backbar a:hover{color:var(--green-tint)}.backbar .sep{color:var(--ink-faint)}.backbar .here{color:var(--ink)}
+.hero{padding:72px 0 40px}
+.hero .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);background:rgba(159,232,112,0.10);border:1px solid rgba(159,232,112,0.30);padding:6px 12px;border-radius:9999px;margin-bottom:24px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.4vw,76px);margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);color:var(--ink-soft);max-width:62ch;line-height:1.55}
+.hero .meta{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);display:flex;gap:10px 22px;flex-wrap:wrap}
+.hero .meta b{color:var(--ink);font-weight:600}
+section{padding:8px 0 40px}
+.talk{background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:32px 34px;margin-bottom:18px}
+.talk .top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.talk .no{font-weight:900;font-size:34px;line-height:0.9;color:var(--green);letter-spacing:-0.02em;flex-shrink:0;min-width:52px}
+.talk h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.1;letter-spacing:-0.01em}
+.talk .who{font-size:13px;color:var(--ink-faint);font-weight:600;margin:8px 0 0 66px}
+.talk .body{margin:18px 0 0 66px}
+.talk .thesis{font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.talk .thesis b{color:var(--green-tint);font-weight:700}
+.talk ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.talk li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.talk li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.7}
+.talk li b{color:var(--ink);font-weight:700}
+.meta-row{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.chip{font-size:13.5px;line-height:1.55;display:flex;gap:10px}
+.chip .k{flex-shrink:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding-top:3px;width:60px}
+.chip.num .k{color:var(--sky)}.chip.quote .k{color:var(--amber)}.chip.sw .k{color:var(--green)}
+.chip .v{color:var(--ink-soft)}.chip .v b{color:var(--ink);font-weight:700}
+.chip.quote .v{font-style:italic;color:var(--ink)}
+.talk .watch{display:inline-flex;margin:16px 0 0 66px;font-size:13px;color:var(--green);font-weight:600}
+.talk .watch:hover{color:var(--green-tint)}
+@media(max-width:680px){.talk{padding:26px 22px}.talk .who,.talk .body,.talk .watch{margin-left:0}.talk .no{min-width:42px;font-size:28px}}
+.chapnav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 70px}
+.chapnav a{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.chapnav a:hover{border-color:rgba(159,232,112,.4);transform:translateY(-2px)}
+.chapnav .dir{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:800;margin-bottom:8px}
+.chapnav .t{font-size:16px;font-weight:800;color:var(--ink);line-height:1.2}
+.chapnav a.next{text-align:right}
+.chapnav a.hub{grid-column:span 2;text-align:center;background:var(--surface-1)}
+.chapnav a.hub .t{color:var(--green)}
+@media(max-width:560px){.chapnav{grid-template-columns:1fr}.chapnav a.next{text-align:left}.chapnav a.hub{grid-column:span 1}}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}footer a{color:var(--green)}
+@media(max-width:640px){.hero{padding:48px 0 32px}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="backbar"><div class="wrap">
+  <a href="/ideas"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+  <span class="sep">/</span>
+  <a href="/ideas/code-with-claude-london-2026.html">Code with Claude 伦敦 2026</a>
+  <span class="sep">/</span>
+  <span class="here">② · 工艺:prompt · 模型 · 思考</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">§ 现场笔记 · 第 ② 章 / 共 6</span>
+  <h1 class="display">能力来自<span class="accent">工具与 eval</span>，<br/>不是把 prompt 写得更长。</h1>
+  <p class="lead">五场最「手上功夫」的讲座:prompting 是对着 eval 调试、选模型按「每个成功结果最便宜」、思考是 effort 杠杆不是开关、能力曲线怎么骑、以及平台层(缓存+上下文工程)怎么把成本砍一个量级。</p>
+  <div class="meta">
+    <span><b>5</b> 场</span>
+    <span>主题:<b>The craft</b></span>
+    <span>来自 Code with Claude · London 2026</span>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<article class="talk">
+  <div class="top"><span class="no">04</span><h2>Getting more out of the Claude Platform</h2></div>
+  <div class="who">Puneet Shah · Anthropic 平台团队</div>
+  <div class="body">
+    <p class="thesis">模型之上的平台层——<b>prompt 缓存、上下文工程、成本/智能权衡</b>——才是把 demo 变成生产 agent 的东西。现场把一个 agent 从 ~£31 砍到 ~£11,智能不掉。</p>
+    <ul><li><b>Prompt 缓存是第一要务</b>:输入打 9 折 + 限额翻倍(命中 80% ≈ 5× 有效限额) + 更低首字延迟;先知道你的缓存命中率(控制台现在能看,还能看「为什么缓存断了」——经典 bug 是系统提示里塞了时间戳)。</li><li>上下文工程 = 决定给模型看什么;永远去读 transcript 看模型实际看到了什么。</li><li>三招:tool search(用到才加载 schema,Lovable −10% token)、程序化工具调用(Claude 写 Python 调工具+先清洗再进上下文,Quora 砍掉 HTML 噪声)、compaction(到阈值 ~400K 就摘要下移,近乎无限上下文)。</li><li>advisor 策略:廉价执行器(Sonnet/Haiku)只在难case 调 Opus「顾问」,Pareto 最优。</li><li>demo:Sonnet 4.6 + Opus 4.7 顾问,抓出一个 Sonnet 标了绿的「西瓜合同」(外绿内红)的尾部风险。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">缓存 9 折;80% 命中 ≈ 5× 限额;demo £31→~£11;compaction 阈值 400K。新发布:自动 prompt 缓存、Claude Platform on AWS。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“如果这一场你只记一件事,记住 prompt 缓存。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">先量缓存命中率,再用 tool search + 程序化调用 + compaction 砍上下文,只把难case 经 advisor 路由给贵模型——合起来约 10× 降本而不丢智能。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=QIriO1-vHYw" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">05</span><h2>The prompting playbook</h2></div>
+  <div class="who">Margot Vanlaer · Anthropic Applied AI</div>
+  <div class="body">
+    <p class="thesis">Prompting = <b>对着 eval 调试</b>:先清一般卫生,再逐个攻 failure mode;模型越聪明,旧的防御性指令越有害,能力得来自工具/harness 而不是叫它「更努力」。</p>
+    <ul><li>先建 eval:控制case(必过)、边界case(把过去的失败编码进去防回归)、能力上限case(交给人或拒答)。</li><li>迁移失败两种因:新模型有能力但行为变了(可 prompt 修) vs 新模型更弱(修不了)——eval 区分两者。</li><li>卫生:删冗余、别告诉它「你是人」、用 XML 分清 角色/准则/政策/数据;「你分不清,模型也分不清」。</li><li>「指令不增加能力」:要算 proration 就给 calculate 工具;一边倒的规则(升级很贵)会让它拒绝该升级的——<b>把两边权衡都讲清楚,让它判断</b>。</li><li>确定性规则就用 Python 数违规,别用 LLM 评委。</li><li>爬坡结果:赢家是把一个大 prompt 拆成「生成-评估-修复」三段小循环,过了全部case,token 还更少。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">5 个测试case(电信客服 bot);升级一次 ~$8;排班 8 员工×5 次;自适应思考方案 ~3× token/~100s。模型:Sonnet 4.6、Opus 4.7。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“幻觉的反面也会发生——模型会把它其实掌握的信息藏起来。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">把 prompt 当成 eval 驱动的调试:撕掉过时的防御补丁,把能力搬进工具/harness,约束类任务优先用小型「生成-评估-修复」循环而不是一段巨型 prompt。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=G2B0YWuJUgI" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">06</span><h2>The capability curve</h2></div>
+  <div class="who">Jeremy · Anthropic 研究团队 PM</div>
+  <div class="body">
+    <p class="thesis">12 个月里 Claude 从初级长到资深工程师,增益集中在<b>规划、纠错、长程连贯</b>。建议是骑曲线、别押注单个模型:靠 eval、砍脚手架、给模型留出余地。</p>
+    <ul><li>三类增益驱动自治:行动前会规划(给高 reasoning effort,而不是硬塞结构)、纠错(doom-loop 基本解决,用 test-time compute 换路子)、持续注意(连贯到 ~1M token,不必切碎任务或在 200K 处盯着)。</li><li>更大胆:把整个代码库交给它,别预先限制范围。</li><li>「eval 是 AI 时代的单测和回归测试」:建匹配真实流量的 eval,不是学术 benchmark;警惕<b>饱和的 eval</b>(Opus 4.7 已 ~90% 就该抬高标准)。有好 eval 的团队换新模型最快 = 竞争优势。</li><li>砍脚手架:把「缝合怪 prompt」(~3000 行给旧模型的旧补丁)每次发版都审一遍、用 eval 验证最小 prompt 仍然能跑。</li><li>给余地:自适应思考、调高 effort、用 auto mode、闭合 agent 循环让它自查自改。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">SWE-bench Verified:Sonnet 3.7 ~60%(去年)→ Opus 4.7 87%(~3× issue);「Mythos preview」已把它刷饱和;Bun 引擎被 Claude ~1 周重写成 Rust、~100% 测试通过(创始人不会 Rust)。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“Evaluation 就是 AI 时代的单元测试和回归测试。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">建可信、未饱和、贴合你用例的 eval,这样每个新前沿模型都能快速换上,然后撕掉过时脚手架、放手让模型自己思考和长跑。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=DNRddIEoH3c" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">10</span><h2>Picking the right model</h2></div>
+  <div class="who">Lucas · Anthropic Applied AI</div>
+  <div class="body">
+    <p class="thesis">公开 benchmark 只是方向。正确的选法是建一个私有小 eval,优化<b>「每个成功结果最便宜」</b>而不是每 token 最便宜;有了 eval 再用 effort/思考/缓存/上下文工程去移动成本-质量前沿。</p>
+    <ul><li>三支柱:模型质量、延迟、成本,eval 围三者建。</li><li>eval = 一组任务(输入+成功标准);既评最终答案也评过程;LLM 评委 + 确定性代码评分并用。</li><li>失败模式:把噪声当信号(每任务多跑几次)、把基建问题当模型问题(读 transcript 区分)、悄悄饱和(用反馈回路保持数据代表真实流量)。</li><li>读你的 transcript:Claude 曾在某 benchmark 拿高分,只因为它去翻了之前试验的 git 历史抄答案。</li><li>更聪明的模型常更快、更省 token(回合更少):codefix Haiku 4.5 不思考 92% → 开思考 100%。</li><li>移动前沿:prompt 缓存(缓存前缀约 1/10 输入价 →「Opus 质量,Sonnet 成本」,命中率冲 80–90%,把消息数组当 append-only、别放时间戳) + 上下文清洁。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">markdown 替 JSON + 简化时间戳 = token −66.4%;web 搜去重 = 输入 −77% / 成本 −65% / 准确率 +9%;缓存 = 1/10 输入价。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“对你的用例最合适的模型,是「每个成功结果最便宜」的那个。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">把人力投到一个会评过程也评结果的私有小 eval 上,横扫 模型×effort×思考,再用 prompt 缓存 + 精简工具响应腾出预算,然后才去碰复杂的多 agent 编排。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=P0uMXS6emHA" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">15</span><h2>The thinking lever</h2></div>
+  <div class="who">Alexander Bricken · Anthropic Applied AI Research</div>
+  <div class="body">
+    <p class="thesis">测试时计算(test-time compute)是<b>智能的杠杆</b>:让 Claude 在回答前多花 token 思考,能稳定提升难题表现。正确的用法是 effort + 预算 + 自适应思考,而不是一个粗暴的 on/off 思考开关。</p>
+    <ul><li>两条扩展轴:训练时计算(更大模型) + 测试时计算(更多推理 token),都涨性能。</li><li>测试时计算拆三块:思考空间(草稿纸)、工具调用(连接世界)、文本输出。</li><li>两个用户级旋钮:effort(low/high/max,拿智能换速度/token) + 预算(硬上限,如 max-token 或 task budget)。</li><li>推理演化:前置思考 → 交错思考 → 自适应思考(Claude 自己决定何时/要不要思考,可能不思考),自适应是 Pareto 最优。</li><li>思考开关是 effort 的糟糕代理——关掉只是删掉一种能力(类比:给队友搜索工具、让他自己决定何时用,而不是禁掉他的内心独白)。</li><li>档位建议:max 只给真·难题(收益递减);extra-high 是 Claude Code/Claude.ai 默认;medium/low 给分类/摘要/抽取。需要任何智能时,宁可大模型低 effort,也别小模型高 effort。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">内部 agentic 编码基准 ~刚到 80%;low effort ~50s/~4600 输出 token,high ~2×,max ~10×;METR 式:最新模型能处理 ~16 小时人类工作(50% 准确)。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“拿不准的时候,就上 extra-high。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">别把思考当 on/off——用一个硬 eval 集挑模型和 effort 档,默认 extra-high,只在你验证过确实划算的真·难题上才上 max。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=T7KqH7kYnE4" target="_blank" rel="noopener">看原片 →</a>
+</article></div></section>
+
+<section style="padding-top:0;"><div class="wrap"><div class="chapnav"><a class="prev" href="/ideas/ccl-london-2026-vision.html"><div class="dir">← 上一章</div><div class="t">① · 愿景与组织</div></a><a class="next" href="/ideas/ccl-london-2026-claude-code.html"><div class="dir">下一章 →</div><div class="t">③ · Claude Code 进阶</div></a><a class="hub" href="/ideas/code-with-claude-london-2026.html"><div class="dir">↑ 回总览</div><div class="t">Code with Claude 伦敦 2026 · 现场笔记</div></a></div></div></section>
+
+<footer><div class="wrap">
+  <span>Field notes · Code with Claude London 2026 · 第 ② 章 工艺:prompt · 模型 · 思考</span>
+  <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+</div></div></footer>
+</body>
+</html>

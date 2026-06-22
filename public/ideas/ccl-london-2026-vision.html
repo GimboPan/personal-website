@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>愿景与组织 · Code with Claude 伦敦 2026 — Ideas — Gimbo's Universe</title>
+<meta name="description" content="开场 keynote 立的总框架，加上三家把 AI 织进团队的现身说法：能力指数级抬升、采用却线性，于是为保护工程带宽建的老流程会悄悄失效——要敢审、敢杀、敢 Claudify，并为下一个模型设计。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0f0c;--surface-1:#14160f;--surface-2:#1a1c19;--surface-3:#21241f;--ink:#f5f5f0;--ink-soft:#c6c8c0;--ink-faint:#8a8c84;--line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);--green:#9fe870;--green-deep:#163300;--green-tint:#d8f5b8;--amber:#ffd11a;--coral:#ff7a82;--sky:#38c8ff;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Inter','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-feature-settings:"calt","ss01";}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+.display{font-weight:900;line-height:0.85;letter-spacing:-0.02em}
+.backbar{background:var(--surface-1);border-bottom:1px solid var(--line);padding:16px 0}
+.backbar .wrap{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;flex-wrap:wrap}
+.backbar a{color:var(--green);display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.backbar a:hover{color:var(--green-tint)}.backbar .sep{color:var(--ink-faint)}.backbar .here{color:var(--ink)}
+.hero{padding:72px 0 40px}
+.hero .eyebrow{display:inline-block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);background:rgba(159,232,112,0.10);border:1px solid rgba(159,232,112,0.30);padding:6px 12px;border-radius:9999px;margin-bottom:24px;font-weight:700}
+.hero h1{font-size:clamp(40px,6.4vw,76px);margin-bottom:22px;max-width:18ch}
+.hero h1 .accent{color:var(--green)}
+.hero .lead{font-size:clamp(16px,1.5vw,20px);color:var(--ink-soft);max-width:62ch;line-height:1.55}
+.hero .meta{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint);display:flex;gap:10px 22px;flex-wrap:wrap}
+.hero .meta b{color:var(--ink);font-weight:600}
+section{padding:8px 0 40px}
+.talk{background:var(--surface-2);border:1px solid var(--line);border-radius:24px;padding:32px 34px;margin-bottom:18px}
+.talk .top{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.talk .no{font-weight:900;font-size:34px;line-height:0.9;color:var(--green);letter-spacing:-0.02em;flex-shrink:0;min-width:52px}
+.talk h2{font-size:clamp(20px,2.4vw,26px);font-weight:900;line-height:1.1;letter-spacing:-0.01em}
+.talk .who{font-size:13px;color:var(--ink-faint);font-weight:600;margin:8px 0 0 66px}
+.talk .body{margin:18px 0 0 66px}
+.talk .thesis{font-size:16px;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.talk .thesis b{color:var(--green-tint);font-weight:700}
+.talk ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.talk li{font-size:14.5px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.talk li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.7}
+.talk li b{color:var(--ink);font-weight:700}
+.meta-row{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.chip{font-size:13.5px;line-height:1.55;display:flex;gap:10px}
+.chip .k{flex-shrink:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding-top:3px;width:60px}
+.chip.num .k{color:var(--sky)}.chip.quote .k{color:var(--amber)}.chip.sw .k{color:var(--green)}
+.chip .v{color:var(--ink-soft)}.chip .v b{color:var(--ink);font-weight:700}
+.chip.quote .v{font-style:italic;color:var(--ink)}
+.talk .watch{display:inline-flex;margin:16px 0 0 66px;font-size:13px;color:var(--green);font-weight:600}
+.talk .watch:hover{color:var(--green-tint)}
+@media(max-width:680px){.talk{padding:26px 22px}.talk .who,.talk .body,.talk .watch{margin-left:0}.talk .no{min-width:42px;font-size:28px}}
+.chapnav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 70px}
+.chapnav a{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.chapnav a:hover{border-color:rgba(159,232,112,.4);transform:translateY(-2px)}
+.chapnav .dir{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:800;margin-bottom:8px}
+.chapnav .t{font-size:16px;font-weight:800;color:var(--ink);line-height:1.2}
+.chapnav a.next{text-align:right}
+.chapnav a.hub{grid-column:span 2;text-align:center;background:var(--surface-1)}
+.chapnav a.hub .t{color:var(--green)}
+@media(max-width:560px){.chapnav{grid-template-columns:1fr}.chapnav a.next{text-align:left}.chapnav a.hub{grid-column:span 1}}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}footer a{color:var(--green)}
+@media(max-width:640px){.hero{padding:48px 0 32px}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+<div class="backbar"><div class="wrap">
+  <a href="/ideas"><span aria-hidden="true">←</span> Gimbo's Universe</a>
+  <span class="sep">/</span>
+  <a href="/ideas/code-with-claude-london-2026.html">Code with Claude 伦敦 2026</a>
+  <span class="sep">/</span>
+  <span class="here">① · 愿景与组织</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">§ 现场笔记 · 第 ① 章 / 共 6</span>
+  <h1 class="display">当编程不再是瓶颈，<span class="accent">组织</span>得重写。</h1>
+  <p class="lead">开场 keynote 立的总框架，加上三家把 AI 织进团队的现身说法：能力指数级抬升、采用却线性，于是为保护工程带宽建的老流程会悄悄失效——要敢审、敢杀、敢 Claudify，并为下一个模型设计。</p>
+  <div class="meta">
+    <span><b>4</b> 场</span>
+    <span>主题:<b>Vision & the AI-native org</b></span>
+    <span>来自 Code with Claude · London 2026</span>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<article class="talk">
+  <div class="top"><span class="no">01</span><h2>开场 Keynote</h2></div>
+  <div class="who">Boris Cherny 等 · Anthropic</div>
+  <div class="body">
+    <p class="thesis">能力指数级、采用线性——<b>开发者的活，就是补上中间那道越张越大的差</b>。整场用三层叙事串起来：模型(地基) → Claude 平台(规模化 agent) → Claude Code(每个开发者)。</p>
+    <ul><li>「计算器手感」回来了：从想法到能跑的程序之间的距离，又一次在坍缩。</li><li><b>为下一个模型设计</b>，不是现在这个；更难的 eval 是探测指数曲线在动的方式(以前会失败的任务开始通过 = 发车信号)。</li><li>脚手架(loop/指令/工具)会拖住更聪明的模型；通用原语(文件系统/沙箱)走得更远。</li><li>「advisor 策略」：小模型当执行器，遇到难case 调大模型要建议。</li><li>新发布：自托管沙箱(Daytona/Cloudflare/Vercel/Modal) + MCP tunnel(内网 MCP 走隧道，不出公网)；外加多 agent 编排、outcomes、dreaming。</li><li>从「我 prompt Claude Code」转向「让 Claude 去 prompt Claude Code」，越来越多代码异步化。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">平台 API 调用量同比 ~17×；人均每周用 Claude 20+ 小时；12 个月 8 个前沿模型;Mercado Libre 2.3 万工程师 / 50 万+ PR review / 目标 Q3 90% 自主编码。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“能力已经到了，剩下的差距是我们把它用起来有多快。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">把架构和 eval 建成「下一个模型一来就自动吃红利」的样子；自托管沙箱 + MCP tunnel 让在自己 infra/数据上跑 agent 变得现实。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=6amLO7I9xdg" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">03</span><h2>Running an AI-native engineering org</h2></div>
+  <div class="who">Fiona Fun · Anthropic(带 Claude Code / Cowork，前 Meta/Microsoft)</div>
+  <div class="body">
+    <p class="thesis">当编程、写测试、重构都不再是瓶颈，<b>为保护稀缺工程带宽而建的团队规范会「悄悄失效」</b>——纪律是持续追问每条流程还服不服务于它的目的，并给「杀掉旧流程」明确许可。</p>
+    <ul><li>新瓶颈：验证(对不对)、谁来 review、维护成本。</li><li>「建造便宜，争论昂贵」——直接生成 3 个 PR 版本，而不是开会白板；少写设计文档。</li><li>「shift left」：比你抓 bug、比她抓 bug 更好的，是自动化在源头就抓住。</li><li>人留在环里的地方：法务、风险/信任边界、产品品味；Claude 接管风格、lint、明显 bug、spec 漂移(把 spec 签进仓库)。</li><li>招两种人：有产品感的创造型 builder + 深系统专家；产品感靠 dogfood + 和客户聊出来。</li><li>每个 manager 先当回 IC；新的「真理之源」是代码本身，把 spec 变成 skill 签进仓库。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">信号:入职到第一个 PR 的时间、对队友的成本、PR 周期(拆成漏斗各段看)、Claude-assisted commit 占比。宣布 Claude for small business / Cowork / Claude Design。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“过去对你有用的，现在不一定了。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">定期审你那条最「收税」的流程，问它还服不服务目的——不服就杀掉或 Claudify；编程便宜之后，把筹码压到验证与自动化上。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=IA5LWIGqnyM" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">07</span><h2>Designing with Claude: From prompt to production</h2></div>
+  <div class="who">Dan Carey · Anthropic Labs(Claude Design)</div>
+  <div class="body">
+    <p class="thesis">3 个人 ~10 周做出 Claude Design：<b>用原型代替 PRD</b>，把「聊用户 → 设计 → 上线 → 读反馈」的循环跑了 50–100 遍。Claude Code 让工程变快后，瓶颈挪到了「搞清楚该做对的那件事」。</p>
+    <ul><li>Anthropic Labs 是「下注工厂」：十几个小队探边界，能成的加倍下注，不成的折叠；每 1–2 天发一次。Labs 孵出了 Claude Code、Design、MCP、Skills、Claude-in-Chrome。</li><li>原型 > PRD：文档不精确(两个读者想象出两个产品)，原型具体可感；他们没写 PRD/愿景/OKR。</li><li>起点：一个人、一个周末、一段录屏(Agent SDK 上的薄 IDE，复用一个 Claude Code skill)→ 发 Slack → 社区反馈成了 roadmap。</li><li>小团队、角色融化：从单人(「你和你的好兄弟 Claude」)起步，「扩张 300% 到三个人」；工程师聊用户、PM 写代码、设计师做分析。</li><li>每个循环步骤都优化、常让 Claude 干：一下午做出反馈聚类工具，把反馈对到 trace 上、一键应用修复。</li><li>反直觉:做「快成了」的原型，不是「已经成了」的——下一个模型可能补上工程补不了的(Opus 4.7 就修好了早期原型的问题)。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">~10 周从想法到上线;循环跑 50–100 遍;团队 3 人(最多 5);周五上线到周一发了 62 项改进;全平台 token 上限翻倍。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“你不会想做那个「已经成了」的东西，你要做那个「快成了」的。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">用当天就能做出的 Claude 原型替掉 PRD，团队保持小而角色融化，并在 24 小时内真发一个用户需求来暴露你流程里的瓶颈。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=Uvl-tRga98g" target="_blank" rel="noopener">看原片 →</a>
+</article>
+<article class="talk">
+  <div class="top"><span class="no">18</span><h2>From one person to 80</h2></div>
+  <div class="who">Yoav & Gabrielle · Base44(vibe-coding 平台，被 Wix 收购)</div>
+  <div class="body">
+    <p class="thesis">从一人到 ~80 工程师还保持速度：用 Claude Code 把重流程<b>换成极简的实时 prompt 和 skill</b>；evals/QA/实验这类复杂系统，等时机真到了再 all-in。</p>
+    <ul><li>不写入职文档:新人跑两个 prompt——「扫所有 commit，告诉我每个人在乎什么」+「给我这个组件的 mermaid 图」，Claude 保持它常新。</li><li>从创始人累积的历史 PR 评论里<b>蒸馏出他的 review 规则</b>，几天重跑一次，复制他的标准。</li><li>生产质量信号:agent 好用时用户沉默、坏了用户「变得很吵」→ 廉价模型逐条分类挫败感 → 每个 agent 版本在小比例用户上 A/B。</li><li>实验规模化:把 Claude 接到 Statsig MCP，分析最近 ~100 个实验 + 对应 PR，蒸馏出实验准则;GitHub bot 给每个 PR 判定(直接发/灰度/A/B)。</li><li>Evals 故意推迟，到点再 all-in:做了「用户模拟器」(Stagehand 在 CI 里驱动真实 Base44 实例),子部分失败不算 eval 失败,而是把拒绝喂回让 agent 修。</li><li>QA 做成 skill:把常见流程包成 skill + CLI 工具 → 一个元 QA skill;PR 一开,agent 出测试计划、测、带截图回报(~80% 能行)。</li></ul>
+    <div class="meta-row"><div class="chip num"><span class="k">数字</span><span class="v">平台 2024 年底上线;2025 年 4 月已盈利;被 Wix 收后 2→15 工程师,再一夜合并 40→80;QA agent ~80% 有效。</span></div><div class="chip quote"><span class="k">金句</span><span class="v">“东西都正常时用户什么都不说;一旦开始坏，用户就变得非常非常吵。”</span></div><div class="chip sw"><span class="k">So-what</span><span class="v">别过早造编排/eval/QA 机器;从已有产物(commit、PR 评论、历史实验)里用 prompt 和 skill 蒸馏准则和品味,重系统等规模真逼到了再上。</span></div></div>
+  </div>
+  <a class="watch" href="https://www.youtube.com/watch?v=VueeyKcquoA" target="_blank" rel="noopener">看原片 →</a>
+</article></div></section>
+
+<section style="padding-top:0;"><div class="wrap"><div class="chapnav"><span></span><a class="next" href="/ideas/ccl-london-2026-craft.html"><div class="dir">下一章 →</div><div class="t">② · 工艺:prompt · 模型 · 思考</div></a><a class="hub" href="/ideas/code-with-claude-london-2026.html"><div class="dir">↑ 回总览</div><div class="t">Code with Claude 伦敦 2026 · 现场笔记</div></a></div></div></section>
+
+<footer><div class="wrap">
+  <span>Field notes · Code with Claude London 2026 · 第 ① 章 愿景与组织</span>
+  <span>Filed under <a href="/ideas">/ideas</a> · Gimbo's Universe</span>
+</div></div></footer>
+</body>
+</html>

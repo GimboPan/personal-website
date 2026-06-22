@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.3] — 2026-06-22 · Ideas #15 — Code with Claude 伦敦 2026 现场笔记(总览 + 6 章系列)(live: pending)
+## [1.11.3] — 2026-06-22 · Ideas #15 — Code with Claude 伦敦 2026 现场笔记(总览 + 6 章系列)(live: cffc4af)
 
 > New Ideas piece (现场笔记), shipped as a **multi-page series**: I pulled the full transcript of every talk in Anthropic's *Code with Claude · London 2026* playlist (24 sessions), read them all, and distilled them. The hub page is the overview (9 cross-talk threads + key numbers); 6 chapter sub-pages go a layer deeper (per-talk thesis / points / numbers / quotes / so-what). The spine is the keynote line — *capability is already here; the gap is how fast we put it to work.*
 
@@ -24,7 +24,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.2] — 2026-06-22 · Ideas #16 — 把两本书熔成一个职场跃迁 skill (live: pending)
+## [1.11.2] — 2026-06-22 · Ideas #16 — 把两本书熔成一个职场跃迁 skill (live: cffc4af)
 
 > New Ideas piece (Artifact / 操作手册): I read both reading-club books on working in the age of AI — *Open to Work* (LinkedIn CEO Ryan Roslansky) and *Agents, Robots, and Us* (McKinsey) — and fused them into a runnable coach (Navi) that walks an AI-anxious professional up a 6-rung literacy ladder. Shipped two ways: a **Claude Skill** (open-sourced at github.com/GimboPan/ai-native-professional) and a **ChatGPT Custom GPT** for people who don't use Claude. This page is its operating manual.
 

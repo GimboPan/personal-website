@@ -6,6 +6,23 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.11.4] — 2026-06-23 · Ideas #17 — 四轮加密周期复盘(主导 Layer 1 主线)
+
+> New Ideas piece (图解深读): a four-cycle retrospective of crypto (2013→now) organized around one spine — **which Layer 1 dominated each cycle**. The arc: sole rule (Bitcoin, before "L1" was even a concept) → one superpower (Ethereum, via EVM/ERC-20 + ICO, dragging BTC.D from ~87% to ~31%) → the L1 wars (ETH still dominant in DeFi/NFT but the gas-fee crisis spawns BSC/Solana/Terra/Avalanche) → twin poles + anchor return (Bitcoin re-anchors via spot ETF to ~65% dominance; Ethereum gets vampired by its own L2s; Solana revives from the FTX rubble on memecoins and overtakes ETH mainnet on several on-chain metrics). Every cycle also carries its narrative, revolutionary primitive, and signature blow-up; the piece closes on seven cross-cycle patterns + a disciplined-investor framing.
+
+### Added — Ideas
+
+- **`public/ideas/crypto-four-cycles.html`** — Wise-Dark deep-read built off the `two-simulations.html` template. Sections: the 7-beat cycle rhythm (减半→流动性→新原语→叙事→狂热→暴雷→地基) + the "narrative climbs the stack" thesis; a **four-cycle overview grid** with each card's **dominant L1 highlighted** (BTC peak + BTC.D swing + 主导/挑战/原语/叙事/暴雷); four per-cycle deep sections each with a dedicated 主导 Layer 1 callout; an **L1-dominance timeline table** (cycle → dominant L1 → challenger field → BTC.D) + 6 key-shift moments; seven cross-cycle patterns; five investor lessons + a disclaimer.
+- **`src/data/ideas.ts`** — new article entry index `17`, topics economy/tech, `art` motif `orbit` (accent `#ffd11a`), `status: 'live'`, `isNew: true`. Catalog counts/timeline derive automatically.
+
+### Notes
+
+- **Versioning** — patch (third digit): a plain new Ideas piece, per the rule set 2026-06-20.
+- **Method** — researched + fact-checked via a multi-agent workflow (4 per-cycle research agents + 4 adversarial fact-check agents + 2 synthesis agents). Corrections applied to the draft (e.g. 2013 BTC.D is ~85–95% not "常年 95%+"; 2017 early dominance ~87% not ~95%; PBoC notice dated 2013/12/03; GENIUS Act is already signed law as of 2025/7/18, not a prediction; IBIT no longer the largest single BTC holder after Strategy overtook in 2026/4). 2025+ prices flagged as report-口径, verify against exchange data.
+- **Red lines** — clean: general market history + category-level investment philosophy only. **No personal holdings, positions, or financial figures** (explicit disclaimer in-page); no employer or colleague names.
+
+---
+
 ## [1.11.3] — 2026-06-22 · Ideas #15 — Code with Claude 伦敦 2026 现场笔记(总览 + 6 章系列)(live: cffc4af)
 
 > New Ideas piece (现场笔记), shipped as a **multi-page series**: I pulled the full transcript of every talk in Anthropic's *Code with Claude · London 2026* playlist (24 sessions), read them all, and distilled them. The hub page is the overview (9 cross-talk threads + key numbers); 6 chapter sub-pages go a layer deeper (per-talk thesis / points / numbers / quotes / so-what). The spine is the keynote line — *capability is already here; the gap is how fast we put it to work.*

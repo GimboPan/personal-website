@@ -74,6 +74,19 @@ export const seriesDefs: SeriesDef[] = [
 
 export const articles: IdeaArticle[] = [
   {
+    index: '17',
+    title: '四轮加密周期复盘 · 叙事、革命性技术与每轮的主导 Layer 1 · 图解深读',
+    lede: '从 2013 到现在,加密走过四轮牛熊。我把它做成一份按「主导 Layer 1」这条主线串起来的复盘——每一轮各自的宏观背景、能让普通人听懂并驱动散户入场的主导叙事、当轮才成熟的革命性技术原语,以及最关键的:那一轮真正主导链上价值的公链是谁、谁在挑战。主线很清晰:独霸(比特币,「L1」概念还没诞生、它是事实上唯一的链)→ 一超(以太坊借 EVM/ERC-20 与 ICO 上位,把 BTC.D 从 ~87% 砸到 ~31%)→ 群雄(L1 大战:ETH 仍主导 DeFi/NFT 但 gas 危机外溢催生 BSC/Solana/Terra/Avalanche)→ 双极 + 锚回归(比特币靠现货 ETF 机构化、dominance 重回 65%,以太坊被自家 L2 吸血、Solana 从 FTX 废墟靠 memecoin 复活反超,形成双极)。还提炼了贯穿四轮的七条结构性规律(减半时钟、叙事逐层上移、每轮一个新原语点火、每轮顶部都有一场「最体面的暴雷」当墓碑、上一轮泡沫=下一轮地基、主导权高度黏滞、挑战者高死亡率)和一组纪律型投资启示。全文事实经一套多智能体流程逐轮对抗式核查(4 研究 + 4 核查 + 2 综合 agent),价格/份额/日期都用核过的口径。认知框架,非投资建议,不含任何个人持仓。',
+    date: '2026.06',
+    tags: ['Economy', 'Tech'],
+    topicSlug: 'economy',
+    topics: ['economy', 'tech'],
+    href: '/ideas/crypto-four-cycles.html',
+    status: 'live',
+    isNew: true,
+    art: { motif: 'orbit', accent: '#ffd11a', seed: 17 },
+  },
+  {
     index: '16',
     title: 'AI 不会取代你,用 AI 的人会 · 把两本书熔成一个职场跃迁 skill · 操作手册',
     lede: '读书会发下来两本讲「AI 时代怎么工作」的书:LinkedIn CEO 的《Open to Work》和 McKinsey 的《Agents, Robots, and Us》。我没停在写读后感——把两本完整读完、蒸馏,熔成了一个职场跃迁教练 Navi,并开源:用 Claude 的人 clone 成 skill,不用 Claude 的人直接在 ChatGPT 里打开 Custom GPT 版就能聊。这篇是它的操作手册。两本书正好互补:报告给「人机到底怎么分工」的硬数据(57% 工作小时理论上可自动化、但 72% 的技能落在「人机伙伴区」、AI fluency 需求两年涨近 7 倍、最有价值的人正从 executor 变成 orchestrator/validator),书给「人怎么重新定位自己」的那一面(5C 人类能力、把工作拆成三桶的任务自评、职业是攀岩墙不是梯子、anxiety→agency→aspiration 的情绪弧)。核心是把这一切收成一条一次只爬一级的 6 级阶梯:L0 焦虑回避者 → L1 AI 使用者 → L2 任务架构师 → L3 编排者/验证者 → L4 人类优势创新者 → L5 新型职场人,每级都有认知转变、动手练习和升级判据。贯穿全篇的校准是同一句:自动化冲着任务来不冲着头衔(放射科医生在 AI 大举进入后就业还年增约 3%),真正的风险不是 AI 取代你,是「用 AI 的人」取代你——这条阶梯就是让你成为那个人。附 builder 批注:这又是一次「把读到的变成能交出去的」。',

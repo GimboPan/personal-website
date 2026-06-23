@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>四轮加密周期复盘 · 叙事、革命性技术与每轮的主导 Layer 1 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="从 2013 到现在,四轮加密牛熊各自的主导叙事、革命性技术原语,以及——重点——每一轮真正主导的 Layer 1 公链是谁。主导权走的是一条独霸(BTC)→ 一超(ETH)→ 群雄(L1 大战)→ 双极 + 锚回归(ETH/Solana + 比特币 L1 复兴 · 机构化)的演化线。全文事实经一套多智能体流程逐轮对抗式核查。认知框架,非投资建议。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* backbar */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .here { color: var(--ink); }
+    .backbar .sep { opacity: 0.5; }
+
+    /* hero */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30); padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700; }
+    .hero h1 { font-size: clamp(46px, 7.4vw, 92px); margin-bottom: 28px; max-width: 15ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 32px; }
+    .hero .lead b { color: var(--ink); font-weight: 700; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 36px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* sections */
+    section { padding: 60px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(32px, 4.6vw, 54px); margin-bottom: 18px; max-width: 24ch; }
+    .section-title .accent { color: var(--green); }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 66ch; line-height: 1.6; margin-bottom: 36px; }
+    .section-lead b { color: var(--ink); font-weight: 700; }
+    .prose { font-size: 16px; color: var(--ink-soft); line-height: 1.78; max-width: 70ch; }
+    .prose p { margin-bottom: 18px; }
+    .prose b { color: var(--ink); font-weight: 700; }
+    .prose .g { color: var(--green); font-weight: 700; }
+
+    /* framework rhythm */
+    .rhythm { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+    .rhythm .beat { flex: 1 1 130px; background: var(--surface-1); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+    .rhythm .beat .n { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; color: var(--ink-faint); text-transform: uppercase; }
+    .rhythm .beat .t { font-size: 14px; font-weight: 800; color: var(--ink); margin-top: 5px; }
+    .rhythm .beat .d { font-size: 12px; color: var(--ink-soft); margin-top: 5px; line-height: 1.45; }
+
+    /* four-cycle cards (centerpiece) */
+    .cycles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 34px; }
+    @media (max-width: 880px) { .cycles { grid-template-columns: 1fr; } }
+    .cyc { background: var(--surface-2); border: 1px solid var(--line); border-top: 3px solid var(--c); border-radius: 24px; padding: 24px 24px 26px; }
+    .cyc .top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+    .cyc .era { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
+    .cyc .btcd { font-size: 11px; color: var(--ink-faint); font-weight: 600; }
+    .cyc .peak { font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; font-size: 34px; margin-top: 12px; }
+    .cyc .peak small { font-size: 12px; font-weight: 600; color: var(--ink-faint); margin-left: 9px; letter-spacing: 0; }
+    .cyc .l1 { background: var(--l1bg); border-radius: 16px; padding: 13px 15px; margin: 16px 0 6px; }
+    .cyc .l1 .lab { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c); margin-bottom: 4px; }
+    .cyc .l1 .name { font-size: 16px; font-weight: 900; color: var(--ink); line-height: 1.2; }
+    .cyc .l1 .name span { font-weight: 600; color: var(--ink-soft); font-size: 13px; }
+    .cyc .l1 .sub { font-size: 12px; color: var(--ink-soft); margin-top: 4px; line-height: 1.45; }
+    .cyc .field { font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-top: 9px; }
+    .cyc .field .lk { color: var(--ink-faint); font-weight: 700; }
+    .cyc .field b { color: var(--ink); }
+    .cyc .field.blow { color: var(--coral); }
+    .cyc .field.blow .lk { color: var(--coral); opacity: 0.8; }
+
+    /* per-cycle dominant-L1 callout */
+    .l1note { background: var(--surface-2); border: 1px solid var(--line); border-left: 3px solid var(--c2); border-radius: 16px; padding: 20px 22px; margin: 26px 0 6px; max-width: 70ch; }
+    .l1note .h { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c2); margin-bottom: 9px; }
+    .l1note p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.62; margin: 0; }
+    .l1note p + p { margin-top: 10px; }
+    .l1note b { color: var(--ink); font-weight: 700; }
+
+    /* L1 arc table */
+    .l1table { margin-top: 34px; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+    .l1table .r { display: grid; grid-template-columns: 150px 1.1fr 1.7fr 130px; border-bottom: 1px solid var(--line); }
+    .l1table .r:last-child { border-bottom: none; }
+    .l1table .r.h { background: var(--surface-2); }
+    .l1table .c { padding: 15px 18px; font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+    .l1table .r.h .c { font-weight: 800; color: var(--ink); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .l1table .c.cy { font-weight: 800; color: var(--ink); }
+    .l1table .c.cy small { display: block; font-weight: 600; color: var(--ink-faint); font-size: 11px; margin-top: 3px; letter-spacing: 0; text-transform: none; }
+    .l1table .c b { color: var(--ink); }
+    .l1table .c .dom { color: var(--ink); font-weight: 800; }
+    @media (max-width: 820px) {
+      .l1table .r { grid-template-columns: 1fr; }
+      .l1table .r.h { display: none; }
+      .l1table .c { padding: 12px 18px; border-bottom: 1px solid var(--line); }
+      .l1table .c:last-child { border-bottom: none; }
+      .l1table .c::before { content: attr(data-l) " · "; color: var(--ink-faint); font-weight: 700; font-size: 11px; }
+      .l1table .c.cy::before { content: none; }
+    }
+
+    /* key shifts */
+    .shifts { margin-top: 30px; display: flex; flex-direction: column; gap: 10px; }
+    .shift { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: start; background: var(--surface-1); border: 1px solid var(--line); border-radius: 16px; padding: 15px 20px; }
+    .shift .y { font-weight: 900; font-size: 13px; color: var(--green); white-space: nowrap; padding-top: 1px; letter-spacing: -0.01em; }
+    .shift .x { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+    .shift .x b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 560px) { .shift { grid-template-columns: 1fr; gap: 6px; } }
+
+    /* card grid (patterns) */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 34px; }
+    .card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 22px; padding: 24px; }
+    .card .k { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 800; margin-bottom: 10px; }
+    .card h3 { font-size: 18px; font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+    .card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+    .card p b { color: var(--ink); }
+    @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+
+    /* lessons list */
+    .lessons { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; max-width: 74ch; }
+    .lesson { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; }
+    .lesson .dot { width: 9px; height: 9px; border-radius: 9999px; background: var(--green); margin-top: 8px; flex-shrink: 0; }
+    .lesson .b { font-size: 15px; color: var(--ink-soft); line-height: 1.62; }
+    .lesson .b b { color: var(--ink); font-weight: 700; }
+
+    /* quote */
+    .quote { background: var(--surface-2); border: 1px solid rgba(159,232,112,0.30); border-radius: 36px; padding: 48px 46px; margin-top: 44px; }
+    .quote blockquote { font-size: clamp(26px, 3.6vw, 42px); font-weight: 900; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 24px; max-width: 24ch; }
+    .quote blockquote .accent { color: var(--green); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 64ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 36px 26px; border-radius: 28px; } }
+
+    /* disclaimer */
+    .disclaimer { margin-top: 30px; font-size: 12.5px; color: var(--ink-faint); line-height: 1.6; max-width: 72ch; border-top: 1px solid var(--line); padding-top: 18px; }
+    .disclaimer b { color: var(--ink-soft); }
+
+    /* outro */
+    .outro { padding: 76px 0 104px; border-top: 1px solid var(--line); }
+    .outro .manifesto { font-size: clamp(32px, 5.2vw, 60px); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 30px; }
+    .outro .manifesto .accent { color: var(--green); }
+    .outro p { font-size: 16px; color: var(--ink-soft); max-width: 62ch; line-height: 1.72; margin-bottom: 14px; }
+    .outro p b { color: var(--ink); }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--ink-faint); }
+    footer a { color: var(--green); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">四轮加密周期复盘</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">复盘 · 加密周期 × Layer 1 · 多智能体核查</span>
+      <h1 class="display">四轮周期,<br/><span class="accent">一条主导权主线.</span></h1>
+      <p class="lead">从 2013 到现在,加密走过四轮牛熊。每一轮都有一段能让普通人听懂的主导叙事、一个当轮才成熟的革命性技术原语——以及一个真正主导链上价值的 <b>Layer 1 公链</b>。把四轮叠起来看,主导权走的是一条清晰的演化线:<b>独霸 → 一超 → 群雄 → 双极 + 锚回归。</b>这篇按这条主线逐轮拆开。</p>
+      <div class="credits">
+        <div class="item"><div class="label">跨度</div><div class="value">2011 → 2026 · 四轮周期</div></div>
+        <div class="item"><div class="label">方法</div><div class="value">多智能体复盘 + 逐轮对抗式核查</div></div>
+        <div class="item"><div class="label">性质</div><div class="value">认知框架 · 非投资建议</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 框架:周期的底层节拍 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">先给一把尺子</span>
+      <h2 class="section-title display">周期为什么是「周期」</h2>
+      <p class="section-lead">四轮长得不一样,底层节拍却惊人地一致。把它当成一个可复用的模板——也是读懂这篇的钥匙:</p>
+      <div class="rhythm">
+        <div class="beat"><div class="n">01 定时器</div><div class="t">减半</div><div class="d">四年一次的供给冲击,重置叙事</div></div>
+        <div class="beat"><div class="n">02 柴火</div><div class="t">宏观流动性</div><div class="d">放水 / 低利率提供燃料</div></div>
+        <div class="beat"><div class="n">03 点火</div><div class="t">新技术原语</div><div class="d">当轮才成熟的那个新东西</div></div>
+        <div class="beat"><div class="n">04 风</div><div class="t">主导叙事</div><div class="d">普通人能听懂、愿意进场</div></div>
+        <div class="beat"><div class="n">05 火势</div><div class="t">散户 / 杠杆狂热</div><div class="d">反身性把价格推到顶</div></div>
+        <div class="beat"><div class="n">06 灭火</div><div class="t">标志性暴雷</div><div class="d">最体面的那个先死,标记顶部</div></div>
+        <div class="beat"><div class="n">07 余烬</div><div class="t">builder 留下地基</div><div class="d">熊市里沉淀成下一轮的底座</div></div>
+      </div>
+      <p class="prose" style="margin-top:30px;">最关键的一条规律,记住它就够本了:<b>叙事每一轮都沿着技术栈往上爬一层。</b>周期一在争论<span class="g">货币本身</span>(比特币是钱吗);周期二在争论<span class="g">平台</span>(谁是世界计算机);周期三在争论<span class="g">应用</span>(链上能跑出银行、交易所、艺术品市场吗);周期四在争论<span class="g">分发与接入</span>(怎么把这套东西塞进华尔街和你妈的支付 App)。技术原语一旦在某一轮被验证,它就不再是叙事、变成地基,下一轮的人站在它上面盖楼。</p>
+    </div>
+  </section>
+
+  <!-- 四轮总览卡片 -->
+  <section style="padding-top:24px;">
+    <div class="wrap">
+      <span class="section-tag">四轮总览 · 主导 Layer 1 高亮</span>
+      <h2 class="section-title display">一张图看完<br/>四轮的<span class="accent">主导权.</span></h2>
+      <p class="section-lead">每张卡片的高亮块就是那一轮真正主导链上价值的 Layer 1。注意 BTC.D(比特币市值占比)的钟摆——它直观记录了资金在 BTC 与各 L1 之间的潮汐。</p>
+      <div class="cycles">
+
+        <div class="cyc" style="--c:#ffd11a; --l1bg:rgba(255,209,26,0.10);">
+          <div class="top"><span class="era">周期一 · 2011–2013</span><span class="btcd">BTC.D ~85–95%</span></div>
+          <div class="peak">~$1,150<small>BTC 顶 · 2013/11 末</small></div>
+          <div class="l1">
+            <div class="lab">主导 Layer 1</div>
+            <div class="name">Bitcoin</div>
+            <div class="sub">事实上唯一的 L1 —— 智能合约尚未诞生</div>
+          </div>
+          <div class="field"><span class="lk">挑战者:</span>Litecoin · Namecoin · Peercoin · Ripple(皆参数微调)</div>
+          <div class="field"><span class="lk">原语:</span>PoW + UTXO + 减半 → 首次实现「数字稀缺」</div>
+          <div class="field"><span class="lk">叙事:</span>数字黄金 / 逃离法币(塞浦路斯 bail-in)</div>
+          <div class="field blow"><span class="lk">暴雷:</span>Mt.Gox 丢 ~85 万 BTC(2014 破产)</div>
+        </div>
+
+        <div class="cyc" style="--c:#38c8ff; --l1bg:rgba(56,200,255,0.10);">
+          <div class="top"><span class="era">周期二 · 2015–2017</span><span class="btcd">BTC.D 87%→31%</span></div>
+          <div class="peak">~$19.7k<small>BTC 顶 · 2017/12/17</small></div>
+          <div class="l1">
+            <div class="lab">主导 Layer 1</div>
+            <div class="name">Ethereum</div>
+            <div class="sub">智能合约 L1 霸权确立 · 全行业融资基础设施</div>
+          </div>
+          <div class="field"><span class="lk">挑战者:</span>NEO · EOS · Cardano · Qtum(多为叙事/募资,链上空心)</div>
+          <div class="field"><span class="lk">原语:</span>EVM + ERC-20 → 人人可发可编程代币(ICO)</div>
+          <div class="field"><span class="lk">叙事:</span>区块链不只比特币 / 世界计算机 / ICO</div>
+          <div class="field blow"><span class="lk">暴雷:</span>The DAO 被盗 360 万 ETH→硬分叉;~95% ICO 归零</div>
+        </div>
+
+        <div class="cyc" style="--c:#9fe870; --l1bg:rgba(159,232,112,0.10);">
+          <div class="top"><span class="era">周期三 · 2019–2021</span><span class="btcd">BTC.D 70%→38%</span></div>
+          <div class="peak">~$69k<small>BTC 顶 · 2021/11/10</small></div>
+          <div class="l1">
+            <div class="lab">主导 Layer 1</div>
+            <div class="name">Ethereum <span>+ Bitcoin(价值锚)</span></div>
+            <div class="sub">DeFi/NFT 大本营 · 占 DeFi TVL ~55–65%</div>
+          </div>
+          <div class="field"><span class="lk">挑战者(L1 大战):</span>Solana · BSC · Terra · Avalanche/Fantom/Polygon</div>
+          <div class="field"><span class="lk">原语:</span>AMM + 流动性挖矿 + ERC-721 + Rollup</div>
+          <div class="field"><span class="lk">叙事:</span>DeFi / NFT / GameFi / 机构入场</div>
+          <div class="field blow"><span class="lk">暴雷:</span>Terra/LUNA 归零(~$400–600 亿)→3AC→FTX</div>
+        </div>
+
+        <div class="cyc" style="--c:#ff7a82; --l1bg:rgba(255,122,130,0.10);">
+          <div class="top"><span class="era">周期四 · 2023–今(进行中)</span><span class="btcd">BTC.D 49%→65%→56%</span></div>
+          <div class="peak">~$126k<small>BTC ATH · 2025/10</small></div>
+          <div class="l1">
+            <div class="lab">主导 Layer 1</div>
+            <div class="name">Bitcoin <span>+ ETH / Solana 双极</span></div>
+            <div class="sub">BTC 机构化锚回归 · ETH 被 L2 吸血 · SOL 复活反超</div>
+          </div>
+          <div class="field"><span class="lk">新极/挑战:</span>Solana · Base(ETH L2)· Tron(USDT);旧杀手 ADA/AVAX 边缘化</div>
+          <div class="field"><span class="lk">原语:</span>现货 ETF + 稳定币支付轨 + restaking + Ordinals</div>
+          <div class="field"><span class="lk">叙事:</span>接入 TradFi / ETF / 稳定币 / Meme / AI agent / RWA</div>
+          <div class="field blow"><span class="lk">暴雷:</span>LIBRA 名人 meme 归零;Bybit 被盗 $15 亿(史上最大)</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 周期一 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">周期一 · 2011–2013</span>
+      <h2 class="section-title display">还没有「L1」这个词,<br/>比特币就是<span class="accent">全部.</span></h2>
+      <div class="prose">
+        <p>价格上,BTC 在 2013/11/27 首次突破 $1,000,峰值约 $1,150 出现在 11 月底到 12 月初。年内还有个前置小顶:2013/04/10 因塞浦路斯危机冲到 ~$266,随后两天(含 Mt.Gox 暂停交易)急跌到 ~$55。真正的引信是 <b>2013/03 塞浦路斯 bail-in</b>——政府作为救助条件对大额存款强制罚没,第一次让普通人直观理解「银行里的钱不是你的钱」。叠加 2012/11/28 首次减半(50→25),「数字黄金 / 逃离法币」的叙事第一次有了新闻头条支撑。</p>
+        <p>革命性的是那个<b>零号原语</b>:中本聪用 <span class="g">PoW + 最长链规则</span>解决了 30 年无解的拜占庭将军 + 双花问题——让「写历史」需要烧真实电力,作恶得持续掌握 51%+ 算力、经济上不划算。配合 UTXO + 全网广播,第一次在没有发行方的情况下让<b>数字稀缺性</b>成立。这是后面一切加密资产的地基。</p>
+      </div>
+      <div class="l1note" style="--c2:#ffd11a;">
+        <div class="h">本轮主导 Layer 1</div>
+        <p><b>比特币是事实上唯一的 L1。</b>智能合约、可编程链要到 2015 才出现,本轮根本不存在「L1 竞争格局」,无 DeFi、无 TVL 概念。BTC dominance 全年大致在 <b>~85–95%</b> 区间波动(并非「常年 95%+」,年末山寨投机时一度回落到 90% 以下)。</p>
+        <p>所谓「挑战者」全是参数微调:<b>Litecoin</b>(2011/10/07,Scrypt + 2.5 分钟出块,「数字白银」)、<b>Namecoin</b>(首个 BTC 代码分叉,去中心化 DNS)、<b>Peercoin</b>(首提 PoS 雏形)、<b>Ripple</b>(预挖、非 PoW、走银行清算)——无一动摇比特币。</p>
+      </div>
+      <div class="prose" style="margin-top:24px;">
+        <p><b>暴雷与遗产。</b>2014/02,曾承载全球大部分 BTC 交易量的 <b>Mt.Gox</b> 丢失约 85 万枚 BTC 后破产,把第一轮牛市送进约两年深熊,留下刻进全行业的一句话:<span class="g">「Not your keys, not your coins」</span>——链上密码学可信,不等于链下中介可信。更深的遗产是认知:Vitalik 等人意识到「比特币只能记账、无法编程」,这一局限直接催生了 2013 年末的以太坊白皮书,把行业从「只有一条链」推向「可编程公链」时代。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 周期二 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">周期二 · 2015–2017</span>
+      <h2 class="section-title display">以太坊借 ICO 上位,<br/>「L1」成为<span class="accent">资产类别.</span></h2>
+      <div class="prose">
+        <p>BTC 从 2015 年初 ~$200 涨到 <b>2017/12/17 盘中 ~$19,783</b>(约 100 倍);ETH 顶部 ~$1,400–$1,448,滞后一个月到 2018/1 中旬,一年内逾 100 倍。这一轮第一次把「区块链」本身当可编程平台卖给大众:口号是<b>「Blockchain not Bitcoin」「世界计算机」</b>,而真正点燃散户的是副产品 <b>ICO</b>——一份白皮书 + 一个 ERC-20 就能向全球募资。</p>
+        <p>两个原语定义了本轮:<span class="g">图灵完备的 EVM</span>(比特币脚本是刻意残废的,EVM 第一次让链上能跑任意逻辑、「代码即合约」自动执行)+ <span class="g">ERC-20 标准</span>(把「发币」变成几十行代码、钱包交易所即插即用,把融资的边际成本压到接近零——这正是 ICO 能全球爆炸复制的技术前提)。</p>
+      </div>
+      <div class="l1note" style="--c2:#38c8ff;">
+        <div class="h">本轮主导 Layer 1</div>
+        <p><b>以太坊是无可争议的主导智能合约 L1。</b>几乎所有 ICO 都基于它发 ERC-20,以太坊因此<b>变成「融资基础设施」本身</b>。它是 BTC dominance 从 2017 年初 ~87% 砸到 <b>2018/1/16 历史低点 ~31.1%</b> 的最大单一推手。</p>
+        <p>关键澄清:<b>NEO / EOS / Cardano / Qtum 不是真正的「主导 L1」,而是「叙事/募资挑战者」</b>——本轮链上实际开发与资产沉淀极少。EOS 是史上最大 ICO(约 $41.97 亿),但主网 2018/6 才上线;Cardano 2017/9 才主网。比特币此时是「衰落中的总龙头」,深陷区块大小内战,<b>2017/8/1 硬分叉出 BCH</b>。</p>
+      </div>
+      <div class="prose" style="margin-top:24px;">
+        <p><b>暴雷与遗产。</b>两条线:<b>The DAO</b>(2016/6 被重入漏洞抽走约 360 万 ETH)→ 2016/7/20 硬分叉,链分裂为 ETH(回滚)与 ETC(坚持不可篡改);以及 <b>ICO 泡沫破裂</b>(业界广泛引用「约 95% 归零」),叠加各国监管落地。但 ERC-20 / EVM / ERC-721 直接催生了下一轮的 DeFi 与 NFT,<b>「L1 平台币」作为独立资产类别被确立</b>——后续所有「以太坊杀手」叙事都沿用本轮模板。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 周期三 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">周期三 · 2019–2021</span>
+      <h2 class="section-title display">L1 大战:霸权坐实,<br/>却亲手催生了<span class="accent">一代杀手.</span></h2>
+      <div class="prose">
+        <p>双顶:第一顶 <b>2021/4/14 盘中 ~$64,863</b>(当天恰逢 Coinbase 直接上市);本轮大顶 <b>2021/11/10 盘中 ~$68,789</b>,ETH 同日 ATH ~$4,878。根本燃料是 <b>COVID 大放水</b>(2020/3 美联储降息至 0 + 无限 QE),叠加 2020/5 第三次减半,形成「减半 + 放水」双击。叙事不再单一,而是多条赛道同时引爆:<b>DeFi</b>(2020/6 Compound 流动性挖矿点燃 DeFi Summer)、<b>NFT</b>(2021/3 Beeple $69.3M 破圈)、<b>GameFi</b>、<b>机构入场</b>(MicroStrategy / 特斯拉 / 萨尔瓦多 / BITO 期货 ETF)。</p>
+        <p>技术上一口气落地了多个原语:<span class="g">AMM</span>(Uniswap 解决链上「没做市商就没市场」的死结)+ <span class="g">流动性挖矿</span>(解决冷启动)+ <span class="g">可组合性「货币乐高」</span> + <span class="g">ERC-721</span> + <span class="g">Rollup</span>(Arbitrum 2021/8 主网,回应「以太坊太贵太堵」)。</p>
+      </div>
+      <div class="l1note" style="--c2:#9fe870;">
+        <div class="h">本轮主导 Layer 1</div>
+        <p>这是名副其实的「<b>L1 大战</b>」那一轮,但格局清晰:<b>以太坊 = 绝对主导</b>(DeFi/NFT 大本营,DeFi TVL 峰值约 $1,800 亿,以太坊长期占 ~55–65%);<b>比特币 = 市值锚 / 数字黄金</b>,dominance 从 2021 年初 ~70% 回落到年中 ~38–40%。</p>
+        <p>挑战者梯队,正是被以太坊 gas 危机外溢催生的:<b>BSC</b>(廉价版以太坊,2021 年 TVL 第二大链)、<b>Solana</b>($1.5→$260 约 170 倍)、<b>Terra/LUNA</b>(UST 算法稳定币 + ~20% APY)、<b>Avalanche/Fantom/Polygon</b>。这是历史上第一次出现真正分流链上活动的多链格局。</p>
+      </div>
+      <div class="prose" style="margin-top:24px;">
+        <p><b>暴雷与遗产。</b>真正的崩盘落在 2022:<b>Terra/LUNA-UST 死亡螺旋</b>(UST+LUNA 合计约 $400–600 亿归零)→ 拖垮 3AC / Celsius → 2022/11 引爆 FTX。教训:靠「印新币护盘」的算法稳定币在挤兑下必然死亡螺旋,20% 无风险收益本身就是庞氏信号。但 <b>AMM/借贷/超额抵押稳定币这套 DeFi 核心积木</b>(Uniswap/Aave/Maker/Curve)扛住熊市成为永久基础设施;<b>L2 Rollup</b> 与「多链」格局沉淀下来,Solana 在归零式下跌后等待复活。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 周期四 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">周期四 · 2023–今(进行中)</span>
+      <h2 class="section-title display">接入 TradFi 主流,<br/>主导权<span class="accent">再分配.</span></h2>
+      <div class="prose">
+        <p>BTC <b>2024/12/5 首破 $100k</b> → 2025/10 初创下 ~$12.5–12.6 万历史新高后大幅回撤。本轮与前三轮最本质的差异是「监管政权更替」:<b>《GENIUS Act》已于 2025/7/18 签署成法</b>(美国首部联邦稳定币法,已是既成事实而非预期)——加密第一次被纳入美国主流政治与金融基建议程。叙事主线全部指向「<b>分发与接入</b>」:现货 ETF、稳定币美元支付轨、Meme(pump.fun)、AI agent、RWA(贝莱德 BUIDL)。</p>
+        <p>技术原语:<span class="g">现货 ETF</span>(打通 TradFi「最后一公里分发」)+ <span class="g">稳定币支付轨</span>(加密少数被真实大规模使用的 PMF)+ <span class="g">Restaking</span>(EigenLayer)+ <span class="g">模块化 / DA 层</span>(Celestia)+ <span class="g">Ordinals/Runes</span>(把资产发行刻进比特币 L1)。</p>
+      </div>
+      <div class="l1note" style="--c2:#ff7a82;">
+        <div class="h">本轮主导 Layer 1</div>
+        <p><b>比特币 = 绝对市场锚 / 机构化主角。</b>靠现货 ETF(2024/1)完成机构化,dominance 从 ~49% 升到 2025/6 峰值 ~65%,2026 年初仍在 ~56–57% 高位,长期「比特币季」;Ordinals/Runes 还复活了它的 L1 链上活动。(注:全体美国现货 BTC ETF 合计持仓 2025 下半年逼近 80 万枚,但「最大单一持有者」地位 2026/4 已被 Strategy 反超。)</p>
+        <p><b>以太坊与 Solana = 双极。</b>以太坊仍是 DeFi 价值层标准(主网 TVL ~$55B),但被自家 L2(Base/Arbitrum)吸血、ETH/BTC 汇率长期走弱。<b>Solana 是本轮最强的复活故事</b>——从 FTX 废墟靠 memecoin/pump.fun 回归,链上活跃度、交易笔数、手续费、稳定币结算多项已与/超过以太坊主网,更接近「与 ETH 并列的双极」而非单纯挑战者。旧一轮的「以太坊杀手」Cardano/Avalanche/Polkadot 则显著边缘化(相对衰退,非归零)。</p>
+      </div>
+      <div class="prose" style="margin-top:24px;">
+        <p><b>暴雷。</b>两类:<b>LIBRA</b>(2025/2 阿根廷总统背书的 Solana meme,约 3 小时暴跌 ~89%)——名人/政要背书的「注意力即资产」本质是零和提款机;<b>Bybit 被盗 $15 亿 ETH</b>(2025/2,朝鲜 Lazarus,史上最大单笔加密盗窃,手法是多签前端 UI 被篡改诱骗「盲签」)——即便多签冷流程,人对签名内容的盲信仍是最大攻击面。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- L1 主线 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">把主线拎出来</span>
+      <h2 class="section-title display">Layer 1 主导权的<br/>十三年<span class="accent">演化线.</span></h2>
+      <p class="section-lead"><b>独霸(BTC)→ 一超(ETH)→ 群雄(L1 大战)→ 双极 + 锚回归(ETH/Solana + 比特币 L1 复兴 · 机构化)。</b>一张表把四轮的主导链与挑战格局对齐:</p>
+      <div class="l1table">
+        <div class="r h">
+          <div class="c">周期</div>
+          <div class="c">主导 Layer 1</div>
+          <div class="c">挑战格局</div>
+          <div class="c">BTC.D 轨迹</div>
+        </div>
+        <div class="r">
+          <div class="c cy">周期一<small>2011–2013</small></div>
+          <div class="c" data-l="主导"><span class="dom">Bitcoin</span>(唯一)</div>
+          <div class="c" data-l="挑战">LTC / Namecoin / Peercoin / Ripple —— 皆参数微调,无一动摇 BTC</div>
+          <div class="c" data-l="BTC.D">~85–95%</div>
+        </div>
+        <div class="r">
+          <div class="c cy">周期二<small>2015–2017</small></div>
+          <div class="c" data-l="主导"><span class="dom">Ethereum</span>(一超)</div>
+          <div class="c" data-l="挑战">NEO / EOS / Cardano / Qtum —— 叙事募资明星,链上空心</div>
+          <div class="c" data-l="BTC.D">87% → 31%</div>
+        </div>
+        <div class="r">
+          <div class="c cy">周期三<small>2019–2021</small></div>
+          <div class="c" data-l="主导"><span class="dom">Ethereum</span> + BTC(锚)</div>
+          <div class="c" data-l="挑战">BSC / Solana / Terra / AVAX·FTM·MATIC —— 首次真正分流链上活动</div>
+          <div class="c" data-l="BTC.D">70% → 38%</div>
+        </div>
+        <div class="r">
+          <div class="c cy">周期四<small>2023–今</small></div>
+          <div class="c" data-l="主导"><span class="dom">Bitcoin</span> + ETH/Solana 双极</div>
+          <div class="c" data-l="挑战">Base(ETH L2)/ Tron(USDT);旧杀手 ADA/AVAX 边缘化</div>
+          <div class="c" data-l="BTC.D">49% → 65% → 56%</div>
+        </div>
+      </div>
+
+      <p class="prose" style="margin-top:42px;"><b>几个主导权真正转移 / 被挑战的关键节点:</b></p>
+      <div class="shifts">
+        <div class="shift"><div class="y">2015</div><div class="x"><b>以太坊上线</b> —— 「L1 平台」这个资产类别从无到有,在此之前根本不存在主导权之争。</div></div>
+        <div class="shift"><div class="y">2017</div><div class="x"><b>ETH 借 ICO 上位</b> —— 成为全行业融资基础设施,把 BTC.D 从 ~87% 砸到 ~31%,主导权第一次从比特币转移到智能合约链。</div></div>
+        <div class="shift"><div class="y">2020–21</div><div class="x"><b>以太坊 gas 危机</b> —— 正因 ETH 太强太贵,才催生 BSC/Solana/Terra 这第一代真正分流链上活动的「杀手」。</div></div>
+        <div class="shift"><div class="y">2022/5</div><div class="x"><b>Terra 归零</b> —— 一个曾进前十的 L1 被彻底洗出局,算法稳定币路线被证伪。</div></div>
+        <div class="shift"><div class="y">2024/1</div><div class="x"><b>现货 ETF 获批</b> —— 主导权部分「回流」比特币(机构化),BTC.D 重回 65%。</div></div>
+        <div class="shift"><div class="y">2024</div><div class="x"><b>Solana 靠 meme 深度复活</b> —— 从 challenger 升格为与 ETH 并列的双极之一,首次打破「以太坊永远主导」的惯性。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 跨周期规律 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">跨周期规律</span>
+      <h2 class="section-title display">四轮叠在一起,<br/>露出七条<span class="accent">主线.</span></h2>
+      <div class="cards">
+        <div class="card"><div class="k">规律 01</div><h3>叙事逐层上移</h3><p>沿<b>货币 → 平台 → 应用 → 分发</b>爬。每轮不推翻下层,而是在稳固的下层上叠一层新抽象,底层货币地基从未被取代,只是被越垫越高。</p></div>
+        <div class="card"><div class="k">规律 02</div><h3>减半时钟</h3><p>四年一轮,大顶滞后减半约 <b>12–18 个月</b>(2013/11、2017/12、2021/11、2025/10 全部吻合)。供给冲击经由约一年的反身性循环放大。</p></div>
+        <div class="card"><div class="k">规律 03</div><h3>一个新原语点火</h3><p>PoW → 智能合约/ERC-20 → AMM/NFT → ETF/稳定币/pump.fun。没有新原语,就只有价格回声而没有新资金入口。</p></div>
+        <div class="card"><div class="k">规律 04</div><h3>最体面的暴雷当墓碑</h3><p>炸的从来不是边缘骗局,而是本轮<b>最受尊敬、杠杆叠得最高</b>的那个:Mt.Gox → The DAO → Terra/LUNA。它的死亡正是顶部信号。</p></div>
+        <div class="card"><div class="k">规律 05</div><h3>泡沫废墟 = 下一轮地基</h3><p>空心 ICO 留下 ERC-20;gas 危机留下高性能链/L2;Terra 教训留下受监管稳定币。泡沫高估时间表,<b>低估技术留存</b>。</p></div>
+        <div class="card"><div class="k">规律 06</div><h3>主导权高度黏滞</h3><p>比特币是永恒的锚,以太坊三轮未被真正掀翻,直到周期四 Solana 才首次多指标实质追平。绝大多数「杀手」沦为叙事玩具。</p></div>
+        <div class="card"><div class="k">规律 07</div><h3>挑战者高死亡率</h3><p>靠募资额/叙事热度(而非链上真实沉淀)冲进前列的,下一轮系统性掉队:NEO/EOS、Cardano/Polkadot 一路边缘化。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 投资启示 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">投资启示</span>
+      <h2 class="section-title display">认知框架,<br/>不是<span class="accent">买卖信号.</span></h2>
+      <p class="section-lead">把规律落到一个纪律型长期视角(段永平 / 芒格 / 塔勒布味道)。再次强调:这是对四轮历史的事后归纳,不是任何标的的入场/离场指令。</p>
+      <div class="lessons">
+        <div class="lesson"><span class="dot"></span><div class="b"><b>分清「地基」与「叙事玩具」。</b>四轮下来真正没被掀翻的只有比特币(价值锚)和以太坊(智能合约头把交椅三轮);成群的「XX 杀手」里绝大多数是本轮的叙事玩具。核心仓压在地基上,小卫星仓只留给已用真实链上数据证明自己的新地基(如 Solana 的复活)。</div></div>
+        <div class="lesson"><span class="dot"></span><div class="b"><b>用「链上真实使用」而非「募资额/叙事热度」当估值锚。</b>手续费、活跃地址、稳定币结算量这类难以伪造的指标才是北极星;叙事只负责提供入场注意力,不负责提供安全边际。</div></div>
+        <div class="lesson"><span class="dot"></span><div class="b"><b>减半时钟用来管理预期和情绪,不用来精确择时。</b>它的用途是提醒自己「现在是周期的哪一段」,而不是抄底逃顶——口径误差和黑天鹅会毁掉择时。</div></div>
+        <div class="lesson"><span class="dot"></span><div class="b"><b>为「最体面的暴雷」留生存边际。</b>任何给你「稳定高收益」、被全行业当新范式、靠反身性自我强化的东西,尾部风险极大。避免出局,优先于追求最大收益。</div></div>
+        <div class="lesson"><span class="dot"></span><div class="b"><b>自托管 + 仓位规模 &gt; 择时。</b>四轮的结构性损失大多来自托管方爆雷(Mt.Gox / FTX)和单点杠杆,而非买错时点。这是高确定性、可重复执行的边。</div></div>
+      </div>
+      <div class="quote">
+        <blockquote class="display">历史押韵,<br/>但<span class="accent">不重复.</span></blockquote>
+        <p class="body">周期四 Solana 就打破了「以太坊永远主导」的惯性。所以纪律不是把任一条规律当成确定性指令,而是<b>只在自己真正理解技术原语与使用场景的范围内行动</b>——看不懂的新叙事,宁可错过也不下注。</p>
+      </div>
+      <p class="disclaimer"><b>免责声明:</b>本文为加密行业历史的复盘与认知框架整理,不构成任何投资、财务或交易建议,也不包含任何个人持仓或财务信息。文中价格、份额、日期等数据为公开报道口径、可能存在出入,2025 年后的数字尤其需以交易所原始数据复核。加密资产波动极大,决策与风险自负。</p>
+    </div>
+  </section>
+
+  <!-- outro -->
+  <div class="outro">
+    <div class="wrap">
+      <h2 class="manifesto display">独霸 · 一超 · 群雄 ·<br/><span class="accent">双极.</span></h2>
+      <p>从「比特币是不是钱」问到「怎么把它塞进养老金账户」,四轮加密把同一件事沿着技术栈越垫越高。每一轮的主导 Layer 1,既是当时的霸主,也是下一轮挑战者站上去的肩膀。</p>
+      <p>主导权从来不是被「更快更便宜」直接掀翻的——它高度黏滞,需要数轮时间。<b>新链能分流注意力和增量资金,但撼动既有地基,要靠的是真实使用,而不是叙事。</b></p>
+      <p>这就是把十三年四轮读成一条线之后,我留下的那把尺子。</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Gimbo's Universe · Ideas · 2026.06</span>
+      <span><a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

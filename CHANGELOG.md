@@ -6,6 +6,40 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.11.6] — 2026-06-23 · Ideas #17 扩写 — 内嵌「其他值得研究的 L1」章(分层 + 七种押注 + Sui×Aptos)
+
+> Second extension to the four-cycle piece (Ideas #17), per the owner's "做成第二个 idea 但内嵌进去" + "等研究都完了再统一 push" calls. Answers "ETH/Solana 之外过去两轮还有哪些 L1 值得研究,比如 Sui?" with an opinionated 4-tier ranking, a 7-bet design-space framework, and a Sui×Aptos head-to-head. Same multi-agent + adversarial-fact-check method (7 cluster-research + 7 verify + 3 synthesis agents).
+
+### Changed — Ideas
+
+- **`public/ideas/crypto-four-cycles.html`** — inserted a second extension chapter (after the tech-sediment chapter, before cross-cycle patterns): a **4-tier "worth-studying" ranking** (🥇 must-study: Sui/Hyperliquid/Cosmos/Celestia/Monad/BNB/Tron/Avalanche · 🥈 worth-a-look: Aptos/Sei v2/MegaETH/Injective/NEAR/Sonic/TON/Stacks · 🥉 cautionary 鬼链: Berachain/Cardano/Polkadot/Osmosis · ⚰️ faded: Algorand/Kava), a **7 new-architecture-bets** card grid (data-model-as-scaling / app-specific L1 / parallel-EVM / sovereign app-chains / distribution-first / value-capture econ / Bitcoin programmability), and a **Sui × Aptos** head-to-head table (object vs account model, deterministic vs Block-STM parallelism, zkLogin UX, traction). Two new CSS components: `.tiers` list + `.duel` table.
+- **`src/data/ideas.ts`** — extended index `17` lede again to cover the other-L1s chapter. No new catalog entry (count stays 17).
+
+### Notes
+
+- **Versioning** — patch: a second content drop into the existing Ideas #17 (not a new ID). Both 1.11.5 and 1.11.6 ship in one push, per the owner's request to hold until the research was done.
+- **Method** — facts adversarially checked + refreshed to 2026: CME **SUI** futures live 2026/05 and SUI spot/staking ETFs listed 2025/12–2026/02 (no longer "discussion"); Monad mainnet 2025/11; Berachain collapsed to ~8% of peak TVL ("鬼链"); Justin Sun / SEC settled 2026/03; Osmosis→Hub merge proposal rejected 2026/04. Verdicts (must-study / cautionary / faded) are opinionated calls, flagged as such.
+- **Red lines** — clean: protocol/architecture analysis only; no holdings, positions, employer, or colleague specifics.
+
+---
+
+## [1.11.5] — 2026-06-23 · Ideas #17 扩写 — 内嵌「技术沉淀」章(ETH vs Solana + Base 专题)
+
+> Extended the existing four-cycle piece (Ideas #17) rather than spinning up a new entry, per the owner's call ("做成第二个 idea,但内嵌到四周期里面"). Added a full **技术沉淀 (tech sediment)** chapter that zooms from "which L1 dominated" into "what durable tech each ecosystem precipitated": the modular-vs-monolithic fork, a 7-layer stack comparison (Ethereum vs Solana), each stack's surviving primitives, a focused **Base** case study (the L2 the owner named), and the convergence / where-each-wins close. Same multi-agent + adversarial-fact-check method as the base piece.
+
+### Changed — Ideas
+
+- **`public/ideas/crypto-four-cycles.html`** — inserted a new chapter between the L1-dominance section and the cross-cycle patterns. New sections: ecosystem fork (模块化/scale-out vs 单体/scale-up), a **stack-by-layer comparison table** (执行/DA/共识·质押/MEV/账户抽象/应用基建/分发·消费 × ETH vs SOL), Ethereum's sedimented stack (Rollup/OP Stack, EIP-4844 blobs, EigenLayer restaking, ERC-4337, DeFi legos + RWA), a **Base case study** (OP Stack lineage, no token, Coinbase distribution; corrected: leads on **activity**, not absolute TVL — Arbitrum One still #1), Solana's sedimented stack (PoH/Sealevel + Firedancer, de-FTX'd DeFi via Jupiter/Jito, State Compression, pump.fun, DePIN), and a convergence + moats close. Two new CSS components: `.fork` cards and the `.stack` table (both responsive, ETH=sky / SOL=green accents).
+- **`src/data/ideas.ts`** — extended the index `17` lede to describe the embedded tech-sediment chapter + Base deep-dive. No new catalog entry (count stays 17).
+
+### Notes
+
+- **Versioning** — patch (third digit): a content drop into an existing Ideas piece, per the rule set 2026-06-20 (not a new ID, not an IA change).
+- **Method** — sediment content from a second multi-agent workflow (8 per-layer research agents + 8 adversarial fact-check agents + 3 synthesis agents). Corrections applied: Base leads **activity/daily-tx**, not absolute TVL (Arbitrum One ~$14–17B still #1); full Firedancer first produced blocks **2025/10** (not 2024); Orca Whirlpools / Raydium CLMM are **2022** (C3), not C4; Token-2022 confidential transfer temporarily disabled 2025/06.
+- **Red lines** — clean: protocol/engineering history only; no holdings, positions, employer, or colleague specifics.
+
+---
+
 ## [1.11.4] — 2026-06-23 · Ideas #17 — 四轮加密周期复盘(主导 Layer 1 主线)(live: 7391812)
 
 > New Ideas piece (图解深读): a four-cycle retrospective of crypto (2013→now) organized around one spine — **which Layer 1 dominated each cycle**. The arc: sole rule (Bitcoin, before "L1" was even a concept) → one superpower (Ethereum, via EVM/ERC-20 + ICO, dragging BTC.D from ~87% to ~31%) → the L1 wars (ETH still dominant in DeFi/NFT but the gas-fee crisis spawns BSC/Solana/Terra/Avalanche) → twin poles + anchor return (Bitcoin re-anchors via spot ETF to ~65% dominance; Ethereum gets vampired by its own L2s; Solana revives from the FTX rubble on memecoins and overtakes ETH mainnet on several on-chain metrics). Every cycle also carries its narrative, revolutionary primitive, and signature blow-up; the piece closes on seven cross-cycle patterns + a disciplined-investor framing.

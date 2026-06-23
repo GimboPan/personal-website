@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.6] — 2026-06-23 · Ideas #17 扩写 — 内嵌「其他值得研究的 L1」章(分层 + 七种押注 + Sui×Aptos)
+## [1.11.6] — 2026-06-23 · Ideas #17 扩写 — 内嵌「其他值得研究的 L1」章(分层 + 七种押注 + Sui×Aptos)(live: 5fd2073)
 
 > Second extension to the four-cycle piece (Ideas #17), per the owner's "做成第二个 idea 但内嵌进去" + "等研究都完了再统一 push" calls. Answers "ETH/Solana 之外过去两轮还有哪些 L1 值得研究,比如 Sui?" with an opinionated 4-tier ranking, a 7-bet design-space framework, and a Sui×Aptos head-to-head. Same multi-agent + adversarial-fact-check method (7 cluster-research + 7 verify + 3 synthesis agents).
 
@@ -23,7 +23,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.5] — 2026-06-23 · Ideas #17 扩写 — 内嵌「技术沉淀」章(ETH vs Solana + Base 专题)
+## [1.11.5] — 2026-06-23 · Ideas #17 扩写 — 内嵌「技术沉淀」章(ETH vs Solana + Base 专题)(live: 5fd2073)
 
 > Extended the existing four-cycle piece (Ideas #17) rather than spinning up a new entry, per the owner's call ("做成第二个 idea,但内嵌到四周期里面"). Added a full **技术沉淀 (tech sediment)** chapter that zooms from "which L1 dominated" into "what durable tech each ecosystem precipitated": the modular-vs-monolithic fork, a 7-layer stack comparison (Ethereum vs Solana), each stack's surviving primitives, a focused **Base** case study (the L2 the owner named), and the convergence / where-each-wins close. Same multi-agent + adversarial-fact-check method as the base piece.
 

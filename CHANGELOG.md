@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.11.4] — 2026-06-23 · Ideas #17 — 四轮加密周期复盘(主导 Layer 1 主线)
+## [1.11.4] — 2026-06-23 · Ideas #17 — 四轮加密周期复盘(主导 Layer 1 主线)(live: 7391812)
 
 > New Ideas piece (图解深读): a four-cycle retrospective of crypto (2013→now) organized around one spine — **which Layer 1 dominated each cycle**. The arc: sole rule (Bitcoin, before "L1" was even a concept) → one superpower (Ethereum, via EVM/ERC-20 + ICO, dragging BTC.D from ~87% to ~31%) → the L1 wars (ETH still dominant in DeFi/NFT but the gas-fee crisis spawns BSC/Solana/Terra/Avalanche) → twin poles + anchor return (Bitcoin re-anchors via spot ETF to ~65% dominance; Ethereum gets vampired by its own L2s; Solana revives from the FTX rubble on memecoins and overtakes ETH mainnet on several on-chain metrics). Every cycle also carries its narrative, revolutionary primitive, and signature blow-up; the piece closes on seven cross-cycle patterns + a disciplined-investor framing.
 

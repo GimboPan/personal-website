@@ -6,7 +6,7 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
-## [1.12.0] — 2026-06-24 · Life — "Reel & Radio" 影音区 + 塔勒布 collapsed beside the shelf
+## [1.12.0] — 2026-06-24 · Life — "Reel & Radio" 影音区 + 塔勒布 collapsed beside the shelf (live: b00198c)
 
 > Two changes to `/life` in one batch. **(1)** New section **Reel & Radio** — a second input line alongside reading; one module, two voices: 看 · ON SCREEN (films & documentaries) and 听 · ON AIR (podcasts). Built to mirror Reading's two-tier shape so the page reads as one design language. **(2)** The standalone **塔勒布专区** is collapsed from its own full-width module into a compact **专题阅读** list panel sitting to the right of the read-books shelf — the Reading block becomes a two-column "shelf + 专题" row, tightening the page and pairing the deep-read series with the books it grew out of.
 

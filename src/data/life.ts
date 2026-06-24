@@ -36,6 +36,47 @@ export interface Group {
   status: 'active' | 'dormant';
 }
 
+/* ─── Reel & Radio (影音区) ────────────────────────────────────────────────
+   The "input/consumption" companion to Reading: what gets watched and what
+   plays on the commute. Mirrors the two-tier shelf — featured posters out,
+   the rest as a filmstrip; podcasts as square art tinted by their 主线. */
+
+/** A film or documentary. featured → poster card; otherwise a filmstrip frame. */
+export interface Screen {
+  title: string;
+  director: string;
+  year: string;
+  kind: 'film' | 'doc';
+  tags: string[];
+  /** One-line take, shown on featured poster cards. */
+  verdict: string;
+  /** Real poster when available; else a hue placeholder is drawn. */
+  posterUrl?: string;
+  hue?: string;
+  /** true → big 2:3 poster card up top; false/undefined → small filmstrip frame. */
+  featured?: boolean;
+}
+
+/** A listening 主线 — the colour-coded taste lines that tint the podcast grid. */
+export interface PodcastLine {
+  key: string;
+  label: string;
+  hue: string;
+  blurb: string;
+}
+
+export interface Podcast {
+  name: string;
+  host: string;
+  /** Matches a PodcastLine.key. */
+  line: string;
+  /** Why it's on rotation. */
+  why: string;
+  /** Real square cover art when available; else a hue placeholder. */
+  artUrl?: string;
+  hue?: string;
+}
+
 export interface TalebViz {
   slug: string;
   no: string; // display order, e.g. "01"
@@ -83,7 +124,12 @@ export const currentlyReading: Book[] = [
    two-tier wall shelf. Add a line here and it slots onto the boards. */
 export const shelf: ShelfBook[] = [
   { title: 'The Next Conversation', author: 'Jefferson Fisher', hue: '#c2603e' },
-  { title: '活出你的本來面目', author: '鐘穎', hue: '#6f8f6a' },
+  { title: 'The Inner Game of Tennis', author: 'W. Timothy Gallwey', hue: '#6f8f6a' },
+  { title: '我看见的世界', author: '李飞飞', hue: '#5b7aa8' },
+  { title: '猫鱼', author: '陈冲', hue: '#a86a7a' },
+  { title: 'A Different Kind of Power', author: 'Jacinda Ardern', hue: '#3e8f86' },
+  { title: 'Open to Work', author: 'Ryan Roslansky', hue: '#c9a14a' },
+  { title: 'Team Intelligence', author: '', hue: '#7e76c2' },
 ];
 
 /* ─── Taleb 专区 ──────────────────────────────────────────────────────────
@@ -161,6 +207,71 @@ export const talebBooks: TalebViz[] = [
     href: '/life/taleb/skin-in-the-game.html',
     status: 'live',
   },
+];
+
+/* ─── Reel & Radio seed data ───────────────────────────────────────────────
+   SEED / 占位 — 替换成你真实看过的片单与在听的播客。海报与封面图放进
+   /public 后填到 posterUrl / artUrl；没有图就留 hue，会画一个着色占位。 */
+
+/* 看 · On screen — featured posters (2:3) + the rest as a filmstrip. */
+export const screen: Screen[] = [
+  {
+    title: 'The Social Dilemma',
+    director: 'Jeff Orlowski',
+    year: '2020',
+    kind: 'doc',
+    tags: ['tech', 'attention', 'society'],
+    verdict: '把「你不是用户，是产品」拍成了纪录片。看完会想重设手机。',
+    hue: '#7d93b0',
+    featured: true,
+  },
+  {
+    title: 'Free Solo',
+    director: 'E. Chai Vasarhelyi · Jimmy Chin',
+    year: '2018',
+    kind: 'doc',
+    tags: ['climbing', 'risk', 'craft'],
+    verdict: '没有绳子的攀岩，是「非对称风险」最纯粹的影像版——一次失误就出局。',
+    hue: '#c96442',
+    featured: true,
+  },
+  {
+    title: 'Everything Everywhere All at Once',
+    director: 'Daniels',
+    year: '2022',
+    kind: 'film',
+    tags: ['sci-fi', 'family', 'absurd'],
+    verdict: '在无限可能性里，选择「善良」是最反直觉也最难的那一个。',
+    hue: '#b08cb0',
+    featured: true,
+  },
+  // ── filmstrip（看过的，缩略）──
+  { title: 'Jiro Dreams of Sushi', director: 'David Gelb', year: '2011', kind: 'doc', tags: ['craft'], verdict: '一辈子做好一件事。', hue: '#c9a14a' },
+  { title: 'AlphaGo', director: 'Greg Kohs', year: '2017', kind: 'doc', tags: ['AI'], verdict: '第 37 手。', hue: '#9fe870' },
+  { title: 'Inside Job', director: 'Charles Ferguson', year: '2010', kind: 'doc', tags: ['finance'], verdict: '2008 是怎么炼成的。', hue: '#6f8f6a' },
+  { title: 'The Founder', director: 'John Lee Hancock', year: '2016', kind: 'film', tags: ['business'], verdict: '系统 > 配方。', hue: '#d97757' },
+  { title: 'Chef’s Table', director: 'David Gelb', year: '2015', kind: 'doc', tags: ['food'], verdict: '每集一个偏执狂。', hue: '#5fbf8a' },
+  { title: 'Dune: Part Two', director: 'Denis Villeneuve', year: '2024', kind: 'film', tags: ['sci-fi'], verdict: '沙、权力、宿命。', hue: '#c2603e' },
+];
+
+/* 听 · On air — the 5 taste lines (from 小宇宙 326h), and the shows on rotation.
+   Colours flow from line → tile, so the grid reads as a taste map. */
+export const podcastLines: PodcastLine[] = [
+  { key: 'tech', label: '科技创投', hue: '#9fe870', blurb: '产品、AI、创业者怎么想' },
+  { key: 'crypto', label: '加密', hue: '#e0a73e', blurb: '链上、周期、第一性原理' },
+  { key: 'health', label: '健康', hue: '#5fbf8a', blurb: '长寿、训练、睡眠、心智' },
+  { key: 'nz', label: 'NZ 本地', hue: '#7d93b0', blurb: '本地电台、财经、生活' },
+  { key: 'arts', label: '音乐文学闲聊', hue: '#c08ab0', blurb: '人文、闲聊、下班的耳朵' },
+];
+
+export const podcasts: Podcast[] = [
+  { name: "What's Next 科技早知道", host: '声动活泼', line: 'tech', why: '追科技与商业的下一步。', artUrl: '/life/podcasts/images-2.jpg' },
+  { name: '自习室 STUDYROOM', host: '', line: 'arts', why: '读书分享 —— 一本一本聊过来。', artUrl: '/life/podcasts/images.png' },
+  { name: 'CRYPTO 101', host: '', line: 'crypto', why: '从零讲加密与链上的入门向播客。', artUrl: '/life/podcasts/images-5.jpg' },
+  { name: 'The Health Hub', host: 'NewstalkZB', line: 'health', why: 'NewstalkZB 的健康谈话节目。', artUrl: '/life/podcasts/images-3.jpg' },
+  { name: 'Smart Money', host: 'NewstalkZB', line: 'nz', why: 'NewstalkZB 的本地理财话题。', artUrl: '/life/podcasts/images-4.jpg' },
+  { name: '一波一会', host: 'evolve', line: 'arts', why: 'evolve 出品的人文慢对话。', artUrl: '/life/podcasts/images.jpg' },
+  { name: '宁浪别野', host: '', line: 'arts', why: '四位女生的闲聊播客。', artUrl: '/life/podcasts/images-1.jpg' },
 ];
 
 /* Interest-based groups — placeholder. */

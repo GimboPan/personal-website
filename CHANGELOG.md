@@ -6,6 +6,33 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.12.0] — 2026-06-24 · Life — "Reel & Radio" 影音区 + 塔勒布 collapsed beside the shelf
+
+> Two changes to `/life` in one batch. **(1)** New section **Reel & Radio** — a second input line alongside reading; one module, two voices: 看 · ON SCREEN (films & documentaries) and 听 · ON AIR (podcasts). Built to mirror Reading's two-tier shape so the page reads as one design language. **(2)** The standalone **塔勒布专区** is collapsed from its own full-width module into a compact **专题阅读** list panel sitting to the right of the read-books shelf — the Reading block becomes a two-column "shelf + 专题" row, tightening the page and pairing the deep-read series with the books it grew out of.
+
+### Changed — Life
+
+- **`src/pages/life.astro`** — the read-books shelf and the 塔勒布 series now share a two-column row (`lg:grid-cols-[minmax(0,440px)_1fr]`, stacks on mobile): the spine-out 书架 on the left, a new **专题阅读 · 塔勒布 Incerto** panel on the right. The old Module 2.5 section (featured overview card + 3-col five-book grid) is removed; its content is re-expressed compactly as an Incerto overview band (`打开总览 →`) over a 5-row list (number + 中文/EN·year + `打开 →` for live / `进行中` chip for wip). The `id="taleb"` anchor + `scroll-mt-20` move onto the panel so existing `/life#taleb` links still land.
+- **`src/data/life.ts`** — `shelf` (读过的) grew from 2 to 7: removed 活出你的本来面目; added The Inner Game of Tennis, 我看见的世界 (李飞飞), 猫鱼 (陈冲), A Different Kind of Power (Jacinda Ardern), Open to Work, Team Intelligence — each a distinct spine hue. The shelf now auto-splits into two tiers.
+
+### Added — Life
+
+- **`src/pages/life.astro`** — new `<section id="reel-radio">` (anchor + `scroll-mt-20`) between the Taleb zone and Social. Two sub-voices under one header:
+  - **看 · ON SCREEN** — featured 2:3 poster cards (reuse the `reading-card` cover-card pattern: hue placeholder, hover lift, DOC/FILM tag, tags, one-line verdict) + a horizontally-scrolling **filmstrip** of "看过的" — a roll of celluloid frames with top/bottom sprocket-hole perforations, the cinematic analog to Reading's spine-out 书架.
+  - **听 · ON AIR** — square (1:1) podcast cover tiles in a 2/3/4-col grid, each tinted by its 主线, with a colour-coded taste-line legend and a small animated lime **equalizer** accent beside the header. Header stat: `N films · N shows · 326h`.
+- **`src/data/life.ts`** — new `Screen`, `PodcastLine`, `Podcast` interfaces + arrays (`screen`, `podcastLines`, `podcasts`). `podcastLines` encodes the 5 taste lines from 小宇宙 326h (科技 / 加密 / 健康 / **NZ 本地** / 人文闲聊), each with a hue that flows line → tile.
+  - **Podcasts are real, with cover art**: 7 shows the owner actually listens to — What's Next 科技早知道, 自习室 STUDYROOM (读书分享), CRYPTO 101, The Health Hub & Smart Money (both NewstalkZB), 一波一会 (evolve), 宁浪别野 — square covers dropped in `public/life/podcasts/` and wired via `artUrl`. (The `nz` line was relabelled from the earlier "NZ 求职" to **NZ 本地** to fit the two NewstalkZB local shows.)
+  - **Films are still seed**: the ON SCREEN list (`screen`) ships as clearly-marked placeholder examples (`SEED / 占位`) drawn as hue cards — real posters / final watch-list drop in later via `posterUrl`.
+- **`public/life/podcasts/`** — 7 podcast cover images added (`public/life/screen/` created for film posters, still empty).
+
+### Notes
+
+- **Versioning** — minor (second digit): a new section / mechanism on an existing module, per the rule set 2026-06-20 (not a plain Ideas content drop).
+- **Design** — no new dependencies; reuses existing Wise-Dark tokens (`card`, `ink-*`, `lime-tint`, `tracking-tool`) and the `cover-sheen` / `reading-card` patterns. New CSS: `.filmstrip` / `.frame` (sprocket-hole roll), `.pod-card` hue ring, `.eq` equalizer — all with `prefers-reduced-motion` fallbacks.
+- **Red lines** — clean: films, documentaries and podcasts are public works; hosts/directors/podcast shows referenced are public. No company, friend/colleague, or financial specifics.
+
+---
+
 ## [1.11.6] — 2026-06-23 · Ideas #17 扩写 — 内嵌「其他值得研究的 L1」章(分层 + 七种押注 + Sui×Aptos)(live: 5fd2073)
 
 > Second extension to the four-cycle piece (Ideas #17), per the owner's "做成第二个 idea 但内嵌进去" + "等研究都完了再统一 push" calls. Answers "ETH/Solana 之外过去两轮还有哪些 L1 值得研究,比如 Sui?" with an opinionated 4-tier ranking, a 7-bet design-space framework, and a Sui×Aptos head-to-head. Same multi-agent + adversarial-fact-check method (7 cluster-research + 7 verify + 3 synthesis agents).

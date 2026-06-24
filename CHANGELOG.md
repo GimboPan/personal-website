@@ -6,6 +6,20 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.12.1] — 2026-06-24 · NZ Managed Funds Guide — 数据刷新至 2026-05-31
+
+> Quarterly data refresh of the NZ Managed Funds Guide (`/ai-builder/nz-funds.html`). All 91 PIE-fund returns rolled forward from 2026-04-30 to **2026-05-31** (after fees, before tax, NZD — same basis). Sourced this round from the 15 fund managers' own monthly factsheets with per-fund cross-verification (Mindful Money / Sorted Smart Investor / Morningstar as second source), run via a 28-agent research workflow.
+
+### Changed — AI Builder
+
+- **`public/ai-builder/nz-funds.html`** — `FUNDS_DATA` returns + fund sizes refreshed for **74 of 91** funds (33 two-source-confirmed, 41 manager-official single-source); **17 held** at the prior 2026-04-30 value (manager not yet reporting May, after-tax-only second source, or delisted). `META` → v3.2 / dataDate 2026-05-31. In-page "数据时效 / 报告日" notes, the `BENCHMARKS` array, and two prose figures (Milford 5Y, Smart US 500 5Y) updated to match.
+- **`src/data/ai-builder.ts`** — nz-funds card `date` → 2026-06-24.
+
+### Notes
+
+- Fees / risk (1–7) / active-passive / equity-bond split unchanged — this refresh covered returns + size only.
+- Working source + full changelog live in `个人理财/投资nz/` (guide v3.2).
+
 ## [1.12.0] — 2026-06-24 · Life — "Reel & Radio" 影音区 + 塔勒布 collapsed beside the shelf (live: b00198c)
 
 > Two changes to `/life` in one batch. **(1)** New section **Reel & Radio** — a second input line alongside reading; one module, two voices: 看 · ON SCREEN (films & documentaries) and 听 · ON AIR (podcasts). Built to mirror Reading's two-tier shape so the page reads as one design language. **(2)** The standalone **塔勒布专区** is collapsed from its own full-width module into a compact **专题阅读** list panel sitting to the right of the read-books shelf — the Reading block becomes a two-column "shelf + 专题" row, tightening the page and pairing the deep-read series with the books it grew out of.
@@ -30,6 +44,23 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 - **Versioning** — minor (second digit): a new section / mechanism on an existing module, per the rule set 2026-06-20 (not a plain Ideas content drop).
 - **Design** — no new dependencies; reuses existing Wise-Dark tokens (`card`, `ink-*`, `lime-tint`, `tracking-tool`) and the `cover-sheen` / `reading-card` patterns. New CSS: `.filmstrip` / `.frame` (sprocket-hole roll), `.pod-card` hue ring, `.eq` equalizer — all with `prefers-reduced-motion` fallbacks.
 - **Red lines** — clean: films, documentaries and podcasts are public works; hosts/directors/podcast shows referenced are public. No company, friend/colleague, or financial specifics.
+
+---
+
+## [1.11.7] — 2026-06-24 · Ideas #18 — Hyperliquid 深度长文(app-specific L1)
+
+> New Ideas piece (深度长文), the deepest single-protocol study yet: a standalone long-form on **Hyperliquid** — the strongest existence-proof of cycle 4's "应用拥有整条栈" thesis. An on-chain perps exchange that turned itself into an L1, then uses ~97% of real trading fees to buy back HYPE daily. Picks up the "Hyperliquid" thread the owner chose from the previous chapter's "worth-studying" list.
+
+### Added — Ideas
+
+- **`public/ideas/hyperliquid.html`** — new standalone Wise-Dark deep-read (8 sections): what/why → architecture (HyperBFT ~0.07s finality + HyperCore L1-native CLOB + 3-layer liquidation HLP→insurance→ADL) → HyperEVM + the trustless glue (read precompiles + CoreWriter) → product primitives (HLP / HIP-1 dutch auction / HIP-3 builder-deployed perps / Builder Codes) → the **value flywheel** (6-step chain visual) → app-specific-L1 thesis with a dYdX v4 controlled-experiment **compare table** → risks with a **JELLY-event callout** + 5 risk cards → a **bull/bear arena** + honest verdict. New CSS components: `.arch` layer stack, `.flywheel` step chain, `.compare` table, `.arena` bull/bear grid, `.metrics` hero stats.
+- **`src/data/ideas.ts`** — new article entry index `18`, topics tech/economy, `art` motif `core`, `status: 'live'`, `isNew: true`. Catalog count → 18.
+
+### Notes
+
+- **Versioning** — patch (third digit): a new Ideas piece (new ID), per the rule set 2026-06-20.
+- **Method** — 5 dimension-research + 5 adversarial-verify + 3 synthesis agents (workflow paused mid-run when the owner ran low on tokens, then resumed from cache). Corrections applied: liquidation is **3 layers** (HLP→insurance→**ADL**), not 2; JELLY (2025-03-26) key fact is the **validator-vote delist + oracle override** (HLP ended ~+$700k); CoreWriter mainnet ~2025-07-05; share is a **volatile time series** (~70–80% mid-2025 → <20% Dec-2025 → ~32% mid-2026), not a fixed range; cumulative buyback >$2B; competitors Lighter (a16z) / Aster (CZ·YZi Labs). All market/financial figures flagged as time-sensitive snapshots.
+- **Red lines** — clean: protocol mechanism + industry-thesis analysis only; explicit in-page disclaimer; no holdings, positions, employer, or colleague specifics.
 
 ---
 

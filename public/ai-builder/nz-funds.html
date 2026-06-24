@@ -934,7 +934,7 @@
           <div class="meta-chip">阅读时长：<strong>~ 14 分钟</strong></div>
           <div class="meta-chip">基金数量：<strong id="meta-fund-count">--</strong></div>
           <div class="meta-chip">主数据源：<strong>InvestNow / Morningstar</strong></div>
-          <div class="meta-chip">版本：<strong>v3.1 · 2026-06-06</strong></div>
+          <div class="meta-chip">版本：<strong>v3.2 · 2026-06-24</strong></div>
           <div class="meta-chip" style="background:#fff8e7;border-color:#ffd11a;">⚠ <strong>教育用途 · 非投资建议</strong></div>
         </div>
       </div>
@@ -1231,7 +1231,7 @@
 
     <div class="callout mt-3">
       <span class="callout-icon">⏱</span>
-      <p><strong>数据时效（2026-06-06 刷新）：</strong>下表已从 InvestNow 业绩页刷新至 <strong>2026-04-30</strong>（after fees, before tax, NZD，与原口径一致）：91 只中 <strong>88 只</strong>为该日最新；3 只 InvestNow 已不再列示（Elevation Capital Global Shares、Mercer Responsible Conservative / Growth）保留 2026-02-28 值。残余偏差仅 2026-04-30→今（含 6 月初地缘回调），量级远小于此前。下季再从 <a href="https://investnow.co.nz/resources/performance/" target="_blank" rel="noopener">InvestNow 业绩页</a> 导出替换 <code>FUNDS_DATA</code> 即可。</p>
+      <p><strong>数据时效（2026-06-24 刷新）：</strong>下表回报已刷新至 <strong>2026-05-31</strong>（after fees, before tax, NZD，与原口径一致），取自各基金公司官方月报 / factsheet 并逐只交叉验证：91 只中 <strong>74 只</strong>更新到该月末（33 只双源确认、41 只官方单源），<strong>17 只</strong>保留上一期 2026-04-30 值（基金公司尚未出 5 月数、或仅税后口径无法同口径确认、或已停列）。费率·风险·风格仍为 2026-04-30 口径。下季可从 <a href="https://investnow.co.nz/resources/performance/" target="_blank" rel="noopener">InvestNow 业绩页</a> 导出做同口径单源核对。</p>
     </div>
 
     <div class="filters mt-3">
@@ -1462,7 +1462,7 @@
 
     <div class="callout info">
       <span class="callout-icon">ⓘ</span>
-      <p><strong>关键观察</strong>：Milford Active Growth 的 7.36% (5Y) 略低于 SmartShares Total World 的 14.08%——但前者是增长导向的多元化配置（股票为主 + 部分债券），后者是 100% 股票。"超过基准"要在<u>同等风险水平</u>上比较。</p>
+      <p><strong>关键观察</strong>：Milford Active Growth 的 7.23% (5Y) 略低于 SmartShares Total World 的 14.77%——但前者是增长导向的多元化配置（股票为主 + 部分债券），后者是 100% 股票。"超过基准"要在<u>同等风险水平</u>上比较。</p>
     </div>
   </div>
 </section>
@@ -1667,7 +1667,7 @@
           <li><strong>10Y 榜单偏差</strong>：Generate（2012）、Simplicity（2016）等较新基金没有 10 年数据，被系统性排除。</li>
           <li><strong>2022 回撤为类别估算</strong>：仅出现在「风险」章节的<u>资产类别</u>示意；主表已改用各基金 PDS 标准<strong>风险指标 1–7</strong> + 实际<strong>费率</strong>（硬数据，2026-04-30 InvestNow）。</li>
           <li><strong>份额类未统一</strong>：同一基金可能有 retail / wholesale / hedged / unhedged 等多个 share class。本指南对应 InvestNow 显示的 <strong>Retail PIE</strong>，但跨源对比可能因 class 差异出现 0.3–0.5% 误差。</li>
-          <li><strong>美股回报含 NZD 贬值红利</strong>：Smart US 500 ETF 5Y ~16.75% ≈ S&P 500 USD 12.8% + NZD 贬值 4%/年。未来 NZD 反弹时，unhedged 基金的 NZD 回报会显著低于历史。</li>
+          <li><strong>美股回报含 NZD 贬值红利</strong>：Smart US 500 ETF 5Y ~17.76% ≈ S&P 500 USD 回报 + NZD 贬值 ~4%/年。未来 NZD 反弹时，unhedged 基金的 NZD 回报会显著低于历史。</li>
         </ul>
       </div>
     </div>
@@ -1681,7 +1681,7 @@
         <strong>① 份额类</strong>：InvestNow 显示的 <strong>Retail PIE 单元</strong>，对应一般个人投资者通过 InvestNow 平台持有的基金 class。<br>
         <strong>② 报告口径</strong>：<u>after fees, before tax</u>——已扣除 management fee 但未扣除 PIR 税。你的实际净回报 ≈ 表中数字 × (1 − 你的 PIR)。<br>
         <strong>③ 计算货币</strong>：NZD。海外资产基金（如 Smart US 500 ETF）的 NZD 回报 = 标的资产 USD 回报 + NZD 兑 USD 汇率变动。<br>
-        <strong>④ 报告日</strong>：基金回报 = <strong>2026-04-30</strong>（2026-06-06 从 InvestNow 业绩页刷新，after fees / before tax / NZD，与原口径一致；88/91 为该日最新，3 只 InvestNow 未列示者留 2026-02-28）。残余偏差仅 2026-04-30→今（含 6 月初回调）。下次仍从 InvestNow 导出替换。</p>
+        <strong>④ 报告日</strong>：基金回报 = <strong>2026-05-31</strong>（2026-06-24 从各基金公司官方月报刷新并交叉验证，after fees / before tax / NZD，与原口径一致；74/91 更新到 5-31，17 只保留 2026-04-30）。费率·风险为 2026-04-30 口径。下次可从 InvestNow 导出做同口径核对。</p>
     </div>
 
     <hr class="section-sep">
@@ -1777,7 +1777,7 @@
   <div class="cmp-panel">
     <button class="cmp-close" id="cmp-close" aria-label="关闭对比">✕</button>
     <h3>基金对比</h3>
-    <p class="t-fine" style="margin:0;">绿色 = 该行最优（费率最低 / 风险最低 / 回报最高）。回报为 2026-04-30、after fees before tax；最多对比 4 只。</p>
+    <p class="t-fine" style="margin:0;">绿色 = 该行最优（费率最低 / 风险最低 / 回报最高）。回报为 2026-05-31、after fees before tax；最多对比 4 只。</p>
     <div style="overflow:auto;"><table class="cmp-table" id="cmp-table"></table></div>
   </div>
 </div>
@@ -1828,7 +1828,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.1 · 2026-06-06</code></span>
+      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.2 · 2026-06-24</code></span>
       <span>无追踪 · 无 cookie · 完全静态 HTML · 内容采用 CC BY 4.0 开放</span>
     </div>
   </div>
@@ -1844,10 +1844,10 @@
    ============================================================================ */
 
 const META = {
-  dataDate: '2026-04-30',          // 基金回报快照日（2026-06-06 从 InvestNow 刷新）
+  dataDate: '2026-05-31',          // 基金回报快照日（2026-06-24 多源刷新：基金公司官方月报 + 交叉验证）
   publishedDate: '2026-05-05',
-  verifiedDate: '2026-06-06',      // v2.0 核验 + v3.0 重设计（同日）
-  version: 'v3.1',
+  verifiedDate: '2026-06-24',      // v3.2 多源刷新核验
+  version: 'v3.2',
   fundCount: 91,
   source: 'InvestNow / Morningstar',
   nzdUsd5YStart: 0.71,
@@ -1959,99 +1959,99 @@ function parsePct(s) {
 }
 
 /* ===== 91 只 NZ Managed Fund 数据（InvestNow / Morningstar） =====
-   格式: [Name, Sector, 3Y, 5Y, 10Y, Fee, Risk(1-7), Style, 股/债, 规模]  — N/A 用 '–'；数据 2026-04-30 InvestNow */
+   格式: [Name, Sector, 3Y, 5Y, 10Y, Fee, Risk(1-7), Style, 股/债, 规模]  — N/A 用 '–'；数据 2026-05-31（多源刷新） */
 const FUNDS_DATA = [
-  ['Amova Concentrated Equity Fund','Australasian Equities','1.51%','0.04%','5.89%','1.15%','5','Active','100% / 0%','$13.22M'],
-  ['Amova Core Equity Fund','Australasian Equities','1.39%','0.71%','6.88%','0.95%','5','Active','100% / 0%','$22.57M'],
-  ['Amova NZ Corporate Bond Fund','New Zealand Fixed Interest','5.43%','2.25%','3.28%','0.70%','3','Active','0% / 100%','$558.29M'],
-  ['ANZ OneAnswer Australian Share Fund','Australasian Equities','8.38%','7.81%','5.68%','1.09%','5','Active','100% / 0%','$23.14M'],
-  ['ANZ OneAnswer Balanced Growth Fund','Diversified','8.35%','4.59%','6.78%','0.98%','4','Active','63% / 37%','$47.6M'],
-  ['ANZ OneAnswer International Share Fund','International Equities','15.50%','10.71%','12.38%','1.00%','5','Active','100% / 0%','$180.08M'],
-  ['ANZ OneAnswer NZ Share Fund','Australasian Equities','2.36%','0.18%','6.42%','1.05%','5','Active','100% / 0%','$47.93M'],
-  ['ANZ OneAnswer Property Securities Fund','Listed Property','0.61%','−3.34%','3.12%','1.06%','5','Active','100% / 0%','$46M'],
-  ['Devon Alpha Fund','Australasian Equities','4.05%','5.31%','6.75%','1.31%','5','Active','0%-100% / 0%-100%','$144.46M'],
-  ['Devon Australian Fund','Australasian Equities','11.04%','8.96%','7.97%','1.32%','5','Active','80%-100% / 0%-20%','$10.94M'],
-  ['Devon Dividend Yield Fund','Australasian Equities','7.49%','6.98%','6.68%','1.06%','5','Active','90%-100% / 0%-10%','$17.21M'],
-  ['Devon Trans-Tasman Fund','Australasian Equities','7.83%','6.96%','8.12%','1.32%','5','Active','50%-100% / 0%-50%','$163.28M'],
+  ['Amova Concentrated Equity Fund','Australasian Equities','2.56%','0.84%','5.70%','1.15%','5','Active','100% / 0%','$13.22M'],
+  ['Amova Core Equity Fund','Australasian Equities','2.78%','1.85%','6.69%','0.95%','5','Active','100% / 0%','$22.57M'],
+  ['Amova NZ Corporate Bond Fund','New Zealand Fixed Interest','5.81%','2.58%','3.35%','0.70%','3','Active','0% / 100%','$558.29M'],
+  ['ANZ OneAnswer Australian Share Fund','Australasian Equities','9.02%','7.59%','5.47%','1.09%','5','Active','100% / 0%','$21.94M'],
+  ['ANZ OneAnswer Balanced Growth Fund','Diversified','9.82%','5.10%','6.90%','0.98%','4','Active','63% / 37%','$45.61M'],
+  ['ANZ OneAnswer International Share Fund','International Equities','17.09%','11.56%','12.43%','1.00%','5','Active','100% / 0%','$169.44M'],
+  ['ANZ OneAnswer NZ Share Fund','Australasian Equities','4.32%','1.63%','6.42%','1.05%','5','Active','100% / 0%','$49.40M'],
+  ['ANZ OneAnswer Property Securities Fund','Listed Property','1.45%','−2.77%','3.09%','1.06%','5','Active','100% / 0%','$43.29M'],
+  ['Devon Alpha Fund','Australasian Equities','5.25%','5.87%','6.75%','1.31%','5','Active','0%-100% / 0%-100%','$144.46M'],
+  ['Devon Australian Fund','Australasian Equities','12.08%','9.00%','7.97%','1.32%','5','Active','80%-100% / 0%-20%','$10.94M'],
+  ['Devon Dividend Yield Fund','Australasian Equities','7.33%','6.05%','6.68%','1.06%','5','Active','90%-100% / 0%-10%','$17.21M'],
+  ['Devon Trans-Tasman Fund','Australasian Equities','8.61%','7.15%','8.12%','1.32%','5','Active','50%-100% / 0%-50%','$163.28M'],
   ['Elevation Capital Global Shares Fund','International Equities','8.29%','6.41%','7.56%','–','–','–','–','–'],
-  ['Fisher Funds Australian Growth Fund','Australasian Equities','0.01%','1.39%','6.84%','0.87%','5','Active','100% / 0%','$82.19M'],
-  ['Fisher Funds BondPlus Fund','International Fixed Interest','2.44%','−0.76%','1.10%','1.26%','3','Active','0% / 100%','$92.69M'],
-  ['Fisher Funds CashPlus Fund','Cash and Cash Equivalents','4.37%','3.01%','2.34%','0.83%','1','Active','0% / 100%','$12.39M'],
-  ['Fisher Funds Global Fund','International Equities','13.21%','6.61%','9.94%','1.64%','5','Active','100% / 0%','$155.71M'],
-  ['Fisher Funds Income Fund','International Fixed Interest','6.28%','3.05%','3.27%','0.99%','3','Active','0% / 100%','$42.21M'],
-  ['Fisher Funds International Growth Fund','International Equities','7.25%','−0.15%','9.03%','1.31%','6','Active','100% / 0%','$74.31M'],
-  ['Fisher Funds NZ Fixed Income Trust','New Zealand Fixed Interest','4.59%','0.87%','2.17%','0.97%','3','Active','0% / 100%','$75.1M'],
-  ['Fisher Funds NZ Growth Fund','Australasian Equities','2.56%','−1.81%','7.55%','1.42%','5','Active','100% / 0%','$165.28M'],
-  ['Fisher Funds Property & Infrastructure','Listed Property','8.00%','5.14%','9.04%','1.53%','5','Active','100% / 0%','$157.09M'],
-  ['Fisher Funds Trans Tasman Equity Trust','Australasian Equities','0.74%','−0.70%','7.16%','1.63%','5','Active','100% / 0%','$66.38M'],
+  ['Fisher Funds Australian Growth Fund','Australasian Equities','0.30%','1.30%','6.50%','0.87%','5','Active','100% / 0%','$76.73M'],
+  ['Fisher Funds BondPlus Fund','International Fixed Interest','2.80%','−0.60%','1.10%','1.26%','3','Active','0% / 100%','$94.90M'],
+  ['Fisher Funds CashPlus Fund','Cash and Cash Equivalents','4.30%','3.10%','2.30%','0.83%','1','Active','0% / 100%','$12.63M'],
+  ['Fisher Funds Global Fund','International Equities','13.60%','7.20%','10.00%','1.64%','5','Active','100% / 0%','$151.91M'],
+  ['Fisher Funds Income Fund','International Fixed Interest','6.50%','3.20%','3.20%','0.99%','3','Active','0% / 100%','$42.25M'],
+  ['Fisher Funds International Growth Fund','International Equities','5.60%','−0.10%','8.50%','1.31%','6','Active','100% / 0%','$73.96M'],
+  ['Fisher Funds NZ Fixed Income Trust','New Zealand Fixed Interest','5.20%','1.30%','2.20%','0.97%','3','Active','0% / 100%','$76.97M'],
+  ['Fisher Funds NZ Growth Fund','Australasian Equities','3.70%','−0.10%','7.50%','1.42%','5','Active','100% / 0%','$160.55M'],
+  ['Fisher Funds Property & Infrastructure','Listed Property','8.40%','5.10%','9.00%','1.53%','5','Active','100% / 0%','$153.70M'],
+  ['Fisher Funds Trans Tasman Equity Trust','Australasian Equities','1.40%','0.20%','6.90%','1.63%','5','Active','100% / 0%','$65.17M'],
   ['Harbour Australasian Equity Focus Fund','Australasian Equities','−0.15%','−1.60%','6.63%','1.20%','5','Active','95% / 5%','$20.69M'],
-  ['Harbour Australasian Equity Fund','Australasian Equities','0.71%','−1.05%','6.59%','1.10%','5','Active','98% / 2%','$98.6M'],
-  ['Harbour Australasian Equity Income Fund','Australasian Equities','5.00%','4.06%','7.03%','1.08%','4','Active','90% / 10%','$36.27M'],
-  ['Harbour Income Fund','Diversified','6.37%','4.32%','5.25%','0.64%','3','Active','32% / 68%','$298.71M'],
-  ['Harbour NZ Core Fixed Interest Fund','New Zealand Fixed Interest','4.72%','1.49%','2.42%','0.65%','3','Active','0% / 100%','$292.36M'],
-  ['Harbour NZ Corporate Bond Fund','New Zealand Fixed Interest','5.61%','2.13%','2.93%','0.46%','3','Active','0% / 100%','$631.43M'],
-  ['Harbour NZ Index Shares Fund','Australasian Equities','3.07%','0.80%','6.70%','0.21%','5','Passive','99% / 1%','$713.73M'],
-  ['Harbour T. Rowe Price Global Equity','International Equities','17.84%','8.09%','13.52%','1.19%','5','Active','98% / 2%','$656.89M'],
+  ['Harbour Australasian Equity Fund','Australasian Equities','2.05%','0.03%','6.40%','1.10%','5','Active','98% / 2%','$101.16M'],
+  ['Harbour Australasian Equity Income Fund','Australasian Equities','6.51%','4.53%','7.17%','1.08%','4','Active','90% / 10%','$34.87M'],
+  ['Harbour Income Fund','Diversified','6.87%','4.53%','5.33%','0.64%','3','Active','32% / 68%','$293.56M'],
+  ['Harbour NZ Core Fixed Interest Fund','New Zealand Fixed Interest','5.28%','1.84%','2.49%','0.65%','3','Active','0% / 100%','$289.04M'],
+  ['Harbour NZ Corporate Bond Fund','New Zealand Fixed Interest','5.91%','2.43%','3.00%','0.46%','3','Active','0% / 100%','$619.30M'],
+  ['Harbour NZ Index Shares Fund','Australasian Equities','3.75%','1.44%','6.67%','0.21%','5','Passive','99% / 1%','$679.47M'],
+  ['Harbour T. Rowe Price Global Equity','International Equities','18.24%','9.29%','13.62%','1.19%','5','Active','98% / 2%','$599.21M'],
   ['Mercer Core Global Shares Fund','International Equities','22.66%','16.38%','13.99%','1.26%','5','Active','100% / 0%','$65.05M'],
   ['Mercer Core Hedged Global Shares Fund','International Equities','19.27%','9.81%','10.96%','1.48%','6','Active','100% / 0%','$19.51M'],
   ['Mercer Global Listed Infrastructure','Other','9.51%','9.40%','8.71%','1.36%','5','Active','100% / 0%','$76.08M'],
   ['Mercer Global Listed Real Estate','Listed Property','9.46%','2.41%','4.15%','1.35%','6','Active','100% / 0%','$71.84M'],
   ['Mercer Global Shares Fund','International Equities','20.30%','11.97%','12.20%','1.27%','5','Active','100% / 0%','$33.04M'],
-  ['Mercer Income Generator Fund','Diversified','4.00%','2.73%','4.78%','1.29%','4','Active','40% / 60%','$25.08M'],
-  ['Mercer Macquarie NZ Cash Fund','Cash and Cash Equivalents','4.52%','3.51%','3%','0.30%','2','Active','0% / 100%','$242.95M'],
-  ['Mercer Macquarie NZ Fixed Interest','New Zealand Fixed Interest','4.27%','0.96%','2.12%','0.61%','3','Active','0% / 100%','$183.18M'],
-  ['Mercer Macquarie NZ Short Duration','New Zealand Fixed Interest','5.15%','2.65%','2.76%','0.69%','2','Active','0% / 100%','$46.36M'],
+  ['Mercer Income Generator Fund','Diversified','4.74%','2.96%','4.81%','1.29%','4','Active','40% / 60%','$25.08M'],
+  ['Mercer Macquarie NZ Cash Fund','Cash and Cash Equivalents','4.43%','3.55%','3.00%','0.30%','2','Active','0% / 100%','$242.95M'],
+  ['Mercer Macquarie NZ Fixed Interest','New Zealand Fixed Interest','4.91%','1.37%','2.16%','0.61%','3','Active','0% / 100%','$183.18M'],
+  ['Mercer Macquarie NZ Short Duration','New Zealand Fixed Interest','5.32%','2.79%','2.80%','0.69%','2','Active','0% / 100%','$46.36M'],
   ['Mercer Responsible Balanced Fund','Diversified','8.05%','4.25%','6.01%','1.27%','4','Active','60% / 40%','$28.84M'],
   ['Mercer Responsible Conservative Fund','Diversified','6.70%','3.35%','4.47%','–','–','–','–','–'],
   ['Mercer Responsible Growth Fund','Diversified','16.66%','10.36%','10.52%','–','–','–','–','–'],
   ['Mercer Responsible Trans-Tasman Shares','Australasian Equities','2.57%','0.08%','7.15%','1.07%','5','Active','100% / 0%','$31.56M'],
-  ['Milford Active Growth Fund','Diversified','10.74%','7.36%','9.75%','1.05%','4','Active','78% / 22%','$6,079.52M'],
-  ['Milford Balanced Fund','Diversified','7.82%','5.63%','7.75%','1.06%','4','Active','61% / 39%','$2,627.26M'],
-  ['Milford Conservative Fund','Diversified','5.58%','3.08%','4.67%','0.87%','3','Active','18% / 82%','$940.58M'],
-  ['Milford Diversified Income Fund','Diversified','6.76%','4.72%','6.34%','0.65%','3','Active','40% / 60%','$3,556.4M'],
-  ['Milford Global Equity Fund','International Equities','12.91%','7.74%','10.48%','1.35%','5','Active','95% / 5%','$2,502.83M'],
-  ['Milford Trans-Tasman Bond Fund','New Zealand Fixed Interest','5.17%','2.23%','3.43%','0.65%','3','Active','0% / 100%','$2,126.46M'],
-  ['Milford Trans-Tasman Equity Fund','Australasian Equities','4.69%','3.27%','9.38%','1.05%','5','Active','95% / 5%','$784.67M'],
+  ['Milford Active Growth Fund','Diversified','10.75%','7.23%','9.48%','1.05%','4','Active','78% / 22%','$6,132.80M'],
+  ['Milford Balanced Fund','Diversified','8.37%','5.87%','7.69%','1.06%','4','Active','61% / 39%','$2,653.10M'],
+  ['Milford Conservative Fund','Diversified','5.90%','3.25%','4.64%','0.87%','3','Active','18% / 82%','$954.60M'],
+  ['Milford Diversified Income Fund','Diversified','7.25%','4.72%','6.25%','0.65%','3','Active','40% / 60%','$3,587.30M'],
+  ['Milford Global Equity Fund','International Equities','13.80%','8.35%','10.54%','1.35%','5','Active','95% / 5%','$2,550.10M'],
+  ['Milford Trans-Tasman Bond Fund','New Zealand Fixed Interest','5.71%','2.53%','3.47%','0.65%','3','Active','0% / 100%','$2,140.80M'],
+  ['Milford Trans-Tasman Equity Fund','Australasian Equities','5.64%','3.84%','9.37%','1.05%','5','Active','95% / 5%','$787.40M'],
   ['Mint Australasian Equity Fund','Australasian Equities','1.30%','0.00%','6.45%','1.19%','5','Active','95% / 5%','$204.93M'],
   ['Mint Australasian Property Fund','Listed Property','1.51%','−2.18%','3.26%','1.04%','5','Active','95% / 5%','$17.27M'],
-  ['Mint Diversified Income Fund','Diversified','4.30%','1.74%','3.33%','0.98%','4','Active','30% / 70%','$41.51M'],
+  ['Mint Diversified Income Fund','Diversified','4.69%','1.85%','3.21%','0.98%','4','Active','30% / 70%','$40.00M'],
   ['Octagon Australian Equities','Australasian Equities','9.45%','8.50%','8.46%','1.18%','5','Active','95% / 5%','$126.95M'],
   ['Octagon New Zealand Equities','Australasian Equities','2.57%','1.86%','7.68%','1.18%','5','Active','95% / 5%','$171.31M'],
-  ['Pathfinder Global Property Fund','Listed Property','8.76%','2.00%','2.77%','1.00%','6','Active','100% / 0%','$17.47M'],
+  ['Pathfinder Global Property Fund','Listed Property','9.56%','1.69%','2.52%','1.00%','6','Active','100% / 0%','$17.47M'],
   ['Pathfinder Global Water Fund','International Equities','8.53%','5.65%','8.30%','1.30%','6','Active','100% / 0%','$66.83M'],
-  ['QuayStreet Income Fund','Diversified','5.84%','4.11%','4.55%','0.76%','3','Active','20% / 80%','$337.54M'],
-  ['QuayStreet NZ Equity Fund','Australasian Equities','1.77%','1.02%','7.39%','1.27%','4','Active','100% / 0%','$197.09M'],
-  ['Russell Global Fixed Interest Fund','International Fixed Interest','2%','−0.52%','1.64%','0.58%','4','Active','0% / 100%','$573.05M'],
-  ['Russell Global Shares Fund','International Equities','19.34%','13.36%','12.74%','0.85%','4','Active','100% / 0%','$376.5M'],
-  ['Russell Hedged Global Shares Fund','International Equities','16.93%','9.21%','10.88%','0.86%','5','Active','100% / 0%','$321.72M'],
-  ['Russell NZ Fixed Interest Fund','New Zealand Fixed Interest','4.34%','1.13%','2.20%','0.49%','3','Active','0% / 100%','$161.96M'],
-  ['Russell NZ Shares Fund','Australasian Equities','1.78%','−0.01%','6.43%','0.78%','5','Active','100% / 0%','$218.92M'],
-  ['Salt Enhanced Property Fund','Listed Property','2.27%','−1.36%','4.87%','1.02%','5','Active','95% / 5%','$18.13M'],
-  ['Salt Long Short Fund','Australasian Equities','16.65%','13.74%','10.32%','3.21%','4','Active','30% / 70%','$185.72M'],
-  ['Salt NZ Dividend Appreciation Fund','Australasian Equities','7.63%','4.28%','8.28%','1.10%','5','Active','100% / 0%','$113.59M'],
-  ['Smart Asia Pacific ETF','International Equities','20.06%','11.80%','9.77%','0.55%','4','Passive','100% / 0%','$131.24M'],
-  ['Smart Australian Dividend ETF','Australasian Equities','15.37%','11.77%','8.59%','0.54%','5','Passive','100% / 0%','$55.17M'],
-  ['Smart Australian Financials ETF','Australasian Equities','23.78%','15.75%','10.36%','0.54%','6','Passive','100% / 0%','$68.71M'],
+  ['QuayStreet Income Fund','Diversified','6.01%','4.19%','4.58%','0.76%','3','Active','20% / 80%','$339.68M'],
+  ['QuayStreet NZ Equity Fund','Australasian Equities','3.27%','1.84%','7.09%','1.27%','4','Active','100% / 0%','$198.00M'],
+  ['Russell Global Fixed Interest Fund','International Fixed Interest','3.00%','−0.51%','1.65%','0.58%','4','Active','0% / 100%','$573.25M'],
+  ['Russell Global Shares Fund','International Equities','19.49%','13.66%','12.61%','0.85%','4','Active','100% / 0%','$378.87M'],
+  ['Russell Hedged Global Shares Fund','International Equities','18.59%','9.66%','11.14%','0.86%','5','Active','100% / 0%','$319.51M'],
+  ['Russell NZ Fixed Interest Fund','New Zealand Fixed Interest','4.89%','1.50%','2.26%','0.49%','3','Active','0% / 100%','$163.00M'],
+  ['Russell NZ Shares Fund','Australasian Equities','3.24%','1.08%','6.39%','0.78%','5','Active','100% / 0%','$220.62M'],
+  ['Salt Enhanced Property Fund','Listed Property','2.72%','−1.46%','4.18%','1.02%','5','Active','95% / 5%','$19.00M'],
+  ['Salt Long Short Fund','Australasian Equities','15.28%','12.87%','9.65%','3.21%','4','Active','30% / 70%','$190.00M'],
+  ['Salt NZ Dividend Appreciation Fund','Australasian Equities','8.03%','4.36%','7.31%','1.10%','5','Active','100% / 0%','$114.00M'],
+  ['Smart Asia Pacific ETF','International Equities','22.58%','13.86%','10.98%','0.55%','4','Passive','100% / 0%','$159.28M'],
+  ['Smart Australian Dividend ETF','Australasian Equities','15.24%','11.06%','8.24%','0.54%','5','Passive','100% / 0%','$57.63M'],
+  ['Smart Australian Financials ETF','Australasian Equities','21.80%','13.55%','9.67%','0.54%','6','Passive','100% / 0%','$68.11M'],
   ['Smart Australian Mid Cap ETF','Australasian Equities','12.48%','9.27%','10.68%','0.75%','6','Passive','100% / 0%','$142.18M'],
-  ['Smart Australian Property ETF','Listed Property','8.62%','4.36%','5.04%','0.54%','6','Passive','100% / 0%','$23.43M'],
-  ['Smart Australian Resources ETF','Australasian Equities','17.14%','14.76%','15.93%','0.54%','6','Passive','100% / 0%','$128.7M'],
-  ['Smart Australian Top 20 ETF','Australasian Equities','15.77%','11.93%','10.32%','0.60%','5','Passive','100% / 0%','$220.55M'],
-  ['Smart Emerging Markets ETF','International Equities','17.61%','8.29%','8.73%','0.59%','5','Passive','100% / 0%','$258.72M'],
-  ['Smart Europe ETF','International Equities','15.15%','12.22%','9.64%','0.55%','5','Passive','100% / 0%','$163.35M'],
-  ['Smart Global Bond ETF','International Fixed Interest','2.66%','0.45%','2.13%','0.54%','3','Active','0% / 100%','$144.75M'],
-  ['Smart NZ Bond ETF','New Zealand Fixed Interest','4.51%','2.11%','3.13%','0.54%','3','Active','0% / 100%','$59.53M'],
-  ['Smart NZ Cash ETF','Cash and Cash Equivalents','4.98%','3.65%','2.93%','0.20%','2','Active','0% / 100%','$39.52M'],
-  ['Smart NZ Dividend ETF','Australasian Equities','7.99%','5.12%','7.03%','0.54%','5','Passive','100% / 0%','$104.95M'],
-  ['Smart NZ Mid Cap ETF','Australasian Equities','6.53%','1.60%','7.73%','0.60%','5','Passive','100% / 0%','$135.38M'],
-  ['Smart NZ Property ETF','Listed Property','1.56%','−2.60%','3.67%','0.54%','5','Passive','100% / 0%','$79.17M'],
-  ['Smart NZ Top 10 ETF','Australasian Equities','0.84%','−0.04%','6.34%','0.60%','5','Passive','100% / 0%','$104.06M'],
-  ['Smart NZ Top 50 ETF','Australasian Equities','2.79%','0.60%','7.02%','0.50%','5','Passive','100% / 0%','$587.24M'],
-  ['Smart Total World ETF','International Equities','21.15%','14.08%','12.75%','0.40%','5','Passive','100% / 0%','$317.65M'],
-  ['Smart US 500 ETF','International Equities','22.52%','16.75%','15.90%','0.34%','5','Passive','100% / 0%','$1,075.67M'],
-  ['Smart US Large Growth ETF','International Equities','27.87%','17.23%','18.15%','0.51%','6','Passive','100% / 0%','$589.38M'],
-  ['Smart US Large Value ETF','International Equities','16.48%','14.74%','12.40%','0.51%','5','Passive','100% / 0%','$57.05M'],
-  ['Smart US Mid Cap ETF','International Equities','17.03%','11.08%','12.12%','0.51%','5','Passive','100% / 0%','$52.32M'],
-  ['Smart US Small Cap ETF','International Equities','17.73%','10.07%','11.82%','0.51%','6','Passive','100% / 0%','$51.14M'],
+  ['Smart Australian Property ETF','Listed Property','8.78%','4.04%','4.79%','0.54%','6','Passive','100% / 0%','$23.97M'],
+  ['Smart Australian Resources ETF','Australasian Equities','19.74%','15.70%','17.49%','0.54%','6','Passive','100% / 0%','$132.89M'],
+  ['Smart Australian Top 20 ETF','Australasian Equities','15.73%','11.00%','9.98%','0.60%','5','Passive','100% / 0%','$220.59M'],
+  ['Smart Emerging Markets ETF','International Equities','17.85%','8.69%','9.03%','0.59%','5','Passive','100% / 0%','$237.40M'],
+  ['Smart Europe ETF','International Equities','16.38%','11.92%','9.40%','0.55%','5','Passive','100% / 0%','$178.86M'],
+  ['Smart Global Bond ETF','International Fixed Interest','2.99%','0.35%','2.10%','0.54%','3','Active','0% / 100%','$146.98M'],
+  ['Smart NZ Bond ETF','New Zealand Fixed Interest','4.81%','2.28%','3.15%','0.54%','3','Active','0% / 100%','$61.18M'],
+  ['Smart NZ Cash ETF','Cash and Cash Equivalents','4.70%','3.69%','2.93%','0.20%','2','Active','0% / 100%','$43.69M'],
+  ['Smart NZ Dividend ETF','Australasian Equities','8.04%','5.26%','7.06%','0.54%','5','Passive','100% / 0%','$104.59M'],
+  ['Smart NZ Mid Cap ETF','Australasian Equities','6.94%','1.85%','7.72%','0.60%','5','Passive','100% / 0%','$135.01M'],
+  ['Smart NZ Property ETF','Listed Property','2.62%','−1.80%','3.85%','0.54%','5','Passive','100% / 0%','$66.85M'],
+  ['Smart NZ Top 10 ETF','Australasian Equities','2.40%','1.74%','6.18%','0.60%','5','Passive','100% / 0%','$104.26M'],
+  ['Smart NZ Top 50 ETF','Australasian Equities','3.33%','1.18%','7.01%','0.50%','5','Passive','100% / 0%','$573.24M'],
+  ['Smart Total World ETF','International Equities','21.08%','14.77%','12.99%','0.40%','5','Passive','100% / 0%','$358.92M'],
+  ['Smart US 500 ETF','International Equities','22.72%','17.76%','15.83%','0.34%','5','Passive','100% / 0%','$1,157.66M'],
+  ['Smart US Large Growth ETF','International Equities','26.39%','18.97%','18.39%','0.51%','6','Passive','100% / 0%','$613.78M'],
+  ['Smart US Large Value ETF','International Equities','17.74%','14.53%','12.76%','0.51%','5','Passive','100% / 0%','$67.29M'],
+  ['Smart US Mid Cap ETF','International Equities','16.73%','11.27%','12.06%','0.51%','5','Passive','100% / 0%','$55.48M'],
+  ['Smart US Small Cap ETF','International Equities','18.05%','10.84%','12.09%','0.51%','6','Passive','100% / 0%','$54.40M'],
 ];
 
 /* ===== 三套样板组合（资产类别 + 同类基金示例）
@@ -2120,11 +2120,11 @@ const RISK_TABLE = [
 
 /* ===== 基准对比表 ===== */
 const BENCHMARKS = [
-  { name: 'Smart NZ Top 50 ETF (NZX 50 代理)',   yr5: 0.6,  yr10: 7.02,  meaning: 'NZ 本土股市基准。5Y 弱因 2022-23 利率冲击。' },
-  { name: 'Smart US 500 ETF (S&P 500 代理)',     yr5: 16.75, yr10: 15.9, meaning: '美股大盘。许多本地基金的"隐形对手"。' },
-  { name: 'Smart Total World ETF (MSCI World)',  yr5: 14.08, yr10: 12.75, meaning: '全球股票综合。最公平的国际基准。' },
-  { name: 'Smart Global Bond ETF (全球债)',       yr5: 0.45,  yr10: 2.13,  meaning: '债券基准。2022 全球债熊市拖累 5Y。' },
-  { name: 'Smart NZ Cash ETF (现金代理)',         yr5: 3.65,  yr10: 2.93,  meaning: '无风险利率。所有"主动"基金都应跑赢这个。' },
+  { name: 'Smart NZ Top 50 ETF (NZX 50 代理)',   yr5: 1.18,  yr10: 7.01,  meaning: 'NZ 本土股市基准。5Y 弱因 2022-23 利率冲击。' },
+  { name: 'Smart US 500 ETF (S&P 500 代理)',     yr5: 17.76, yr10: 15.83, meaning: '美股大盘。许多本地基金的"隐形对手"。' },
+  { name: 'Smart Total World ETF (MSCI World)',  yr5: 14.77, yr10: 12.99, meaning: '全球股票综合。最公平的国际基准。' },
+  { name: 'Smart Global Bond ETF (全球债)',       yr5: 0.35,  yr10: 2.10,  meaning: '债券基准。2022 全球债熊市拖累 5Y。' },
+  { name: 'Smart NZ Cash ETF (现金代理)',         yr5: 3.69,  yr10: 2.93,  meaning: '无风险利率。所有"主动"基金都应跑赢这个。' },
   { name: 'NZ 银行定期存款 (~年化)',              yr5: 4.0,   yr10: 3.5,   meaning: '最容易拿到的"对手盘"。许多平衡基金长期未跑赢。' },
 ];
 

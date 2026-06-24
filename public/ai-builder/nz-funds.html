@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新西兰华人基金投资指南 · NZ Managed Funds for 华人投资者</title>
+<title>新西兰哪些基金长期跑过 10%？· NZ 优质 Managed Fund 筛选</title>
 <meta name="description" content="面向新西兰华人投资者的 Managed Fund 选择指南：含 PIE/FIF 税务、风险指标、组合配置、货币对冲与基准对比。">
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="article">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:title" content="新西兰华人基金投资指南">
+<meta property="og:title" content="新西兰哪些基金长期跑过 10%？">
 <meta property="og:description" content="面向新西兰华人投资者的 Managed Fund 选择指南——含 PIE/FIF 税务、风险、组合配置与基准对比。">
 <meta property="og:site_name" content="NZ 华人基金指南">
 <meta name="twitter:card" content="summary_large_image">
@@ -918,10 +918,10 @@
       <div class="hero-text">
         <span class="pill"><span class="dot"></span> <span id="hero-data-date">数据更新中</span></span>
         <h1 class="display" id="hero-h1">
-          在新西兰投资 <br><span class="accent">10万纽币</span>，<br>该买哪只基金？
+          在新西兰，<br>哪些基金<br>长期<span class="accent">跑过 10%？</span>
         </h1>
         <p class="hero-sub">
-          面向新西兰华人投资者的 Managed Fund 选择指南。覆盖 90+ 只主流基金的 5 年与 10 年实际回报，含税务（PIE / FIF）、风险、组合配置、汇率影响、基准对比——全部数据来源公开可查。
+          面向新西兰华人投资者的优质基金筛选。把 91 只主流 PIE 基金按 5 年 / 10 年实际回报扒一遍——长期跑过 10% 的只有约 1/5，且几乎全是全球 / 美股（高回报必然伴随高风险）。含税务（PIE / FIF）、风险、组合与基准对比，数据公开可查。
         </p>
         <div class="meta-row">
           <div class="meta-chip" id="freshness-chip">
@@ -934,7 +934,7 @@
           <div class="meta-chip">阅读时长：<strong>~ 14 分钟</strong></div>
           <div class="meta-chip">基金数量：<strong id="meta-fund-count">--</strong></div>
           <div class="meta-chip">主数据源：<strong>InvestNow / Morningstar</strong></div>
-          <div class="meta-chip">版本：<strong>v3.2 · 2026-06-24</strong></div>
+          <div class="meta-chip">版本：<strong>v3.3 · 2026-06-24</strong></div>
           <div class="meta-chip" style="background:#fff8e7;border-color:#ffd11a;">⚠ <strong>教育用途 · 非投资建议</strong></div>
         </div>
       </div>
@@ -1203,9 +1203,17 @@
      ==================================================================== -->
 <section id="top">
   <div class="container">
-    <div class="eyebrow">10 年实战榜单</div>
-    <h2>10 年回报 Top 15</h2>
-    <p class="lede">截至数据日期，按 10 年年化收益排序。所有数据来自 InvestNow / Morningstar，税前 / 净费率（after fees, before tax）。</p>
+    <div class="eyebrow">回到开头那个问题</div>
+    <h2>长期跑过 10% 的，只有这些</h2>
+    <style>
+      .tc-table{width:100%;border-collapse:collapse;font-size:14px;}
+      .tc-table th,.tc-table td{padding:9px 10px;text-align:center;border-bottom:1px solid rgba(0,0,0,.08);}
+      .tc-table thead th{font-size:12px;color:#6b6b6b;font-weight:600;border-bottom:1.5px solid rgba(0,0,0,.18);}
+      .tc-table td:first-child,.tc-table th:first-child{text-align:left;}
+      .tc-table tbody tr:hover{background:rgba(159,232,112,.12);}
+      .tc-tag{display:inline-block;padding:2px 8px;border-radius:6px;background:#eef6e6;color:var(--green-deep);font-size:12px;font-weight:600;}
+    </style>
+    <div id="tenclub" class="mt-3"></div>
 
     <div class="chart-card mt-3">
       <h3>Top 15 / 10 年年化收益</h3>
@@ -1828,7 +1836,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.2 · 2026-06-24</code></span>
+      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.3 · 2026-06-24</code></span>
       <span>无追踪 · 无 cookie · 完全静态 HTML · 内容采用 CC BY 4.0 开放</span>
     </div>
   </div>
@@ -1847,7 +1855,7 @@ const META = {
   dataDate: '2026-05-31',          // 基金回报快照日（2026-06-24 多源刷新：基金公司官方月报 + 交叉验证）
   publishedDate: '2026-05-05',
   verifiedDate: '2026-06-24',      // v3.2 多源刷新核验
-  version: 'v3.2',
+  version: 'v3.3',
   fundCount: 91,
   source: 'InvestNow / Morningstar',
   nzdUsd5YStart: 0.71,
@@ -2856,6 +2864,31 @@ new Chart(document.getElementById('chart-currency'), {
       }
     }
   });
+})();
+
+
+/* ===== 10%+ 俱乐部：5Y 和 10Y 都跑过 10% 年化（数据驱动，随数据刷新自动更新） ===== */
+(function () {
+  var host = document.getElementById('tenclub');
+  if (!host || typeof FUNDS_DATA === 'undefined') return;
+  var club = FUNDS_DATA
+    .map(function (r) { return { name:r[0], y5:parsePct(r[3]), y10:parsePct(r[4]), fee:r[5], risk:r[6], style:r[7] }; })
+    .filter(function (f) { return f.y5 != null && f.y10 != null && f.y5 >= 10 && f.y10 >= 10; })
+    .sort(function (a, b) { return b.y10 - a.y10; });
+  var n5 = FUNDS_DATA.filter(function (r) { var v = parsePct(r[3]); return v != null && v >= 10; }).length;
+  var n10 = FUNDS_DATA.filter(function (r) { var v = parsePct(r[4]); return v != null && v >= 10; }).length;
+  function sl(s) { return s === 'Passive' ? '被动' : (s === 'Active' ? '主动' : s); }
+  function dash(x) { return (x === '–' || x === '-' || x === '' || x == null) ? '—' : x; }
+  var rows = club.map(function (f, i) {
+    return '<tr><td><span style="color:#9a9a9a;">' + String(i + 1).padStart(2, '0') + '</span>&nbsp;&nbsp;' + f.name + '</td>'
+      + '<td style="font-weight:700;">' + f.y5.toFixed(2) + '%</td>'
+      + '<td style="font-weight:800;color:var(--green-deep);">' + f.y10.toFixed(2) + '%</td>'
+      + '<td>' + dash(f.fee) + '</td><td>' + (dash(f.risk)==='—'?'—':f.risk+'/7') + '</td><td>' + (dash(f.style)==='—'?'—':'<span class="tc-tag">'+sl(f.style)+'</span>') + '</td></tr>';
+  }).join('');
+  host.innerHTML =
+    '<p class="lede">把 91 只基金按年化回报筛一遍：<strong>5 年 &ge;10% 的有 ' + n5 + ' 只、10 年 &ge;10% 的有 ' + n10 + ' 只</strong>；而 <strong>5 年和 10 年都跑过 10%</strong> 的「长期优质」只有 <strong style="color:var(--green-deep);">' + club.length + ' 只</strong>——下表全部列出（按 10 年年化排序，after fees / before tax / NZD）。</p>'
+    + '<div style="overflow-x:auto;"><table class="tc-table"><thead><tr><th>基金</th><th>5Y 年化</th><th>10Y 年化</th><th>费率</th><th>风险</th><th>类型</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
+    + '<div style="margin-top:14px;background:#fff8e7;border:1px solid #ffd11a;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.7;"><strong>⚠ 看清楚再追：</strong>这份「10%+ 俱乐部」几乎清一色是 <strong>100% 股票的全球 / 美股基金（风险 5–6 / 7）</strong>——10% 的回报从来不是免费的，对应的是 2022 那种 −20%~−33% 的回撤。多元化「核心」基金（如 Milford Active Growth ~7%）进不了这张表，但波动小得多、更适合 3–5 年要用的钱。<strong>过去跑过 10% ≠ 未来还能；这是历史业绩，不是投资建议。</strong></div>';
 })();
 
 </script>

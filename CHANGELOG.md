@@ -6,6 +6,18 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.12.2] — 2026-06-24 · NZ Managed Funds Guide — retitled around the "10%+ club"
+
+> Repositioned the guide from "which fund should I buy" to the reader's real goal — **finding NZ funds that have beaten 10% over the long run**. New data-driven "10%+ 俱乐部" module + reframed hero / SEO title.
+
+### Changed — AI Builder
+
+- **`public/ai-builder/nz-funds.html`** — hero H1 → 「在新西兰，哪些基金长期跑过 10%？」; `<title>` / og:title reframed; subhead now states only ~1/5 of funds cleared 10% long-term (almost all global/US equity). The `#top` leaderboard became a **"10%+ 俱乐部"**: a data-driven table auto-filtering `FUNDS_DATA` for funds ≥10% on BOTH 5Y and 10Y (currently 13), sorted by 10Y, with an amber risk / past≠future caveat for FMA safety. META → v3.3.
+
+### Notes
+
+- Auto-updates on every future data refresh (no hardcoded list). Data + basis unchanged (still 2026-05-31).
+
 ## [1.12.1] — 2026-06-24 · NZ Managed Funds Guide — 数据刷新至 2026-05-31
 
 > Quarterly data refresh of the NZ Managed Funds Guide (`/ai-builder/nz-funds.html`). All 91 PIE-fund returns rolled forward from 2026-04-30 to **2026-05-31** (after fees, before tax, NZD — same basis). Sourced this round from the 15 fund managers' own monthly factsheets with per-fund cross-verification (Mindful Money / Sorted Smart Investor / Morningstar as second source), run via a 28-agent research workflow.

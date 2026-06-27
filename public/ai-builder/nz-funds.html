@@ -931,7 +931,7 @@
           <div class="meta-chip">阅读时长：<strong>~ 14 分钟</strong></div>
           <div class="meta-chip">基金数量：<strong id="meta-fund-count">--</strong></div>
           <div class="meta-chip">主数据源：<strong>InvestNow / Morningstar</strong></div>
-          <div class="meta-chip">版本：<strong>v3.4 · 2026-06-24</strong></div>
+          <div class="meta-chip">版本：<strong>v3.5 · 2026-06-24</strong></div>
           <div class="meta-chip" style="background:#fff8e7;border-color:#ffd11a;">⚠ <strong>教育用途 · 非投资建议</strong></div>
         </div>
       </div>
@@ -1210,6 +1210,47 @@
       .tc-tag{display:inline-block;padding:2px 8px;border-radius:6px;background:#eef6e6;color:var(--green-deep);font-size:12px;font-weight:600;}
     </style>
     <div id="tenclub" class="mt-3"></div>
+
+    <details class="tc-explainer" style="margin-top:16px;border:1px solid rgba(0,0,0,.12);border-radius:14px;padding:0 18px;background:#fafdf7;">
+      <style>.tc-explainer summary{list-style:none;}.tc-explainer summary::-webkit-details-marker{display:none;}.tc-explainer summary::marker{content:"";}.tc-explainer[open] summary .tc-fold{display:none;}</style>
+      <summary style="cursor:pointer;padding:16px 0;font-weight:700;font-size:15px;">🔍 这些基金到底投了什么？为什么「被动」排在「主动」前面？<span class="tc-fold" style="color:var(--green-deep);font-weight:600;">　展开 ▾</span></summary>
+      <div style="padding-bottom:18px;font-size:14px;line-height:1.75;">
+
+        <h4 style="margin:8px 0 6px;font-size:15px;">① 它们实际投了什么（穿透看，约 2026-03~05 快照）</h4>
+        <div style="overflow-x:auto;">
+          <table class="tc-table">
+            <thead><tr><th>基金</th><th>本质是什么</th><th>主要持有</th><th>集中度</th></tr></thead>
+            <tbody>
+              <tr><td>Smart US Large Growth <span class="tc-tag">被动</span></td><td>喂给 Vanguard VUG，追美国大盘<strong>成长</strong>指数</td><td>英伟达13% · 苹果12% · 微软9% · 谷歌11% · 博通 · 亚马逊 · Meta · 特斯拉</td><td>前10 ≈ <strong>65%</strong></td></tr>
+              <tr><td>Smart Australian Resources <span class="tc-tag">被动</span></td><td>直接持有澳洲 ASX200 <strong>资源</strong>指数</td><td><strong>BHP 35%</strong> · Woodside · 力拓 · Fortescue · Santos</td><td>BHP 占 ⅓ · 前10 ≈ 75%</td></tr>
+              <tr><td>Smart US 500 <span class="tc-tag">被动</span></td><td>喂给 Vanguard VOO，追<strong>标普 500</strong></td><td>英伟达8% · 苹果7% · 微软 · 亚马逊 · 谷歌…「七巨头」≈ ⅓</td><td>前10 ≈ 39%</td></tr>
+              <tr><td>Mercer Core Global <span class="tc-tag" style="background:#e7eefb;color:#3a5bb8;">主动</span></td><td>多经理量化「核心」，基准 MSCI World</td><td>同样的巨头（英伟达5%·苹果5%…）· 美国 ~70% + 其他发达市场</td><td>前10 ≈ 24%</td></tr>
+              <tr><td>Harbour T. Rowe Price <span class="tc-tag" style="background:#e7eefb;color:#3a5bb8;">主动</span></td><td>T. Rowe Price 真人选股，约 150 只</td><td>英伟达 · 谷歌 · 苹果 · AMD · 台积电 · 美国 62% + 亚洲</td><td>前10 ≈ 29%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:10px;"><strong>关键：①③④⑤ 其实是同一笔押注。</strong>英伟达 / 苹果 / 微软 / 谷歌 / 亚马逊 / 博通 / Meta 这同样 7 只美国巨头，在第 ①③④⑤ 只里反复出现——它们本质不是 5 个不同策略，而是「<strong>含多少美国科技巨头</strong>」的 5 种不同浓度。只有 ② 澳洲资源是完全不同的另一笔押注（靠 BHP 一只扛起 ⅓）。</p>
+
+        <h4 style="margin:18px 0 6px;font-size:15px;">② 为什么「被动」超过了「主动」</h4>
+        <p>那张榜单看着像「便宜的被动打败了贵的主动」——<strong>一半是真的，一半是错觉</strong>。</p>
+        <p style="margin:6px 0 2px;color:var(--green-deep);font-weight:700;">真实的三股力：</p>
+        <ul style="padding-left:20px;margin:0 0 10px;">
+          <li><strong>费率拖累（会复利）</strong>：被动 0.34–0.54% vs 主动 1.19–1.26%。主动每年要先跑赢指数 ~1% 才打平。</li>
+          <li><strong>这十年属于美国科技巨头</strong>：名次的头号驱动不是经理本事，而是「七巨头」的史诗行情——<strong>谁装得越纯、越集中（①&gt;③），谁赢得越多</strong>。④⑤ 持有的是<strong>同样的股票</strong>，只是被日欧 / 新兴市场稀释了，只吃到同一波的一部分。这是<strong>持仓构成</strong>，不是「主动输给被动」。</li>
+          <li><strong>结构性证据（SPIVA）</strong>：全球 10–15 年看，约 <strong>85–90%+</strong> 的主动基金扣费后跑输自己的基准——所以「长期被动通常赢」确有其事。</li>
+        </ul>
+        <div style="margin-top:8px;background:#fff8e7;border:1px solid #ffd11a;border-radius:12px;padding:14px 16px;">
+          <strong>⚠ 但这张表是「拿苹果比橘子」：</strong>
+          <ul style="padding-left:20px;margin:8px 0 0;">
+            <li>①③（被动赢家）是<strong>纯美国 / 纯成长、风险 6/7、更集中</strong>；④⑤（主动）是<strong>分散的全球盘、风险 5/7</strong>。它们排名靠后是因为更分散，<strong>不是因为主动差</strong>。</li>
+            <li><strong>同类比才公平</strong>：和被动全球指数 Smart Total World（10Y <strong>12.99%</strong>）比——Mercer <strong>13.99%</strong>、Harbour <strong>13.62%</strong> 其实<strong>双双跑赢了被动全球指数</strong>。在自己的赛道里，这两只主动这十年是<strong>加了分</strong>的。</li>
+            <li><strong>② 澳洲资源是假象</strong>：它是被动，但赢在大宗商品周期、BHP 占 ⅓、毫无分散，下行可能腰斩——别读成「被动有效」。</li>
+            <li><strong>过去 ≠ 未来</strong>：撑起 ①③ 的「美国成长独大」可能反转（NZD 反弹、美科技杀估值）；集中度是双刃剑。</li>
+          </ul>
+        </div>
+        <p class="t-fine" style="margin-top:12px;color:#6b6b6b;">持仓为约 2026-03~05 快照，权重随市场每日漂移；来源：Sorted 官方披露 / 各家 factsheet / 底层 ETF（VUG·VOO）。本块为教育性说明，非投资建议。</p>
+      </div>
+    </details>
 
     <div class="chart-card mt-3">
       <h3>Top 15 / 10 年年化收益</h3>
@@ -1758,7 +1799,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.4 · 2026-06-24</code></span>
+      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.5 · 2026-06-24</code></span>
       <span>无追踪 · 无 cookie · 完全静态 HTML · 内容采用 CC BY 4.0 开放</span>
     </div>
   </div>
@@ -1777,7 +1818,7 @@ const META = {
   dataDate: '2026-05-31',          // 基金回报快照日（2026-06-24 多源刷新：基金公司官方月报 + 交叉验证）
   publishedDate: '2026-06-24',
   verifiedDate: '2026-06-24',      // v3.2 多源刷新核验
-  version: 'v3.4',
+  version: 'v3.5',
   fundCount: 91,
   source: 'InvestNow / Morningstar',
   nzdUsd5YStart: 0.71,

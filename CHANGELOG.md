@@ -6,6 +6,18 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.12.4] — 2026-06-24 · NZ Managed Funds Guide — holdings + passive-vs-active explainer
+
+> Added a collapsed `<details>` explainer under the "10%+ club" answering the natural follow-up: what do the top funds actually hold, and why does passive sit above active?
+
+### Changed — AI Builder
+
+- **`public/ai-builder/nz-funds.html`** — new foldable explainer in the `#top` section: (1) look-through holdings of the top 5 (VUG / VOO / ASX200 Resources / MSCI World quant / T. Rowe stock-picking) showing ①③④⑤ are the same 7 US mega-caps at different concentrations, ② is a BHP-⅓ commodity bet; (2) honest passive-vs-active explanation — fee drag + the US-mega-cap decade + SPIVA, plus the apples-to-oranges caveat (same-category, Mercer/Harbour actually beat the passive global index; resources is a cycle illusion; past≠future). Education only, not a recommendation. META → v3.5.
+
+### Notes
+
+- Holdings are a static ~2026-03–05 snapshot (sourced from Sorted disclosures / factsheets / underlying ETFs), not data-driven — refresh manually if the top-5 membership changes materially.
+
 ## [1.12.3] — 2026-06-24 · NZ Managed Funds Guide — strip fund/platform recommendations
 
 > Made the guide recommendation-free (data + education only) for cleaner FMA positioning. Removed the sample-portfolios section and all named-fund / platform endorsements; kept every factual data table.

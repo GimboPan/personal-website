@@ -6,6 +6,18 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.12.3] — 2026-06-24 · NZ Managed Funds Guide — strip fund/platform recommendations
+
+> Made the guide recommendation-free (data + education only) for cleaner FMA positioning. Removed the sample-portfolios section and all named-fund / platform endorsements; kept every factual data table.
+
+### Changed — AI Builder
+
+- **`public/ai-builder/nz-funds.html`** — deleted the "三套配置示例" portfolios section (HTML + `PORTFOLIOS` data + `renderPortfolio` JS + nav/TOC/CTA links; mobile menu renumbered). Platforms table kept but stripped of the "适合" column + "本指南推荐主力平台" + steering lede. Fee-tier "代表：&lt;fund&gt;" examples genericised; 2-min-read and FAQ fund/allocation recommendations neutralised ("see the data + talk to a licensed FA"). publishedDate → 2026-06-24 (页面更新 now shows today). META → v3.4.
+
+### Notes
+
+- Kept as factual data (not recommendations): the 91-fund table, 10Y leaderboard, 10%+ club, benchmark comparison, provider-origin, tax/risk/fee/currency/methodology, #next-steps (查持牌 FA), disclaimer. Data + basis unchanged (still 2026-05-31).
+
 ## [1.12.2] — 2026-06-24 · NZ Managed Funds Guide — retitled around the "10%+ club"
 
 > Repositioned the guide from "which fund should I buy" to the reader's real goal — **finding NZ funds that have beaten 10% over the long run**. New data-driven "10%+ 俱乐部" module + reframed hero / SEO title.

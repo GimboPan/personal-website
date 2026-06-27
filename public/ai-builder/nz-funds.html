@@ -852,7 +852,6 @@
       <li><a href="#fees" data-section="fees">费用影响</a></li>
       <li><a href="#currency" data-section="currency">货币对冲</a></li>
       <li><a href="#benchmark" data-section="benchmark">基准对比</a></li>
-      <li><a href="#portfolios" data-section="portfolios">三套组合</a></li>
       <li><a href="#origin" data-section="origin">提供商</a></li>
       <li><a href="#platforms" data-section="platforms">平台对比</a></li>
       <li><a href="#methodology" data-section="methodology">方法论</a></li>
@@ -879,7 +878,6 @@
       <a href="#risk">风险</a>
       <a href="#fees">费用</a>
       <a href="#currency">汇率</a>
-      <a href="#portfolios">组合</a>
       <a href="#platforms">平台</a>
     </div>
     <a class="nav-cta" href="#funds">查基金 →</a>
@@ -900,12 +898,11 @@
   <a href="#fees"><span class="num">08</span> 费用影响</a>
   <a href="#currency"><span class="num">09</span> 货币对冲</a>
   <a href="#benchmark"><span class="num">10</span> 基准对比</a>
-  <a href="#portfolios"><span class="num">11</span> 三套组合</a>
-  <a href="#origin"><span class="num">12</span> 提供商</a>
-  <a href="#platforms"><span class="num">13</span> 平台对比</a>
-  <a href="#methodology"><span class="num">14</span> 方法论</a>
-  <a href="#next-steps"><span class="num">15</span> 下一步</a>
-  <a href="#disclaimer"><span class="num">16</span> 免责</a>
+  <a href="#origin"><span class="num">11</span> 提供商</a>
+  <a href="#platforms"><span class="num">12</span> 平台对比</a>
+  <a href="#methodology"><span class="num">13</span> 方法论</a>
+  <a href="#next-steps"><span class="num">14</span> 下一步</a>
+  <a href="#disclaimer"><span class="num">15</span> 免责</a>
 </div>
 
 <!-- ====================================================================
@@ -934,7 +931,7 @@
           <div class="meta-chip">阅读时长：<strong>~ 14 分钟</strong></div>
           <div class="meta-chip">基金数量：<strong id="meta-fund-count">--</strong></div>
           <div class="meta-chip">主数据源：<strong>InvestNow / Morningstar</strong></div>
-          <div class="meta-chip">版本：<strong>v3.3 · 2026-06-24</strong></div>
+          <div class="meta-chip">版本：<strong>v3.4 · 2026-06-24</strong></div>
           <div class="meta-chip" style="background:#fff8e7;border-color:#ffd11a;">⚠ <strong>教育用途 · 非投资建议</strong></div>
         </div>
       </div>
@@ -973,11 +970,10 @@
       <ol class="list-prose" style="font-size: 15px; padding-left: 20px;">
         <li><strong>买 NZ 注册的 PIE 基金</strong>（几乎所有本地基金都是）——税封顶 28%；<strong>别直接买美股 / 海外 ETF</strong>（踩 FIF，按个人税率最高 39%）。</li>
         <li><strong>先确认你的 PIR</strong>（应税收入 &gt; $53,500 基本就是 28%）——5 分钟、全页最高性价比的一步。</li>
-        <li><strong>低费被动指数打底</strong>（Smart / Simplicity，费率 ~0.3%）<strong> ＋ 按用钱年限选风险等级</strong>——钱越久不用、股票比例越高；3 年内要用就别追 10%。</li>
+        <li><strong>低费被动指数打底</strong>（费率 ~0.3% 的宽基指数基金）<strong> ＋ 按用钱年限选风险等级</strong>——钱越久不用、股票比例越高；3 年内要用就别追 10%。</li>
       </ol>
       <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;">
         <a class="nav-cta" href="#funds">查基金大全（按费率 / 风险排序）→</a>
-        <a class="nav-cta" href="#portfolios" style="background: #fff; color: var(--green-deep); box-shadow: inset 0 0 0 1.5px var(--green);">看三套组合 →</a>
       </div>
       <p class="t-fine" style="margin-top: 12px;">下面是支撑这 3 条的完整数据与推理；不急的话，从「税务」那节开始读。</p>
     </div>
@@ -1390,22 +1386,22 @@
       <div class="card reveal">
         <div class="lbl">超低费 0.10–0.35%</div>
         <div class="num">$3k</div>
-        <div class="sub-text">10年总费用（$100k）。代表：Simplicity Growth、Smart US 500 ETF。</div>
+        <div class="sub-text">10年总费用（$100k）。代表：低费被动指数 / 宽基 ETF。</div>
       </div>
       <div class="card reveal">
         <div class="lbl">低费 0.35–0.60%</div>
         <div class="num">$6k</div>
-        <div class="sub-text">代表：SmartShares 行业 ETF、SuperLife 基金。</div>
+        <div class="sub-text">代表：行业 / 主题 ETF。</div>
       </div>
       <div class="card reveal">
         <div class="lbl">中费 0.75–1.10%</div>
         <div class="num">$11k</div>
-        <div class="sub-text">代表：Milford Active Growth、Generate、Booster。</div>
+        <div class="sub-text">代表：主动多元化基金。</div>
       </div>
       <div class="card feat reveal">
         <div class="lbl">高费 1.25–1.80%</div>
         <div class="num">$18k</div>
-        <div class="sub-text">代表：Fisher Funds Global、Milford Dynamic、Elevation。要求 alpha 显著才划算。</div>
+        <div class="sub-text">代表：高费主动基金。要求 alpha 显著才划算。</div>
       </div>
     </div>
   </div>
@@ -1475,72 +1471,6 @@
   </div>
 </section>
 
-<!-- ====================================================================
-     SECTION 13 — Portfolios
-     ==================================================================== -->
-<section id="portfolios">
-  <div class="container">
-    <div class="eyebrow">怎么配 $100k</div>
-    <h2>三套<br>资产类别配置示例</h2>
-    <p class="lede">下面的三套示例按<strong>资产类别（asset class）+ 比例</strong>表达，每条后列举该类别下的<strong>同类可选基金</strong>——可任意替换。</p>
-
-    <div class="callout danger mt-3">
-      <span class="callout-icon">⚠</span>
-      <p><strong>这不是个性化投资建议（personalised advice）。</strong>NZ 受 FMA 监管的 Financial Advice Provider 制度下，针对具体个人的"具体基金 + 具体金额"配置只能由<a href="https://fsp-register.companiesoffice.govt.nz/" target="_blank" rel="noopener">持牌 FA</a> 提供。本节仅为教育用途的资产类别框架，请把它当作"和持牌 FA 讨论的起点"，不是终点。</p>
-    </div>
-
-    <div class="grid grid-3 mt-4">
-      <!-- Conservative -->
-      <div class="portfolio">
-        <div class="ptag">保守稳健</div>
-        <h3>护城河</h3>
-        <p class="blurb">3 年内可能动用 / 心理承受 −10% 以内回撤 / 优先保本。</p>
-        <div class="meta-row mt-2">
-          <div class="meta-chip">目标年化 <strong>5–7%</strong></div>
-          <div class="meta-chip">最大回撤 <strong>~10%</strong></div>
-        </div>
-        <div class="alloc-list" id="alloc-conservative"></div>
-      </div>
-      <!-- Balanced - featured -->
-      <div class="portfolio feat">
-        <div class="ptag">示例 · 平衡</div>
-        <h3>稳进取</h3>
-        <p class="blurb">5 年以上 / 接受 −15% 回撤 / 兼顾增长与稳健。多数家庭场景的常见参考。</p>
-        <div class="meta-row mt-2">
-          <div class="meta-chip">目标年化 <strong>7–9%</strong></div>
-          <div class="meta-chip">最大回撤 <strong>~15%</strong></div>
-        </div>
-        <div class="alloc-list" id="alloc-balanced"></div>
-      </div>
-      <!-- Aggressive -->
-      <div class="portfolio">
-        <div class="ptag">进取增长</div>
-        <h3>火力全开</h3>
-        <p class="blurb">10 年以上 / 接受 −25% 回撤 / 追求 10%+ 长期复利。本金要"放得久"。</p>
-        <div class="meta-row mt-2">
-          <div class="meta-chip">目标年化 <strong>9–12%</strong></div>
-          <div class="meta-chip">最大回撤 <strong>~25%</strong></div>
-        </div>
-        <div class="alloc-list" id="alloc-aggressive"></div>
-      </div>
-    </div>
-
-    <div class="callout green mt-3">
-      <span class="callout-icon">✓</span>
-      <p><strong>3 个组合都做到的事</strong>：① 100% PIE 结构（避免 FIF）；② 至少 60% 海外分散（NZ 股市太小）；③ 含一只低费率被动 ETF 做"地基"；④ 只用 $100k 即可在 InvestNow 一站式实现，无平台费。</p>
-    </div>
-
-    <details>
-      <summary>定投 vs 一次性投入：哪个好？</summary>
-      <p>历史数据上 <strong>一次性投入（lump sum）</strong>大约 2/3 时间跑赢分批定投——因为市场长期向上。但定投的心理价值在于：如果第 1 个月就跌 15%，分批可以让你不至于崩溃割肉。</p>
-      <ul>
-        <li>$100k 一次性 → 长期期望收益更高，但需要心理承受力</li>
-        <li>$100k / 6–12 个月分批 → 平均成本，但牺牲约 0.5–1% 长期回报</li>
-        <li>折中：30% 立即入场 + 70% 分 6 个月平均建仓</li>
-      </ul>
-    </details>
-  </div>
-</section>
 
 <!-- ====================================================================
      SECTION 14 — Provider origin
@@ -1565,7 +1495,7 @@
       <div class="card">
         <div class="lbl"><span class="badge global">海外跨国</span></div>
         <h3 class="h3-card-sm">Mercer（美国 Marsh McLennan）<br>Russell Investments（美国西雅图）</h3>
-        <p class="t-caption">在 NZ 都有 PIE 注册基金，可放心持有；管理团队和投资策略来自全球网络。Mercer Core Global Shares 长期表现强劲。</p>
+        <p class="t-caption">在 NZ 都有 PIE 注册基金；管理团队和投资策略来自全球网络。</p>
       </div>
     </div>
   </div>
@@ -1578,7 +1508,7 @@
   <div class="container">
     <div class="eyebrow">怎么买</div>
     <h2>购买平台对比</h2>
-    <p class="lede">$100k 体量下，平台费比基金费率影响小，但<strong>覆盖面</strong>差异巨大。InvestNow 一家几乎能买齐本指南所有 PIE 基金。</p>
+    <p class="lede">$100k 体量下，平台费比基金费率影响小，但<strong>覆盖面</strong>与 FIF 风险差异巨大。下表为各平台的客观对比（覆盖 / 费用 / 最低投资 / FIF 风险），不构成任何推荐。</p>
 
     <div class="tablewrap mt-3">
       <table>
@@ -1589,7 +1519,6 @@
             <th>平台费</th>
             <th>最低投资</th>
             <th>FIF 风险</th>
-            <th>适合</th>
           </tr>
         </thead>
         <tbody>
@@ -1599,7 +1528,6 @@
             <td class="num-cell green-text">$0</td>
             <td>$50 定投 / $250 一次性</td>
             <td class="green-text">无（全为 PIE）</td>
-            <td>本指南推荐主力平台</td>
           </tr>
           <tr>
             <td><strong>Sharesies</strong></td>
@@ -1607,7 +1535,6 @@
             <td class="num-cell">$3 / $7 / $15 月订阅 + 超额 1.9%(封顶) + 0.5% 汇兑</td>
             <td>$1</td>
             <td class="red-text">直接买美股会触发</td>
-            <td>新手 / 小额 / 想买单股</td>
           </tr>
           <tr>
             <td><strong>Hatch</strong></td>
@@ -1615,7 +1542,6 @@
             <td class="num-cell">US$3 / 笔（≤300股，超出 +US$0.01/股）+ 0.5% 汇兑（无月费）</td>
             <td>$0</td>
             <td class="red-text">$50k+ 几乎必触发</td>
-            <td>愿意自己处理 FIF / 想直接买美国 ETF</td>
           </tr>
           <tr>
             <td><strong>直接通过基金公司</strong></td>
@@ -1623,7 +1549,6 @@
             <td class="num-cell green-text">$0</td>
             <td>$1k–10k</td>
             <td class="green-text">无（PIE）</td>
-            <td>专一持有 Milford / Generate 等</td>
           </tr>
           <tr>
             <td><strong>NZX 直接（通过券商）</strong></td>
@@ -1631,7 +1556,6 @@
             <td class="num-cell">交易费 $5–30 / 笔</td>
             <td>1 股</td>
             <td class="green-text">PIE 结构无 FIF</td>
-            <td>想自己挑 ETF / 不在乎交易费</td>
           </tr>
           <tr>
             <td><strong>IBKR (Interactive Brokers)</strong></td>
@@ -1639,7 +1563,6 @@
             <td class="num-cell">交易费极低</td>
             <td>$0</td>
             <td class="red-text">境外资产几乎必触发 FIF</td>
-            <td>不适合本指南目标场景</td>
           </tr>
         </tbody>
       </table>
@@ -1697,7 +1620,7 @@
     <h3 class="h3-card mt-3">常见问题</h3>
     <details>
       <summary>$100k 全部押 Smart US 500 ETF 行不行？</summary>
-      <p>历史表现确实很强（10Y 15.90%），但风险极高：① 单一国家、单一指数；② 2022 跌过 −19%，1995–2025 内最差 12 个月跌 −37%（2008）；③ 全部押 USD，未来 NZD 反弹会显著吃掉收益。建议作为组合的<strong>主轴而非全部</strong>——比如平衡组合的 35–45%。</p>
+      <p>历史表现确实很强（10Y 15.83%），但风险极高：① 单一国家、单一指数；② 2022 跌过 −19%，1995–2025 内最差 12 个月跌 −37%（2008）；③ 全部押 USD，未来 NZD 反弹会显著吃掉收益。是否、以及以多大比例持有单一市场，取决于你的风险承受力与时间——宜与持牌 FA 讨论。</p>
     </details>
     <details>
       <summary>KiwiSaver 已经买了 Aggressive，还需要 Managed Fund 吗？</summary>
@@ -1705,11 +1628,11 @@
     </details>
     <details>
       <summary>定投比一次性投入安全吗？</summary>
-      <p>"安全"看怎么定义。从期望回报看，约 2/3 时间一次性投入跑赢定投——因为市场长期向上。定投的真实价值是<strong>降低你做错决定的概率</strong>：如果你刚投完就跌 20% 受不了割肉，定投会让你还有钱在手。$100k 推荐做法：30% 立即 + 70% / 6 个月分批。</p>
+      <p>"安全"看怎么定义。从期望回报看，约 2/3 时间一次性投入跑赢定投——因为市场长期向上。定投的真实价值是<strong>降低你做错决定的概率</strong>：如果你刚投完就跌 20% 受不了割肉，定投会让你还有钱在手。至于具体比例，没有标准答案，取决于你的现金流与心理承受力。</p>
     </details>
     <details>
-      <summary>主动基金（Milford 等）还值得买吗？</summary>
-      <p>大部分主动基金长期跑不赢被动指数（这是全球数据，不只是 NZ）。但<strong>少数主动基金</strong>因策略独特、规模适中、团队稳定能持续创造 alpha——Milford Active Growth 就是其中之一。$100k 可考虑 20–40% 主动 + 其余被动 ETF 的组合，让两种风格都贡献。</p>
+      <summary>主动基金还值得买吗？</summary>
+      <p>大部分主动基金长期跑不赢被动指数（这是全球数据，不只是 NZ）。但少数主动基金因策略独特、规模适中、团队稳定，长期跑出了 alpha——具体是哪些、值不值它更高的费率，需要你对照「基金大全」自己看数据，并与持牌 FA 讨论。</p>
     </details>
     <details>
       <summary>这页面怎么更新数据？</summary>
@@ -1765,7 +1688,7 @@
       <li><strong>历史回报不代表未来</strong>——尤其是过去 10 年美股的强势行情，未必在下一个 10 年延续。</li>
       <li><strong>所有金融产品都有亏损可能</strong>——包括"保守"基金（2022 NZ 债券基金跌了约 10%）。</li>
       <li><strong>税法每年都可能变</strong>——PIE / FIF 规则细节请以 IRD 当年最新口径为准。</li>
-      <li><strong>不要把鸡蛋放在一个篮子</strong>——即使数据好的基金。本指南所有"组合"都至少包含 3 只不同资产基金。</li>
+      <li><strong>不要把鸡蛋放在一个篮子</strong>——即使数据再好的基金，也应跨资产类别分散。</li>
       <li><strong>能承受多深的亏损，先想清楚</strong>——回撤承受力（risk tolerance）比预期收益（return target）更重要。</li>
     </ul>
 
@@ -1802,14 +1725,13 @@
     <div class="footer-grid">
       <div>
         <div class="footer-mark">NZ 华人基金<br>投资指南</div>
-        <p>面向新西兰华人投资者的开源数据指南。覆盖 90+ 主流 PIE Managed Fund，含税务、风险、组合配置与平台对比。</p>
+        <p>面向新西兰华人投资者的开源数据指南。覆盖 90+ 主流 PIE Managed Fund，含税务、风险、费用与平台对比。</p>
       </div>
       <div>
         <h4>导航</h4>
         <ul>
           <li><a href="#tax">税务（PIE/FIF）</a></li>
           <li><a href="#funds">基金大全</a></li>
-          <li><a href="#portfolios">三套组合</a></li>
           <li><a href="#platforms">平台对比</a></li>
           <li><a href="#methodology">方法论</a></li>
         </ul>
@@ -1836,7 +1758,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.3 · 2026-06-24</code></span>
+      <span>数据日期 <code id="footer-data-date">--</code> · 页面更新 <code id="footer-page-date">--</code> · <code>v3.4 · 2026-06-24</code></span>
       <span>无追踪 · 无 cookie · 完全静态 HTML · 内容采用 CC BY 4.0 开放</span>
     </div>
   </div>
@@ -1853,9 +1775,9 @@
 
 const META = {
   dataDate: '2026-05-31',          // 基金回报快照日（2026-06-24 多源刷新：基金公司官方月报 + 交叉验证）
-  publishedDate: '2026-05-05',
+  publishedDate: '2026-06-24',
   verifiedDate: '2026-06-24',      // v3.2 多源刷新核验
-  version: 'v3.3',
+  version: 'v3.4',
   fundCount: 91,
   source: 'InvestNow / Morningstar',
   nzdUsd5YStart: 0.71,
@@ -2062,51 +1984,6 @@ const FUNDS_DATA = [
   ['Smart US Small Cap ETF','International Equities','18.05%','10.84%','12.09%','0.51%','6','Passive','100% / 0%','$54.40M'],
 ];
 
-/* ===== 三套样板组合（资产类别 + 同类基金示例）
-   注意：以教育用途按资产类别表达，每条后列举的是"同类可选"基金。
-   不构成具体投资建议——读者应根据自身情况与持牌 FA 讨论。 ===== */
-const PORTFOLIOS = {
-  conservative: [
-    { class: 'NZ 固定收益（债券）',  pct: 30, note: '本地债券压舱石',
-      examples: 'Smart NZ Bond ETF · Harbour NZ Core FI · Milford Trans-Tasman Bond' },
-    { class: '多元化保守基金（30/70 股债）',  pct: 25, note: '专业经理操作',
-      examples: 'Milford Conservative · Mercer Responsible Conservative · ANZ OneAnswer Conservative' },
-    { class: '全球股票指数',              pct: 20, note: '广泛分散',
-      examples: 'Smart Total World ETF · Russell Global Shares · ANZ OneAnswer International Share' },
-    { class: '现金 / 货币基金',            pct: 15, note: '流动性缓冲',
-      examples: 'Smart NZ Cash ETF · Mercer Macquarie NZ Cash · Fisher Funds CashPlus' },
-    { class: 'ESG 多元化',                 pct: 10, note: '可持续投资偏好',
-      examples: 'Mercer Responsible Balanced · Pathfinder Global Water · Pathfinder Global Property' },
-  ],
-  balanced: [
-    { class: '全球股票指数',              pct: 30, note: '组合核心',
-      examples: 'Smart Total World ETF · Russell Global Shares · Mercer Global Shares' },
-    { class: '多元化激进 / 主动 (60/40)',  pct: 25, note: '主动经理 alpha',
-      examples: 'Milford Active Growth · Mercer Responsible Growth · Generate Focused Growth' },
-    { class: '美股大盘指数',              pct: 15, note: '增长引擎',
-      examples: 'Smart US 500 ETF · ANZ OneAnswer International Share · Russell Global Shares' },
-    { class: 'NZ 固定收益（债券）',        pct: 15, note: '波动缓冲',
-      examples: 'Smart NZ Bond ETF · Harbour NZ Core FI · Milford Trans-Tasman Bond' },
-    { class: '全球股票 hedged',           pct: 10, note: '降低货币波动',
-      examples: 'Russell Hedged Global Shares · Mercer Core Hedged Global Shares' },
-    { class: '澳股大盘',                   pct:  5, note: '近邻分散',
-      examples: 'Smart Australian Top 20 ETF · Smart Australian Mid Cap ETF · Devon Australian' },
-  ],
-  aggressive: [
-    { class: '全球股票指数',              pct: 30, note: '组合核心',
-      examples: 'Smart Total World ETF · Russell Global Shares · Mercer Global Shares' },
-    { class: '美股大盘指数',              pct: 25, note: '主增长引擎',
-      examples: 'Smart US 500 ETF · Russell Global Shares · Mercer Core Global Shares' },
-    { class: '美股成长 / 高 beta',         pct: 15, note: '更高潜在回报与回撤',
-      examples: 'Smart US Large Growth ETF · Smart US Mid Cap ETF · Fisher Funds International Growth' },
-    { class: '主动全球股票',              pct: 15, note: '寻找 alpha',
-      examples: 'Mercer Core Global Shares · Harbour T. Rowe Price Global Equity · Milford Global Equity' },
-    { class: '商品 / 资源',                pct: 10, note: '分散非美股风险',
-      examples: 'Smart Australian Resources ETF · Smart Australian Top 20 ETF · Salt Long Short' },
-    { class: 'NZ 债券缓冲',                pct:  5, note: '少量保护',
-      examples: 'Smart NZ Bond ETF · Harbour NZ Corporate Bond' },
-  ],
-};
 
 /* ===== 风险指标表 ===== */
 const RISK_TABLE = [
@@ -2328,23 +2205,6 @@ bmTbody.innerHTML = BENCHMARKS.map(b => `
 `).join('');
 
 /* ===== Portfolios — render asset-class allocations (FMA-aware) ===== */
-function renderPortfolio(id, items) {
-  const el = document.getElementById(id);
-  el.innerHTML = items.map(it => `
-    <div class="alloc-row">
-      <div class="alloc-head">
-        <span class="alloc-name">${it.class}</span>
-        <span class="alloc-pct">${it.pct}%</span>
-      </div>
-      <div class="alloc-bar"><div class="alloc-bar-fill" style="width: ${it.pct * 2.5}%; max-width: 100%;"></div></div>
-      <div class="alloc-note">${it.note}</div>
-      <div class="alloc-examples"><span class="alloc-examples-label">同类可选：</span>${it.examples}</div>
-    </div>
-  `).join('');
-}
-renderPortfolio('alloc-conservative', PORTFOLIOS.conservative);
-renderPortfolio('alloc-balanced', PORTFOLIOS.balanced);
-renderPortfolio('alloc-aggressive', PORTFOLIOS.aggressive);
 
 /* ============================================================================
    Charts

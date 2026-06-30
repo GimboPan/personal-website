@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import CinematicHero from '~/components/CinematicHero.astro';
-import { currentlyReading, shelf, groups, talebOverview, talebBooks, screen, podcastLines, podcasts } from '~/data/life';
+import { currentlyReading, shelf, groups, northStars, talebOverview, talebBooks, screen, podcastLines, podcasts } from '~/data/life';
 
 // Split the shelf into two tiers once there are enough books to fill both;
 // with just a few, keep them together on a single plank.
@@ -29,6 +29,25 @@ const lineLabel = (key) => podcastLines.find((l) => l.key === key)?.label ?? key
   ogImage="/og-life.jpg"
 >
   <CinematicHero />
+
+  <!-- ============ ETHOS · FOUR NORTH STARS ============ -->
+  <section id="why" class="relative border-b border-hairline scroll-mt-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12 py-12 md:py-14">
+      <div class="terminal text-lime mb-5 text-[11px]">// why all this input · 向内生长</div>
+      <ul class="flex flex-wrap gap-2.5 md:gap-3">
+        {northStars.map((s) => (
+          <li
+            class="star inline-flex items-center gap-2.5 rounded-full pl-3.5 pr-4 py-2 transition-transform duration-300 ease-out hover:-translate-y-0.5"
+            style={`--hue:${s.hue}; background:${s.hue}1a; border:1px solid ${s.hue}3d;`}
+          >
+            <span class="w-2 h-2 rounded-full shrink-0" style={`background:${s.hue}; box-shadow:0 0 8px ${s.hue}aa;`}></span>
+            <span class="font-display text-base md:text-lg font-black uppercase tracking-tight leading-none" style={`color:${s.hue};`}>{s.en}</span>
+            <span class="font-mono text-[10px] tracking-tool text-ink-gray">{s.zh}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
   <!-- ============ MODULE 1 · WRITING THE BOOK ============ -->
   <section id="more" class="relative scroll-mt-20">
@@ -458,6 +477,17 @@ const lineLabel = (key) => podcastLines.find((l) => l.key === key)?.label ?? key
   </section>
 
   <style>
+    /* ── North-star cards (ethos band) ───────────────────────────────── */
+    .star:hover {
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--hue) 55%, transparent),
+        0 18px 28px -14px rgba(0, 0, 0, 0.8);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .star,
+      .star:hover { transform: none; }
+    }
+
     /* ── Currently-reading cover cards ───────────────────────────────── */
     .reading-card:hover {
       box-shadow:

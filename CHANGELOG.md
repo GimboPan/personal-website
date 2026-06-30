@@ -6,6 +6,27 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.13.0] — 2026-06-30 · Life — four north-star tags ("why all this input")
+
+> Reframed `/life` from "what I consume" to "what it's for". A minimal band under the cinematic hero names the four things the input serves — no manifesto, just four tags.
+
+### Added — Life
+
+- **`src/data/life.ts`** — new `NorthStar` interface + `northStars` array (single source of truth): Inner Peace (心安), Joy (喜悦), Love (爱), Creativity (创造), each with an accent hue drawn from the existing shelf palette.
+- **`src/pages/life.astro`** — new `#why` band between the hero and "Writing the Book": a single eyebrow `// why all this input · 向内生长` over four hue-tinted pill tags (glowing accent dot + display word + CJK pairing), with a per-tag hover lift/ring + reduced-motion guard.
+
+### Notes
+
+- Deliberately wordless — the four pursuits frame the input modules (Reading, Reel & Radio) as means, not ends. Lime stays an accent only; the tags use the muted shelf hues. (`gloss` field retained on `NorthStar` for possible future expansion.)
+
+## [1.12.5] — 2026-06-30 · Life shelf — Sally Rooney trilogy
+
+> Added Sally Rooney's three millennial-relationship novels to the virtual bookshelf on `/life`, spine-out alongside the rest.
+
+### Added — Life
+
+- **`src/data/life.ts`** — three new `shelf` entries: *Conversations with Friends* (`#c77b8b` rose), *Normal People* (`#3f7fae` teal-blue), *Beautiful World, Where Are You* (`#cf9d5e` ochre) — spine hues echoing each book's cover. They slot onto the existing two-tier wall shelf with no layout changes.
+
 ## [1.12.4] — 2026-06-24 · NZ Managed Funds Guide — holdings + passive-vs-active explainer
 
 > Added a collapsed `<details>` explainer under the "10%+ club" answering the natural follow-up: what do the top funds actually hold, and why does passive sit above active?

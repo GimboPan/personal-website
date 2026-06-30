@@ -89,6 +89,26 @@ export interface TalebViz {
   status: 'live' | 'wip';
 }
 
+/* ─── North stars ─────────────────────────────────────────────────────────
+   The why beneath the input. Reading, listening, watching aren't collection —
+   they're in service of growing inward, toward these four. Framed at the top
+   of /life so the modules below read as means, not ends. */
+export interface NorthStar {
+  en: string;
+  zh: string;
+  /** One-line gloss. */
+  gloss: string;
+  /** Accent hue (echoes the shelf palette). */
+  hue: string;
+}
+
+export const northStars: NorthStar[] = [
+  { en: 'Inner Peace', zh: '心安', hue: '#3e8f86', gloss: "The calm that doesn't depend on what's happening around me." },
+  { en: 'Joy', zh: '喜悦', hue: '#c9a14a', gloss: 'Delight in small, ordinary, un-extraordinary things.' },
+  { en: 'Love', zh: '爱', hue: '#c2603e', gloss: 'For the people in the room, this place, and the work itself.' },
+  { en: 'Creativity', zh: '创造', hue: '#7e76c2', gloss: "The pull to make something that wasn't there before." },
+];
+
 /* Reading list — the three currently on the table, shown cover-out. */
 export const currentlyReading: Book[] = [
   {
@@ -130,6 +150,9 @@ export const shelf: ShelfBook[] = [
   { title: 'A Different Kind of Power', author: 'Jacinda Ardern', hue: '#3e8f86' },
   { title: 'Open to Work', author: 'Ryan Roslansky', hue: '#c9a14a' },
   { title: 'Team Intelligence', author: '', hue: '#7e76c2' },
+  { title: 'Conversations with Friends', author: 'Sally Rooney', hue: '#c77b8b' },
+  { title: 'Normal People', author: 'Sally Rooney', hue: '#3f7fae' },
+  { title: 'Beautiful World, Where Are You', author: 'Sally Rooney', hue: '#cf9d5e' },
 ];
 
 /* ─── Taleb 专区 ──────────────────────────────────────────────────────────

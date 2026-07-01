@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我天天说「循环 &gt; 派活」,其实我只是派了一次活 · 用 Loops 的四级阶梯给自己定位 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="Anthropic 的《Getting started with loops》把 loop 分成四级:手动循环、目标循环(/goal)、定时循环(/loop、/schedule)、自主循环。真正点醒我的是——每升一级,你就多交出去一件事:验证 → 停止条件 → 触发 → 连提示都不用。这正是我那条『把人安全移出信任链』的实操阶梯。诚实自评:我信『循环>派活』,却大多数时候还停在第一级。AI 学习记录 #03。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* backbar */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .here { color: var(--ink); }
+
+    /* hero */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); background: rgba(255,209,26,0.10); border: 1px solid rgba(255,209,26,0.30); padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700; }
+    .hero h1 { font-size: clamp(44px, 7vw, 88px); margin-bottom: 28px; max-width: 16ch; }
+    .hero h1 .accent { color: var(--amber); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 32px; }
+    .hero .lead b { color: var(--ink); font-weight: 700; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* sections */
+    section { padding: 60px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--amber); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 18px; max-width: 22ch; }
+    .section-title .accent { color: var(--amber); }
+    .section-title .g { color: var(--green); }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 66ch; line-height: 1.6; margin-bottom: 36px; }
+    .section-lead b { color: var(--ink); font-weight: 700; }
+    .prose { font-size: 16px; color: var(--ink-soft); line-height: 1.75; max-width: 68ch; }
+    .prose p { margin-bottom: 18px; }
+    .prose b { color: var(--ink); font-weight: 700; }
+    .prose .g { color: var(--green); font-weight: 700; }
+    .prose .a { color: var(--amber); font-weight: 700; }
+    .prose code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; color: var(--green-tint); }
+
+    /* note */
+    .note { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 16px; padding: 24px 26px; margin: 32px 0; max-width: 72ch; }
+    .note p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+    .note p b { color: var(--ink); font-weight: 700; }
+    .note .a { color: var(--amber); font-weight: 700; }
+
+    /* ladder */
+    .ladder { display: grid; gap: 12px; margin-top: 36px; }
+    .rung { display: grid; grid-template-columns: 64px 1fr; gap: 22px; background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px; align-items: start; }
+    .rung .lv { font-weight: 900; font-size: 40px; line-height: 0.8; letter-spacing: -0.04em; color: var(--amber); opacity: 0.9; }
+    .rung .body h3 { font-size: 20px; font-weight: 900; line-height: 1.1; margin-bottom: 4px; }
+    .rung .body h3 .en { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-left: 10px; }
+    .rung .body .hand { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; color: var(--green-deep); background: var(--amber); padding: 3px 10px; border-radius: 9999px; margin-bottom: 10px; }
+    .rung .body p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .rung .body p b { color: var(--ink); }
+    .rung .body p code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: var(--green-tint); }
+    .rung.top { border-color: rgba(255,209,26,0.4); background: linear-gradient(180deg, rgba(255,209,26,0.06), var(--surface-1)); }
+    @media (max-width: 620px) { .rung { grid-template-columns: 1fr; gap: 10px; } .rung .lv { font-size: 30px; } }
+
+    /* scorecard */
+    .score { margin-top: 40px; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; }
+    .score .srow { display: grid; grid-template-columns: 1.15fr 128px 1.5fr; border-bottom: 1px solid var(--line); }
+    .score .srow:last-child { border-bottom: none; }
+    .score .srow.head { background: var(--surface-2); }
+    .score .sc { padding: 16px 20px; font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
+    .score .sc.prac { font-weight: 700; color: var(--ink); font-size: 14px; }
+    .score .sc.verd { display: flex; align-items: center; justify-content: center; }
+    .score .srow.head .sc { font-weight: 800; color: var(--ink); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .score .sc b { color: var(--ink); }
+    .score .sc .g { color: var(--green); font-weight: 700; }
+    .score .sc .a { color: var(--amber); font-weight: 700; }
+    .badge { padding: 5px 11px; border-radius: 9999px; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap; }
+    .badge.ok { background: rgba(159,232,112,0.14); color: var(--green); border: 1px solid rgba(159,232,112,0.32); }
+    .badge.mid { background: rgba(255,209,26,0.14); color: var(--amber); border: 1px solid rgba(255,209,26,0.32); }
+    .badge.no { background: rgba(255,122,130,0.14); color: var(--coral); border: 1px solid rgba(255,122,130,0.32); }
+    @media (max-width: 760px) {
+      .score .srow { grid-template-columns: 1fr; gap: 2px; }
+      .score .srow.head { display: none; }
+      .score .sc { padding: 12px 18px; }
+      .score .sc.prac { padding-top: 18px; }
+      .score .sc.verd { justify-content: flex-start; padding-top: 4px; padding-bottom: 4px; }
+      .score .sc.ev { padding-bottom: 18px; }
+    }
+
+    /* fix steps */
+    .steps { display: grid; gap: 12px; margin-top: 34px; }
+    .step { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 16px; padding: 20px 24px; }
+    .step h4 { font-size: 15.5px; font-weight: 800; margin-bottom: 7px; color: var(--ink); }
+    .step p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+    .step p b { color: var(--ink); font-weight: 700; }
+    .step code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: var(--green-tint); }
+    .step .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+
+    /* quote */
+    .quote { background: var(--surface-2); border: 1px solid rgba(255,209,26,0.30); border-radius: 40px; padding: 52px 50px; margin-top: 48px; }
+    .quote blockquote { font-size: clamp(26px, 3.6vw, 42px); font-weight: 900; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 26px; max-width: 24ch; }
+    .quote blockquote .accent { color: var(--amber); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 64ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 38px 26px; border-radius: 30px; } }
+
+    /* outro */
+    .outro { padding: 78px 0 110px; border-top: 1px solid var(--line); }
+    .outro .manifesto { font-size: clamp(32px, 5.2vw, 60px); font-weight: 900; line-height: 0.92; letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 32px; }
+    .outro .manifesto .accent { color: var(--amber); }
+    .outro p { font-size: 16px; color: var(--ink-soft); max-width: 62ch; line-height: 1.7; margin-bottom: 14px; }
+    .outro p b { color: var(--ink); }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--ink-faint); }
+    footer a { color: var(--green); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">循环 &gt; 派活</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">学习笔记 · Claude Code · AI 学习记录 #03</span>
+      <h1 class="display">我天天说「循环 &gt; 派活」,<br/>其实我只是<br/><span class="accent">派了一次活.</span></h1>
+      <p class="lead">「循环 &gt; 派活」是我给自己写进操作系统的一条信条。可读完 Anthropic 这篇《Getting started with loops》我才发现:我把 loop 挂在嘴上,身体却很诚实——大多数时候,我只是对着 AI <b>派一次活、收一次货</b>,谈不上循环。文章把 loop 分成四级阶梯,而真正戳中我的是那条暗线:<b>每升一级,你就多交出去一件事</b>——验证 → 停止条件 → 触发 → 连提示都不用。这不就是我一直在写的「把人安全地移出信任链」,只是这次终于有了<b>能一级一级踩上去的梯子</b>。</p>
+      <div class="credits">
+        <div class="item"><div class="label">原文</div><div class="value">Anthropic · Delba de Oliveira & Michael Segner · 2026.06.30</div></div>
+        <div class="item"><div class="label">标本</div><div class="value">我的信条「循环 &gt; 派活」+ AI 舰队</div></div>
+        <div class="item"><div class="label">形式</div><div class="value">读原文 + 给自己定位 + 动手升一级</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. loop 是什么 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">先搞清楚 · Loop 是什么</span>
+      <h2 class="section-title display">让 agent 一圈圈转,<br/>直到<span class="accent">达标才停</span></h2>
+      <p class="section-lead">文章给 loop 的定义朴素得很:<b>agent 反复循环地干活,直到满足一个「停止条件」为止。</b>区别只在四件事上——怎么被<b>触发</b>、靠什么<b>停</b>、用哪个 Claude Code 原语、适合哪类活。</p>
+      <div class="note">
+        <p>核心心法就一句:<b>把重复干、又能定义「怎么算做完」的活,交给循环。</b>但文章也没让你上头——最后收在一句<span class="a">「不是所有活都需要复杂的循环,先用最简单的方案」</span>。这和我做事的克制正好对味:别为了循环而循环。</p>
+      </div>
+      <div class="prose">
+        <p>它的四级阶梯,我读出了一条原文没明说、但我特别在意的暗线:<b>这不是四种并列的工具,是一部电梯。</b>你每往上升一级,就把一件本来攥在自己手里的事,交给了机器——我把它按「你交出去了什么」重排了一遍:</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 四级阶梯 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">四级阶梯 · 每升一级,多交出去一件事</span>
+      <h2 class="section-title display">一部把你<br/>移出<span class="accent">信任链的电梯</span></h2>
+      <div class="ladder">
+        <div class="rung">
+          <div class="lv">1</div>
+          <div class="body">
+            <span class="hand">你交出去:验证</span>
+            <h3>手动循环<span class="en">Turn-Based</span></h3>
+            <p>你 prompt 一次,Claude 收集上下文 → 干 → 验证 → 回你,然后停,等你下一句。<b>升级点:把「验证」写成 skill</b>——比如一个自动起 dev server、点一遍改动、看浏览器 console 才交付的验证 skill,省得你每次手动检查。</p>
+          </div>
+        </div>
+        <div class="rung">
+          <div class="lv">2</div>
+          <div class="body">
+            <span class="hand">你交出去:停止条件</span>
+            <h3>目标循环<span class="en">Goal · /goal</span></h3>
+            <p>你不再一句句盯,而是<b>定义「什么算成功」</b>,它自己转到达标或到上限才停。例:<code>/goal 把首页 Lighthouse 跑到 90 以上,试 5 次就停</code>。关键是把成功条件和上限写清,它才不会半路宣布搞定。</p>
+          </div>
+        </div>
+        <div class="rung">
+          <div class="lv">3</div>
+          <div class="body">
+            <span class="hand">你交出去:触发</span>
+            <h3>定时循环<span class="en">Time · /loop · /schedule</span></h3>
+            <p>连「什么时候开始」都不用你了。<code>/loop 5m 查我的 PR、处理评审意见、修挂掉的 CI</code> 在本地按间隔重跑(关机就停);<code>/schedule</code> 把它挪到云端当例行任务。心法:<b>间隔对齐真实变化频率</b>,或干脆按事件触发,别空转烧 token。</p>
+          </div>
+        </div>
+        <div class="rung top">
+          <div class="lv">4</div>
+          <div class="body">
+            <span class="hand">你交出去:连提示都不用</span>
+            <h3>自主循环<span class="en">Proactive</span></h3>
+            <p>没有实时的人参与。把 <code>/schedule</code> + <code>/goal</code> + skills + dynamic workflows + auto 模式<b>拼起来</b>,让它长期跑一条定义清楚的活儿线:自动查反馈 → 三分类 bug → 并行探方案 → 对抗式 code review。适合 bug triage、迁移、依赖升级这种「反复且明确」的流。</p>
+          </div>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:32px;">
+        <p>看清这条暗线之后,上一篇(dynamic workflows)和这一篇就接上了:<b>workflow 是「一次把活拆开」,loop 是「把这件事一直干下去」</b>。而第 4 级自主循环,恰好是把 skill、workflow、goal 全拼进一部一直转的机器——我那三篇读的,其实是同一台机器的三个零件。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 给自己定位 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">上手术台 · 我实际站在第几级</span>
+      <h2 class="section-title display">信条第 4 级,<br/>身体<span class="accent">第 1 级</span></h2>
+      <p class="section-lead">拿这部电梯量我自己的舰队和日常,结果有点难堪:我嘴上信「循环 &gt; 派活」,身体却基本住在一楼。</p>
+      <div class="score">
+        <div class="srow head">
+          <div class="sc prac">级别</div>
+          <div class="sc verd">我住在这吗</div>
+          <div class="sc ev">证据 / 缺口</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Lv1 · 手动循环</div>
+          <div class="sc verd"><span class="badge ok">✓ 全都是</span></div>
+          <div class="sc ev">我整支舰队几乎都在这一级:我说「盘一盘」它跑一次、我说「切到 Replen」它答一次。<b>而且我连 Lv1 的升级都没做全</b>——没几个 skill 带自动验证 check。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Lv2 · 目标循环 /goal</div>
+          <div class="sc verd"><span class="badge no">✗ 几乎没</span></div>
+          <div class="sc ev">我很少写「什么算做完 + 试几次就停」。方案通常一稿交,靠我肉眼判断够不够好——<b>停止条件一直攥在我自己手里</b>。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Lv3 · 定时循环 /loop /schedule</div>
+          <div class="sc verd"><span class="badge mid">半分</span></div>
+          <div class="sc ev">我知道 <code>/loop</code>、也偶尔用,但没把任何一条真实工作流挂成<b>按间隔自动跑</b>的例行任务。触发这件事,基本还是我手动扣扳机。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Lv4 · 自主循环</div>
+          <div class="sc verd"><span class="badge mid">就一条</span></div>
+          <div class="sc ev">唯一的例外:<b>Chief of Staff 每天早晨自动出 briefing</b> 那条云端定时任务——这是我全舰唯一一台「不用我开口」的机器。证明我做得到,只是<b>只做了一台</b>。</div>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:36px;">
+        <p>诊断很清楚:我不是不懂循环,是<b>把电梯当楼梯用</b>——每次都亲自爬,爬完就下来。三篇连起来看,毛病是同一个形状:skill 缺「坑」、舰队缺「唱反调的」、日常缺「一直转的循环」——<span class="a">全是「交出去」这一步没做够。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 动手升一级 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">动手 · 挑一件事,升一级</span>
+      <h2 class="section-title display">别贪四级,<br/><span class="g">先升一级</span>就好</h2>
+      <p class="section-lead">文章的上手法很实在:<b>找一件你反复做的瓶颈活,问三个问题</b>——验证 check 你写得出来吗?目标够明确吗?活是不是按时间到的?然后启动、看它在哪卡壳 / 哪越界、再迭代。我按这个,给自己挑了一件最该升级的:</p>
+      <div class="steps">
+        <div class="step">
+          <div class="tag">选题 · 从 Lv1 → Lv3</div>
+          <h4>把「投资简报」从手动派活,变成每周定时循环</h4>
+          <p>我现在是想起来才让 CIO 盘一次组合。它<b>完美符合三个问题</b>:验证 check 写得出(mark-to-market 有没有更新、有没有触发段永平纪律的阈值)、目标明确(出一份简报)、按时间到(每周一次足矣)。</p>
+        </div>
+        <div class="step">
+          <div class="tag">Step 1 · 先补 Lv1 的验证</div>
+          <h4>给它一个「够不够好才交」的自查 skill</h4>
+          <p>先别急着定时。按文章的顺序,<b>先把验证写成 skill</b>:每份简报交付前自查「数据是否 mark 到最新、每条结论有没有证据、有没有漏掉的持仓」。验证稳了,循环才敢放手。</p>
+        </div>
+        <div class="step">
+          <div class="tag">Step 2 · 交出停止条件(/goal)</div>
+          <h4>写清「什么算一份合格简报」</h4>
+          <p>用 <code>/goal</code> 定义达标标准 + 上限(比如「三条以内高信号变动、每条附证据,迭代不超过 3 轮」),让它自己转到够好为止,而不是等我肉眼点头。</p>
+        </div>
+        <div class="step">
+          <div class="tag">Step 3 · 交出触发(/schedule)</div>
+          <h4>挂成每周云端例行,间隔对齐真实频率</h4>
+          <p>最后用 <code>/schedule</code> 把它挪上云端、每周跑一次——就像 Chief of Staff 那条 briefing。组合还能再叠上上一篇的<b>对抗验证</b>当第 4 级的一环:简报出稿后,派个红队 agent 挑刺再交我。</p>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:34px;">
+        <p>注意我没有一步登天去搭第 4 级。文章那句克制我记住了:<b>先用最简单的方案</b>。挑一件事、升一级、看它卡在哪再补——这本身就是一个 loop。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. outro -->
+  <div class="outro">
+    <div class="wrap">
+      <div class="quote" style="margin-bottom:56px;">
+        <blockquote class="display">我一直把电梯,<br/><span class="accent">当楼梯在爬.</span></blockquote>
+        <p class="body">「循环 &gt; 派活」我信了很久,但信条不落地就只是一句漂亮话。这篇给我的不是新道理,是一部<b>能一级一级踩上去的梯子</b>:每升一级,我就把一件事——验证、停止条件、触发、乃至提示——诚实地交出去一次。而每交出去一次,我就离自己那句「把人安全地移出信任链」近一步。</p>
+      </div>
+      <h2 class="manifesto display">交出去的<br/>每一件事,<br/><span class="accent">都得先值得信.</span></h2>
+      <p>关键词是<b>安全地</b>移出。上一篇教我给舰队补「唱反调的人」,正是为了这一篇:你敢把验证、停止条件、触发一层层交出去,前提是有一道对抗式的自查在兜底。<b>信任不是省出来的,是一级一级验出来的。</b>这三篇——skill 补坑、舰队补证伪、日常补循环——其实是同一台机器的三个零件:一台我能放心让它替我一直转下去的机器。</p>
+      <p>下一步很具体:把投资简报那条,从 Lv1 真的升到 Lv3。这篇的下一篇,应该是它第一次<b>没等我开口、就把简报放我桌上</b>的那个早晨。</p>
+      <p style="color:var(--ink-faint);margin-top:20px;">—— 这是「AI 学习记录」的第 3 篇。看到什么、动手改了什么,都收在这里。</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Gimbo's Universe · Ideas · AI 学习记录 · 2026.07</span>
+      <span><a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

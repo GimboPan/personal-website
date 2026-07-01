@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我搭的第一台自动机器,第一次就抓到了我自己的错 · 把 skill/workflow/loop 焊进一件真事 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="前三篇我都在读 Anthropic 的文章、给自己的 skill/舰队/循环打分。这一篇是收官:我真把学到的三样东西焊进了一件天天要做的真事,给它加了一道『交付前自查闸』和一个专门唱反调的『红队』,然后按下试跑。第一次运行,这台我亲手搭的机器,就当着我的面抓到了我自己三个自欺——复读旧判断、被催着做不可逆的事、假装看全了数据。这是『把读到的变成能交出去的』第一次真的闭环。AI 学习记录 #04。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* backbar */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .here { color: var(--ink); }
+
+    /* hero */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30); padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700; }
+    .hero h1 { font-size: clamp(44px, 7vw, 88px); margin-bottom: 28px; max-width: 17ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 32px; }
+    .hero .lead b { color: var(--ink); font-weight: 700; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* sections */
+    section { padding: 60px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 18px; max-width: 22ch; }
+    .section-title .accent { color: var(--green); }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 66ch; line-height: 1.6; margin-bottom: 36px; }
+    .section-lead b { color: var(--ink); font-weight: 700; }
+    .prose { font-size: 16px; color: var(--ink-soft); line-height: 1.75; max-width: 68ch; }
+    .prose p { margin-bottom: 18px; }
+    .prose b { color: var(--ink); font-weight: 700; }
+    .prose .g { color: var(--green); font-weight: 700; }
+    .prose code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; color: var(--green-tint); }
+
+    /* note */
+    .note { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 16px; padding: 24px 26px; margin: 32px 0; max-width: 72ch; }
+    .note p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+    .note p b { color: var(--ink); font-weight: 700; }
+    .note .g { color: var(--green); font-weight: 700; }
+
+    /* build strip: 3 parts */
+    .weld { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
+    .part { background: var(--surface-2); border: 1px solid var(--line); border-radius: 24px; padding: 26px 24px; }
+    .part .from { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px; }
+    .part .from .n { color: var(--green); }
+    .part h3 { font-size: 19px; font-weight: 900; line-height: 1.12; margin-bottom: 10px; }
+    .part p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+    .part p b { color: var(--ink); }
+    @media (max-width: 760px) { .weld { grid-template-columns: 1fr; } }
+
+    /* caught cards */
+    .caught { display: grid; gap: 14px; margin-top: 36px; }
+    .catch { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--coral); border-radius: 18px; padding: 24px 26px; }
+    .catch .lbl { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); margin-bottom: 10px; }
+    .catch h3 { font-size: 20px; font-weight: 900; line-height: 1.15; margin-bottom: 10px; }
+    .catch p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.68; }
+    .catch p b { color: var(--ink); font-weight: 700; }
+    .catch .fix { margin-top: 12px; font-size: 13px; color: var(--green-tint); padding-top: 12px; border-top: 1px solid var(--line); }
+    .catch .fix b { color: var(--green); }
+
+    /* gate */
+    .gate { background: var(--surface-2); border: 1px solid var(--line); border-radius: 28px; padding: 34px 34px; margin-top: 36px; }
+    .gate h3 { font-size: 17px; font-weight: 800; margin-bottom: 18px; }
+    .gate ul { list-style: none; display: grid; gap: 10px; }
+    .gate li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; align-items: start; }
+    .gate li .mk { color: var(--green); font-weight: 900; }
+    .gate li.flag .mk { color: var(--amber); }
+    .gate li b { color: var(--ink); }
+    @media (max-width: 600px) { .gate { padding: 26px 22px; border-radius: 22px; } }
+
+    /* quote */
+    .quote { background: var(--surface-2); border: 1px solid rgba(159,232,112,0.30); border-radius: 40px; padding: 52px 50px; margin-top: 48px; }
+    .quote blockquote { font-size: clamp(26px, 3.6vw, 42px); font-weight: 900; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 26px; max-width: 24ch; }
+    .quote blockquote .accent { color: var(--green); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 64ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 38px 26px; border-radius: 30px; } }
+
+    /* outro */
+    .outro { padding: 78px 0 110px; border-top: 1px solid var(--line); }
+    .outro .manifesto { font-size: clamp(32px, 5.2vw, 60px); font-weight: 900; line-height: 0.92; letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 32px; }
+    .outro .manifesto .accent { color: var(--green); }
+    .outro p { font-size: 16px; color: var(--ink-soft); max-width: 62ch; line-height: 1.7; margin-bottom: 14px; }
+    .outro p b { color: var(--ink); }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--ink-faint); }
+    footer a { color: var(--green); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">第一台自动机器</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">实操记录 · Claude Code · AI 学习记录 #04</span>
+      <h1 class="display">我搭的第一台自动机器,<br/>第一次就抓到了<br/><span class="accent">我自己的错.</span></h1>
+      <p class="lead">前三篇我都在做同一件事:读 Anthropic 的文章,然后<b>给自己的 skill、舰队、循环打分</b>。这一篇不一样——我真把学到的三样东西(skill / workflow / loop)<b>焊进了一件天天要做的真事</b>:我那份投资简报。给它加了两样它从来没有的东西:一道「交付前自查闸」,和一个专门唱反调的「红队」,再挂成本地周循环。然后我按下试跑。<b>第一次运行,这台我亲手搭的机器,就当着我的面,抓到了我自己三个自欺。</b>这是「把读到的变成能交出去的」,第一次真的闭上了环。</p>
+      <div class="credits">
+        <div class="item"><div class="label">前情</div><div class="value">AI 学习记录 #01–03(skill / workflow / loop)</div></div>
+        <div class="item"><div class="label">标本</div><div class="value">我舰队里的投资简报官</div></div>
+        <div class="item"><div class="label">形式</div><div class="value">动手焊 + 按下试跑 + 看它抓错</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. 三篇 → 一件事 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">收官 · 从「看懂」到「跑起来」</span>
+      <h2 class="section-title display">这次不是读,<br/>是<span class="accent">焊</span></h2>
+      <p class="section-lead">前三篇连起来是同一台机器的三个零件,而且我给自己打分的结果高度一致:<b>我擅长「生成」,不擅长「证伪」</b>。skill 缺「坑」、舰队缺「唱反调的」、日常缺「一直转的循环」——全是「交出去」这一步没做够。诊断做完,总得有一次真的动手。我挑了最该升级的那件事,把三个零件一次焊上:</p>
+      <div class="weld">
+        <div class="part">
+          <div class="from">来自 <span class="n">#01 · Skill</span></div>
+          <h3>一道交付闸</h3>
+          <p>给简报加了一段「合格才准交」的自查清单:数据有没有标日期、每条结论有没有证据、有没有漏掉的部分。<b>skill 补上了它最缺的自动 check。</b></p>
+        </div>
+        <div class="part">
+          <div class="from">来自 <span class="n">#02 · Workflow</span></div>
+          <h3>一个红队</h3>
+          <p>草稿出来后,<b>换一副专门挑刺的眼睛</b>再过一遍,逐条试着证伪:证据够吗?有没有偏袒我上一版的判断?这就是那篇里最缺的对抗式验证。</p>
+        </div>
+        <div class="part">
+          <div class="from">来自 <span class="n">#03 · Loop</span></div>
+          <h3>挂成周循环</h3>
+          <p>把它设成每周一次的<b>本地</b>循环(数据不上云,是原则)。「触发」为隐私故意留半手动——我升了一级,不贪四级。</p>
+        </div>
+      </div>
+      <div class="note">
+        <p>注意:这三样加起来<b>没让我写一行复杂代码</b>——都是往那个 skill 的说明书里加了几段话。难的从来不是技术,是<span class="g">想清楚「一份合格的东西长什么样」「该从哪个角度拆自己的台」</span>。焊完,我按下试跑。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 红队抓到的三个自欺 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">试跑现场 · 红队抓到了什么</span>
+      <h2 class="section-title display">一台机器,<br/>当面拆我三次<span class="accent">台</span></h2>
+      <p class="section-lead">这是这次最想给你看的东西。第一次跑,红队就在我的草稿里,揪出了三处我<b>自己根本不会发现</b>的自欺——因为它们太像「我平时就是这么想的」:</p>
+      <div class="caught">
+        <div class="catch">
+          <span class="lbl">自欺 01 · 复读</span>
+          <h3>我直接沿用了上周的一个判断</h3>
+          <p>草稿里有个结论,我<b>原封不动搬了上一版简报</b>——感觉很对,因为那就是我上周的想法。红队一核:<b>世界这周已经变了</b>,那个判断早就不成立。这是最隐蔽的偷懒:偏袒自己的过去(self-preferential bias)。</p>
+          <div class="fix"><b>红队改法:</b>重新按本周现实推算,把那句「你已经怎样了」换成了「情况其实已经变成这样」。</div>
+        </div>
+        <div class="catch">
+          <span class="lbl">自欺 02 · 越界</span>
+          <h3>它差点催我做一件不可逆的事</h3>
+          <p>草稿里有条建议,语气偏向<b>催我立刻动手</b>去做一个不可逆的操作。红队拿出我<b>自己定过的纪律</b>(有些大动作要挑时点、不可逆的事必须留给本人拍板)把它拦下:从「催你做」降级成「<b>只起草方案,时点你自己定</b>」。</p>
+          <div class="fix"><b>红队改法:</b>该我做主的地方,不许机器把我架上铁轨——它把决定权还给了我。</div>
+        </div>
+        <div class="catch">
+          <span class="lbl">自欺 03 · 假装完整</span>
+          <h3>我在没看全数据时就想下结论</h3>
+          <p>有一块数据我其实<b>没看全</b>,但草稿读起来一副胸有成竹、结论完整的样子。红队逼我把「这块没看全 / 待核」<b>明明白白标出来</b>,不许用漂亮的完整感盖住窟窿。</p>
+          <div class="fix"><b>红队改法:</b>诚实优先于好看——一份承认自己缺了什么的简报,才是可信的。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 交付闸 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">交付闸 · 没有一条被瞎填</span>
+      <h2 class="section-title display">诚实,<br/>比<span class="accent">好看</span>值钱</h2>
+      <p class="section-lead">红队挑完刺,还有一道「交付闸」:合格标准全过才准交,否则如实标注、别硬撑。这次五条里四条干净通过,一条<b>带着诚实的标注</b>放行——而这一条,恰恰是它最该做的事。</p>
+      <div class="gate">
+        <h3>交付闸 · 5 条自检结果</h3>
+        <ul>
+          <li><span class="mk">✓</span><span>数据都标了「截至日期」,<b>拉不到的一律标「待核」,一个数都没编</b></span></li>
+          <li><span class="mk">✓</span><span>摘要压到三行内,点出「最该动的那一两件」</span></li>
+          <li><span class="mk">✓</span><span>每条建议都写全「做什么 + 为什么 + 需要我」,且不超过三条(宁可少而准)</span></li>
+          <li><span class="mk">✓</span><span>逐条对照过我自己定的硬规则,红旗都点了名</span></li>
+          <li class="flag"><span class="mk">⚑</span><span>有一块数据没看全 → <b>没有假装完整,老实标了「待核」放行</b>。这不是失败,这正是交付闸存在的意义</span></li>
+        </ul>
+      </div>
+      <div class="prose" style="margin-top:32px;">
+        <p>升级前,这台机器会直接吐一份<b>看着完整、其实复读了旧判断、还假装数据都看全了</b>的简报——而我大概率会点头收下,因为它「读起来很对」。升级后,红队摁住三个自欺、交付闸逼它对缺口诚实。<span class="g">同一件事,产出从「自我确认」变成了「自我审视」。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. outro -->
+  <div class="outro">
+    <div class="wrap">
+      <div class="quote" style="margin-bottom:56px;">
+        <blockquote class="display">我给自己,<br/><span class="accent">造了一个诚实的对手.</span></blockquote>
+        <p class="body">复读上一版的判断、被催着做不可逆的事、在没看全时假装看全——这三个自欺<b>根本不是投资独有的</b>,是每个人每天做决定时都在犯的。过去唯一的区别是:<b>没有任何人、任何机器会拦我。</b>现在有了一个。它不比我聪明,它只是<b>不偏袒我</b>——而这恰恰是我最给不了自己的东西。</p>
+      </div>
+      <h2 class="manifesto display">认知免费之后,<br/>稀缺的不是再生成一版,<br/><span class="accent">是有人说你错了.</span></h2>
+      <p>我曾经在另一篇里招供过:我做的模拟都是「<b>自己出题、自己阅卷</b>」,断言必然通过。这台机器,就是我一直缺的那道「别自己给自己阅卷」。读(#01–03)→ 焊(交付闸+红队+循环)→ 跑(抓到三个错)——到这一篇,这一整圈才算真的闭上。学一样东西的终点,不是看懂,是<b>它开始替你干活、还敢当面纠正你</b>。</p>
+      <p>下一步很简单:让它跑满几周,看它还能抓到我什么。这台机器越诚实,我就越自由。</p>
+      <p style="color:var(--ink-faint);margin-top:20px;">—— 这是「AI 学习记录」的第 4 篇,也是 Anthropic 三件套(skill / workflow / loop)这个小系列的收官:从看懂,到跑起来。</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Gimbo's Universe · Ideas · AI 学习记录 · 2026.07</span>
+      <span><a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

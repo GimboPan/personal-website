@@ -6,6 +6,71 @@ Format: based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versi
 
 ---
 
+## [1.14.3] — 2026-07-01 · Ideas — AI 学习记录 #04: the first machine I built caught my own mistakes
+
+> Capstone of the Anthropic-primitives trilogy. The first three pieces were "read + self-grade"; this one is the payoff — I actually welded skills + workflows + loops into a real recurring task (my fleet's investment-briefing agent): added a delivery gate (from #01), a red-team self-audit (from #02), and made it a weekly local loop (from #03). On its very first run, the machine caught three of my own self-deceptions (reusing last week's stale judgment / almost railroading me into an irreversible action / concluding on incomplete data). Fully desensitized — no holdings, amounts, or returns, per the financial red line.
+
+### Added — Ideas
+
+- **`public/ideas/first-machine.html`** — new Wise-Dark deep-read (实操 register, green `#9fe870` capstone accent). Sections: from reading to welding (3 parts mapped to #01/#02/#03) → the 3 things the red-team caught (coral "caught" cards, each with the fix) → the delivery gate (5-item checklist, 4 pass + 1 honest "待核" flag) → outro ("I built myself an honest opponent"; calls back to《两次模拟》's "自己出题自己阅卷" confession; read → weld → run closes the loop). **Red-line-clean**: investment kept category-level, zero positions/numbers/tickers/salary/employer.
+- **`src/data/ideas.ts`** — new article **#22** (`topicSlug: tech`, `seriesSlug: ai-log`, `date: 2026.07`, `art: core/#9fe870`). AI 学习记录 count now 9.
+
+### Notes
+
+- This piece documents actual work done this session: the `chief-investment-officer` skill (local, outside this repo) gained a 交付闸 (stop condition), a 红队自审 step, and a 周循环 section; a test run surfaced the three catches described. The website piece abstracts all of it — the machinery and the lesson travel, the portfolio does not.
+- Trilogy is now a closed set of 4: #19 skills (add Gotchas) → #20 workflows (add red-team) → #21 loops (climb the ladder) → #22 the build (read → weld → run). Accent hues green/sky/amber/green.
+- Patch bump: content drop into the existing 专辑.
+
+## [1.14.2] — 2026-07-01 · Ideas — AI 学习记录 #03: loops → a 4-rung ladder I preach but don't climb
+
+> Third piece in the series, completing a trilogy on Anthropic's three Claude Code primitives (skills → workflows → loops). "Getting started with loops" reframed as a ladder where each rung hands off one more thing (verification → stop condition → trigger → the prompt itself) — literally the "把人安全地移出信任链" arc I keep writing. Honest self-grade: I wrote "循环 > 派活" into my own operating system but live on rung 1; my only rung-4 loop is the daily Chief of Staff briefing.
+
+### Added — Ideas
+
+- **`public/ideas/getting-started-with-loops.html`** — new Wise-Dark deep-read (learning-note register, amber `#ffd11a` accent). Sections: what a loop is ("start with the simplest solution") → the **4-rung ladder** re-sorted by "what you hand off" (turn-based/verification → /goal/stop-condition → /loop·/schedule/trigger → proactive/the-prompt, top rung lit) → a **scorecard** placing me (Lv1 ✓ all my fleet but not even the Lv1 verification upgrade, /goal ✗, /loop half, proactive = one) → a 4-step hands-on climb (take the CIO investment briefing from Lv1 → Lv3: add a verification skill, hand off the stop condition via /goal, then /schedule it weekly + graft last piece's adversarial red-team). Back-link at top.
+- **`src/data/ideas.ts`** — new article **#21** (`topicSlug: tech`, `seriesSlug: ai-log`, `date: 2026.07`, `art: loop/#ffd11a`). AI 学习记录 count now 8.
+
+### Notes
+
+- Trilogy throughline is now explicit in the copy: skills (add a Gotchas section), workflows (add a red-team agent), loops (climb from manual to automated) are "three parts of one machine" — every gap is the same shape: not handing enough off / not falsifying. The three accent hues (green #19 → sky #20 → amber #21) visually distinguish the set within the series.
+- Red lines: fleet + supply-chain + investment content is generic/philosophy-level — no company names, colleague names, or financial positions/holdings.
+- Patch bump: plain content drop into the existing 专辑.
+
+## [1.14.1] — 2026-07-01 · Ideas — AI 学习记录 #02: dynamic workflows → a checkup on my own AI fleet
+
+> Second piece in the「AI 学习记录」series. Anthropic's "A harness for every task: dynamic workflows" article, but turned inward: I already hand-built a harness (my AI fleet — a Chief of Staff fanning out to CIO/CMO/CHO/EVO). Graded the fleet + my supply-chain sandbox against the article's 7 orchestration patterns. Finding matches piece #19 exactly: I'm good at *generating*, bad at *falsifying* — the biggest gap is adversarial verification, the very "self-preferential bias / 自己出题自己阅卷" I confessed to in the earlier《两次模拟》piece.
+
+### Added — Ideas
+
+- **`public/ideas/dynamic-workflows.html`** — new Wise-Dark deep-read (learning-note register, sky `#38c8ff` accent to differ from #19's green). Sections: what a harness / dynamic workflow is (static vs dynamic, "does it really need more compute?") + the 3 failure modes it fights (laziness / self-preferential bias / goal drift) → the 7 patterns as cards (adversarial verification lit as the star) → a 6-row **scorecard** grading the fleet (fan-out-and-synthesize ✓ via Chief of Staff, classify-and-act ✓ via EVO, model routing / loop-until-done half, generate-filter/tournament ✗, adversarial verification ✗ = the hole) → a 4-step hands-on fix (add a red-team role, let something else write dirty/edge scenarios for the sandbox, `/goal`+`/loop`+token-budget guardrails, the quarantine pattern for untrusted email). Back-link at top per pattern.
+- **`src/data/ideas.ts`** — new article **#20** (`topicSlug: tech`, `seriesSlug: ai-log`, `date: 2026.07`, `art: team/#38c8ff`). AI 学习记录 count now 7.
+
+### Notes
+
+- Continuity is deliberate: this piece explicitly calls back to #19 (skills → add a Gotchas section) and to《两次模拟》(the self-grading blind spot) — the series is accreting one throughline: cognition is free, so the scarce/valuable thing is *falsification* (a Gotchas section, a red-team agent), which the machine can't hand you.
+- Red lines: fleet + supply-chain content is generic/role-level — no company names, colleague names, or financial positions.
+- Patch bump (not minor): a plain content drop into an existing Ideas 专辑 (no new mechanism/IA), per the versioning rule.
+
+## [1.14.0] — 2026-07-01 · Ideas — new 专辑「AI 学习记录」+ first piece (grading Replen against Anthropic's skills guide)
+
+> Opened a new ongoing series (专辑) on `/ideas`: **AI 学习记录 / Learning the Latest AI** — a running log where each new AI thing I read gets turned into a hands-on change to something of my own, not just a summary. Kicked it off with piece #19: instead of a read-through of Anthropic's "how we use skills" article, I put my own `replen` skill on the operating table and graded it against the article's criteria — the highest-signal part (a Gotchas section) was completely missing, so I wrote one from real supply-chain work.
+
+### Added — Ideas
+
+- **`public/ideas/skill-scorecard.html`** — new Wise-Dark deep-read (learning-note register). Sections: what a skill actually is (folder + `SKILL.md` "door-sign" analogy) + the article's 9 skill categories → the 8 criteria that matter → an 8-row **scorecard** grading `replen` (door-sign/trigger words ✓, progressive disclosure via `references/cpim/` ✓, guidance-not-railroad ✓; but Gotchas ✗, memory ✗, scripts ✗) → a hands-on **Gotchas section** with five real (desensitized) supply-chain gotchas (lead-time variance > demand variance, MRP lot-sizing before quantity, the fill-rate vs. cycle-service-level pun, FEFO vs. WMS-default FIFO, the true drivers of bullwhip) + a `safety_stock.py` / append-only param-log note. Back-link to `/` at top per the standalone-HTML pattern.
+- **`src/data/ideas.ts`** — new `seriesDef` **`ai-log`「AI 学习记录」**; new article **#19** (`topicSlug: tech`, `seriesSlug: ai-log`, `date: 2026.07`, `art: bars/#9fe870`).
+
+### Changed — Ideas
+
+- **`src/data/ideas.ts`** — so the new 专辑 doesn't launch as a lonely single, folded the clearly-AI-learning pieces into it: #16 (AI 职场跃迁) and #15 (Code with Claude 伦敦) gain `seriesSlug: ai-log`; #14 (李飞飞)、#09 (Claude Code 一周年)、#08 (write loops) move from `seriesSlug: 'ai-voices'` to `seriesSlugs: ['ai-voices', 'ai-log']` (dual-series membership). New series count = 6.
+- **`src/data/ideas.ts`** — prepended `2026.07` to `archiveMonths` so the new piece's month is a live archive filter.
+
+### Notes
+
+- Series (专辑) mechanism itself is unchanged — this adds a new instance + retro-tags, which the owner endorsed when choosing "new 专辑, existing AI pieces auto-join" over a standalone page. Piece register is "两种混着来": this first one is a full deep-read; lighter notes will land in the same series later.
+- Red lines: all supply-chain content is role/industry-level (NZ healthcare distribution planner) + generic CPIM — no company names, colleague names, or financial positions.
+- Minor bump (not patch): a new 专辑 + collection re-organization is more than a plain Ideas content drop.
+
 ## [1.13.0] — 2026-06-30 · Life — four north-star tags ("why all this input")
 
 > Reframed `/life` from "what I consume" to "what it's for". A minimal band under the cinematic hero names the four things the input serves — no manifesto, just four tags.

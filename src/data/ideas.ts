@@ -50,6 +50,13 @@ export interface SeriesDef {
 
 export const seriesDefs: SeriesDef[] = [
   {
+    slug: 'ai-log',
+    label: 'AI 学习记录',
+    sub: 'Learning the Latest AI',
+    description:
+      '一条持续更新的线:我对最新 AI 的学习记录。读到的每一样新东西——文章、访谈、发布、最佳实践——尽量不停在「看懂」,而是就地上手改一件自己的东西,把它变成能交出去的。重型的做成图解深读,零散的做成学习笔记,都收在这里。',
+  },
+  {
     slug: 'ai-voices',
     label: 'AI 前沿人物',
     sub: 'Voices in AI',
@@ -74,6 +81,71 @@ export const seriesDefs: SeriesDef[] = [
 
 export const articles: IdeaArticle[] = [
   {
+    index: '22',
+    title: '我搭的第一台自动机器,第一次就抓到了我自己的错 · 把 skill/workflow/loop 焊进一件真事 · 实操记录',
+    lede: '前三篇(AI 学习记录 #01–03)我都在读 Anthropic 的 skill/workflow/loop 三篇、给自己的 skill 与舰队打分,结论高度一致:我擅长「生成」、不擅长「证伪」,全是「交出去」这一步没做够。这一篇是收官——我真把三样东西焊进了一件天天要做的真事(舰队里的投资简报官):给它加了一道「交付前自查闸」(来自 #01 skill 的自动 check)、一个专门唱反调的「红队」(来自 #02 workflow 的对抗式验证)、再挂成每周一次的本地循环(来自 #03 loop,数据不上云、触发为隐私留半手动)。三样加起来没写一行复杂代码,难的只是想清楚「一份合格的东西长什么样」「该从哪个角度拆自己的台」。然后按下试跑——第一次运行,这台机器就当面抓到我三个自欺:① 复读:我直接沿用了上一版的一个判断,而世界这周已经变了(self-preferential bias);② 越界:它差点催我做一件不可逆的事,被我自己定的纪律拦下、降级成「只起草、时点你定」;③ 假装完整:我在没看全数据时就想下结论,被逼着老实标「待核」。交付闸 5 条 4 过 + 1 带诚实标注放行,没有一个数被瞎填。落点:这三个自欺不是投资独有的,是每个人每天做决定都在犯的,过去唯一的区别是没有任何人任何机器会拦我——现在有了一个,它不比我聪明,只是不偏袒我。呼应《两次模拟》里招供过的「自己出题自己阅卷」:读→焊→跑,这一整圈才算真的闭上;学一样东西的终点不是看懂,是它开始替你干活还敢当面纠正你。全篇已脱敏,不含任何持仓/金额/涨跌。AI 学习记录第 4 篇,Anthropic 三件套小系列收官。',
+    date: '2026.07',
+    tags: ['Tech'],
+    topicSlug: 'tech',
+    href: '/ideas/first-machine.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'ai-log',
+    art: { motif: 'core', accent: '#9fe870', seed: 22 },
+  },
+  {
+    index: '21',
+    title: '我天天说「循环 > 派活」,其实我只是派了一次活 · 用 Loops 的四级阶梯给自己定位 · 学习笔记',
+    lede: 'Anthropic 的《Getting started with loops》把 loop 定义成「agent 反复循环干活,直到满足停止条件」,分成四级:① 手动循环(turn-based,你 prompt 一次它干一次)② 目标循环(/goal,定义什么算成功、试几次就停)③ 定时循环(/loop 本地按间隔重跑、/schedule 挪云端)④ 自主循环(proactive,把 schedule+goal+skills+workflows+auto 拼起来长期跑)。真正戳中我的是一条暗线:这不是四种并列工具,是一部电梯——每升一级你就多交出去一件事:验证 → 停止条件 → 触发 → 连提示都不用。这正是我一直写的「把人安全地移出信任链」,终于有了能一级级踩的梯子。诚实自评:我把「循环>派活」写进了操作系统,身体却基本住一楼——整支舰队几乎都在 Lv1(还没几个 skill 带自动验证),/goal 几乎没用(停止条件一直攥自己手里),/loop 半分,Lv4 只有一条(Chief of Staff 每早自动出 briefing),证明做得到只是只做了一台。动手不贪四级、先升一级:把「投资简报」从手动派活升到定时循环——先补 Lv1 验证 skill、再用 /goal 交出停止条件、最后 /schedule 挂成每周云端例行,还叠上一篇的对抗验证当红队。三篇连起来是同一台机器的三个零件:skill 补坑、舰队补证伪、日常补循环,全是「交出去」这步没做够。落点:交出去的每一件事都得先值得信,信任不是省出来的,是一级级验出来的。AI 学习记录第 3 篇。',
+    date: '2026.07',
+    tags: ['Tech'],
+    topicSlug: 'tech',
+    href: '/ideas/getting-started-with-loops.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'ai-log',
+    art: { motif: 'loop', accent: '#ffd11a', seed: 21 },
+  },
+  {
+    index: '20',
+    title: '派活谁都会,难的是不让 AI「自己批自己的卷」· 用 dynamic workflows 给我的 AI 舰队做体检 · 学习笔记',
+    lede: 'Anthropic 出了 dynamic workflows——让 Claude 遇到复杂任务时,自己现写一段 JS,临时搭一套多智能体编排(他们叫 harness):派几个子 agent、每个用什么模型、能不能各开一个干净工作区、断了能不能续跑。读的时候我一直点头,因为我早就手工搭了一个 harness——我的 AI 舰队(一个 Chief of Staff 扇出给投资/营销/健康/进化几个专职 agent)。文章说用 workflow 是为了从结构上治大模型干长活的三个老毛病:① 偷懒(半路宣布搞定,其实只做一半)② 自偏(要验证时偏袒自己的产出,自己出题自己阅卷)③ 跑偏(聊越久离最初目标越远)。再给七个可复用的编排套路:分类再派、扇出再合并、对抗式验证、多生成再筛、锦标赛两两对比、干到干净为止、智能分级路由。我拿这七招量自己的舰队+供应链沙盘:扇出合并(Chief of Staff)和分类再派(EVO)我天天在用只是不知道有名字,分级路由和 loop 各得半分,而对抗式验证是最大的洞——我的舰队全是「建设性」角色,没一个专门唱反调;供应链沙盘更是我在《两次模拟》里招供过的「邮件我造、规则我定、断言必然通过」,活生生的自偏。动手补四步:给舰队加个红队/审卷官、让别人给沙盘出脏数据边界场景、配 /goal+/loop+token 预算三个护栏、用 quarantine 隔离不可信邮件不给高权限。落点:我擅长生成不擅长证伪;认知免费之后,值钱的越来越是「有没有人诚实告诉你这里错了」——对抗式验证就是交出去前的最后一道自查。上一篇给 skill 补坑,这一篇给舰队补唱反调的人,同一件事。AI 学习记录第 2 篇。',
+    date: '2026.07',
+    tags: ['Tech'],
+    topicSlug: 'tech',
+    href: '/ideas/dynamic-workflows.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'ai-log',
+    art: { motif: 'team', accent: '#38c8ff', seed: 20 },
+  },
+  {
+    index: '19',
+    title: '我有 30 个 Skill,却没一个是「造」出来的 · 拿 Anthropic 的方法给自己的 Replen 打分 · 学习笔记',
+    lede: 'Anthropic 的 Thariq Shihipar 写了篇《Lessons from building Claude Code: how we use skills》,把内部几百个 skill 的经验蒸馏成「好 skill 和平庸 skill 差在哪」。我没停在读后感——把自己那个供应链 skill「Replen」搬上手术台,拿他的判准逐条打分。文章先把 skill 分成 9 类(产品验证类对产出质量的可测量提升最大),再给出一串判准,我挑出对「会用、想做好」的人最要紧的八条:① 别说 Claude 已经知道的废话 ② Gotchas 坑清单是信息量最高的一段(作者原话)③ 门牌 description 写给模型看、塞触发词 ④ 分层按需展开 progressive disclosure ⑤ 给方向别写死 ⑥ 帮它记住(日志/JSON/SQLite)⑦ 存脚本别让它重造轮子 ⑧ 用 hooks 上保险。拿这八条量 Replen:门牌(带负向触发)、分层(references/cpim/)、不写死(判断框架而非死脚本)这三条它做对了;但真正把好坏分开的三样——坑、记忆、脚本——一样都没有,而它们恰好是「skill 生成器」吹不出来、只能亲手喂的。最狠的一刀是补 Gotchas:我从真实供应链工作刮出五条真·坑(前置期方差比需求方差更致命、MRP 看批量规则先于数量、「服务水平」fill rate vs 不缺货概率的双关、FEFO 撞上 WMS 默认 FIFO、牛鞭真凶是批量+促销+长 LT 而非终端需求),再配一个 safety_stock.py + 一个追加式参数日志。落点:生成一个 skill 很容易,「造」一个不容易;通用能力 Claude 自带,你的坑和判断才是护城河——认知变免费之后,专业值钱在「你踩过而它没踩过」的那一段。「AI 学习记录」第 1 篇。',
+    date: '2026.07',
+    tags: ['Tech'],
+    topicSlug: 'tech',
+    href: '/ideas/skill-scorecard.html',
+    status: 'live',
+    isNew: true,
+    seriesSlug: 'ai-log',
+    art: { motif: 'bars', accent: '#9fe870', seed: 19 },
+  },
+  {
+    index: '18',
+    title: 'Hyperliquid:把交易所做成链,再用真金白银回购自己 · 深度长文',
+    lede: '接着「其他值得研究的 L1」往下钻,单独写一篇 Hyperliquid——周期四「应用拥有整条栈」迄今最强的实证。它不是「又一条更快的公链」,而是一家完全开在链上、却有中心化交易所级体验的永续交易所:把自己变成了 L1,再用约 97% 的真实手续费每天回购 HYPE。全文八节:① 是什么(为永续而生的 app-specific L1,链上能不能跑一个真正的交易所)② 架构(HyperBFT 共识 ~0.07s 最终性 + HyperCore 把订单簿/撮合/清算做成 L1 原生状态机 + 全链上 CLOB 而非 AMM + 清算三层兜底 HLP→保险基金→ADL)③ HyperEVM(2025/02,与 HyperCore 同共识同区块、read precompiles + CoreWriter 双向无信任读写——护城河 = 任意合约直接调用原生 CEX 级订单簿)④ 产品机制(把撮合/做市/清算/上币/开市场/前端分发全做成开放原语:HLP 社区金库、HIP-1 荷兰拍、HIP-3 建设者自部署永续、Builder Codes)⑤ 代币经济与回购飞轮(零 VC、11 人团队、~31% 推送式空投、Assistance Fund 约 97% 手续费回购、年化强度约市值 7% 是 ETH 销毁的 4–5 倍)⑥ app-specific L1 命题(与 dYdX v4 的控制变量对照、vs GMX/Jupiter「拥有链 vs 租用链」、对手其实是 CEX)⑦ 风险与争议(JELLY 事件 2025/03「裁判下场踢球」+ 验证者中心化/预言机/HLP 回撤+ADL/桥单点/飞轮顺周期五个投影)⑧ 多空辩论 + 诚实展望。全文经多智能体对抗式核查,份额/回购/收入等数字均标注为时点敏感快照。认知框架,非投资建议,不含任何个人持仓。',
+    date: '2026.06',
+    tags: ['Tech', 'Economy'],
+    topicSlug: 'tech',
+    topics: ['tech', 'economy'],
+    href: '/ideas/hyperliquid.html',
+    status: 'live',
+    isNew: true,
+    art: { motif: 'core', accent: '#9fe870', seed: 18 },
+  },
+  {
     index: '17',
     title: '四轮加密周期复盘 · 叙事、革命性技术与每轮的主导 Layer 1 · 图解深读',
     lede: '从 2013 到现在,加密走过四轮牛熊。我把它做成一份按「主导 Layer 1」这条主线串起来的复盘——每一轮各自的宏观背景、能让普通人听懂并驱动散户入场的主导叙事、当轮才成熟的革命性技术原语,以及最关键的:那一轮真正主导链上价值的公链是谁、谁在挑战。主线很清晰:独霸(比特币,「L1」概念还没诞生、它是事实上唯一的链)→ 一超(以太坊借 EVM/ERC-20 与 ICO 上位,把 BTC.D 从 ~87% 砸到 ~31%)→ 群雄(L1 大战:ETH 仍主导 DeFi/NFT 但 gas 危机外溢催生 BSC/Solana/Terra/Avalanche)→ 双极 + 锚回归(比特币靠现货 ETF 机构化、dominance 重回 65%,以太坊被自家 L2 吸血、Solana 从 FTX 废墟靠 memecoin 复活反超,形成双极)。还提炼了贯穿四轮的七条结构性规律(减半时钟、叙事逐层上移、每轮一个新原语点火、每轮顶部都有一场「最体面的暴雷」当墓碑、上一轮泡沫=下一轮地基、主导权高度黏滞、挑战者高死亡率)和一组纪律型投资启示。全文事实经一套多智能体流程逐轮对抗式核查(4 研究 + 4 核查 + 2 综合 agent),价格/份额/日期都用核过的口径。文末还内嵌了一章「技术沉淀」延伸:以太坊(模块化/L2-rollup)与 Solana(单体/scale-up)两条技术栈按七层对照,各自在熊市里沉淀下来、还活着还在用的技术(ETH:Rollup/OP Stack、EIP-4844 blobs、再质押 EigenLayer、ERC-4337、DeFi 乐高+RWA;Solana:PoH/Sealevel 八件套+Firedancer、去 FTX 化重建的 Jupiter/Jito、状态压缩、pump.fun、DePIN),并对 Base 这条 L2 做了专题——为什么它没自己造轮子、而是站在 Optimism 的 OP Stack 上、无原生代币却靠真实活跃度领跑(澄清:领先的是链上活跃度,绝对 TVL 仍是 Arbitrum 第一),最后落到 ETH/Solana 两条路线的趋同与各自护城河。再加一章「ETH/Solana 之外还有哪些 L1 值得研究」——把 Sui/Aptos(Move 系)、Hyperliquid(app-specific L1)、Cosmos/Celestia、并行 EVM(Monad/MegaETH)、TON/Tron/BNB(分发派)、Berachain/Cardano/Polkadot(强叙事弱生态的反面教材)分成四档,提炼七种「新架构押注」+ Sui×Aptos 同源孪生对决。认知框架,非投资建议,不含任何个人持仓。',
@@ -97,6 +169,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/ai-native-professional.html',
     status: 'live',
     isNew: true,
+    seriesSlug: 'ai-log',
     art: { motif: 'ascent', accent: '#9fe870', seed: 16 },
   },
   {
@@ -110,6 +183,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/code-with-claude-london-2026.html',
     status: 'live',
     isNew: true,
+    seriesSlug: 'ai-log',
     art: { motif: 'constellation', accent: '#9fe870', seed: 15 },
   },
   {
@@ -123,7 +197,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/agency-is-the-key.html',
     status: 'live',
     isNew: true,
-    seriesSlug: 'ai-voices',
+    seriesSlugs: ['ai-voices', 'ai-log'],
     art: { motif: 'ascent', accent: '#9fe870', seed: 14 },
   },
   {
@@ -192,7 +266,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/claude-code-one-year.html',
     status: 'live',
     isNew: true,
-    seriesSlug: 'ai-voices',
+    seriesSlugs: ['ai-voices', 'ai-log'],
     art: { motif: 'loop', accent: '#38c8ff', seed: 9 },
   },
   {
@@ -206,7 +280,7 @@ export const articles: IdeaArticle[] = [
     href: '/ideas/write-loops-not-code.html',
     status: 'live',
     isNew: true,
-    seriesSlug: 'ai-voices',
+    seriesSlugs: ['ai-voices', 'ai-log'],
     art: { motif: 'core', accent: '#9fe870', seed: 8 },
   },
   {
@@ -303,6 +377,7 @@ export const topicDefs: TopicDef[] = [
 
 /** Months shown in the archive timeline, newest first. */
 export const archiveMonths: string[] = [
+  '2026.07',
   '2026.06',
   '2026.05',
   '2026.04',

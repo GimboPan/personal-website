@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我有 30 个 Skill,却没一个是「造」出来的 · 拿 Anthropic 的方法给自己的 Replen 打分 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="Anthropic 的 Thariq Shihipar 写了一篇《Lessons from building Claude Code: how we use skills》,把内部几百个 skill 的经验蒸馏成一套好 skill 的判准。我没停在读后感——把自己那个供应链 skill『Replen』搬上手术台,逐条打分。结果:几条它已经做对了,但信息量最高的那一段(Gotchas 坑清单)完全缺席。这是『AI 学习记录』的第 1 篇。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* backbar */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .here { color: var(--ink); }
+
+    /* hero */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: rgba(159,232,112,0.10); border: 1px solid rgba(159,232,112,0.30); padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700; }
+    .hero h1 { font-size: clamp(46px, 7.5vw, 92px); margin-bottom: 28px; max-width: 15ch; }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 32px; }
+    .hero .lead b { color: var(--ink); font-weight: 700; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* sections */
+    section { padding: 60px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--green); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 18px; max-width: 22ch; }
+    .section-title .accent { color: var(--green); }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 66ch; line-height: 1.6; margin-bottom: 36px; }
+    .section-lead b { color: var(--ink); font-weight: 700; }
+    .prose { font-size: 16px; color: var(--ink-soft); line-height: 1.75; max-width: 68ch; }
+    .prose p { margin-bottom: 18px; }
+    .prose b { color: var(--ink); font-weight: 700; }
+    .prose .g { color: var(--green); font-weight: 700; }
+    .prose code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; color: var(--green-tint); }
+
+    /* analogy note */
+    .note { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 16px; padding: 24px 26px; margin: 32px 0; max-width: 72ch; }
+    .note p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+    .note p b { color: var(--ink); font-weight: 700; }
+    .note .g { color: var(--green); font-weight: 700; }
+
+    /* 9-category grid */
+    .cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+    .cat { background: var(--surface-1); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+    .cat .cn { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; color: var(--ink-faint); margin-bottom: 6px; }
+    .cat h4 { font-size: 14px; font-weight: 800; margin-bottom: 5px; line-height: 1.25; }
+    .cat p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+    .cat.lit { background: var(--green); border-color: var(--green); }
+    .cat.lit .cn { color: rgba(22,51,0,0.6); }
+    .cat.lit h4, .cat.lit p { color: var(--green-deep); }
+    @media (max-width: 760px) { .cats { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 460px) { .cats { grid-template-columns: 1fr; } }
+
+    /* lesson cards */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 36px; }
+    .card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 24px; padding: 26px; }
+    .card .k { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: 10px; }
+    .card h3 { font-size: 19px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .card p b { color: var(--ink); }
+    .card.lit { background: var(--green); border-color: var(--green); }
+    .card.lit .k { color: rgba(22,51,0,0.6); }
+    .card.lit h3, .card.lit p { color: var(--green-deep); }
+    .card.lit p b { color: var(--green-deep); font-weight: 900; }
+    @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+
+    /* scorecard */
+    .score { margin-top: 40px; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; }
+    .score .srow { display: grid; grid-template-columns: 1.15fr 108px 1.5fr; border-bottom: 1px solid var(--line); }
+    .score .srow:last-child { border-bottom: none; }
+    .score .srow.head { background: var(--surface-2); }
+    .score .sc { padding: 16px 20px; font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
+    .score .sc.prac { font-weight: 700; color: var(--ink); font-size: 14px; }
+    .score .sc.verd { display: flex; align-items: center; justify-content: center; }
+    .score .srow.head .sc { font-weight: 800; color: var(--ink); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .score .sc b { color: var(--ink); }
+    .score .sc .g { color: var(--green); font-weight: 700; }
+    .score .sc .c { color: var(--coral); font-weight: 700; }
+    .badge { padding: 5px 11px; border-radius: 9999px; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap; }
+    .badge.ok { background: rgba(159,232,112,0.14); color: var(--green); border: 1px solid rgba(159,232,112,0.32); }
+    .badge.mid { background: rgba(255,209,26,0.14); color: var(--amber); border: 1px solid rgba(255,209,26,0.32); }
+    .badge.no { background: rgba(255,122,130,0.14); color: var(--coral); border: 1px solid rgba(255,122,130,0.32); }
+    .badge.na { background: rgba(255,255,255,0.05); color: var(--ink-faint); border: 1px solid var(--line-strong); }
+    @media (max-width: 760px) {
+      .score .srow { grid-template-columns: 1fr; gap: 2px; }
+      .score .srow.head { display: none; }
+      .score .sc { padding: 12px 18px; }
+      .score .sc.prac { padding-top: 18px; }
+      .score .sc.verd { justify-content: flex-start; padding-top: 4px; padding-bottom: 4px; }
+      .score .sc.ev { padding-bottom: 18px; }
+    }
+
+    /* gotchas */
+    .gotchas { display: grid; gap: 12px; margin-top: 34px; }
+    .got { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--coral); border-radius: 16px; padding: 20px 24px; }
+    .got h4 { font-size: 15.5px; font-weight: 800; margin-bottom: 7px; color: var(--ink); }
+    .got p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+    .got p b { color: var(--ink); font-weight: 700; }
+    .got .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); margin-bottom: 8px; }
+
+    /* quote */
+    .quote { background: var(--surface-2); border: 1px solid rgba(159,232,112,0.30); border-radius: 40px; padding: 52px 50px; margin-top: 48px; }
+    .quote blockquote { font-size: clamp(26px, 3.6vw, 42px); font-weight: 900; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 26px; max-width: 24ch; }
+    .quote blockquote .accent { color: var(--green); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 64ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 38px 26px; border-radius: 30px; } }
+
+    /* outro */
+    .outro { padding: 78px 0 110px; border-top: 1px solid var(--line); }
+    .outro .manifesto { font-size: clamp(32px, 5.2vw, 60px); font-weight: 900; line-height: 0.92; letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 32px; }
+    .outro .manifesto .accent { color: var(--green); }
+    .outro p { font-size: 16px; color: var(--ink-soft); max-width: 62ch; line-height: 1.7; margin-bottom: 14px; }
+    .outro p b { color: var(--ink); }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--ink-faint); }
+    footer a { color: var(--green); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">给自己的 Skill 打分</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">学习笔记 · Claude Code Skills · AI 学习记录 #01</span>
+      <h1 class="display">我有 30 个 Skill,<br/>却没一个是<br/><span class="accent">「造」出来的.</span></h1>
+      <p class="lead">我的 Claude 里躺着约 30 个 skill,但说实话,绝大多数是我用一个「skill 生成器」一口气吹出来的,从没被认真<b>打磨</b>过。Anthropic 的 Thariq Shihipar 写了一篇文章,把内部几百个 skill 的经验蒸馏成「好 skill 和平庸 skill 差在哪」。我没停在读后感——把自己那个供应链 skill <b>Replen</b> 搬上手术台,拿他的判准逐条打分。结果有点扎心也有点提气:几条它已经做对了,但<b>信息量最高的那一段,完全缺席。</b></p>
+      <div class="credits">
+        <div class="item"><div class="label">原文</div><div class="value">Anthropic · Thariq Shihipar · 2026.06.03</div></div>
+        <div class="item"><div class="label">标本</div><div class="value">我的 replen skill</div></div>
+        <div class="item"><div class="label">形式</div><div class="value">读原文 + 给自己打分 + 动手补</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. 先搞清楚 skill 是什么 + 文章的大判断 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">先搞清楚 · Skill 到底是什么</span>
+      <h2 class="section-title display">一个文件夹,<br/>一块「门牌」</h2>
+      <p class="section-lead">别被名字唬住。一个 skill 在硬盘上,就是<b>一个文件夹 + 一个文本文件</b>(<code>SKILL.md</code>),有时再加几个附属资料。文件最上面那段说明(<code>name</code> + <code>description</code>)是全局最关键的东西。</p>
+      <div class="note">
+        <p>打个比方:你雇了 30 个专家,每人门上挂一块<b>门牌</b>。你一开口,Claude 不会把 30 个人全喊进来,而是<span class="g">扫一遍所有门牌</span>,看谁的牌子跟你现在说的事对得上,就敲谁的门。<b>门牌(description)= 什么时候该叫我</b>;门后面的正文,是这位专家干活的手册。所以一个 skill 好不好,一半胜负在门牌写得准不准——牌子写错,专家再厉害也没人叫他。</p>
+      </div>
+      <div class="prose">
+        <p>文章的核心判断很清醒:skill 之所以成了 Claude Code 里<b>用得最多</b>的扩展方式,恰恰因为门槛极低——谁都能写。但门槛低的另一面是,<b>大多数 skill 都很平庸</b>。Anthropic 内部用了几百个,才总结出「好」和「平庸」的分界线。作者先把 skill 分成 9 类,让你先认清自己要做的是哪一种:</p>
+      </div>
+      <div class="cats">
+        <div class="cat"><div class="cn">01</div><h4>库 / API 参考</h4><p>讲清某个库或 CLI 怎么用、有哪些边界和坑</p></div>
+        <div class="cat lit"><div class="cn">02 · 最见效</div><h4>产品验证</h4><p>测试并验证代码真能跑——文章说这类对产出质量的<b>可测量提升最大</b></p></div>
+        <div class="cat"><div class="cn">03</div><h4>取数与分析</h4><p>接上你的数据 / 监控栈、凭证和看板</p></div>
+        <div class="cat"><div class="cn">04</div><h4>业务流程自动化</h4><p>把重复流程自动化,用日志文件保持每次一致</p></div>
+        <div class="cat"><div class="cn">05</div><h4>脚手架 / 模板</h4><p>用自然语言的需求,生成框架样板代码</p></div>
+        <div class="cat"><div class="cn">06</div><h4>代码质量与评审</h4><p>把组织标准落地、辅助 code review</p></div>
+        <div class="cat"><div class="cn">07</div><h4>CI/CD 与部署</h4><p>拉 / 推 / 发代码,带自动化测试</p></div>
+        <div class="cat"><div class="cn">08</div><h4>排障手册 Runbook</h4><p>系统化地查症状、产出结构化报告</p></div>
+        <div class="cat"><div class="cn">09</div><h4>基础设施运维</h4><p>带护栏地做例行维护</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 文章的干货:好 skill 的判准 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">文章的干货 · 好 skill 差在哪</span>
+      <h2 class="section-title display">八条,<br/>够我拿去<span class="accent">量自己</span></h2>
+      <p class="section-lead">文章讲了一大串,我挑出对「会用、想做好」的人最要紧的八条。中间那条被作者原话标成<b>信息量最高</b>——记住它,后面全靠它给我判死刑。</p>
+      <div class="cards">
+        <div class="card"><div class="k">判准 01</div><h3>别说 Claude 已经知道的</h3><p>skill 里只放它<b>不知道</b>的东西——你的规矩、你的坑、你公司的习惯。通用知识它自带,写进去是浪费,还稀释信号。好内容要「把它推出惯常思路」。</p></div>
+        <div class="card lit"><div class="k">判准 02 · 最高信号 ★</div><h3>Gotchas:一段「坑清单」</h3><p>作者原话:<b>一个 skill 里信息量最高的,就是 Gotchas 段。</b>把 Claude 反复踩的坑写下来——这个表只能追加不能改、那个字段跨系统命名不一致——比写一堆正确流程都值钱。</p></div>
+        <div class="card"><div class="k">判准 03</div><h3>门牌写给「模型」看</h3><p>description 是给 Claude 扫的,不是给人读的。要塞<b>触发词</b>(像 babysit、debug 这种你一说就该激活的词),它才找得到你。</p></div>
+        <div class="card"><div class="k">判准 04</div><h3>分层放,别全塞一个文件</h3><p>主文件写精华,细节丢到附属文件里,Claude 需要时才去翻。文章叫它 <b>progressive disclosure</b>(按需展开)——把文件夹当成上下文工程的工具。</p></div>
+        <div class="card"><div class="k">判准 05</div><h3>给方向,别写死</h3><p>给它必要信息和判断依据,别写成一步都不能改的死脚本。作者叫「别把 Claude 架在铁轨上」——留点灵活度,它反而干得更好。</p></div>
+        <div class="card"><div class="k">判准 06</div><h3>帮它记住</h3><p>靠持久文件给 skill 装记忆:追加式文本日志、JSON、甚至 SQLite。让它跨会话记得「上次怎么定的」,而不是每次从零。</p></div>
+        <div class="card"><div class="k">判准 07</div><h3>存脚本,别让它重造轮子</h3><p>把可复用的函数 / 计算存成脚本,让 Claude 专注在「怎么组合、怎么判断」,而不是每次现场把公式手搓一遍(还容易搓错)。</p></div>
+        <div class="card"><div class="k">判准 08</div><h3>用 hooks 上保险</h3><p>给危险操作装按需触发的护栏:<code>/careful</code> 挡住 rm -rf、DROP TABLE,<code>/freeze</code> 只允许改指定目录。加上一句:从最小开始,踩坑再补。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 拿 replen 打分 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">上手术台 · 给 Replen 打分</span>
+      <h2 class="section-title display">我那个供应链<br/>Skill,<span class="accent">及格吗?</span></h2>
+      <p class="section-lead">Replen 是我把 CPIM 供应链计划知识 + 自己的实战经验熔成的一个「资深计划员」。它长这样:一个 <code>SKILL.md</code> 写角色和规则,一个 <code>references/cpim/</code> 放各模块细节。拿上面八条量下来——</p>
+      <div class="score">
+        <div class="srow head">
+          <div class="sc prac">判准</div>
+          <div class="sc verd">Replen</div>
+          <div class="sc ev">证据 / 缺口</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">门牌写给模型(触发词)</div>
+          <div class="sc verd"><span class="badge ok">✓ 做到了</span></div>
+          <div class="sc ev">description 列了一长串「触发」词组,还写了「<b>不在</b>泛泛的『帮我管管事情』上触发」——这种<span class="g">负向触发</span>,比多数人写得都好。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">分层 · 按需展开</div>
+          <div class="sc verd"><span class="badge ok">✓ 做到了</span></div>
+          <div class="sc ev">主文件写精华,CPIM 各模块细节丢进 <code>references/cpim/</code>,规则里写「不确定就查对应模块再答」——教科书式的 progressive disclosure。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">给方向,别写死</div>
+          <div class="sc verd"><span class="badge ok">✓ 做到了</span></div>
+          <div class="sc ev">角色规则给的是<b>判断框架</b>(先分「教科书答案 vs 实战答案」,冲突时标出来),不是一步不能改的死脚本。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">别说 Claude 已经知道的</div>
+          <div class="sc verd"><span class="badge mid">半分</span></div>
+          <div class="sc ev">「教科书 vs 实战」这个区分本身就是高价值的非通用信息;但正文里仍有些 CPIM 定义是 Claude 本来就会的,可以再削。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Gotchas · 坑清单 ★</div>
+          <div class="sc verd"><span class="badge no">✗ 缺席</span></div>
+          <div class="sc ev">通篇<b>没有一段「这里最容易错」</b>。而文章说这是<span class="c">信息量最高</span>的部分。最该补、最能拉开差距的那一段,恰恰不在。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">帮它记住(日志 / 记忆)</div>
+          <div class="sc verd"><span class="badge no">✗ 没有</span></div>
+          <div class="sc ev">每次从零起,不积累「上次这个 SKU 用了什么参数、结论是什么」。一个追加式日志就能让它跨会话记住。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">存脚本,别重造轮子</div>
+          <div class="sc verd"><span class="badge no">✗ 没有</span></div>
+          <div class="sc ev">安全库存 / ROP / EOQ 都是<b>文字描述的公式</b>,Claude 每次现场手算,容易错。放一个能直接跑的计算脚本会稳得多。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">用 hooks 上保险</div>
+          <div class="sc verd"><span class="badge na">— 可跳过</span></div>
+          <div class="sc ev">没有,但对 Replen 这种「顾问型」skill 不是刚需——它不删库、不发单、不动真实系统,风险面很小。</div>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:36px;">
+        <p>打完这张表,结论很清楚:Replen 在「<b>门牌 / 分层 / 不写死</b>」这三条上,其实做得不错——这大概是那个生成器的默认模板攒下的底子。但真正把好 skill 和平庸 skill 分开的三样东西:<span class="g">坑、记忆、脚本</span>,它一样都没有。而它们,恰好是生成器<b>吹不出来</b>、只能我亲手喂的东西。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 动手补最该补的那一刀 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">动手 · 补最狠的那一刀</span>
+      <h2 class="section-title display">给 Replen 补一段<br/><span class="accent">真·坑清单</span></h2>
+      <p class="section-lead">既然 Gotchas 是最高信号、又完全缺席,那这一刀最值。学 skill 最好的方式不是再读一遍文章,是<b>就地把学到的用在自己的东西上</b>。下面这几条,是我从真实供应链工作里刮出来的坑——每一条都符合那句判准:<b>把 Claude 推出它的惯常思路。</b></p>
+      <div class="gotchas">
+        <div class="got">
+          <div class="tag">Gotcha · 安全库存</div>
+          <h4>前置期的波动,比需求波动更致命</h4>
+          <p>安全库存对 <b>lead time 的方差</b>远比对需求方差敏感,可 ERP 里的 lead time 常是个没人维护的过时固定值。算 safety stock 前先问:这个 LT 是真实近况,还是三年前建档时拍的?——别直接信系统默认值。</p>
+        </div>
+        <div class="got">
+          <div class="tag">Gotcha · MRP</div>
+          <h4>建议单要先看批量规则,再看数量</h4>
+          <p>MOQ / rounding / lot-sizing 会把「净需求 3 个」放大成「订 500 个」。看 MRP 跑出来的建议,<b>先看批量参数</b>再看数量,否则你以为的缺货补货,其实是一柜子呆滞的开始。</p>
+        </div>
+        <div class="got">
+          <div class="tag">Gotcha · 术语双关</div>
+          <h4>「服务水平」到底指哪一个?</h4>
+          <p>老板嘴里的 service level 经常指 <b>fill rate</b>(按量满足率),而安全库存公式里的 service level 是<b>不缺货概率</b>(按周期)。两个不是一回事。先问清是哪一个再动手,不然算出来的 ss 是对着错题解的。</p>
+        </div>
+        <div class="got">
+          <div class="tag">Gotcha · 效期品</div>
+          <h4>FEFO 想要的,和系统默认给的,常常打架</h4>
+          <p>效期品要先出近效期批次(FEFO),但很多 WMS 默认按 FIFO 拣货。这一层最容易在<b>系统里埋雷、到货架上才发现</b>——过期报废时才想起来,晚了。</p>
+        </div>
+        <div class="got">
+          <div class="tag">Gotcha · 牛鞭</div>
+          <h4>牛鞭效应,别只怪终端需求</h4>
+          <p>放大波动的真凶,多是<b>批量订货 + 促销 + 长前置期 + 层层加保险库存</b>,而不是终端需求本身在剧烈跳动。看到剧烈波动先别喊「客户善变」,先查自己这条链上有几层在各自加码。</p>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:34px;">
+        <p>补完这段坑清单,再顺手做两件小事,判准 06 / 07 就一起补上了:一个 <code>safety_stock.py</code>——输入 LT 的均值和方差、需求的均值和方差、目标 service level,直接吐出安全库存和再订货点,省得每次手算(判准 07);再加一个追加式的参数日志,把每次为某个 SKU 定的参数和理由记一行(判准 06)。<b>三样机器喂不出来的东西,一晌就能亲手喂进去。</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. builder 批注 / outro -->
+  <div class="outro">
+    <div class="wrap">
+      <div class="quote" style="margin-bottom:56px;">
+        <blockquote class="display">生成一个 skill 很容易,<br/><span class="accent">「造」一个不容易.</span></blockquote>
+        <p class="body">这篇文章真正点醒我的,不是那 9 个分类,是它逼我看清:我那 30 个 skill 大多是<b>生成的,不是造的</b>。生成器能给你一块像样的门牌、一套还行的分层——但<b>坑、记忆、脚本</b>这三样,它给不了。因为坑是我踩出来的,记忆是我这份工作攒出来的,脚本是我知道该算什么才写得出来。</p>
+      </div>
+      <h2 class="manifesto display">通用能力它自带,<br/>你的坑和判断<br/><span class="accent">才是护城河.</span></h2>
+      <p>这和我这个站子一直在讲的是同一句话:<b>认知变免费之后,专业值钱在「你踩过而它没踩过」的那一段。</b>放到 skill 层面,答案朴素得可爱——就是那段 Gotchas。Claude 会所有教科书,但它没在半夜被一个过时的 lead time 坑过,我被坑过。</p>
+      <p>所以我给自己立了条规矩:以后读到的每一样 AI 新东西,尽量不停在「看懂」,而是<b>就地上手改一件自己的东西</b>。这篇的下一步,就是把补完 Gotchas + 脚本 + 日志的 Replen 真的跑一遍。</p>
+      <p style="color:var(--ink-faint);margin-top:20px;">—— 这是「AI 学习记录」的第 1 篇。看到什么、动手改了什么,都收在这里。</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Gimbo's Universe · Ideas · AI 学习记录 · 2026.07</span>
+      <span><a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

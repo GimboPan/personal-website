@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>派活谁都会,难的是不让 AI「自己批自己的卷」· 用 dynamic workflows 给我的 AI 舰队做体检 — Ideas — Gimbo's Universe</title>
+  <meta name="description" content="Anthropic 的 dynamic workflows:让 Claude 自己写一段 JS,临时搭一套多智能体编排(harness)去干一个特定任务。读的时候我一直点头——因为我早就手工搭了一个 harness:我的 AI 舰队。文章点出三个失败模式,其中『自偏』我在《两次模拟》里亲口招供过:自己出题、自己阅卷。这篇把三个病、七个药方,对着我自己的舰队和供应链沙盘量一遍。AI 学习记录 #02。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f0c;
+      --surface-1: #14160f;
+      --surface-2: #1a1c19;
+      --surface-3: #21241f;
+      --ink: #f5f5f0;
+      --ink-soft: #c6c8c0;
+      --ink-faint: #8a8c84;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --green: #9fe870;
+      --green-deep: #163300;
+      --green-tint: #d8f5b8;
+      --amber: #ffd11a;
+      --coral: #ff7a82;
+      --sky: #38c8ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "calt", "ss01";
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .display { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; }
+
+    /* backbar */
+    .backbar { background: var(--surface-1); border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .backbar .wrap { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+    .backbar a { color: var(--green); display: inline-flex; align-items: center; gap: 6px; transition: color .15s; }
+    .backbar a:hover { color: var(--green-tint); }
+    .backbar .here { color: var(--ink); }
+
+    /* hero */
+    .hero { padding: 80px 0 60px; }
+    .hero .eyebrow { display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sky); background: rgba(56,200,255,0.10); border: 1px solid rgba(56,200,255,0.30); padding: 6px 12px; border-radius: 9999px; margin-bottom: 28px; font-weight: 700; }
+    .hero h1 { font-size: clamp(44px, 7vw, 88px); margin-bottom: 28px; max-width: 16ch; }
+    .hero h1 .accent { color: var(--sky); }
+    .hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-soft); max-width: 64ch; line-height: 1.55; margin-bottom: 32px; }
+    .hero .lead b { color: var(--ink); font-weight: 700; }
+    .hero .credits { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13px; color: var(--ink-faint); padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero .credits .item .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; font-weight: 700; }
+    .hero .credits .item .value { color: var(--ink); font-weight: 600; }
+
+    /* sections */
+    section { padding: 60px 0; }
+    .section-tag { display: inline-block; font-size: 11px; letter-spacing: 0.16em; color: var(--sky); text-transform: uppercase; font-weight: 700; margin-bottom: 18px; }
+    .section-title { font-size: clamp(32px, 5vw, 56px); margin-bottom: 18px; max-width: 22ch; }
+    .section-title .accent { color: var(--sky); }
+    .section-title .g { color: var(--green); }
+    .section-lead { font-size: 17px; color: var(--ink-soft); max-width: 66ch; line-height: 1.6; margin-bottom: 36px; }
+    .section-lead b { color: var(--ink); font-weight: 700; }
+    .prose { font-size: 16px; color: var(--ink-soft); line-height: 1.75; max-width: 68ch; }
+    .prose p { margin-bottom: 18px; }
+    .prose b { color: var(--ink); font-weight: 700; }
+    .prose .g { color: var(--green); font-weight: 700; }
+    .prose .s { color: var(--sky); font-weight: 700; }
+    .prose code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; color: var(--green-tint); }
+
+    /* note */
+    .note { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--sky); border-radius: 16px; padding: 24px 26px; margin: 32px 0; max-width: 72ch; }
+    .note p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+    .note p b { color: var(--ink); font-weight: 700; }
+    .note .s { color: var(--sky); font-weight: 700; }
+
+    /* failure trio */
+    .fails { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
+    .fail { background: var(--surface-1); border: 1px solid var(--line); border-radius: 24px; padding: 26px 24px; }
+    .fail .n { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; }
+    .fail h3 { font-size: 20px; font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
+    .fail p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+    .fail p b { color: var(--ink); }
+    @media (max-width: 760px) { .fails { grid-template-columns: 1fr; } }
+
+    /* pattern cards */
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 36px; }
+    .card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 24px; padding: 26px; }
+    .card .k { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: 10px; }
+    .card h3 { font-size: 19px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .card h3 .en { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sky); margin-bottom: 5px; }
+    .card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .card p b { color: var(--ink); }
+    .card.lit { background: var(--green); border-color: var(--green); }
+    .card.lit .k { color: rgba(22,51,0,0.6); }
+    .card.lit h3, .card.lit p { color: var(--green-deep); }
+    .card.lit h3 .en { color: var(--green-deep); opacity: 0.7; }
+    .card.lit p b { color: var(--green-deep); font-weight: 900; }
+    @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+
+    /* scorecard */
+    .score { margin-top: 40px; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; }
+    .score .srow { display: grid; grid-template-columns: 1.15fr 118px 1.5fr; border-bottom: 1px solid var(--line); }
+    .score .srow:last-child { border-bottom: none; }
+    .score .srow.head { background: var(--surface-2); }
+    .score .sc { padding: 16px 20px; font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
+    .score .sc.prac { font-weight: 700; color: var(--ink); font-size: 14px; }
+    .score .sc.verd { display: flex; align-items: center; justify-content: center; }
+    .score .srow.head .sc { font-weight: 800; color: var(--ink); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .score .sc b { color: var(--ink); }
+    .score .sc .g { color: var(--green); font-weight: 700; }
+    .score .sc .c { color: var(--coral); font-weight: 700; }
+    .badge { padding: 5px 11px; border-radius: 9999px; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap; }
+    .badge.ok { background: rgba(159,232,112,0.14); color: var(--green); border: 1px solid rgba(159,232,112,0.32); }
+    .badge.mid { background: rgba(255,209,26,0.14); color: var(--amber); border: 1px solid rgba(255,209,26,0.32); }
+    .badge.no { background: rgba(255,122,130,0.14); color: var(--coral); border: 1px solid rgba(255,122,130,0.32); }
+    @media (max-width: 760px) {
+      .score .srow { grid-template-columns: 1fr; gap: 2px; }
+      .score .srow.head { display: none; }
+      .score .sc { padding: 12px 18px; }
+      .score .sc.prac { padding-top: 18px; }
+      .score .sc.verd { justify-content: flex-start; padding-top: 4px; padding-bottom: 4px; }
+      .score .sc.ev { padding-bottom: 18px; }
+    }
+
+    /* fix steps */
+    .steps { display: grid; gap: 12px; margin-top: 34px; }
+    .step { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 16px; padding: 20px 24px; }
+    .step h4 { font-size: 15.5px; font-weight: 800; margin-bottom: 7px; color: var(--ink); }
+    .step p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+    .step p b { color: var(--ink); font-weight: 700; }
+    .step code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: var(--green-tint); }
+    .step .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+
+    /* quote */
+    .quote { background: var(--surface-2); border: 1px solid rgba(56,200,255,0.30); border-radius: 40px; padding: 52px 50px; margin-top: 48px; }
+    .quote blockquote { font-size: clamp(26px, 3.6vw, 42px); font-weight: 900; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 26px; max-width: 24ch; }
+    .quote blockquote .accent { color: var(--sky); }
+    .quote .body { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 64ch; }
+    .quote .body b { color: var(--ink); font-weight: 700; }
+    @media (max-width: 760px) { .quote { padding: 38px 26px; border-radius: 30px; } }
+
+    /* outro */
+    .outro { padding: 78px 0 110px; border-top: 1px solid var(--line); }
+    .outro .manifesto { font-size: clamp(32px, 5.2vw, 60px); font-weight: 900; line-height: 0.92; letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 32px; }
+    .outro .manifesto .accent { color: var(--sky); }
+    .outro p { font-size: 16px; color: var(--ink-soft); max-width: 62ch; line-height: 1.7; margin-bottom: 14px; }
+    .outro p b { color: var(--ink); }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--ink-faint); }
+    footer a { color: var(--green); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a href="/">← Gimbo's Universe</a>
+      <span class="sep">/</span>
+      <a href="/ideas">Ideas</a>
+      <span class="sep">/</span>
+      <span class="here">给 AI 舰队做体检</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">学习笔记 · Claude Code · AI 学习记录 #02</span>
+      <h1 class="display">派活谁都会,<br/>难的是不让 AI<br/><span class="accent">自己批自己的卷.</span></h1>
+      <p class="lead">Anthropic 出了个 <b>dynamic workflows</b>——让 Claude 自己写一段 JS,临时搭一套多智能体编排(他们叫 <b>harness</b>)去干一个特定任务。读的时候我一直点头:因为我<b>早就手工搭了一个 harness</b>——我的 AI 舰队,一个 Chief of Staff 派活给投资/营销/健康/进化几个专职 agent。文章点出用 workflow 要治的三个失败模式,其中一个我在《两次模拟》里<b>亲口招供过</b>:自己出题、自己阅卷。这篇,就是把这三个病和七个药方,对着我自己的舰队和供应链沙盘,量一遍。</p>
+      <div class="credits">
+        <div class="item"><div class="label">原文</div><div class="value">Anthropic · Thariq Shihipar & Sid Bidasaria · 2026.06.02</div></div>
+        <div class="item"><div class="label">标本</div><div class="value">我的 AI 舰队 + 供应链沙盘</div></div>
+        <div class="item"><div class="label">形式</div><div class="value">读原文 + 给自己打分 + 动手补</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. 是什么 + 三个失败模式 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">先搞清楚 · Harness 是什么</span>
+      <h2 class="section-title display">给每个任务,<br/>临时搭一套<span class="accent">班子</span></h2>
+      <p class="section-lead">平时 Claude Code 用的是一套通用「班子」(harness),处理日常编程够用。<b>dynamic workflow</b> 是让它遇到复杂任务时,<b>当场给自己写一套专用班子</b>——用 JS 描述怎么分工:派几个子 agent、每个用什么模型、能不能各自开一个干净的工作区、断了能不能续跑。</p>
+      <div class="note">
+        <p>关键区别:<b>静态</b> workflow 是你预先写死的流程,通用但呆板;<b>动态</b> workflow 是 Claude 针对手上这个任务<span class="s">现编</span>的编排——Opus 4.8 才具备的能力。代价是:<b>很烧 token</b>。所以文章反复提醒:不是每个任务都要,先问一句「<b>这真的需要更多算力吗?</b>」大多数日常活儿,用不着五个评审员开会。</p>
+      </div>
+      <div class="prose">
+        <p>那什么时候值得动用一整套班子?文章给的理由很实在——它专治大模型干长活时的<b>三个老毛病</b>。而且靠的不是「提醒它别犯」,是靠<b>把活拆给各自上下文干净的子 agent</b>,从结构上让这些毛病发不出来:</p>
+      </div>
+      <div class="fails">
+        <div class="fail"><div class="n">病 01</div><h3>偷懒</h3><p>复杂多步的活干到一半,<b>半路宣布「搞定了」</b>,其实只做了一部分。(agentic laziness)</p></div>
+        <div class="fail"><div class="n">病 02 · 我招供过</div><h3>自偏</h3><p>需要验证时,<b>偏袒自己产出的结果</b>。自己出题自己阅卷,当然全对。(self-preferential bias)</p></div>
+        <div class="fail"><div class="n">病 03</div><h3>跑偏</h3><p>聊得越久,<b>离最初的目标越远</b>,忠诚度一点点流失。(goal drift)</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 七个药方 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">七个药方 · 可复用的编排套路</span>
+      <h2 class="section-title display">七种把活<br/>拆开干的<span class="accent">姿势</span></h2>
+      <p class="section-lead">文章给了七个可复用的编排 pattern。中间那个我单独高亮——它正是治「病 02·自偏」的药,也是我下面给自己打分时,扣分最狠的地方。</p>
+      <div class="cards">
+        <div class="card"><div class="k">Pattern 01</div><h3><span class="en">Classify & Act</span>分类再派</h3><p>先判断这活是什么类型 / 要什么格式,再<b>路由</b>给对应的 agent。</p></div>
+        <div class="card"><div class="k">Pattern 02</div><h3><span class="en">Fan-Out & Synthesize</span>扇出再合并</h3><p>拆成多个子任务并行干,再<b>收口合并</b>。合并那一步就是同步点。</p></div>
+        <div class="card lit"><div class="k">Pattern 03 · 治自偏 ★</div><h3><span class="en">Adversarial Verification</span>对抗式验证</h3><p>另派<b>专门挑刺</b>的验证 agent,拿预设的评分标准去<b>攻</b>每个产出,防止过度自信。</p></div>
+        <div class="card"><div class="k">Pattern 04</div><h3><span class="en">Generate & Filter</span>多生成再筛</h3><p>先造一堆候选方案,再按质量、去重、验证<b>筛掉</b>大部分。</p></div>
+        <div class="card"><div class="k">Pattern 05</div><h3><span class="en">Tournament</span>锦标赛</h3><p>多个 agent 用<b>不同思路</b>做同一件事,两两对比、逐轮决出胜者。给 1000+ 项定性排名不爆上下文。</p></div>
+        <div class="card"><div class="k">Pattern 06</div><h3><span class="en">Loop Until Done</span>干到干净为止</h3><p>不设固定轮数,<b>一直派</b>到满足停止条件(没有新发现 / 零报错)才停。</p></div>
+        <div class="card"><div class="k">Pattern 07</div><h3><span class="en">Model Routing</span>智能分级路由</h3><p>先派个分类器摸清任务难度,再<b>按难度</b>派给对的模型(轻活 Sonnet,重活 Opus)。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 拿舰队打分 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">上手术台 · 给我的舰队打分</span>
+      <h2 class="section-title display">我的舰队,<br/>用了<span class="g">几个</span>药方?</h2>
+      <p class="section-lead">我的舰队本质就是一套手搭的 harness:一个 Chief of Staff 接到「盘一盘」,扇出给投资(CIO)、营销(CMO)、健康(CHO)、进化(EVO)几个专职 agent,再收口成一份 briefing。拿这七个 pattern 量下来,我惊讶地发现——<b>我早就在用其中几个,只是没有名字。</b></p>
+      <div class="score">
+        <div class="srow head">
+          <div class="sc prac">Pattern</div>
+          <div class="sc verd">我用了吗</div>
+          <div class="sc ev">证据 / 缺口</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Fan-Out & Synthesize · 扇出再合并</div>
+          <div class="sc verd"><span class="badge ok">✓ 天天用</span></div>
+          <div class="sc ev">Chief of Staff 就是活的扇出-合并:一句「盘一盘」扇给 CIO/CMO/CHO,各自出简报,再收成一份 <b>briefing</b>。我搭它时根本不知道这有名字。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Classify & Act · 分类再派</div>
+          <div class="sc verd"><span class="badge ok">✓ 用了</span></div>
+          <div class="sc ev">进化官 EVO 干的就是这个:把我读的 / 看的 / 听的<b>分类</b>,蒸馏出 so-what,再<b>路由</b>给对的格子(CIO / CMO / CHO / 工作)。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Model Routing · 智能分级路由</div>
+          <div class="sc verd"><span class="badge mid">半分</span></div>
+          <div class="sc ev">我<b>手动</b>做(重活切 Opus、轻活 Sonnet),但没让一个分类器自动摸难度再决定。这一步可以交出去。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Loop Until Done · 干到干净为止</div>
+          <div class="sc verd"><span class="badge mid">半分</span></div>
+          <div class="sc ev">我有 <code>/loop</code>,信条也是「循环 &gt; 派活」;但多是<b>固定节奏</b>,不是「干到没有新发现为止」的收敛式停止。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Generate & Filter / Tournament</div>
+          <div class="sc verd"><span class="badge no">✗ 基本没</span></div>
+          <div class="sc ev">我做方案通常<b>一稿到底</b>,很少「先造五个再筛」或让几个思路打锦标赛。省 token,但也少了多样性。</div>
+        </div>
+        <div class="srow">
+          <div class="sc prac">Adversarial Verification · 对抗式验证 ★</div>
+          <div class="sc verd"><span class="badge no">✗ 最大的洞</span></div>
+          <div class="sc ev">我的舰队<b>全是「建设性」角色</b>,没有一个专职唱反调、拆台的。供应链沙盘更甚——《两次模拟》我自己写过:<span class="c">邮件是我造的、规则是我定的、断言必然通过</span>。这就是活生生的病 02。</div>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:36px;">
+        <p>打完这张表,结论和上一篇(给 Replen 打分)惊人地一致:我<b>擅长「生成」,不擅长「证伪」</b>。我的舰队会派活、会收口、会分类,唯独缺一个会诚实告诉我「这里错了」的角色。而文章把这个缺口的名字、和补它的标准套路,一起递到了我手上——<span class="s">对抗式验证</span>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 动手补 -->
+  <section>
+    <div class="wrap">
+      <span class="section-tag">动手 · 给舰队装一个「红队」</span>
+      <h2 class="section-title display">补上那个<br/><span class="g">专门拆台</span>的角色</h2>
+      <p class="section-lead">这一刀最值,而且好在——文章特意说了 <b>workflow 不是只给大任务用的,你可以让它跑一个「quick workflow」</b>,轻量地做一次对抗式审查。所以我不用建大工程,四步就能把这个洞补上:</p>
+      <div class="steps">
+        <div class="step">
+          <div class="tag">Step 1 · 加个角色</div>
+          <h4>给舰队添一个「红队 / 审卷官」</h4>
+          <p>专职唱反调:CIO 出完投资简报,派一个<b>只找反驳证据</b>的 agent 去攻;方案定稿前,让它拿「投资人 / 客户 / 竞争对手」三个视角各挑一遍刺——文章原文就举了这个商业计划对抗评审的例子。</p>
+        </div>
+        <div class="step">
+          <div class="tag">Step 2 · 治沙盘的自偏</div>
+          <h4>让别人出题,别自己出题</h4>
+          <p>供应链沙盘的断言之所以必然通过,是因为场景是我造的、还是干净的。补法:派一个 agent 专门<b>造脏数据和边界场景</b>(缺字段的邮件、前后矛盾的交期、超容差的发票)去攻我的 Action Center——攻不破,证据才算数。</p>
+        </div>
+        <div class="step">
+          <div class="tag">Step 3 · 配上护栏</div>
+          <h4>防偷懒、防跑偏、防烧钱</h4>
+          <p>三个开关一起用:<code>/goal</code> 设硬性完成标准(治偷懒)、<code>/loop</code> 让它干到干净为止(治半途而废)、给个 token 预算(「<b>用 10k tokens</b>」)——毕竟 workflow 烧钱,别让红队自己失控。</p>
+        </div>
+        <div class="step">
+          <div class="tag">Step 4 · 隔离不可信内容</div>
+          <h4>「隔离区」:脏入口不给高权限</h4>
+          <p>文章的 quarantine 套路,和我供应链 agent 的信条正好撞上:处理外部不可信邮件的 agent,<b>绝不给它高权限操作</b>——抽取归抽取,永远不许它直接发 PO、动付款。这一层我本来就信,现在有了名字。</p>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:34px;">
+        <p>四步里没有一步要我写复杂代码——最重的也就是一句「用 quick workflow,从投资人/客户/竞争对手三个视角对抗式审一下这个方案,预算 10k tokens」。<b>把学到的就地用在自己的东西上,门槛比想象的低。</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. outro -->
+  <div class="outro">
+    <div class="wrap">
+      <div class="quote" style="margin-bottom:56px;">
+        <blockquote class="display">我一直靠直觉搭多智能体,<br/><span class="accent">缺的是那个唱反调的.</span></blockquote>
+        <p class="body">这篇真正给我的,不是七个花哨的 pattern,是一面镜子:我手搭的舰队和供应链沙盘,擅长<b>生成</b>——派活、收口、分类样样行;却几乎没有<b>证伪</b>的能力。一个全是「好好先生」的班子,产出再多也只是自我确认。文章把我最缺的那块拼图,连名字带标准套路一起递了过来。</p>
+      </div>
+      <h2 class="manifesto display">认知免费之后,<br/>值钱的越来越是<br/><span class="accent">「证伪」.</span></h2>
+      <p>生成越来越便宜,谁都能让 AI 吐一堆方案。稀缺的是:<b>有没有人——哪怕是另一个 agent——诚实地告诉你,这里错了。</b>这和我那套 gimbo-perspective 的 gut-check 是同一句:「这能不能交出去?」对抗式验证,就是交出去之前的最后一道自查。上一篇教我给 skill 补「坑」,这一篇教我给舰队补「唱反调的人」——都是同一件事:<b>把机器喂不出来的那部分,亲手补上。</b></p>
+      <p>下一步,我真的会给舰队加一个对抗 agent。这篇的下一篇,应该是它抓到我第一个错的那天。</p>
+      <p style="color:var(--ink-faint);margin-top:20px;">—— 这是「AI 学习记录」的第 2 篇。看到什么、动手改了什么,都收在这里。</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Gimbo's Universe · Ideas · AI 学习记录 · 2026.07</span>
+      <span><a href="/ideas">← 返回 Ideas</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>
